@@ -1,0 +1,456 @@
+* {
+
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body {
+
+    font-family: Arial;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+
+}
+
+
+
+.iconoMenu {
+
+    width: 36px;
+    margin-top: 6px;
+    margin-left: -110px;
+}
+
+.lblTituloMenu {
+
+    margin-top: 20px;
+    margin-left: 10px;
+    position: absolute;
+    font-size: 17px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+
+
+#navAdmin {
+
+    margin-left: 0px;
+    margin-top: -5px;
+    position: fixed;
+    background: linear-gradient(#314c86, #3dacb4);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 180px;
+    height: 800px;
+    font-family: Arial;
+}
+
+
+#navAdmin ul {
+
+    padding-top: 0px;
+
+}
+
+#navAdmin li {
+
+
+    margin-top: 11px;
+    padding-top: 17px;
+    height: 30px;
+    cursor: pointer;
+
+}
+
+#navAdmin li a {
+
+
+    font-size: 17px;
+    margin-left: 8px;
+    color: white;
+    text-decoration: none;
+
+
+}
+
+#navAdmin li:hover {
+
+
+    background: rgba(#3e5097, #3e5097, #3e5097, 0.5);
+
+}
+
+
+#navAdmin ul img {
+
+    width: 25px;
+    display: flex;
+    position: absolute;
+    margin-top: -5px;
+    padding-left: 30px;
+
+}
+
+
+#liInicio a {
+
+
+    padding-left: 10px;
+}
+
+
+#liClientes a {
+
+
+    padding-left: 16px;
+}
+
+#liClientes .btnFlecha {
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liClientes:hover>.btnFlecha {
+
+    display: block;
+}
+
+
+.subMenu {
+
+    background-color: rgb(46, 46, 46);
+    margin-top: 10px;
+    padding-top: 0px;
+    display: none;
+}
+
+
+#navAdmin #liClientes .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liClientes .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+
+
+
+}
+
+#navAdmin #liClientes .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 1px;
+
+}
+
+#navAdmin #liClientes .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+#liReserva a {
+
+
+    padding-left: 26px;
+}
+
+
+
+#liReserva .btnFlecha {
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liReserva:hover>.btnFlecha {
+
+    display: block;
+
+
+}
+
+#navAdmin #liReserva .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liReserva .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+
+}
+
+#navAdmin #liReserva .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+
+#navAdmin #liReserva .subMenu .liHabitacion img {
+
+    padding-left: 47px;
+}
+
+#navAdmin #liReserva .subMenu .liHabitacion a,
+#navAdmin #liReserva .subMenu .liCalendario a {
+
+    margin-left: 20px;
+}
+
+#navAdmin #liReserva .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+
+#liHabitaciones a {
+
+
+    padding-left: 40px;
+}
+
+
+
+#liGanancias a {
+
+
+    padding-left: 27px;
+}
+
+#userAdmin {
+
+    width: 180px;
+    height: 55px;
+    position: absolute;
+    top: 74%;
+    left: 0px;
+    background-color: #3dacb4;
+
+}
+
+#userAdmin img {
+
+    width: 33px;
+    padding-top: 10px;
+    padding-right: 85px;
+
+}
+
+#userAdmin label {
+
+    padding-top: 20px;
+    margin-left: -66px;
+    position: absolute;
+}
+
+
+#userAdmin .subMenuAdmin {
+
+    height: 91px;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    margin-top: 20px;
+    display: none;
+    padding-top: 0px;
+
+
+
+}
+
+#userAdmin .subMenuAdmin li {
+
+    color: white;
+    list-style: none;
+    padding-top: 10px;
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+
+
+#userAdmin .subMenuAdmin li img {
+
+    width: 20px;
+    margin-top: -12px;
+    padding-left: 50px;
+}
+
+#userAdmin .subMenuAdmin li a {
+
+    font-size: 14px;
+    margin-left: 18px;
+    color: white;
+    text-decoration: none;
+
+}
+
+#userAdmin .subMenuAdmin li .logout {
+
+    margin-left: 10px;
+}
+
+#userAdmin .subMenuAdmin li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+#userAdmin .btnFlecha {
+
+    width: 14px;
+    margin-left: 83%;
+    margin-top: -35px;
+    display: flex;
+    display: none;
+
+}
+
+#userAdmin:hover>.btnFlecha {
+
+    display: block;
+}
+
+
+#menuHabitaciones {
+
+    margin-left: 0;
+    margin-top: 0px;
+    width: 100%;
+    height: 190px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+
+}
+
+#menuHabitaciones img {
+
+    width: 200px;
+    margin-left: 49%;
+    margin-top: -10px;
+
+}
+
+#menuHabitaciones  h1 {
+
+    color: #6981d8;
+    margin-top: -2px;
+    font-size: 27px;
+    margin-left: 53%;
+}
+
+
+#menuHabitaciones  ul {
+
+    padding-top: 0px;
+    margin-left: 42%;
+
+}
+
+#menuHabitaciones ul li {
+
+    list-style: none;
+    display: inline-block;
+    padding: 20px;
+    margin-top: -10px;
+    margin-left: 30px;
+    padding-bottom: 1px;
+    cursor: pointer;
+
+
+}
+
+#menuHabitaciones ul li:hover {
+
+    border-bottom: 3px solid rgb(96, 185, 219);
+
+}
+
+#menuHabitaciones  ul li a {
+
+    opacity: 50%;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+
+}
+
+#menuHabitaciones ul li img {
+
+    width: 30px;
+    height: 30px;
+    display: flex;
+    margin-top: -27px;
+    margin-left: 60px;
+}
+
+#menuHabitaciones  ul li .imgHabitaciones {
+
+    margin-left: 110px;
+}
+
+
+#viewGrafica {
+
+    width: 900px;
+    height: 400px;
+    margin-left: 300px;
+    margin-top: 1%;
+    border-radius: 5px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+}
+
+
+#viewGrafica .sinDatos {
+
+    display: none;
+    opacity: 50%;
+    margin-top: 10%;
+
+}
+
+#viewGrafica .sinDatos img {
+
+    width: 80px;
+
+}
+
+#viewGrafica .sinDatos h2 {
+
+    color: #000000;
+    font-size: 18px;
+
+}
+
+#graficaHabitaciones {
+
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    padding-top: 50px;
+}
+

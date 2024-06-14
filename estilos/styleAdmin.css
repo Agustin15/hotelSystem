@@ -1,0 +1,843 @@
+* {
+
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body {
+
+    font-family: Arial;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+
+}
+
+#headerLogin {
+
+    background: linear-gradient(#242c49, #36457e);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+    height: 70px;
+    font-family: Arial;
+
+}
+
+#headerLogin a {
+
+    text-decoration: none;
+    color: rgba(255, 255, 255);
+}
+
+#headerLogin ul {
+
+    margin-right: 3%;
+    margin-top: -46px;
+    color: rgba(255, 255, 255);
+    font-size: 16px;
+    font-family: Arial;
+
+}
+
+#headerLogin li {
+
+    display: inline-block;
+    padding: 14px;
+    text-align: center;
+    transform: scale(1.0);
+    transition: 0.5s;
+
+}
+
+#headerLogin li:hover {
+
+    border-bottom: 2px solid rgba(255, 255, 255, 0.822);
+    transform: scale(1.1);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#headerLogin li img {
+
+    width: 16px;
+}
+
+
+.redes {
+
+    margin-left: 46%;
+    margin-top: -46px;
+}
+
+.redes li:hover {
+
+    transform: scale(1.0);
+    border-bottom: none;
+}
+
+.redes img {
+
+    opacity: 100%;
+    transition: 0.5s;
+}
+
+.redes img:hover {
+
+    opacity: 60%;
+    transition: 0.5s;
+}
+
+
+#logo {
+
+    display: flex;
+    margin-left: 11%;
+    padding-top: 10px;
+}
+
+#logo h1 {
+
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 20px;
+    margin-left: 15px;
+    color: rgba(255, 255, 255);
+}
+
+
+#loginAdmin {
+
+    width: 532px;
+    height: 460px;
+    margin: auto;
+    margin-top: 7%;
+
+
+}
+
+#loginAdmin form {
+
+    margin-top: 1%;
+    width: 490px;
+    height: 400px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    margin-left: 0%;
+    float: left;
+    padding-left: 40px;
+
+}
+
+#loginAdmin form h1 {
+
+    font-size: 18px;
+    margin-top: 2px;
+    margin-left: 20px;
+}
+
+
+
+
+#loginAdmin form input[type="text"],
+#loginAdmin form input[type="password"] {
+
+    margin-top: 30px;
+    margin-left: -16px;
+    height: 30px;
+    width: 180px;
+    border: 1px solid rgb(37, 127, 179);
+    border-radius: 3px;
+    outline: none;
+    padding-left: 13px;
+    padding-right: 30px;
+
+}
+
+
+
+#loginAdmin form input[type="text"]::placeholder,
+#loginAdmin form input[type="password"]::placeholder {
+
+    opacity: 70%;
+    font-size: 17px;
+    margin-left: 30px;
+    
+}
+
+
+
+#loginAdmin form input[type="text"]:hover,
+#loginAdmin form input[type="password"]:hover {
+
+    border-bottom: 1px solid rgb(42, 141, 180);
+
+}
+
+.lblUsuario{
+
+
+position: absolute;
+font-size: 17px;
+margin-top: 37px;
+margin-left: -213px;
+color: rgb(121, 121, 121);
+background-color: white;
+}
+
+
+
+
+.lblPass{
+
+
+    position: absolute;
+    font-size: 17px;
+    color: rgb(121, 121, 121);
+    margin-top: 37px;
+    margin-left: -213px;
+    background-color: rgb(255, 255, 255);
+    width: 100px; 
+    
+    }
+
+    .lblInputEfect{
+
+        animation-name: lblTranslate;
+        animation-duration:0.2s;
+        animation-fill-mode: forwards;
+    }
+
+    
+    .lblInputEfectRemove{
+
+        animation-name: lblTranslateRemove;
+        animation-duration:0.2s;
+        animation-fill-mode: forwards;
+    }
+
+
+    @keyframes lblTranslate {
+        
+
+        from{
+
+           transform: translateY(0px);
+        }
+
+        
+        to{
+
+            transform: translateY(-20px);
+         }
+    }
+    
+
+    
+    @keyframes lblTranslateRemove {
+        
+
+        from{
+
+           transform: translateY(-20px);
+        }
+
+        
+        to{
+
+            transform: translateY(0px);
+         }
+    }
+    
+
+
+
+#loginAdmin form input[type="submit"] {
+
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 170px;
+    height: 32px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    background: linear-gradient(#69a6d8, #36457e);
+
+}
+
+#loginAdmin form input[type="submit"]:hover {
+
+
+    background: linear-gradient(#6981d8, #36457e);
+
+}
+
+
+
+#loginAdmin form img {
+
+    width: 18px;
+    position: absolute;
+    margin-top: 36px;
+    margin-left: 185px;
+    opacity: 30%;
+
+}
+
+
+#loginAdmin form .iconoPass {
+
+    width: 21px;
+    position: absolute;
+    margin-top: 35px;
+    margin-left: -30px;
+
+}
+
+#disenioForm {
+
+
+    width: 262px;
+    height: 404px;
+    margin-top: -257px;
+    margin-left: 230px;
+    background: linear-gradient(#6981d8, #36457e);
+    color: white;
+    text-align: center;
+
+}
+
+#disenioForm h2 {
+
+    font-size: 22px;
+}
+
+#disenioForm .imgForm {
+
+    width: 140px;
+    margin-top: 3%;
+    opacity: 100%;
+    margin-left: -60px;
+
+}
+
+
+
+
+.avisoCompleteDatosFormulario {
+
+    background: linear-gradient(#242c49, #36457e);
+    color: rgb(255, 255, 255);
+    width: 300px;
+    height: 43px;
+    margin-left: -100%;
+    display: none;
+    margin-top: 2%;
+    position: absolute;
+    border-radius: 3px;
+
+
+}
+
+
+.avisoCompleteDatosFormulario label {
+
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 60px;
+    margin-top: 13px;
+    display: block;
+}
+
+
+.avisoCompleteDatosFormulario img {
+
+    width: 22px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 9px;
+}
+
+
+
+.activarCompleteDatosFormulario {
+
+
+    animation-name: activoAvisoForm;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    display: block;
+
+}
+
+.desactivarCompleteDatosFormulario {
+
+    animation-name: desactivoAvisoForm;
+    animation-duration: 0.5s;
+
+}
+
+@keyframes activoAvisoForm {
+
+    from {
+
+        margin-left: -100%;
+
+    }
+
+    to {
+
+        margin-left: 38%;
+
+    }
+}
+
+
+@keyframes desactivoAvisoForm {
+
+    from {
+
+        margin-left: 38%;
+
+    }
+
+    to {
+
+        margin-left: -100%;
+
+    }
+}
+
+
+
+.iconoMenu {
+
+    width: 36px;
+    margin-top: 6px;
+    margin-left: -110px;
+}
+
+.lblTituloMenu{
+
+    margin-top:20px;
+    margin-left: 10px;
+    position: absolute;
+    font-size: 17px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+
+
+#navAdmin {
+
+    margin-left: 0px;
+    margin-top: -22px;
+    position: fixed;
+    background: linear-gradient(#314c86, #3dacb4);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 180px;
+    height: 800px;
+    font-family: Arial;
+}
+
+
+#navAdmin ul {
+
+    padding-top: 0px;
+
+}
+
+#navAdmin li {
+
+
+    margin-top: 11px;
+    padding-top: 17px;
+    height: 30px;
+    cursor: pointer;
+
+
+
+}
+
+#navAdmin li a {
+
+
+    font-size: 17px;
+    margin-left: 8px;
+    color: white;
+    text-decoration: none;
+
+
+}
+
+#navAdmin li:hover {
+
+
+    background: rgba(#3e5097, #3e5097, #3e5097, 0.5);
+
+}
+
+
+#navAdmin ul img {
+
+    width: 25px;
+    display: flex;
+    position: absolute;
+    margin-top: -5px;
+    padding-left: 30px;
+
+}
+
+
+#liInicio a {
+
+
+    padding-left: 10px;
+}
+
+
+#liClientes a {
+
+
+    padding-left: 16px;
+
+}
+
+#liClientes .btnFlecha{
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liClientes:hover > .btnFlecha{
+
+    display: block;
+}
+
+
+.subMenu {
+
+    background-color: rgb(46, 46, 46);
+    margin-top: 10px;
+    padding-top: 0px;
+    display: none;
+}
+
+
+#navAdmin #liClientes .subMenu li img {
+
+    width: 22px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liClientes .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114,0.5);
+
+
+}
+
+#navAdmin #liClientes .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 1px;
+  
+
+}
+
+#navAdmin #liClientes .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+
+#liReserva a {
+
+
+    padding-left: 26px;
+}
+
+
+#liReserva .btnFlecha{
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liReserva:hover> .btnFlecha{
+
+    display: block;
+    
+
+}
+
+#navAdmin #liReserva .subMenu li img {
+
+    width: 25px;
+    margin-top: -5px;
+    padding-left: 45px;
+}
+
+#navAdmin #liReserva .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114,0.5);
+
+}
+
+#navAdmin #liReserva .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 0px;
+  
+
+}
+
+#navAdmin #liReserva .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+
+#navAdmin #liReserva .subMenu .liHabitacion img{
+
+    padding-left: 47px;
+}
+
+#navAdmin #liReserva .subMenu .liHabitacion a,
+#navAdmin #liReserva .subMenu .liCalendario a{
+
+    margin-left: 30px;
+}
+
+
+#liHabitaciones a {
+
+
+    padding-left: 40px;
+}
+
+
+#liGanancias a {
+
+
+    padding-left: 27px;
+}
+
+#userAdmin {
+
+    width: 180px;
+    height: 62px;
+    position: absolute;
+    top: 74%;
+    left: 0px;
+    background-color: #3dacb4;
+
+}
+
+#userAdmin img {
+
+    width: 33px;
+    padding-top: 10px;
+    padding-right: 85px;
+
+}
+
+#userAdmin label {
+
+    padding-top: 20px;
+    margin-left: -66px;
+    position: absolute;
+}
+
+
+#userAdmin .subMenuAdmin{
+
+    height: 91px;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    margin-top: 20px;
+    display: none;
+    padding-top: 0px;
+
+
+
+}
+
+#userAdmin .subMenuAdmin li {
+
+    color: white;
+    list-style: none;
+    padding-top:10px;
+    margin-top:0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+
+
+#userAdmin .subMenuAdmin li img {
+
+    width: 20px;
+    margin-top: -12px;
+    padding-left: 50px;
+}
+
+#userAdmin .subMenuAdmin li a{
+
+    font-size: 14px;
+    margin-left: 18px;
+    color: white;
+    text-decoration: none;
+    
+}
+
+#userAdmin .subMenuAdmin li .logout{
+
+    margin-left:10px;
+}
+
+#userAdmin .subMenuAdmin li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+#userAdmin .btnFlecha{
+
+    width: 14px;
+    margin-left: 83%;
+    margin-top: -35px;
+    display: flex;
+    display: none;
+    
+}
+
+#userAdmin:hover > .btnFlecha{
+
+    display: block;
+}
+
+#adminBanner img {
+
+
+    width: 300px;
+    height: 130px;
+    margin-top: -5px;
+
+
+}
+
+
+
+#adminBanner {
+    margin-left: 10%;
+    margin-top: -1%;
+    text-align: center;
+}
+
+#adminBanner h1 {
+
+    font-size: 27px;
+    color: #6981d8;
+    margin-top: 20px;
+
+}
+
+#viewClientes,#viewHabitaciones {
+
+    width: 520px;
+    height:280px;
+    display: block;
+    margin-left: 15%;
+    margin-top: 20px;
+    text-align: center;
+    list-style: none;
+    border: 1px solid rgb(238, 238, 238);
+ 
+}
+
+
+#viewClientes h3,#viewHabitaciones h3 {
+
+    font-size: 18px;
+    margin-left: -20px;
+}
+
+#viewClientes button, #viewHabitaciones button  {
+
+    width: 80px;
+    height: 30px;
+    color: rgb(0, 0, 0);
+    border: none;
+    font-size: 18px;
+    background: none;
+    opacity: 70%;
+    float: right;
+    display: none;
+    margin-top: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    
+}
+
+#sinDatosGraficaHabitaciones, #sinDatosGraficaClientes{
+
+    margin: auto;
+    font-size: 14px;
+    margin-top: -29%;
+    text-align: center;
+
+}
+
+#sinDatosGraficaHabitaciones img, #sinDatosGraficaClientes img{
+
+    width: 70px;
+    opacity: 65%;
+    margin-top: 10px;
+}
+
+#sinDatosGraficaHabitaciones h1, #sinDatosGraficaClientes h1{
+
+    font-size: 20px;
+    opacity: 30%;
+}
+
+#viewClientes button:hover {
+
+    opacity: 90%;
+
+
+}
+
+
+#graficaClientes {
+
+    width: 80%;
+    height: 160px;
+    margin:auto;
+}
+
+
+
+
+#graficaHabitaciones {
+
+    width: 80%;
+    height: 160px;
+    margin:auto;
+}
+

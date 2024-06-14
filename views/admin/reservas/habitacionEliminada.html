@@ -1,0 +1,27 @@
+<div id="confirmacionHabitacionEliminada">
+
+    <br>
+    <img src="../../../img/tickDelete.gif">
+    <br>
+    <div class="bodyHabitacionEliminada">
+        <h1>Habitacion eliminada de la reserva exitosamente</h1>
+        <br>
+        <button class="btnOK">OK</button>
+
+    </div>
+
+</div>
+
+<script>
+
+    $(".btnOK").click(function () {
+
+
+        $("#opcionHabitacion").empty();
+        $("#opcionHabitacion").removeClass("panelHabitacionEliminar");
+        $("#modal").css("cursor", "auto");
+
+
+    });
+
+</script>

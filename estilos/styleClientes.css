@@ -1,0 +1,2265 @@
+* {
+
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body {
+
+    font-family: Arial;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+
+}
+
+
+
+.iconoMenu {
+
+    width: 36px;
+    margin-top: 6px;
+    margin-left: -110px;
+}
+
+.lblTituloMenu {
+
+    margin-top: 20px;
+    margin-left: 10px;
+    position: absolute;
+    font-size: 17px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+
+
+#navAdmin {
+
+    margin-left: 0px;
+    margin-top: -5px;
+    position: fixed;
+    background: linear-gradient(#314c86, #3dacb4);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 180px;
+    height: 800px;
+    font-family: Arial;
+}
+
+
+#navAdmin ul {
+
+    padding-top: 0px;
+
+}
+
+#navAdmin li {
+
+
+    margin-top: 11px;
+    padding-top: 17px;
+    height: 30px;
+    cursor: pointer;
+
+}
+
+#navAdmin li a {
+
+
+    font-size: 17px;
+    margin-left: 8px;
+    color: white;
+    text-decoration: none;
+
+
+}
+
+#navAdmin li:hover {
+
+
+    background: rgba(#3e5097, #3e5097, #3e5097, 0.5);
+
+}
+
+
+#navAdmin ul img {
+
+    width: 25px;
+    display: flex;
+    position: absolute;
+    margin-top: -5px;
+    padding-left: 30px;
+
+}
+
+
+#liInicio a {
+
+
+    padding-left: 10px;
+}
+
+
+#liClientes a {
+
+
+    padding-left: 16px;
+}
+
+#liClientes .btnFlecha {
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liClientes:hover>.btnFlecha {
+
+    display: block;
+}
+
+
+.subMenu {
+
+    background-color: rgb(46, 46, 46);
+    margin-top: 10px;
+    padding-top: 0px;
+    display: none;
+}
+
+
+#navAdmin #liClientes .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liClientes .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+
+
+
+}
+
+#navAdmin #liClientes .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 1px;
+
+}
+
+#navAdmin #liClientes .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+
+#liReserva a {
+
+
+    padding-left: 26px;
+}
+
+
+#liReserva .btnFlecha {
+
+    width: 14px;
+    margin-left: 69%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liReserva:hover>.btnFlecha {
+
+    display: block;
+
+
+}
+
+#navAdmin #liReserva .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liReserva .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+
+}
+
+#navAdmin #liReserva .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+
+#navAdmin #liReserva .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+
+
+#navAdmin #liReserva .subMenu .liHabitacion img{
+
+    padding-left: 47px;
+}
+
+#navAdmin #liReserva .subMenu .liHabitacion a,
+#navAdmin #liReserva .subMenu .liCalendario a{
+
+    margin-left: 30px;
+}
+
+
+#liHabitaciones a {
+
+
+    padding-left: 40px;
+}
+
+
+
+#liGanancias a {
+
+
+    padding-left: 27px;
+}
+
+#userAdmin {
+
+    width: 180px;
+    height: 55px;
+    position: absolute;
+    top: 74%;
+    left: 0px;
+    background-color: #3dacb4;
+
+}
+
+#userAdmin img {
+
+    width: 33px;
+    padding-top: 10px;
+    padding-right: 85px;
+
+}
+
+#userAdmin label {
+
+    padding-top: 20px;
+    margin-left: -66px;
+    position: absolute;
+}
+
+
+#userAdmin .subMenuAdmin {
+
+    height: 91px;
+    background-color: rgb(46, 46, 46);
+    color: white;
+    margin-top: 20px;
+    display: none;
+    padding-top: 0px;
+
+
+
+}
+
+#userAdmin .subMenuAdmin li {
+
+    color: white;
+    list-style: none;
+    padding-top: 10px;
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+
+
+#userAdmin .subMenuAdmin li img {
+
+    width: 20px;
+    margin-top: -12px;
+    padding-left: 50px;
+}
+
+#userAdmin .subMenuAdmin li a {
+
+    font-size: 14px;
+    margin-left: 18px;
+    color: white;
+    text-decoration: none;
+
+}
+
+#userAdmin .subMenuAdmin li .logout {
+
+    margin-left: 10px;
+}
+
+#userAdmin .subMenuAdmin li:hover {
+
+    background-color: rgb(65, 65, 65);
+}
+
+#userAdmin .btnFlecha {
+
+    width: 14px;
+    margin-left: 83%;
+    margin-top: -35px;
+    display: flex;
+    display: none;
+
+}
+
+#userAdmin:hover>.btnFlecha {
+
+    display: block;
+}
+
+
+
+#menuCliente {
+
+    margin-left: 0;
+    margin-top: 0px;
+    width: 100%;
+    height: 190px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+
+}
+
+#menuCliente img {
+
+    width: 200px;
+    margin-left: 46%;
+    margin-top: -10px;
+
+}
+
+#menuCliente h1 {
+
+    color: #6981d8;
+    margin-top: -2px;
+    font-size: 27px;
+    margin-left: 50%;
+}
+
+
+#menuCliente ul {
+
+    padding-top: 0px;
+    margin-left: 34%;
+
+}
+
+#menuCliente ul li {
+
+    list-style: none;
+    display: inline-block;
+    padding: 20px;
+    margin-top: -10px;
+    margin-left: 30px;
+    padding-bottom: 1px;
+    cursor: pointer;
+
+
+}
+
+#menuCliente ul li:hover {
+
+    border-bottom: 3px solid rgb(96, 185, 219);
+
+}
+
+#menuCliente ul li a {
+
+    opacity: 50%;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+
+}
+
+#menuCliente ul li img {
+
+    width: 30px;
+    height: 30px;
+    display: flex;
+    margin-top: -27px;
+    margin-left: 60px;
+}
+
+#menuCliente ul li .imgClientes {
+
+    margin-left: 70px;
+}
+
+#viewGrafica {
+
+    width: 900px;
+    height: 400px;
+    margin-left: 300px;
+    margin-top: 1%;
+    border-radius: 5px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+}
+
+
+#viewGrafica .sinDatos {
+
+    display: none;
+    opacity: 50%;
+    margin-top: 10%;
+
+}
+
+#viewGrafica .sinDatos img {
+
+    width: 80px;
+
+}
+
+#viewGrafica .sinDatos h2 {
+
+    color: #000000;
+    font-size: 18px;
+
+}
+
+#graficaClientes {
+
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    padding-top: 50px;
+}
+
+
+#divTableClientes {
+
+    margin-top: 10px;
+    margin-left: 22%;
+    width: 865px;
+    height: 410px;
+    background-color: white;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    text-align: center;
+
+
+
+
+}
+
+#divTableClientes #containerTable {
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 340px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+#sinDatosTblClientes
+{
+
+    display: none;
+    margin: auto;
+    margin-top: 7%;
+    text-align: center;
+
+}
+
+.clientesVacio
+{
+
+    margin: auto;
+    margin-top: 7%;
+    text-align: center;
+
+}
+
+#sinDatosTblClientes h3,
+.clientesVacio h3 {
+
+    opacity: 40%;
+    margin-top: 6px;
+}
+
+.clientesVacio img{
+
+    width: 90px;
+    opacity: 60%;
+}
+
+
+#sinDatosTblClientes img {
+
+    width: 70px;
+    opacity: 60%;
+}
+
+
+#divTableClientes #buscador {
+
+    margin-left: 30px;
+    float: left;
+    margin-top: 20px;
+    height: 25px;
+    border-radius: 3px;
+    border: 1px solid rgb(105, 105, 105);
+    outline: none;
+    padding-right: 30px;
+    padding-left: 10px;
+    width: 150px;
+
+
+}
+
+#divTableClientes .lupa {
+
+    width: 18px;
+    margin-left: -78%;
+    margin-top: 24px;
+
+}
+
+#divTableClientes table {
+
+    width: 100%;
+    border-radius: 3px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+#divTableClientes table th {
+
+    padding: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: rgb(247, 247, 247);
+    background: linear-gradient(#314c86, #3dacb4);
+    font-weight: bold;
+
+
+}
+
+.tdNombre img {
+
+    width: 23px;
+    margin-left: 25px;
+    margin-top: 0px;
+    display: flex;
+
+}
+
+.tdNombre a {
+
+    margin-left: 57px;
+    margin-top: -18px;
+    display: flex;
+
+}
+
+#divTableClientes table td {
+
+
+    padding-top: 6px;
+    padding-bottom: 7px;
+    border-left: 1px solid gray;
+
+
+}
+
+
+#divTableClientes table td button {
+
+    width: 55px;
+    height: 35px;
+    border: none;
+    margin-left: 10px;
+}
+
+#divTableClientes table td button img {
+
+    width: 22px;
+
+}
+
+
+.btnEliminar {
+
+    background-color: rgb(230, 42, 42);
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px rgb(153, 153, 153);
+    border: none;
+
+}
+
+
+.btnEliminar:hover {
+
+
+    background-color: rgb(221, 24, 24);
+}
+
+.btnEditar {
+
+    background-color: rgb(94, 177, 255);
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgb(153, 153, 153);
+    border: none;
+
+}
+
+.btnEditar:hover {
+
+    background-color: rgb(79, 159, 235);
+}
+
+
+.btnInfo {
+
+    background-color: rgb(9, 72, 131);
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgb(153, 153, 153);
+    border: none;
+
+}
+
+.btnInfo:hover {
+
+
+    background-color: rgb(8, 50, 88);
+}
+
+
+#modal {
+
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    margin-top: 0px;
+    display: none;
+    background-color: rgba(83, 83, 83, 0.5);
+    position: absolute;
+
+}
+
+.divConfirmacionDelete {
+
+    margin-top: -30%;
+    width: 330px;
+    height: 150px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: 41%;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    position: absolute;
+
+
+
+}
+
+.divConfirmacionDelete h2 {
+
+    font-size: 17px;
+}
+
+.divConfirmacionDelete button {
+
+    width: 60px;
+    height: 30px;
+    color: white;
+    box-shadow: 2px 2px 2px solid grey;
+    border: 1px solid red;
+    border-radius: 3px;
+    margin-top: auto;
+}
+
+
+.divConfirmacionDelete img {
+
+    width: 30px;
+    padding-bottom: 10px;
+}
+
+.divConfirmacionDelete .btnSi {
+
+
+    color: rgb(255, 255, 255);
+    box-shadow: 2px 2px 2px solid grey;
+    background-color: red;
+    margin-left: -5px;
+
+
+}
+
+.divConfirmacionDelete .btnSi:hover {
+
+    background-color: rgb(219, 3, 3);
+}
+
+.divConfirmacionDelete .btnNo {
+
+
+    box-shadow: 2px 2px 2px solid grey;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    margin-left: 14px;
+
+
+}
+
+
+.divConfirmacionDelete .btnNo:hover {
+
+    background-color: rgb(224, 224, 224);
+}
+
+
+.divEditar {
+
+    margin-top: -45%;
+    width: 450px;
+    height: 540px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: 37%;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+
+
+}
+
+.divEditar label {
+
+    position: absolute;
+    font-size: 16px;
+    width: 80px;
+    height: 13px;
+    color: rgb(156, 156, 156);
+    background-color: white;
+}
+
+.divEditar h1 {
+
+    font-size: 20px;
+    margin-top: 10px;
+    color: #36b8cf;
+
+}
+
+.divEditar form .iconoFormEditar {
+
+    width: 40px;
+    position: relative;
+    margin: auto;
+    margin-top: 15px;
+
+}
+
+.divEditar img {
+
+    width: 17px;
+    display: flex;
+    position: absolute;
+}
+
+
+.divEditar .lblNombre {
+
+    margin-left: 6px;
+    margin-top: 23px;
+}
+
+.divEditar .lblApellido {
+
+    margin-left: 6px;
+    margin-top: 23px;
+}
+
+.divEditar .lblCorreo {
+
+    margin-left: 4px;
+    margin-top: 23px;
+    width: 70px;
+}
+
+.divEditar .lblTelefono {
+
+    margin-left: 6px;
+    margin-top: 23px;
+}
+
+.divEditar form input[type="text"],
+.divEditar form input[type="correo"] {
+
+    border: 2px solid rgb(224, 224, 224);
+    width: 290px;
+    border-radius: 3px;
+    height: 30px;
+    outline: none;
+    margin-top: 34px;
+    font-size: 15px;
+    padding-left: 16px;
+    padding-top: 4px;
+    padding-bottom: 1px;
+
+}
+
+.divEditar form input[type="correo"] {
+
+    width: 255px;
+}
+
+.divEditar form input[type="text"]:hover,
+.divEditar form input[type="correo"]:hover {
+
+    border: 2px solid rgb(41, 122, 214);
+
+}
+
+.divEditar form input[type="submit"],
+.divEditar form button {
+
+    width: 130px;
+    height: 32px;
+    background-color: rgb(41, 122, 214);
+    color: white;
+    border: none;
+    margin-top: 30px;
+
+
+
+}
+
+
+.divEditar form input[type="submit"] {
+
+    margin-left: -170px;
+}
+
+.divEditar form input[type="submit"]:hover {
+
+    background-color: #3e6c97;
+}
+
+
+.divEditar form button:hover {
+
+    background-color: #3e6c97;
+}
+
+
+.divEditar form button {
+
+    margin-top: 0px;
+    display: flex;
+    margin-left: 56%;
+    margin-top: -32px;
+    text-align: center;
+    padding-top: 9px;
+    padding-left: 35px;
+}
+
+
+
+.divInfo {
+
+    margin-top: -47%;
+    width: 800px;
+    height: 600px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: 25%;
+    padding-bottom: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+
+
+}
+
+.divInfo label {
+
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+
+
+.divInfo .imgTitulo {
+
+    width: 60px;
+    margin-left: 24px;
+}
+
+
+.divInfo .divCliente {
+
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.divInfo .divCliente img {
+
+    width: 50px;
+}
+
+.divInfo .divCliente label {
+
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.divInfo h2 {
+
+    font-size: 20px;
+    margin: auto;
+    margin-top: 6px;
+}
+
+.divInfo .containerTable {
+
+    height: 400px;
+    margin: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-align: center;
+    margin-top: 0;
+
+}
+
+
+.divInfo table {
+
+    height: 500px;
+    width: 800px;
+    margin: auto;
+    margin-top: 8px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+
+}
+
+
+.divInfo table td {
+
+    padding-bottom: 30px;
+}
+
+
+.divInfo table .fechaEstadia {
+
+    color: white;
+    background: linear-gradient(#314c86, #3dacb4);
+    font-weight: 100;
+    padding-bottom: 7px;
+}
+
+
+.divInfo table .fechaEstadia img {
+
+    width: 30px;
+    margin: auto;
+    margin-top: 2px;
+}
+
+.divInfo .sinDatos {
+
+    margin: auto;
+    margin-top: 8%;
+
+}
+
+.divInfo .sinDatos img {
+
+    width: 90px;
+    opacity: 70%;
+}
+
+.divInfo .sinDatos h2 {
+
+    font-size: 20px;
+    opacity: 70%;
+}
+
+.divInfo .sinResultados {
+
+    display: none;
+    margin: auto;
+    margin-top: 100px;
+    font-size: 16px;
+    opacity: 75%;
+
+
+}
+
+.divInfo .sinResultados img {
+
+    width: 50px;
+}
+
+
+.divInfo table .huespedes {
+
+    float: right;
+    margin-right: 140px;
+    margin-top: 22px;
+    width: 140px;
+    padding-top: 5px;
+    height: auto;
+    padding-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(#314c86, #46c5ce);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+
+}
+
+.divInfo table .huespedes:hover {
+
+    background: linear-gradient(#2a86bb, #2a448d);
+
+}
+
+.divInfo table .huespedes h3 {
+
+    font-size: 15px;
+    margin-top: 13px;
+    color: rgb(255, 255, 255)
+}
+
+
+
+.divInfo table .huespedes label {
+
+    font-size: 13px;
+    margin-top: 30px;
+
+
+}
+
+.divInfo table .huespedes img {
+
+    width: 40px;
+    margin-top: 3px;
+
+}
+
+
+.divInfo table .noches {
+
+    float: left;
+    margin-left: 140px;
+    margin-top: 22px;
+    width: 140px;
+    padding-top: 5px;
+    height: auto;
+    padding-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(#314c86, #3dacb4);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+}
+
+
+.divInfo table .noches:hover {
+
+    background: linear-gradient(#2a86bb, #2a448d);
+
+}
+
+.divInfo table .noches h3 {
+
+    font-size: 15px;
+    margin-top: 13px;
+    color: rgb(255, 255, 255)
+}
+
+
+
+.divInfo table .noches label {
+
+    font-size: 13px;
+    margin-top: 30px;
+
+}
+
+.divInfo table .noches img {
+
+    width: 40px;
+    margin-top: 3px;
+
+}
+
+
+
+.divInfo table .habitaciones {
+
+    float: left;
+    margin-left: 140px;
+    margin-top: 50px;
+    width: 140px;
+    padding-top: 5px;
+    height: auto;
+    padding-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(#314c86, #3dacb4);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+    border-radius: 4px;
+    color: white;
+}
+
+
+.divInfo table .habitaciones:hover {
+
+    background: linear-gradient(#2a86bb, #2a448d);
+
+}
+
+.divInfo table .habitaciones h3 {
+
+    font-size: 15px;
+    margin-top: 13px;
+    color: rgb(255, 255, 255)
+}
+
+
+
+.divInfo table .habitaciones label {
+
+    font-size: 13px;
+    margin-top: 30px;
+
+}
+
+.divInfo table .habitaciones img {
+
+    width: 40px;
+    margin-top: 3px;
+
+}
+
+
+
+.divInfo table .servicios {
+
+    float: right;
+    margin-right: 140px;
+    margin-top: 50px;
+    width: 140px;
+    padding-top: 5px;
+    height: auto;
+    padding-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(#314c86, #3dacb4);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+}
+
+
+.divInfo table .servicios:hover {
+
+    background: linear-gradient(#2a86bb, #2a448d);
+
+}
+
+.divInfo table .servicios h3 {
+
+    font-size: 15px;
+    margin-top: 13px;
+    color: rgb(255, 255, 255);
+}
+
+
+
+.divInfo table .servicios label {
+
+    font-size: 13px;
+    margin-top: 30px;
+
+}
+
+.divInfo table .servicios img {
+
+    width: 40px;
+    margin-top: 3px;
+
+}
+
+
+
+.divInfo table .pago {
+
+
+    margin: auto;
+    margin-top: 85px;
+    width: 140px;
+    padding-top: 5px;
+    height: auto;
+    padding-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(#314c86, #3dacb4);
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    color: rgb(0, 0, 0);
+}
+
+
+.divInfo table .pago:hover {
+
+    background: linear-gradient(#2a86bb, #2a448d);
+
+}
+
+.divInfo table .pago h3 {
+
+    font-size: 15px;
+    margin-top: 13px;
+    color: rgb(255, 255, 255);
+}
+
+
+
+.divInfo table .pago label {
+
+    font-size: 13px;
+    margin-top: 30px;
+
+}
+
+.divInfo table .pago img {
+
+    width: 40px;
+    margin-top: 3px;
+
+}
+
+
+
+
+
+.divInfo .cerrar {
+
+    width: 20px;
+    height: 19px;
+    padding-top: 1px;
+    border-radius: 60px;
+    background-color: #3673cf;
+    float: right;
+    margin-right: 10px;
+    margin-top: 4px;
+
+}
+
+.divInfo .cerrar img {
+
+    width: 10px;
+}
+
+.divInfo .cerrar:hover {
+
+    background-color: #3e5097;
+}
+
+.divInfo table .noches li {
+
+    list-style: none;
+    padding-top: 5px;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+
+
+.divInfo #buscadorEstadia {
+
+    margin-top: 20px;
+    width: 140px;
+    height: 26px;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 3px;
+    padding-left: 20px;
+    padding-right: 25px;
+    outline: none;
+    display: flex;
+    margin-left: 2%;
+
+
+
+}
+
+.divInfo .imgBuscar {
+
+    width: 20px;
+    position: absolute;
+    margin-left: -227px;
+    margin-top: 24px;
+}
+
+.divInfo #buscadorEstadia::placeholder {
+
+    font-size: 15px;
+    opacity: 85%;
+}
+
+#avisoCliente {
+
+
+    color: rgb(255, 255, 255);
+    width: 300px;
+    height: 40px;
+    margin-left: 60%;
+    width: 300px;
+    display: flex;
+    margin-top: -3%;
+    border-radius: 3px;
+    text-align: center;
+}
+
+
+#avisoCliente label {
+
+    font-size: 16px;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 10px;
+    display: block;
+}
+
+
+#avisoCliente img {
+
+    width: 20px;
+    position: absolute;
+    margin-left: 5%;
+    margin-top: 10px;
+}
+
+
+.avisoClienteActive {
+
+    animation-name: avisoClienteActive;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes avisoClienteActive {
+
+    from {
+
+        transform: scale(0.0);
+    }
+
+    to {
+
+        transform: scale(1.0);
+    }
+
+}
+
+
+.avisoClienteDesactive {
+
+    animation-name: avisoClienteDesactive;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes avisoClienteDesactive {
+
+    from {
+
+        transform: scale(1.0);
+    }
+
+    to {
+
+        transform: scale(0.0);
+    }
+
+}
+
+#alertaEditar {
+
+    color: rgb(255, 255, 255);
+    width: 250px;
+    height: 40px;
+    margin: auto;
+    width: 300px;
+    margin-top: 4%;
+    background-color: rgb(0, 89, 255);
+    border-radius: 3px;
+    text-align: center;
+    transform: scale(0.0);
+
+}
+
+#alertaEditar img {
+
+    width: 20px;
+    display: flex;
+    margin-left: 3%;
+    margin-top: -7px;
+
+}
+
+#alertaEditar label {
+
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: -34%;
+    margin-top: -6px;
+    position: absolute;
+    color: white;
+    background: none;
+    width: auto;
+
+}
+
+.alertaEditarActive {
+
+    animation: alertaEditarActive;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+
+}
+
+
+@keyframes alertaEditarActive {
+
+    from {
+        transform: scale(0.0);
+
+    }
+
+    to {
+        transform: scale(1.0);
+    }
+}
+
+
+#modalInfo {
+
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    margin-top: 0px;
+    display: none;
+    position: absolute;
+
+}
+
+
+.detallesNoches {
+
+    margin-top: 34%;
+    margin-left: 37%;
+    height: 160px;
+    width: 200px;
+    border-radius: 3px;
+    background: linear-gradient(#314c86, #3dacb4);
+    padding-top: 30px;
+    z-index: 1;
+    position: absolute;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.detallesNoches label {
+
+    font-size: 20px;
+}
+
+.detallesNoches img {
+
+    width: 50px;
+
+}
+
+.detallesNoches .cerrarNoches {
+
+    float: right;
+    margin-right: 2px;
+    margin-top: -32px;
+    opacity: 70%;
+    width: 25px;
+}
+
+
+
+.detallesHuespedes {
+
+    margin-top: 34%;
+    margin-left: 38%;
+    height: 180px;
+    width: 200px;
+    border-radius: 3px;
+    background: linear-gradient(#314c86, #3dacb4);
+    padding-top: 30px;
+    z-index: 1;
+    position: absolute;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+
+.detallesHuespedes li {
+
+    font-size: 17px;
+    margin-top: 8px;
+    list-style: none;
+
+}
+
+
+
+.detallesHuespedes img {
+
+    width: 50px;
+
+}
+
+
+.detallesHuespedes .cerrarHuespedes {
+
+    float: right;
+    margin-right: 2px;
+    margin-top: -32px;
+    opacity: 70%;
+    width: 25px;
+}
+
+.detallesServicios {
+
+    background: linear-gradient(#314c86, #46c5ce);
+    margin-top: 26%;
+    margin-left: 25%;
+    width: 400px;
+    height: 300px;
+    padding-bottom: 16px;
+    border-radius: 3px;
+    padding-top: 30px;
+    z-index: 1;
+    position: absolute;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    color: white;
+
+
+}
+
+.detallesHabitaciones {
+
+    margin-top: 11%;
+    margin-left: 23%;
+    width: 420px;
+    height: 430px;
+    padding-bottom: 16px;
+    border-radius: 3px;
+    background: white;
+    padding-top: 30px;
+    z-index: 1;
+    position: absolute;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+
+
+}
+
+.detallesHabitaciones .containerDivHabitacion {
+
+    width: 100%;
+    height: 340px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+
+.detallesHabitaciones .divHabitacion {
+
+    color: rgb(241, 241, 241);
+    width: 290px;
+    height: 80px;
+    border-radius: 3px;
+    background: linear-gradient(#314c86, #46c5ce);
+    box-shadow:
+        0 0 0 0px rgb(210, 246, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    margin: auto;
+    margin-top: 10px;
+    padding-top: 5px;
+
+}
+
+.detallesHabitaciones .divHabitacion h3 {
+
+    font-size: 14px;
+    opacity: 100%;
+    float: left;
+    margin-left: 4%;
+
+}
+
+.detallesHabitaciones .divHabitacion label {
+
+    opacity: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+    display: flex;
+    margin-left: 40%;
+}
+
+.detallesHabitaciones .divHabitacion .imgHabitacion {
+
+    float: left;
+    margin-left: 3px;
+    width: 60px;
+    border-radius: 3px;
+
+}
+
+
+.detallesHabitaciones .divHabitacion .imgAdultos {
+
+    width: 24px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+
+}
+
+
+
+.detallesHabitaciones .divHabitacion .imgNinos {
+
+    width: 24px;
+    float: left;
+    margin-left: -8.1%;
+    margin-top: 8px;
+
+}
+
+
+.detallesHabitaciones .divHabitacion .lblNinos {
+
+    margin-top: 13px;
+}
+
+
+.detallesHabitaciones img,
+.detallesServicios img {
+
+    width: 50px;
+
+}
+
+
+.detallesHabitaciones .cerrarHabitaciones,
+.detallesServicios .cerrarServicios {
+
+    float: right;
+    margin-right: 2px;
+    margin-top: -32px;
+    opacity: 70%;
+    width: 25px;
+}
+
+.detallesServicios .sinDatos,
+.detallesHabitaciones .sinDatos {
+
+    margin: auto;
+    opacity: 70%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.detallesServicios .sinDatos img,
+.detallesHabitaciones .sinDatos img {
+
+    width: 70px;
+
+}
+
+.detallesServicios .sinDatos label,
+.detallesHabitaciones .sinDatos label {
+
+    font-size: 17px;
+}
+
+.detallesFactura {
+
+    margin-top: 10%;
+    margin-left: 14%;
+    width: 570px;
+    height: 440px;
+    padding-bottom: 16px;
+    border-radius: 3px;
+    background: white;
+    padding-top: 30px;
+    z-index: 1;
+    position: absolute;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+
+}
+
+.detallesFactura img {
+
+    width: 60px;
+
+}
+
+.detallesFactura .cerrarFactura {
+
+    float: right;
+    margin-right: 2px;
+    margin-top: -32px;
+    opacity: 70%;
+    width: 25px;
+
+}
+
+.detallesFactura .containerDetalles {
+
+    width: 100%;
+    margin: auto;
+    height: 75%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+
+
+}
+
+.detallesFactura .containerDetalles img {
+
+    width: 25px;
+    margin-top: 20px;
+    opacity: 70%;
+}
+
+.detallesFactura .containerDetalles .lblLlegada {
+
+    float: left;
+    margin-left: 50px;
+    color: rgb(151, 151, 151);
+
+}
+
+
+.detallesFactura .containerDetalles .lblSalida {
+
+    float: right;
+    margin-right: 50px;
+    color: rgb(151, 151, 151);
+
+}
+
+
+.detallesFactura .containerDetalles .lblNoches {
+
+    margin-top: 46px;
+    color: rgb(151, 151, 151);
+
+}
+
+
+.detallesFactura .containerDetalles li {
+
+    margin-top: 4%;
+    display: inline-block;
+}
+
+.detallesFactura .containerDetalles .habitaciones {
+
+
+    width: 270px;
+    border-right: 1px solid rgb(185, 185, 185);
+    text-align: center;
+    height: auto;
+    padding-bottom: 30px;
+    list-style: none;
+
+
+}
+
+
+
+.detallesFactura .containerDetalles .ulHabitacion li {
+
+    margin-left: 10%;
+    text-align: left;
+    margin-top: 5px;
+    color: rgb(151, 151, 151);
+    display: block;
+
+
+}
+
+.detallesFactura .containerDetalles .lblHabitaciones {
+
+    margin: auto;
+    color: rgb(151, 151, 151);
+    display: block;
+}
+
+.detallesFactura .habitaciones .iconoHabitacion {
+
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.detallesFactura .containerDetalles .servicios {
+
+    float: right;
+    margin-right: 5px;
+    width: 270px;
+    box-shadow: 2px 2px 2px solid rgb(177, 177, 177);
+    text-align: center;
+    height: auto;
+    padding-bottom: 30px;
+    list-style: none;
+}
+
+
+.detallesFactura .servicios .lblServicios,
+.detallesFactura .servicios .lblServiciosEstadia {
+
+    margin: auto;
+    margin-top: 30px;
+    color: rgb(151, 151, 151);
+}
+
+.detallesFactura .servicios .iconoServicios {
+
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.detallesFactura .containerDetalles h3 {
+
+    float: right;
+    margin-right: 40px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top: 4px;
+    padding-bottom: 20px;
+}
+
+#formAgregar {
+
+    width: 480px;
+    height: 480px;
+    border-radius: 5px;
+    box-shadow:
+        0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    margin-left: 37%;
+    margin-top: -1%;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    padding-top: 25px;
+
+}
+
+#formAgregar .imgAgregar {
+
+    width: 40px;
+    position: relative;
+
+}
+
+#formAgregar h1 {
+
+    font-size: 18px;
+    opacity: 90%;
+    margin-top: 10px;
+    padding-top: 8px;
+}
+
+
+#formAgregar input[type="text"],
+input[type="correo"] {
+
+    border: 3px solid rgb(212, 212, 212);
+    border-radius: 3px;
+    width: 200px;
+    height: 27px;
+    outline: none;
+    margin-top: 46px;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 34px;
+    padding-bottom: 2px;
+
+
+}
+
+#formAgregar input[type="text"]:hover,
+input[type="correo"]:hover {
+
+    border: 3px solid rgb(130, 255, 130);
+}
+
+#formAgregar input[type="submit"],
+#formAgregar button {
+
+    width: 130px;
+    height: 32px;
+    background-color: rgb(21, 204, 67);
+    color: white;
+    border: none;
+    margin-top: 34px;
+
+}
+
+#formAgregar input[type="submit"] {
+
+    margin: auto;
+    margin-top: 6%;
+}
+
+#formAgregar #btnCancelar {
+
+    margin-left: 10px;
+}
+
+#formAgregar input[type="submit"]:hover,
+#formAgregar button:hover {
+
+    background-color: rgb(22, 148, 54);
+}
+
+#formAgregar .inputColumn1 {
+
+    margin-left: 8px;
+}
+
+
+#formAgregar .inputColumn2 {
+
+    margin-left: 30px;
+}
+
+
+#formAgregar img {
+
+    width: 21px;
+    position: absolute;
+    opacity: 70%;
+}
+
+#formAgregar .imgNombre {
+
+    margin-top: 52px;
+    margin-left: -34px;
+
+
+}
+
+#formAgregar .imgApellido {
+
+
+    margin-top: 52px;
+    margin-left: -36px;
+
+}
+
+#formAgregar .imgTelefono {
+
+    margin-top: 52px;
+    margin-left: -35px;
+
+}
+
+#formAgregar .imgCorreo {
+
+    margin-top: 54px;
+    margin-left: -35px;
+
+}
+
+
+#formAgregar label {
+
+    position: absolute;
+    font-size: 16px;
+    width: 80px;
+    height: 16px;
+    color: rgb(156, 156, 156);
+    background-color: white;
+}
+
+#formAgregar .lblNombre {
+
+    margin-left: 6px;
+    margin-top: 55px;
+}
+
+#formAgregar .lblApellido {
+
+    margin-left: 6px;
+    margin-top: 55px;
+}
+
+#formAgregar .lblCorreo {
+
+    margin-left: 4px;
+    margin-top: 55px;
+    width: 70px;
+}
+
+#formAgregar .lblTelefono {
+
+    margin-left: 6px;
+    margin-top: 55px;
+}
+
+
+.lblInputEfect {
+
+    animation-name: lblTranslate;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+
+.lblInputEfectRemove {
+
+    animation-name: lblTranslateRemove;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes lblTranslate {
+
+
+    from {
+
+        transform: translateY(0px);
+    }
+
+
+    to {
+
+        transform: translateY(-20px);
+    }
+}
+
+
+
+@keyframes lblTranslateRemove {
+
+
+    from {
+
+        transform: translateY(-20px);
+    }
+
+
+    to {
+
+        transform: translateY(0px);
+    }
+}
+
+.formAgregarActive {
+
+    animation: bajar;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+
+}
+
+
+
+.formAgregarDesactive {
+
+    animation: subir;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes bajar {
+
+    from {
+
+        margin-top: -1%;
+
+    }
+
+    to {
+
+        margin-top: 2%;
+
+    }
+}
+
+@keyframes subir {
+
+    from {
+
+        margin-top: 0%;
+
+    }
+
+    to {
+
+        margin-top: -1%;
+
+    }
+}
+
+#alertaAgregar {
+
+    color: rgb(255, 255, 255);
+    width: 250px;
+    height: 40px;
+    margin-left: 43%;
+    width: 300px;
+    margin-top: -2%;
+    background-color: rgb(16, 221, 61);
+    border-radius: 3px;
+    text-align: center;
+    transform: scale(0.0);
+
+}
+
+#alertaAgregar img {
+
+    width: 20px;
+    display: flex;
+    margin-left: 3%;
+    margin-top: -8px;
+
+}
+
+#alertaAgregar h2 {
+
+    font-size: 14px;
+    font-weight: bold;
+    margin: auto;
+    margin-top: -18px;
+
+
+}
+
+.alertaAgregarActive {
+
+    animation: alertaAgregarActive;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+
+}
+
+
+@keyframes alertaAgregarActive {
+
+    from {
+        transform: scale(0.0);
+
+    }
+
+    to {
+        transform: scale(1.0);
+    }
+}
+
+.alertaAgregarDesactive {
+
+    animation: alertaAgregarDesactive;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+
+}
+
+
+
+@keyframes alertaAgregarDesactive {
+
+    from {
+        transform: scale(1.0);
+
+    }
+
+    to {
+        transform: scale(0.0);
+    }
+}
