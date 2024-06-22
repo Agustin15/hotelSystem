@@ -56,7 +56,8 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
     <br>
     <h4>Reserva</h4>
     <br>
-    <label><?php echo $habitacionReservada['idReservaHabitacion']; ?></label>
+    <label><a id="linkReserva" href="lista.php?idReserva=<?php echo $habitacionReservada['idReservaHabitacion']; ?>">
+            <?php echo $habitacionReservada['idReservaHabitacion']; ?></label></a>
     <br>
     <button id="viewCalendario">Ver calendario</button>
 

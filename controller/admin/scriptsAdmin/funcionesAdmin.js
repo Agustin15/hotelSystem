@@ -62,10 +62,18 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
 
 
                     subMenu.slideToggle("fast", "swing");
+                    if(liNext.hasClass("optionGanancias")){
+
+                        liNext.animate({
+                            'margin-top': '99px'
+                        }, "fast");
+
+                    }else{
                     liNext.animate({
                         'margin-top': '150px'
                     }, "fast");
 
+                }
 
 
                 }
@@ -126,9 +134,17 @@ function liBorderBottom(pagina) {
             $(".liAgregarReserva").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
 
-            case "habitaciones":
+            case "Estandar":
 
-            $(".liHabitaciones").css("border-bottom", "3px solid rgb(96, 185, 219)");
+            $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
+            break;
+            case "Deluxe":
+
+            $(".liDeluxe").css("border-bottom", "3px solid rgb(96, 185, 219)");
+            break;
+            case "Suite":
+
+            $(".liSuite").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
 
 
@@ -173,16 +189,16 @@ function graficar(dataPoints, grafica, titulo, theme) {
 }
 
 
-function graficarHabitaciones(dataPointsHabitacionesReservadas,graficaHabitaciones) {
+function graficarHabitaciones(dataPointsHabitacionesReservadas,graficaHabitaciones,title) {
 
 
     var chart = new CanvasJS.Chart(graficaHabitaciones, {
         theme: "light2",
         animationEnabled: true,
         title:{
-            text:"Categorias de habitaciones mas reservadas"}
-            ,
-       
+            text:title
+        },
+    
         data: [{
             type: "pie",
             startAngle: 25,

@@ -110,15 +110,36 @@ if (empty($usuario)) {
                 </li>
                 <li id="liHabitaciones">
 
-                    <img src="../../../img/habitaciones.png">
-                    <a href="../habitaciones/grafica.php">Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGraficaPie">
+
+                            <img src="../../../img/grafica.png">
+                            <a href="../habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../../img/key-card.png">
+                            <a href="../habitaciones/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
                     <a>Ganancias</a>
 
                 </li>
+
             </ul>
 
             <div id="userAdmin">

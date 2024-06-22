@@ -70,20 +70,20 @@ $reserva = json_decode($reserva, true);
 
     }
 
-    $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/calendario.php?reserva=" +
+    $("#panelInfo").load("opcionesInfoReserva/calendario.php?reserva=" +
         JSON.stringify(reserva));
 
 
     $(".liCalendario").on("click", function() {
 
-        $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/calendario.php?reserva=" +
+        $("#panelInfo").load("opcionesInfoReserva/calendario.php?reserva=" +
             JSON.stringify(reserva));
 
     });
 
     $(".liCliente").on("click", function() {
 
-        $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/cliente.php?reserva=" +
+        $("#panelInfo").load("opcionesInfoReserva/cliente.php?reserva=" +
             JSON.stringify(reserva));
 
     });
@@ -91,7 +91,7 @@ $reserva = json_decode($reserva, true);
 
     $(".liHabitaciones").on("click", function() {
 
-        $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/habitaciones.php?reserva=" +
+        $("#panelInfo").load("opcionesInfoReserva/habitaciones.php?reserva=" +
             JSON.stringify(reserva));
 
     });
@@ -99,14 +99,14 @@ $reserva = json_decode($reserva, true);
 
     $(".liHuespedes").on("click", function() {
 
-        $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/huespedes.php?reserva=" +
+        $("#panelInfo").load("opcionesInfoReserva/huespedes.php?reserva=" +
             JSON.stringify(reserva));
 
     });
 
     $(".liFactura").on("click", function() {
 
-        $("#panelInfo").load("../../../controller/admin/reservas/opcionesInfoReserva/factura.php?reserva=" +
+        $("#panelInfo").load("opcionesInfoReserva/factura.php?reserva=" +
             JSON.stringify(reserva));
 
     });

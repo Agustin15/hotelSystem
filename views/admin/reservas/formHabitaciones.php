@@ -154,7 +154,7 @@ $reserva = $claseReserva->getReservaPoridReserva($idReserva);
         console.log(reserva);
 
         $(".divOpcion").empty();
-        $(".divOpcion").load("../../../controller/admin/reservas/formEditar.php?reserva=" +
+        $(".divOpcion").load("formEditar.php?reserva=" +
             encodeURIComponent(JSON.stringify(reserva)));
         $(".divEditar").css("marginTop", "-47%");
 
@@ -175,7 +175,7 @@ $reserva = $claseReserva->getReservaPoridReserva($idReserva);
         $("#modal").css("cursor", "none");
 
         $("#opcionHabitacion").addClass("panelHabitacionLibrar");
-        $("#opcionHabitacion").load("../../../controller/admin/reservas/editarHabitaciones/librarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
+        $("#opcionHabitacion").load("editarHabitaciones/librarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
             numeroHabitacion);
 
     });
@@ -194,7 +194,7 @@ $reserva = $claseReserva->getReservaPoridReserva($idReserva);
         $("#modal").css("cursor", "none");
 
         $("#opcionHabitacion").addClass("panelHabitacionEliminar");
-        $("#opcionHabitacion").load("../../../controller/admin/reservas/editarHabitaciones/eliminarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
+        $("#opcionHabitacion").load("editarHabitaciones/eliminarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
             numeroHabitacion);
 
 

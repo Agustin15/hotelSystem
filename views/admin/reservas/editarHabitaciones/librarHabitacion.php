@@ -90,7 +90,7 @@ $salida = new DateTime($habitacion['fechaSalidaHabitacion']);
             console.log(reserva);
 
 
-            fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/opcionHabitacion.php", {
+            fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php", {
 
                     method: "PUT",
                     body: JSON.stringify({

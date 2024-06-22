@@ -101,7 +101,7 @@ $totalHabitacionesHotel = $claseHabitacion->getCantidadHabitaciones();
     $(".editarHabitacion").on("click",function(){
 
        $(".divOpcion").empty();
-       $(".divOpcion").load("../../../controller/admin/reservas/formHabitaciones.php?idReserva=" +
+       $(".divOpcion").load("formHabitaciones.php?idReserva=" +
                 "<?php echo $reserva['idReserva']?>");
         $(".divEditar").css("marginTop","-40%")        
 

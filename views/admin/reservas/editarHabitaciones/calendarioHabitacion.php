@@ -39,7 +39,7 @@ $hoy =date("Y-m-d");
         <div id="sinDatos">
             <h4>No hay ninguna reserva cercana </h4>
             <br>
-            <img src="../../../img/sinDatos.png">
+            <img src="../../../img/withoutBooking.png">
 
         </div>
 

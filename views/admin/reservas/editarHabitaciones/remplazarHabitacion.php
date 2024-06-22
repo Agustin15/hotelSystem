@@ -34,6 +34,21 @@ $claseReservas = new reservas();
 
     <br>
 
+    <?php
+
+    date_default_timezone_set('America/Montevideo');
+    $hoy = date("Y-m-d");
+    $reservas = $claseReservas->getReservasHabilitadas($hoy);
+    if (empty($reservas)) {
+
+    ?>
+        <h3>No hay reservas en curso</h3>
+        <br>
+        <img id="sinBookings" src="../../../img/withoutBooking.png">
+    <?php
+    }else{
+    ?>
+
     <div id="subFormBuscar">
         <label>id Reserva</label>
         <br>
@@ -42,9 +57,7 @@ $claseReservas = new reservas();
 
             <?php
 
-            date_default_timezone_set('America/Montevideo');
-            $hoy = date("Y-m-d");
-            $reservas = $claseReservas->getReservasHabilitadas($hoy);
+
             foreach ($reservas as  $reserva) {
 
             ?>
@@ -65,6 +78,9 @@ $claseReservas = new reservas();
 
     </div>
 
+    <?php
+    }
+    ?>
 
     <div class="subForm">
 
@@ -112,7 +128,7 @@ $claseReservas = new reservas();
         $("#divOpcion").empty();
         $("#divOpcion").removeClass("panelHabitacionRemplazar");
         $("#divOpcion").addClass("panelHabitacionAsignar");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/asignarHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/asignarHabitacion.php?habitacion=" +
             "<?php echo $habitacion ?>" + "&categoria=" + "<?php echo $categoria ?>"
         );
 
@@ -126,7 +142,7 @@ $claseReservas = new reservas();
 
 
 
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/getHabitaciones.php?idReserva=" +
+        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/getHabitaciones.php?idReserva=" +
                 idReserva + "&opcion=remplazar", {
 
                     method: "GET",
@@ -154,7 +170,7 @@ $claseReservas = new reservas();
 
                     inputFechaRemplazo.innerHTML = "";
                     select.innerHTML = "";
-                    
+
                     data_resp.habitaciones.forEach(function(habitacion) {
 
                         var option = document.createElement("option");
@@ -194,7 +210,7 @@ $claseReservas = new reservas();
 
         var opcion = "remplazar"
 
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/opcionHabitacion.php", {
+        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php", {
 
                 method: "PUT",
                 body: JSON.stringify({

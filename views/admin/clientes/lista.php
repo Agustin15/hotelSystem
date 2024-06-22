@@ -15,7 +15,7 @@ if (empty($usuario)) {
 }
 
 
-$cliente ="";
+$cliente = "";
 if (isset($_GET['cliente'])) {
 
     $cliente = $_GET['cliente'];
@@ -125,12 +125,31 @@ if (isset($_GET['cliente'])) {
 
                 <li id="liHabitaciones">
 
-                    <img src="../../../img/habitaciones.png">
-                    <a href="../habitaciones/grafica.php">Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGraficaPie">
+
+                            <img src="../../../img/grafica.png">
+                            <a href="../habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../../img/key-card.png">
+                            <a href="../habitaciones/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
-
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
                     <a>Ganancias</a>
 
@@ -272,10 +291,10 @@ if (isset($_GET['cliente'])) {
 <script>
     window.onload = function() {
 
-        $("#tableClientes").load("../../../controller/admin/cliente/cargarTabla.php", function() {
+        $("#tableClientes").load("cargarTabla.php", function() {
 
             var cliente = "<?php echo $cliente ?>";
-            if (cliente !=="") {
+            if (cliente !== "") {
 
                 buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
             }

@@ -115,16 +115,36 @@ if (empty($usuario)) {
 
                 <li id="liHabitaciones">
 
-                    <img src="../../../img/habitaciones.png">
-                    <a href="../habitaciones/grafica.php">Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGraficaPie">
+
+                            <img src="../../../img/grafica.png">
+                            <a href="../habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../../img/key-card.png">
+                            <a href="../habitaciones/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
-
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
                     <a>Ganancias</a>
 
                 </li>
+
             </ul>
 
             <div id="userAdmin">
@@ -193,7 +213,7 @@ if (empty($usuario)) {
 
             <div class="sinDatos">
 
-                <img src="../../../img/sinDatos.png">
+                <img src="../../../img/sinDatosGrafica.png">
                 <br>
                 <h2>No hay datos aun</h2>
 
@@ -280,11 +300,11 @@ if (empty($usuario)) {
 
     window.onload = function() {
 
-        let sumClientes = dataPointsClientes.reduce((ac,element)=>{
-            
-            return ac + element.y+element.y
-        
-        },0);
+        let sumClientes = dataPointsClientes.reduce((ac, element) => {
+
+            return ac + element.y + element.y
+
+        }, 0);
 
         if (sumClientes > 0) {
             graficar(dataPointsClientes, "graficaClientes", "Clientes por mes", "light2");

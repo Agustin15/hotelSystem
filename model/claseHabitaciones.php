@@ -35,14 +35,14 @@ class habitaciones
     }
 
 
-    
+
     public function getAllHabitacionesReservadas()
     {
 
 
 
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada");
-    
+
         $consulta->execute();
 
         $resultados = $consulta->get_result();
@@ -169,6 +169,20 @@ class habitaciones
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=?");
         $consulta->bind_param("i", $numHabitacion);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function habitacionesHospedajesAntiguos($numHabitacion,$hoy)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+      numHabitacionReservada=? and fechaSalidaHabitacion<=?");
+        $consulta->bind_param("is", $numHabitacion,$hoy);
         $consulta->execute();
 
         $resultado = $consulta->get_result();
@@ -334,16 +348,16 @@ class habitaciones
 
 
 
-    function totalHabitacionesCategoriaReservadas($habitacionesReservadas,$categoriaFilter)
+    function totalHabitacionesCategoriaReservadas($habitacionesReservadas, $categoriaFilter)
     {
-      $total=array_reduce($habitacionesReservadas, function ($acc,$habitacion) use($categoriaFilter) {
+        $total = array_reduce($habitacionesReservadas, function ($acc, $habitacion) use ($categoriaFilter) {
 
             $habitacionReservada = $this->buscarCategoriaPorNumero($habitacion['numHabitacionReservada']);
             $habitacionReservada = $habitacionReservada->fetch_array(MYSQLI_ASSOC);
 
-            ($categoriaFilter == $habitacionReservada['tipoHabitacion'])? $acc++ : $acc;
+            ($categoriaFilter == $habitacionReservada['tipoHabitacion']) ? $acc++ : $acc;
             return $acc;
-        },0);
+        }, 0);
 
         return $total;
     }
@@ -361,11 +375,12 @@ class habitaciones
     }
 
 
-    public function totalHabitacion($precioHabitacion,$cantidad){
+    public function totalHabitacion($precioHabitacion, $cantidad)
+    {
 
-       $totalHabitacion=$precioHabitacion*$cantidad;
+        $totalHabitacion = $precioHabitacion * $cantidad;
 
-       return $totalHabitacion;
+        return $totalHabitacion;
     }
     public function habitacionMasCercana($numHabitacion)
     {

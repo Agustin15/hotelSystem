@@ -480,8 +480,13 @@ background-color: white;
 #navAdmin li:hover {
 
 
-    background: rgba(#3e5097, #3e5097, #3e5097, 0.5);
+    background-color: rgb(3, 76, 105);
 
+}
+
+#navAdmin li .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
 }
 
 
@@ -557,10 +562,6 @@ background-color: white;
 
 }
 
-#navAdmin #liClientes .subMenu li:hover {
-
-    background-color: rgb(65, 65, 65);
-}
 
 
 
@@ -609,12 +610,6 @@ background-color: white;
 
 }
 
-#navAdmin #liReserva .subMenu li:hover {
-
-    background-color: rgb(65, 65, 65);
-}
-
-
 
 #navAdmin #liReserva .subMenu .liHabitacion img{
 
@@ -628,11 +623,82 @@ background-color: white;
 }
 
 
-#liHabitaciones a {
 
+#liHabitaciones #textHabitaciones{
 
-    padding-left: 40px;
+    padding-left: 33px;
 }
+
+
+#liHabitaciones .btnFlecha {
+
+    width: 14px;
+    margin-left: 70%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liHabitaciones:hover>.btnFlecha {
+
+    display: block;
+
+
+}
+
+
+#liHabitaciones:hover>#iconoHabitaciones {
+
+    margin-left: -10px;
+
+}
+
+
+#liHabitaciones:hover #textHabitaciones{
+
+    padding-left: 10px;
+}
+
+
+#navAdmin #liHabitaciones .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liHabitaciones  .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+   
+}
+
+#navAdmin #liHabitaciones .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+
+
+#navAdmin #liHabitaciones  .subMenu .liGrafica a
+{
+
+    margin-left: 20px;
+}
+
+#navAdmin #liHabitaciones  .subMenu .liHabitacion img {
+
+    padding-left: 47px;
+}
+
+#navAdmin #liHabitaciones  .subMenu .liHabitacion a
+{
+
+    margin-left: 17px;
+}
+
 
 
 #liGanancias a {
@@ -758,6 +824,15 @@ background-color: white;
 
 }
 
+.titleGraphic{
+
+    background:  #3dacb4;
+    width: 100%;
+    height: 35px;
+    padding-top: 17px;
+    
+}
+
 #viewClientes,#viewHabitaciones {
 
     width: 520px;
@@ -776,6 +851,7 @@ background-color: white;
 
     font-size: 18px;
     margin-left: -20px;
+    color: white;
 }
 
 #viewClientes button, #viewHabitaciones button  {

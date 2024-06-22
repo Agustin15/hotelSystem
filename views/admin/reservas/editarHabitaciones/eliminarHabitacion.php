@@ -33,7 +33,7 @@ $idReserva = $_GET['idReserva'];
 
         console.log(datosHabitacion);
 
-        var url = `http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/opcionHabitacion.php?datosHabitacion=
+        var url = `http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php?datosHabitacion=
         ${datosHabitacion}`;
         fetch(url, {
 
@@ -70,7 +70,7 @@ $idReserva = $_GET['idReserva'];
         $("#opcionHabitacion").removeClass("panelHabitacionEliminar");
         
         $(".divOpcion").empty();
-        $(".divOpcion").load("../../../controller/admin/reservas/formHabitaciones.php?idReserva=" +
+        $(".divOpcion").load("../formHabitaciones.php?idReserva=" +
             "<?php echo $idReserva?>");
 
     })

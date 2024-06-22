@@ -39,7 +39,7 @@ btnsAgregarHabitacion.forEach(function (btnAgregarHabitacion) {
 
 
             alerta("Ingresa la fecha de ingreso y de salida");
-            window.scroll(0,0);
+            window.scroll(0, 0);
 
 
         } else {
@@ -51,7 +51,7 @@ btnsAgregarHabitacion.forEach(function (btnAgregarHabitacion) {
 
                 alertaHuespedes(idHuespedes);
 
-               
+
             } else {
                 var datosHabitacion = leerDatosHabitacion(btnAgregarHabitacion);
                 listaHabitaciones.push(datosHabitacion);
@@ -60,7 +60,7 @@ btnsAgregarHabitacion.forEach(function (btnAgregarHabitacion) {
 
                 imprimirHabitaciones();
 
-                window.scroll(0,0);
+                window.scroll(0, 0);
                 setLocalStorage();
 
 
@@ -86,10 +86,10 @@ function comprobarSelect(boton) {
     var selectNino = formHabitacion.querySelector("#selectNino");
 
     var section = formHabitacion.parentNode;
-    var divHabitacion= section.parentNode;
+    var divHabitacion = section.parentNode;
 
 
-    
+
     if (selectAdulto.options[selectAdulto.selectedIndex].text == "0" &&
         selectNino.options[selectNino.selectedIndex].text == "0") {
 
@@ -161,21 +161,14 @@ function leerDatosHabitacion(boton) {
 function calcularDeposito() {
 
 
-    var deposito = 0;
 
+    var deposito = listaHabitaciones.reduce((deposito, habitacion) => {
 
-    listaHabitaciones.forEach(function (habitacion) {
+        habitacion.TotalHabitacion = (habitacion.PrecioHab * habitacion.Noches) * habitacion.CantHabitaciones;
 
+        return deposito + habitacion.TotalHabitacion;
 
-        habitacion.TotalHabitacion = (habitacion.PrecioHab * habitacion.Noches)
-            * habitacion.CantHabitaciones;
-
-        deposito += habitacion.TotalHabitacion;
-
-
-
-    });
-
+    },0);
 
 
     return deposito;
@@ -374,9 +367,9 @@ formDatosReserva.addEventListener("submit", function () {
 
     fetch("http://localhost/Sistema%20Hotel/views/reserva.php", {
 
-        
+
         method: "POST",
-        body: JSON.stringify({ 'habitaciones': JSON.stringify(listaHabitaciones), 'fechas': JSON.stringify(fechas)}),
+        body: JSON.stringify({ 'habitaciones': JSON.stringify(listaHabitaciones), 'fechas': JSON.stringify(fechas) }),
         headers:
         {
 

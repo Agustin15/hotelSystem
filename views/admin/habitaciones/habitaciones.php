@@ -24,11 +24,11 @@ if (empty($usuario)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleReservas.css">
+    <link rel="stylesheet" href="../../../estilos/styleAdminHabitaciones.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsReservas/funcionesReservas.js"> </script>
+    <script src="../../../controller/admin/scriptsHabitaciones/funcionesHabitaciones.js"> </script>
 
     <title>Admin-Reservas</title>
 </head>
@@ -39,6 +39,7 @@ if (empty($usuario)) {
 
 
     </div>
+
 
     <header>
         <nav id="navAdmin">
@@ -94,19 +95,19 @@ if (empty($usuario)) {
                         <li>
 
                             <img src="../../../img/reservas.png">
-                            <a href="lista.php">Lista</a>
+                            <a href="../reservas/lista.php">Lista</a>
 
                         </li>
                         <li class="liCalendario">
 
                             <img src="../../../img/agregarReserva.png">
-                            <a href="agregar.php">Calendario</a>
+                            <a href="../reservas/agregar.php">Calendario</a>
                         </li>
 
                         <li class="liHabitacion">
 
                             <img src="../../../img/habitacionesReserva.png">
-                            <a href="habitaciones.php">Habitaciones</a>
+                            <a href="../reservas/habitaciones.php">Habitaciones</a>
 
                         </li>
 
@@ -133,7 +134,7 @@ if (empty($usuario)) {
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../habitaciones/habitaciones.php">Lista</a>
+                            <a href="../../views/admin/reservas/habitaciones.php">Lista</a>
 
                         </li>
 
@@ -176,36 +177,38 @@ if (empty($usuario)) {
 
     </header>
 
-
-    <nav id="menuReservas">
+    <nav id="menuHabitaciones">
 
         <br>
-        <h1>Reservas</h1>
-        <br>
-        <img src="../../../img/reservasBanner.png">
+        <h1>Habitaciones </h1>
 
         <ul>
 
-            <li class="liListaReservas">
-                <a href="lista.php">Lista</a>
-                <img class="imgReservas" src="../../../img/reservas.png">
+            <li class="liGrafica">
 
-            </li>
-            <li class="liAgregarReservas">
-                <a href="agregar.php">Calendario</a>
-                <img class="imgAgregarReserva" src="../../../img/agregarReserva.png">
-
+                <img src="../../../img/grafica.png">
+                <br>
+                <a href="grafica.php">Gráfica</a>
             </li>
 
-            <li class="liHabitaciones">
-                <a>Habitaciones</a>
-                <img class="imgHabitacionReserva" src="../../../img/habitacionesReserva.png">
-
+            <li class="liEstandar">
+                <img src="../../../img/standardIcon.png">
+                <br>
+                <a>Estandar</a>
+            </li>
+            <li class="liDeluxe">
+                <img src="../../../img/deluxeIcon.png">
+                <br>
+                <a>Deluxe</a>
+            </li>
+            <li class="liSuite">
+                <img src="../../../img/suiteIcon.png">
+                <br>
+                <a>Suite</a>
             </li>
         </ul>
     </nav>
 
-    </div>
 
     <br>
 
@@ -244,24 +247,6 @@ if (empty($usuario)) {
 
     <div id="habitaciones">
 
-        <ul>
-            <li class="liEstandar">
-                <img src="../../../img/bannerHab1.jpg">
-                <br>
-                Estandar
-            </li>
-            <li class="liDeluxe">
-                <img src="../../../img/bannerHab1Deluxe.jpg">
-                <br>
-                Deluxe
-            </li>
-            <li class="liSuite">
-                <img src="../../../img/bannerHab1Suite.jpg">
-                <br>
-                Suite
-            </li>
-        </ul>
-
 
         <div id="avisoHabitacion">
 
@@ -291,35 +276,34 @@ if (empty($usuario)) {
 
         $(".cargarHabitaciones").empty();
 
-        let pagina = localStorage.getItem("opcionHabitacion");
+        let viewHabitaciones = localStorage.getItem("opcionHabitacionesHotel");
 
-        switch (pagina) {
+        switch (viewHabitaciones) {
 
             case "Estandar":
             default:
 
 
-                $(".cargarHabitaciones").load("editarHabitaciones/estandar.php");
+                $(".cargarHabitaciones").load("estandar.php");
+                liBorderBottom("Estandar");
                 break;
 
 
             case "Deluxe":
 
-                $(".cargarHabitaciones").load("editarHabitaciones/deluxe.php");
+                $(".cargarHabitaciones").load("deluxe.php");
+                liBorderBottom("Deluxe");
                 break;
 
             case "Suite":
 
-                $(".cargarHabitaciones").load("editarHabitaciones/suite.php");
+                $(".cargarHabitaciones").load("suite.php");
+                liBorderBottom("Suite");
                 break;
 
 
 
         }
-
-
-        openSubMenu("../../../img/btnFlechaAbajo.png", "../../../img/btnFlecha.png");
-
 
     }
 
@@ -327,17 +311,17 @@ if (empty($usuario)) {
     $(".liEstandar").on("click", function() {
 
 
-        localStorage.setItem("opcionHabitacion", "Estandar");
+        localStorage.setItem("viewHabitaciones", "Estandar");
         $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/estandar.php");
+        $(".cargarHabitaciones").load("estandar.php");
 
     });
 
     $(".liDeluxe").on("click", function() {
 
-        localStorage.setItem("opcionHabitacion", "Deluxe");
+        localStorage.setItem("viewHabitaciones", "Deluxe");
         $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/deluxe.php");
+        $(".cargarHabitaciones").load("deluxe.php");
 
     });
 
@@ -345,12 +329,14 @@ if (empty($usuario)) {
 
     $(".liSuite").on("click", function() {
 
-        localStorage.setItem("opcionHabitacion", "Suite");
+        localStorage.setItem("viewHabitaciones", "Suite");
         $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/suite.php");
+        $(".cargarHabitaciones").load("suite.php");
 
     });
 
+    
 
-    liBorderBottom("habitaciones");
+    openSubMenu("../../../img/btnFlechaAbajo.png", "../../../img/btnFlecha.png");
+    
 </script>

@@ -119,7 +119,7 @@ function opcionCliente(datosCliente, opcion) {
         case "eliminar":
 
             $(".divOpcion").addClass("divConfirmacionDelete");
-            $(".divOpcion").load("../../../controller/admin/cliente/formEliminar.php?cliente=" +
+            $(".divOpcion").load("formEliminar.php?cliente=" +
                 encodeURIComponent(JSON.stringify(cliente)));
 
 
@@ -128,7 +128,7 @@ function opcionCliente(datosCliente, opcion) {
         case "editar":
 
             $(".divOpcion").addClass("divEditar");
-            $(".divOpcion").load("../../../controller/admin/cliente/formEditar.php?cliente=" +
+            $(".divOpcion").load("formEditar.php?cliente=" +
                 encodeURIComponent(JSON.stringify(cliente)));
 
 
@@ -137,7 +137,7 @@ function opcionCliente(datosCliente, opcion) {
         case "info":
 
             $(".divOpcion").addClass("divInfo");
-            $(".divOpcion").load("../../../controller/admin/cliente/infoCliente/infoCliente.php?cliente=" +
+            $(".divOpcion").load("infoCliente/infoCliente.php?cliente=" +
                 encodeURIComponent(JSON.stringify(cliente)));
 
 

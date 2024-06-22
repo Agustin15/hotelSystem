@@ -7,7 +7,7 @@
         <br>
         <label>Numero de habitacion</label>
         <input id="numHabitacion" min="1" type="number">
-        <input type="submit" value="Buscar">
+       
 
     </form>
 
@@ -153,7 +153,7 @@
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("reservaMasCercana");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/calendarioHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/calendarioHabitacion.php?habitacion=" +
             encodeURIComponent(numeroHabitacion));
         $("#modal").css("display", "block");
 
@@ -171,7 +171,7 @@
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("panelHabitacionAsignar");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/asignarHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/asignarHabitacion.php?habitacion=" +
             encodeURIComponent(numeroHabitacion) + "&categoria=Estandar");
         $("#modal").css("display", "block");
 
@@ -192,7 +192,7 @@
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("panelHabitacionDetalles");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/detallesHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/detallesHabitacion.php?habitacion=" +
             encodeURIComponent(numeroHabitacion) + "&categoria=Deluxe");
         $("#modal").css("display", "block");
 
@@ -201,35 +201,4 @@
     });
 
 
-    $("#formDeluxe").on("submit", function(event) {
-
-        event.preventDefault();
-
-        const buscar = {
-
-            "numHabitacion": $("#numHabitacion")
-
-        };
-
-
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/buscarHabitaciones.php", {
-
-                method: "POST",
-                body: JSON.stringify({
-                    'buscar': buscar
-                }),
-                headers: {
-
-                    "Content-Type": "application/json",
-                }
-
-            }).then(resp => resp.json())
-            .then(data => {
-
-                console.log(data);
-
-
-            })
-
-    });
 </script>

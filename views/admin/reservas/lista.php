@@ -14,7 +14,7 @@ if (empty($usuario)) {
     $claseCliente = new cliente();
 }
 
-$idReserva="";
+$idReserva = "";
 if (isset($_GET['idReserva'])) {
 
     $idReserva = $_GET['idReserva'];
@@ -129,12 +129,31 @@ if (isset($_GET['idReserva'])) {
 
                 <li id="liHabitaciones">
 
-                    <img src="../../../img/habitaciones.png">
-                    <a>Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGraficaPie">
+
+                            <img src="../../../img/grafica.png">
+                            <a href="../habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../../img/key-card.png">
+                            <a href="../habitaciones/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
-
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
                     <a>Ganancias</a>
 
@@ -279,12 +298,12 @@ if (isset($_GET['idReserva'])) {
 <script>
     window.onload = function() {
 
-        $("#tableReservas").load("../../../controller/admin/reservas/cargarTabla.php", function() {
+        $("#tableReservas").load("cargarTabla.php", function() {
 
             var idReserva = "<?php echo $idReserva ?>";
             if (idReserva !== "") {
 
-                buscadorParametroReserva(idReserva,".tdIdReserva", "id-reserva");
+                buscadorParametroReserva(idReserva, ".tdIdReserva", "id-reserva");
             }
 
         });

@@ -2,9 +2,9 @@
 
 
 
-require("../../../../model/claseReservas.php");
-require("../../../../model/claseHabitaciones.php");
-require("../../../../model/clasePago.php");
+require("../../../model/claseReservas.php");
+require("../../../model/claseHabitaciones.php");
+require("../../../model/clasePago.php");
 $claseReservas = new reservas();
 $claseHabitacion = new habitaciones();
 $clasePago = new pago();

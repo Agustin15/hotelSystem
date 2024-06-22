@@ -35,6 +35,7 @@ body {
 
 
 
+
 #navAdmin {
 
     margin-left: 0px;
@@ -63,6 +64,8 @@ body {
     height: 30px;
     cursor: pointer;
 
+
+
 }
 
 #navAdmin li a {
@@ -79,8 +82,13 @@ body {
 #navAdmin li:hover {
 
 
-    background: rgba(#3e5097, #3e5097, #3e5097, 0.5);
+    background-color: rgb(3, 76, 105);
 
+}
+
+#navAdmin li .subMenu li:hover {
+
+    background-color: rgb(65, 65, 65);
 }
 
 
@@ -106,6 +114,7 @@ body {
 
 
     padding-left: 16px;
+
 }
 
 #liClientes .btnFlecha {
@@ -134,7 +143,7 @@ body {
 
 #navAdmin #liClientes .subMenu li img {
 
-    width: 20px;
+    width: 22px;
     margin-top: -2px;
     padding-left: 45px;
 }
@@ -145,7 +154,6 @@ body {
     border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 
 
-
 }
 
 #navAdmin #liClientes .subMenu li a {
@@ -153,12 +161,10 @@ body {
     font-size: 14px;
     margin-left: 1px;
 
+
 }
 
-#navAdmin #liClientes .subMenu li:hover {
 
-    background-color: rgb(65, 65, 65);
-}
 
 
 #liReserva a {
@@ -166,7 +172,6 @@ body {
 
     padding-left: 26px;
 }
-
 
 
 #liReserva .btnFlecha {
@@ -187,8 +192,8 @@ body {
 
 #navAdmin #liReserva .subMenu li img {
 
-    width: 20px;
-    margin-top: -2px;
+    width: 25px;
+    margin-top: -5px;
     padding-left: 45px;
 }
 
@@ -204,7 +209,9 @@ body {
     font-size: 14px;
     margin-left: 0px;
 
+
 }
+
 
 #navAdmin #liReserva .subMenu .liHabitacion img {
 
@@ -214,23 +221,84 @@ body {
 #navAdmin #liReserva .subMenu .liHabitacion a,
 #navAdmin #liReserva .subMenu .liCalendario a {
 
+    margin-left: 30px;
+}
+
+
+
+#liHabitaciones #textHabitaciones {
+
+    padding-left: 33px;
+}
+
+
+#liHabitaciones .btnFlecha {
+
+    width: 14px;
+    margin-left: 70%;
+    margin-top: -18px;
+    display: none;
+
+}
+
+#liHabitaciones:hover>.btnFlecha {
+
+    display: block;
+
+
+}
+
+
+#liHabitaciones:hover>#iconoHabitaciones {
+
+    margin-left: -10px;
+
+}
+
+
+#liHabitaciones:hover #textHabitaciones {
+
+    padding-left: 10px;
+}
+
+
+#navAdmin #liHabitaciones .subMenu li img {
+
+    width: 20px;
+    margin-top: -2px;
+    padding-left: 45px;
+}
+
+#navAdmin #liHabitaciones .subMenu li {
+
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+
+#navAdmin #liHabitaciones .subMenu li a {
+
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+
+
+#navAdmin #liHabitaciones .subMenu .liGraficaPie a {
+
     margin-left: 20px;
 }
 
-#navAdmin #liReserva .subMenu li:hover {
 
-    background-color: rgb(65, 65, 65);
+
+#navAdmin #liHabitaciones .subMenu .liHabitacion img {
+
+    padding-left: 47px;
 }
 
+#navAdmin #liHabitaciones .subMenu .liHabitacion a {
 
-
-#liHabitaciones a {
-
-
-    padding-left: 40px;
+    margin-left: 17px;
 }
-
-
 
 #liGanancias a {
 
@@ -1473,6 +1541,7 @@ body {
 #habitacionesSuite li h4 {
 
     font-size: 14px;
+    color: rgb(68, 68, 68);
 }
 
 #habitacionesEstandar li label,
@@ -1709,6 +1778,17 @@ body {
 }
 
 
+.panelHabitacionAsignar #formAsignar h3,
+.panelHabitacionRemplazar #formRemplazar h3 {
+
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(192, 192, 192);
+    opacity: 70%;
+
+}
+
 
 .panelHabitacionAsignar #formAsignar img,
 .panelHabitacionRemplazar #formRemplazar img {
@@ -1719,6 +1799,20 @@ body {
     margin-top: 22px;
 
 }
+
+
+.panelHabitacionAsignar #formAsignar #sinBookings,
+.panelHabitacionRemplazar #formRemplazar #sinBookings {
+
+    width: 50px;
+    opacity: 70%;
+    display: block;
+    margin:auto;
+    margin-top: 3px;
+
+}
+
+
 
 
 .panelHabitacionAsignar #formAsignar label,
@@ -2150,6 +2244,17 @@ body {
     padding: 0px;
 }
 
+#divDetalles #opcion #reserva #linkReserva {
+
+    text-decoration: none;
+    color: rgb(138, 138, 138);
+}
+
+#divDetalles #opcion #reserva #linkReserva:hover {
+
+    text-decoration: underline;
+    opacity: 70%;
+}
 
 #reservaMasCercana #cerrar {
 
@@ -3259,7 +3364,7 @@ body {
 
     margin-top: 0px;
     float: right;
-    margin-right:40px;
+    margin-right: 40px;
     padding-bottom: 20px;
     color: black;
 }

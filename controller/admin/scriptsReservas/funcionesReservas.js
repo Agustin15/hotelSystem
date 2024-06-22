@@ -76,7 +76,7 @@ function opcionReserva(datosReserva, opcion) {
         case "eliminar":
 
             $(".divOpcion").addClass("divConfirmacionDelete");
-            $(".divOpcion").load("../../../controller/admin/reservas/formEliminar.php?reserva=" +
+            $(".divOpcion").load("formEliminar.php?reserva=" +
                 encodeURIComponent(JSON.stringify(reserva)));
 
 
@@ -85,7 +85,7 @@ function opcionReserva(datosReserva, opcion) {
         case "editar":
 
             $(".divOpcion").addClass("divEditar");
-            $(".divOpcion").load("../../../controller/admin/reservas/formEditar.php?reserva=" +
+            $(".divOpcion").load("formEditar.php?reserva=" +
                 encodeURIComponent(JSON.stringify(reserva)));
 
 
@@ -94,7 +94,7 @@ function opcionReserva(datosReserva, opcion) {
         case "info":
 
             $(".divOpcion").addClass("divInfo");
-            $(".divOpcion").load("../../../controller/admin/reservas/infoReserva.php?reserva=" +
+            $(".divOpcion").load("infoReserva.php?reserva=" +
                 encodeURIComponent(JSON.stringify(reserva)));
 
 

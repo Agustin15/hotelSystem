@@ -3,8 +3,8 @@
 $idReserva = $_GET['idReserva'];
 $opcion = $_GET['opcion'];
 
-require("../../../../model/claseHabitaciones.php");
-require("../../../../model/claseReservas.php");
+require("../../../model/claseHabitaciones.php");
+require("../../../model/claseReservas.php");
 $claseHabitaciones = new habitaciones();
 $claseReservas = new reservas();
 

@@ -230,7 +230,7 @@ if ($reservasCliente->num_rows == 0) {
                     var noches = $(this).data("noches");
 
                     $(".subVentanas").addClass(".noches");
-                    $(".subVentanas").load("../../../controller/admin/cliente/infoCliente/noches.php?noches=" +
+                    $(".subVentanas").load("infoCliente/noches.php?noches=" +
                         encodeURIComponent(noches));
                     break;
 
@@ -239,7 +239,7 @@ if ($reservasCliente->num_rows == 0) {
                     var adultos = $(this).data("adultos");
                     var ninos = $(this).data("ninos");
 
-                    $(".subVentanas").load("../../../controller/admin/cliente/infoCliente/huespedes.php?adultos=" +
+                    $(".subVentanas").load("infoCliente/huespedes.php?adultos=" +
                         encodeURIComponent(adultos) + "&ninos=" + encodeURIComponent(ninos));
                     break;
 
@@ -248,7 +248,7 @@ if ($reservasCliente->num_rows == 0) {
                     var habitaciones = $(this).data("habitaciones");
 
 
-                    $(".subVentanas").load("../../../controller/admin/cliente/infoCliente/habitaciones.php?habitaciones=" +
+                    $(".subVentanas").load("infoCliente/habitaciones.php?habitaciones=" +
                         encodeURIComponent(JSON.stringify(habitaciones)));
                     break;
 
@@ -257,7 +257,7 @@ if ($reservasCliente->num_rows == 0) {
 
                     var servicios = $(this).data("servicios");
 
-                    $(".subVentanas").load("../../../controller/admin/cliente/infoCliente/servicios.php?servicios=" +
+                    $(".subVentanas").load("infoCliente/servicios.php?servicios=" +
                         encodeURIComponent(JSON.stringify(servicios)));
                     break;
 
@@ -265,7 +265,7 @@ if ($reservasCliente->num_rows == 0) {
 
                     var factura = $(this).data("pago");
 
-                    $(".subVentanas").load("../../../controller/admin/cliente/infoCliente/factura.php?factura=" +
+                    $(".subVentanas").load("infoCliente/factura.php?factura=" +
                         encodeURIComponent(JSON.stringify(factura)));
                     console.log(factura);
                     break;

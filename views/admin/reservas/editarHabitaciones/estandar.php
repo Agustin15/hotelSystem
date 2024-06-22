@@ -1,18 +1,17 @@
-<div id="suite">
+<div id="estandar">
 
     <br>
 
-    <h1>Habitaciones Suite</h1>
-    <form id="formSuite">
+    <h1>Habitaciones Estandar</h1>
+    <form id="formEstandar">
         <br>
         <label>Numero de habitacion</label>
         <input id="numHabitacion" min="1" type="number">
-        <input type="submit" value="Buscar">
-
+    
     </form>
 
 
-    <ul id="habitacionesSuite">
+    <ul id="habitacionesEstandar">
 
         <?php
 
@@ -26,14 +25,13 @@
         $claseHabitacion = new habitaciones();
         $claseReservas = new reservas();
 
-        $habitaciones =  $claseHabitacion->getAllHabitacionesCategoria("Suite");
+        $habitaciones =  $claseHabitacion->getAllHabitacionesCategoria("Estandar");
 
         foreach ($habitaciones as $habitacion) {
 
         ?>
 
             <li data-habitacion="<?php echo $habitacion['numHabitacion'] ?>">
-
 
                 <img class="iconoCalendar" title="reservas cercanas" src="../../../img/reservaId.png">
                 <img src="../../../img/bannerHab1.jpg">
@@ -103,9 +101,9 @@
 
 
 <script>
-    inputHabitacionSearch = $("#numHabitacion");
-    divHabitaciones = $("#habitacionesSuite");
-    liHabitaciones = divHabitaciones.find("li");
+    let inputHabitacionSearch = $("#numHabitacion");
+    let divHabitaciones = $("#habitacionesEstandar");
+    let liHabitaciones = divHabitaciones.find("li");
 
 
     inputHabitacionSearch.on("change", function() {
@@ -142,8 +140,6 @@
 
 
 
-
-
     $(".iconoCalendar").on("click", function() {
 
 
@@ -155,7 +151,7 @@
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("reservaMasCercana");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/calendarioHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/calendarioHabitacion.php?habitacion=" +
             encodeURIComponent(numeroHabitacion));
         $("#modal").css("display", "block");
 
@@ -164,18 +160,21 @@
     });
 
 
+
+
     $(".btnOcupar").on("click", function() {
 
         var habitacion = $(this).parent();
 
         var numeroHabitacion = habitacion.data("habitacion");
 
+
         $("#modal").css("display", "inline");
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("panelHabitacionAsignar");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/asignarHabitacion.php?habitacion=" +
-            encodeURIComponent(numeroHabitacion) + "&categoria=Suite");
+        $("#divOpcion").load("editarHabitaciones/asignarHabitacion.php?habitacion=" +
+            encodeURIComponent(numeroHabitacion) + "&categoria=Estandar");
         $("#modal").css("display", "block");
 
 
@@ -195,44 +194,12 @@
         $("#modal").css("cursor", "none");
 
         $("#divOpcion").addClass("panelHabitacionDetalles");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/detallesHabitacion.php?habitacion=" +
-            encodeURIComponent(numeroHabitacion) + "&categoria=Deluxe");
+        $("#divOpcion").load("editarHabitaciones/detallesHabitacion.php?habitacion=" +
+            encodeURIComponent(numeroHabitacion) + "&categoria=Estandar");
         $("#modal").css("display", "block");
 
 
 
     });
 
-
-    $("#formSuite").on("submit", function(event) {
-
-        event.preventDefault();
-
-        const buscar = {
-
-            "numHabitacion": $("#numHabitacion")
-
-        };
-
-
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/buscarHabitaciones.php", {
-
-                method: "POST",
-                body: JSON.stringify({
-                    'buscar': buscar
-                }),
-                headers: {
-
-                    "Content-Type": "application/json",
-                }
-
-            }).then(resp => resp.json())
-            .then(data => {
-
-                console.log(data);
-
-
-            })
-
-    });
 </script>

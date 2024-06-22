@@ -50,14 +50,14 @@ $habitacion = $_GET['habitacion'];
 
 
 <script>
-    $("#opcion").load("../../../controller/admin/reservas/editarHabitaciones/detalles/reserva.php?habitacion=" +
+    $("#opcion").load("editarHabitaciones/detalles/reserva.php?habitacion=" +
         "<?php echo $habitacion ?>"
     );
 
 
     $(".reserva").on("click", function() {
 
-        $("#opcion").load("../../../controller/admin/reservas/editarHabitaciones/detalles/reserva.php?habitacion=" +
+        $("#opcion").load("editarHabitaciones/detalles/reserva.php?habitacion=" +
             "<?php echo $habitacion ?>"
         );
 
@@ -69,7 +69,7 @@ $habitacion = $_GET['habitacion'];
 
 
         $("#opcion").empty();
-        $("#opcion").load("../../../controller/admin/reservas/editarHabitaciones/detalles/cliente.php?habitacion=" +
+        $("#opcion").load("editarHabitaciones/detalles/cliente.php?habitacion=" +
             "<?php echo $habitacion ?>"
         );
 
@@ -82,7 +82,7 @@ $habitacion = $_GET['habitacion'];
 
 
         $("#opcion").empty();
-        $("#opcion").load("../../../controller/admin/reservas/editarHabitaciones/detalles/huespedes.php?habitacion=" +
+        $("#opcion").load("editarHabitaciones/detalles/huespedes.php?habitacion=" +
             "<?php echo $habitacion ?>"
         );
 

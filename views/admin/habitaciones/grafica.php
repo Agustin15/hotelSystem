@@ -113,16 +113,33 @@ if (empty($usuario)) {
 
 
                 </li>
-
-
                 <li id="liHabitaciones">
 
-                    <img src="../../../img/habitaciones.png">
-                    <a>Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGraficaPie">
+
+                            <img src="../../../img/grafica.png">
+                            <a href="../../views/admin/habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../../img/key-card.png">
+                            <a href="../../views/admin/reservas/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
-
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
                     <a>Ganancias</a>
 
@@ -158,40 +175,50 @@ if (empty($usuario)) {
     </header>
 
 
+    
     <nav id="menuHabitaciones">
 
         <br>
-        <h1>Clientes</h1>
-        <br>
-        <img src="../../../img/clientesBanner.jpg">
+        <h1>Habitaciones </h1>
 
         <ul>
 
             <li class="liGrafica">
-                <a>Gráfica</a>
+
                 <img src="../../../img/grafica.png">
+                <br>
+                <a href="grafica.php">Gráfica</a>
             </li>
 
-            <li>
-                <a href="">Habitaciones</a>
-                <img class="imgHabitaciones" src="../../../img/habitacionesInfo.png">
-
+            <li class="liEstandar">
+                <img src="../../../img/standardIcon.png">
+                <br>
+                <a href="habitaciones.php">Estandar</a>
+            </li>
+            <li class="liDeluxe">
+                <img src="../../../img/deluxeIcon.png">
+                <br>
+                <a href="habitaciones.php">Deluxe</a>
+            </li>
+            <li class="liSuite">
+                <img src="../../../img/suiteIcon.png">
+                <br>
+                <a href="habitaciones.php">Suite</a>
             </li>
         </ul>
     </nav>
 
-    </div>
+
 
     <br>
     <div id="viewGrafica">
 
-     <h1></h1>
         <div id="graficaHabitaciones">
 
 
             <div class="sinDatos">
 
-                <img src="../../../img/sinDatos.png">
+                <img src="../../../img/sinDatosGrafica.png">
                 <br>
                 <h2>No hay datos aun</h2>
 
@@ -290,11 +317,12 @@ if (empty($usuario)) {
     window.onload = function() {
 
 
-        if(dataPointsHabitacionesReservadas.length>0){
-      
-            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones");
+        if (dataPointsHabitacionesReservadas.length > 0) {
 
-    }
+            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones",
+                "Categoria de habitaciones mas reservadas");
+
+        }
 
 
     };

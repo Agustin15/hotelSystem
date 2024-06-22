@@ -111,13 +111,33 @@ if (empty($usuario)) {
 
                 <li id="liHabitaciones">
 
-                    <img src="../../img/habitaciones.png">
-                    <a>Habitaciones</a>
+                    <img id="iconoHabitaciones" src="../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGrafica">
+
+                            <img src="../../img/grafica.png">
+                            <a href="../../views/admin/habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img  src="../../img/key-card.png">
+                            <a href="../../views/admin/reservas/habitaciones.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
 
 
 
-                <li id="liGanancias">
+                <li id="liGanancias" class="optionGanancias">
                     <img src="../../img/ganancias.png">
                     <a>Ganancias</a>
 
@@ -230,8 +250,9 @@ if (empty($usuario)) {
 
     <div id="viewClientes">
 
-        <br>
+        <div class="titleGraphic">
         <h3>Clientes por mes</h3>
+        </div>
         <br>
 
         <br>
@@ -243,25 +264,25 @@ if (empty($usuario)) {
 
             <h1>Sin datos aun</h1>
             <br>
-            <img src="../../img/sinDatos.png">
+            <img src="../../img/sinDatosGrafica.png">
         </div>
     </div>
 
     <div id="viewHabitaciones">
 
         <br>
-        <h3>Habitaciones mas reservadas</h3>
-        <br>
-
+        <div class="titleGraphic">
+        <h3>Categorias de habitaciones mas reservadas</h3>
+        </div>
         <br>
         <div id="graficaHabitaciones"></div>
-        <button id="btnViewHabitaciones">View</button>
+        <a href="../admin/habitaciones/grafica.php"><button id="btnViewHabitaciones">View</button></a>
 
         <div id="sinDatosGraficaHabitaciones">
 
             <h1>Sin datos aun</h1>
             <br>
-            <img src="../../img/sinDatos.png">
+            <img src="../../img/sinDatosGrafica.png">
         </div>
     </div>
 
@@ -356,7 +377,7 @@ if (empty($usuario)) {
 
         if (dataPointsHabitacionesReservadas.length > 0) {
 
-            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones");
+            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones","");
 
         }
 

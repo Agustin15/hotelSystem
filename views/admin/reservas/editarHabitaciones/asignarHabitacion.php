@@ -33,27 +33,42 @@ $claseReservas = new reservas();
     <h1>Agregar Habitacion <?php echo $habitacion ?></h1>
 
     <br>
+    <?php
 
-    <label>id Reserva</label>
-    <br>
-    <select id="idReserva">
+    date_default_timezone_set('America/Montevideo');
+    $hoy = date("Y-m-d");
+    $reservas = $claseReservas->getReservasHabilitadas($hoy);
+    if (empty($reservas)) {
 
-        <?php
+    ?>
 
-        date_default_timezone_set('America/Montevideo');
-        $hoy = date("Y-m-d");
-        $reservas = $claseReservas->getReservasHabilitadas($hoy);
-        foreach ($reservas as $reserva) {
+        <h3>No hay reservas en curso</h3>
+        <br>
+        <img id="sinBookings" src="../../../img/withoutBooking.png">
 
-        ?>
+    <?php
+    } else {
+    ?>
 
-            <option value="<?php echo $reserva['idReserva'] ?>"><?php echo $reserva['idReserva'] ?></option>
-        <?php
-        }
-        ?>
+        <label>id Reserva</label>
+        <br>
+        <select id="idReserva">
 
-    </select>
-    <button id="btnBuscar">Buscar</button>
+            <?php
+            foreach ($reservas as $reserva) {
+
+            ?>
+
+                <option value="<?php echo $reserva['idReserva'] ?>"><?php echo $reserva['idReserva'] ?></option>
+            <?php
+            }
+            ?>
+
+        </select>
+        <button id="btnBuscar">Buscar</button>
+    <?php
+    }
+    ?>
     <br><br>
 
     <div class="subForm">
@@ -97,7 +112,7 @@ $claseReservas = new reservas();
         $("#divOpcion").empty();
         $("#divOpcion").removeClass("panelHabitacionAsignar");
         $("#divOpcion").addClass("panelHabitacionRemplazar");
-        $("#divOpcion").load("../../../controller/admin/reservas/editarHabitaciones/remplazarHabitacion.php?habitacion=" +
+        $("#divOpcion").load("editarHabitaciones/remplazarHabitacion.php?habitacion=" +
             "<?php echo $habitacion ?>" + "&categoria=" + "<?php echo $categoria ?>"
         );
 
@@ -111,7 +126,7 @@ $claseReservas = new reservas();
 
 
 
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/getHabitaciones.php?idReserva=" +
+        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/getHabitaciones.php?idReserva=" +
                 idReserva + "&opcion=agregar", {
 
                     method: "GET",
@@ -181,7 +196,7 @@ $claseReservas = new reservas();
 
             console.log(reserva);
 
-            fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/editarHabitaciones/opcionHabitacion.php", {
+            fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php", {
 
                     method: "POST",
                     body: JSON.stringify({
