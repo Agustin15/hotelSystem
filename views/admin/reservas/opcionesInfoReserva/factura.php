@@ -32,7 +32,7 @@ $claseReservas = new reservas();
         $cantHabitacionesReservadasEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
         $cantHabitacionesReservadasDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
         $cantHabitacionesReservadasSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
-
+    
 
 
     ?>
@@ -69,6 +69,7 @@ $claseReservas = new reservas();
                 <h4>Habitaciones</h4>
 
                 <br>
+                <ul id="ulHabitacion">
                 <?php
 
                 if ($cantHabitacionesReservadasEstandar > 0) {
@@ -77,7 +78,7 @@ $claseReservas = new reservas();
                     $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasEstandar);
                 ?>
 
-                    <ul id="ulHabitacion">
+                  
                         <li>habitacion estandar x <?php echo $cantHabitacionesReservadasEstandar . " ($" . $totalHabitacion . ")" ?></li>
 
                     <?php
@@ -88,7 +89,7 @@ $claseReservas = new reservas();
                     $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasDeluxe);
                     ?>
 
-                        <li>habitacion deluxe x <?php $cantHabitacionesReservadasDeluxe . " ($" . $totalHabitacion . ")" ?></li>
+                        <li>habitacion deluxe x <?php echo $cantHabitacionesReservadasDeluxe . " ($" . $totalHabitacion . ")" ?></li>
 
                     <?php
                 }
@@ -99,7 +100,7 @@ $claseReservas = new reservas();
                     $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasSuite);
                     ?>
 
-                        <li>habitacion suite x <?php $cantHabitacionesReservadasSuite . " ($" . $totalHabitacion . ")" ?></li>
+                        <li>habitacion suite x <?php echo $cantHabitacionesReservadasSuite . " ($" . $totalHabitacion . ")" ?></li>
 
                     <?php
                 }

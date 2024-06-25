@@ -955,11 +955,12 @@ body {
 
 .panelHistorial {
 
-    width: 500px;
+    width: 600px;
     height: 530px;
     background-color: white;
     margin-top: -40%;
-    margin-left: 37%;
+    margin-left: 34%;
+    border-radius: 6px;
     position: absolute;
     z-index: 1;
     text-align: center;
@@ -1077,8 +1078,12 @@ opacity: 70%;
     margin: auto;
     margin-top: 10px;
     height: 270px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     border-radius: 5px;
-    box-shadow: 2px 2px 2px gray;
+    box-shadow:
+    0 0 0 2px rgb(230, 230, 230),
+    0.3em 0.3em 1em rgba(15, 15, 15, 0.3);
 }
 
 .panelHistorial #navHistorial ul {
@@ -1090,11 +1095,11 @@ opacity: 70%;
 
     list-style: none;
     width: 99%;
+    height: 90px;
     background-color: rgb(255, 255, 255);
     padding-top: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid rgb(184, 184, 184);
-   
+    padding-bottom:0px;
+    border-bottom: 1px solid rgb(184, 184, 184);   
 }
 
 .panelHistorial #navHistorial li hr{
@@ -1114,10 +1119,14 @@ opacity: 70%;
 .panelHistorial #navHistorial li #fechaReserva{
 
     background-color: rgb(70, 134, 230);
-    width:100%;
+    width:99%;
     height:30px;
     padding-top: 10px;
     color: white;
+    margin-left:4px;
+    margin-top: -5px;
+    border-radius: 3px;
+    font-weight: bold;
 
 }
 
@@ -1125,28 +1134,23 @@ opacity: 70%;
 .panelHistorial #navHistorial li #lblLlegada{
 
     float: left;
-    margin-left: 40px;
+    margin-left: 120px;
 }
 
 .panelHistorial #navHistorial li #lblSalida{
 
     float: right;
-    margin-right: 50px;
+    margin-right: 110px;
 
 }
 
-.panelHistorial #navHistorial li #lblCliente {
 
-    float: right;
-    margin-right: 10px;
-}
 
 .panelHistorial #navHistorial li #lblReserva{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -10px;
+    float: left;
+    margin-left: 45px; 
+    margin-top: -18px;
 }
 
 .panelHistorial #navHistorial li label a{
@@ -1159,4 +1163,173 @@ opacity: 70%;
 
     text-decoration: underline;
     color: #3b77d1;
+}
+
+
+.panelHistorial #navHistorial .reserva{
+
+    border-right:1px solid rgb(156, 156, 156);
+    height:32px;
+    width: 150px;
+    margin-top: -20px;
+    padding-top: 20px;
+
+}
+
+.panelHistorial #navHistorial .cliente{
+
+    border-right:1px solid rgb(156, 156, 156);
+    height:36px;
+    width:240px;
+    margin-top: -51px;
+    padding-top: 16px;
+    margin-left: 160px;
+    padding-left: -20px;
+}
+
+
+.panelHistorial #navHistorial .huespedes{
+
+    height:36px;
+    width:150px;
+    margin-top: -51px;
+    padding-top: 16px;
+    margin-left: 403px;
+    padding-left: 10px;
+}
+
+
+.panelHistorial #navHistorial #sinResultadosBooking{
+
+    opacity: 60%;
+    margin: auto;
+    margin-top: 60px;
+    display: none;
+    
+}
+
+
+.panelHistorial #navHistorial #sinResultadosBooking img{
+
+    width: 50px;
+}
+
+
+.panelHistorial #navHistorial #sinResultadosBooking h3{
+
+    font-size: 16px;
+    color:rgb(0, 0, 0);
+}
+
+
+
+.panelProximamente {
+
+    width: 600px;
+    height: 530px;
+    background-color: white;
+    margin-top: -40%;
+    margin-left: 34%;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    color: #000000;
+    overflow-y: scroll;
+    overflow-x: none;
+
+}
+
+
+.panelProximamente #cerrarVentana{
+
+width: 24px;
+float: right;
+margin-right: 5px;
+margin-top: 3px;
+opacity: 70%;
+
+}
+
+.panelProximamente #cerrarVentana:hover{
+
+    opacity: 100%;
+}
+
+
+.panelProximamente img {
+
+    width: 70px;
+    margin: auto;
+    margin-top: 30px;
+
+}
+
+.panelProximamente h1 {
+
+    font-size: 22px;
+    color: rgb(55, 124, 214);
+    margin-top: 10px;
+    opacity: 80%;
+
+}
+
+
+.panelProximamente h2 {
+
+    font-size: 20px;
+    color: rgb(50, 115, 201);
+    opacity: 80%;
+
+}
+
+
+.panelProximamente h3 {
+
+    margin: auto;
+    margin-top: 10px;
+    color: #2090d1;
+}
+
+
+.panelProximamente #sinBookings img {
+
+    width: 50px;
+    opacity: 80%;
+}
+
+.panelProximamente #sinBookings h3 {
+
+    font-size: 16px;
+    opacity: 70%;
+    color: rgb(143, 143, 143);
+}
+
+.panelProximamente #calendarProximamente{
+
+    margin: auto;
+    margin-top: 50px;
+    width: 85%;
+    height: 340px;
+    font-size: 10px;
+    padding-bottom: 10px;
+    
+}
+
+
+.panelProximamente #calendarProximamente button
+{
+
+    width: 60px;
+    font-size: 10px;
+    height: 23px;
+}
+
+
+
+.panelProximamente #calendarProximamente h2{
+
+    font-size: 16px;
+    color:rgb(173, 173, 173);
+
 }

@@ -1671,6 +1671,7 @@ body {
     width: 30%;
     margin-left: 40%;
     background-color: rgb(253, 253, 253);
+    border-radius: 6px;
     position: absolute;
     height: auto;
     z-index: 1;
@@ -2189,6 +2190,7 @@ body {
     background-color: white;
     margin-top: -38%;
     margin-left: 40%;
+    border-radius: 6px;
     position: absolute;
     z-index: 1;
     text-align: center;
@@ -2600,7 +2602,7 @@ body {
     margin-top: -55%;
     width: 450px;
     height: auto;
-    border-radius: 3px;
+    border-radius: 6px;
     text-align: center;
     margin-left: 37%;
     padding-bottom: 20px;

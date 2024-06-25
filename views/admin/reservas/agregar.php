@@ -267,6 +267,39 @@ if (empty($usuario)) {
     <div class="divOpcion">
 
     </div>
+
+
+    <?php
+
+    $reservas = $claseReservas->getAllReservas();
+
+    $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+    
+
+    $bookingsInfo = array_map(function ($reserva) use ($claseCliente) {
+
+        $cliente = $claseCliente->getClienteUpdate($reserva['idClienteReserva']);
+        $clienteCorreo =  $cliente['correo'];
+        $clienteNombre = $cliente['nombre'];
+        $clienteApellido = $cliente['apellido'];
+
+
+
+        return [
+            "idReserva" => $reserva['idReserva'],
+            "fechaLlegada" => $reserva['fechaLlegada'],
+            "fechaSalida" => $reserva['fechaSalida'],
+            "nombreCliente" => $clienteNombre,
+            "apellidoCliente" => $clienteApellido,
+            "correoCliente" => $clienteCorreo
+
+        ];
+
+     
+    }, $reservas);
+
+    ?>
+
 </body>
 
 </html>
@@ -302,53 +335,43 @@ if (empty($usuario)) {
 
     window.onload = function() {
 
-
+        let reservas = [];
         let events = [];
+        let reserva, numReserva, llegada, salida, clienteNombre, clienteCorreo, clienteApellido;
 
-        <?php
+        reservas = <?php echo json_encode($bookingsInfo) ?>;
 
-        $reservas = $claseReservas->getAllReservas();
-
-        foreach ($reservas->fetch_all(MYSQLI_ASSOC) as $reserva) {
-
-            $llegada = new DateTime($reserva['fechaLlegada']);
-            $salida = new DateTime($reserva['fechaSalida']);
-            $idCliente = $reserva['idClienteReserva'];
-            $cliente = $claseCliente->getClienteUpdate($idCliente);
+            console.log(reservas);
+        events = reservas.map((reserva) => {
 
 
-        ?>
+            numReserva = reserva.idReserva;
+            llegada = reserva.fechaLlegada;
+            salida = reserva.fechaSalida;
+            clienteNombre = reserva.nombreCliente;
+            clienteCorreo = reserva.correoCliente;
+            clienteApellido = reserva.apellidoCliente;
 
-            var numReserva = <?php echo $reserva['idReserva'] ?>;
-            var inicioReserva = "<?php echo $llegada->format("Y-m-d"); ?>";
-            var finReserva = "<?php echo $salida->format("Y-m-d"); ?>";
-            var clienteCorreo = "<?php echo $cliente['correo'] ?>";
-            var clienteNombre = "<?php echo $cliente['nombre'] ?>";
-            var clienteApellido = "<?php echo $cliente['apellido'] ?>";
-
-            <?php $finReservaColor = strtotime($reserva['fechaSalida']); ?>
-
-            var reserva = {
+            reserva = {
                 id: numReserva,
                 title: `Reserva: ${numReserva}`,
-                start: inicioReserva,
-                end: finReserva,
+                start: llegada,
+                end: salida,
                 extendedProps: {
                     clienteCorreo: clienteCorreo,
                     clienteNombre: clienteNombre,
                     clienteApellido: clienteApellido
                 },
-                backgroundColor: changeEventColor(<?php echo $finReservaColor ?>),
-                borderColor: changeEventColor(<?php echo $finReservaColor ?>),
-
-
+                backgroundColor: changeEventColor(salida),
+                borderColor: changeEventColor(salida),
+            
             }
+            console.log(salida);
 
-            events.push(reserva);
-        <?php
 
-        }
-        ?>
+            return reserva;
+        });
+
 
         console.log(events);
         let calendarAdd = document.getElementById("calendarAdd");

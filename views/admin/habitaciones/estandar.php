@@ -129,9 +129,9 @@
 
 
 <script>
-    let inputHabitacionSearch = $("#numHabitacion");
-    let divHabitaciones = $("#habitacionesEstandar");
-    let liHabitaciones = divHabitaciones.find("li");
+    var inputHabitacionSearch = $("#numHabitacion");
+    var divHabitaciones = $("#habitacionesEstandar");
+    var liHabitaciones = divHabitaciones.find("li");
 
 
     inputHabitacionSearch.on("change", function() {
@@ -170,40 +170,40 @@
 
 
 
-        $(".iconoPlus").on("click", function() {
+    $(".iconoPlus").on("click", function() {
 
-            let liHabitacion = $(this).parent();
-            let numHabitacion = liHabitacion.data("habitacion");
+        let liHabitacion = $(this).parent();
+        let numHabitacion = liHabitacion.data("habitacion");
 
-            let menuRoom = $(".menuRoom");
-            if (menuRoom.length > 0 && $(this).attr('src') == "../../../img/menuHabitacion.png") {
+        let menuRoom = $(".menuRoom");
+        if (menuRoom.length > 0 && $(this).attr('src') == "../../../img/menuHabitacion.png") {
 
-                let liFatherRoom = menuRoom.parent();
-                let iconoPlusMenuClose = liFatherRoom.find(".iconoPlus");
-                iconoPlusMenuClose.attr("src", "../../../img/menuHabitacion.png");
-                menuRoom.remove();
-            }
+            let liFatherRoom = menuRoom.parent();
+            let iconoPlusMenuClose = liFatherRoom.find(".iconoPlus");
+            iconoPlusMenuClose.attr("src", "../../../img/menuHabitacion.png");
+            menuRoom.remove();
+        }
 
-            if ($(this).attr('src') == "../../../img/menuHabitacion.png") {
+        if ($(this).attr('src') == "../../../img/menuHabitacion.png") {
 
-                $(this).attr('src', "../../../img/menuOpen.png");
-                openMenuRoom(liHabitacion);
-
-
-            } else {
-
-                closeMenuRoom(liHabitacion);
-                $(this).attr('src', "../../../img/menuHabitacion.png");
-            }
-
-        });
+            $(this).attr('src', "../../../img/menuOpen.png");
+            openMenuRoom(liHabitacion);
 
 
-        const openMenuRoom = (liHabitacion) => {
+        } else {
 
-            let menuRoom = document.createElement("div");
-            menuRoom.className = "menuRoom";
-            menuRoom.innerHTML = `
+            closeMenuRoom(liHabitacion);
+            $(this).attr('src', "../../../img/menuHabitacion.png");
+        }
+
+    });
+
+
+    const openMenuRoom = (liHabitacion) => {
+
+        let menuRoom = document.createElement("div");
+        menuRoom.className = "menuRoom";
+        menuRoom.innerHTML = `
         
         <nav id="menuHabitacion">
         <ul>
@@ -215,34 +215,48 @@
         </nav>
         `;
 
-            liHabitacion.append(menuRoom);
+        liHabitacion.append(menuRoom);
 
 
-        }
+    }
 
-        const closeMenuRoom = (liHabitacion) => {
+    const closeMenuRoom = (liHabitacion) => {
 
-            let menuRoomClose = liHabitacion.find(".menuRoom");
-            menuRoomClose.remove();
-
-
-        }
-
-        $(document).on("click",".liHistorial", function() {
-
-                        
-            $("#modal").css("display", "block");
-            $("#modal").css("cursor", "none");
-
-            let habitacion = $(this).parent().parent().closest("li");
-            let numHabitacion = habitacion.data("habitacion");
-
-            $("#divOpcion").load("opcionesHabitacion/historial.php?numHabitacion="+numHabitacion);
-            $("#divOpcion").addClass("panelHistorial");
+        let menuRoomClose = liHabitacion.find(".menuRoom");
+        menuRoomClose.remove();
 
 
+    }
 
-        });
+    $(document).on("click", ".liHistorial", function() {
 
 
+        $("#modal").css("display", "block");
+        $("#modal").css("cursor", "none");
+
+        let habitacion = $(this).parent().parent().closest("li");
+        let numHabitacion = habitacion.data("habitacion");
+
+        $("#divOpcion").load("opcionesHabitacion/historial.php?numHabitacion=" + numHabitacion);
+        $("#divOpcion").addClass("panelHistorial");
+
+
+
+    });
+
+    $(document).on("click", ".liProximamente", function() {
+
+
+        $("#modal").css("display", "block");
+        $("#modal").css("cursor", "none");
+
+        let habitacion = $(this).parent().parent().closest("li");
+        let numHabitacion = habitacion.data("habitacion");
+
+        $("#divOpcion").load("opcionesHabitacion/proximamente.php?numHabitacion=" + numHabitacion);
+        $("#divOpcion").addClass("panelProximamente");
+
+
+
+    });
 </script>

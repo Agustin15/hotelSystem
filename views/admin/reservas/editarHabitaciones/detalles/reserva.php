@@ -40,6 +40,8 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
             title: 'Reserva ' + numReserva,
             start: inicioReserva,
             end: finReserva,
+            url: "lista.php?idReserva=" + numReserva,
+            backgroundColor: "#329DBF"
         };
 
         let events = [];

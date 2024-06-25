@@ -284,15 +284,28 @@ function recargar() {
 
 }
 
-function cargarCalendario(calendar, evento) {
+function cargarCalendario(calendar,evento) {
 
-    var hoy = new Date();
     var calendarEl = calendar;
     calendar = new FullCalendar.Calendar(calendarEl, {
-        locale:'es',
+        locale: 'es',
         initialView: 'dayGridMonth',
-        initialDate: hoy,
-        events: evento
+        initialDate: evento[0].start,
+        events: evento,
+
+        eventMouseEnter: function (info) {
+
+            info.event.setProp("backgroundColor", "#2984A2");
+
+
+        },
+
+        eventMouseLeave: function (info) {
+
+            info.event.setProp("backgroundColor", "#329DBF");
+
+
+        }
 
     });
     calendar.render();
@@ -303,28 +316,53 @@ function cargarCalendario(calendar, evento) {
 
 function cargarCalendarioAddEvent(calendar, evento) {
 
-  
+
 
     var hoy = new Date();
     var calendarEl = calendar;
     calendar = new FullCalendar.Calendar(calendarEl, {
-        locale:'es',
+        locale: 'es',
         initialView: 'dayGridMonth',
-        selectable:true,
+        selectable: true,
         initialDate: hoy,
         events: evento,
         eventClick: function (info) {
 
-                      
-            descriptionEvent(info.jsEvent,info.event);
+
+            descriptionEvent(info.jsEvent, info.event);
 
         },
 
-          select: function(info) {
-           
+        select: function (info) {
+
             modalNewReserve(info);
-          }
-    
+        },
+
+        eventMouseEnter: function (info) {
+
+            if (info.event.end < hoy) {
+
+                info.event.setProp("backgroundColor", "#D03232");
+
+            } else {
+
+                info.event.setProp("backgroundColor", "#1A69A2");
+
+            }
+
+        },
+
+        eventMouseLeave: function (info) {
+
+            if (info.event.end < hoy) {
+                info.event.setProp("backgroundColor", "#F04141");
+
+            }else{
+
+                info.event.setProp("backgroundColor", "#329DBF");
+            }
+        }
+
     });
 
     calendar.render();
@@ -334,11 +372,11 @@ function cargarCalendarioAddEvent(calendar, evento) {
 
 
 var valueMouseEnterEvent = 0;
-const descriptionEvent = (jsEvent,dataEvent) => {
+const descriptionEvent = (jsEvent, dataEvent) => {
 
     if ($("#descriptionEvent").length == 0 || dataEvent.id != valueMouseEnterEvent) {
 
-        if($("#descriptionEvent").length>0){
+        if ($("#descriptionEvent").length > 0) {
 
             $("#descriptionEvent").remove();
         }
@@ -356,8 +394,8 @@ const descriptionEvent = (jsEvent,dataEvent) => {
 
         var divDescriptionEvent = document.createElement("div");
         divDescriptionEvent.id = "descriptionEvent";
-        divDescriptionEvent.style.left=jsEvent.pageX+"px";
-        divDescriptionEvent.style.top=jsEvent.pageY+"px";
+        divDescriptionEvent.style.left = jsEvent.pageX + "px";
+        divDescriptionEvent.style.top = jsEvent.pageY + "px";
         divDescriptionEvent.innerHTML =
 
             `
@@ -382,7 +420,7 @@ const descriptionEvent = (jsEvent,dataEvent) => {
         divDescriptionEvent.appendChild(btnCerrar);
 
 
-        $("#btnCerrar").on("click",function(){
+        $("#btnCerrar").on("click", function () {
 
             $("#descriptionEvent").remove();
 
@@ -393,18 +431,18 @@ const descriptionEvent = (jsEvent,dataEvent) => {
 
 }
 
-const modalNewReserve=(info)=>{
+const modalNewReserve = (info) => {
 
-   // alert('selected ' + info.startStr + ' to ' + info.endStr);
+    // alert('selected ' + info.startStr + ' to ' + info.endStr);
 
-   const fechaLlegada=info.startStr;
-   const fechaSalida=info.endStr;
-   $("#modal").css("display","block");
-   $("#modal").css("cursor", "none");
+    const fechaLlegada = info.startStr;
+    const fechaSalida = info.endStr;
+    $("#modal").css("display", "block");
+    $("#modal").css("cursor", "none");
 
-   $(".divOpcion").addClass("newReserve");
-   $(".divOpcion").load("../../../controller/admin/reservas/formAgregar.php?fechaLlegada="+
-   fechaLlegada,"&fechaSalida="+fechaSalida);
+    $(".divOpcion").addClass("newReserve");
+    $(".divOpcion").load("formAgregar.php?fechaLlegada=" +
+        fechaLlegada, "&fechaSalida=" + fechaSalida);
 
 
 }

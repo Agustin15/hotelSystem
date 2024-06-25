@@ -7,7 +7,7 @@
         <br>
         <label>Numero de habitacion</label>
         <input id="numHabitacion" min="1" type="number">
-       
+
 
     </form>
 
@@ -199,6 +199,4 @@
 
 
     });
-
-
 </script>

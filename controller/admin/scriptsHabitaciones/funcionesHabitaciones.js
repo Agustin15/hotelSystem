@@ -1,48 +1,4 @@
 
-
-function opcionHabitacion(datosReserva, opcion) {
-
-
-    var reserva = datosReserva[0];
-
-    $("#modal").css("display", "block");
-    $("#modal").css("cursor", "none");
-
-    switch (opcion) {
-
-
-        case "eliminar":
-
-            $(".divOpcion").addClass("divConfirmacionDelete");
-            $(".divOpcion").load("../../../controller/admin/reservas/formEliminar.php?reserva=" +
-                encodeURIComponent(JSON.stringify(reserva)));
-
-
-
-            break;
-        case "editar":
-
-            $(".divOpcion").addClass("divEditar");
-            $(".divOpcion").load("../../../controller/admin/reservas/formEditar.php?reserva=" +
-                encodeURIComponent(JSON.stringify(reserva)));
-
-
-            break;
-
-        case "info":
-
-            $(".divOpcion").addClass("divInfo");
-            $(".divOpcion").load("../../../controller/admin/reservas/infoReserva.php?reserva=" +
-                encodeURIComponent(JSON.stringify(reserva)));
-
-
-            break;
-    }
-
-}
-
-
-
 function aviso(resultado, opcion) {
 
     console.log(resultado);
@@ -222,15 +178,14 @@ function recargar() {
 
 }
 
-function cargarCalendario(calendar, evento) {
+function cargarCalendario(calendar,events) {
 
-    var hoy = new Date();
     var calendarEl = calendar;
     calendar = new FullCalendar.Calendar(calendarEl, {
         locale:'es',
         initialView: 'dayGridMonth',
-        initialDate: hoy,
-        events: evento
+        initialDate: events[0].start,
+        events: events
 
     });
     calendar.render();
@@ -238,111 +193,3 @@ function cargarCalendario(calendar, evento) {
 
 }
 
-
-function cargarCalendarioAddEvent(calendar, evento) {
-
-  
-
-    var hoy = new Date();
-    var calendarEl = calendar;
-    calendar = new FullCalendar.Calendar(calendarEl, {
-        locale:'es',
-        initialView: 'dayGridMonth',
-        selectable:true,
-        initialDate: hoy,
-        events: evento,
-        eventClick: function (info) {
-
-                      
-            descriptionEvent(info.jsEvent,info.event);
-
-        },
-
-          select: function(info) {
-           
-            modalNewReserve(info);
-          }
-    
-    });
-
-    calendar.render();
-
-}
-
-
-
-var valueMouseEnterEvent = 0;
-const descriptionEvent = (jsEvent,dataEvent) => {
-
-    if ($("#descriptionEvent").length == 0 || dataEvent.id != valueMouseEnterEvent) {
-
-        if($("#descriptionEvent").length>0){
-
-            $("#descriptionEvent").remove();
-        }
-
-        valueMouseEnterEvent = dataEvent.id;
-        var idReserva = dataEvent.id;
-        var llegada = dataEvent.start;
-        var salida = dataEvent.end;
-        var nombre = dataEvent.extendedProps.clienteNombre;
-        var apellido = dataEvent.extendedProps.clienteApellido;
-        var correo = dataEvent.extendedProps.clienteCorreo;
-        llegada = llegada.toLocaleDateString();
-        salida = salida.toLocaleDateString();
-
-
-        var divDescriptionEvent = document.createElement("div");
-        divDescriptionEvent.id = "descriptionEvent";
-        divDescriptionEvent.style.left=jsEvent.pageX+"px";
-        divDescriptionEvent.style.top=jsEvent.pageY+"px";
-        divDescriptionEvent.innerHTML =
-
-            `
-        <img src="../../../img/detalles.png">
-        <br>
-        <h1><a class="linkReserva" href="lista.php?idReserva=${idReserva}">Reserva${idReserva}<a></h1>
-    
-     <li>Llegada:${llegada}</li>
-     <li>salida:${salida}</li>
-     <li>cliente:<a class="linkCliente" href="../../admin/clientes/lista.php?cliente=${correo}">
-     ${nombre} ${apellido}(${correo})</a></li>
-
-    `;
-
-        calendarAdd.appendChild(divDescriptionEvent);
-        divDescriptionEvent.classList.remove("descriptionEventHide");
-        divDescriptionEvent.classList.add("descriptionEventShow");
-
-        const btnCerrar = document.createElement("img");
-        btnCerrar.id = "btnCerrar";
-        btnCerrar.src = "../../../img/cerrarVentana.png";
-        divDescriptionEvent.appendChild(btnCerrar);
-
-
-        $("#btnCerrar").on("click",function(){
-
-            $("#descriptionEvent").remove();
-
-        });
-
-    }
-
-
-}
-
-const modalNewReserve=(info)=>{
-
-   // alert('selected ' + info.startStr + ' to ' + info.endStr);
-
-   const fechaLlegada=info.startStr;
-   const fechaSalida=info.endStr;
-   $("#modal").css("display","block");
-   $("#modal").css("cursor", "none");
-
-   $(".divOpcion").addClass("newReserve");
-   $(".divOpcion").load("../../../controller/admin/reservas/formAgregar.php?fechaLlegada="+
-   fechaLlegada,"&fechaSalida="+fechaSalida);
-
-
-}

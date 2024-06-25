@@ -408,6 +408,20 @@ class habitaciones
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
+    
+    public function habitacionesMasCercanasReservadas($numHabitacion, $hoy)
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+        numHabitacionReservada=? and fechaLlegadaHabitacion >?
+         ORDER BY ABS(DATEDIFF(fechaLlegadaHabitacion,CURDATE()))");
+        $consulta->bind_param("is", $numHabitacion, $hoy);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
 
 
     public function deleteHabitacionReserva($idReserva, $numHabitacion)

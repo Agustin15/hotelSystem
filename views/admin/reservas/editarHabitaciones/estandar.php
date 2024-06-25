@@ -7,7 +7,7 @@
         <br>
         <label>Numero de habitacion</label>
         <input id="numHabitacion" min="1" type="number">
-    
+
     </form>
 
 
@@ -101,7 +101,7 @@
 
 
 <script>
-    let inputHabitacionSearch = $("#numHabitacion");
+    var inputHabitacionSearch = $("#numHabitacion");
     let divHabitaciones = $("#habitacionesEstandar");
     let liHabitaciones = divHabitaciones.find("li");
 
@@ -201,5 +201,4 @@
 
 
     });
-
 </script>

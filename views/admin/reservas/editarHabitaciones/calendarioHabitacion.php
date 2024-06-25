@@ -9,7 +9,7 @@ $claseHabitaciones = new habitaciones();
 
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');
-$hoy =date("Y-m-d");
+$hoy = date("Y-m-d");
 
 ?>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
@@ -20,19 +20,19 @@ $hoy =date("Y-m-d");
     <img id="cerrar" src="../../../img/cerrarVentana.png">
     <img src="../../../img/reservaId.png">
     <br>
-    <h4>Reserva mas cercana de la habitacion <?php echo $habitacion ?></h4>
+    <h4>Reservas mas cercanas de la habitacion <?php echo $habitacion ?></h4>
     <br>
 
     <?php
 
 
 
-    $habitacionMasCercanaReservada = $claseHabitaciones->habitacionMasCercanaReservada(
+    $habitacionesMasCercanasReservadas = $claseHabitaciones->habitacionesMasCercanasReservadas(
         $habitacion,
         $hoy
     );
 
-    if (!isset($habitacionMasCercanaReservada) || empty($habitacionMasCercanaReservada)) {
+    if (!isset($habitacionesMasCercanasReservadas) || empty($habitacionesMasCercanasReservadas)) {
 
     ?>
 
@@ -46,11 +46,9 @@ $hoy =date("Y-m-d");
     <?php
     } else {
 
-        $llegada = new DateTime($habitacionMasCercanaReservada['fechaLlegadaHabitacion']);
-        $salida = new DateTime($habitacionMasCercanaReservada['fechaSalidaHabitacion']);
     ?>
 
-        <h4>Reserva:<?php echo $habitacionMasCercanaReservada['idReservaHabitacion']  ?></h4>
+        <h4>Reservas:</h4>
         <br>
         <button id="viewCalendario">Ver calendario</button>
 
@@ -75,32 +73,37 @@ $hoy =date("Y-m-d");
 
     });
 
+
     $("#viewCalendario").on("click", function() {
 
         <?php
-        if (!empty($habitacionMasCercanaReservada)) {
+        if (!empty($habitacionesMasCercanasReservadas)) {
         ?>
-
-            var numReserva = <?php echo $habitacionMasCercanaReservada['idReservaHabitacion'] ?>;
-            var inicioReserva = "<?php echo $llegada->format("Y-m-d"); ?>";
-            var finReserva = "<?php echo $salida->format("Y-m-d"); ?>";
 
             $("#reservaMasCercana").css("width", "550px");
             $("#reservaMasCercana").css("marginLeft", "35%");
-           
-            var calendar = document.getElementById('calendar');
 
-            evento = {
-
-                title: 'Reserva ' + numReserva,
-                start: inicioReserva,
-                end: finReserva,
-            };
-
+            let reservasHabitacionesMasCercanas = [];
+            reservasHabitacionesMasCercanas = <?php echo json_encode($habitacionesMasCercanasReservadas) ?>;
+            let calendar = document.getElementById('calendar');
             let events = [];
 
-            events.push(evento);
+            events = reservasHabitacionesMasCercanas.map((reserva) => {
 
+                let numReserva = reserva.idReservaHabitacion;
+                let inicioReserva = reserva.fechaLlegadaHabitacion;
+                let finReserva = reserva.fechaSalidaHabitacion;
+
+                let evento = {
+
+                    title: 'Reserva ' + numReserva,
+                    start: inicioReserva,
+                    end: finReserva,
+                    url: "lista.php?idReserva=" + numReserva,
+                    backgroundColor: "#329DBF"
+                };
+
+            });
             cargarCalendario(calendar, events);
 
 

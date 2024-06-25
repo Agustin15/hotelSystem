@@ -26,10 +26,17 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
 
         $(".btnFlecha").on("click", function () {
 
-            const li = $(this).parent();
-            liNext = li.next("li");
-            const subMenu = li.find("ul");
 
+
+            if ($(".subMenu").attr("display")=="block") {
+
+               alert("hay un subMenu abierto");
+
+            }
+
+            var li = $(this).parent();
+            var liNext = li.next("li");
+            const subMenu = li.find("ul");
 
             if ($(this).attr("src") == linkBtnFlechaAbajo) {
 
@@ -62,18 +69,18 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
 
 
                     subMenu.slideToggle("fast", "swing");
-                    if(liNext.hasClass("optionGanancias")){
+                    if (liNext.hasClass("optionGanancias")) {
 
                         liNext.animate({
                             'margin-top': '99px'
                         }, "fast");
 
-                    }else{
-                    liNext.animate({
-                        'margin-top': '150px'
-                    }, "fast");
+                    } else {
+                        liNext.animate({
+                            'margin-top': '150px'
+                        }, "fast");
 
-                }
+                    }
 
 
                 }
@@ -125,24 +132,24 @@ function liBorderBottom(pagina) {
             $(".liAgregar").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
 
-            case "listaReservas":
+        case "listaReservas":
 
             $(".liListaReservas").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
-            case "agregarReserva":
+        case "agregarReserva":
 
             $(".liAgregarReserva").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
 
-            case "Estandar":
+        case "Estandar":
 
             $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
-            case "Deluxe":
+        case "Deluxe":
 
             $(".liDeluxe").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
-            case "Suite":
+        case "Suite":
 
             $(".liSuite").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
@@ -189,16 +196,16 @@ function graficar(dataPoints, grafica, titulo, theme) {
 }
 
 
-function graficarHabitaciones(dataPointsHabitacionesReservadas,graficaHabitaciones,title) {
+function graficarHabitaciones(dataPointsHabitacionesReservadas, graficaHabitaciones, title) {
 
 
     var chart = new CanvasJS.Chart(graficaHabitaciones, {
         theme: "light2",
         animationEnabled: true,
-        title:{
-            text:title
+        title: {
+            text: title
         },
-    
+
         data: [{
             type: "pie",
             startAngle: 25,
@@ -207,7 +214,7 @@ function graficarHabitaciones(dataPointsHabitacionesReservadas,graficaHabitacion
             legendText: "{label}",
             indexLabelFontSize: 16,
             indexLabel: "{label} - {y}%",
-            dataPoints:dataPointsHabitacionesReservadas 
+            dataPoints: dataPointsHabitacionesReservadas
         }]
     });
     chart.render();
