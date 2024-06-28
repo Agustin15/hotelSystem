@@ -32,7 +32,7 @@ $hoy = date("Y-m-d");
         $hoy
     );
 
-    if (!isset($habitacionesMasCercanasReservadas) || empty($habitacionesMasCercanasReservadas)) {
+    if (empty($habitacionesMasCercanasReservadas)) {
 
     ?>
 
@@ -96,12 +96,14 @@ $hoy = date("Y-m-d");
 
                 let evento = {
 
-                    title: 'Reserva ' + numReserva,
+                    title: 'Reserva '+numReserva,
                     start: inicioReserva,
                     end: finReserva,
                     url: "lista.php?idReserva=" + numReserva,
                     backgroundColor: "#329DBF"
                 };
+
+                return evento;
 
             });
             cargarCalendario(calendar, events);

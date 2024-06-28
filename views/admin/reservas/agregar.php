@@ -260,7 +260,20 @@ if (empty($usuario)) {
     </div>
 
     <div id="containerCalendar">
+
         <div id="calendarAdd"></div>
+
+
+        <div id="referenceBookingEnd">
+
+            <label>Reserva finalizada</label>
+        </div>
+
+
+        <div id="referenceBookingStart">
+
+            <label>Reserva Pendiente</label>
+        </div>
 
     </div>
 
@@ -274,7 +287,7 @@ if (empty($usuario)) {
     $reservas = $claseReservas->getAllReservas();
 
     $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
-    
+
 
     $bookingsInfo = array_map(function ($reserva) use ($claseCliente) {
 
@@ -294,8 +307,6 @@ if (empty($usuario)) {
             "correoCliente" => $clienteCorreo
 
         ];
-
-     
     }, $reservas);
 
     ?>
@@ -311,15 +322,11 @@ if (empty($usuario)) {
 
     const changeEventColor = (finReserva) => {
 
-        <?php
-        date_default_timezone_set('America/Argentina/Buenos_Aires');
-        $hoy = strtotime(date('Y-m-d'));
 
-        ?>
+        let hoy = new Date();
+        let salida = new Date(finReserva);
 
-        let hoy = <?php echo $hoy; ?>
-
-        if (finReserva > hoy) {
+        if (salida > hoy) {
 
             //azul
             return "#329DBF";
@@ -328,6 +335,7 @@ if (empty($usuario)) {
             //rojo
             return "#F04141";
         }
+
 
     }
 
@@ -341,7 +349,6 @@ if (empty($usuario)) {
 
         reservas = <?php echo json_encode($bookingsInfo) ?>;
 
-            console.log(reservas);
         events = reservas.map((reserva) => {
 
 
@@ -364,16 +371,14 @@ if (empty($usuario)) {
                 },
                 backgroundColor: changeEventColor(salida),
                 borderColor: changeEventColor(salida),
-            
+
             }
-            console.log(salida);
+
 
 
             return reserva;
         });
 
-
-        console.log(events);
         let calendarAdd = document.getElementById("calendarAdd");
 
         cargarCalendarioAddEvent(calendarAdd, events);
