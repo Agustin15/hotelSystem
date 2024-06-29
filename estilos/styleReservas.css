@@ -404,7 +404,7 @@ body {
     margin-left: 0;
     margin-top: 0px;
     width: 100%;
-    height: 190px;
+    height: 179px;
     box-shadow:
         0 0 0 2px rgb(255, 255, 255),
         0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
@@ -414,26 +414,26 @@ body {
 
 #menuReservas img {
 
-    width: 300px;
+    width: 250px;
     height: 100px;
-    margin-left: 43%;
-    margin-top: -10px;
+    margin-left: 54%;
+    margin-top: -70px;
 
 }
 
 #menuReservas h1 {
 
     color: #6981d8;
-    margin-top: -2px;
+    margin-top: 17px;
     font-size: 27px;
-    margin-left: 50%;
+    margin-left: 45%;
 }
 
 
 #menuReservas ul {
 
-    padding-top: 0px;
-    margin-left: 33%;
+    padding-top: 10px;
+    margin-left: 37%;
 
 }
 
@@ -462,6 +462,8 @@ body {
     font-weight: bold;
     text-decoration: none;
     color: black;
+    display: block;
+    margin-top: -10px;
 
 }
 
@@ -476,14 +478,15 @@ body {
 
 #menuReservas ul li .imgReservas {
 
-    margin-left: 45px;
+    margin:auto;
+   
 }
 
 
 #menuReservas ul li .imgAgregarReserva {
 
-    margin-left: 90px;
-    margin-top: -26px;
+    margin: auto;
+    margin-top: 0px;
 
 
 }
@@ -491,7 +494,7 @@ body {
 
 #menuReservas ul li .imgHabitacionReserva {
 
-    margin-left: 110px;
+    margin:auto;
 
 
 }
@@ -1462,12 +1465,25 @@ body {
 #habitaciones .cargarHabitaciones #deluxe #numHabitacion,
 #habitaciones .cargarHabitaciones #suite #numHabitacion {
 
-    width: 60px;
+   
+    width: 62px;
     border-radius: 3px;
     border: 1px solid rgb(182, 182, 182);
     height: 25px;
     margin-left: 5px;
+    padding-left: 27px;
     outline: none;
+}
+
+
+#habitaciones .cargarHabitaciones #estandar #iconSearch,
+#habitaciones .cargarHabitaciones #deluxe #iconSearch,
+#habitaciones .cargarHabitaciones #suite #iconSearch{
+
+    width: 15px;
+    margin-left:19.8%;
+    margin-top: -22px;
+    display: flex;
 }
 
 #habitaciones .cargarHabitaciones #estandar input[type="submit"],
@@ -3210,7 +3226,7 @@ body {
 
 .divInfo #calendarInfoReserva {
 
-    width: 400px;
+    width: 510px;
     margin: auto;
     margin-top: 30px;
     font-size: 10px;

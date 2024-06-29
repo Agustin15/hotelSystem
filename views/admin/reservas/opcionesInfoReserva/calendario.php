@@ -18,13 +18,11 @@ if (!empty($_GET['reserva'])) {
 
 <h1>Calendario</h1>
 <br>
-<button id="btnViewCalendar">Ver Calendario</button>
-<br>
 
 <div id="calendarInfoReserva"></div>
 
 <script>
-    $("#btnViewCalendar").on("click", function() {
+    $(document).ready(function() {
 
 
         let calendar = document.getElementById('calendarInfoReserva');

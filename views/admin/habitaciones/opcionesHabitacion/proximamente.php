@@ -47,8 +47,6 @@ if (isset($_GET['numHabitacion'])) {
 
 
     ?>
-
-        <button id="viewCalendar">Ver calendario</button>
         <div id="calendarProximamente"></div>
 
 <?php
@@ -70,7 +68,7 @@ if (isset($_GET['numHabitacion'])) {
     });
 
 
-    $("#viewCalendar").on("click", function() {
+    $(document).ready(function(){ 
 
         let reservasHabitacion = [];
         reservasHabitacion = <?php echo  json_encode($reservasHabitacion) ?>;
@@ -83,7 +81,7 @@ if (isset($_GET['numHabitacion'])) {
             let salida = reserva.fechaSalidaHabitacion;
             let idReserva = reserva.idReservaHabitacion;
 
-            let reserva = {
+            reserva = {
 
                 idReserva: idReserva,
                 title: `Reserva: ${idReserva}`,

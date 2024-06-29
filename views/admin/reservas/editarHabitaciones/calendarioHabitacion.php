@@ -50,9 +50,7 @@ $hoy = date("Y-m-d");
 
         <h4>Reservas:</h4>
         <br>
-        <button id="viewCalendario">Ver calendario</button>
 
-        <br>
         <div id='calendar'></div>
 
     <?php
@@ -74,7 +72,7 @@ $hoy = date("Y-m-d");
     });
 
 
-    $("#viewCalendario").on("click", function() {
+    $(document).ready(function() {
 
         <?php
         if (!empty($habitacionesMasCercanasReservadas)) {

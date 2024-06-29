@@ -621,12 +621,24 @@ body {
 #habitaciones .cargarHabitaciones #deluxe #numHabitacion,
 #habitaciones .cargarHabitaciones #suite #numHabitacion {
 
-    width: 60px;
+    width: 62px;
     border-radius: 3px;
     border: 1px solid rgb(182, 182, 182);
     height: 25px;
     margin-left: 5px;
+    padding-left: 27px;
     outline: none;
+}
+
+
+#habitaciones .cargarHabitaciones #estandar #iconSearch,
+#habitaciones .cargarHabitaciones #deluxe #iconSearch,
+#habitaciones .cargarHabitaciones #suite #iconSearch{
+
+    width: 15px;
+    margin-left:19.8%;
+    margin-top: -22px;
+    display: flex;
 }
 
 #habitaciones .cargarHabitaciones #estandar input[type="submit"],

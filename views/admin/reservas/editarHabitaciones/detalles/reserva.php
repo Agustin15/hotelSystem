@@ -27,7 +27,7 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
     var finReserva = "<?php echo $salida->format("Y-m-d"); ?>";
 
 
-    $("#viewCalendario").on("click", function() {
+    $(document).ready(function() {
 
         $("#divDetalles").css("width", "550px");
         $("#divDetalles").css("marginLeft", "35%");
@@ -61,7 +61,7 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
     <label><a id="linkReserva" href="lista.php?idReserva=<?php echo $habitacionReservada['idReservaHabitacion']; ?>">
             <?php echo $habitacionReservada['idReservaHabitacion']; ?></label></a>
     <br>
-    <button id="viewCalendario">Ver calendario</button>
+   
 
     <br>
     <div id='calendar'></div>

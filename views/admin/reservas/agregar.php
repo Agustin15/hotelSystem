@@ -190,25 +190,26 @@ if (empty($usuario)) {
 
         <br>
         <h1>Reservas</h1>
-        <br>
-        <img src="../../../img/reservasBanner.png">
+        <img id="iconoTitle" src="../../../img/reservasBanner.png">
 
         <ul>
 
             <li class="liListaReservas">
-                <a href="lista.php">Lista</a>
                 <img class="imgReservas" src="../../../img/reservas.png">
+                <br>
+                <a href="lista.php">Lista</a>
 
             </li>
             <li class="liAgregarReserva">
-                <a href="agregar.php">Calendario</a>
                 <img class="imgAgregarReserva" src="../../../img/agregarReserva.png">
-
+                <br>
+                <a href="agregar.php">Calendario</a>
             </li>
 
             <li>
-                <a href="habitaciones.php">Habitaciones</a>
                 <img class="imgHabitacionReserva" src="../../../img/habitacionesReserva.png">
+                <br>
+                <a href="habitaciones.php">Habitaciones</a>
 
             </li>
         </ul>

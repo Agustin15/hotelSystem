@@ -175,23 +175,28 @@ if (empty($usuario)) {
 
         <br>
         <h1>Clientes</h1>
-        <br>
         <img src="../../../img/clientesBanner.jpg">
 
         <ul>
 
             <li class="liGrafica">
+
+                <img class="imgClientes" src="../../../img/grafica.png">
+                <br>
                 <a href="grafica.php">Gráfica</a>
-                <img src="../../../img/grafica.png">
+
             </li>
             <li class="liLista">
-                <a href="lista.php">Gestion</a>
                 <img class="imgClientes" src="../../../img/listaClientes.png">
+                <br>
+                <a href="lista.php">Gestion</a>
 
             </li>
             <li class="liAgregar">
-                <a>Agregar</a>
+
                 <img class="imgClientes" src="../../../img/agregarCliente.png">
+                <br>
+                <a>Agregar</a>
 
             </li>
         </ul>

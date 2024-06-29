@@ -141,6 +141,11 @@ function liBorderBottom(pagina) {
             $(".liAgregarReserva").css("border-bottom", "3px solid rgb(96, 185, 219)");
             break;
 
+            case "habitaciones":
+
+            $(".liHabitaciones").css("border-bottom", "3px solid rgb(96, 185, 219)");
+            break;
+
         case "Estandar":
 
             $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
