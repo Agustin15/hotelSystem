@@ -160,11 +160,12 @@ if (isset($reservaJson)) {
         );
 
         $respuestaReserva = $claseReserva->addReservaBd($cliente['idCliente']);
+
     }
 
     if ($respuestaReserva || $actualizarReserva) {
 
-
+    
         foreach ($habitaciones as $habitacion) {
 
             do {

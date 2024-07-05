@@ -72,14 +72,14 @@
                         <label class="lblOcupada">Ocupada</label>
                         <div class="infoReserva">
                             <label class="lblNumReserva">Reserva</label>
-                            <label class="lblReserva"><a href="../reservas/lista.php?idReserva=<?php echo $habitacionMasCercana['idReservaHabitacion'] ?>">
+                            <label class="lblReserva"><a target="_blank" href="../reservas/lista.php?idReserva=<?php echo $habitacionMasCercana['idReservaHabitacion'] ?>">
                                     <?php echo $habitacionMasCercana['idReservaHabitacion'] ?></a>
                             </label>
 
                         </div>
                         <div class="infoHuesped">
                             <img src="../../../img/iconHuesped.png"> <label class="lblHuesped">Huesped</label>
-                            <label class="lblCliente"><a href="../clientes/lista.php?cliente=<?php echo $cliente['correo'] ?>">
+                            <label class="lblCliente"><a target="_blank" href="../clientes/lista.php?cliente=<?php echo $cliente['correo'] ?>">
                                     <?php echo $cliente['correo'] ?></a></label>
                         </div>
 

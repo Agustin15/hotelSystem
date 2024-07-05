@@ -70,21 +70,30 @@ REFERENCES clientes(idCliente)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
+CREATE TABLE servicio(
+idServicio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nombreServicio VARCHAR(50) NOT NULL,
+descripcionServicio VARCHAR(80) NOT NULL,
+precio DOUBLE NOT NULL
+);
 
 CREATE TABLE serviciosExtra_habitacion(
-idServicio INT NOT NULL,
-nombreServicio VARCHAR(50) NOT NULL,
-precioServicio DOUBLE NOT NULL,
+idServicioHabitacion INT NOT NULL,
+cantidad INT NOT NULL,
 idReservaHabitacionServicio INT NOT NULL,
 numHabitacionServicio INT NOT NULL,
 
-primary key(idServicio,numHabitacionServicio,idReservaHabitacionServicio),
+PRIMARY KEY(idServicioHabitacion,numHabitacionServicio,idReservaHabitacionServicio),
 
-CONSTRAINT fk_idReservaServicio FOREIGN KEY(idReservaHabitacionServicio)
-REFERENCES habitacion_reservada (idReservaHabitacion) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_numHabitacionServicio FOREIGN KEY(numHabitacionServicio)
-REFERENCES habitacion_reservada (numHabitacionReservada) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT fk_idServicio FOREIGN KEY (idServicioHabitacion)
+REFERENCES servicio(idServicio) ON DELETE CASCADE ON UPDATE CASCADE,
+
+CONSTRAINT fk_numHabitacionServicio FOREIGN KEY (numHabitacionServicio)
+REFERENCES habitacion_reservada(numHabitacionReservada) ON DELETE CASCADE ON UPDATE CASCADE,
+
+CONSTRAINT fk_idReservaServicio FOREIGN KEY (idReservaHabitacionServicio)
+REFERENCES habitacion_reservada(idReservaHabitacion) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
 
 CREATE TABLE pago(
@@ -136,10 +145,32 @@ INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (29,"Suite");
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (30,"Suite");
 
 
-
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Suite",5,6,1,500);
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Deluxe",4,5,1,300);
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Estandar",3,4,1,120);
+
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500);
+
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Agua 1L",75);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Agua 650ml",55);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","CocaCola 1L",100);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","CocaCola 650ml",80);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Whiskey 5cl",90);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Ron 5cl",90);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Papas pringles",110);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Manis salados",70);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Chocolate Milka",100);
+
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Agua 1L",65);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Agua 650ml",45);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","CocaCola 1L",90);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","CocaCola 650ml",70);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Fanta 1L",90);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Fanta 560ml",70);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Sprite 1L",90);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Sprite 560ml",70);
+
 
 
 

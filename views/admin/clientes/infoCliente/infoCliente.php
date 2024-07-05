@@ -7,11 +7,13 @@ require("../../../../model/claseCliente.php");
 require("../../../../model/claseReserva.php");
 require("../../../../model/claseHabitaciones.php");
 require("../../../../model/clasePago.php");
+require("../../../../model/claseServicios.php");
 
 $claseReserva = new reserva();
 $claseCliente = new cliente();
 $claseHabitaciones = new habitaciones();
 $clasePago= new pago();
+$claseServicio = new servicio();
 
 $reservasCliente = $claseReserva->getReservaIdCliente($cliente['idCliente']);
 
@@ -144,7 +146,7 @@ if ($reservasCliente->num_rows == 0) {
 
                         <?php
 
-                        $serviciosCliente = $claseCliente->getServiciosCliente($reservaCliente['idReserva']);
+                        $serviciosCliente = $claseServicio->getServiciosReserva($reservaCliente['idReserva']);
 
                         ?>
                         <div class="servicios" data-servicios="<?php echo  htmlentities(json_encode($serviciosCliente->fetch_all(MYSQLI_ASSOC))) ?>">

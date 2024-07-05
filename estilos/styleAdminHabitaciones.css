@@ -1,1348 +1,1315 @@
 * {
-
-    margin: 0px;
-    padding: 0px;
-
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
-
-    font-family: Arial;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
-
+  font-family: Arial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-
-
 .iconoMenu {
-
-    width: 36px;
-    margin-top: 6px;
-    margin-left: -110px;
+  width: 36px;
+  margin-top: 6px;
+  margin-left: -110px;
 }
 
 .lblTituloMenu {
-
-    margin-top: 20px;
-    margin-left: 10px;
-    position: absolute;
-    font-size: 17px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  margin-top: 20px;
+  margin-left: 10px;
+  position: absolute;
+  font-size: 17px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 #navAdmin {
-
-    margin-left: 0px;
-    margin-top: -5px;
-    position: fixed;
-    background: linear-gradient(#314c86, #3dacb4);
-    color: rgb(255, 255, 255);
-    text-align: center;
-    width: 180px;
-    height: 800px;
-    font-family: Arial;
+  margin-left: 0px;
+  margin-top: -5px;
+  position: fixed;
+  background: linear-gradient(#314c86, #3dacb4);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 180px;
+  height: 800px;
+  font-family: Arial;
 }
 
-
 #navAdmin ul {
-
-    padding-top: 0px;
-
+  padding-top: 0px;
 }
 
 #navAdmin li {
-
-
-    margin-top: 11px;
-    padding-top: 17px;
-    height: 30px;
-    cursor: pointer;
-
-
-
+  margin-top: 11px;
+  padding-top: 17px;
+  height: 30px;
+  cursor: pointer;
 }
 
 #navAdmin li a {
-
-
-    font-size: 17px;
-    margin-left: 8px;
-    color: white;
-    text-decoration: none;
-
-
+  font-size: 17px;
+  margin-left: 8px;
+  color: white;
+  text-decoration: none;
 }
 
 #navAdmin li:hover {
-
-
-    background-color: rgb(3, 76, 105);
-
+  background-color: rgb(3, 76, 105);
 }
 
 #navAdmin li .subMenu li:hover {
-
-    background-color: rgb(65, 65, 65);
+  background-color: rgb(65, 65, 65);
 }
-
 
 #navAdmin ul img {
-
-    width: 25px;
-    display: flex;
-    position: absolute;
-    margin-top: -5px;
-    padding-left: 30px;
-
+  width: 25px;
+  display: flex;
+  position: absolute;
+  margin-top: -5px;
+  padding-left: 30px;
 }
-
 
 #liInicio a {
-
-
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
-
 #liClientes a {
-
-
-    padding-left: 16px;
-
+  padding-left: 16px;
 }
 
 #liClientes .btnFlecha {
-
-    width: 14px;
-    margin-left: 69%;
-    margin-top: -18px;
-    display: none;
-
+  width: 14px;
+  margin-left: 69%;
+  margin-top: -18px;
+  display: none;
 }
 
-#liClientes:hover>.btnFlecha {
-
-    display: block;
+#liClientes:hover > .btnFlecha {
+  display: block;
 }
-
 
 .subMenu {
-
-    background-color: rgb(46, 46, 46);
-    margin-top: 10px;
-    padding-top: 0px;
-    display: none;
+  background-color: rgb(46, 46, 46);
+  margin-top: 10px;
+  padding-top: 0px;
+  display: none;
 }
 
-
 #navAdmin #liClientes .subMenu li img {
-
-    width: 22px;
-    margin-top: -2px;
-    padding-left: 45px;
+  width: 22px;
+  margin-top: -2px;
+  padding-left: 45px;
 }
 
 #navAdmin #liClientes .subMenu li {
-
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-
-
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
 
 #navAdmin #liClientes .subMenu li a {
-
-    font-size: 14px;
-    margin-left: 1px;
-
-
+  font-size: 14px;
+  margin-left: 1px;
 }
 
 #liReserva a {
-
-
-    padding-left: 26px;
+  padding-left: 26px;
 }
-
 
 #liReserva .btnFlecha {
-
-    width: 14px;
-    margin-left: 69%;
-    margin-top: -18px;
-    display: none;
-
+  width: 14px;
+  margin-left: 69%;
+  margin-top: -18px;
+  display: none;
 }
 
-#liReserva:hover>.btnFlecha {
-
-    display: block;
-
-
+#liReserva:hover > .btnFlecha {
+  display: block;
 }
 
 #navAdmin #liReserva .subMenu li img {
-
-    width: 25px;
-    margin-top: -5px;
-    padding-left: 45px;
+  width: 25px;
+  margin-top: -5px;
+  padding-left: 45px;
 }
 
 #navAdmin #liReserva .subMenu li {
-
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
 
 #navAdmin #liReserva .subMenu li a {
-
-    font-size: 14px;
-    margin-left: 0px;
-
-
+  font-size: 14px;
+  margin-left: 0px;
 }
 
-
 #navAdmin #liReserva .subMenu .liHabitacion img {
-
-    padding-left: 47px;
+  padding-left: 47px;
 }
 
 #navAdmin #liReserva .subMenu .liHabitacion a,
 #navAdmin #liReserva .subMenu .liCalendario a {
-
-    margin-left: 30px;
+  margin-left: 30px;
 }
-
-
 
 #liHabitaciones #textHabitaciones {
-
-    padding-left: 33px;
+  padding-left: 33px;
 }
-
 
 #liHabitaciones .btnFlecha {
-
-    width: 14px;
-    margin-left: 70%;
-    margin-top: -18px;
-    display: none;
-
+  width: 14px;
+  margin-left: 70%;
+  margin-top: -18px;
+  display: none;
 }
 
-#liHabitaciones:hover>.btnFlecha {
-
-    display: block;
-
-
+#liHabitaciones:hover > .btnFlecha {
+  display: block;
 }
 
-
-#liHabitaciones:hover>#iconoHabitaciones {
-
-    margin-left: -10px;
-
+#liHabitaciones:hover > #iconoHabitaciones {
+  margin-left: -10px;
 }
-
 
 #liHabitaciones:hover #textHabitaciones {
-
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
-
 #navAdmin #liHabitaciones .subMenu li img {
-
-    width: 20px;
-    margin-top: -2px;
-    padding-left: 45px;
+  width: 20px;
+  margin-top: -2px;
+  padding-left: 45px;
 }
 
 #navAdmin #liHabitaciones .subMenu li {
-
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
 
 #navAdmin #liHabitaciones .subMenu li a {
-
-    font-size: 14px;
-    margin-left: 0px;
-
+  font-size: 14px;
+  margin-left: 0px;
 }
-
 
 #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
-
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
-
-
 #navAdmin #liHabitaciones .subMenu .liHabitacion img {
-
-    padding-left: 47px;
+  padding-left: 47px;
 }
 
 #navAdmin #liHabitaciones .subMenu .liHabitacion a {
-
-    margin-left: 17px;
+  margin-left: 17px;
 }
-
-
 
 #liGanancias a {
-
-
-    padding-left: 27px;
+  padding-left: 27px;
 }
 
-
-
 #userAdmin {
-
-    width: 180px;
-    height: 55px;
-    position: absolute;
-    top: 74%;
-    left: 0px;
-    background-color: #3dacb4;
-
+  width: 180px;
+  height: 55px;
+  position: absolute;
+  top: 74%;
+  left: 0px;
+  background-color: #3dacb4;
 }
 
 #userAdmin img {
-
-    width: 33px;
-    padding-top: 10px;
-    padding-right: 85px;
-
+  width: 33px;
+  padding-top: 10px;
+  padding-right: 85px;
 }
 
 #userAdmin label {
-
-    padding-top: 20px;
-    margin-left: -66px;
-    position: absolute;
+  padding-top: 20px;
+  margin-left: -66px;
+  position: absolute;
 }
 
-
 #userAdmin .subMenuAdmin {
-
-    height: 91px;
-    background-color: rgb(46, 46, 46);
-    color: white;
-    margin-top: 20px;
-    display: none;
-    padding-top: 0px;
-
-
-
+  height: 91px;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  margin-top: 20px;
+  display: none;
+  padding-top: 0px;
 }
 
 #userAdmin .subMenuAdmin li {
-
-    color: white;
-    list-style: none;
-    padding-top: 10px;
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+  color: white;
+  list-style: none;
+  padding-top: 10px;
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
 
-
 #userAdmin .subMenuAdmin li img {
-
-    width: 20px;
-    margin-top: -12px;
-    padding-left: 50px;
+  width: 20px;
+  margin-top: -12px;
+  padding-left: 50px;
 }
 
 #userAdmin .subMenuAdmin li a {
-
-    font-size: 14px;
-    margin-left: 18px;
-    color: white;
-    text-decoration: none;
-
+  font-size: 14px;
+  margin-left: 18px;
+  color: white;
+  text-decoration: none;
 }
 
 #userAdmin .subMenuAdmin li .logout {
-
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 #userAdmin .subMenuAdmin li:hover {
-
-    background-color: rgb(65, 65, 65);
+  background-color: rgb(65, 65, 65);
 }
 
 #userAdmin .btnFlecha {
-
-    width: 14px;
-    margin-left: 83%;
-    margin-top: -35px;
-    display: flex;
-    display: none;
-
+  width: 14px;
+  margin-left: 83%;
+  margin-top: -35px;
+  display: flex;
+  display: none;
 }
 
-#userAdmin:hover>.btnFlecha {
-
-    display: block;
+#userAdmin:hover > .btnFlecha {
+  display: block;
 }
-
 
 #menuHabitaciones {
-
-    margin-left: 0;
-    margin-top: 0px;
-    width: 100%;
-    height: 120px;
-    box-shadow:
-        0 0 0 2px rgb(255, 255, 255),
-        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-
-
+  margin-left: 0;
+  margin-top: 0px;
+  width: 100%;
+  height: 120px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 #menuHabitaciones img {
-
-    width: 200px;
-    margin-left: 69%;
-    margin-top: -10px;
-    display: flex;
-
-
+  width: 200px;
+  margin-left: 69%;
+  margin-top: -10px;
+  display: flex;
 }
 
 #menuHabitaciones h1 {
-
-    color: #6981d8;
-    margin-top: -2px;
-    font-size: 27px;
-    margin-left: 49%;
+  color: #6981d8;
+  margin-top: -2px;
+  font-size: 27px;
+  margin-left: 49%;
 }
 
-
 #menuHabitaciones ul {
-
-    padding-top: 25px;
-    margin-left: 36%;
-
+  padding-top: 25px;
+  margin-left: 36%;
 }
 
 #menuHabitaciones ul li {
-
-    list-style: none;
-    display: inline-block;
-    padding: 20px;
-    margin-top: -10px;
-    margin-left: 30px;
-    padding-bottom: 1px;
-    cursor: pointer;
-
-
+  list-style: none;
+  display: inline-block;
+  padding: 20px;
+  margin-top: -10px;
+  margin-left: 30px;
+  padding-bottom: 1px;
+  cursor: pointer;
 }
 
 #menuHabitaciones ul li:hover {
-
-    border-bottom: 3px solid rgb(96, 185, 219);
-
+  border-bottom: 3px solid rgb(96, 185, 219);
 }
 
 #menuHabitaciones ul li a {
-
-    opacity: 50%;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
-    display: block;
-    margin-top: -13px;
-
+  opacity: 50%;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  display: block;
+  margin-top: -13px;
 }
 
 #menuHabitaciones ul li img {
-
-    width: 30px;
-    height: 30px;
-    display: block;
-    margin-top: -15px;
-    margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-top: -15px;
+  margin-left: 10px;
 }
-
-
 
 #menuHabitaciones ul .liSuite img {
-
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
-
 #menuHabitaciones ul .liEstandar img {
-
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 #viewGrafica {
-
-    width: 900px;
-    height: 400px;
-    margin-left: 300px;
-    margin-top: 3%;
-    border-radius: 5px;
-    box-shadow:
-        0 0 0 2px rgb(255, 255, 255),
-        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-    text-align: center;
-
+  width: 900px;
+  height: 400px;
+  margin-left: 300px;
+  margin-top: 3%;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
-
 #viewGrafica .sinDatos {
-
-    display: none;
-    opacity: 50%;
-    margin-top: 10%;
-
+  display: none;
+  opacity: 50%;
+  margin-top: 10%;
 }
 
 #viewGrafica .sinDatos img {
-
-    width: 80px;
-
+  width: 80px;
 }
 
 #viewGrafica .sinDatos h2 {
-
-    color: #000000;
-    font-size: 18px;
-
+  color: #000000;
+  font-size: 18px;
 }
 
 #graficaHabitaciones {
-
-    width: 90%;
-    height: 200px;
-    margin: auto;
-    padding-top: 50px;
+  width: 90%;
+  height: 200px;
+  margin: auto;
+  padding-top: 50px;
 }
 
-
 #habitaciones {
-
-
-    width: 1010px;
-    height: 510px;
-    margin-left: 19%;
-    margin-top: -3%;
-    border-radius: 5px;
+  width: 1010px;
+  height: 510px;
+  margin-left: 19%;
+  margin-top: -3%;
+  border-radius: 5px;
 }
 
 #habitaciones ul li {
-
-    list-style: none;
-    display: inline-block;
-    padding: 10px;
-    padding-bottom: 30px;
-    color: rgb(177, 177, 177);
-    text-align: center;
-
+  list-style: none;
+  display: inline-block;
+  padding: 10px;
+  padding-bottom: 30px;
+  color: rgb(177, 177, 177);
+  text-align: center;
 }
 
 #habitaciones ul li img {
-
-    width: 60px;
-    border-radius: 5px;
-
-
+  width: 60px;
+  border-radius: 5px;
 }
 
 #habitaciones ul li:hover {
-
-    border-bottom: 3px solid skyblue;
-    background-color: rgb(247, 247, 247);
-
+  border-bottom: 3px solid skyblue;
+  background-color: rgb(247, 247, 247);
 }
 
 #habitaciones .cargarHabitaciones {
-
-    margin: auto;
-    margin-top: 0px;
-    width: 99%;
-    height: 88%;
-    overflow-y: scroll;
-    padding-bottom: 10px;
-    box-shadow:
-        0 0 0 2px rgb(255, 255, 255),
-        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-
+  margin: auto;
+  margin-top: 0px;
+  width: 99%;
+  height: 88%;
+  overflow-y: scroll;
+  padding-bottom: 10px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
-
 
 #habitaciones .cargarHabitaciones #estandar,
 #habitaciones .cargarHabitaciones #deluxe,
 #habitaciones .cargarHabitaciones #suite {
-
-    margin: auto;
-    margin-top: 20px;
-    width: 99%;
-    height: auto;
-    padding-bottom: 10px;
-
-
+  margin: auto;
+  margin-top: 20px;
+  width: 99%;
+  height: auto;
+  padding-bottom: 10px;
 }
 
 #habitaciones .cargarHabitaciones #estandar h1,
 #habitaciones .cargarHabitaciones #deluxe h1,
 #habitaciones .cargarHabitaciones #suite h1 {
-
-    font-size: 16px;
-    margin: auto;
-    margin-top: 2px;
-    text-align: center;
+  font-size: 16px;
+  margin: auto;
+  margin-top: 2px;
+  text-align: center;
 }
 
 #habitaciones .cargarHabitaciones #estandar label,
 #habitaciones .cargarHabitaciones #deluxe label,
 #habitaciones .cargarHabitaciones #suite label {
-
-    font-size: 15px;
-    opacity: 90%;
-    padding-left: 30px;
-
+  font-size: 15px;
+  opacity: 90%;
+  padding-left: 30px;
 }
-
 
 #habitaciones .cargarHabitaciones #estandar #numHabitacion,
 #habitaciones .cargarHabitaciones #deluxe #numHabitacion,
 #habitaciones .cargarHabitaciones #suite #numHabitacion {
-
-    width: 62px;
-    border-radius: 3px;
-    border: 1px solid rgb(182, 182, 182);
-    height: 25px;
-    margin-left: 5px;
-    padding-left: 27px;
-    outline: none;
+  width: 62px;
+  border-radius: 3px;
+  border: 1px solid rgb(182, 182, 182);
+  height: 25px;
+  margin-left: 5px;
+  padding-left: 27px;
+  outline: none;
 }
-
 
 #habitaciones .cargarHabitaciones #estandar #iconSearch,
 #habitaciones .cargarHabitaciones #deluxe #iconSearch,
-#habitaciones .cargarHabitaciones #suite #iconSearch{
-
-    width: 15px;
-    margin-left:19.8%;
-    margin-top: -22px;
-    display: flex;
+#habitaciones .cargarHabitaciones #suite #iconSearch {
+  width: 15px;
+  margin-left: 19.8%;
+  margin-top: -22px;
+  display: flex;
 }
 
 #habitaciones .cargarHabitaciones #estandar input[type="submit"],
 #habitaciones .cargarHabitaciones #deluxe input[type="submit"],
 #habitaciones .cargarHabitaciones #suite input[type="submit"] {
-
-    background-color: #1e95aa;
-    color: white;
-    border-radius: 3px;
-    border: none;
-    width: 70px;
-    height: 26px;
-    margin-left: 11px;
-    margin-top: -7px;
+  background-color: #1e95aa;
+  color: white;
+  border-radius: 3px;
+  border: none;
+  width: 70px;
+  height: 26px;
+  margin-left: 11px;
+  margin-top: -7px;
 }
 
 #habitaciones .cargarHabitaciones #estandar input[type="submit"]:hover,
 #habitaciones .cargarHabitaciones #deluxe input[type="submit"]:hover,
 #habitaciones .cargarHabitaciones #suite input[type="submit"]:hover {
-
-    background-color: #1a8497;
+  background-color: #1a8497;
 }
 
 #habitacionesEstandar,
 #habitacionesDeluxe,
 #habitacionesSuite {
-
-    width: 100%;
-    margin-top: 30px;
-
+  width: 100%;
+  margin-top: 30px;
 }
 
 #habitacionesEstandar img,
 #habitacionesDeluxe img,
 #habitacionesSuite img {
-
-    width: 30px;
-    float: left;
-    margin-top: -8px;
+  width: 30px;
+  float: left;
+  margin-top: -8px;
 }
 
 #habitacionesEstandar .iconoPlus,
 #habitacionesDeluxe .iconoPlus,
 #habitacionesSuite .iconoPlus {
-
-    width: 17px;
-    float: right;
-    margin-right: 1px;
-    opacity: 70%;
-
+  width: 17px;
+  float: right;
+  margin-right: 1px;
+  opacity: 70%;
 }
 
-
 #habitacionesEstandar .iconoPlus:hover {
-
-    opacity: 100%;
+  opacity: 100%;
 }
 
 #habitacionesEstandar li,
 #habitacionesDeluxe li,
 #habitacionesSuite li {
-
-    display: inline-block;
-    width: 240px;
-    margin-left: 40px;
-    margin-top: 30px;
-    height: 75px;
-    border-radius: 3px;
-    box-shadow:
-        0 0 0 2px rgb(255, 255, 255),
-        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-    color: black;
-
-
+  display: inline-block;
+  width: 240px;
+  margin-left: 40px;
+  margin-top: 30px;
+  height: 75px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  color: black;
 }
 
 #habitacionesEstandar li h4,
 #habitacionesDeluxe li h4,
 #habitacionesSuite li h4 {
-
-    font-size: 15px;
-    color: #242424;
+  font-size: 15px;
+  color: #242424;
 }
 
 #habitacionesEstandar li label,
 #habitacionesDeluxe li label,
 #habitacionesSuite li label {
-
-
-    margin-top: 26px;
-    font-weight: bold;
+  margin-top: 26px;
+  font-weight: bold;
 }
-
-
 
 #habitacionesEstandar li .lblLibre,
 #habitacionesDeluxe li .lblLibre,
 #habitacionesSuite li .lblLibre {
-
-    color: rgb(47, 255, 57);
-    float: left;
-    margin-left: -80px;
+  color: rgb(47, 255, 57);
+  float: left;
+  margin-left: -80px;
 }
-
-
 
 #habitacionesEstandar li .lblOcupada,
 #habitacionesDeluxe li .lblOcupada,
 #habitacionesSuite li .lblOcupada {
-
-    color: rgb(228, 35, 35);
-    float: left;
-    margin-left: -91px;
+  color: rgb(228, 35, 35);
+  float: left;
+  margin-left: -91px;
 }
-
 
 #habitacionesEstandar li .infoHuesped {
-
-
-    float: left;
-    display: flex;
-    flex-direction: column;
-    margin-left: -4px;
-    margin-top: 10px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  margin-left: -4px;
+  margin-top: 10px;
 }
 
-
 #habitacionesEstandar li .infoHuesped label {
-
-    margin-top: -20px;
-    font-size: 13px;
-    font-weight: 100;
+  margin-top: -20px;
+  font-size: 13px;
+  font-weight: 100;
 }
 
 #habitacionesEstandar li .infoHuesped .lblHuesped {
-
-    margin-left: 20px;
-    color: #242424;
-    font-weight: bold;
-
-
+  margin-left: 20px;
+  color: #242424;
+  font-weight: bold;
 }
 
 #habitacionesEstandar li .infoHuesped .lblCliente {
-
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
-
 #habitacionesEstandar li .infoHuesped img {
-
-    width: 24px;
-    margin-left: 37px;
-    margin-top: 5px;
-
+  width: 24px;
+  margin-left: 37px;
+  margin-top: 5px;
 }
 
 #habitacionesEstandar li .infoReserva {
-
-    float: left;
-    display: flex;
-    flex-direction: column;
-    margin-top: 19px;
-    margin-left: -91px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  margin-top: 19px;
+  margin-left: -91px;
 }
 
-
 #habitacionesEstandar li .infoReserva label {
-
-    font-size: 12px;
-
+  font-size: 12px;
 }
 
 #habitacionesEstandar li .infoReserva .lblReserva {
-
-    margin-top: 3px;
-    font-weight: 100;
-
+  margin-top: 3px;
+  font-weight: 100;
 }
 
 #habitacionesEstandar li .infoReserva .lblNumReserva {
-
-    color: #242424;
+  color: #242424;
 }
 
 #habitacionesEstandar li a {
-
-    color: rgb(170, 170, 170);
-    text-decoration: none;
+  color: rgb(170, 170, 170);
+  text-decoration: none;
 }
 
 #habitacionesEstandar li a:hover {
-
-    color: rgb(60, 137, 253);
-    text-decoration: underline;
+  color: rgb(60, 137, 253);
+  text-decoration: underline;
 }
 
 #habitacionesEstandar .sinReservaEnCurso {
-
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    opacity: 80%;
-    margin-top: 21px;
-    margin-left: 10px;
-    float: left;
-
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  opacity: 80%;
+  margin-top: 21px;
+  margin-left: 10px;
+  float: left;
 }
 
 #habitacionesEstandar .sinReservaEnCurso h4 {
-
-    color: rgb(163, 163, 163);
-    font-size: 14px;
-    margin-top: -4px;
+  color: rgb(163, 163, 163);
+  font-size: 14px;
+  margin-top: -4px;
 }
-
 
 #habitacionesEstandar .sinReservaEnCurso img {
-
-    width: 35px;
-    margin-left: 50px;
+  width: 35px;
+  margin-left: 50px;
 }
-
-
 
 #habitaciones .cargarHabitaciones #estandar #habitacionesEstandar li:hover,
 #habitaciones .cargarHabitaciones #deluxe #habitacionesDeluxe li:hover,
 #habitaciones .cargarHabitaciones #suite #habitacionesSuite li:hover {
-
-    border-bottom: none;
+  border-bottom: none;
 }
 
 #habitaciones #sinDatosHabitaciones {
-
-    margin: auto;
-    margin-top: 60px;
-    display: none;
-    opacity: 50%;
-    width: 330px;
-    height: auto;
-    text-align: center;
-
+  margin: auto;
+  margin-top: 60px;
+  display: none;
+  opacity: 50%;
+  width: 330px;
+  height: auto;
+  text-align: center;
 }
 
 #habitaciones #sinDatosHabitaciones img {
-
-    width: 40px;
-    margin: auto;
-    float: none;
+  width: 40px;
+  margin: auto;
+  float: none;
 }
 
-
 #habitaciones #sinDatosHabitaciones h1 {
-
-    font-size: 20px;
+  font-size: 20px;
 }
 
 #menuHabitacion {
-
-    z-index: 1;
-    margin-top: -36%;
-    float: right;
-    margin-right: 4px;
-    width: 180px;
-
+  z-index: 1;
+  margin-top: -36%;
+  float: right;
+  margin-right: 4px;
+  width: 180px;
 }
 
 #menuHabitacion ul li {
-
-    background: #117fbe;
-    color: rgb(255, 255, 255);
-    display: block;
-    opacity: 100%;
-    border-radius: 0px;
-    border-bottom: 1px solid rgb(94, 179, 236);
-    width: auto;
-    box-shadow: none;
-    height: auto;
-    margin-top: 0px;
-    padding-bottom: 8px;
-    padding-top: -2px;
-    font-size: 14px;
+  background: #117fbe;
+  color: rgb(255, 255, 255);
+  display: block;
+  opacity: 100%;
+  border-radius: 0px;
+  border-bottom: 1px solid rgb(94, 179, 236);
+  width: auto;
+  box-shadow: none;
+  height: auto;
+  margin-top: 0px;
+  padding-bottom: 8px;
+  padding-top: -2px;
+  font-size: 14px;
 }
 
-
 #menuHabitacion ul li:hover {
-
-    background: #0e73ad;
+  background: #0e73ad;
 }
 
 #menuHabitacion ul li img {
-
-    width: 20px;
-    display: flex;
-    margin-top: -3px;
+  width: 20px;
+  display: flex;
+  margin-top: -3px;
 }
 
-
 #menuHabitacion ul .liHistorial a {
-
-    margin-left: -37px;
-    color: white;
-    text-decoration: none;
+  margin-left: -37px;
+  color: white;
+  text-decoration: none;
 }
 
 #menuHabitacion ul .liServicios a {
-
-    margin-left: -30px;
-    color: white;
-    text-decoration: none;
+  margin-left: -30px;
+  color: white;
+  text-decoration: none;
 }
-
 
 #modal {
-
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    margin-top: 0px;
-    display: none;
-    background-color: rgba(83, 83, 83, 0.5);
-    position: absolute;
-
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  margin-top: 0px;
+  display: none;
+  background-color: rgba(83, 83, 83, 0.5);
+  position: absolute;
 }
-
 
 .panelHistorial {
-
-    width: 600px;
-    height: 530px;
-    background-color: white;
-    margin-top: -40%;
-    margin-left: 34%;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    text-align: center;
-    color: #000000;
-
+  width: 600px;
+  height: 530px;
+  background-color: white;
+  margin-top: -40%;
+  margin-left: 34%;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  color: #000000;
 }
 
-
-.panelHistorial #cerrarVentana{
-
-width: 24px;
-float: right;
-margin-right: 5px;
-margin-top: 3px;
-opacity: 70%;
-
+.panelHistorial #cerrarVentana {
+  width: 24px;
+  float: right;
+  margin-right: 5px;
+  margin-top: 3px;
+  opacity: 70%;
 }
 
-.panelHistorial #cerrarVentana:hover{
-
-    opacity: 100%;
+.panelHistorial #cerrarVentana:hover {
+  opacity: 100%;
 }
 
 .panelHistorial img {
-
-    width: 50px;
-    margin: auto;
-    margin-top: 30px;
-
+  width: 50px;
+  margin: auto;
+  margin-top: 30px;
 }
 
 .panelHistorial h1 {
-
-    font-size: 22px;
-    color: rgb(55, 124, 214);
-    margin-top: 10px;
-    opacity: 80%;
-
+  font-size: 22px;
+  color: rgb(55, 124, 214);
+  margin-top: 10px;
+  opacity: 80%;
 }
-
 
 .panelHistorial h2 {
-
-    font-size: 20px;
-    color: rgb(50, 115, 201);
-    opacity: 80%;
-
+  font-size: 20px;
+  color: rgb(50, 115, 201);
+  opacity: 80%;
 }
-
 
 .panelHistorial h3 {
-
-    margin: auto;
-    margin-top: 10px;
-    color: #2090d1;
+  margin: auto;
+  margin-top: 10px;
+  color: #2090d1;
 }
 
-
-
 .panelHistorial #searchBooking {
-
-    margin: auto;
-    margin-top: 20px;
-    text-align: center;
-    width: 99%;
-    height: 34px;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  width: 99%;
+  height: 34px;
 }
 
 .panelHistorial #searchBooking input {
-
-    padding-left: 40px;
-    width: 300px;
-    height: 30px;
-    border-radius: 8px;
-    outline: none;
-    border: 1px solid rgb(109, 109, 109);
-    margin: auto;
-    padding-top: -20px;
-
+  padding-left: 40px;
+  width: 300px;
+  height: 30px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid rgb(109, 109, 109);
+  margin: auto;
+  padding-top: -20px;
 }
 
 .panelHistorial #searchBooking #iconSearch {
-
-    width: 20px;
-    margin-left: 10px;
-    position: absolute;
-    margin-top: 5px;
-    opacity: 90%;
+  width: 20px;
+  margin-left: 10px;
+  position: absolute;
+  margin-top: 5px;
+  opacity: 90%;
 }
-
 
 .panelHistorial #searchBooking input::placeholder {
-
-    color: rgb(116, 116, 116);
-    font-size: 14px;
+  color: rgb(116, 116, 116);
+  font-size: 14px;
 }
 
-
 .panelHistorial #sinBookings img {
-
-    width: 50px;
-    opacity: 80%;
+  width: 50px;
+  opacity: 80%;
 }
 
 .panelHistorial #sinBookings h3 {
-
-    font-size: 16px;
-    opacity: 80%;
-    color: rgb(143, 143, 143);
+  font-size: 16px;
+  opacity: 80%;
+  color: rgb(143, 143, 143);
 }
 
 .panelHistorial #navHistorial {
-
-    width: 96%;
-    margin: auto;
-    margin-top: 10px;
-    height: 270px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    border-radius: 5px;
-    box-shadow:
-    0 0 0 2px rgb(230, 230, 230),
+  width: 96%;
+  margin: auto;
+  margin-top: 10px;
+  height: 270px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(230, 230, 230),
     0.3em 0.3em 1em rgba(15, 15, 15, 0.3);
 }
 
 .panelHistorial #navHistorial ul {
-
-    width: 100%;
+  width: 100%;
 }
 
 .panelHistorial #navHistorial li {
-
-    list-style: none;
-    width: 99%;
-    height: 90px;
-    background-color: rgb(255, 255, 255);
-    padding-top: 10px;
-    padding-bottom:0px;
-    border-bottom: 1px solid rgb(184, 184, 184);   
+  list-style: none;
+  width: 99%;
+  height: 90px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 10px;
+  padding-bottom: 0px;
+  border-bottom: 1px solid rgb(184, 184, 184);
+  cursor: pointer;
 }
 
-.panelHistorial #navHistorial li hr{
-
-    margin-top: 2px;
+.panelHistorial #navHistorial li hr {
+  margin-top: 2px;
 }
 
 .panelHistorial #navHistorial li img {
-
-    display: flex;
-    margin-left: 10px;
-    margin-top: -6px;
-    width: 20px;
-
+  display: flex;
+  margin-left: 10px;
+  margin-top: -6px;
+  width: 20px;
 }
 
-.panelHistorial #navHistorial li #fechaReserva{
-
-    background-color: rgb(70, 134, 230);
-    width:99%;
-    height:30px;
-    padding-top: 10px;
-    color: white;
-    margin-left:4px;
-    margin-top: -5px;
-    border-radius: 3px;
-    font-weight: bold;
-
+.panelHistorial #navHistorial li #fechaReserva {
+  background-color: rgb(70, 134, 230);
+  width: 99%;
+  height: 30px;
+  padding-top: 10px;
+  color: white;
+  margin-left: 4px;
+  margin-top: -5px;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
-
-.panelHistorial #navHistorial li #lblLlegada{
-
-    float: left;
-    margin-left: 120px;
+.panelHistorial #navHistorial li #lblLlegada {
+  float: left;
+  margin-left: 120px;
 }
 
-.panelHistorial #navHistorial li #lblSalida{
-
-    float: right;
-    margin-right: 110px;
-
+.panelHistorial #navHistorial li #lblSalida {
+  float: right;
+  margin-right: 110px;
 }
 
-
-
-.panelHistorial #navHistorial li #lblReserva{
-
-    float: left;
-    margin-left: 45px; 
-    margin-top: -18px;
+.panelHistorial #navHistorial li #lblReserva {
+  float: left;
+  margin-left: 45px;
+  margin-top: -18px;
 }
 
-.panelHistorial #navHistorial li label a{
-
-    text-decoration: none;
-    color: black;
+.panelHistorial #navHistorial li label a {
+  text-decoration: none;
+  color: black;
 }
 
-.panelHistorial #navHistorial li label a:hover{
-
-    text-decoration: underline;
-    color: #3b77d1;
+.panelHistorial #navHistorial li label a:hover {
+  text-decoration: underline;
+  color: #3b77d1;
 }
 
-
-.panelHistorial #navHistorial .reserva{
-
-    border-right:1px solid rgb(156, 156, 156);
-    height:32px;
-    width: 150px;
-    margin-top: -20px;
-    padding-top: 20px;
-
+.panelHistorial #navHistorial .reserva {
+  border-right: 1px solid rgb(156, 156, 156);
+  height: 32px;
+  width: 150px;
+  margin-top: -20px;
+  padding-top: 20px;
 }
 
-.panelHistorial #navHistorial .cliente{
-
-    border-right:1px solid rgb(156, 156, 156);
-    height:36px;
-    width:240px;
-    margin-top: -51px;
-    padding-top: 16px;
-    margin-left: 160px;
-    padding-left: -20px;
+.panelHistorial #navHistorial .cliente {
+  border-right: 1px solid rgb(156, 156, 156);
+  height: 36px;
+  width: 240px;
+  margin-top: -51px;
+  padding-top: 16px;
+  margin-left: 160px;
+  padding-left: -20px;
 }
 
-
-.panelHistorial #navHistorial .huespedes{
-
-    height:36px;
-    width:150px;
-    margin-top: -51px;
-    padding-top: 16px;
-    margin-left: 403px;
-    padding-left: 10px;
+.panelHistorial #navHistorial .huespedes {
+  height: 36px;
+  width: 150px;
+  margin-top: -51px;
+  padding-top: 16px;
+  margin-left: 403px;
+  padding-left: 10px;
 }
 
-
-.panelHistorial #navHistorial #sinResultadosBooking{
-
-    opacity: 60%;
-    margin: auto;
-    margin-top: 60px;
-    display: none;
-    
+.panelHistorial #navHistorial #sinResultadosBooking {
+  opacity: 60%;
+  margin: auto;
+  margin-top: 60px;
+  display: none;
 }
 
-
-.panelHistorial #navHistorial #sinResultadosBooking img{
-
-    width: 50px;
+.panelHistorial #navHistorial #sinResultadosBooking img {
+  width: 50px;
 }
 
-
-.panelHistorial #navHistorial #sinResultadosBooking h3{
-
-    font-size: 16px;
-    color:rgb(0, 0, 0);
+.panelHistorial #navHistorial #sinResultadosBooking h3 {
+  font-size: 16px;
+  color: rgb(0, 0, 0);
 }
-
-
 
 .panelProximamente {
-
-    width: 600px;
-    height: 530px;
-    background-color: white;
-    margin-top: -40%;
-    margin-left: 34%;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    text-align: center;
-    color: #000000;
-    overflow-y: scroll;
-    overflow-x: none;
-
+  width: 600px;
+  height: 530px;
+  background-color: white;
+  margin-top: -40%;
+  margin-left: 34%;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  color: #000000;
+  overflow-y: scroll;
+  overflow-x: none;
 }
 
-
-.panelProximamente #cerrarVentana{
-
-width: 24px;
-float: right;
-margin-right: 5px;
-margin-top: 3px;
-opacity: 70%;
-
+.panelProximamente #cerrarVentana {
+  width: 24px;
+  float: right;
+  margin-right: 5px;
+  margin-top: 3px;
+  opacity: 70%;
 }
 
-.panelProximamente #cerrarVentana:hover{
-
-    opacity: 100%;
+.panelProximamente #cerrarVentana:hover {
+  opacity: 100%;
 }
-
 
 .panelProximamente img {
-
-    width: 70px;
-    margin: auto;
-    margin-top: 30px;
-
+  width: 70px;
+  margin: auto;
+  margin-top: 30px;
 }
 
 .panelProximamente h1 {
-
-    font-size: 22px;
-    color: rgb(55, 124, 214);
-    margin-top: 10px;
-    opacity: 80%;
-
+  font-size: 22px;
+  color: rgb(55, 124, 214);
+  margin-top: 10px;
+  opacity: 80%;
 }
-
 
 .panelProximamente h2 {
-
-    font-size: 20px;
-    color: rgb(50, 115, 201);
-    opacity: 80%;
-
+  font-size: 20px;
+  color: rgb(50, 115, 201);
+  opacity: 80%;
 }
-
 
 .panelProximamente h3 {
-
-    margin: auto;
-    margin-top: 10px;
-    color: #2090d1;
+  margin: auto;
+  margin-top: 10px;
+  color: #2090d1;
 }
 
-
 .panelProximamente #sinBookings img {
-
-    width: 50px;
-    opacity: 80%;
+  width: 50px;
+  opacity: 80%;
 }
 
 .panelProximamente #sinBookings h3 {
-
-    font-size: 16px;
-    opacity: 70%;
-    color: rgb(143, 143, 143);
+  font-size: 16px;
+  opacity: 70%;
+  color: rgb(143, 143, 143);
 }
 
-.panelProximamente #calendarProximamente{
+.panelProximamente #calendarProximamente {
+  margin: auto;
+  margin-top: 50px;
+  width: 85%;
+  height: 340px;
+  font-size: 10px;
+  padding-bottom: 10px;
+}
 
+.panelProximamente #calendarProximamente button {
+  width: 60px;
+  font-size: 10px;
+  height: 23px;
+}
+
+.panelProximamente #calendarProximamente h2 {
+  font-size: 16px;
+  color: rgb(173, 173, 173);
+}
+
+.panelServicesRoom {
+  width: 600px;
+  height: 530px;
+  background-color: white;
+  margin-top: -40%;
+  margin-left: 34%;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  color: #000000;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+.panelServicesRoom #menuServicesRoom {
+  float: left;
+  margin-left: 10px;
+  margin-top: -20px;
+}
+
+.panelServicesRoom #menuServicesRoom ul li {
+  display: inline-block;
+  margin-left: 20px;
+  color: rgb(168, 168, 168);
+}
+
+.panelServicesRoom #menuServicesRoom ul li img {
+  width: 20px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.panelServicesRoom #iconServiceRoom {
+  margin-top: 15%;
+  width: 58px;
+}
+.panelServicesRoom h1 {
+  font-size: 22px;
+  color: rgb(55, 124, 214);
+  margin-top: 10px;
+  opacity: 80%;
+}
+
+.panelServicesRoom h2 {
+  font-size: 20px;
+  color: rgb(50, 115, 201);
+  opacity: 80%;
+}
+
+.panelServicesRoom img {
+  display: block;
+  margin: auto;
+}
+
+#panelOptionService #sinServiciosHabitacion {
+  opacity: 70%;
+  margin: auto;
+  margin-top: 3%;
+  text-align: center;
+}
+
+#panelOptionService #sinServiciosHabitacion img {
+  width: 100px;
+}
+
+#panelOptionService #sinServiciosHabitacion h3 {
+  font-size: 20px;
+  color: rgb(172, 172, 172);
+}
+
+#panelOptionService #servicesList {
+  margin-top: 0%;
+  padding-bottom: 20px;
+}
+
+#panelOptionService #servicesList li {
+  background: linear-gradient(#314c86, #3dacb4);
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px grey;
+  width: 150px;
+  height: auto;
+  text-align: center;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(78, 78, 78, 0.3);
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#panelOptionService #servicesList li h4 {
+  font-size: 14px;
+  color: white;
+}
+
+#panelOptionService #servicesList li img {
+  width: 40px;
+  display: block;
+}
+
+#panelOptionService #servicesList #optionSup {
+  margin-left: -30px;
+}
+
+#panelOptionService #servicesList #optionInf {
+  margin-left: -30px;
+}
+
+#panelOptionService #servicesList li:hover {
+  background: linear-gradient(#2a86bb, #2a448d);
+}
+
+.panelPhone {
+  width: 400px;
+  height: auto;
+  padding-bottom: 60px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  margin-left: 100px;
+  margin-top: -220px;
+}
+
+#optionAddService .panelPhone img {
+  display: block;
+  width: 40px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#optionAddService .panelPhone h1 {
+  color: #0e73ad;
+  font-size: 15px;
+}
+
+.panelPhone #formAddPhoneService {
+  width: 99%;
+  height: auto;
+  text-align: center;
+}
+
+.panelPhone #formAddPhoneService #tarifa {
+  color: rgb(177, 177, 177);
+}
+
+.panelPhone #formAddPhoneService #lblPrecio {
+  color: rgb(177, 177, 177);
+  margin-top: 20px;
+  display: block;
+}
+
+.panelPhone #formAddPhoneService input[type="text"] {
+  border: 1px solid gray;
+  margin-left: 0px;
+  margin-top: 0px;
+  color: rgb(0, 0, 0);
+  width: 120px;
+  height: 26px;
+  outline: none;
+  border-radius: 5px;
+  padding-left: 30px;
+}
+
+.panelPhone #formAddPhoneService input[type="text"]::placeholder {
+  color: rgb(175, 175, 175);
+}
+
+.panelPhone #formAddPhoneService input[type="text"]:hover {
+  border: 1px solid rgb(0, 89, 255);
+}
+
+.panelPhone #formAddPhoneService img {
+  width: 17px;
+  display: flex;
+  margin-top: -23px;
+  margin-left: 130px;
+}
+
+.panelPhone #formAddPhoneService button {
+  background-color: #0e73ad;
+  box-shadow: 2px 2px 2px gray;
+  margin: auto;
+  margin-top: 30px;
+  color: white;
+  border-radius: 5px;
+  width: 100px;
+  border: none;
+  height: 25px;
+}
+
+.panelPhone #formAddPhoneService button:hover {
+  background-color: #0b5885;
+}
+
+.panelPhone #avisoErrorAddService {
+  margin: auto;
+  width: 300px;
+  height: 30px;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+  background-color: #0e73ad;
+  font-weight: bold;
+  font-size: 14px;
+  padding-top: 12px;
+  transform: scale(0.0);
+  
+}
+
+.panelPhone #avisoErrorAddService img {
+  width: 24px;
+  float: left;
+  margin-left: 10px;
+  margin-top: -2px;
+}
+
+.panelPhone #avisoErrorAddService label{
+
+  margin-left: -20px;
+}
+
+.avisoErrorAddServiceShow {
+  transform: scale(1.0);
+}
+
+
+#modalServices{
+
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  top:0px;
+  display: none;
+  position: absolute;
+
+}
+
+
+#modalService{
+
+    height: 100%;
+    width: 100%;
     margin: auto;
-    margin-top: 50px;
-    width: 85%;
-    height: 340px;
-    font-size: 10px;
-    padding-bottom: 10px;
-    
+    top: -10%;
+    display: none;
+    position: absolute;
+  
+
 }
 
+.panelPhone #cerrar{
+  float: right;
+  margin-right: 3px;
+  margin-top: -15px;
+  opacity: 70%;
+  width: 25px;
+  
+  }
 
-.panelProximamente #calendarProximamente button
-{
+.serviceAdd{
 
-    width: 60px;
-    font-size: 10px;
-    height: 23px;
+  position: absolute;
+  top: 20%;
+  left: 2%;
+  z-index: 1;
+  width: 370px;
+  height: 210px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+.serviceAdd img{
+
+  width: 45px;
+
 }
 
+.serviceAdd p{
 
+  color: black;
+  font-size: 14px;
+}
+.serviceAdd button{
 
-.panelProximamente #calendarProximamente h2{
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width:100px;
+  height: 26px;
+  background-color: #0e73ad;
+  box-shadow: 2px 2px 2px grey;
+}
 
-    font-size: 16px;
-    color:rgb(173, 173, 173);
+.serviceAdd button:hover{
 
+  background-color: #0b5885;
 }
 

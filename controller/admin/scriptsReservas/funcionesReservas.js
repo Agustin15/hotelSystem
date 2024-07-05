@@ -401,11 +401,11 @@ const descriptionEvent = (jsEvent, dataEvent) => {
             `
         <img src="../../../img/detalles.png">
         <br>
-        <h1><a class="linkReserva" href="lista.php?idReserva=${idReserva}">Reserva${idReserva}<a></h1>
+        <h1><a target="_blank" class="linkReserva" href="lista.php?idReserva=${idReserva}">Reserva${idReserva}<a></h1>
     
      <li>Llegada:${llegada}</li>
      <li>salida:${salida}</li>
-     <li>cliente:<a class="linkCliente" href="../../admin/clientes/lista.php?cliente=${correo}">
+     <li>cliente:<a target="_blank" class="linkCliente" href="../../admin/clientes/lista.php?cliente=${correo}">
      ${nombre} ${apellido}(${correo})</a></li>
 
     `;

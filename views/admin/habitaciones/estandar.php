@@ -209,7 +209,7 @@
         <ul>
          <li class="liHistorial"><img src="../../../img/history.png"><a>Historial</a></li>
          <li class="liProximamente"><img src="../../../img/long-term.png">Proximamente</li>
-         <li class="liServicios"><img src="../../../img/order-food.png"><a>Servicios</a></li>
+         <li class="liServicesRoom"><img src="../../../img/order-food.png"><a>Servicios</a></li>
          
         <ul>
         </nav>
@@ -255,6 +255,22 @@
 
         $("#divOpcion").load("opcionesHabitacion/proximamente.php?numHabitacion=" + numHabitacion);
         $("#divOpcion").addClass("panelProximamente");
+
+
+
+    });
+
+    $(document).on("click", ".liServicesRoom", function() {
+
+
+        $("#modal").css("display", "block");
+        $("#modal").css("cursor", "none");
+
+        let habitacion = $(this).parent().parent().closest("li");
+        let numHabitacion = habitacion.data("habitacion");
+
+        $("#divOpcion").load("opcionesHabitacion/servicios.php?numHabitacion=" + numHabitacion);
+        $("#divOpcion").addClass("panelServicesRoom");
 
 
 

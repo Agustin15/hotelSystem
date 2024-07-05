@@ -283,8 +283,11 @@ $diferencia= $llegada->diff($salida);
                         "Content-Type": "application/json",
                     },
 
+                  
+
                 })
 
+             
             }
         }
     });

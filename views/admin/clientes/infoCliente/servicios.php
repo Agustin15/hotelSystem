@@ -6,6 +6,7 @@ $servicios = json_decode($_GET['servicios'], true);
 require("../../../../model/claseCliente.php");
 $claseCliente = new cliente();
 
+
 ?>
 
 

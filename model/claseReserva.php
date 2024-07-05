@@ -104,7 +104,7 @@ class reserva
         return $numHabitacionAsignada;
     }
 
-    public function addReservaBd()
+    public function addReservaBd($idCliente)
     {
 
 
@@ -120,8 +120,15 @@ class reserva
         );
 
         $resultado = $consulta->execute();
+        if($resultado){
 
-        return  $resultado;
+            return  $resultado;
+        }else{
+
+            return $consulta->error;
+        }
+
+       
     }
 
 
