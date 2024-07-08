@@ -21,7 +21,7 @@ $numHabitacion = $_GET['numHabitacion'];
             <img src="../../../img/telephone.png">
         </li>
 
-        <li>
+        <li id="liMassages">
             <h4>Masajes</h4>
             <br>
             <img src="../../../img/massage.png">
@@ -57,9 +57,22 @@ $numHabitacion = $_GET['numHabitacion'];
 
         $("#optionAddService").empty();
         $("#optionAddService").addClass("panelPhone");
-        
+
         let numHabitacion = <?php echo $numHabitacion ?>;
         $("#optionAddService").load("opcionesHabitacion/opcionesServicios/agregarServicios/telefonoServicio.php?numHabitacion=" + numHabitacion);
+
+    });
+
+    $("#liMassages").on("click", function() {
+
+        $("#modalServices").css("display", "block");
+        $("#modalServices").css("cursor", "none");
+
+        $("#optionAddService").empty();
+        $("#optionAddService").addClass("panelMassage");
+
+        let numHabitacion = <?php echo $numHabitacion ?>;
+        $("#optionAddService").load("opcionesHabitacion/opcionesServicios/agregarServicios/masajeServicio.php?numHabitacion=" + numHabitacion);
 
     });
 </script>

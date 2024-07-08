@@ -6,14 +6,12 @@ $claseServicio = new servicio();
 $claseHabitacion = new habitaciones();
 $numHabitacion = $_GET['numHabitacion'];
 
-$servicePhone = $claseServicio->getServicio("telefono");
-$idServicio = $servicePhone['idServicio'];
+$service = $claseServicio->getServicio("masajes");
+$idServicio = $service['idServicio'];
 
 $hoy = date("Y-m-d");
 $habitacion = $claseHabitacion->getHabitacionReservadaFechaAndNum($hoy, $numHabitacion);
 $idReserva = $habitacion['idReservaHabitacion'];
-
-
 
 
 ?>
@@ -21,9 +19,9 @@ $idReserva = $habitacion['idReservaHabitacion'];
 <br>
 <img id="cerrar" src="../../../img/cerrarVentana.png">
 
-<img src="../../../img/telephone.png">
+<img src="../../../img/massage.png">
 <br>
-<h1>Agregar tarifa telefono</h1>
+<h1>Agregar servicio de masaje</h1>
 <br>
 
 
@@ -36,15 +34,15 @@ $idReserva = $habitacion['idReservaHabitacion'];
 </div>
 
 
-<form id="formAddPhoneService">
+<form id="formAddMassageService">
 
-    <label id="tarifa">*Tarifa:<?php echo $servicePhone['precio'] ?> pesos por minuto</label>
+    <label id="tarifa">*Precio por huesped:<?php echo $service['precio'] ?> pesos</label>
     <br><br>
-    <label id="lblPrecio">Cantidad de minutos de llamada:</label>
+    <label id="lblPrecio">Cantidad de personas:</label>
     <br>
-    <input id="minutosLlamada" type="text" placeholder="Minutos">
+    <input id="cantPersonas" type="number" placeholder="Personas">
 
-    <img src="../../../img/reloj.png">
+    <img src="../../../img/iconHuesped.png">
     <br>
 
     <button id="btnAgregar">Agregar</button>
@@ -59,6 +57,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
     <label id="lblAvisoError"></label>
 </div>
 
+
 <script>
     $("#cerrar").on("click", function() {
 
@@ -66,7 +65,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
         $("#modalServices").css("cursor", "auto");
 
         $("#optionAddService").empty();
-        $("#optionAddService").removeClass("panelPhone");
+        $("#optionAddService").removeClass("panelMassage");
 
     });
 
@@ -74,11 +73,11 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
         event.preventDefault();
 
-        if ($("#minutosLlamada").val() == "") {
+        if ($("#cantPersonas").val() == "" ||$("#cantPersonas").val() ==0) {
 
             $("#avisoErrorAddService").css("transform", "scale(1.0)");
 
-            $("#lblAvisoError").text("Complete el campo de precio");
+            $("#lblAvisoError").text("Complete el campo de personas");
 
             deleteNotice($("#avisoErrorAddService"));
 
@@ -91,7 +90,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
             const servicio = {
 
                 "idServicio": idServicio,
-                "cantidad": parseInt($("#minutosLlamada").val()),
+                "cantidad": parseInt($("#cantPersonas").val()),
                 "idReserva": idReserva,
                 "numHabitacion": numHabitacion
 
@@ -116,7 +115,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
                         $("#msjServiceAdd").addClass("serviceAdd");
                         $("#msjServiceAdd").load("opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
-                            numHabitacion + "&&idReserva=" + idReserva+"&&servicio=telefono");
+                            numHabitacion + "&&idReserva=" + idReserva+"&&servicio=masaje");
 
                     }
 

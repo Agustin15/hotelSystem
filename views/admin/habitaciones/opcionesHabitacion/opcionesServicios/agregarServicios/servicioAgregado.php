@@ -1,6 +1,25 @@
 <?php
 $numHabitacion = $_GET['numHabitacion'];
 $idReserva = $_GET['idReserva'];
+$servicio = $_GET['servicio'];
+
+switch ($servicio) {
+
+    case "telefono":
+
+
+        $text = "Tarifa de telefono agregada a la habitacion";
+
+        break;
+
+    case "masaje":
+
+
+        $text = "servicio de masaje agregado a la habitacion";
+
+        break;
+}
+
 ?>
 
 <div id="modalServicioAgregado">
@@ -8,7 +27,7 @@ $idReserva = $_GET['idReserva'];
     <br>
     <img src="../../../img/tickServices.gif">
     <br>
-    <p>Tarifa de telefono agregada a la habitacion <?php echo $numHabitacion ?></p>
+    <p><?php echo $text . " " . $numHabitacion ?></p>
     <p>de la reserva <?php echo $idReserva ?></p>
 
     <br>

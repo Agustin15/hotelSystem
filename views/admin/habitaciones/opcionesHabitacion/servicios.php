@@ -4,6 +4,8 @@ $numHabitacion = $_GET['numHabitacion'];
 
 ?>
 
+<img id="cerrar" src="../../../img/cerrarVentana.png">
+
 <nav id="menuServicesRoom">
 
     <ul>
@@ -36,6 +38,16 @@ $numHabitacion = $_GET['numHabitacion'];
 
 
 <script>
+    $("#cerrar").on("click", function() {
+
+       $("#divOpcion").empty();
+       $("#divOpcion").removeClass("panelServicesRoom");
+       $("#modal").css("display", "none");
+       $("#modal").css("cursor", "auto");
+
+    });
+
+
     $(document).ready(function() {
 
 

@@ -662,7 +662,7 @@ body {
 #menuHabitacion {
   z-index: 1;
   margin-top: -36%;
-  float: right;
+  display: flex;
   margin-right: 4px;
   width: 180px;
 }
@@ -1124,7 +1124,8 @@ body {
   background: linear-gradient(#2a86bb, #2a448d);
 }
 
-.panelPhone {
+.panelPhone,
+.panelMassage {
   width: 400px;
   height: auto;
   padding-bottom: 60px;
@@ -1137,35 +1138,41 @@ body {
   margin-top: -220px;
 }
 
-#optionAddService .panelPhone img {
+#optionAddService .panelPhone img,
+#optionAddService .panelMassage img {
   display: block;
   width: 40px;
   margin: auto;
   margin-top: 20px;
 }
 
-#optionAddService .panelPhone h1 {
+#optionAddService .panelPhone h1,
+#optionAddService .panelMassage h1 {
   color: #0e73ad;
   font-size: 15px;
 }
 
-.panelPhone #formAddPhoneService {
+.panelPhone #formAddPhoneService,
+.panelMassage #formAddMassageService {
   width: 99%;
   height: auto;
   text-align: center;
 }
 
-.panelPhone #formAddPhoneService #tarifa {
+.panelPhone #formAddPhoneService #tarifa,
+.panelMassage #formAddMassageService #tarifa {
   color: rgb(177, 177, 177);
 }
 
-.panelPhone #formAddPhoneService #lblPrecio {
+.panelPhone #formAddPhoneService #lblPrecio,
+.panelMassage #formAddMassageService #lblPrecio {
   color: rgb(177, 177, 177);
   margin-top: 20px;
   display: block;
 }
 
-.panelPhone #formAddPhoneService input[type="text"] {
+.panelPhone #formAddPhoneService input[type="text"],
+.panelMassage #formAddMassageService input[type="number"] {
   border: 1px solid gray;
   margin-left: 0px;
   margin-top: 0px;
@@ -1177,22 +1184,34 @@ body {
   padding-left: 30px;
 }
 
-.panelPhone #formAddPhoneService input[type="text"]::placeholder {
+.panelMassage #formAddMassageService input[type="number"] {
+  width: 80px;
+}
+
+.panelPhone #formAddPhoneService input[type="text"]::placeholder,
+.panelMassage #formAddMassageService input[type="text"]::placeholder {
   color: rgb(175, 175, 175);
 }
 
-.panelPhone #formAddPhoneService input[type="text"]:hover {
+.panelPhone #formAddPhoneService input[type="text"]:hover,
+.panelMassage #formAddMassageService input[type="text"]:hover {
   border: 1px solid rgb(0, 89, 255);
 }
 
-.panelPhone #formAddPhoneService img {
+.panelPhone #formAddPhoneService img,
+.panelMassage #formAddMassageService img {
   width: 17px;
   display: flex;
   margin-top: -23px;
   margin-left: 130px;
 }
 
-.panelPhone #formAddPhoneService button {
+.panelMassage #formAddMassageService img {
+  margin-left: 149px;
+}
+
+.panelPhone #formAddPhoneService button,
+.panelMassage #formAddMassageService button {
   background-color: #0e73ad;
   box-shadow: 2px 2px 2px gray;
   margin: auto;
@@ -1204,11 +1223,13 @@ body {
   height: 25px;
 }
 
-.panelPhone #formAddPhoneService button:hover {
+.panelPhone #formAddPhoneService button:hover,
+.panelMassage #formAddMassageService button:hover {
   background-color: #0b5885;
 }
 
-.panelPhone #avisoErrorAddService {
+.panelPhone #avisoErrorAddService,
+.panelMassage #avisoErrorAddService {
   margin: auto;
   width: 300px;
   height: 30px;
@@ -1219,62 +1240,55 @@ body {
   font-weight: bold;
   font-size: 14px;
   padding-top: 12px;
-  transform: scale(0.0);
-  
+  transform: scale(0);
 }
 
-.panelPhone #avisoErrorAddService img {
+.panelPhone #avisoErrorAddService img,
+.panelMassage #avisoErrorAddService img {
   width: 24px;
   float: left;
   margin-left: 10px;
   margin-top: -2px;
 }
 
-.panelPhone #avisoErrorAddService label{
-
+.panelPhone #avisoErrorAddService label,
+.panelMassage #avisoErrorAddService label {
   margin-left: -20px;
 }
 
-.avisoErrorAddServiceShow {
-  transform: scale(1.0);
-}
-
-
-#modalServices{
-
+#modalServices {
   height: 100%;
   width: 100%;
   margin: auto;
-  top:0px;
+  top: 0px;
   display: none;
   position: absolute;
-
 }
 
-
-#modalService{
-
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    top: -10%;
-    display: none;
-    position: absolute;
-  
-
+#modalService {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  top: -10%;
+  display: none;
+  position: absolute;
 }
 
-.panelPhone #cerrar{
+#divOpcion #cerrar,
+.panelPhone #cerrar,
+.panelMassage #cerrar {
   float: right;
   margin-right: 3px;
   margin-top: -15px;
   opacity: 70%;
   width: 25px;
-  
-  }
+}
 
-.serviceAdd{
+#divOpcion #cerrar {
+  margin-top: 4px;
+}
 
+.serviceAdd {
   position: absolute;
   top: 20%;
   left: 2%;
@@ -1285,31 +1299,25 @@ body {
   background-color: white;
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
-.serviceAdd img{
-
+.serviceAdd img {
   width: 45px;
-
 }
 
-.serviceAdd p{
-
+.serviceAdd p {
   color: black;
   font-size: 14px;
 }
-.serviceAdd button{
-
+.serviceAdd button {
   margin-top: 10px;
   border: none;
   border-radius: 5px;
   color: white;
-  width:100px;
+  width: 100px;
   height: 26px;
   background-color: #0e73ad;
   box-shadow: 2px 2px 2px grey;
 }
 
-.serviceAdd button:hover{
-
+.serviceAdd button:hover {
   background-color: #0b5885;
 }
-
