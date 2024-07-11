@@ -13,6 +13,7 @@ $hoy = date("Y-m-d");
 $habitacion = $claseHabitacion->getHabitacionReservadaFechaAndNum($hoy, $numHabitacion);
 $idReserva = $habitacion['idReservaHabitacion'];
 
+$cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
 ?>
 
@@ -36,15 +37,17 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 <form id="formAddMassageService">
 
-    <label id="tarifa">*Precio por huesped:<?php echo $service['precio'] ?> pesos</label>
+    <label id="tarifa">*Precio por huesped:$<?php echo $service['precio'] ?></label>
     <br><br>
     <label id="lblPrecio">Cantidad de personas:</label>
     <br>
-    <input id="cantPersonas" type="number" placeholder="Personas">
+    <input id="cantPersonas" type="number" min="1" placeholder="Personas">
 
     <img src="../../../img/iconHuesped.png">
     <br>
 
+    <label id="totalService"></label>
+    <br>
     <button id="btnAgregar">Agregar</button>
 </form>
 
@@ -69,18 +72,76 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
     });
 
+    const showNotice = (text,fontSize) => {
+
+        $("#avisoErrorAddService").css("transform", "scale(1.0)");
+        $("#avisoErrorAddService").css("font-size", fontSize);
+
+        $("#lblAvisoError").text(text);
+    }
+
+
+    let cantHuespedes = <?php echo $cantHuespedes ?>;
+    $("#cantPersonas").on("change", function() {
+
+        if ($(this).val() != "") {
+
+            dataService = {
+
+                "precio": 500,
+                "cantidad": $(this).val()
+
+            };
+
+            fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?dataService=" +
+                    JSON.stringify(dataService), {
+
+                        method: "GET",
+                        headers: {
+
+                            "Content-Type": "application/json",
+                        }
+
+                    }).then(respuesta => respuesta.json())
+                .then(data_resp => {
+
+                    let total = JSON.parse(data_resp.total);
+                    $("#totalService").text("Total:$" + total);
+
+                });
+
+        }
+    });
+
+    $("#cantPersonas").keydown(function(e) {
+
+        if (e.keyCode == 8) {
+            $("#totalService").text("");
+
+        }
+
+    });
+
+
     $("#btnAgregar").on("click", function(event) {
 
         event.preventDefault();
 
-        if ($("#cantPersonas").val() == "" ||$("#cantPersonas").val() ==0) {
 
-            $("#avisoErrorAddService").css("transform", "scale(1.0)");
 
-            $("#lblAvisoError").text("Complete el campo de personas");
+        if ($("#cantPersonas").val() == "") {
+
+            showNotice("Complete el campo de cantidad",14);
 
             deleteNotice($("#avisoErrorAddService"));
 
+
+        } else if (cantHuespedes != $("#cantPersonas").val().trim()) {
+
+
+            showNotice("Cantidad no coincide con huespedes",13);
+
+            deleteNotice($("#avisoErrorAddService"));
 
         } else {
 
@@ -115,7 +176,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
                         $("#msjServiceAdd").addClass("serviceAdd");
                         $("#msjServiceAdd").load("opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
-                            numHabitacion + "&&idReserva=" + idReserva+"&&servicio=masaje");
+                            numHabitacion + "&&idReserva=" + idReserva + "&&servicio=masaje");
 
                     }
 

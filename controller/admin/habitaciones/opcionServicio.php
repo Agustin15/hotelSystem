@@ -41,4 +41,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         echo $peticionJson;
 
         break;
+
+    case "GET":
+
+        $dataService = json_decode($_GET['dataService'], true);
+
+        $total = $claseServicio->calculateTotalService($dataService['cantidad'], $dataService['precio']);
+
+        $peticion=array("total"=>$total);
+        $peticionJson=json_encode($peticion);
+
+        echo $peticionJson;
+
+        break;
 }

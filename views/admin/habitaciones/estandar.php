@@ -208,7 +208,7 @@
         <nav id="menuHabitacion">
         <ul>
          <li class="liHistorial"><img src="../../../img/history.png"><a>Historial</a></li>
-         <li class="liProximamente"><img src="../../../img/long-term.png">Proximamente</li>
+         <li class="liProximamente"><img src="../../../img/long-term.png"><a>Proximamente</a></li>
          <li class="liServicesRoom"><img src="../../../img/order-food.png"><a>Servicios</a></li>
          
         <ul>

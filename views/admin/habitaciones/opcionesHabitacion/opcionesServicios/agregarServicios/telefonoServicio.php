@@ -38,15 +38,18 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 <form id="formAddPhoneService">
 
-    <label id="tarifa">*Tarifa:<?php echo $servicePhone['precio'] ?> pesos por minuto</label>
+    <label id="tarifa">*Tarifa:$<?php echo $servicePhone['precio'] ?> por minuto</label>
     <br><br>
     <label id="lblPrecio">Cantidad de minutos de llamada:</label>
     <br>
+
     <input id="minutosLlamada" type="text" placeholder="Minutos">
 
-    <img src="../../../img/reloj.png">
+    <img id="clock" title="Calcular tarifa"  src="../../../img/reloj.png">
     <br>
+    <label id="lblTotalPhone"></label>
 
+    <br>
     <button id="btnAgregar">Agregar</button>
 </form>
 
@@ -67,6 +70,47 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
         $("#optionAddService").empty();
         $("#optionAddService").removeClass("panelPhone");
+
+    });
+
+
+    $("#clock").on("click", function() {
+
+        if ($("#minutosLlamada").val() != "") {
+
+            dataService = {
+
+                "precio": 10,
+                "cantidad": $("#minutosLlamada").val().trim()
+
+            };
+
+            fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?dataService=" +
+                    JSON.stringify(dataService), {
+
+                        method: "GET",
+                        headers: {
+
+                            "Content-Type": "application/json",
+                        }
+
+                    }).then(respuesta => respuesta.json())
+                .then(data_resp => {
+
+                    let total = JSON.parse(data_resp.total);
+                    $("#lblTotalPhone").text("Total:$" + total);
+
+                });
+
+        }
+    });
+
+    $("#minutosLlamada").keydown(function(e) {
+
+        if (e.keyCode == 8) {
+            $("#lblTotalPhone").text("");
+
+        }
 
     });
 
@@ -116,7 +160,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
                         $("#msjServiceAdd").addClass("serviceAdd");
                         $("#msjServiceAdd").load("opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
-                            numHabitacion + "&&idReserva=" + idReserva+"&&servicio=telefono");
+                            numHabitacion + "&&idReserva=" + idReserva + "&&servicio=telefono");
 
                     }
 
