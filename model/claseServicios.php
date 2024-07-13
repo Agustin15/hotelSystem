@@ -72,7 +72,7 @@ class servicio
         $consulta->execute();
         $resultado = $consulta->get_result();
 
-        return $resultado->fetch_array(MYSQLI_ASSOC);
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
     public function addServiceToRoom($idServicio, $cantidad, $idReserva, $numHabitacion)

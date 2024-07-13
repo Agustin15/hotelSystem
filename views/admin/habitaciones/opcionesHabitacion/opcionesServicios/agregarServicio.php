@@ -31,7 +31,7 @@ $numHabitacion = $_GET['numHabitacion'];
 
     <div id="optionInf">
 
-        <li>
+        <li id="liMiniBar">
             <h4>Minibar</h4>
             <br>
             <img src="../../../img/minibar.png">
@@ -73,6 +73,17 @@ $numHabitacion = $_GET['numHabitacion'];
 
         let numHabitacion = <?php echo $numHabitacion ?>;
         $("#optionAddService").load("opcionesHabitacion/opcionesServicios/agregarServicios/masajeServicio.php?numHabitacion=" + numHabitacion);
+
+    });
+
+    $("#liMiniBar").on("click", function() {
+
+
+        $("#optionAddService").empty();
+        $("#optionAddService").addClass("panelMiniBar");
+
+        let numHabitacion = <?php echo $numHabitacion ?>;
+        $("#optionAddService").load("opcionesHabitacion/opcionesServicios/agregarServicios/miniBarServicio.php?numHabitacion=" + numHabitacion);
 
     });
 </script>

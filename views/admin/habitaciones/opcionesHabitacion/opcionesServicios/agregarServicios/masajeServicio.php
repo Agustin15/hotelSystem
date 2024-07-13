@@ -7,7 +7,7 @@ $claseHabitacion = new habitaciones();
 $numHabitacion = $_GET['numHabitacion'];
 
 $service = $claseServicio->getServicio("masajes");
-$idServicio = $service['idServicio'];
+$idServicio = $service[0]['idServicio'];
 
 $hoy = date("Y-m-d");
 $habitacion = $claseHabitacion->getHabitacionReservadaFechaAndNum($hoy, $numHabitacion);
@@ -37,7 +37,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
 <form id="formAddMassageService">
 
-    <label id="tarifa">*Precio por huesped:$<?php echo $service['precio'] ?></label>
+    <label id="tarifa">*Precio por huesped:$<?php echo $service[0]['precio'] ?></label>
     <br><br>
     <label id="lblPrecio">Cantidad de personas:</label>
     <br>
@@ -88,7 +88,8 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
             dataService = {
 
-                "precio": 500,
+        
+                "precio":<?php echo $service[0]['precio'] ?>,
                 "cantidad": $(this).val()
 
             };

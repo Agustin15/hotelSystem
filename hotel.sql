@@ -74,7 +74,9 @@ CREATE TABLE servicio(
 idServicio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombreServicio VARCHAR(50) NOT NULL,
 descripcionServicio VARCHAR(80) NOT NULL,
-precio DOUBLE NOT NULL
+precio DOUBLE NOT NULL,
+imagen BLOB,
+maxStock INT
 );
 
 CREATE TABLE serviciosExtra_habitacion(
@@ -149,27 +151,49 @@ INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Deluxe",4,5,1,300);
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Estandar",3,4,1,120);
 
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50,null,null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500,null,null);
 
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Agua 1L",75);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Agua 650ml",55);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","CocaCola 1L",100);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","CocaCola 650ml",80);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Whiskey 5cl",90);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Ron 5cl",90);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Papas pringles",110);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Manis salados",70);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Minibar","Chocolate Milka",100);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Agua 1L",75,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua1L.jpg'),2);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Agua 650ml",55,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua650mL.jpg'),6);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","CocaCola 1L",100,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/cocacola1l.jpg'),2);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","CocaCola 650ml",80,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/cocacola650ml.jpg'),6);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Whiskey Jack Daniels 5cl",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/whiskeyJackDaniels5cl.jpg'),5);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Ron Captain Morgan 5cl",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/ronCaptainMorgan5cl.jpg'),5);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Fernet branca 5cl",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/fernetBranca5cl.jpg'),5);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Red bull 250ml",100,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/redBull250ml.jpg'),6);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Papas pringles comun 37g",75,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pringlesComun37g.png'),4);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Papas pringles crema y cebolla 37g",75,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pringlesCrema37g.jpg'),4);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Papas pringles barbacoa 37g",75,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pringlesBBQ37g.png'),4);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Manix salados 160g",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/manixSalados160g.jpg'),4);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Chocolate Milka 90g",100,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/chocoMilka90g.jpg'),3);
 
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Agua 1L",65);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Agua 650ml",45);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","CocaCola 1L",90);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","CocaCola 650ml",70);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Fanta 1L",90);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Fanta 560ml",70);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Sprite 1L",90);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio) VALUES ("Cantina","Sprite 560ml",70);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Agua 1L",65,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua1L.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Agua 650ml",45,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua650ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","CocaCola 1L",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/cocacola1l.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","CocaCola 650ml",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/cocacola650ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Fanta 1L",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/fanta1l.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Fanta 650ml",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/fanta650ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Sprite 1L",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/sprite1l.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Sprite 650ml",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/sprite650ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Whiskey Jack Daniels 1L",900,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/whiskeyJackDaniels1l.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Ron Captain Morgan 1L",900,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/ronCaptainMorgan1l.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Fernet Branca 750mL",800,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/fernetBranca750ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Red bull 250mL",100,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/redBull250ml.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Hamburguesa comun con fritas",160,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/hamburComun.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Hamburguesa con queso mas fritas",200,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/hamburConQueso.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Hamburguesa completa mas fritas",280,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/hamburCompleta.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Sandwiche caliente",85,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/sandwicheCaliente.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza comun",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaComun.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza con muzarrella",140,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaMuzzarella.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza con pepperoni",180,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaPepperoni.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de frutilla",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoFrutilla.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de chocolate",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoChocolate.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de vainilla",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoVainilla.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de oreo",110,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoOreo.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de chocolate",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/heladoChocolate.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de frutilla",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/heladoFrutilla.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de vainilla",70,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/heladoVainilla.jpg'),null);
 
 
 

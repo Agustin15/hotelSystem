@@ -267,6 +267,11 @@ if (empty($usuario)) {
     <div id="divOpcion">
 
         <div>
+
+            
+    <div id="divMiniBar">
+
+<div>
 </body>
 
 </html>

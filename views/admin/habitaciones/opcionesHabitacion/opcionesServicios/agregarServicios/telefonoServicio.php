@@ -7,7 +7,7 @@ $claseHabitacion = new habitaciones();
 $numHabitacion = $_GET['numHabitacion'];
 
 $servicePhone = $claseServicio->getServicio("telefono");
-$idServicio = $servicePhone['idServicio'];
+$idServicio = $servicePhone[0]['idServicio'];
 
 $hoy = date("Y-m-d");
 $habitacion = $claseHabitacion->getHabitacionReservadaFechaAndNum($hoy, $numHabitacion);
@@ -38,7 +38,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 <form id="formAddPhoneService">
 
-    <label id="tarifa">*Tarifa:$<?php echo $servicePhone['precio'] ?> por minuto</label>
+    <label id="tarifa">*Tarifa:$<?php echo $servicePhone[0]['precio'] ?> por minuto</label>
     <br><br>
     <label id="lblPrecio">Cantidad de minutos de llamada:</label>
     <br>
@@ -80,7 +80,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
             dataService = {
 
-                "precio": 10,
+                "precio":<?php echo $servicePhone[0]['precio'] ?>,
                 "cantidad": $("#minutosLlamada").val().trim()
 
             };
