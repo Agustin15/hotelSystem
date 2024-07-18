@@ -324,7 +324,7 @@ if (empty($usuario)) {
         }
 
 
-        openSubMenu("../../../img/btnFlechaAbajo.png", "../../../img/btnFlecha.png");
+        openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
 
 
     }

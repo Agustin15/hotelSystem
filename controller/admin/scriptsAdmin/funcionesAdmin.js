@@ -1,183 +1,185 @@
-
 function lblInputsLoginActive(label, clase, claseRemove) {
-
-
-    label.removeClass(claseRemove);
-    label.addClass(clase);
-
+  label.removeClass(claseRemove);
+  label.addClass(clase);
 }
 
 function lblInputsLoginDesactive(label, input, claseAdd) {
-
-
-    if (input.val() == "") {
-
-        label.addClass(claseAdd);
-
-    }
+  if (input.val() == "") {
+    label.addClass(claseAdd);
+  }
 }
 
 function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
+  var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
 
-    $(document).ready(function () {
+  var menu, item, subMenu, itemNext;
 
+  buttonsOpenSubMenu.forEach(function (buttonOpen) {
+    buttonOpen.addEventListener("click", function () {
+      if (this.src === linkBtnFlecha) {
+        //verifica si existe un submenu desplegado
+        menu = document.getElementById("navAdmin");
+        var subMenus = menu.querySelectorAll(".subMenu");
 
-      var buttonsOpenSubMenu =document.querySelectorAll(".btnFlecha");
+        subMenus = Array.from(subMenus);
 
-      buttonsOpenSubMenu.forEach(function(button){
+        var subMenusToNone = subMenus.filter(
+          (sub) => sub.style.display == "block"
+        );
 
-        button.addEventListener("click",function(){
+        if (subMenusToNone.length > 0) {
+          subMenusToNone.forEach(function (subMenuToNone) {
+            var item = subMenuToNone.parentNode;
+            item.querySelector(".btnFlecha").src = linkBtnFlecha;
+            subMenuToNone.style.display = "none";
+            var itemNext = item.nextElementSibling;
+            itemNext.style.marginTop = "11px";
+          });
+        }
 
-            if(this.src===linkBtnFlecha){
+        //abrir submenu
+        this.src = linkBtnFlechaAbajo;
+        item = this.parentNode;
+        subMenu = item.querySelector("ul");
+        subMenu.style.display = "block";
 
-            this.src=linkBtnFlechaAbajo;
-            var item=button.parentNode;
-            var subMenu=item.querySelector("ul");
+        if (item.id == "userAdmin") {
+          item.style.marginTop = "-86px";
+        } else {
+          itemNext = item.nextElementSibling;
 
-            subMenu.style.display="block";
+          if (itemNext.id == "liGanancias") {
+            itemNext.style.marginTop = "110px";
+          } else {
+            itemNext.style.marginTop = "145px";
+          }
+        }
+      } else {
+        //cerrar submenu
+        this.src = linkBtnFlecha;
+        subMenu.style.display = "none";
 
-            }else{
-
-                this.src=linkBtnFlecha;
-
-            }
-        });
-
-      });
-
+        if (item.id == "userAdmin") {
+          item.style.marginTop = "0px";
+        } else {
+          itemNext.style.marginTop = "11px";
+        }
+      }
     });
+  });
 }
-
-
-
 
 function setImg(bannerLink, iconoLink) {
-
-
-    $(document).ready(function () {
-
-        $(".imgBanner").attr("src", bannerLink);
-        $(".iconoAdmin").attr("src", iconoLink);
-
-
-    });
-
-
+  $(document).ready(function () {
+    $(".imgBanner").attr("src", bannerLink);
+    $(".iconoAdmin").attr("src", iconoLink);
+  });
 }
 
-
 function liBorderBottom(pagina) {
+  switch (pagina) {
+    case "grafica":
+      $(".liGrafica").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
 
-    switch (pagina) {
+    case "listaClientes":
+      $(".liLista").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
 
-        case "grafica":
+    case "agregar":
+      $(".liAgregar").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
 
-            $(".liGrafica").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
+    case "listaReservas":
+      $(".liListaReservas").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
+    case "agregarReserva":
+      $(".liAgregarReserva").css(
+        "border-bottom",
+        "3px solid rgb(96, 185, 219)"
+      );
+      break;
 
-        case "listaClientes":
+    case "habitaciones":
+      $(".liHabitaciones").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
 
-            $(".liLista").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-
-        case "agregar":
-
-            $(".liAgregar").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-
-        case "listaReservas":
-
-            $(".liListaReservas").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-        case "agregarReserva":
-
-            $(".liAgregarReserva").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-
-            case "habitaciones":
-
-            $(".liHabitaciones").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-
-        case "Estandar":
-
-            $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-        case "Deluxe":
-
-            $(".liDeluxe").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-        case "Suite":
-
-            $(".liSuite").css("border-bottom", "3px solid rgb(96, 185, 219)");
-            break;
-
-
-    }
-
+    case "Estandar":
+      $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
+    case "Deluxe":
+      $(".liDeluxe").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
+    case "Suite":
+      $(".liSuite").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      break;
+  }
 }
 
 function getMes(numMes) {
+  meses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
 
-    meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-        "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  mesElegido = null;
 
-    mesElegido = null;
+  mesElegido = meses.find((elemento) => meses.indexOf(elemento) + 1 == numMes);
 
-    mesElegido = meses.find((elemento) => meses.indexOf(elemento) + 1 == numMes);
-
-    return mesElegido;
+  return mesElegido;
 }
-
-
 
 function graficar(dataPoints, grafica, titulo, theme) {
-
-
-    var chart = new CanvasJS.Chart(grafica, {
-        theme: theme,
-        animationEnabled: true,
-        title: {
-            text: titulo
-        },
-        data: [{
-
-            type: "column",
-            dataPoints: dataPoints
-
-        }]
-
-    });
-    chart.render();
-
-
+  var chart = new CanvasJS.Chart(grafica, {
+    theme: theme,
+    animationEnabled: true,
+    title: {
+      text: titulo,
+    },
+    data: [
+      {
+        type: "column",
+        dataPoints: dataPoints,
+      },
+    ],
+  });
+  chart.render();
 }
 
+function graficarHabitaciones(
+  dataPointsHabitacionesReservadas,
+  graficaHabitaciones,
+  title
+) {
+  var chart = new CanvasJS.Chart(graficaHabitaciones, {
+    theme: "light2",
+    animationEnabled: true,
+    title: {
+      text: title,
+    },
 
-function graficarHabitaciones(dataPointsHabitacionesReservadas, graficaHabitaciones, title) {
-
-
-    var chart = new CanvasJS.Chart(graficaHabitaciones, {
-        theme: "light2",
-        animationEnabled: true,
-        title: {
-            text: title
-        },
-
-        data: [{
-            type: "pie",
-            startAngle: 25,
-            toolTipContent: "<b>{label}</b>: {y}%",
-            showInLegend: "true",
-            legendText: "{label}",
-            indexLabelFontSize: 16,
-            indexLabel: "{label} - {y}%",
-            dataPoints: dataPointsHabitacionesReservadas
-        }]
-    });
-    chart.render();
-
-
+    data: [
+      {
+        type: "pie",
+        startAngle: 25,
+        toolTipContent: "<b>{label}</b>: {y}%",
+        showInLegend: "true",
+        legendText: "{label}",
+        indexLabelFontSize: 16,
+        indexLabel: "{label} - {y}%",
+        dataPoints: dataPointsHabitacionesReservadas,
+      },
+    ],
+  });
+  chart.render();
 }
-
-

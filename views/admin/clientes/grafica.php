@@ -280,7 +280,7 @@ if (empty($usuario)) {
     liBorderBottom("grafica");
 
 
-    openSubMenu("../../../img/btnFlechaAbajo.png", "../../../img/btnFlecha.png");
+    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
 
 
     var mesesClientes = JSON.parse('<?php echo json_encode($mesesClientes) ?>');

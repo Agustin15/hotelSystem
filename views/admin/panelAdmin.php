@@ -270,7 +270,6 @@ if (empty($usuario)) {
 
     <div id="viewHabitaciones">
 
-        <br>
         <div class="titleGraphic">
         <h3>Categorias de habitaciones mas reservadas</h3>
         </div>
@@ -294,7 +293,7 @@ if (empty($usuario)) {
 </html>
 
 <script>
-    openSubMenu("../../img/btnFlechaAbajo.png", "../../img/btnFlecha.png");
+    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
 
     //Grafica clientes
 

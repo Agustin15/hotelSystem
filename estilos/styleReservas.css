@@ -11,6 +11,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-color: rgb(241, 241, 241);
 
 
 }
@@ -408,6 +409,7 @@ body {
     box-shadow:
         0 0 0 2px rgb(255, 255, 255),
         0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+        background: white;
 
 
 }
@@ -1384,6 +1386,7 @@ body {
     margin-left: 19%;
     margin-top: -1%;
     border-radius: 5px;
+    background-color: white;
 }
 
 #habitaciones ul li {
@@ -2329,6 +2332,7 @@ body {
     width: 400px;
     margin-left: -70px;
     font-size: 10px;
+    
 
 }
 
@@ -2336,6 +2340,7 @@ body {
 
     margin: auto;
     margin-top: 35px;
+    
 }
 
 
@@ -2459,6 +2464,7 @@ body {
     box-shadow:
         0 0 0 2px rgb(255, 255, 255),
         0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+        background-color: white;
 
 }
 

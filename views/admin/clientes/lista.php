@@ -199,7 +199,7 @@ if (isset($_GET['cliente'])) {
                 <a href="grafica.php">Gráfica</a>
             </li>
             <li class="liLista">
-              
+
                 <img class="imgClientes" src="../../../img/listaClientes.png">
                 <br>
                 <a href="lista.php">Gestion</a>
@@ -307,7 +307,7 @@ if (isset($_GET['cliente'])) {
 
     liBorderBottom("listaClientes");
 
-    openSubMenu("../../../img/btnFlechaAbajo.png", "../../../img/btnFlecha.png");
+    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
 
 
     $("#buscador").on("keydown", function() {
