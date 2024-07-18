@@ -78,7 +78,7 @@ class servicio
     public function addServiceToRoom($idServicio, $cantidad, $idReserva, $numHabitacion)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("insert into serviciosExtra_habitacion (idServicioHabitacion,cantidad,idReservaHabitacionServicio,
+        $consulta = $this->conexion->conectar()->prepare("insert into serviciosExtra_habitacion (idServicio,cantidad,idReservaHabitacionServicio,
         numHabitacionServicio) values(?,?,?,?)");
         $consulta->bind_param("iiii",$idServicio,$cantidad,$idReserva,$numHabitacion);
        $resultado= $consulta->execute();

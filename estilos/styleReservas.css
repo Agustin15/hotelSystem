@@ -879,7 +879,7 @@ body {
 
 .divEditar {
 
-    margin-top: -47%;
+    margin-top: -46%;
     width: 450px;
     height: auto;
     border-radius: 3px;
@@ -3102,7 +3102,7 @@ body {
 .divInfo {
 
     width: 600px;
-    height: 400px;
+    height: 500px;
     margin-top: -41%;
     margin-left: 33%;
     position: absolute;
@@ -3251,6 +3251,7 @@ body {
 .divInfo #cliente {
 
     color: rgb(172, 172, 172);
+    font-size: 18px;
 
 
 }

@@ -80,12 +80,13 @@ maxStock INT
 );
 
 CREATE TABLE serviciosExtra_habitacion(
-idServicioHabitacion INT NOT NULL,
+idServicioHabitacion INT NOT NULL AUTO_INCREMENT,
+idServicio INT NOT NULL,
 cantidad INT NOT NULL,
 idReservaHabitacionServicio INT NOT NULL,
 numHabitacionServicio INT NOT NULL,
 
-PRIMARY KEY(idServicioHabitacion,numHabitacionServicio,idReservaHabitacionServicio),
+PRIMARY KEY(idServicioHabitacion,idServicio,numHabitacionServicio,idReservaHabitacionServicio),
 
 CONSTRAINT fk_idServicio FOREIGN KEY (idServicioHabitacion)
 REFERENCES servicio(idServicio) ON DELETE CASCADE ON UPDATE CASCADE,

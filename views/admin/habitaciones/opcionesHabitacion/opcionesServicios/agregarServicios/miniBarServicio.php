@@ -59,13 +59,13 @@ $idReserva = $habitacion['idReservaHabitacion'];
                     <div class="supCantidadBtnAgregar">
                         <div class="cantidad">
 
-                            <input type="number" value="0" min="0" max="<?php echo $product['maxStock'] ?>">
+                            <input class="inputCant" type="number" value="0" min="0" max="<?php echo $product['maxStock'] ?>">
 
                         </div>
 
                         <div class="btnAgregar">
 
-                            <button class="agregar" data-product="<?php echo $product['descripcionServicio']; ?>" data-price="<?php echo $product['precio'] ?>" data-image="data:image/jpg; base64,<?php echo base64_encode($product['imagen']) ?>">Agregar</button>
+                            <button class="agregar" data-id-service="<?php echo $product['idServicio']; ?> " data-product="<?php echo $product['descripcionServicio']; ?>" data-price="<?php echo $product['precio'] ?>" data-image="data:image/jpg; base64,<?php echo base64_encode($product['imagen']) ?>" data-max-stock="<?php echo $product['maxStock'] ?>">Agregar</button>
 
                         </div>
 
@@ -96,14 +96,24 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
         <div id="deposito">
 
-            <span>Total:</span>
+            <span id="spanTotal"></span>
 
         </div>
 
+        <div id="buttonAgregarServicio">
+
+            <button id="btnAgregarService">Agregar</button>
+
+        </div>
     </div>
 
 
 </div>
+
+
+
+
+
 
 <div id="aviso">
 
@@ -125,6 +135,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 
 
+
 <script>
     $("#cerrar").on("click", function() {
 
@@ -137,13 +148,22 @@ $idReserva = $habitacion['idReservaHabitacion'];
     });
 
 
-    let buttonsAdds = document.querySelectorAll(".agregar");
+
+    var buttonsAdds = document.querySelectorAll(".agregar");
     var aviso = document.getElementById("aviso");
-    let price;
-    let cant;
-    let nameProduct;
-    let image;
-    let products = [];
+    var divListaProductos = document.getElementById("listaProductos");
+    var spanTotal = document.getElementById("spanTotal");
+    var divDeposito = document.getElementById("deposito");
+    var btnAgregarServicio = document.getElementById("buttonAgregarServicio");
+
+
+    var price;
+    var cant;
+    var nameProduct;
+    var image;
+    var idService;
+    var products = [];
+    var servicio = [];
 
     buttonsAdds.forEach(function(button) {
 
@@ -151,38 +171,54 @@ $idReserva = $habitacion['idReservaHabitacion'];
         button.addEventListener("click", function() {
 
 
-            let sup = this.closest(".supCantidadBtnAgregar");
-            let input = sup.querySelector("input");
+            var sup = this.closest(".supCantidadBtnAgregar");
+            var input = sup.querySelector("input");
 
             price = this.dataset.price;
             nameProduct = this.dataset.product;
             cant = input.value;
             image = this.dataset.image;
+            maxStock = this.dataset.maxStock;
+            idService = this.dataset.idService;
+
+
 
 
             if (cant == 0) {
 
-
-                aviso.querySelector("span").textContent = "Ingresa una cantidad valida";
-                aviso.style.display = "block";
-                $("#modalService").css("display", "block");
-                $("#modalService").css("cursor", "none");
+                alert("Ingresa una cantidad valida");
 
 
             } else {
-                const product = {
-
-                    "name": nameProduct,
-                    "price": price,
-                    "cant": cant,
-                    "image": image
-
-                };
 
 
+                var productIsset = additionProductCant(nameProduct, cant);
 
-                products.push(product);
-                printProductsAdded(products);
+                if (productIsset == false) {
+
+
+                    var product = {
+
+                        "idService": parseInt(idService),
+                        "name": nameProduct,
+                        "price": price,
+                        "cant": parseInt(cant),
+                        "image": image,
+                        "maxStock": maxStock,
+                        "idBooking": <?php echo $idReserva ?>,
+                        "numRoom": <?php echo $numHabitacion ?>,
+                        "total": price * cant
+
+                    };
+
+
+                    products.push(product);
+                    printProductsAdded(products);
+
+
+                }
+
+
 
             }
 
@@ -193,59 +229,245 @@ $idReserva = $habitacion['idReservaHabitacion'];
     });
 
 
-    const printProductsAdded = (products) => {
+    var createObjectServiceToBd = () => {
+
+
+        servicio = products.map((product) => {
+
+            var serviceToBd = {
+
+                "idServicio": product.idService,
+                "cantidad": product.cant,
+                "idReserva": product.idBooking,
+                "numHabitacion": product.numRoom,
+                "total": product.total
+
+            };
+
+            return serviceToBd;
+
+        });
+
+    };
+
+    var printProductsAdded = (products) => {
+
+
+        btnAgregarServicio.style.display = "block"
+        divDeposito.style.display = "block";
+
+        cleanList();
+        var totalCart = totalPriceCart(products);
+
 
         products.forEach(function(product) {
 
-            const productDetails = document.createElement("div");
+            var productDetails = document.createElement("div");
             productDetails.classList.add("productDetails");
 
             productDetails.innerHTML = ` 
             
-          
-<div class="containerDetailsProduct">
+         <div class="containerDetailsProduct">
 
 <div class="imageAndCant">
+
 <div class="imageProduct">
 <img src="${product.image}">
 </div>
 
 <div class="cantProduct">
 
-<div class="minus">
+<div class="minus" data-minus="${product.name}">
 
-<img src="../../../img/minus.png">
+<img class="substraction" src="../../../img/minus.png">
 </div>
 <div class="cant">
 
 <span>${product.cant}</span>
 </div>
 
-<div class="plus">
+<div class="plus" data-addition="${product.name}">
 
-<img src="../../../img/add.png">
+<img class="addition" src="../../../img/add.png">
 </div>
 </div>
 </div>
 
 <div class="nameProduct">
 
-<span>${product.name}</span>
+<h5>${product.name}</h5>
 
 </div>
 
+<div class="deleteSup">
+<div class="deleteProduct" data-delete="${product.name}">
+
+<img class="imgDeleteProduct"  src="../../../img/eliminar.png">
+</div>
+</div>
+
+<div class="priceProduct">
+
+<span>Precio:$${product.total}</span>
+</div>
+
+
+</div>       
+
             `;
 
-            const divListaProductos = document.getElementById("listaProductos");
-
             divListaProductos.appendChild(productDetails);
+            spanTotal.innerHTML = `Total:$${totalCart} `;
 
+
+
+        });
+
+
+        var deletes = document.querySelectorAll(".imgDeleteProduct");
+
+        deletes.forEach(function(deleteProduct) {
+
+            deleteProduct.addEventListener("click", function() {
+
+                var divFatherDelete = deleteProduct.parentNode;
+                var productNameDelete = divFatherDelete.dataset.delete;
+
+                deleteProductCart(productNameDelete);
+
+
+            });
+
+
+        });
+
+
+        var substractions = document.querySelectorAll(".substraction");
+
+        substractions.forEach(function(substraction) {
+
+            substraction.addEventListener("click", function() {
+
+                var divFatherMinus = this.parentNode;
+                var productNameMinus = divFatherMinus.dataset.minus;
+
+
+                substractionProduct(productNameMinus);
+
+            });
+
+        });
+
+        var additions = document.querySelectorAll(".addition");
+
+        additions.forEach(function(addition) {
+
+            addition.addEventListener("click", function() {
+
+                var divFatherAddition = this.parentNode;
+                var productNameAddition = divFatherAddition.dataset.addition;
+
+
+                additionProductCant(productNameAddition, 1);
+
+            });
 
         });
 
 
     }
 
+
+    var alert = (text) => {
+
+
+        aviso.querySelector("span").textContent = text;
+        aviso.style.display = "block";
+        $("#modalService").css("display", "block");
+        $("#modalService").css("cursor", "none");
+    }
+
+
+    var cleanList = () => {
+
+
+        divListaProductos.innerHTML = "";
+        spanTotal.innerHTML = "";
+        if (products.length == 0) {
+
+            divDeposito.style.display = "none";
+            btnAgregarServicio.style.display = "none";
+
+        }
+
+    }
+
+    var totalPriceCart = (products) => {
+
+        var totalCart = products.reduce((total, product) => total + product.total, 0);
+
+        return totalCart;
+
+    }
+
+    var deleteProductCart = (productName) => {
+
+        products = products.filter((product) => product.name != productName);
+
+        printProductsAdded(products);
+
+    };
+
+    var substractionProduct = (productName) => {
+
+        var productSubstraction = products.find((product) => product.name === productName);
+
+        if (productSubstraction.cant > 1) {
+
+            productSubstraction.cant--;
+            productSubstraction.total = productSubstraction.cant * productSubstraction.price;
+
+            printProductsAdded(products);
+
+        }
+
+    }
+
+
+    var additionProductCant = (productName, cantAdded) => {
+
+
+        var productIsset = false;
+        var limitStock = false;
+
+        if (products.length > 0) {
+
+            var productAdditionCant = null;
+            productAdditionCant = products.find((product) => product.name === productName);
+
+
+            if (productAdditionCant != null) {
+
+                productIsset = true;
+                if ((parseInt(productAdditionCant.cant) + parseInt(cantAdded)) <= productAdditionCant.maxStock) {
+
+                    productAdditionCant.cant = parseInt(productAdditionCant.cant) + parseInt(cantAdded);
+                    productAdditionCant.total = productAdditionCant.cant * productAdditionCant.price;
+
+                    printProductsAdded(products);
+
+
+                } else {
+
+                    alert("Maxima cantidad alcanzada");
+                }
+            }
+
+        }
+
+
+        return productIsset;
+    }
 
 
 
@@ -259,40 +481,52 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
     });
 
+    $("#cerrarMinibar").on("click", function() {
+
+        $("#optionAddService").empty();
+
+        $("#optionAddService").removeClass("panelMiniBar");
+
+    });
 
 
+    btnAgregarServicio.addEventListener("click", function() {
 
 
+        createObjectServiceToBd();
+
+      
+        fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php", {
+
+                method: "POST",
+                body: JSON.stringify(servicio),
+
+                headers: {
+
+                    "Content-Type": "application/json",
+                }
+
+            }).then(resp => resp.json())
+            .then(data_resp => {
+
+                if (data_resp.respuesta == true) {
+
+                    alert("Servicios de minibar agregados");
+                    var img = $("#imgAviso").find("img");
+                    img.attr("src", "../../../img/tickServices.gif");
+
+                    document.querySelectorAll(".inputCant").forEach(function(input) {
+
+                        input.value = 0;
+
+                    });
+
+                    products = [];
+                    cleanList();
+                }
 
 
-    // $("#cantPersonas").on("change", function() {
+            });
 
-    //     if ($(this).val() != "") {
-
-    //         dataService = {
-
-    //             "precio": 500,
-    //             "cantidad": $(this).val()
-
-    //         };
-
-    //         fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?dataService=" +
-    //                 JSON.stringify(dataService), {
-
-    //                     method: "GET",
-    //                     headers: {
-
-    //                         "Content-Type": "application/json",
-    //                     }
-
-    //                 }).then(respuesta => respuesta.json())
-    //             .then(data_resp => {
-
-    //                 let total = JSON.parse(data_resp.total);
-    //                 $("#totalService").text("Total:$" + total);
-
-    //             });
-
-    //     }
-    // });
+    });
 </script>

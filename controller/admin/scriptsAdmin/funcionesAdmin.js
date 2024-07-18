@@ -22,75 +22,28 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
     $(document).ready(function () {
 
 
-        ///SubMenu
+      var buttonsOpenSubMenu =document.querySelectorAll(".btnFlecha");
 
-        $(".btnFlecha").on("click", function () {
+      buttonsOpenSubMenu.forEach(function(button){
 
+        button.addEventListener("click",function(){
 
+            if(this.src===linkBtnFlecha){
 
-            if ($(".subMenu").attr("display")=="block") {
+            this.src=linkBtnFlechaAbajo;
+            var item=button.parentNode;
+            var subMenu=item.querySelector("ul");
 
-               alert("hay un subMenu abierto");
+            subMenu.style.display="block";
 
-            }
+            }else{
 
-            var li = $(this).parent();
-            var liNext = li.next("li");
-            const subMenu = li.find("ul");
-
-            if ($(this).attr("src") == linkBtnFlechaAbajo) {
-
-
-                $(this).attr("src", linkBtnFlecha);
-                subMenu.slideToggle("fast", "swing");
-                liNext.animate({
-                    'margin-top': '11px'
-                }, "fast");
-
-                $("#userAdmin").animate({
-                    'margin-top': '0px'
-                }, "fast");
-
-
-            } else {
-
-                $(this).attr("src", linkBtnFlechaAbajo);
-                if (subMenu.attr("class") == "subMenuAdmin") {
-
-
-                    $("#userAdmin").animate({
-                        'margin-top': '-80px'
-                    }, "fast");
-
-                    subMenu.slideToggle("fast");
-
-                } else {
-
-
-
-                    subMenu.slideToggle("fast", "swing");
-                    if (liNext.hasClass("optionGanancias")) {
-
-                        liNext.animate({
-                            'margin-top': '99px'
-                        }, "fast");
-
-                    } else {
-                        liNext.animate({
-                            'margin-top': '150px'
-                        }, "fast");
-
-                    }
-
-
-                }
+                this.src=linkBtnFlecha;
 
             }
-
-
-
         });
 
+      });
 
     });
 }

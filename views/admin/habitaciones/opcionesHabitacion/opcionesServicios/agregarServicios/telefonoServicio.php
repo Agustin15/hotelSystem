@@ -45,7 +45,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
     <input id="minutosLlamada" type="text" placeholder="Minutos">
 
-    <img id="clock" title="Calcular tarifa"  src="../../../img/reloj.png">
+    <img id="clock" title="Calcular tarifa" src="../../../img/reloj.png">
     <br>
     <label id="lblTotalPhone"></label>
 
@@ -78,29 +78,15 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
         if ($("#minutosLlamada").val() != "") {
 
-            dataService = {
+            var calculatePhone = {
 
-                "precio":<?php echo $servicePhone[0]['precio'] ?>,
+                "precio": <?php echo $servicePhone[0]['precio'] ?>,
                 "cantidad": $("#minutosLlamada").val().trim()
 
             };
 
-            fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?dataService=" +
-                    JSON.stringify(dataService), {
 
-                        method: "GET",
-                        headers: {
-
-                            "Content-Type": "application/json",
-                        }
-
-                    }).then(respuesta => respuesta.json())
-                .then(data_resp => {
-
-                    let total = JSON.parse(data_resp.total);
-                    $("#lblTotalPhone").text("Total:$" + total);
-
-                });
+            $("#lblTotalPhone").text("Total:$" + calculatePhone.precio * calculatePhone.cantidad);
 
         }
     });
@@ -129,17 +115,27 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
         } else {
 
-            let numHabitacion = <?php echo $numHabitacion ?>;
-            let idReserva = <?php echo $idReserva ?>;
-            let idServicio = <?php echo $idServicio ?>;
-            const servicio = {
+            var numHabitacion = <?php echo $numHabitacion ?>;
+            var idReserva = <?php echo $idReserva ?>;
+            var idServicio = <?php echo $idServicio ?>;
+            var precio = <?php echo $servicePhone[0]['precio'] ?>;
+            var cantidad = parseInt($("#minutosLlamada").val());
+
+
+            var phone = {
 
                 "idServicio": idServicio,
-                "cantidad": parseInt($("#minutosLlamada").val()),
+                "cantidad": cantidad,
+                "precio": precio,
                 "idReserva": idReserva,
-                "numHabitacion": numHabitacion
+                "numHabitacion": numHabitacion,
+                "total": precio * cantidad
 
             };
+
+            var servicio = [];
+            servicio.push(phone);
+
 
             fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php", {
 
@@ -162,6 +158,8 @@ $idReserva = $habitacion['idReservaHabitacion'];
                         $("#msjServiceAdd").load("opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
                             numHabitacion + "&&idReserva=" + idReserva + "&&servicio=telefono");
 
+                        servicio = [];
+
                     }
 
                 });
@@ -174,7 +172,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
         setTimeout(function() {
 
             alert.css("transform", "scale(0.0)");
-            let lbl = alert.find("label");
+            var lbl = alert.find("label");
             lbl.text("");
 
         }, 4000);

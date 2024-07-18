@@ -9,27 +9,43 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     case "POST":
 
+        $peticionJson = null;
         $servicio = json_decode(file_get_contents("php://input"), true);
 
-        $resultado = $claseServicio->addServiceToRoom(
-            $servicio['idServicio'],
-            $servicio['cantidad'],
-            $servicio['idReserva'],
-            $servicio['numHabitacion']
-        );
+        $total = 0;
+
+        if (count($servicio) > 1) {
+
+            foreach ($servicio as $service) {
+
+                $resultado = $claseServicio->addServiceToRoom(
+                    $service['idServicio'],
+                    $service['cantidad'],
+                    $service['idReserva'],
+                    $service['numHabitacion']
+                );
+
+                $total += $service['total'];
+            }
+        } else {
+
+            $resultado = $claseServicio->addServiceToRoom(
+                $servicio[0]['idServicio'],
+                $servicio[0]['cantidad'],
+                $servicio[0]['idReserva'],
+                $servicio[0]['numHabitacion']
+            );
+
+            $total = $servicio[0]['total'];
+        }
+
 
         if ($resultado) {
 
-            $datosServicio = $claseServicio->getServicioHotel($servicio['idServicio']);
-            $totalServicio = $claseServicio->calculateTotalService(
-                $servicio['cantidad'],
-                $datosServicio['precio']
-            );
+            $pagoReserva = $clasePago->getPago($servicio[0]['idReserva']);
+            $nuevoDeposito = $pagoReserva['deposito'] + $total;
 
-            $pagoReserva = $clasePago->getPago($servicio['idReserva']);
-            $nuevoDeposito = $pagoReserva['deposito'] + $totalServicio;
-
-            $resultado = $clasePago->updatePago($servicio['idReserva'], $nuevoDeposito);
+            $resultado = $clasePago->updatePago($servicio[0]['idReserva'], $nuevoDeposito);
 
             if ($resultado) {
 
@@ -37,19 +53,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                 $peticionJson = json_encode($peticion);
             }
         }
-
-        echo $peticionJson;
-
-        break;
-
-    case "GET":
-
-        $dataService = json_decode($_GET['dataService'], true);
-
-        $total = $claseServicio->calculateTotalService($dataService['cantidad'], $dataService['precio']);
-
-        $peticion=array("total"=>$total);
-        $peticionJson=json_encode($peticion);
 
         echo $peticionJson;
 

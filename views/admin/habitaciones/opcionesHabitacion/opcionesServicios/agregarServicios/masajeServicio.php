@@ -72,7 +72,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
     });
 
-    const showNotice = (text,fontSize) => {
+    var showNotice = (text, fontSize) => {
 
         $("#avisoErrorAddService").css("transform", "scale(1.0)");
         $("#avisoErrorAddService").css("font-size", fontSize);
@@ -81,35 +81,18 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
     }
 
 
-    let cantHuespedes = <?php echo $cantHuespedes ?>;
+    var cantHuespedes = <?php echo $cantHuespedes ?>;
     $("#cantPersonas").on("change", function() {
 
         if ($(this).val() != "") {
 
-            dataService = {
+            var precio = <?php echo $service[0]['precio'] ?>;
 
-        
-                "precio":<?php echo $service[0]['precio'] ?>,
-                "cantidad": $(this).val()
+            var cantidad = $(this).val();
 
-            };
 
-            fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?dataService=" +
-                    JSON.stringify(dataService), {
 
-                        method: "GET",
-                        headers: {
-
-                            "Content-Type": "application/json",
-                        }
-
-                    }).then(respuesta => respuesta.json())
-                .then(data_resp => {
-
-                    let total = JSON.parse(data_resp.total);
-                    $("#totalService").text("Total:$" + total);
-
-                });
+            $("#totalService").text("Total:$" +precio * cantidad);
 
         }
     });
@@ -132,7 +115,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
         if ($("#cantPersonas").val() == "") {
 
-            showNotice("Complete el campo de cantidad",14);
+            showNotice("Complete el campo de cantidad", 14);
 
             deleteNotice($("#avisoErrorAddService"));
 
@@ -140,23 +123,31 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
         } else if (cantHuespedes != $("#cantPersonas").val().trim()) {
 
 
-            showNotice("Cantidad no coincide con huespedes",13);
+            showNotice("Cantidad no coincide con huespedes", 13);
 
             deleteNotice($("#avisoErrorAddService"));
 
         } else {
 
-            let numHabitacion = <?php echo $numHabitacion ?>;
-            let idReserva = <?php echo $idReserva ?>;
-            let idServicio = <?php echo $idServicio ?>;
-            const servicio = {
+            var numHabitacion = <?php echo $numHabitacion ?>;
+            var idReserva = <?php echo $idReserva ?>;
+            var idServicio = <?php echo $idServicio ?>;
+            var cantidad = parseInt($("#cantPersonas").val());
+            var precio = <?php echo $service[0]['precio'] ?>
+
+            var massage = {
 
                 "idServicio": idServicio,
-                "cantidad": parseInt($("#cantPersonas").val()),
+                "cantidad": cantidad,
+                "precio": precio,
                 "idReserva": idReserva,
-                "numHabitacion": numHabitacion
+                "numHabitacion": numHabitacion,
+                "total": cantidad * precio
 
             };
+
+            var servicio=[];
+            servicio.push(massage);
 
             fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php", {
 
@@ -170,6 +161,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
                 .then(data_resp => {
 
 
+                    console.log(data_resp);
                     if (data_resp.respuesta == true) {
 
                         $("#modalService").css("display", "block");
@@ -178,6 +170,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
                         $("#msjServiceAdd").addClass("serviceAdd");
                         $("#msjServiceAdd").load("opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
                             numHabitacion + "&&idReserva=" + idReserva + "&&servicio=masaje");
+                            servicio=[];
 
                     }
 
@@ -191,7 +184,7 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
         setTimeout(function() {
 
             alert.css("transform", "scale(0.0)");
-            let lbl = alert.find("label");
+            var lbl = alert.find("label");
             lbl.text("");
 
         }, 4000);
