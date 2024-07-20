@@ -6,3 +6,6 @@ INSERT INTO clientes(correo,nombre,apellido,telefono) values("seba@gmail.com","S
 INSERT INTO clientes(correo,nombre,apellido,telefono) values("tomas@gmail.com","Tomas","Poggio","09999999");
 INSERT INTO clientes(correo,nombre,apellido,telefono) values("manuel@gmail.com","Manuel","Poggio","097777777");
 INSERT INTO clientes(correo,nombre,apellido,telefono) values("daniel@gmail.com","Daniel","Poggio","094444444");
+
+use hotel;
+select * from pago INNER JOIN reserva_habitacion ON month(reserva_habitacion.fechaSalida)=07;

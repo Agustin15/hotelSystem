@@ -11,8 +11,12 @@ if (empty($usuario)) {
 
     require("../../model/claseAdmin.php");
     require("../../model/claseHabitaciones.php");
+    require("../../model/clasePago.php");
+    require("../../model/claseReservas.php");
     $admin = new admin();
     $claseHabitaciones = new habitaciones;
+    $clasePago = new pago();
+    $claseReservas = new reservas();
 }
 ?>
 
@@ -126,7 +130,7 @@ if (empty($usuario)) {
 
                         <li class="liHabitacion">
 
-                            <img  src="../../img/key-card.png">
+                            <img src="../../img/key-card.png">
                             <a href="../../views/admin/habitaciones/habitaciones.php">Lista</a>
 
                         </li>
@@ -209,6 +213,9 @@ if (empty($usuario)) {
     <?php
     }
 
+
+    //datos para graficas
+
     //traer clientes
     $mesesConsulta = array(
         "1", "2", "3", "4", "5", "6", "7",
@@ -228,6 +235,7 @@ if (empty($usuario)) {
 
     //traer habitaciones
 
+
     $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
     $totalHabitaciones = $habitacionesReservadas->num_rows;
 
@@ -244,34 +252,190 @@ if (empty($usuario)) {
         $porcentajeDeluxe = ($cantDeluxe * 100) / $totalHabitaciones;
         $porcentajeSuite = ($cantSuite * 100) / $totalHabitaciones;
     }
+
+
+    //datos para los panels de informacion 
+
+    //habitaciones
+
+    $totalEstandarHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Estandar"));
+    $totalDeluxeHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Deluxe"));
+    $totalSuiteHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Suite"));
+
+    $cantidadHabitacionesHotel = $claseHabitaciones->getCantidadHabitaciones();
+
+    //ingresos
+
+    $totalIngresos = $clasePago->calculateTotalIngresos();
+    $mesActual = date("m");
+
+    $ingresosDelUlimoMes = $clasePago->calculateTotalIngresosMes(intval($mesActual));
+
+
+    //reservas
+    $hoy = date("Y-m-d");
+
+    $cantReservasFinalizadas =  $claseReservas->getCantReservasFinalizadas($hoy);
+    $cantReservasPendientes =  $claseReservas->getCantReservasPendientes($hoy);
+    $cantReservasEnCurso =  $claseReservas->getCantReservasEnCurso($hoy);
+
+
     ?>
 
 
 
-    <div id="viewClientes">
+    <div id="containClienteAndGeneral">
 
-        <div class="titleGraphic">
-        <h3>Clientes por mes</h3>
-        </div>
-        <br>
+        <div id="viewClientes">
 
-        <br>
-        <div id="graficaClientes"></div>
-        <a href="clientes/grafica.php">
-            <button id="btnViewClientes">View</button></a>
-
-        <div id="sinDatosGraficaClientes">
-
-            <h1>Sin datos aun</h1>
+            <div class="titleGraphic">
+                <h3>Clientes por mes</h3>
+            </div>
             <br>
-            <img src="../../img/sinDatosGrafica.png">
+
+            <br>
+            <div id="graficaClientes"></div>
+            <a href="clientes/grafica.php">
+                <button id="btnViewClientes">View</button></a>
+
+            <div id="sinDatosGraficaClientes">
+
+                <h1>Sin datos aun</h1>
+                <br>
+                <img src="../../img/sinDatosGrafica.png">
+            </div>
         </div>
+
+        <div id="dataGeneral">
+
+            <div id="dataHabitaciones">
+
+                <div id="title">
+
+                    <span>Habitaciones</span>
+                </div>
+                <div id="total">
+
+                    <span>Totales:<?php echo $cantidadHabitacionesHotel ?></span>
+                </div>
+
+
+                <div id="stateRooms">
+
+                    <div id="libres">
+
+                        <span>Libres</span>
+
+                        <div id="cantHabitaciones">
+
+                            <div id="estandar">
+
+                                <span>Estandar:<?php echo ($totalEstandarHotel - $cantEstandar) ?></span>
+                            </div>
+
+                            <div id="deluxe">
+
+                                <span>Deluxe:<?php echo ($totalDeluxeHotel - $cantDeluxe) ?></span>
+                            </div>
+
+                            <div id="suite">
+
+                                <span>Suite:<?php echo ($totalSuiteHotel - $cantSuite) ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ocupadas">
+
+                        <span>Ocupadas</span>
+
+                        <div id="cantHabitaciones">
+
+                            <div id="estandar">
+
+                                <span>Estandar:<?php echo $cantEstandar ?></span>
+                            </div>
+
+                            <div id="deluxe">
+
+                                <span>Deluxe:<?php echo $cantDeluxe ?></span>
+                            </div>
+
+                            <div id="suite">
+
+                                <span>Suite:<?php echo $cantSuite ?></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="panelReservaAndGanancias">
+                <div id="reservas">
+
+                    <div id="title">
+
+                        <span>Reservas</span>
+
+                    </div>
+
+
+                    <div id="antiguas">
+
+
+                        <span>Finalizadas:<?php echo $cantReservasFinalizadas?></span>
+                    </div>
+                    <div id="enCurso">
+
+
+                        <span>En curso:<?php  echo $cantReservasEnCurso?></span>
+                    </div>
+
+                    <div id="pendientes">
+
+
+                        <span>Pendientes:<?php echo $cantReservasPendientes?></span>
+                    </div>
+
+
+                </div>
+
+                <div id="ganancias">
+
+                    <div id="title">
+
+                        <span>Ganancias</span>
+                    </div>
+
+                    <div id="total">
+
+                        <span>Totales:$<?php echo $totalIngresos ?></span>
+                    </div>
+
+                    <div id="ultimoMes">
+
+                        <span>Del ultimo mes</span>
+                    </div>
+
+                    <div id="ingresosUltimoMes">
+
+                        <span>$<?php echo $ingresosDelUlimoMes ?></span>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
     </div>
 
     <div id="viewHabitaciones">
 
         <div class="titleGraphic">
-        <h3>Categorias de habitaciones mas reservadas</h3>
+            <h3>Categorias de habitaciones mas reservadas</h3>
         </div>
         <br>
         <div id="graficaHabitaciones"></div>
@@ -366,6 +530,8 @@ if (empty($usuario)) {
     window.onload = function() {
 
 
+        console.log(<?php echo $mesActual ?>);
+
         if (dataPointsClientes.length > 0) {
             graficar(dataPointsClientes, "graficaClientes", "", "light2");
             $("#navAdmin").css("marginTop", "-22px");
@@ -376,7 +542,7 @@ if (empty($usuario)) {
 
         if (dataPointsHabitacionesReservadas.length > 0) {
 
-            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones","");
+            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones", "");
 
         }
 

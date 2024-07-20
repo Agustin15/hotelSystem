@@ -28,7 +28,7 @@ class reservas
         $this->idCliente = $idCliente;
     }
 
-    
+
     public function setLlegada($llegada)
     {
 
@@ -141,7 +141,7 @@ class reservas
         return $resultado;
     }
 
-    
+
     public function addReservaBd()
     {
 
@@ -161,5 +161,60 @@ class reservas
 
         return  $resultado;
     }
-}
 
+    public function getCantReservasPendientes($hoy)
+    {
+
+
+        $reservas = $this->getAllReservas();
+
+        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+
+        $totalPendientes = array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
+
+            ($reserva['fechaLlegada'] > $hoy) ? $ac++ : $ac;
+
+            return $ac;
+        },0);
+
+        return $totalPendientes;
+    }
+
+
+    public function getCantReservasFinalizadas($hoy)
+    {
+
+
+        $reservas = $this->getAllReservas();
+
+        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+
+        $totalFinalizadas =  array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
+
+            ($reserva['fechaSalida'] < $hoy) ? $ac++ : $ac;
+
+            return $ac;
+        },0);
+
+        return $totalFinalizadas;
+    }
+
+
+    public function getCantReservasEnCurso($hoy)
+    {
+
+
+        $reservas = $this->getAllReservas();
+
+        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+
+        $totalEnCurso = array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
+
+            ($reserva['fechaLlegada'] <= $hoy && $reserva['fechaSalida'] >= $hoy) ? $ac++ : $ac;
+
+            return $ac;
+        },0);
+
+        return $totalEnCurso;
+    }
+}
