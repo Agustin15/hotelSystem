@@ -55,6 +55,19 @@ class cliente
 
 
 
+    public function getClientesReservas($mes,$anio)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where MONTH(fechaLlegada)=? 
+        and YEAR(fechaLlegada)=?");
+        $consulta->bind_param("ss", $mes,$anio);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->num_rows;
+    }
+
+
     public function deleteCliente($idCliente)
     {
 

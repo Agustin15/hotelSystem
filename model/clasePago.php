@@ -82,13 +82,13 @@ class pago
 
 
 
-    public function getAllIngresosMes($mes)
+    public function getAllIngresosMes($mes,$anio)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
-         where MONTH(reserva_habitacion.fechaSalida)=? ");
-        $consulta->bind_param("i", $mes);
+         where MONTH(reserva_habitacion.fechaSalida)=? and YEAR(reserva_habitacion.fechaSalida)=? ");
+        $consulta->bind_param("ii", $mes,$anio);
         $consulta->execute();
         $resultado = $consulta->get_result();
 
@@ -111,10 +111,10 @@ class pago
 
 
 
-    public function calculateTotalIngresosMes($mes)
+    public function calculateTotalIngresosMes($mes,$anio)
     {
 
-        $ingresosMes = $this->getAllIngresosMes($mes);
+        $ingresosMes = $this->getAllIngresosMes($mes,$anio);
 
         $totalIngresosMes = array_reduce($ingresosMes, function ($ac, $ingresoMes) {
 

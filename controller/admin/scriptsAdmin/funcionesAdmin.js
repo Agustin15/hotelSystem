@@ -183,3 +183,39 @@ function graficarHabitaciones(
   });
   chart.render();
 }
+
+const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
+  var chart = new CanvasJS.Chart(graficaGanancias, {
+    animationEnabled: true,
+    title: {
+      text: title,
+    },
+    axisX: {
+      valueFormatString: "MMM",
+      crosshair: {
+        enabled: true,
+        snapToDataPoint: true,
+      },
+    },
+    axisY: {
+      title: "Precios (en $UY)",
+      valueFormatString: "$##0.00",
+      crosshair: {
+        enabled: true,
+        snapToDataPoint: true,
+        labelFormatter: function (e) {
+          return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+        },
+      },
+    },
+    data: [
+      {
+        type: "area",
+        xValueFormatString: "MMM",
+        yValueFormatString: "$##0.00",
+        dataPoints: dataPoints,
+      },
+    ],
+  });
+  chart.render();
+};

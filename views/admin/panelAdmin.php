@@ -13,10 +13,13 @@ if (empty($usuario)) {
     require("../../model/claseHabitaciones.php");
     require("../../model/clasePago.php");
     require("../../model/claseReservas.php");
+    require("../../model/claseCliente.php");
+
     $admin = new admin();
     $claseHabitaciones = new habitaciones;
     $clasePago = new pago();
     $claseReservas = new reservas();
+    $claseCliente = new cliente();
 }
 ?>
 
@@ -213,6 +216,9 @@ if (empty($usuario)) {
     <?php
     }
 
+    $mesActual = date("m");
+    $anioActual = date("Y");
+    $hoy = date("Y-m-d");
 
     //datos para graficas
 
@@ -223,13 +229,16 @@ if (empty($usuario)) {
     );
     $mesesClientes = [];
 
-    foreach ($mesesConsulta as $mes) {
+    $mesesClientes =  array_map(function ($mes) use ($claseCliente, $anioActual) {
 
-        $cantClientes = $clientes = $admin->getClientesReservas($mes);
+        $cantClientes =  $claseCliente->getClientesReservas($mes, $anioActual);
 
         $mesCliente = array("mes" => $mes, "cantClientes" => $cantClientes);
-        array_push($mesesClientes, $mesCliente);
-    }
+
+        return $mesCliente;
+    }, $mesesConsulta);
+
+
 
 
 
@@ -254,6 +263,20 @@ if (empty($usuario)) {
     }
 
 
+    //traer ganancias por mes
+
+    $gananciasPorMes = [];
+    $gananciasPorMes = array_map(function ($mes) use ($clasePago, $anioActual) {
+
+
+        $totalIngresosMes = $clasePago->calculateTotalIngresosMes($mes, $anioActual);
+
+        $totalGananciasMes = array("mes" => $mes, "ganancias" => $totalIngresosMes);
+
+        return $totalGananciasMes;
+    }, $mesesConsulta);
+
+
     //datos para los panels de informacion 
 
     //habitaciones
@@ -267,13 +290,11 @@ if (empty($usuario)) {
     //ingresos
 
     $totalIngresos = $clasePago->calculateTotalIngresos();
-    $mesActual = date("m");
 
-    $ingresosDelUlimoMes = $clasePago->calculateTotalIngresosMes(intval($mesActual));
-
+    $ingresosDelUlimoMes = $clasePago->calculateTotalIngresosMes(intval($mesActual), $anioActual);
 
     //reservas
-    $hoy = date("Y-m-d");
+
 
     $cantReservasFinalizadas =  $claseReservas->getCantReservasFinalizadas($hoy);
     $cantReservasPendientes =  $claseReservas->getCantReservasPendientes($hoy);
@@ -289,14 +310,17 @@ if (empty($usuario)) {
         <div id="viewClientes">
 
             <div class="titleGraphic">
-                <h3>Clientes por mes</h3>
+                <h3>Clientes <?php echo $anioActual ?></h3>
             </div>
             <br>
 
             <br>
             <div id="graficaClientes"></div>
-            <a href="clientes/grafica.php">
-                <button id="btnViewClientes">View</button></a>
+           
+            <div id="containButtonClientes">
+
+            <a href="clientes/grafica.php"> <button>Ver</button></a>
+            </div>
 
             <div id="sinDatosGraficaClientes">
 
@@ -384,18 +408,18 @@ if (empty($usuario)) {
                     <div id="antiguas">
 
 
-                        <span>Finalizadas:<?php echo $cantReservasFinalizadas?></span>
+                        <span>Finalizadas:<?php echo $cantReservasFinalizadas ?></span>
                     </div>
                     <div id="enCurso">
 
 
-                        <span>En curso:<?php  echo $cantReservasEnCurso?></span>
+                        <span>En curso:<?php echo $cantReservasEnCurso ?></span>
                     </div>
 
                     <div id="pendientes">
 
 
-                        <span>Pendientes:<?php echo $cantReservasPendientes?></span>
+                        <span>Pendientes:<?php echo $cantReservasPendientes ?></span>
                     </div>
 
 
@@ -432,24 +456,54 @@ if (empty($usuario)) {
 
     </div>
 
-    <div id="viewHabitaciones">
+    <div id="containViewHabitacionAndGananacias">
+        <div id="viewHabitaciones">
 
-        <div class="titleGraphic">
-            <h3>Categorias de habitaciones mas reservadas</h3>
-        </div>
-        <br>
-        <div id="graficaHabitaciones"></div>
-        <a href="../admin/habitaciones/grafica.php"><button id="btnViewHabitaciones">View</button></a>
-
-        <div id="sinDatosGraficaHabitaciones">
-
-            <h1>Sin datos aun</h1>
+            <div class="titleGraphic">
+                <h3>Categorias de habitaciones mas reservadas</h3>
+            </div>
             <br>
-            <img src="../../img/sinDatosGrafica.png">
+            <div id="graficaHabitaciones"></div>
+
+            <div id="containButtonHabitaciones">
+
+                <a href="../admin/habitaciones/grafica.php"><button id="btnViewHabitaciones">Ver</button></a>
+            </div>
+
+
+            <div id="sinDatosGraficaHabitaciones">
+
+                <h1>Sin datos aun</h1>
+                <br>
+                <img src="../../img/sinDatosGrafica.png">
+            </div>
+        </div>
+
+        <div id="viewGanancias">
+
+            <div class="titleGraphic"">
+
+      <h3>Ganancias <?php echo $anioActual ?></h3>
+      </div>
+
+      <div id="graficaGanancias"></div>
+
+            <div id="containButtonGanancias">
+
+                <button>Ver</button>
+            </div>
+            <br>
+
+            <div id="sinDatosGraficaGanancias">
+
+                <h1>Sin datos aun</h1>
+                <br>
+                <img src="../../img/sinDatosGrafica.png">
+            </div>
         </div>
     </div>
 
-
+<br>
 
 
 </body>
@@ -463,6 +517,7 @@ if (empty($usuario)) {
 
     var mesesClientes = JSON.parse('<?php echo json_encode($mesesClientes) ?>');
 
+
     let sumaClientes = mesesClientes.reduce((ac, element) => {
 
         return ac + element.cantClientes + element.cantClientes;
@@ -472,28 +527,25 @@ if (empty($usuario)) {
     dataPointsClientes = [];
     if (sumaClientes > 0) {
 
-        $("#btnViewClientes").css("display", "block");
+        $("#containButtonClientes").css("display", "block");
         $("#sinDatosGraficaClientes").css("display", "none");
 
         var mes = 0;
         var cantClientes = 0
 
-        for (var f = 0; f < mesesClientes.length; f++) {
+     dataPointsClientes= mesesClientes.map((mesCliente)=>{
 
-            var mes = mesesClientes[f].mes;
+            var dataPointCliente={
+                "label": getMes(mesCliente.mes),
+                "y":mesCliente.cantClientes
+            };
 
-            var cantClientes = mesesClientes[f].cantClientes;
+            return dataPointCliente;
+        });
 
-            var mesPalabra = getMes(mes);
-
-            dataPointsClientes.push({
-                "label": mesPalabra,
-                "y": cantClientes
-            });
-        }
     }
-
-
+       
+    
     //grafica habitaciones
 
     dataPointsHabitacionesReservadas = [];
@@ -503,7 +555,7 @@ if (empty($usuario)) {
     if (isset($porcentajeEstandar)) {
     ?>
 
-        $("#btnViewHabitaciones").css("display", "block");
+        $("#containButtonHabitaciones").css("display", "block");
         $("#sinDatosGraficaHabitaciones").css("display", "none");
 
         dataPointsHabitacionesReservadas.push({
@@ -526,11 +578,31 @@ if (empty($usuario)) {
 
     ?>
 
+    let gananciasPorMes = <?php echo json_encode($gananciasPorMes) ?>
+
+    let totalGanancias = gananciasPorMes.reduce((ac, ganancia) => ac += ganancia.ganancias, 0);
+    let dataPointGanancias;
+
+    if (totalGanancias > 0) {
+
+        $("#containButtonGanancias").css("display", "block");
+        $("#sinDatosGraficaGanancias").css("display", "none");
+        dataPointsGanancias = gananciasPorMes.map((ganancia) => {
+
+            dataPointGanancia = {
+
+                x: new Date(ganancia.mes),
+                y: ganancia.ganancias
+            };
+
+            return dataPointGanancia;
+        });
+
+        console.log(dataPointsGanancias);
+    }
 
     window.onload = function() {
 
-
-        console.log(<?php echo $mesActual ?>);
 
         if (dataPointsClientes.length > 0) {
             graficar(dataPointsClientes, "graficaClientes", "", "light2");
@@ -545,6 +617,12 @@ if (empty($usuario)) {
             graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones", "");
 
         }
+
+        if (dataPointsGanancias.length > 0) {
+
+            graficarGananciasPorMes(dataPointsGanancias, "graficaGanancias", "");
+        }
+
 
 
     };
