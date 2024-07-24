@@ -315,7 +315,7 @@ body {
 
 #navAdmin {
   margin-left: 0px;
-  margin-top:90px;
+  margin-top:-14px;
   position: fixed;
   background: linear-gradient(#314c86, #3dacb4);
   color: rgb(255, 255, 255);
@@ -773,7 +773,7 @@ body {
 
 #containButtonClientes,
 #containButtonHabitaciones,
-#containButtonGananacias {
+#containButtonGanancias {
 
 display: none;
 }
@@ -813,10 +813,7 @@ display: none;
   text-align: center;
 }
 
-#sinDatosGraficaGanancias{
 
-  margin-top: 2%;
-}
 
 #sinDatosGraficaHabitaciones img,
 #sinDatosGraficaClientes img ,

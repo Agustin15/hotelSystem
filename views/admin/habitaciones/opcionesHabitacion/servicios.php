@@ -21,6 +21,11 @@ $numHabitacion = $_GET['numHabitacion'];
             <br>
             Agregar servicio
         </li>
+        <li id="liDeleteService">
+            <img src="../../../img/addService.png">
+            <br>
+            Eliminar servicio
+        </li>
     </ul>
 </nav>
 
@@ -40,10 +45,10 @@ $numHabitacion = $_GET['numHabitacion'];
 <script>
     $("#cerrarPanelService").on("click", function() {
 
-       $("#divOpcion").empty();
-       $("#divOpcion").removeClass("panelServicesRoom");
-       $("#modal").css("display", "none");
-       $("#modal").css("cursor", "auto");
+        $("#divOpcion").empty();
+        $("#divOpcion").removeClass("panelServicesRoom");
+        $("#modal").css("display", "none");
+        $("#modal").css("cursor", "auto");
 
     });
 
@@ -70,6 +75,16 @@ $numHabitacion = $_GET['numHabitacion'];
 
         $("#panelOptionService").empty();
         $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/agregarServicio.php?numHabitacion=" + numHabitacion);
+
+    });
+
+
+    $("#liDeleteService").on("click", function() {
+
+        let numHabitacion = <?php echo $numHabitacion ?>;
+
+        $("#panelOptionService").empty();
+        $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion=" + numHabitacion);
 
     });
 </script>

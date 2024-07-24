@@ -137,15 +137,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 
 <script>
-    $("#cerrar").on("click", function() {
 
-        $("#modalServices").css("display", "none");
-        $("#modalServices").css("cursor", "auto");
-
-        $("#optionAddService").empty();
-        $("#optionAddService").removeClass("panelMinibar");
-
-    });
 
 
 

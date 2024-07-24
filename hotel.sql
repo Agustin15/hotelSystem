@@ -186,7 +186,7 @@ INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Hamburguesa completa mas fritas",280,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/hamburCompleta.jpg'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Sandwiche caliente",85,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/sandwicheCaliente.jpg'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza comun",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaComun.jpg'),null);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza con muzarrella",140,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaMuzzarella.jpg'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza con muzarrella",140,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaMuzzarrella.jpg'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Pizza con pepperoni",180,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/pizzaPepperoni.jpg'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de frutilla",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoFrutilla.jpg'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Licuado de chocolate",90,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/licuadoChocolate.jpg'),null);

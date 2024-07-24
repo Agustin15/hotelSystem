@@ -247,13 +247,17 @@ if (empty($usuario)) {
 
     $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
     $totalHabitaciones = $habitacionesReservadas->num_rows;
+     
+    $cantEstandar=0;
+    $cantDeluxe=0;
+    $cantSuite=0;
 
     if ($totalHabitaciones > 0) {
 
         $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
         $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
 
-        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
+        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar") ;
         $cantDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
         $cantSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
 
@@ -492,7 +496,7 @@ if (empty($usuario)) {
 
                 <button>Ver</button>
             </div>
-            <br>
+            
 
             <div id="sinDatosGraficaGanancias">
 
@@ -579,9 +583,10 @@ if (empty($usuario)) {
     ?>
 
     let gananciasPorMes = <?php echo json_encode($gananciasPorMes) ?>
-
+    
     let totalGanancias = gananciasPorMes.reduce((ac, ganancia) => ac += ganancia.ganancias, 0);
-    let dataPointGanancias;
+   
+    let dataPointsGanancias=[];
 
     if (totalGanancias > 0) {
 
@@ -598,11 +603,9 @@ if (empty($usuario)) {
             return dataPointGanancia;
         });
 
-        console.log(dataPointsGanancias);
     }
 
     window.onload = function() {
-
 
         if (dataPointsClientes.length > 0) {
             graficar(dataPointsClientes, "graficaClientes", "", "light2");

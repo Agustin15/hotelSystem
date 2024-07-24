@@ -80,17 +80,42 @@ class servicio
 
         $consulta = $this->conexion->conectar()->prepare("insert into serviciosExtra_habitacion (idServicio,cantidad,idReservaHabitacionServicio,
         numHabitacionServicio) values(?,?,?,?)");
-        $consulta->bind_param("iiii",$idServicio,$cantidad,$idReserva,$numHabitacion);
-       $resultado= $consulta->execute();
-        
+        $consulta->bind_param("iiii", $idServicio, $cantidad, $idReserva, $numHabitacion);
+        $resultado = $consulta->execute();
+
         return $resultado;
     }
 
 
-    public function calculateTotalService($cantidad,$precio){
+    public function calculateTotalService($cantidad, $precio)
+    {
 
-        $totalService=$cantidad*$precio;
+        $totalService = $cantidad * $precio;
         return $totalService;
+    }
+
+    public function getServiciosReservaHabitacion($numHabitacion)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion INNER JOIN
+        habitacion_reservada ON habitacion_reservada.idReservaHabitacion=serviciosextra_habitacion.idReservaHabitacionServicio
+        where habitacion_reservada.fechaLlegadaHabitacion<=DATE(NOW()) and habitacion_reservada.fechaSalidaHabitacion>=DATE(NOW()) and
+        habitacion_reservada.numHabitacionReservada=?");
+        $consulta->bind_param("i",$numHabitacion);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function deleteService($idServicioHabitacion) {
+        
+        $consulta=$this->conexion->conectar()->prepare("delete * from servicioextra_habitacion where 
+        idServicioHabitacion=?");
+        $consulta->bind_param("i",$idServicioHabitacion);
+        $resultado=$consulta->execute();
+
+        return $resultado;
 
     }
 }

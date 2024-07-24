@@ -1047,12 +1047,18 @@ body {
   display: inline-block;
   margin-left: 20px;
   color: rgb(168, 168, 168);
+  padding-bottom: 3px;
+  cursor: pointer;
 }
 
 .panelServicesRoom #menuServicesRoom ul li img {
   width: 20px;
   margin: auto;
   margin-top: 30px;
+}
+
+.panelServicesRoom #menuServicesRoom li:hover {
+  border-bottom: 2px solid rgb(32, 157, 206);
 }
 
 .panelServicesRoom #iconServiceRoom {
@@ -1382,8 +1388,6 @@ body {
   color: #0b5885;
 }
 
-
-
 .panelMiniBar #market,
 .panelCantina #market {
   margin-left: -25px;
@@ -1502,11 +1506,11 @@ body {
 }
 
 .panelMiniBar #aviso #buttonOk,
-.panelCantina #aviso #buttonOk  {
+.panelCantina #aviso #buttonOk {
   margin-top: 10%;
 }
 
-.panelMiniBar #aviso #buttonOk button ,
+.panelMiniBar #aviso #buttonOk button,
 .panelCantina #aviso #buttonOk button {
   font-size: 13px;
   width: 120px;
@@ -1555,7 +1559,7 @@ body {
 }
 
 .panelMiniBar #cart #deposito span,
-.panelCantina #cart #deposito span  {
+.panelCantina #cart #deposito span {
   font-size: 16px;
   float: left;
   margin-left: 10px;
@@ -1569,7 +1573,7 @@ body {
 }
 
 .panelMiniBar #cart #listaProductos .productDetails,
-.panelCantina #cart #listaProductos .productDetails  {
+.panelCantina #cart #listaProductos .productDetails {
   margin: auto;
   margin-top: 25px;
   width: 200px;
@@ -1586,7 +1590,7 @@ body {
 }
 
 .panelMiniBar #cart #listaProductos .containerDetailsProduct,
-.panelCantina #cart #listaProductos .containerDetailsProduct  {
+.panelCantina #cart #listaProductos .containerDetailsProduct {
   display: flex;
   width: auto;
   align-items: stretch;
@@ -1604,13 +1608,13 @@ body {
 }
 
 .panelMiniBar #cart #listaProductos .productDetails .imageProduct,
-.panelCantina #cart #listaProductos .productDetails .imageProduct  {
+.panelCantina #cart #listaProductos .productDetails .imageProduct {
   margin-top: 5px;
   margin-left: 13px;
 }
 
 .panelMiniBar #cart #listaProductos .productDetails .imageProduct img,
-.panelCantina #cart #listaProductos .productDetails .imageProduct img  {
+.panelCantina #cart #listaProductos .productDetails .imageProduct img {
   width: 30px;
 }
 
@@ -1622,7 +1626,7 @@ body {
 }
 
 .panelMiniBar #cart #listaProductos .productDetails .cantProduct img,
-.panelCantina #cart #listaProductos .productDetails .cantProduct img  {
+.panelCantina #cart #listaProductos .productDetails .cantProduct img {
   width: 15px;
   opacity: 60%;
 }
@@ -1638,7 +1642,7 @@ body {
 }
 
 .panelMiniBar #cart #listaProductos .productDetails .nameProduct h5,
-.panelCantina #cart #listaProductos .productDetails .nameProduct h5  {
+.panelCantina #cart #listaProductos .productDetails .nameProduct h5 {
   width: 90px;
   height: 100%;
   font-weight: 100;
@@ -1662,7 +1666,7 @@ body {
   visibility: hidden;
 }
 
-.panelMiniBar #cart #listaProductos .productDetails .deleteProduct ,
+.panelMiniBar #cart #listaProductos .productDetails .deleteProduct,
 .panelCantina #cart #listaProductos .productDetails .deleteProduct {
   width: 100%;
   height: 100%;
@@ -1676,7 +1680,7 @@ body {
 }
 
 .panelMiniBar #cart #buttonAgregarServicio,
-.panelCantina #cart #buttonAgregarServicio  {
+.panelCantina #cart #buttonAgregarServicio {
   margin-top: 22px;
   display: none;
 }
@@ -1695,4 +1699,104 @@ body {
 .panelMiniBar #buttonAgregarServicio button:hover,
 .panelCantina #buttonAgregarServicio button:hover {
   background-color: rgb(219, 219, 219);
+}
+
+#panelOptionService #serviciosReservaHabitacion {
+  margin: auto;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  gap: 15px;
+  width: 100%;
+  height: 320px;
+  background-color: rgb(255, 255, 255);
+  
+}
+
+#panelOptionService #serviciosReservaHabitacion li {
+  padding-top: 5px;
+  list-style: none;
+  width: 280px;
+  height: 140px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px #ffffff, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  background-color: white;
+}
+
+
+
+#panelOptionService #serviciosReservaHabitacion .titleService {
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: rgb(41, 41, 41);
+  font-weight: bold;
+  text-align: center;
+  gap: 12px;
+
+}
+
+#panelOptionService #serviciosReservaHabitacion .iconoService {
+
+  margin-left: 10px;
+}
+
+#panelOptionService #serviciosReservaHabitacion .iconoService img {
+  width: 24px;
+}
+
+
+
+#panelOptionService #serviciosReservaHabitacion .precioAndCantidad {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+}
+
+#panelOptionService #serviciosReservaHabitacion .cantidad,
+#panelOptionService #serviciosReservaHabitacion .precio {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#panelOptionService #serviciosReservaHabitacion .cantidad img,
+#panelOptionService #serviciosReservaHabitacion .precio img {
+  width: 20px;
+}
+
+#panelOptionService #serviciosReservaHabitacion .containButtonDelete {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+#panelOptionService #serviciosReservaHabitacion .containButtonDelete button {
+  width: 70px;
+  height: 25px;
+  box-shadow: 2px 2px 2px black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(230, 4, 4);
+  font-weight: bold;
+  
+}
+
+#panelOptionService #serviciosReservaHabitacion .containButtonDelete button:hover{
+
+  background-color: rgb(187, 12, 12);
 }

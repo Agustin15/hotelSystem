@@ -57,4 +57,36 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         echo $peticionJson;
 
         break;
+
+
+    case "DELETE":
+
+        $serviceDelete = json_decode($_GET['serviceDelete'], true);
+        
+        $respuesta;
+
+        $idReserva = $serviceDelete['idReserva'];
+        $idServicioHabitacion = $serviceDelete['idServicioHabitacion'];
+        $total = $serviceDelete['totalService'];
+
+        $resultado = $claseServicio->deleteService($serviceDelete['idServicioHabitacion']);
+
+        if ($resultado) {
+
+            $pago = $clasePago->getPago($idReserva);
+            $pagoUpdate = $pago['deposito'] - $total;
+            $resultadoPago = $clasePago->updatePago($idReserva, $pagoUpdate);
+
+            if($resultadoPago){
+ 
+                $respuesta=array("resultado"=>$resultadoPago);
+
+            }
+        }
+
+        $respuestaJson=json_encode($respuesta);
+
+        echo $respuestaJson;
+
+        break;
 }
