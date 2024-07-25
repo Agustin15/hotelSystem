@@ -94,6 +94,8 @@ class reservas
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
+    
+
 
 
     public function  deleteReserva($idReserva)

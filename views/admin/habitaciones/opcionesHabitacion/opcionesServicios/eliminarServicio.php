@@ -9,6 +9,9 @@ $hoy = date("Y-m-d");
 $serviciosHabitacionReservada = $claseServicio->getServiciosReservaHabitacion($numHabitacion);
 ?>
 
+
+<div id="modalService"></div>
+
 <h2>Eliminar servicio</h2>
 
 
@@ -32,11 +35,11 @@ if (count($serviciosHabitacionReservada) == 0) {
         <?php
         foreach ($serviciosHabitacionReservada as $servicio) {
 
-            $tipoServicio = $claseServicio->getServicioHotel($servicio['idServicio']);
+       
 
             $iconService;
 
-            switch ($tipoServicio['nombreServicio']) {
+            switch ($servicio['nombreServicio']) {
 
 
                 case "Masajes":
@@ -73,12 +76,12 @@ if (count($serviciosHabitacionReservada) == 0) {
                         <span>
                             <?php
 
-                            if ($tipoServicio['nombreServicio'] != "Minibar" && $tipoServicio['nombreServicio'] != "Cantina") {
+                            if ($servicio['nombreServicio'] != "Minibar" && $servicio['nombreServicio'] != "Cantina") {
 
-                                echo $tipoServicio['nombreServicio'];
+                                echo $servicio['nombreServicio'];
                             } else {
 
-                                echo $tipoServicio['nombreServicio'] . ":" . $tipoServicio['descripcionServicio'];
+                                echo $servicio['nombreServicio'] . ":" . $servicio['descripcionServicio'];
                             }
                             ?>
 
@@ -110,12 +113,13 @@ if (count($serviciosHabitacionReservada) == 0) {
                         </div>
 
                         <div class="precioValor">
-                            <span>Precio:$<?php echo $tipoServicio['precio'] ?></span>
+                            <span>Precio:$<?php echo $servicio['precio'] ?></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="containButtonDelete" data-id-servicio-habitacion="<?php echo $servicio['idServicioHabitacion'] ?>" data-num-habitacion=<?php echo $servicio['numHabitacionReservada'] ?> data-id-reserva=<?php echo $servicio['idReservaHabitacion'] ?> data-precio="<?php echo $tipoServicio['precio'] ?>" data-cantidad="<?php echo $servicio['cantidad'] ?>">
+                <div class="containButtonDelete"
+                data-nombre-servicio="<?php echo $servicio['nombreServicio']?>" data-id-servicio-habitacion="<?php echo $servicio['idServicioHabitacion'] ?>" data-num-habitacion=<?php echo $servicio['numHabitacionReservada'] ?> data-id-reserva=<?php echo $servicio['idReservaHabitacion'] ?> data-precio="<?php echo $servicio['precio'] ?>" data-cantidad="<?php echo $servicio['cantidad'] ?>">
 
                     <button class="buttonDelete">Eliminar</button>
                 </div>
@@ -132,6 +136,26 @@ if (count($serviciosHabitacionReservada) == 0) {
 
 ?>
 
+
+<div id="avisoServiceDelete">
+
+    <div id="iconAvisoDelete">
+        <img src="../../../img/tickDelete.gif">
+    </div>
+
+    <div id="avisoSpan">
+        <span></span>
+    </div>
+
+    <div id="containButton">
+
+        <button id="btnClose">Ok</button>
+    </div>
+
+
+
+</div>
+
 <script>
     var buttonsDeletes = document.querySelectorAll(".buttonDelete");
 
@@ -142,6 +166,7 @@ if (count($serviciosHabitacionReservada) == 0) {
         buttonDelete.addEventListener("click", function() {
 
             var divSupButton = this.parentNode;
+            var nombreServicio=divSupButton.dataset.nombreServicio;
             var idServicioHabitacion = divSupButton.dataset.idServicioHabitacion;
             var idReserva = divSupButton.dataset.idReserva;
             var totalService = divSupButton.dataset.precio * divSupButton.dataset.cantidad;
@@ -155,9 +180,8 @@ if (count($serviciosHabitacionReservada) == 0) {
 
             };
 
-
             fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?serviceDelete=" +
-                    serviceDelete, {
+                    JSON.stringify(serviceDelete), {
 
                         method: "DELETE",
                         headers: {
@@ -166,12 +190,16 @@ if (count($serviciosHabitacionReservada) == 0) {
                         }
 
 
-                    }.then(resp => resp.json()))
+                    }).then(resp => resp.json())
                 .then(respuesta => {
 
+                    console.log(respuesta.resultado);
                     if (respuesta.resultado == true) {
 
 
+                        $("#avisoServiceDelete").css("display", "block");
+                        $("#avisoSpan").text(`Servicio de ${nombreServicio} eliminado`);
+                        $("#modalService").css("display", "block");
 
                     }
 
@@ -180,5 +208,21 @@ if (count($serviciosHabitacionReservada) == 0) {
 
 
         });
+    });
+
+
+
+    $("#btnClose").on("click", function() {
+
+
+        $("#avisoServiceDelete").css("display", "none");
+        $("#avisoSpan").text("");
+        $("#modalService").css("display", "none");
+
+        $("#panelOptionService").empty();
+        $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion="
+        + <?php echo $numHabitacion?>);
+
+
     });
 </script>

@@ -731,7 +731,7 @@ body {
   width: 600px;
   height: 530px;
   background-color: white;
-  margin-top: -40%;
+  margin-top: -45%;
   margin-left: 34%;
   border-radius: 6px;
   position: absolute;
@@ -943,7 +943,7 @@ body {
   width: 600px;
   height: 530px;
   background-color: white;
-  margin-top: -40%;
+  margin-top: -45%;
   margin-left: 34%;
   border-radius: 6px;
   position: absolute;
@@ -1088,6 +1088,10 @@ body {
   margin: auto;
   margin-top: 3%;
   text-align: center;
+}
+#panelOptionService #sinServiciosHabitacionHistorial{
+
+display: none;
 }
 
 #panelOptionService #sinServiciosHabitacion img {
@@ -1721,7 +1725,7 @@ body {
   padding-top: 5px;
   list-style: none;
   width: 280px;
-  height: 140px;
+  height: 150px;
   border-radius: 4px;
   box-shadow: 0 0 0 2px #ffffff, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   margin-top: 20px;
@@ -1799,4 +1803,57 @@ body {
 #panelOptionService #serviciosReservaHabitacion .containButtonDelete button:hover{
 
   background-color: rgb(187, 12, 12);
+}
+
+#avisoServiceDelete{
+
+  width: 300px;
+  height: 150px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  left: 33%;
+  top: 50%;
+  text-align: center;
+  padding-top: 20px;
+  display: none;
+  
+}
+
+
+#avisoServiceDelete #iconAvisoDelete {
+  margin: auto;
+  margin-top: 2px;
+
+}
+
+#avisoServiceDelete #iconAvisoDelete img{
+
+  width: 50px;
+}
+
+
+ #avisoServiceDelete #avisoSpan {
+  margin-top: 15px;
+  font-size: 17px;
+
+}
+
+#avisoServiceDelete button{
+
+  background-color: rgb(224, 8, 8);
+  color: white;
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-top: 16px;
+  border: none;
+}
+#avisoServiceDelete button:hover{
+
+
+  background-color: rgb(212, 3, 3);
 }

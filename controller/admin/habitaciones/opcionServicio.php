@@ -62,7 +62,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     case "DELETE":
 
         $serviceDelete = json_decode($_GET['serviceDelete'], true);
-        
+
         $respuesta;
 
         $idReserva = $serviceDelete['idReserva'];
@@ -77,16 +77,30 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             $pagoUpdate = $pago['deposito'] - $total;
             $resultadoPago = $clasePago->updatePago($idReserva, $pagoUpdate);
 
-            if($resultadoPago){
- 
-                $respuesta=array("resultado"=>$resultadoPago);
+            if ($resultadoPago) {
 
+                $respuesta = array("resultado" => $resultadoPago);
             }
         }
 
-        $respuestaJson=json_encode($respuesta);
+        $respuestaJson = json_encode($respuesta);
 
         echo $respuestaJson;
+
+        break;
+
+    case "GET":
+
+        $respuesta;
+
+        $serviceInfo = json_decode($_GET['serviceInfo'], true);
+
+        $servicesRoom = $claseServicio->getServiciosReservaHabitacion($serviceInfo['numHabitacion']);
+
+
+        $respuesta = array("servicesRoom" => $servicesRoom);
+
+        echo json_encode($respuesta);
 
         break;
 }

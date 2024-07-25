@@ -42,6 +42,7 @@ class servicio
     }
 
 
+
     public function getServiciosHotel()
     {
 
@@ -98,7 +99,8 @@ class servicio
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion INNER JOIN
-        habitacion_reservada ON habitacion_reservada.idReservaHabitacion=serviciosextra_habitacion.idReservaHabitacionServicio
+        habitacion_reservada ON habitacion_reservada.idReservaHabitacion=serviciosextra_habitacion.idReservaHabitacionServicio INNER JOIN
+        servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio 
         where habitacion_reservada.fechaLlegadaHabitacion<=DATE(NOW()) and habitacion_reservada.fechaSalidaHabitacion>=DATE(NOW()) and
         habitacion_reservada.numHabitacionReservada=?");
         $consulta->bind_param("i",$numHabitacion);
@@ -110,7 +112,7 @@ class servicio
 
     public function deleteService($idServicioHabitacion) {
         
-        $consulta=$this->conexion->conectar()->prepare("delete * from servicioextra_habitacion where 
+        $consulta=$this->conexion->conectar()->prepare("delete from serviciosExtra_habitacion where 
         idServicioHabitacion=?");
         $consulta->bind_param("i",$idServicioHabitacion);
         $resultado=$consulta->execute();
