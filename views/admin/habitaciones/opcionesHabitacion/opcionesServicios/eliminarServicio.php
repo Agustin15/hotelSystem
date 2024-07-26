@@ -35,7 +35,7 @@ if (count($serviciosHabitacionReservada) == 0) {
         <?php
         foreach ($serviciosHabitacionReservada as $servicio) {
 
-       
+
 
             $iconService;
 
@@ -101,7 +101,26 @@ if (count($serviciosHabitacionReservada) == 0) {
                         </div>
 
                         <div class="cantidadValor">
-                            <span>Cantidad:<?php echo $servicio['cantidad'] ?></span>
+                            <span>
+                                Cantidad:
+                                <?php
+                                if ($servicio['nombreServicio'] == "Telefono") {
+
+                                    if ($servicio['cantidad'] > 1) {
+
+                                       echo $servicio['cantidad'] . "minutos";
+                                    }else{
+
+                                         echo $servicio['cantidad'] . " minuto";
+                                    }
+                                } else {
+
+                                    echo $servicio['cantidad'];
+                                }
+
+                                ?>
+
+                            </span>
                         </div>
                     </div>
 
@@ -118,8 +137,7 @@ if (count($serviciosHabitacionReservada) == 0) {
                     </div>
                 </div>
 
-                <div class="containButtonDelete"
-                data-nombre-servicio="<?php echo $servicio['nombreServicio']?>" data-id-servicio-habitacion="<?php echo $servicio['idServicioHabitacion'] ?>" data-num-habitacion=<?php echo $servicio['numHabitacionReservada'] ?> data-id-reserva=<?php echo $servicio['idReservaHabitacion'] ?> data-precio="<?php echo $servicio['precio'] ?>" data-cantidad="<?php echo $servicio['cantidad'] ?>">
+                <div class="containButtonDelete" data-nombre-servicio="<?php echo $servicio['nombreServicio'] ?>" data-id-servicio-habitacion="<?php echo $servicio['idServicioHabitacion'] ?>" data-num-habitacion=<?php echo $servicio['numHabitacionReservada'] ?> data-id-reserva=<?php echo $servicio['idReservaHabitacion'] ?> data-precio="<?php echo $servicio['precio'] ?>" data-cantidad="<?php echo $servicio['cantidad'] ?>">
 
                     <button class="buttonDelete">Eliminar</button>
                 </div>
@@ -166,7 +184,7 @@ if (count($serviciosHabitacionReservada) == 0) {
         buttonDelete.addEventListener("click", function() {
 
             var divSupButton = this.parentNode;
-            var nombreServicio=divSupButton.dataset.nombreServicio;
+            var nombreServicio = divSupButton.dataset.nombreServicio;
             var idServicioHabitacion = divSupButton.dataset.idServicioHabitacion;
             var idReserva = divSupButton.dataset.idReserva;
             var totalService = divSupButton.dataset.precio * divSupButton.dataset.cantidad;
@@ -220,8 +238,8 @@ if (count($serviciosHabitacionReservada) == 0) {
         $("#modalService").css("display", "none");
 
         $("#panelOptionService").empty();
-        $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion="
-        + <?php echo $numHabitacion?>);
+        $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion=" +
+            <?php echo $numHabitacion ?>);
 
 
     });

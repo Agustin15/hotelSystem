@@ -91,16 +91,27 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     case "GET":
 
-        $respuesta;
-
-        $serviceInfo = json_decode($_GET['serviceInfo'], true);
-
-        $servicesRoom = $claseServicio->getServiciosReservaHabitacion($serviceInfo['numHabitacion']);
 
 
-        $respuesta = array("servicesRoom" => $servicesRoom);
+        $numHabitacion = $_GET['numHabitacion'];
 
-        echo json_encode($respuesta);
+        $servicesRoom = $claseServicio->getServiciosReservaHabitacion($numHabitacion);
+
+
+
+        $servicesRoom = array_map(function ($serviceRoom) {
+
+            if (!empty($serviceRoom['imagen'])) {
+
+                $serviceRoom['imagen'] = base64_encode($serviceRoom['imagen']);
+            }
+
+            return $serviceRoom;
+        }, $servicesRoom);
+
+
+
+        echo json_encode($servicesRoom);
 
         break;
 }

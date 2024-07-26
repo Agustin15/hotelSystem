@@ -20,28 +20,24 @@ $numHabitacion = $_GET['numHabitacion'];
 
 </div>
 
-<div id="containHistorialServiciosHabitacion">
+
 
     <ul id="serviciosHabitacionEnCurso">
 
 
     </ul>
 
-</div>
+    
+
 
 <script>
-    var serviceInfo = {
+    var numHabitacion = <?php echo $numHabitacion; ?>;
 
-        "numHabitacion": <?php echo $numHabitacion ?>
-
-    };
-
-
-
+    var containServicios = document.getElementById("serviciosHabitacionEnCurso");
     $(document).ready(function() {
 
-        fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?serviceInfo=" +
-                JSON.stringify(serviceInfo), {
+        fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?numHabitacion=" +
+                numHabitacion, {
 
                     method: "GET",
 
@@ -55,10 +51,9 @@ $numHabitacion = $_GET['numHabitacion'];
                 }).then(resp => resp.json())
             .then(respuesta => {
 
+                if (respuesta.length > 0) {
 
-                if (respuesta.servicesRoom.length > 0) {
-
-                  printServicesRoomBookingInCurse(respuesta.servicesRoom);
+                    printServicesRoomBookingInCurse(respuesta);
                 } else {
 
                     $("#sinServiciosHabitacionHistorial").css("display", "block");
@@ -73,38 +68,49 @@ $numHabitacion = $_GET['numHabitacion'];
 
     var printServicesRoomBookingInCurse = (servicesRoom) => {
 
-        var containServicios = document.getElementById("serviciosHabitacionEnCurso");
+  
         servicesRoom.forEach(function(serviceRoom) {
 
-            var nameService;
+        
+            var titleProductService;
+            var quantityProduct = serviceRoom.cantidad;
             var imgService;
             var imgProduct;
 
-            if (serviceRoom.nombreServicio != "Minibar" &&
-                serviceRoom.nombreServicio != "Cantina") {
+            if(serviceRoom.nombreServicio=="Minibar" ||serviceRoom.nombreServicio =="Cantina"){
 
-                nameService = serviceRoom.nombreServicio;
+                titleProductService=serviceRoom.nombreServicio+":"+serviceRoom.descripcionServicio;
 
-            } else {
+            }else{
 
-                nameService = serviceRoom.descripcionServicio;
-
+                titleProductService=serviceRoom.nombreServicio;
             }
-
-            switch (nameService) {
+          
+            switch (serviceRoom.nombreServicio) {
 
                 case "Telefono":
 
                     imgService = "../../../img/telephone.png";
+                    quantityProduct = serviceRoom.cantidad;
+
+                    if(quantityProduct>1){
+
+                        quantityProduct+=" minutos";
+                    }else{
+
+
+                        quantityProduct+=" minuto";
+                    }
                     break;
                 case "Masajes":
 
                     imgService = "../../../img/massage.png";
+
                     break;
 
                 case "Minibar":
 
-                    imgService = "../../../img/miniBar.png";
+                    imgService = "../../../img/minibar.png";
                     imgProduct = serviceRoom.imagen;
                     break;
 
@@ -115,27 +121,51 @@ $numHabitacion = $_GET['numHabitacion'];
                     break;
             }
 
-            containServicios.innerHTML = `
+            containServicios.innerHTML += `
     
     <li>
     
-    <div class="titleService">
+    
+<div class="titleService">
 
-    <img src=${imgService}>
-     <span>${nameService}</span>
+<div>
+<img src=${imgService}>
+</div>
+<div>
+ <span>${titleProductService}</span>
+ </div>
 
-    </div>
+</div>
+<div class="containQuantityAndPrice">
 
-    <div class="quantity">
+<div class="quantity">
 
-    <div class="iconQuant">
-    <img src="../../../img/cantidadService.png">
-    <div>
-    <div class="spanQuant">
-    <span>${serviceRoom.cantidad}</span>
-    </div>
-    </div>
+<div class="iconQuant">
+<img src="../../../img/cantidadService.png">
+</div>
+<div class="spanQuant">
+<span>Cantidad:${quantityProduct}</span>
+</div>
+</div>
 
+<div class="price">
+
+<div class="iconPrice">
+
+ <img src="../../../img/dollar.png">
+</div>
+
+<div class="spanPrice">
+<span>Precio:$${serviceRoom.precio}</span>
+</div>
+</div>
+</div>
+
+<div class="totalPrice">
+
+<span>Total:$${serviceRoom.precio*serviceRoom.cantidad}</span>
+
+</div>
 
 
     </li>

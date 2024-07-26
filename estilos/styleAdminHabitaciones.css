@@ -1089,9 +1089,8 @@ body {
   margin-top: 3%;
   text-align: center;
 }
-#panelOptionService #sinServiciosHabitacionHistorial{
-
-display: none;
+#panelOptionService #sinServiciosHabitacionHistorial {
+  display: none;
 }
 
 #panelOptionService #sinServiciosHabitacion img {
@@ -1718,7 +1717,6 @@ display: none;
   width: 100%;
   height: 320px;
   background-color: rgb(255, 255, 255);
-  
 }
 
 #panelOptionService #serviciosReservaHabitacion li {
@@ -1732,8 +1730,6 @@ display: none;
   background-color: white;
 }
 
-
-
 #panelOptionService #serviciosReservaHabitacion .titleService {
   display: flex;
   margin-top: 8px;
@@ -1744,19 +1740,15 @@ display: none;
   font-weight: bold;
   text-align: center;
   gap: 12px;
-
 }
 
 #panelOptionService #serviciosReservaHabitacion .iconoService {
-
   margin-left: 10px;
 }
 
 #panelOptionService #serviciosReservaHabitacion .iconoService img {
   width: 24px;
 }
-
-
 
 #panelOptionService #serviciosReservaHabitacion .precioAndCantidad {
   display: flex;
@@ -1797,16 +1789,16 @@ display: none;
   border-radius: 4px;
   background-color: rgb(230, 4, 4);
   font-weight: bold;
-  
 }
 
-#panelOptionService #serviciosReservaHabitacion .containButtonDelete button:hover{
-
+#panelOptionService
+  #serviciosReservaHabitacion
+  .containButtonDelete
+  button:hover {
   background-color: rgb(187, 12, 12);
 }
 
-#avisoServiceDelete{
-
+#avisoServiceDelete {
   width: 300px;
   height: 150px;
   border-radius: 5px;
@@ -1819,30 +1811,23 @@ display: none;
   text-align: center;
   padding-top: 20px;
   display: none;
-  
 }
-
 
 #avisoServiceDelete #iconAvisoDelete {
   margin: auto;
   margin-top: 2px;
-
 }
 
-#avisoServiceDelete #iconAvisoDelete img{
-
+#avisoServiceDelete #iconAvisoDelete img {
   width: 50px;
 }
 
-
- #avisoServiceDelete #avisoSpan {
+#avisoServiceDelete #avisoSpan {
   margin-top: 15px;
   font-size: 17px;
-
 }
 
-#avisoServiceDelete button{
-
+#avisoServiceDelete button {
   background-color: rgb(224, 8, 8);
   color: white;
   width: 90px;
@@ -1852,8 +1837,84 @@ display: none;
   margin-top: 16px;
   border: none;
 }
-#avisoServiceDelete button:hover{
-
-
+#avisoServiceDelete button:hover {
   background-color: rgb(212, 3, 3);
 }
+
+#panelOptionService #serviciosHabitacionEnCurso {
+  width: 99%;
+  height: 280px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#panelOptionService #serviciosHabitacionEnCurso li {
+  width: 310px;
+  height: 170px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  background-color: white;
+  list-style: none;
+}
+
+
+
+#panelOptionService #serviciosHabitacionEnCurso .titleService {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+#panelOptionService #serviciosHabitacionEnCurso .titleService img {
+  width: 30px;
+}
+
+
+#panelOptionService #serviciosHabitacionEnCurso .containQuantityAndPrice{
+
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+
+}
+
+#panelOptionService #serviciosHabitacionEnCurso .quantity,
+#panelOptionService #serviciosHabitacionEnCurso .price{
+
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#panelOptionService #serviciosHabitacionEnCurso .quantity img,
+#panelOptionService #serviciosHabitacionEnCurso .price img {
+  width: 24px;
+  
+}
+
+#panelOptionService #serviciosHabitacionEnCurso .totalPrice{
+
+ 
+  float: right;
+  margin-top: 13px;
+  font-size: 15px;
+  font-weight: bold;
+  padding-right: 10px;
+
+}
+
