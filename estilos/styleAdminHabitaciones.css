@@ -486,6 +486,43 @@ body {
   background-color: #1a8497;
 }
 
+#habitaciones #estandar #alert {
+  width: 380px;
+  height: 220px;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  top: 40%;
+  left: 38%;
+  z-index: 1;
+  padding: 1rem;
+  display: none;
+}
+
+#habitaciones #estandar #alert #bodyAlert {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+  padding-top: 1rem;
+  font-weight: bold;
+}
+#habitaciones #estandar #alert #bodyAlert img {
+  width: 45px;
+}
+
+#habitaciones #estandar #alert #containButton button {
+  width: 100px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #1d6e9c;
+  color: white;
+  border: none;
+  font-weight: bold;
+  
+
+}
+
 #habitacionesEstandar,
 #habitacionesDeluxe,
 #habitacionesSuite {
@@ -1864,8 +1901,6 @@ body {
   list-style: none;
 }
 
-
-
 #panelOptionService #serviciosHabitacionEnCurso .titleService {
   display: flex;
   flex-direction: column;
@@ -1879,21 +1914,17 @@ body {
   width: 30px;
 }
 
-
-#panelOptionService #serviciosHabitacionEnCurso .containQuantityAndPrice{
-
+#panelOptionService #serviciosHabitacionEnCurso .containQuantityAndPrice {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 30px;
   margin-top: 10px;
-
 }
 
 #panelOptionService #serviciosHabitacionEnCurso .quantity,
-#panelOptionService #serviciosHabitacionEnCurso .price{
-
+#panelOptionService #serviciosHabitacionEnCurso .price {
   font-size: 14px;
   font-weight: bold;
   display: flex;
@@ -1904,17 +1935,12 @@ body {
 #panelOptionService #serviciosHabitacionEnCurso .quantity img,
 #panelOptionService #serviciosHabitacionEnCurso .price img {
   width: 24px;
-  
 }
 
-#panelOptionService #serviciosHabitacionEnCurso .totalPrice{
-
- 
+#panelOptionService #serviciosHabitacionEnCurso .totalPrice {
   float: right;
   margin-top: 13px;
   font-size: 15px;
   font-weight: bold;
   padding-right: 10px;
-
 }
-

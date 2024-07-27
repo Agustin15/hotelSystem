@@ -11,6 +11,22 @@
     </form>
 
 
+    <div id="alert">
+
+        <div id="bodyAlert">
+            <div id="imgAlert">
+                <img src="../../../img/advertenciaService.png">
+            </div>
+            <div id="spanAlert">
+                <span>No puedes acceder a servicios de una habitacion que no tiene una reserva en curso</span>
+            </div>
+            <div id="containButton">
+                <button id="closeAlertBtn">Ok</button>
+            </div>
+
+        </div>
+    </div>
+
     <ul id="habitacionesEstandar">
 
         <?php
@@ -31,9 +47,15 @@
 
         foreach ($habitaciones as $habitacion) {
 
+
+
+            $habitacionesReservadas =  $claseHabitacion->habitacionesReservadas($habitacion['numHabitacion']);
+            $habitacionMasCercana = $claseHabitacion->habitacionMasCercana($habitacion['numHabitacion']);
+
+
         ?>
 
-            <li class="liHabitacion" data-habitacion="<?php echo $habitacion['numHabitacion'] ?>">
+            <li class="liHabitacion" data-habitacion="<?php echo $habitacion['numHabitacion'] ?> " data-details="<?php echo htmlspecialchars(json_encode($habitacionMasCercana), ENT_QUOTES, 'UTF-8') ?>">
 
                 <img class="iconoPlus" title="Opciones" src="../../../img/menuHabitacion.png">
                 <img src="../../../img/bannerHab1.jpg">
@@ -41,7 +63,6 @@
 
                 <?php
 
-                $habitacionesReservadas =  $claseHabitacion->habitacionesReservadas($habitacion['numHabitacion']);
                 if (empty($habitacionesReservadas)) {
 
                 ?>
@@ -56,9 +77,6 @@
                     <?php
 
                 } else {
-
-                    $habitacionMasCercana = $claseHabitacion->habitacionMasCercana($habitacion['numHabitacion']);
-
 
                     if (
 
@@ -82,6 +100,7 @@
                             <label class="lblCliente"><a href="../clientes/lista.php?cliente=<?php echo $cliente['correo'] ?>">
                                     <?php echo $cliente['correo'] ?></a></label>
                         </div>
+
 
                     <?php
 
@@ -215,8 +234,9 @@
         </nav>
         `;
 
-        liHabitacion.append(menuRoom);
 
+
+        liHabitacion.append(menuRoom);
 
     }
 
@@ -260,19 +280,58 @@
 
     });
 
+
+
+    const alertServiceOption = (option) => {
+
+
+        if (option == "show") {
+            $("#alert").css("display", "block");
+
+        } else {
+
+            $("#alert").css("display", "none")
+            $("#modal").css("display", "none");
+          
+        }
+    }
+
     $(document).on("click", ".liServicesRoom", function() {
+
+
+        let habitacion = $(this).parent().parent().closest("li");
+        let numHabitacion = habitacion.data("habitacion");
+        let habitacionDetails = habitacion.data("details");
+        let hoy = new Date(Date.now());
 
 
         $("#modal").css("display", "block");
         $("#modal").css("cursor", "none");
 
-        let habitacion = $(this).parent().parent().closest("li");
-        let numHabitacion = habitacion.data("habitacion");
+        if (habitacionDetails == null) {
 
-        $("#divOpcion").load("opcionesHabitacion/servicios.php?numHabitacion=" + numHabitacion);
-        $("#divOpcion").addClass("panelServicesRoom");
+            alertServiceOption("show");
+
+        } else {
+
+            if (habitacionDetails.fechaLlegadaHabitacion > hoy || habitacionDetails.fechaSalidaHabitacion < hoy) {
+
+                alertServiceOption("show");
 
 
+            } else {
+
+                $("#divOpcion").load("opcionesHabitacion/servicios.php?numHabitacion=" + numHabitacion);
+                $("#divOpcion").addClass("panelServicesRoom");
+
+            }
+
+        }
+    });
+
+    $("#closeAlertBtn").on("click", function() {
+
+        alertServiceOption("hide");
 
     });
 </script>
