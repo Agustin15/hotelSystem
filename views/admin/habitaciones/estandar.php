@@ -27,6 +27,11 @@
         </div>
     </div>
 
+
+
+
+
+
     <ul id="habitacionesEstandar">
 
         <?php
@@ -51,28 +56,57 @@
 
             $habitacionesReservadas =  $claseHabitacion->habitacionesReservadas($habitacion['numHabitacion']);
             $habitacionMasCercana = $claseHabitacion->habitacionMasCercana($habitacion['numHabitacion']);
+            $llegadaReservadaMasCercana = null;
+            $salidaReservadaMasCercana = null;
 
+            if (!empty($habitacionMasCercana)) {
+                $llegadaReservadaMasCercana = $habitacionMasCercana['fechaLlegadaHabitacion'];
+                $salidaReservadaMasCercana = $habitacionMasCercana['fechaSalidaHabitacion'];
+            }
 
         ?>
 
-            <li class="liHabitacion" data-habitacion="<?php echo $habitacion['numHabitacion'] ?> " data-details="<?php echo htmlspecialchars(json_encode($habitacionMasCercana), ENT_QUOTES, 'UTF-8') ?>">
+            <li class="liHabitacion" data-habitacion="<?php echo $habitacion['numHabitacion'] ?> " data-llegada-cercana="<?php echo strtotime($llegadaReservadaMasCercana); ?>" data-salida-cercana="<?php echo strtotime($salidaReservadaMasCercana) ?>">
 
-                <img class="iconoPlus" title="Opciones" src="../../../img/menuHabitacion.png">
-                <img src="../../../img/bannerHab1.jpg">
-                <h4>Habitacion <?php echo $habitacion['numHabitacion'] ?></h4>
+                <div>
+                    <img class="iconoPlus" title="Opciones" src="../../../img/menuHabitacion.png">
 
+                </div>
+
+                <div class="containIconRoomAndNumb">
+                    <div>
+                        <img src="../../../img/bannerHab1.jpg">
+
+                    </div>
+
+                    <div>
+                        <h4>Habitacion <?php echo $habitacion['numHabitacion'] ?></h4>
+
+                    </div>
+                </div>
                 <?php
 
                 if (empty($habitacionesReservadas)) {
 
                 ?>
-                    <label class="lblLibre">Libre</label>
-                    <div class="sinReservaEnCurso">
 
-                        <img src="../../../img/libreDeReservas.png">
-                        <br>
-                        <h4>Sin reserva en curso</h4>
+                    <div class="containSinReserva">
+                        <div class="lblLibre">
+                            <label>Libre</label>
+
+                        </div>
+                        <div class="sinReservaEnCurso">
+
+                            <div>
+                                <img src="../../../img/libreDeReservas.png">
+                            </div>
+                            <div class="message">
+                                <h4>Sin reserva en curso</h4>
+                            </div>
+                        </div>
+
                     </div>
+
 
                     <?php
 
@@ -87,32 +121,68 @@
                         $cliente = $claseClientes->getClienteUpdate($habitacionMasCercana['idClienteHabitacion']);
 
                     ?>
-                        <label class="lblOcupada">Ocupada</label>
-                        <div class="infoReserva">
-                            <label class="lblNumReserva">Reserva</label>
-                            <label class="lblReserva"><a href="../reservas/lista.php?idReserva=<?php echo $habitacionMasCercana['idReservaHabitacion'] ?>">
-                                    <?php echo $habitacionMasCercana['idReservaHabitacion'] ?></a>
-                            </label>
+
+                        <div class="dataBookingRoom">
+
+                            <div class="containBooking">
+                                <div class="lblOcupada">
+                                    <label>Ocupada</label>
+                                </div>
+                                <div class="lblNumReserva">
+                                    <label>Reserva</label>
+                                </div>
+                                <div class="lblReserva">
+
+                                    <label><a href="../reservas/lista.php?idReserva=<?php echo $habitacionMasCercana['idReservaHabitacion'] ?>">
+                                            <?php echo $habitacionMasCercana['idReservaHabitacion'] ?></a>
+                                    </label>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="infoHuesped">
+
+                                <div class="containIconAndLbl">
+                                    <div>
+                                        <img src="../../../img/iconHuesped.png">
+
+                                    </div>
+
+                                    <div class="lblHuesped">
+                                        <label>Huesped</label>
+                                    </div>
+                                </div>
+                                <div class="lblCliente">
+                                    <label><a href="../clientes/lista.php?cliente=<?php echo $cliente['correo'] ?>">
+                                            <?php echo $cliente['correo'] ?></a></label>
+                                </div>
+                            </div>
 
                         </div>
-                        <div class="infoHuesped">
-                            <img src="../../../img/iconHuesped.png"> <label class="lblHuesped">Huesped</label>
-                            <label class="lblCliente"><a href="../clientes/lista.php?cliente=<?php echo $cliente['correo'] ?>">
-                                    <?php echo $cliente['correo'] ?></a></label>
-                        </div>
-
 
                     <?php
 
 
                     } else {
                     ?>
-                        <label class="lblLibre">Libre</label>
-                        <div class="sinReservaEnCurso">
 
-                            <img src="../../../img/libreDeReservas.png">
-                            <br>
-                            <h4>Sin reserva en curso</h4>
+                        <div class="containSinReserva">
+                            <div class="lblLibre">
+                                <label>Libre</label>
+
+                            </div>
+                            <div class="sinReservaEnCurso">
+
+                                <div>
+                                    <img src="../../../img/libreDeReservas.png">
+                                </div>
+                                <div class="message">
+                                    <h4>Sin reserva en curso</h4>
+                                </div>
+                            </div>
+
                         </div>
 
                 <?php
@@ -194,7 +264,7 @@
         let liHabitacion = $(this).parent();
         let numHabitacion = liHabitacion.data("habitacion");
 
-        let menuRoom = $(".menuRoom");
+        let menuRoom = $(".menuHabitacion");
         if (menuRoom.length > 0 && $(this).attr('src') == "../../../img/menuHabitacion.png") {
 
             let liFatherRoom = menuRoom.parent();
@@ -220,21 +290,46 @@
 
     const openMenuRoom = (liHabitacion) => {
 
-        let menuRoom = document.createElement("div");
-        menuRoom.className = "menuRoom";
+        let menuRoom = document.createElement("ul");
+        menuRoom.className = "menuHabitacion";
         menuRoom.innerHTML = `
         
-        <nav id="menuHabitacion">
-        <ul>
-         <li class="liHistorial"><img src="../../../img/history.png"><a>Historial</a></li>
-         <li class="liProximamente"><img src="../../../img/long-term.png"><a>Proximamente</a></li>
-         <li class="liServicesRoom"><img src="../../../img/order-food.png"><a>Servicios</a></li>
-         
-        <ul>
-        </nav>
+        <li class="liHistorial">
+
+            <div class="iconHistorial">
+                <img src="../../../img/history.png">
+
+            </div>
+            <div>
+                <a>Historial</a>
+            </div>
+
+        </li>
+        <li class="liProximamente">
+
+            <div>
+                <img src="../../../img/long-term.png">
+            </div>
+
+            <div>
+                <a>Proximamente</a>
+
+            </div>
+        </li>
+        <li class="liServicesRoom">
+
+            <div>
+                <img src="../../../img/order-food.png">
+            </div>
+            <div>
+                <a>Servicios</a>
+            </div>
+        </li>
+
+
+     
+
         `;
-
-
 
         liHabitacion.append(menuRoom);
 
@@ -242,7 +337,7 @@
 
     const closeMenuRoom = (liHabitacion) => {
 
-        let menuRoomClose = liHabitacion.find(".menuRoom");
+        let menuRoomClose = liHabitacion.find(".menuHabitacion");
         menuRoomClose.remove();
 
 
@@ -292,7 +387,7 @@
 
             $("#alert").css("display", "none")
             $("#modal").css("display", "none");
-          
+
         }
     }
 
@@ -301,23 +396,24 @@
 
         let habitacion = $(this).parent().parent().closest("li");
         let numHabitacion = habitacion.data("habitacion");
-        let habitacionDetails = habitacion.data("details");
-        let hoy = new Date(Date.now());
+        let fechaSalidaHabitacionMasCercana = habitacion.data("salidaCercana");
+        let fechaLlegadaHabitacionMasCercana = habitacion.data("llegadaCercana");
+        let hoy = <?php echo $hoy; ?>
 
 
         $("#modal").css("display", "block");
         $("#modal").css("cursor", "none");
 
-        if (habitacionDetails == null) {
+        if (fechaLlegadaHabitacionMasCercana == null || fechaSalidaHabitacionMasCercana == null) {
 
             alertServiceOption("show");
 
         } else {
 
-            if (habitacionDetails.fechaLlegadaHabitacion > hoy || habitacionDetails.fechaSalidaHabitacion < hoy) {
+
+            if (fechaLlegadaHabitacionMasCercana > hoy || fechaSalidaHabitacionMasCercana < hoy) {
 
                 alertServiceOption("show");
-
 
             } else {
 

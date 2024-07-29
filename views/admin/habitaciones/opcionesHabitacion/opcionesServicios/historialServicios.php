@@ -54,6 +54,7 @@ $numHabitacion = $_GET['numHabitacion'];
                 if (respuesta.length > 0) {
 
                     printServicesRoomBookingInCurse(respuesta);
+                 
                 } else {
 
                     $("#sinServiciosHabitacionHistorial").css("display", "block");
