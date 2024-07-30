@@ -494,7 +494,7 @@ body {
   position: absolute;
   top: 40%;
   left: 38%;
-  z-index: 1;
+  z-index: 3;
   padding: 1rem;
   display: none;
 }
@@ -810,7 +810,7 @@ background-color: #1a6a99;
   margin-left: 34%;
   border-radius: 6px;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   color: #000000;
 }
@@ -1022,7 +1022,7 @@ background-color: #1a6a99;
   margin-left: 34%;
   border-radius: 6px;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   color: #000000;
   overflow-y: scroll;
@@ -1105,7 +1105,7 @@ background-color: #1a6a99;
   margin-left: 24%;
   border-radius: 6px;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
   color: #000000;
   overflow-y: scroll;

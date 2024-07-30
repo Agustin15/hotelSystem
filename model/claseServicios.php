@@ -95,7 +95,7 @@ class servicio
         return $totalService;
     }
 
-    public function getServiciosReservaHabitacion($numHabitacion)
+    public function getServiciosReservaHabitacionEnCurso($numHabitacion)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion INNER JOIN
@@ -103,21 +103,37 @@ class servicio
         servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio 
         where habitacion_reservada.fechaLlegadaHabitacion<=DATE(NOW()) and habitacion_reservada.fechaSalidaHabitacion>=DATE(NOW()) and
         habitacion_reservada.numHabitacionReservada=?");
-        $consulta->bind_param("i",$numHabitacion);
+        $consulta->bind_param("i", $numHabitacion);
         $consulta->execute();
         $resultados = $consulta->get_result();
 
         return $resultados->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function deleteService($idServicioHabitacion) {
-        
-        $consulta=$this->conexion->conectar()->prepare("delete from serviciosExtra_habitacion where 
+    public function deleteService($idServicioHabitacion)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("delete from serviciosExtra_habitacion where 
         idServicioHabitacion=?");
-        $consulta->bind_param("i",$idServicioHabitacion);
-        $resultado=$consulta->execute();
+        $consulta->bind_param("i", $idServicioHabitacion);
+        $resultado = $consulta->execute();
 
         return $resultado;
+    }
 
+
+
+
+    public function getServiciosReservaHabitacion($idReserva,$numHabitacion)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion INNER JOIN
+        servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio
+        where serviciosextra_habitacion.idReservaHabitacionServicio=? and serviciosextra_habitacion.numHabitacionServicio=?");
+        $consulta->bind_param("ii",$idReserva,$numHabitacion);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
     }
 }

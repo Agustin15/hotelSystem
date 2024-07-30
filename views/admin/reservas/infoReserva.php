@@ -104,6 +104,14 @@ $reserva = json_decode($reserva, true);
 
     });
 
+
+
+    $(".liServicios").on("click", function() {
+
+        $("#panelInfo").load("opcionesInfoReserva/servicios.php?reserva=" +
+            JSON.stringify(reserva));
+          
+    });
     $(".liFactura").on("click", function() {
 
         $("#panelInfo").load("opcionesInfoReserva/factura.php?reserva=" +

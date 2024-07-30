@@ -6,7 +6,7 @@ $numHabitacion = $_GET['numHabitacion'];
 
 $hoy = date("Y-m-d");
 
-$serviciosHabitacionReservada = $claseServicio->getServiciosReservaHabitacion($numHabitacion);
+$serviciosHabitacionReservada = $claseServicio->getServiciosReservaHabitacionEnCurso($numHabitacion);
 ?>
 
 

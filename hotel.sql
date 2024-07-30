@@ -152,8 +152,8 @@ INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Deluxe",4,5,1,300);
 INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Estandar",3,4,1,120);
 
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50,null,null);
-INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500,null,null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50,load_file('C:/xampp/htdocs/Sistema hotel/img/telephone.png'),null);
+INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500,load_file('C:/xampp/htdocs/Sistema hotel/img/massage.png'),null);
 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Agua 1L",75,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua1L.jpg'),2);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Minibar","Agua 650ml",55,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/agua650mL.jpg'),6);

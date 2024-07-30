@@ -95,7 +95,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
         $numHabitacion = $_GET['numHabitacion'];
 
-        $servicesRoom = $claseServicio->getServiciosReservaHabitacion($numHabitacion);
+        $servicesRoom = $claseServicio->getServiciosReservaHabitacionEnCurso($numHabitacion);
 
 
 
