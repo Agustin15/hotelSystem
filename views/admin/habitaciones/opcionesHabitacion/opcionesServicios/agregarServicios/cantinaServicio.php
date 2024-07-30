@@ -106,6 +106,8 @@ $idReserva = $habitacion['idReservaHabitacion'];
             <button id="btnAgregarService">Agregar</button>
 
         </div>
+
+
     </div>
 
 
@@ -477,7 +479,6 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 
         createObjectServiceToBd();
-
 
         fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php", {
 

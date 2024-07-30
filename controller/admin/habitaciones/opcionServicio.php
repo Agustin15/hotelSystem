@@ -13,32 +13,70 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         $servicio = json_decode(file_get_contents("php://input"), true);
 
         $total = 0;
-
         if (count($servicio) > 1) {
 
             foreach ($servicio as $service) {
 
-                $resultado = $claseServicio->addServiceToRoom(
+                $servicioIsset = $claseServicio->getServiciosHabitacionReserva(
                     $service['idServicio'],
-                    $service['cantidad'],
                     $service['idReserva'],
                     $service['numHabitacion']
                 );
+
+                if (!empty($servicioIsset)) {
+
+                    $newCantidad = $service['cantidad'] + $servicioIsset['cantidad'];
+
+                    $resultado =  $claseServicio->updateService(
+                        $newCantidad,
+                        $service['idServicio'],
+                        $service['idReserva'],
+                        $service['numHabitacion']
+                    );
+                } else {
+
+                    $resultado = $claseServicio->addServiceToRoom(
+                        $service['idServicio'],
+                        $service['cantidad'],
+                        $service['idReserva'],
+                        $service['numHabitacion']
+                    );
+                }
+
 
                 $total += $service['total'];
             }
         } else {
 
-            $resultado = $claseServicio->addServiceToRoom(
+
+            $servicioIsset = $claseServicio->getServiciosHabitacionReserva(
                 $servicio[0]['idServicio'],
-                $servicio[0]['cantidad'],
                 $servicio[0]['idReserva'],
                 $servicio[0]['numHabitacion']
             );
 
+            if (!empty($servicioIsset)) {
+
+
+                $newCantidad = $servicio[0]['cantidad'] + $servicioIsset['cantidad'];
+                $resultado = $claseServicio->updateService(
+                    $newCantidad,
+                    $servicio[0]['idServicio'],
+                    $servicio[0]['idReserva'],
+                    $servicio[0]['numHabitacion']
+                );
+            } else {
+
+                $resultado = $claseServicio->addServiceToRoom(
+                    $servicio[0]['idServicio'],
+                    $servicio[0]['cantidad'],
+                    $servicio[0]['idReserva'],
+                    $servicio[0]['numHabitacion']
+                );
+            }
+
             $total = $servicio[0]['total'];
         }
-
 
         if ($resultado) {
 

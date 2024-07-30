@@ -28,6 +28,18 @@ class servicio
     }
 
 
+    public function getServiciosHabitacionReserva($idServicio, $idReserva, $numHabitacion)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from serviciosExtra_habitacion where
+        idServicio=? and idReservaHabitacionServicio=? and numHabitacionServicio=? ");
+        $consulta->bind_param("iii", $idServicio, $idReserva, $numHabitacion);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_array(MYSQLI_ASSOC);
+    }
+
+
 
     public function getServiciosHabitacion($numHabitacion)
     {
@@ -124,16 +136,27 @@ class servicio
 
 
 
-    public function getServiciosReservaHabitacion($idReserva,$numHabitacion)
+    public function getServiciosReservaHabitacion($idReserva, $numHabitacion)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion INNER JOIN
         servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio
         where serviciosextra_habitacion.idReservaHabitacionServicio=? and serviciosextra_habitacion.numHabitacionServicio=?");
-        $consulta->bind_param("ii",$idReserva,$numHabitacion);
+        $consulta->bind_param("ii", $idReserva, $numHabitacion);
         $consulta->execute();
         $resultados = $consulta->get_result();
 
         return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateService($cantidad,$idServicio,$numHabitacion,$idReserva)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("update serviciosExtra_habitacion set cantidad=? where 
+        idServicio=? and idReservaHabitacionServicio=? and numHabitacionServicio=?");
+        $consulta->bind_param("iiii",$cantidad,$idServicio,$numHabitacion,$idReserva);
+        $resultado = $consulta->execute();
+
+        return $resultado;
     }
 }

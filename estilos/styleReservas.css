@@ -2413,7 +2413,7 @@ body {
 }
 
 .divInfo #sinDatosInfo {
-  opacity: 50%;
+  opacity: 80%;
 }
 
 .divInfo #sinDatosInfo img {
@@ -2781,35 +2781,84 @@ body {
   margin: auto;
   margin-top: 40px;
   height: auto;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(150, 150, 150);
+  padding-bottom: 1rem;
+
+
 }
 
-.divInfo #detallesFactura li {
-  display: inline-block;
-  width: 290px;
-  height: auto;
-  color: rgb(100, 100, 100);
-  opacity: 80%;
-  padding-bottom: 10px;
+.divInfo #detallesFactura #habitacionesPrecios{
+
+  margin-left: 3rem;
+
+  
 }
 
-.divInfo #detallesFactura #habitacionesPrecios {
-  float: left;
-  border-right: 1px solid gray;
+.divInfo #detallesFactura #serviciosPrecios{
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+  margin-right: 3rem;
+ 
 }
 
-.divInfo #detallesFactura #serviciosPrecios {
-  float: right;
+.divInfo #detallesFactura li{
+
+  list-style: none;
+  
 }
 
-.divInfo #detallesFactura #habitacionesPrecios img {
-  width: 25px;
-}
+.divInfo #detallesFactura .titleHabitacion{
 
-.divInfo #detallesFactura #habitacionesPrecios h4 {
+  margin-top: 0.5rem;
   font-weight: bold;
 }
 
-.divInfo #detallesFactura #habitacionesPrecios #ulHabitacion {
-  text-align: center;
-  color: rgb(97, 97, 97);
+.divInfo #detallesFactura .nameService{
+
+  width: 170px;
+}
+
+.divInfo #sinDatosInfo{
+
+  font-size: 25px;
+  margin-top: 2rem;
+
+}
+.divInfo #sinDatosInfo img{
+
+  width: 60px;
+}
+
+.divInfo #sinServiciosFactura{
+
+  opacity: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  width: 190px;
+
+
+}
+
+
+
+.divInfo #totalFactura{
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size:20px;
+  color: black;
+  float: right;
+  margin-right: 2rem;
+  font-weight: bold;
 }

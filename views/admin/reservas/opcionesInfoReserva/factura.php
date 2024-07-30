@@ -9,9 +9,11 @@ $idReserva = $reserva['idReserva'];
 require("../../../../model/claseHabitaciones.php");
 require("../../../../model/clasePago.php");
 require("../../../../model/claseReservas.php");
+require("../../../../model/claseServicios.php");
 $claseHabitaciones = new habitaciones();
 $clasePago = new pago();
 $claseReservas = new reservas();
+$claseServicio = new servicio();
 
 ?>
 
@@ -24,7 +26,7 @@ $claseReservas = new reservas();
 
     if (!empty($pago)) {
 
-        $deposito=$pago['deposito'];
+        $deposito = $pago['deposito'];
         $habitacionesReservadas = $claseHabitaciones->getHabitaciones($idReserva);
 
         $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
@@ -32,8 +34,12 @@ $claseReservas = new reservas();
         $cantHabitacionesReservadasEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
         $cantHabitacionesReservadasDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
         $cantHabitacionesReservadasSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
-    
 
+
+        $habitacionesCantidad = [
+            array("categoria" => "estandar", "cantidad" => $cantHabitacionesReservadasEstandar),
+            array("categoria" => "deluxe", "cantidad" => $cantHabitacionesReservadasDeluxe), array("categoria" => "suite", "cantidad" => $cantHabitacionesReservadasSuite)
+        ];
 
     ?>
 
@@ -48,7 +54,7 @@ $claseReservas = new reservas();
         $reserva = $claseReservas->getReservaPoridReserva($idReserva);
         $llegada = new DateTime($reserva['fechaLlegada']);
         $salida = new DateTime($reserva['fechaSalida']);
-        $noches=$llegada->diff($salida)->days;
+        $noches = $llegada->diff($salida)->days;
         ?>
 
         <h4 id="llegada">Llegada:<?php echo $llegada->format("d-m-Y") ?></h4>
@@ -57,69 +63,170 @@ $claseReservas = new reservas();
 
         <img src="../../../img/luna.png">
         <br>
-        <label><?php echo $noches?> noches</label>
+        <label><?php echo $noches ?> noches</label>
         <br>
 
-        <ul id="detallesFactura">
+        <div id="detallesFactura">
 
-            <li id="habitacionesPrecios">
+            <ul id="habitacionesPrecios">
 
-                <img src="../../../img/habitacionesDetalle.png">
-                <br>
-                <h4>Habitaciones</h4>
+                <div id="titleRoom">
 
-                <br>
-                <ul id="ulHabitacion">
+                    <div>
+                        <img src="../../../img/habitacionesDetalle.png">
+                    </div>
+
+                    <div>
+                        <h4>Habitaciones</h4>
+                    </div>
+
+                    <br>
+
+                </div>
+
+
                 <?php
 
-                if ($cantHabitacionesReservadasEstandar > 0) {
+                foreach ($habitacionesCantidad as $habitacionCantidad) {
 
-                    $precioHabitacion = $claseHabitaciones->getPrecioHabitacion("Estandar");
-                    $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasEstandar);
+                    if ($habitacionCantidad['cantidad'] > 0) {
+
+                        $categoriaPrecio = $claseHabitaciones->getPrecioHabitacion(
+                            $habitacionCantidad['categoria']
+                        );
+
+                        $totalHabitacion = $claseHabitaciones->totalHabitacion(
+                            $categoriaPrecio['precio'],
+                            $habitacionCantidad['cantidad']
+                        );
+
                 ?>
 
-                  
-                        <li>habitacion estandar x <?php echo $cantHabitacionesReservadasEstandar . " ($" . $totalHabitacion . ")" ?></li>
+                        <li>
 
-                    <?php
-                }
-                if ($cantHabitacionesReservadasDeluxe > 0) {
+                            <span>Habitacion <?php echo $habitacionCantidad['categoria'] ?>
+                                x<?php echo $habitacionCantidad['cantidad'] ?>
+                                ($<?php echo $totalHabitacion ?>)
 
-                    $precioHabitacion = $claseHabitaciones->getPrecioHabitacion("Deluxe");
-                    $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasDeluxe);
-                    ?>
+                            </span>
+                        </li>
 
-                        <li>habitacion deluxe x <?php echo $cantHabitacionesReservadasDeluxe . " ($" . $totalHabitacion . ")" ?></li>
+                <?php
 
-                    <?php
+                    }
                 }
 
-                if ($cantHabitacionesReservadasSuite > 0) {
+                ?>
 
-                    $precioHabitacion = $claseHabitaciones->getPrecioHabitacion("Suite");
-                    $totalHabitacion = $claseHabitaciones->totalHabitacion($precioHabitacion['precio'], $cantHabitacionesReservadasSuite);
-                    ?>
+            </ul>
 
-                        <li>habitacion suite x <?php echo $cantHabitacionesReservadasSuite . " ($" . $totalHabitacion . ")" ?></li>
+
+            <ul id="serviciosPrecios">
+
+                <div id="titleService">
+                    <div>
+                        <img src="../../../img/serviciosDetalles.png">
+                    </div>
+
+                    <div>
+                        <h4>Servicios</h4>
+                    </div>
+                </div>
+
+
+                <?php
+
+                $serviciosReserva = $claseServicio->getServiciosReserva($idReserva);
+
+                if (!empty($serviciosReserva->fetch_all(MYSQLI_ASSOC))) {
+
+
+                    foreach ($habitacionesReservadas as $habitacionReservada) {
+
+                        $serviciosHabitacion = $claseServicio->getServiciosReservaHabitacion(
+                            $idReserva,
+                            $habitacionReservada['numHabitacionReservada']
+                        );
+
+                        if (!empty($serviciosHabitacion)) {
+
+                ?>
+
+                            <div class="titleHabitacion">
+                                <span>Habitacion <?php echo $habitacionReservada['numHabitacionReservada'] ?></span>
+
+                            </div>
+                            <?php
+                            foreach ($serviciosHabitacion as $servicioHabitacion) {
+
+
+                                $totalService = $servicioHabitacion['precio'] * $servicioHabitacion['cantidad'];
+
+
+                                if (
+                                    $servicioHabitacion['nombreServicio'] == "Telefono"  ||
+                                    $servicioHabitacion['nombreServicio'] == "Masajes"
+                                ) {
+
+                                    $nombreServicio = $servicioHabitacion['nombreServicio'];
+                                } else {
+
+
+                                    $nombreServicio = $servicioHabitacion['nombreServicio'] . " (" . $servicioHabitacion['descripcionServicio'] . ")";
+                                }
+
+                                $cantidad = $servicioHabitacion['cantidad'];
+                                if ($servicioHabitacion['nombreServicio'] == "Telefono") {
+
+                                    $cantidad = $servicioHabitacion['cantidad'] . " min";
+                                }
+                            ?>
+
+                                <li>
+
+                                    <div class="nameService">
+                                        <span><?php echo $nombreServicio ?> x<?php echo $cantidad ?>
+                                            ($<?php echo $totalService ?>)</span>
+
+                                    </div>
+
+                                </li>
+                        <?php
+
+
+                            }
+                        } else {
+                        }
+
+                        ?>
 
                     <?php
-                }
+                    }
+                } else {
+
                     ?>
 
-                    </ul>
-            </li>
-            <li id="serviciosPrecios">
+                    <div id="sinServiciosFactura">
 
-                <img src="../../../img/serviciosDetalles.png">
-                <br><br>
-                <h4>No hay servicios aun</h4>
-            </li>
-        </ul>
-        <br><br>
-        <hr>
-        <br>
+                        <div>
+                            <span>No se han ordenado servicios</span>
+                        </div>
 
-        <h3>Total:$<?php echo $deposito ?></h3>
+                    </div>
+                <?php
+                }
+
+                ?>
+
+
+            </ul>
+        </div>
+
+        <div id="totalFactura">
+
+            <span>Total:$<?php echo $pago['deposito'] ?></span>
+        </div>
+
 
     <?php
     } else {
