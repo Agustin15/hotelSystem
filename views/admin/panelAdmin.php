@@ -20,6 +20,15 @@ if (empty($usuario)) {
     $clasePago = new pago();
     $claseReservas = new reservas();
     $claseCliente = new cliente();
+
+    
+
+    $adminUser = $admin->getAdminGenero($usuario);
+
+    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
+    
+    $genero = $datoAdminUser['genero'];
+    $_SESSION['genero'] = $genero;
 }
 ?>
 
@@ -32,8 +41,8 @@ if (empty($usuario)) {
     <link rel="stylesheet" href="../../estilos/styleAdmin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../alertas/alertas.js"></script>
+    <script src="../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../js/alertas.js" defer></script>
 
     <title>Admin</title>
 
@@ -153,7 +162,7 @@ if (empty($usuario)) {
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin">
+                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
                 <label><?php echo $usuario ?></label>
                 <img class="btnFlecha" src="../../img/btnFlecha.png">
 
@@ -181,40 +190,6 @@ if (empty($usuario)) {
 
 
     <?php
-
-
-
-    $adminUser = $admin->getAdminGenero($usuario);
-
-    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
-
-    $genero = $datoAdminUser['genero'];
-    $_SESSION['genero'] = $genero;
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../img/adminBannerM.jpg", "../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../img/adminBannerF.jpg", "../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
 
     $mesActual = date("m");
     $anioActual = date("Y");
@@ -247,17 +222,20 @@ if (empty($usuario)) {
 
     $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
     $totalHabitaciones = $habitacionesReservadas->num_rows;
-     
-    $cantEstandar=0;
-    $cantDeluxe=0;
-    $cantSuite=0;
+
+    $cantEstandar = 0;
+    $cantDeluxe = 0;
+    $cantSuite = 0;
+    $porcentajeEstandar = null;
+    $porcentajeDeluxe = null;
+    $porcentajeSuite = null;
 
     if ($totalHabitaciones > 0) {
 
         $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
         $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
 
-        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar") ;
+        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
         $cantDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
         $cantSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
 
@@ -311,7 +289,7 @@ if (empty($usuario)) {
 
     <div id="containClienteAndGeneral">
 
-        <div id="viewClientes">
+        <div id="viewClientes" data-meses-clientes='<?php echo json_encode($mesesClientes) ?>'>
 
             <div class="titleGraphic">
                 <h3>Clientes <?php echo $anioActual ?></h3>
@@ -320,10 +298,10 @@ if (empty($usuario)) {
 
             <br>
             <div id="graficaClientes"></div>
-           
+
             <div id="containButtonClientes">
 
-            <a href="clientes/grafica.php"> <button>Ver</button></a>
+                <a href="clientes/grafica.php"> <button>Ver</button></a>
             </div>
 
             <div id="sinDatosGraficaClientes">
@@ -461,7 +439,7 @@ if (empty($usuario)) {
     </div>
 
     <div id="containViewHabitacionAndGananacias">
-        <div id="viewHabitaciones">
+        <div id="viewHabitaciones" data-porcentaje-estandar=<?php echo $porcentajeEstandar ?> data-porcentaje-deluxe=<?php echo $porcentajeDeluxe ?> data-porcentaje-suite=<?php echo $porcentajeSuite ?>>
 
             <div class="titleGraphic">
                 <h3>Categorias de habitaciones mas reservadas</h3>
@@ -483,7 +461,7 @@ if (empty($usuario)) {
             </div>
         </div>
 
-        <div id="viewGanancias">
+        <div id="viewGanancias" data-ganancias-mes='<?php echo json_encode($gananciasPorMes)?>'>
 
             <div class="titleGraphic"">
 
@@ -496,7 +474,7 @@ if (empty($usuario)) {
 
                 <button>Ver</button>
             </div>
-            
+
 
             <div id="sinDatosGraficaGanancias">
 
@@ -507,126 +485,9 @@ if (empty($usuario)) {
         </div>
     </div>
 
-<br>
+    <br>
 
 
 </body>
 
 </html>
-
-<script>
-    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-    //Grafica clientes
-
-    var mesesClientes = JSON.parse('<?php echo json_encode($mesesClientes) ?>');
-
-
-    let sumaClientes = mesesClientes.reduce((ac, element) => {
-
-        return ac + element.cantClientes + element.cantClientes;
-
-    }, 0);
-
-    dataPointsClientes = [];
-    if (sumaClientes > 0) {
-
-        $("#containButtonClientes").css("display", "block");
-        $("#sinDatosGraficaClientes").css("display", "none");
-
-        var mes = 0;
-        var cantClientes = 0
-
-     dataPointsClientes= mesesClientes.map((mesCliente)=>{
-
-            var dataPointCliente={
-                "label": getMes(mesCliente.mes),
-                "y":mesCliente.cantClientes
-            };
-
-            return dataPointCliente;
-        });
-
-    }
-       
-    
-    //grafica habitaciones
-
-    dataPointsHabitacionesReservadas = [];
-
-    <?php
-
-    if (isset($porcentajeEstandar)) {
-    ?>
-
-        $("#containButtonHabitaciones").css("display", "block");
-        $("#sinDatosGraficaHabitaciones").css("display", "none");
-
-        dataPointsHabitacionesReservadas.push({
-                "y": "<?php echo $porcentajeEstandar ?>",
-                "label": "Estandar"
-            }, {
-                "y": "<?php echo $porcentajeDeluxe ?>",
-                "label": "Deluxe"
-
-            }, {
-                "y": "<?php echo  $porcentajeSuite ?>",
-                "label": "Suite"
-
-            }
-
-        );
-
-    <?php
-    }
-
-    ?>
-
-    let gananciasPorMes = <?php echo json_encode($gananciasPorMes) ?>
-    
-    let totalGanancias = gananciasPorMes.reduce((ac, ganancia) => ac += ganancia.ganancias, 0);
-   
-    let dataPointsGanancias=[];
-
-    if (totalGanancias > 0) {
-
-        $("#containButtonGanancias").css("display", "block");
-        $("#sinDatosGraficaGanancias").css("display", "none");
-        dataPointsGanancias = gananciasPorMes.map((ganancia) => {
-
-            dataPointGanancia = {
-
-                x: new Date(ganancia.mes),
-                y: ganancia.ganancias
-            };
-
-            return dataPointGanancia;
-        });
-
-    }
-
-    window.onload = function() {
-
-        if (dataPointsClientes.length > 0) {
-            graficar(dataPointsClientes, "graficaClientes", "", "light2");
-            $("#navAdmin").css("marginTop", "-22px");
-
-        }
-
-
-
-        if (dataPointsHabitacionesReservadas.length > 0) {
-
-            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones", "");
-
-        }
-
-        if (dataPointsGanancias.length > 0) {
-
-            graficarGananciasPorMes(dataPointsGanancias, "graficaGanancias", "");
-        }
-
-
-
-    };
-</script>

@@ -15,12 +15,6 @@ if (empty($usuario)) {
 }
 
 
-$cliente = "";
-if (isset($_GET['cliente'])) {
-
-    $cliente = $_GET['cliente'];
-}
-
 
 ?>
 
@@ -34,8 +28,8 @@ if (isset($_GET['cliente'])) {
     <link rel="stylesheet" href="../../../estilos/styleClientes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsCliente/funcionesCliente.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsClientes.js" defer> </script>
 
     <title>Admin-Clientes</title>
 </head>
@@ -217,37 +211,6 @@ if (isset($_GET['cliente'])) {
     </div>
 
     <br>
-
-    <?php
-
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-
-
-    ?>
     <br>
 
 
@@ -290,29 +253,3 @@ if (isset($_GET['cliente'])) {
 </body>
 
 </html>
-
-<script>
-    window.onload = function() {
-
-        $("#tableClientes").load("cargarTabla.php", function() {
-
-            var cliente = "<?php echo $cliente ?>";
-            if (cliente !== "") {
-
-                buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
-            }
-        });
-
-    }
-
-    liBorderBottom("listaClientes");
-
-    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-
-    $("#buscador").on("keydown", function() {
-
-        buscadorCliente();
-
-    });
-</script>

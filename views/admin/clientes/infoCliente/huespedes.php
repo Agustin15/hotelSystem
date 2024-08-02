@@ -19,16 +19,3 @@ $ninos = json_decode($_GET['ninos']);
 
 </div>
 
-<script>
-    $(".cerrarHuespedes").on("click", function() {
-
-
-        $("#modalInfo").css("display", "none");
-        $("#modalInfo").css("cursor", "auto");
-
-        $(".subVentanas").empty();
-        
-
-
-    });
-</script>

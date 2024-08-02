@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
-    <script src="../alertas/alertas.js"></script>
+    <script defer src="../js/alertas.js"></script>
 
 
     <title>Reserva</title>
@@ -586,10 +586,8 @@
     </div>
 
 
-    <script type="module" src="seleccionHabitaciones.js"></script>
-    <script type="module" src="comprobarSelects.js"></script>
-
-    <script src="seleccionHabitaciones.js"></script>
+    <script type="module" src="../js/seleccionHabitaciones.js"></script>
+    <script type="module" src="../js/comprobarSelects.js"></script>
 
     <?php
 

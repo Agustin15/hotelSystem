@@ -17,16 +17,3 @@ $noches = json_decode($_GET['noches']);
 
 </div>
 
-<script>
-    $(".cerrarNoches").on("click", function() {
-
-
-        $("#modalInfo").css("display", "none");
-        $("#modalInfo").css("cursor", "auto");
-
-        $(".subVentanas").empty();
-        
-
-
-    });
-</script>

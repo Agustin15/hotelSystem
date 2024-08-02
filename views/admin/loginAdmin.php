@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../estilos/styleAdmin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="../../alertas/alertas.js"></script>
-    <script src="../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
+    <script src="../../js/alertas.js" defer></script>
+    <script src="../../js/scriptsLogin.js" defer ></script>
 
     <title>Admin-Login</title>
 
@@ -52,7 +52,7 @@
     <div id="loginAdmin">
 
         <br>
-        <form method="POST" action="../../controller/admin/autenticacionLogin.php">
+        <form method="POST" id="formLogin">
 
             <br>
             <h1>Ingresa los datos</h1>
@@ -88,52 +88,5 @@
 
 </body>
 
-<script>
-    var password = document.getElementById("password");
-    var iconoPass = document.querySelector('.iconoPass');
-    iconoPass.addEventListener("click", function() {
-
-        if (password.type == "password") {
-
-            password.type = "text";
-            iconoPass.src = "../../img/ver.png";
-
-        } else {
-
-            password.type = "password";
-            iconoPass.src = "../../img/ojo.png";
-
-        }
-
-    });
-
-
-    $("#password").on("click", function() {
-
-        lblInputsLoginActive($(".lblPass"),"lblInputEfect","lblInputEfectRemove");
-
-    });
-
-    $("#password").on("mouseleave", function() {
-
-
-        lblInputsLoginDesactive($(".lblPass"),$(this),"lblInputEfectRemove");
-    });
-
-
-
-    $("#usuario").on("click", function() {
-
-        lblInputsLoginActive($(".lblUsuario"),"lblInputEfect","lblInputEfectRemove");
-
-
-    });
-
-    $("#usuario").on("mouseleave", function() {
-
-
-        lblInputsLoginDesactive($(".lblUsuario"),$(this),"lblInputEfectRemove");
-    });
-</script>
-
 </html>
+

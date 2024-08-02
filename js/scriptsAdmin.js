@@ -1,14 +1,3 @@
-function lblInputsLoginActive(label, clase, claseRemove) {
-  label.removeClass(claseRemove);
-  label.addClass(clase);
-}
-
-function lblInputsLoginDesactive(label, input, claseAdd) {
-  if (input.val() == "") {
-    label.addClass(claseAdd);
-  }
-}
-
 function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
 
@@ -69,11 +58,22 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   });
 }
 
-function setImg(bannerLink, iconoLink) {
-  $(document).ready(function () {
-    $(".imgBanner").attr("src", bannerLink);
-    $(".iconoAdmin").attr("src", iconoLink);
-  });
+let iconAdmin = document.querySelector(".iconoAdmin");
+
+if (typeof iconAdmin !== "undefined") {
+  let genreData = iconAdmin.dataset.genre;
+
+  if ((genreData = "M")) {
+    $(".iconoAdmin").attr(
+      "src",
+      "http://localhost/sistema%20Hotel/img/perfilM.png"
+    );
+  } else {
+    $(".iconoAdmin").attr(
+      "src",
+      "http://localhost/sistema%20Hotel/img/perfilF.png"
+    );
+  }
 }
 
 function liBorderBottom(pagina) {
@@ -138,6 +138,12 @@ function getMes(numMes) {
 
   return mesElegido;
 }
+
+//abrir subMenus
+openSubMenu(
+  "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
+  "http://localhost/sistema%20Hotel/img/btnFlecha.png"
+);
 
 function graficar(dataPoints, grafica, titulo, theme) {
   var chart = new CanvasJS.Chart(grafica, {
@@ -219,3 +225,105 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
   });
   chart.render();
 };
+
+//Grafica clientes
+
+let viewClientes = document.getElementById("viewClientes");
+let dataPointsClientes = [];
+
+if (document.body.contains(viewClientes)) {
+  var mesesClientes = JSON.parse(viewClientes.dataset.mesesClientes);
+
+  let sumaClientes = mesesClientes.reduce((ac, element) => {
+    return ac + element.cantClientes + element.cantClientes;
+  }, 0);
+
+  if (sumaClientes > 0) {
+    $("#containButtonClientes").css("display", "block");
+    $("#sinDatosGraficaClientes").css("display", "none");
+
+    var mes = 0;
+    var cantClientes = 0;
+
+    dataPointsClientes = mesesClientes.map((mesCliente) => {
+      var dataPointCliente = {
+        label: getMes(mesCliente.mes),
+        y: mesCliente.cantClientes,
+      };
+
+      return dataPointCliente;
+    });
+  }
+}
+//grafica habitaciones
+
+dataPointsHabitacionesReservadas = [];
+let viewHabitaciones = document.getElementById("viewHabitaciones");
+
+if (document.body.contains(viewHabitaciones)) {
+  let porcentajeEstandar = viewHabitaciones.dataset.porcentajeEstandar;
+  let porcentajeDeluxe = viewHabitaciones.dataset.porcentajeDeluxe;
+  let porcentajeSuite = viewHabitaciones.dataset.porcentajeSuite;
+
+  if (porcentajeEstandar.length > 0) {
+    $("#containButtonHabitaciones").css("display", "block");
+    $("#sinDatosGraficaHabitaciones").css("display", "none");
+
+    dataPointsHabitacionesReservadas.push(
+      {
+        y: porcentajeEstandar,
+        label: "Estandar",
+      },
+      {
+        y: porcentajeDeluxe,
+        label: "Deluxe",
+      },
+      {
+        y: porcentajeSuite,
+        label: "Suite",
+      }
+    );
+  }
+}
+
+let viewGanancias = document.getElementById("viewGanancias");
+let dataPointsGanancias = [];
+
+if (document.body.contains(viewGanancias)) {
+  let gananciasPorMes = JSON.parse(viewGanancias.dataset.gananciasMes);
+
+  let totalGanancias = gananciasPorMes.reduce(
+    (ac, ganancia) => (ac += ganancia.ganancias),
+    0
+  );
+
+  if (totalGanancias > 0) {
+    $("#containButtonGanancias").css("display", "block");
+    $("#sinDatosGraficaGanancias").css("display", "none");
+    dataPointsGanancias = gananciasPorMes.map((ganancia) => {
+      dataPointGanancia = {
+        x: new Date(ganancia.mes),
+        y: ganancia.ganancias,
+      };
+
+      return dataPointGanancia;
+    });
+  }
+}
+
+if (dataPointsClientes.length > 0) {
+  graficar(dataPointsClientes, "graficaClientes", "", "light2");
+  $("#navAdmin").css("marginTop", "-22px");
+}
+
+if (dataPointsHabitacionesReservadas.length > 0) {
+  graficarHabitaciones(
+    dataPointsHabitacionesReservadas,
+    "graficaHabitaciones",
+    ""
+  );
+}
+
+if (dataPointsGanancias.length > 0) {
+  graficarGananciasPorMes(dataPointsGanancias, "graficaGanancias", "");
+}

@@ -1,53 +1,44 @@
 <?php
 
+$dataUser = json_decode(file_get_contents("php://input"), true);
 
-if (!empty($_POST['user']) && !empty($_POST['password'])) {
 
-    $usuario = $_POST['user'];
-    $contrasenia = $_POST['password'];
+if (!empty($dataUser['user']) && !empty($dataUser['password'])) {
+
+
+    $user = $dataUser['user'];
+    $password = $dataUser['password'];
 
     require("../../model/claseAdmin.php");
 
 
     $admin = new admin();
 
-    $registro = $admin->selectAdminUser($usuario, $contrasenia);
+    $registro = $admin->selectAdminUser($user,$password);
 
     if ($registro != null) {
 
         session_id("login");
         session_start();
-        $_SESSION['usuario'] = $usuario;
+        $_SESSION['usuario'] = $user;
 
-        header("location:../../views/admin/panelAdmin.php");
+        
+        $respuestaJson=json_encode($respuesta=array("resultado"=>true));
+
+
+
     } else {
-?>
-
-        <?php
-        include("../../views/admin/loginAdmin.php");
-
-        ?>
-        <script>
-            alertaCompleteDatos("Nombre de usuario o contraseña incorrectos");
-        </script>
 
 
-    <?php
+        $respuestaJson=json_encode($respuesta=array("resultado"=>"Usuario o contraseña ingresada incorrectos"));
+
+        echo $respuestaJson;
+        
     }
-} else {
+}else{
 
-    ?>
-
-    <?php
-
-    include("../../views/admin/loginAdmin.php");
-
-    ?>
-    <script>
-        alertaCompleteDatos("Complete todos los campos");
-    </script>
-
-<?php
+  
+    header("location:../../views/admin/loginAdmin.php");
 }
 
-?>
+echo $respuestaJson;

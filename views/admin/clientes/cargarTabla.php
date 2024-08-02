@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -93,57 +94,3 @@ if (empty($clientesEstado->fetch_all(MYSQLI_ASSOC))) {
 }
 
 ?>
-
-<script>
-    const showHideBuscador = (estado) => {
-
-        $("#buscador").css("display", estado);
-        $(".lupa").css("display", estado);
-
-    }
-
-    datosCliente = [];
-    const btns = $(".trBody").find("button");
-
-    btns.each(function(index, btn) {
-
-        const opcion = $(btn).data("opcion");
-
-        $(btn).on("click", function() {
-
-
-            const cliente = {
-
-                "idCliente": $(btn).data("id"),
-                "correo": $(btn).data("correo"),
-                "nombre": $(btn).data("nombre"),
-                "apellido": $(btn).data("apellido"),
-                "telefono": $(btn).data("telefono")
-
-            };
-            datosCliente.push(cliente);
-
-            switch (opcion) {
-
-                case "eliminar":
-
-                    opcionCliente(datosCliente, "eliminar");
-
-                    break;
-
-
-                case "editar":
-
-                    opcionCliente(datosCliente, "editar");
-                    break;
-
-                case "info":
-
-                    opcionCliente(datosCliente, "info");
-                    break;
-            }
-
-        });
-
-    });
-</script>

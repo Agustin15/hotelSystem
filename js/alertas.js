@@ -32,7 +32,6 @@ function alerta(msj) {
 function alertaCompleteDatos(msj) {
 
 
-    $(document).ready(function () {
 
 
 
@@ -57,10 +56,6 @@ function alertaCompleteDatos(msj) {
 
 
         setTimeout(borrarAlerta, 4000);
-
-
-
-    });
 
 
 }
