@@ -15,6 +15,22 @@ if (empty($usuario)) {
     require("../../../model/claseReservas.php");
     $claseCliente = new cliente();
     $claseReservas = new reservas();
+
+    //traer clientes
+    $mesesConsulta = array(
+        "1", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "11", "12"
+    );
+    $mesesClientes = [];
+
+    $mesesClientes = array_map(function ($mes) use ($claseReservas) {
+
+        $cantClientes = $claseReservas->getClientesReservas($mes);
+
+        $mesCliente = array("mes" => $mes, "cantClientes" => $cantClientes);
+
+        return $mesCliente;
+    }, $mesesConsulta);
 }
 
 ?>
@@ -28,7 +44,9 @@ if (empty($usuario)) {
     <link rel="stylesheet" href="../../../estilos/styleClientes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsClientes.js" defer> </script>
+
     <title>Admin-Clientes</title>
 </head>
 
@@ -212,7 +230,7 @@ if (empty($usuario)) {
     </div>
 
     <br>
-    <div id="viewGrafica">
+    <div id="viewGrafica" data-meses-clientes='<?php echo json_encode($mesesClientes)?>'>
 
 
         <div id="graficaClientes">
@@ -230,94 +248,6 @@ if (empty($usuario)) {
     </div>
 
 
-    <?php
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-    //traer clientes
-    $mesesConsulta = array(
-        "1", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "11", "12"
-    );
-    $mesesClientes = [];
-
-    foreach ($mesesConsulta as $mes) {
-
-        $cantClientes = $clientes = $claseReservas->getClientesReservas($mes);
-
-        $mesCliente = array("mes" => $mes, "cantClientes" => $cantClientes);
-        array_push($mesesClientes, $mesCliente);
-    }
-
-    ?>
 </body>
 
 </html>
-
-<script>
-    liBorderBottom("grafica");
-
-
-    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-
-    var mesesClientes = JSON.parse('<?php echo json_encode($mesesClientes) ?>');
-
-    var mes = 0;
-    var cantClientes = 0
-    dataPointsClientes = [];
-
-
-    for (var f = 0; f < mesesClientes.length; f++) {
-
-        var mes = mesesClientes[f].mes;
-
-        var cantClientes = mesesClientes[f].cantClientes;
-
-        var mesPalabra = getMes(mes);
-
-        dataPointsClientes.push({
-            "label": mesPalabra,
-            "y": cantClientes
-        });
-    }
-
-
-    window.onload = function() {
-
-        let sumClientes = dataPointsClientes.reduce((ac, element) => {
-
-            return ac + element.y + element.y
-
-        }, 0);
-
-        if (sumClientes > 0) {
-            graficar(dataPointsClientes, "graficaClientes", "Clientes por mes", "light2");
-        } else {
-
-            $(".sinDatos").css("display", "block");
-        }
-    }
-</script>

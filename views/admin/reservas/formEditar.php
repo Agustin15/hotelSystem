@@ -30,7 +30,7 @@ $totalHabitacionesHotel = $claseHabitacion->getCantidadHabitaciones();
 </ul>
 
 <br>
-<form id="formEditar">
+<form id="formEditar" data-id-reserva="<?php echo $reserva['idReserva']?>">
 
     <img class="iconoFormEditar" src="http://localhost/Sistema%20Hotel/img/editar.png">
 
@@ -98,79 +98,5 @@ $totalHabitacionesHotel = $claseHabitacion->getCantidadHabitaciones();
 
 <script>
 
-    $(".editarHabitacion").on("click",function(){
-
-       $(".divOpcion").empty();
-       $(".divOpcion").load("formHabitaciones.php?idReserva=" +
-                "<?php echo $reserva['idReserva']?>");
-        $(".divEditar").css("marginTop","-40%")        
-
-
-    });
-
-
-    $("#formEditar").on("submit", function(event) {
-
-        event.preventDefault();
-
-
-        const datosReserva = {
-            "idReserva": "<?php echo $reserva['idReserva'] ?>",
-            "idCliente": $("#cliente").val().trim(),
-            "llegada": $("#fechaLlegada").val().trim(),
-            "salida": $("#fechaSalida").val().trim(),
-            "cantidadHabitaciones": $("#cantidadHabitaciones").val().trim()
-        }
-
-
-
-        fetch("http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionReserva.php", {
-
-                method: "PUT",
-                body: JSON.stringify({
-                    'reserva': datosReserva,
-
-                }),
-                headers: {
-
-                    "Content-Type": "application/json",
-                }
-
-            }).then(resp => resp.text())
-            .then(data_resp => {
-
-                if (data_resp.respuesta == true) {
-
-                    $("#modal").css("display", "none");
-                    $("#modal").css("cursor", "auto");
-
-                    $('.divOpcion').removeClass('divEditar');
-                    $('.divOpcion').empty();
-
-                    aviso(data_resp.respuesta, "Editar");
-                } else {
-
-
-                    const lbl = $("#alertaEditar").find("label");
-                    lbl.text(data_resp.respuesta);
-                    $("#alertaEditar").addClass("alertaEditarActive");
-
-                }
-
-            })
-    });
-
-
-
-    $("#btnCancelar").on("click", function() {
-
-
-        $("#modal").css("display", "none");
-        $("#modal").css("cursor", "auto");
-
-        $('.divOpcion').removeClass('divEditar');
-        $('.divOpcion').empty();
-        location.reload();
-
-    })
+    
 </script>

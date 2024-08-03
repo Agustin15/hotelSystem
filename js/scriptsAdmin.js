@@ -60,7 +60,7 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
 
 let iconAdmin = document.querySelector(".iconoAdmin");
 
-if (typeof iconAdmin !== "undefined") {
+if (iconAdmin) {
   let genreData = iconAdmin.dataset.genre;
 
   if ((genreData = "M")) {
@@ -231,7 +231,7 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
 let viewClientes = document.getElementById("viewClientes");
 let dataPointsClientes = [];
 
-if (document.body.contains(viewClientes)) {
+if (viewClientes) {
   var mesesClientes = JSON.parse(viewClientes.dataset.mesesClientes);
 
   let sumaClientes = mesesClientes.reduce((ac, element) => {
@@ -260,7 +260,7 @@ if (document.body.contains(viewClientes)) {
 dataPointsHabitacionesReservadas = [];
 let viewHabitaciones = document.getElementById("viewHabitaciones");
 
-if (document.body.contains(viewHabitaciones)) {
+if (viewHabitaciones) {
   let porcentajeEstandar = viewHabitaciones.dataset.porcentajeEstandar;
   let porcentajeDeluxe = viewHabitaciones.dataset.porcentajeDeluxe;
   let porcentajeSuite = viewHabitaciones.dataset.porcentajeSuite;
@@ -289,7 +289,7 @@ if (document.body.contains(viewHabitaciones)) {
 let viewGanancias = document.getElementById("viewGanancias");
 let dataPointsGanancias = [];
 
-if (document.body.contains(viewGanancias)) {
+if (viewGanancias) {
   let gananciasPorMes = JSON.parse(viewGanancias.dataset.gananciasMes);
 
   let totalGanancias = gananciasPorMes.reduce(

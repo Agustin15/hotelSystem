@@ -36,7 +36,7 @@ $reserva = $claseReserva->getReservaPoridReserva($idReserva);
 
 <img src="../../../img/cerrarVentana.png" id="cerrarHabitaciones">
 <br>
-<div id="formEditarHabitaciones">
+<div id="formEditarHabitaciones" data-id-reserva="<?php echo $idReserva ?>" data-llegada="<?php echo $reserva['fechaLlegada'] ?>" data-salida="<?php echo $reserva['fechaSalida'] ?>" data-id-cliente="<?php echo $reserva['idClienteReserva'] ?>" data-cantidad-habitaciones="<?php echo $reserva['cantidadHabitaciones'] ?>">
 
     <img class="iconoFormEditar" src="http://localhost/Sistema%20Hotel/img/editar.png">
 
@@ -123,83 +123,3 @@ $reserva = $claseReserva->getReservaPoridReserva($idReserva);
 <?php
 
 ?>
-
-
-<script>
-    $("#cerrarHabitaciones").on("click", function() {
-
-
-        $("#modal").css("display", "none");
-        $("#modal").css("cursor", "auto");
-
-        $('.divOpcion').removeClass('divEditar');
-        $('.divOpcion').empty();
-        location.reload();
-
-    });
-
-
-
-    $(".editarReserva").on("click", function() {
-
-        var reserva = {
-
-            "idReserva": "<?php echo $reserva['idReserva'] ?>",
-            "idCliente": "<?php echo $reserva['idClienteReserva'] ?>",
-            "llegada": "<?php echo $reserva['fechaLlegada'] ?>",
-            "salida": "<?php echo $reserva['fechaSalida'] ?>",
-            "cantidadHabitaciones": "<?php echo $reserva['cantidadHabitaciones'] ?>"
-
-        };
-        console.log(reserva);
-
-        $(".divOpcion").empty();
-        $(".divOpcion").load("formEditar.php?reserva=" +
-            encodeURIComponent(JSON.stringify(reserva)));
-        $(".divEditar").css("marginTop", "-47%");
-
-
-    });
-
-
-
-    $(".btnLibrar").on("click", function() {
-
-        var habitacion = $(this).parent();
-
-        var numeroHabitacion = habitacion.data("habitacion");
-        var idReserva = "<?php echo $idReserva ?>";
-
-
-        $("#modalHabitaciones").css("display", "inline");
-        $("#modal").css("cursor", "none");
-
-        $("#opcionHabitacion").addClass("panelHabitacionLibrar");
-        $("#opcionHabitacion").load("editarHabitaciones/librarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
-            numeroHabitacion);
-
-    });
-
-
-
-    $(".btnEliminar").on("click", function() {
-
-        var habitacion = $(this).parent();
-
-        var numeroHabitacion = habitacion.data("habitacion");
-        var idReserva = "<?php echo $idReserva ?>";
-
-
-        $("#modalHabitaciones").css("display", "inline");
-        $("#modal").css("cursor", "none");
-
-        $("#opcionHabitacion").addClass("panelHabitacionEliminar");
-        $("#opcionHabitacion").load("editarHabitaciones/eliminarHabitacion.php?idReserva=" + idReserva + "&habitacion=" +
-            numeroHabitacion);
-
-
-
-
-
-    });
-</script>

@@ -9,9 +9,6 @@ if (!empty($_GET['reserva'])) {
     $salida = new DateTime($datosCalendario['salida']);
 }
 ?>
-
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-
 <br>
 <img src="../../../img/reservaId.png">
 <br>
@@ -19,35 +16,4 @@ if (!empty($_GET['reserva'])) {
 <h1>Calendario</h1>
 <br>
 
-<div id="calendarInfoReserva"></div>
-
-<script>
-    $(document).ready(function() {
-
-
-        let calendar = document.getElementById('calendarInfoReserva');
-
-
-        let numReserva = <?php echo $datosCalendario['idReserva']; ?>;
-        let inicioReserva = "<?php echo $llegada->format("Y-m-d"); ?>";
-        let finReserva = "<?php echo $salida->format("Y-m-d"); ?>";
-
-        const event = {
-
-            title: 'Reserva ' + numReserva,
-            start: inicioReserva,
-            end: finReserva,
-            url: "lista.php?idReserva=" + numReserva,
-            backgroundColor: "#329DBF"
-        };
-
-        let events = [];
-
-        
-        events.push(event);
-
-
-        cargarCalendario(calendar, events);
-
-    });
-</script>
+<div id="calendarInfoReserva" data-id-reserva="<?php echo $datosCalendario['idReserva'] ?>" data-llegada="<?php echo $llegada->format("Y-m-d") ?>" data-salida="<?php echo $salida->format("Y-m-d") ?>"></div>

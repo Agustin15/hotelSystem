@@ -7,7 +7,7 @@ $reserva = json_decode($reserva, true);
 ?>
 
 
-<ul id="opcionInfoReserva">
+<ul id="opcionInfoReserva" data-id-reserva="<?php echo $reserva['idReserva'] ?>" data-llegada="<?php echo $reserva['llegada'] ?>" data-salida="<?php echo $reserva['salida'] ?>" data-id-cliente="<?php echo $reserva['idCliente'] ?>">
 
     <li class="liCalendario">
         <img src="../../../img/reservaId.png">
@@ -58,74 +58,3 @@ $reserva = json_decode($reserva, true);
 
 
 </div>
-
-
-<script>
-    var reserva = {
-
-        "idReserva": <?php echo $reserva['idReserva'] ?>,
-        "llegada": "<?php echo $reserva['llegada'] ?>",
-        "salida": "<?php echo $reserva['salida'] ?>",
-        "idCliente": <?php echo $reserva['idCliente'] ?>
-
-    }
-
-    $("#panelInfo").load("opcionesInfoReserva/calendario.php?reserva=" +
-        JSON.stringify(reserva));
-
-
-    $(".liCalendario").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/calendario.php?reserva=" +
-            JSON.stringify(reserva));
-
-    });
-
-    $(".liCliente").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/cliente.php?reserva=" +
-            JSON.stringify(reserva));
-
-    });
-
-
-    $(".liHabitaciones").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/habitaciones.php?reserva=" +
-            JSON.stringify(reserva));
-
-    });
-
-
-    $(".liHuespedes").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/huespedes.php?reserva=" +
-            JSON.stringify(reserva));
-
-    });
-
-
-
-    $(".liServicios").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/servicios.php?reserva=" +
-            JSON.stringify(reserva));
-          
-    });
-    $(".liFactura").on("click", function() {
-
-        $("#panelInfo").load("opcionesInfoReserva/factura.php?reserva=" +
-            JSON.stringify(reserva));
-
-    });
-
-    $("#cerrar").on("click", function() {
-
-        $(".divInfo").empty();
-        $(".divOpcion").removeClass("divInfo");
-        $("#modal").css("display", "none");
-        location.reload();
-
-
-    });
-</script>

@@ -3,6 +3,7 @@
 require("../../../model/claseReservas.php");
 require("../../../model/claseHabitaciones.php");
 require("../../../model/clasePago.php");
+include("funcionesOpcionReserva.php");
 
 $claseReservas = new reservas();
 $claseHabitaciones = new habitaciones();
@@ -53,10 +54,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
     break;
   case "PUT":
 
+    $peticion;
+
     $cantReservasNoColisionan = 0;
     $datosReserva = json_decode(file_get_contents("php://input"), true);
-
-    $peticion = null;
 
     $idReserva = $datosReserva['reserva']['idReserva'];
     $idClienteReserva = $datosReserva['reserva']['idCliente'];
@@ -94,36 +95,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
           $peticion = array("respuesta" => "Este cliente ya tiene una reserva por estas fechas");
         } else {
 
-
-          $llegada = new DateTime($llegada);
-          $salida = new DateTime($salida);
-          $noches = $llegada->diff($salida)->days;
-          $totalHabitaciones = 0;
-          $habitacionesReservadas = $claseHabitaciones->getHabitaciones($idReserva);
-
-          foreach ($habitacionesReservadas->fetch_all(MYSQLI_ASSOC) as $habitacionReservada) {
-
-            $habitacion = $claseHabitaciones->buscarCategoriaPorNumero($habitacionReservada['numHabitacionReservada']);
-            $habitacion = $habitacion->fetch_array(MYSQLI_ASSOC);
-            $precioHabitacion = $claseHabitaciones->getPrecioHabitacion($habitacion['tipoHabitacion']);
-            $precioEstadiaHabitacion = $precioHabitacion['precio'] * $noches;
-            $totalHabitaciones += $precioEstadiaHabitacion;
-          }
-
-          $resultado = $claseReservas->updateReserva();
-
-          if ($resultado) {
-
-            $claseHabitaciones->updateFechasHabitacionReservada(
-              $llegada->format("Y-m-d"),
-              $salida->format("Y-m-d"),
-              $idReserva
-            );
-            $resultado = $clasePago->updatePago($idReserva, $totalHabitaciones);
-            $peticion = array("respuesta" => $resultado);
-          }
+          $peticion = updateBooking($idReserva, $llegada, $salida, $claseHabitaciones, $claseReservas, $clasePago);
         }
       }
+    } else {
+
+      $peticion = updateBooking($idReserva, $llegada, $salida, $claseHabitaciones, $claseReservas, $clasePago);
     }
 
     $peticionJson = json_encode($peticion);

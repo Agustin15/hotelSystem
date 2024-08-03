@@ -21,39 +21,8 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 
-<script>
-    var numReserva = <?php echo $habitacionReservada['idReservaHabitacion'] ?>;
-    var inicioReserva = "<?php echo $llegada->format("Y-m-d"); ?>";
-    var finReserva = "<?php echo $salida->format("Y-m-d"); ?>";
+<div id="reserva" data-id-reserva='<?php echo $habitacionReservada['idReservaHabitacion'] ?>' data-llegada='<?php echo $llegada->format("Y-m-d") ?>' data-salida='<?php echo $salida->format("Y-m-d") ?>'>
 
-
-    $(document).ready(function() {
-
-        $("#divDetalles").css("width", "550px");
-        $("#divDetalles").css("marginLeft", "35%");
-        $(".logoDetalles").css("marginLeft", "240px");
-
-        var calendar = document.getElementById('calendar');
-
-        evento = {
-
-            title: 'Reserva ' + numReserva,
-            start: inicioReserva,
-            end: finReserva,
-            url: "lista.php?idReserva=" + numReserva,
-            backgroundColor: "#329DBF"
-        };
-
-        let events = [];
-
-        events.push(evento);
-
-        cargarCalendario(calendar, events);
-
-    });
-</script>
-
-<div id="reserva">
     <img src="../../../img/reservaId.png">
     <br>
     <h4>Reserva</h4>
@@ -61,7 +30,7 @@ $salida = new DateTime($habitacionReservada['fechaSalidaHabitacion']);
     <label><a id="linkReserva" href="lista.php?idReserva=<?php echo $habitacionReservada['idReservaHabitacion']; ?>">
             <?php echo $habitacionReservada['idReservaHabitacion']; ?></label></a>
     <br>
-   
+
 
     <br>
     <div id='calendar'></div>

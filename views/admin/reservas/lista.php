@@ -37,8 +37,12 @@ if (isset($_GET['idReserva'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
 
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsReservas/funcionesReservas.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsReservas.js" defer> </script>
+    
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js' defer></script>
+
+
 
 
     <title>Admin-Reservas</title>
@@ -162,7 +166,7 @@ if (isset($_GET['idReserva'])) {
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin">
+                <img class="iconoAdmin" >
                 <label><?php echo $usuario ?></label>
                 <img class="btnFlecha" src="../../../img/btnFlecha.png">
 
@@ -230,36 +234,6 @@ if (isset($_GET['idReserva'])) {
 
     <br>
 
-    <?php
-
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-
-
-    ?>
     <br>
 
 
@@ -304,31 +278,3 @@ if (isset($_GET['idReserva'])) {
 
 </html>
 
-<script>
-    window.onload = function() {
-
-        $("#tableReservas").load("cargarTabla.php", function() {
-
-            var idReserva = "<?php echo $idReserva ?>";
-            if (idReserva !== "") {
-
-                buscadorParametroReserva(idReserva, ".tdIdReserva", "id-reserva");
-            }
-
-        });
-
-
-    }
-
-
-    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-    liBorderBottom("listaReservas");
-
-
-    $("#buscador").on("keydown", function() {
-
-        buscadorReserva();
-
-    });
-</script>

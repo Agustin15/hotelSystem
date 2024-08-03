@@ -27,8 +27,9 @@ if (empty($usuario)) {
     <link rel="stylesheet" href="../../../estilos/styleReservas.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsReservas/funcionesReservas.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsReservas.js" defer> </script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js' defer></script>
 
     <title>Admin-Reservas</title>
 </head>
@@ -215,36 +216,6 @@ if (empty($usuario)) {
 
     <br>
 
-    <?php
-
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-
-
-    ?>
     <br>
 
 
@@ -291,72 +262,3 @@ if (empty($usuario)) {
 </body>
 
 </html>
-
-<script>
-    window.onload = function() {
-
-        $(".cargarHabitaciones").empty();
-
-        let pagina = localStorage.getItem("opcionHabitacion");
-
-        switch (pagina) {
-
-            case "Estandar":
-            default:
-
-
-                $(".cargarHabitaciones").load("editarHabitaciones/estandar.php");
-                break;
-
-
-            case "Deluxe":
-
-                $(".cargarHabitaciones").load("editarHabitaciones/deluxe.php");
-                break;
-
-            case "Suite":
-
-                $(".cargarHabitaciones").load("editarHabitaciones/suite.php");
-                break;
-
-
-
-        }
-
-
-        openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-
-    }
-
-
-    $(".liEstandar").on("click", function() {
-
-
-        localStorage.setItem("opcionHabitacion", "Estandar");
-        $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/estandar.php");
-
-    });
-
-    $(".liDeluxe").on("click", function() {
-
-        localStorage.setItem("opcionHabitacion", "Deluxe");
-        $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/deluxe.php");
-
-    });
-
-
-
-    $(".liSuite").on("click", function() {
-
-        localStorage.setItem("opcionHabitacion", "Suite");
-        $(".cargarHabitaciones").empty();
-        $(".cargarHabitaciones").load("editarHabitaciones/suite.php");
-
-    });
-
-
-    liBorderBottom("habitaciones");
-</script>

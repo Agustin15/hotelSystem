@@ -16,6 +16,31 @@ if (empty($usuario)) {
     $claseCliente = new cliente();
     $claseHabitaciones = new habitaciones();
     $claseReservas = new reservas();
+
+    $reservas = $claseReservas->getAllReservas();
+
+    $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+
+
+    $bookingsInfo = array_map(function ($reserva) use ($claseCliente) {
+
+        $cliente = $claseCliente->getClienteUpdate($reserva['idClienteReserva']);
+        $clienteCorreo =  $cliente['correo'];
+        $clienteNombre = $cliente['nombre'];
+        $clienteApellido = $cliente['apellido'];
+
+
+
+        return [
+            "idReserva" => $reserva['idReserva'],
+            "fechaLlegada" => $reserva['fechaLlegada'],
+            "fechaSalida" => $reserva['fechaSalida'],
+            "nombreCliente" => $clienteNombre,
+            "apellidoCliente" => $clienteApellido,
+            "correoCliente" => $clienteCorreo
+
+        ];
+    }, $reservas);
 }
 
 
@@ -33,8 +58,9 @@ if (empty($usuario)) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
 
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsReservas/funcionesReservas.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsReservas.js" defer> </script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js' defer></script>
 
 
     <title>Admin-Reservas</title>
@@ -218,49 +244,18 @@ if (empty($usuario)) {
     </div>
 
     <br>
-
-    <?php
-
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-
-
-    ?>
     <br>
 
     <?php
     ?>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js'></script>
+
 
     <div id="modal">
 
 
     </div>
 
-    <div id="containerCalendar">
+    <div id="containerCalendar" data-reserva='<?php echo json_encode($bookingsInfo)?>'>
 
         <div id="calendarAdd"></div>
 
@@ -278,112 +273,12 @@ if (empty($usuario)) {
 
     </div>
 
-    <div class="divOpcion">
+    <div class="divOpcion" >
 
     </div>
 
 
-    <?php
-
-    $reservas = $claseReservas->getAllReservas();
-
-    $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
-
-
-    $bookingsInfo = array_map(function ($reserva) use ($claseCliente) {
-
-        $cliente = $claseCliente->getClienteUpdate($reserva['idClienteReserva']);
-        $clienteCorreo =  $cliente['correo'];
-        $clienteNombre = $cliente['nombre'];
-        $clienteApellido = $cliente['apellido'];
-
-
-
-        return [
-            "idReserva" => $reserva['idReserva'],
-            "fechaLlegada" => $reserva['fechaLlegada'],
-            "fechaSalida" => $reserva['fechaSalida'],
-            "nombreCliente" => $clienteNombre,
-            "apellidoCliente" => $clienteApellido,
-            "correoCliente" => $clienteCorreo
-
-        ];
-    }, $reservas);
-
-    ?>
 
 </body>
 
 </html>
-
-<script>
-  
-  openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-    liBorderBottom("agregarReserva");
-
-    const changeEventColor = (finReserva) => {
-
-
-        let hoy = new Date();
-        let salida = new Date(finReserva);
-
-        if (salida > hoy) {
-
-            //azul
-            return "#329DBF";
-        } else {
-
-            //rojo
-            return "#F04141";
-        }
-
-
-    }
-
-
-
-    window.onload = function() {
-
-        let reservas = [];
-        let events = [];
-        let reserva, numReserva, llegada, salida, clienteNombre, clienteCorreo, clienteApellido;
-
-        reservas = <?php echo json_encode($bookingsInfo) ?>;
-
-        events = reservas.map((reserva) => {
-
-
-            numReserva = reserva.idReserva;
-            llegada = reserva.fechaLlegada;
-            salida = reserva.fechaSalida;
-            clienteNombre = reserva.nombreCliente;
-            clienteCorreo = reserva.correoCliente;
-            clienteApellido = reserva.apellidoCliente;
-
-            reserva = {
-                id: numReserva,
-                title: `Reserva: ${numReserva}`,
-                start: llegada,
-                end: salida,
-                extendedProps: {
-                    clienteCorreo: clienteCorreo,
-                    clienteNombre: clienteNombre,
-                    clienteApellido: clienteApellido
-                },
-                backgroundColor: changeEventColor(salida),
-                borderColor: changeEventColor(salida),
-
-            }
-
-
-
-            return reserva;
-        });
-
-        let calendarAdd = document.getElementById("calendarAdd");
-
-        cargarCalendarioAddEvent(calendarAdd, events);
-
-    }
-</script>

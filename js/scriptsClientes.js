@@ -1,18 +1,16 @@
-
-
-if(location.href=="http://localhost/sistema%20Hotel/views/admin/clientes/lista.php"){
-
+switch (location.href) {
+  case "http://localhost/sistema%20Hotel/views/admin/clientes/lista.php":
     liBorderBottom("listaClientes");
+    break;
 
-}else{
-
+  case "http://localhost/sistema%20Hotel/views/admin/clientes/agregar.php":
     liBorderBottom("agregar");
-
+    break;
+  case "http://localhost/sistema%20Hotel/views/admin/clientes/grafica.php":
+    liBorderBottom("grafica");
+    break;
 }
-openSubMenu(
-  "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
-  "http://localhost/sistema%20Hotel/img/btnFlecha.png"
-);
+
 
 function buscadorParametroCliente(valueFind, tdClass, dataSet) {
   var tds = $(tdClass);
@@ -239,8 +237,7 @@ function chooseOption() {
 }
 
 function submitUpdate() {
-  let formEditar = null;
-  formEditar = document.getElementById("formEditar");
+  let formEditar = document.getElementById("formEditar");
 
   if (formEditar) {
     formEditar.addEventListener("submit", function (event) {
@@ -291,8 +288,7 @@ function submitUpdate() {
 //opcion editar cliente
 
 function cancelUpdate() {
-  let btnCancelUpdate = null;
-  btnCancelUpdate = document.getElementById("btnCancelar");
+  let btnCancelUpdate = document.getElementById("btnCancelar");
 
   if (btnCancelUpdate) {
     $("#btnCancelar").on("click", function () {
@@ -308,9 +304,7 @@ function cancelUpdate() {
 //opcion eliminar cliente
 
 function submitDelete() {
-  let btnSiEliminar = null;
-
-  btnSiEliminar = document.querySelector(".btnSi");
+  let btnSiEliminar = document.querySelector(".btnSi");
 
   if (btnSiEliminar) {
     $(".btnSi").on("click", function () {
@@ -354,9 +348,7 @@ function eliminar(datosCliente) {
 }
 
 function cancelEliminar() {
-  let btnNoEliminar = null;
-
-  btnNoEliminar = document.querySelector(".btnNo");
+  let btnNoEliminar = document.querySelector(".btnNo");
 
   if (btnNoEliminar) {
     $(".btnNo").on("click", function () {
@@ -373,8 +365,7 @@ function cancelEliminar() {
 //opcion informacion cliente
 
 function closeInfoCliente() {
-  let cerrar = null;
-  cerrar = document.querySelector(".cerrar");
+  let cerrar = document.querySelector(".cerrar");
 
   if (cerrar) {
     $(".cerrar").on("click", function () {
@@ -389,8 +380,7 @@ function closeInfoCliente() {
 }
 
 function searchBooking() {
-  let buscarEstadia = null;
-  buscarEstadia = document.getElementById("buscarEstadia");
+  let buscarEstadia = document.getElementById("buscarEstadia");
 
   if (buscadorEstadia) {
     $("#buscadorEstadia").on("keydown", function () {
@@ -403,8 +393,7 @@ function infoClienteOptions() {
   closeInfoCliente();
   searchBooking();
 
-  let tableEstadias = null;
-  tableEstadias = document.getElementById("tableEstadias");
+  let tableEstadias = document.getElementById("tableEstadias");
   if (tableEstadias) {
     const divButtons = $("#tableEstadias").find("div");
 
@@ -474,8 +463,7 @@ function infoClienteOptions() {
   }
 }
 function closeNoches() {
-  let cerrarNoches = null;
-  cerrarNoches = document.querySelector(".cerrarNoches");
+  let cerrarNoches = document.querySelector(".cerrarNoches");
   if (cerrarNoches) {
     $(".cerrarNoches").on("click", function () {
       $("#modalInfo").css("display", "none");
@@ -487,8 +475,7 @@ function closeNoches() {
 }
 
 function closeHuespedes() {
-  let cerrarHuespedes = null;
-  cerrarHuespedes = document.querySelector(".cerrarHuespedes");
+  let cerrarHuespedes = document.querySelector(".cerrarHuespedes");
   if (cerrarHuespedes) {
     $(".cerrarHuespedes").on("click", function () {
       $("#modalInfo").css("display", "none");
@@ -499,10 +486,19 @@ function closeHuespedes() {
   }
 }
 
+//opcion agregar
+function lblInputsLoginActive(label, clase, claseRemove) {
+  label.removeClass(claseRemove);
+  label.addClass(clase);
+}
 
+function lblInputsLoginDesactive(label, input, claseAdd) {
+  if (input.val() == "") {
+    label.addClass(claseAdd);
+  }
+}
 
-let formAgregar = null;
-formAgregar = document.getElementById(formAgregar);
+let formAgregar = document.getElementById("formAgregar");
 
 if (formAgregar) {
   var inputs = $("#formAgregar").find("input");
@@ -521,11 +517,33 @@ if (formAgregar) {
       }
     });
   });
+
+  submitAdd();
+}
+
+let alertaAgregar = document.getElementById("alertaAgregar");
+
+if (alertaAgregar) {
+  function alertaSetsError(h2, msj, img, claseAviso, claseForm) {
+    img.attr("src", "../../../img/cruzAgregar.png");
+    h2.text(msj);
+
+    $("#alertaAgregar").removeClass("alertaAgregarDesactive");
+    $("#alertaAgregar").addClass(claseAviso);
+    $("#formAgregar").removeClass("formAgregarDesactive");
+    $("#formAgregar").addClass(claseForm);
+  }
+
+  function borrarAlerta() {
+    setTimeout(function () {
+      $("#alertaAgregar").addClass("alertaAgregarDesactive");
+      $("#formAgregar").addClass("formAgregarDesactive");
+    }, 2020);
+  }
 }
 
 function submitAdd() {
-    if(formAgregar){
-  $("#formAgregar").on("submit", function (event) {
+  formAgregar.addEventListener("submit", function (event) {
     event.preventDefault();
 
     var img = $("#alertaAgregar").find("img");
@@ -572,14 +590,25 @@ function submitAdd() {
           telefono: telefono,
         };
 
-        add(cliente);
+        add(cliente, h2, img);
       }
     }
   });
 }
-}
 
-function add() {
+function cleanInputs() {
+  let inputs = formAgregar.querySelectorAll("input");
+
+  inputs.forEach(
+    (input) =>
+      function () {
+        if (input.type !== "submit") {
+          input.value = "";
+        }
+      }
+  );
+}
+function add(cliente, h2, img) {
   fetch(
     "http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
     {
@@ -600,14 +629,12 @@ function add() {
 
         $("#alertaAgregar").removeClass("alertaAgregarDesactive");
         $("#alertaAgregar").addClass("alertaAgregarActive");
-        $(this).removeClass("formAgregarDesactive");
-        $(this).addClass("formAgregarActive");
+        $("#formAgregar").removeClass("formAgregarDesactive");
+        $("#formAgregar").addClass("formAgregarActive");
 
-        correo = "";
-        telefono = "";
-        nombre = "";
-        apellido = "";
         borrarAlerta();
+
+        cleanInputs();
       } else {
         var msj = data_resp.respuesta;
 
@@ -624,27 +651,36 @@ function add() {
     .catch((error) => console.error("Error:", error));
 }
 
+//grafica clientes
 
-let alertaAgregar=null;
-alertaAgregar = document.getElementById("alertaAgregar");
+let viewGrafica = document.getElementById("viewGrafica");
 
-if(alertaAgregar){
+if (viewGrafica) {
+  var mesesClientes = JSON.parse(viewGrafica.dataset.mesesClientes);
 
-function alertaSetsError(h2, msj, img, claseAviso, claseForm) {
-  img.attr("src", "../../../img/cruzAgregar.png");
-  h2.text(msj);
+  dataPointsClientes = [];
 
-  $("#alertaAgregar").removeClass("alertaAgregarDesactive");
-  $("#alertaAgregar").addClass(claseAviso);
-  $("#formAgregar").removeClass("formAgregarDesactive");
-  $("#formAgregar").addClass(claseForm);
-}
+  dataPointsClientes = mesesClientes.map((mesCliente) => {
+    var dataPointCliente = {
+      label: getMes(mesCliente.mes),
+      y: mesCliente.cantClientes,
+    };
 
-function borrarAlerta() {
-  setTimeout(function () {
-    $("#alertaAgregar").addClass("alertaAgregarDesactive");
-    $("#formAgregar").addClass("formAgregarDesactive");
-  }, 2020);
-}
+    return dataPointCliente;
+  });
 
+  let sumClientes = dataPointsClientes.reduce((ac, element) => {
+    return ac + element.y + element.y;
+  }, 0);
+
+  if (sumClientes > 0) {
+    graficar(
+      dataPointsClientes,
+      "graficaClientes",
+      "Clientes por mes",
+      "light2"
+    );
+  } else {
+    $(".sinDatos").css("display", "block");
+  }
 }
