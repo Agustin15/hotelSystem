@@ -14,7 +14,15 @@ if (empty($usuario)) {
     $claseCliente = new cliente();
 }
 
+$correo;
 
+if(isset($_GET['cliente'])){
+
+$correo=$_GET['cliente'];
+}else{
+
+    $correo="";
+}
 
 ?>
 
@@ -135,7 +143,7 @@ if (empty($usuario)) {
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../habitaciones/habitaciones.php">Lista</a>
+                            <a href="../habitaciones/habitacionesEstandar.php">Lista</a>
 
                         </li>
 
@@ -225,7 +233,7 @@ if (empty($usuario)) {
         </div>
 
         <div id="containerTable">
-            <table id="tableClientes">
+            <table id="tableClientes" data-id-cliente-search="<?php echo $correo ?>">
 
 
             </table>

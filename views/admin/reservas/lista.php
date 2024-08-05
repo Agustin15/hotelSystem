@@ -39,8 +39,8 @@ if (isset($_GET['idReserva'])) {
 
     <script src="../../../js/scriptsAdmin.js" defer> </script>
     <script src="../../../js/scriptsReservas.js" defer> </script>
-    
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js' defer></script>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js' defer></script>
 
 
 
@@ -149,7 +149,7 @@ if (isset($_GET['idReserva'])) {
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../habitaciones/habitaciones.php">Lista</a>
+                            <a href="../habitaciones/habitacionesEstandar.php">Lista</a>
 
                         </li>
 
@@ -166,7 +166,7 @@ if (isset($_GET['idReserva'])) {
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin" >
+                <img class="iconoAdmin">
                 <label><?php echo $usuario ?></label>
                 <img class="btnFlecha" src="../../../img/btnFlecha.png">
 
@@ -248,7 +248,7 @@ if (isset($_GET['idReserva'])) {
         </div>
 
         <div id="containerTable">
-            <table id="tableReservas">
+            <table id="tableReservas" data-id-reserva-search="<?php echo $idReserva?>">
 
 
 
@@ -277,4 +277,3 @@ if (isset($_GET['idReserva'])) {
 </body>
 
 </html>
-

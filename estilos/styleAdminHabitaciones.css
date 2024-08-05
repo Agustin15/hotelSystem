@@ -404,12 +404,11 @@ body {
   border-radius: 5px;
 }
 
-#habitaciones ul li:hover {
-  border-bottom: 3px solid skyblue;
-  background-color: rgb(247, 247, 247);
-}
 
-#habitaciones .cargarHabitaciones {
+
+#habitaciones .cargarHabitacionesEstandar,
+#habitaciones .cargarHabitacionesDeluxe,
+#habitaciones .cargarHabitacionesSuite {
   margin: auto;
   margin-top: -30px;
   width: 99%;
@@ -419,9 +418,9 @@ body {
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-#habitaciones .cargarHabitaciones #estandar,
-#habitaciones .cargarHabitaciones #deluxe,
-#habitaciones .cargarHabitaciones #suite {
+#habitaciones .cargarHabitacionesEstandar #estandar,
+#habitaciones .cargarHabitacionesDeluxe #deluxe,
+#habitaciones .cargarHabitacionesSuite #suite {
   margin: auto;
   margin-top: 20px;
   width: 99%;
@@ -429,26 +428,26 @@ body {
   padding-bottom: 10px;
 }
 
-#habitaciones .cargarHabitaciones #estandar h1,
-#habitaciones .cargarHabitaciones #deluxe h1,
-#habitaciones .cargarHabitaciones #suite h1 {
+#habitaciones .cargarHabitacionesEstandar #estandar h1,
+#habitaciones .cargarHabitacionesDeluxe #deluxe h1,
+#habitaciones .cargarHabitacionesSuite #suite h1 {
   font-size: 16px;
   margin: auto;
   margin-top: 2px;
   text-align: center;
 }
 
-#habitaciones .cargarHabitaciones #estandar label,
-#habitaciones .cargarHabitaciones #deluxe label,
-#habitaciones .cargarHabitaciones #suite label {
+#habitaciones .cargarHabitacionesEstandar #estandar label,
+#habitaciones .cargarHabitacionesDeluxe #deluxe label,
+#habitaciones .cargarHabitacionesSuite #suite label {
   font-size: 15px;
   opacity: 90%;
   padding-left: 30px;
 }
 
-#habitaciones .cargarHabitaciones #estandar #numHabitacion,
-#habitaciones .cargarHabitaciones #deluxe #numHabitacion,
-#habitaciones .cargarHabitaciones #suite #numHabitacion {
+#habitaciones .cargarHabitacionesEstandar #estandar #numHabitacion,
+#habitaciones .cargarHabitacionesDeluxe #deluxe #numHabitacion,
+#habitaciones .cargarHabitacionesSuite #suite #numHabitacion {
   width: 62px;
   border-radius: 3px;
   border: 1px solid rgb(182, 182, 182);
@@ -458,18 +457,18 @@ body {
   outline: none;
 }
 
-#habitaciones .cargarHabitaciones #estandar #iconSearch,
-#habitaciones .cargarHabitaciones #deluxe #iconSearch,
-#habitaciones .cargarHabitaciones #suite #iconSearch {
+#habitaciones .cargarHabitacionesEstandar #estandar #iconSearch,
+#habitaciones .cargarHabitacionesDeluxe #deluxe #iconSearch,
+#habitaciones .cargarHabitacionesSuite #suite #iconSearch {
   width: 15px;
   margin-left: 19.8%;
   margin-top: -22px;
   display: flex;
 }
 
-#habitaciones .cargarHabitaciones #estandar input[type="submit"],
-#habitaciones .cargarHabitaciones #deluxe input[type="submit"],
-#habitaciones .cargarHabitaciones #suite input[type="submit"] {
+#habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"],
+#habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"],
+#habitaciones .cargarHabitacionesSuite #suite input[type="submit"] {
   background-color: #1e95aa;
   color: white;
   border-radius: 3px;
@@ -480,13 +479,15 @@ body {
   margin-top: -7px;
 }
 
-#habitaciones .cargarHabitaciones #estandar input[type="submit"]:hover,
-#habitaciones .cargarHabitaciones #deluxe input[type="submit"]:hover,
-#habitaciones .cargarHabitaciones #suite input[type="submit"]:hover {
+#habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"]:hover,
+#habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"]:hover,
+#habitaciones .cargarHabitacionesSuite #suite input[type="submit"]:hover {
   background-color: #1a8497;
 }
 
-#habitaciones #estandar #alert {
+#habitaciones #estandar #alert ,
+#habitaciones #deluxe #alert,
+#habitaciones #suite #alert {
   width: 380px;
   height: 220px;
   border-radius: 5px;
@@ -499,7 +500,9 @@ body {
   display: none;
 }
 
-#habitaciones #estandar #alert #bodyAlert {
+#habitaciones #estandar #alert #bodyAlert,
+#habitaciones #deluxe #alert #bodyAlert,
+#habitaciones #suite #alert #bodyAlert {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -507,11 +510,15 @@ body {
   padding-top: 1rem;
   font-weight: bold;
 }
-#habitaciones #estandar #alert #bodyAlert img {
+#habitaciones #estandar #alert #bodyAlert img,
+#habitaciones #deluxe #alert #bodyAlert img,
+#habitaciones #suite #alert #bodyAlert img {
   width: 45px;
 }
 
-#habitaciones #estandar #alert #containButton button {
+#habitaciones #estandar #alert #containButton button,
+#habitaciones #deluxe #alert #containButton button,
+#habitaciones #suite #alert #containButton button  {
   width: 100px;
   height: 25px;
   border-radius: 5px;
@@ -552,7 +559,9 @@ body {
   opacity: 70%;
 }
 
-#habitacionesEstandar .iconoPlus:hover {
+#habitacionesEstandar .iconoPlus:hover,
+#habitacionesDeluxe .iconoPlus:hover,
+#habitacionesSuite .iconoPlus:hover {
   opacity: 100%;
 }
 
@@ -566,20 +575,27 @@ body {
   color: black;
 }
 
-#habitacionesEstandar li .containIconRoomAndNumb {
+#habitacionesEstandar li .containIconRoomAndNumb,
+#habitacionesDeluxe li .containIconRoomAndNumb,
+#habitacionesSuite li .containIconRoomAndNumb {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-right: 2.7rem;
 }
 
-#habitacionesEstandar li .dataBookingRoom {
+#habitacionesEstandar li .dataBookingRoom,
+#habitacionesDeluxe li .dataBookingRoom ,
+#habitacionesSuite li .dataBookingRoom {
   display: flex;
   flex-direction: row;
   gap: 2rem;
 }
 
-#habitacionesEstandar li .containBooking {
+#habitacionesEstandar li .containBooking ,
+#habitacionesDeluxe li .containBooking, 
+#habitacionesSuite li .containBooking
+{
   display: flex;
   flex-direction: column;
   padding-top: 0.4rem;
@@ -616,7 +632,9 @@ body {
   color: rgb(228, 35, 35);
 }
 
-#habitacionesEstandar li .infoHuesped {
+#habitacionesEstandar li .infoHuesped,
+#habitacionesDeluxe li .infoHuesped,
+#habitacionesSuite li .infoHuesped   {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -625,7 +643,9 @@ body {
   margin-left: -2.1rem;
 }
 
-#habitacionesEstandar li .containIconAndLbl {
+#habitacionesEstandar li .containIconAndLbl,
+#habitacionesDeluxe li .containIconAndLbl,
+#habitacionesSuite li .containIconAndLbl {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -633,43 +653,61 @@ body {
   padding-right: 2rem;
 }
 
-#habitacionesEstandar li .infoHuesped label {
+#habitacionesEstandar li .infoHuesped label,
+#habitacionesDeluxe li .infoHuesped label ,
+#habitacionesSuite li .infoHuesped label {
   font-weight: 100;
 }
 
-#habitacionesEstandar li .infoHuesped .lblHuesped {
+#habitacionesEstandar li .infoHuesped .lblHuesped,
+#habitacionesDeluxe li .infoHuesped .lblHuesped,
+#habitacionesSuite li .infoHuesped .lblHuesped   {
   margin-left: -1.2rem;
   margin-top: -0.4rem;
 }
 
-#habitacionesEstandar li .infoHuesped .lblHuesped label {
+#habitacionesEstandar li .infoHuesped .lblHuesped label,
+#habitacionesDeluxe li .infoHuesped .lblHuesped label,
+#habitacionesSuite li .infoHuesped .lblHuesped label {
   color: #242424;
   font-weight: bold;
   font-size: 13px;
 }
 
-#habitacionesEstandar li .infoHuesped img {
+#habitacionesEstandar li .infoHuesped img,
+#habitacionesDeluxe li .infoHuesped img,
+#habitacionesSuite li .infoHuesped img {
   width: 24px;
 }
-#habitacionesEstandar li .lblCliente {
+#habitacionesEstandar li .lblCliente,
+#habitacionesDeluxe li .lblCliente ,
+#habitacionesSuite li .lblCliente  {
   margin-right: 3rem;
 }
 
-#habitacionesEstandar li .lblReserva label {
+#habitacionesEstandar li .lblReserva label,
+#habitacionesDeluxe li .lblReserva label,
+#habitacionesSuite li .lblReserva label {
   font-weight: 100;
 }
 
-#habitacionesEstandar li a {
+#habitacionesEstandar li a,
+#habitacionesDeluxe li a ,
+#habitacionesSuite li a {
   color: rgb(170, 170, 170);
   text-decoration: none;
 }
 
-#habitacionesEstandar li a:hover {
+#habitacionesEstandar li a:hover,
+#habitacionesDeluxe li a:hover,
+#habitacionesSuite li a:hover {
   color: rgb(60, 137, 253);
   text-decoration: underline;
 }
 
-#habitacionesEstandar .containSinReserva {
+#habitacionesEstandar .containSinReserva,
+#habitacionesDeluxe .containSinReserva,
+#habitacionesSuite .containSinReserva  {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -677,13 +715,17 @@ body {
 
 }
 
-#habitacionesEstandar .containSinReserva .lblLibre {
+#habitacionesEstandar .containSinReserva .lblLibre,
+#habitacionesDeluxe .containSinReserva .lblLibre ,
+#habitacionesSuite .containSinReserva .lblLibre  {
 
   padding-top: 0.5rem;
   padding-left: 1.6rem;
 }
 
-#habitacionesEstandar .sinReservaEnCurso {
+#habitacionesEstandar .sinReservaEnCurso,
+#habitacionesDeluxe .sinReservaEnCurso ,
+#habitacionesSuite .sinReservaEnCurso {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -694,24 +736,30 @@ body {
   gap: 0.5rem;
 }
 
-#habitacionesEstandar .sinReservaEnCurso .message {
+#habitacionesEstandar .sinReservaEnCurso .message,
+#habitacionesDeluxe .sinReservaEnCurso .message ,
+#habitacionesSuite .sinReservaEnCurso .message {
   width: 140px;
 }
 
-#habitacionesEstandar .sinReservaEnCurso h4 {
+#habitacionesEstandar .sinReservaEnCurso h4,
+#habitacionesDeluxe .sinReservaEnCurso h4,
+#habitacionesSuite .sinReservaEnCurso h4 {
   color: rgb(163, 163, 163);
   font-size: 14px;
 }
 
-#habitacionesEstandar .sinReservaEnCurso img {
+#habitacionesEstandar .sinReservaEnCurso img ,
+#habitacionesDeluxe .sinReservaEnCurso img,
+#habitacionesSuite .sinReservaEnCurso img {
   width: 35px;
   padding-right:0.6rem ;
 }
 
-#habitaciones .cargarHabitaciones #estandar #habitacionesEstandar li:hover,
-#habitaciones .cargarHabitaciones #deluxe #habitacionesDeluxe li:hover,
-#habitaciones .cargarHabitaciones #suite #habitacionesSuite li:hover {
-  border-bottom: none;
+#habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar li:hover,
+#habitaciones .cargarHabitacionesDeluxe #deluxe #habitacionesDeluxe li:hover,
+#habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite li:hover {
+  border-bottom: 3px solid rgb(116, 192, 255);
 }
 
 #habitaciones #sinDatosHabitaciones {
@@ -734,7 +782,9 @@ body {
   font-size: 20px;
 }
 
-#habitacionesEstandar .menuHabitacion {
+#habitacionesEstandar .menuHabitacion,
+#habitacionesDeluxe .menuHabitacion,
+#habitacionesSuite .menuHabitacion {
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -746,7 +796,9 @@ body {
   z-index: 2;
 }
 
-#habitacionesEstandar .menuHabitacion li {
+#habitacionesEstandar .menuHabitacion li,
+#habitacionesDeluxe .menuHabitacion li,
+#habitacionesSuite .menuHabitacion li {
   border-bottom: 1px solid rgb(94, 179, 236);
   background-color: #0e73ad;
   width: 100%;
@@ -761,34 +813,49 @@ body {
   gap: 0.5rem;
 }
 
-#habitacionesEstandar .menuHabitacion li:hover{
+#habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar .menuHabitacion li:hover,
+#habitaciones .cargarHabitacionesDeluxe #deluxe #habitacionesDeluxe .menuHabitacion li:hover,
+#habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite .menuHabitacion li:hover{
 
 background-color: #1a6a99;
+border-bottom: none;
 }
 
-#habitacionesEstandar .menuHabitacion li a {
+#habitacionesEstandar .menuHabitacion li a,
+#habitacionesDeluxe .menuHabitacion li a ,
+#habitacionesSuite .menuHabitacion li a {
   color: white;
 }
 
-#habitacionesEstandar .menuHabitacion li img {
+#habitacionesEstandar .menuHabitacion li img,
+#habitacionesDeluxe .menuHabitacion li img ,
+#habitacionesSuite .menuHabitacion li img {
   width: 20px;
 }
 
-#habitacionesEstandar .liHistorial a {
+#habitacionesEstandar .liHistorial a,
+#habitacionesDeluxe .liHistorial a ,
+#habitacionesSuite .liHistorial a {
   color: white;
   text-decoration: none;
 }
 
-#habitacionesEstandar .liProximamente a {
+#habitacionesEstandar .liProximamente a,
+#habitacionesDeluxe .liProximamente a ,
+#habitacionesSuite .liProximamente a {
   text-decoration: none;
   color: white;
 }
 
-#habitacionesEstandar .liServicesRoom a {
+#habitacionesEstandar .liServicesRoom a ,
+#habitacionesDeluxe .liServicesRoom a ,
+#habitacionesSuite .liServicesRoom a {
   color: white;
   text-decoration: none;
 }
-#habitacionesEstandar .menuHabitacion li .iconHistorial {
+#habitacionesEstandar .menuHabitacion li .iconHistorial,
+#habitacionesDeluxe .menuHabitacion li .iconHistorial,
+#habitacionesSuite .menuHabitacion li .iconHistorial {
   margin-top: 0.5rem;
 }
 

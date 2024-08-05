@@ -65,7 +65,7 @@
 
                     <?php
 
-                    } else {
+                    } else if(strtotime($habitacionMasCercana['fechaSalidaHabitacion'])<=$hoy) {
                     ?>
                         <label class="lblLibre">Libre</label>
                         <button class="btnOcupar">Ocupar</button>

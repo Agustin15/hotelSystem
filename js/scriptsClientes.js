@@ -1,17 +1,3 @@
-switch (location.href) {
-  case "http://localhost/sistema%20Hotel/views/admin/clientes/lista.php":
-    liBorderBottom("listaClientes");
-    break;
-
-  case "http://localhost/sistema%20Hotel/views/admin/clientes/agregar.php":
-    liBorderBottom("agregar");
-    break;
-  case "http://localhost/sistema%20Hotel/views/admin/clientes/grafica.php":
-    liBorderBottom("grafica");
-    break;
-}
-
-
 function buscadorParametroCliente(valueFind, tdClass, dataSet) {
   var tds = $(tdClass);
 
@@ -29,13 +15,15 @@ function buscadorParametroCliente(valueFind, tdClass, dataSet) {
 }
 
 $("#tableClientes").load("cargarTabla.php", function () {
-  //   fetch("http://localhost/sistema%20Hotel/views/admin/clientes/lista.php", {});
+  var cliente = $(this).data("idClienteSearch");
 
-  //   //   if (cliente !== "") {
-  //   //     buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
-  //   //   }
+  if (cliente !== "") {
+    buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
+  }
 
   chooseOption();
+
+  liBorderBottom("listaClientes");
 });
 
 $("#buscador").on("keydown", function () {
@@ -501,6 +489,7 @@ function lblInputsLoginDesactive(label, input, claseAdd) {
 let formAgregar = document.getElementById("formAgregar");
 
 if (formAgregar) {
+  liBorderBottom("agregar");
   var inputs = $("#formAgregar").find("input");
 
   inputs.each(function () {
@@ -656,6 +645,8 @@ function add(cliente, h2, img) {
 let viewGrafica = document.getElementById("viewGrafica");
 
 if (viewGrafica) {
+  liBorderBottom("grafica");
+
   var mesesClientes = JSON.parse(viewGrafica.dataset.mesesClientes);
 
   dataPointsClientes = [];

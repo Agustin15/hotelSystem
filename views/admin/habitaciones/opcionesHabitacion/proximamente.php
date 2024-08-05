@@ -47,58 +47,10 @@ if (isset($_GET['numHabitacion'])) {
 
 
     ?>
-        <div id="calendarProximamente"></div>
+        <div data-proximas-reservas='<?php echo json_encode($reservasHabitacion)?>' id="calendarProximamente"></div>
 
 <?php
 
     }
 }
 ?>
-
-<script>
-    $("#cerrarVentana").on("click", function() {
-
-        $("#modal").css("display", "none");
-        $("#modal").css("cursor", "auto");
-
-        $("#divOpcion").empty();
-        $("#divOpcion").removeClass("panelProximamente");
-
-
-    });
-
-
-    $(document).ready(function(){ 
-
-        let reservasHabitacion = [];
-        reservasHabitacion = <?php echo  json_encode($reservasHabitacion) ?>;
-        let events = [];
-
-
-        events=reservasHabitacion.map((reserva)=>{
-            
-            let llegada = reserva.fechaLlegadaHabitacion;
-            let salida = reserva.fechaSalidaHabitacion;
-            let idReserva = reserva.idReservaHabitacion;
-
-            reserva = {
-
-                idReserva: idReserva,
-                title: `Reserva: ${idReserva}`,
-                start: llegada,
-                end: salida,
-                url: "../reservas/lista.php?idReserva=" + idReserva
-            }
-
-            return reserva;
-
-        });
-      
-
-        let calendar = document.getElementById("calendarProximamente");
-        console.log(events);
-        cargarCalendario(calendar, events);
-
-
-    });
-</script>

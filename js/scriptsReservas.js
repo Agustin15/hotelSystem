@@ -1,18 +1,3 @@
-switch (location.href) {
-  case "http://localhost/sistema%20Hotel/views/admin/reservas/lista.php":
-    liBorderBottom("listaReservas");
-    break;
-
-  case "http://localhost/sistema%20Hotel/views/admin/reservas/agregar.php":
-    liBorderBottom("agregarReserva");
-
-    break;
-
-  case "http://localhost/sistema%20Hotel/views/admin/reservas/habitaciones.php":
-    liBorderBottom("habitaciones");
-    break;
-}
-
 function buscadorReserva() {
   const texto = $("#buscador").val();
 
@@ -241,11 +226,14 @@ function recargar() {
 let tableReservas = document.getElementById("tableReservas");
 
 if (tableReservas) {
+  liBorderBottom("listaReservas");
+
   $("#tableReservas").load("cargarTabla.php", function () {
-    // var idReserva = "<?php echo $idReserva ?>";
-    // if (idReserva !== "") {
-    //   buscadorParametroReserva(idReserva, ".tdIdReserva", "id-reserva");
-    // }
+    var idReserva = $(this).data("idReservaSearch");
+
+    if (idReserva !== "") {
+      buscadorParametroReserva(idReserva, ".tdIdReserva", "id-reserva");
+    }
 
     chooseOption();
   });
@@ -785,6 +773,8 @@ let containerCalendar = document.getElementById("containerCalendar");
 
 if (containerCalendar) {
   loadDataBookingsCalendar();
+
+  liBorderBottom("agregarReserva");
 }
 
 function loadDataBookingsCalendar() {
@@ -1020,6 +1010,7 @@ let cargarHabitaciones = document.querySelector(".cargarHabitaciones");
 
 if (cargarHabitaciones) {
   loadRooms();
+  liBorderBottom("habitaciones");
 }
 
 function loadRooms() {
@@ -1034,7 +1025,8 @@ function loadRooms() {
         $(".cargarHabitaciones").load(
           "editarHabitaciones/estandar.php",
           function () {
-            optionsRoom("Estandar");
+            var listHabitaciones = $("#habitacionesEstandar");
+            optionsRoom("Estandar", listHabitaciones);
           }
         );
         break;
@@ -1043,7 +1035,9 @@ function loadRooms() {
         $(".cargarHabitaciones").load(
           "editarHabitaciones/deluxe.php",
           function () {
-            optionsRoom("Deluxe");
+            var listHabitaciones = $("#habitacionesDeluxe");
+            optionsRoom("Deluxe",listHabitaciones);
+           
           }
         );
         break;
@@ -1052,7 +1046,8 @@ function loadRooms() {
         $(".cargarHabitaciones").load(
           "editarHabitaciones/suite.php",
           function () {
-            optionsRoom("Suite");
+            var listHabitaciones = $("#habitacionesSuite");
+            optionsRoom("Suite", listHabitaciones);
           }
         );
         break;
@@ -1065,7 +1060,8 @@ function loadRooms() {
     $(".cargarHabitaciones").load(
       "editarHabitaciones/estandar.php",
       function () {
-        optionsRoom("Estandar");
+        var listHabitaciones = $("#habitacionesEstandar");
+        optionsRoom("Estandar", listHabitaciones);
       }
     );
   });
@@ -1074,7 +1070,8 @@ function loadRooms() {
     localStorage.setItem("opcionHabitacion", "Deluxe");
     $(".cargarHabitaciones").empty();
     $(".cargarHabitaciones").load("editarHabitaciones/deluxe.php", function () {
-      optionsRoom("Deluxe");
+      var listHabitaciones = $("#habitacionesDeluxe");
+      optionsRoom("Deluxe", listHabitaciones);
     });
   });
 
@@ -1082,14 +1079,15 @@ function loadRooms() {
     localStorage.setItem("opcionHabitacion", "Suite");
     $(".cargarHabitaciones").empty();
     $(".cargarHabitaciones").load("editarHabitaciones/suite.php", function () {
-      optionsRoom("Suite");
+      var listHabitaciones = $("#habitacionesSuite");
+      optionsRoom("Suite", listHabitaciones);
     });
   });
 }
 
-function optionsRoom(category) {
+function optionsRoom(category, listHabitaciones) {
   var inputHabitacionSearch = $("#numHabitacion");
-  let divHabitaciones = $("#habitacionesEstandar");
+  let divHabitaciones = listHabitaciones;
   let liHabitaciones = divHabitaciones.find("li");
 
   inputHabitacionSearch.on("change", function () {
@@ -1122,7 +1120,10 @@ function optionsRoom(category) {
     $("#divOpcion").addClass("reservaMasCercana");
     $("#divOpcion").load(
       "editarHabitaciones/calendarioHabitacion.php?habitacion=" +
-        encodeURIComponent(numeroHabitacion)
+        encodeURIComponent(numeroHabitacion),
+      function () {
+        loadFutureBookingsRoomCalendar();
+      }
     );
     $("#modal").css("display", "block");
   });
@@ -1155,20 +1156,6 @@ function detailRoomReserve(category, numeroHabitacion) {
     function () {
       optionsDetailsRoom(numeroHabitacion);
     }
-  );
-  $("#modal").css("display", "block");
-}
-
-function occupyRoom(category, numeroHabitacion) {
-  $("#modal").css("display", "inline");
-  $("#modal").css("cursor", "none");
-
-  $("#divOpcion").addClass("panelHabitacionAsignar");
-  $("#divOpcion").load(
-    "editarHabitaciones/asignarHabitacion.php?habitacion=" +
-      encodeURIComponent(numeroHabitacion) +
-      "&categoria=" +
-      category
   );
   $("#modal").css("display", "block");
 }
@@ -1252,4 +1239,292 @@ function loadDataCalendarDetailRoom() {
   var calendar = document.getElementById("calendar");
 
   cargarCalendario(calendar, events);
+}
+
+function occupyRoom(category, numeroHabitacion) {
+  $("#modal").css("display", "inline");
+  $("#modal").css("cursor", "none");
+
+  $("#divOpcion").addClass("panelHabitacionAsignar");
+  $("#divOpcion").load(
+    "editarHabitaciones/asignarHabitacion.php?habitacion=" +
+      encodeURIComponent(numeroHabitacion) +
+      "&categoria=" +
+      category,
+    function () {
+      optionOccupyRoom(numeroHabitacion, category);
+    }
+  );
+  $("#modal").css("display", "block");
+}
+
+function optionOccupyRoom(numHabitacion, category) {
+  $("#cerrar").on("click", function () {
+    $("#modal").css("display", "none");
+    $("#modal").css("cursor", "auto");
+    $("#divOpcion").removeClass("panelHabitacionRemplazar");
+    $("#divOpcion").removeClass("panelHabitacionAsignar");
+    $("#divOpcion").empty();
+  });
+
+  $(".remplazarHabitacion").on("click", function () {
+    $("#divOpcion").empty();
+    $("#divOpcion").removeClass("panelHabitacionAsignar");
+    $("#divOpcion").addClass("panelHabitacionRemplazar");
+    $("#divOpcion").load(
+      "editarHabitaciones/remplazarHabitacion.php?habitacion=" +
+        numHabitacion +
+        "&categoria=" +
+        category,
+      function () {
+        replaceRoom(numHabitacion, category);
+      }
+    );
+  });
+
+  $("#btnBuscar").on("click", function (event) {
+    event.preventDefault();
+
+    var idReserva = $("#idReserva").val();
+
+    fetch(
+      "http://localhost/Sistema%20Hotel/controller/admin/reservas/getHabitaciones.php?idReserva=" +
+        idReserva +
+        "&opcion=agregar",
+      {
+        method: "GET",
+      }
+    )
+      .then((resp) => resp.json())
+      .then((data_resp) => {
+        var subForm = $(".subForm");
+        subForm.css("display", "block");
+
+        var llegada = data_resp.llegada;
+        var salida = data_resp.salida;
+
+        var inputFechaAgregado = $("#fechaAgregado");
+        inputFechaAgregado.attr("min", llegada);
+        inputFechaAgregado.attr("max", salida);
+      });
+  });
+
+  switch (category) {
+    case "Estandar":
+    case "Deluxe":
+      $("#cantAdultos").attr("max", 5);
+      $("#cantNinos").attr("max", 4);
+      break;
+
+    case "Suite":
+      $("#cantAdultos").attr("max", 6);
+      $("#cantNinos").attr("max", 5);
+      break;
+  }
+
+  $("#formAsignar").on("submit", function (event) {
+    event.preventDefault();
+
+    if ($("#cantAdultos").val() == 0 || $("#cantAdultos").val() == "") {
+      const lbl = $("#alertaAsignar").find("label");
+      lbl.text("Debe haber al menos un adulto de huesped");
+      $("#alertaAsignar").addClass("alertaAsignarActive");
+    } else {
+      var idReserva = $("#idReserva").val().trim();
+      var habitacion = numHabitacion;
+      var fechaAgregado = $("#fechaAgregado").val().trim();
+
+      const reserva = {
+        idReserva: idReserva,
+        habitacion: habitacion,
+        fechaAgregado: fechaAgregado,
+        adultos: $("#cantAdultos").val().trim(),
+        ninos: $("#cantNinos").val().trim(),
+      };
+
+      fetch(
+        "http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            reserva: reserva,
+          }),
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((resp) => resp.json())
+        .then((data_resp) => {
+          if (data_resp.respuesta == true) {
+            $("#modal").css("display", "none");
+            $("#modal").css("cursor", "auto");
+
+            $("#divOpcion").removeClass(".panelHabitacionAsignar");
+            $("#divOpcion").empty();
+
+            aviso(data_resp.respuesta, "Asignar habitacion");
+          } else {
+            const lbl = $("#alertaAsignar").find("label");
+            lbl.text(data_resp.respuesta);
+            $("#alertaAsignar").addClass("alertaAsignarActive");
+          }
+        });
+    }
+  });
+}
+
+function replaceRoom(numeroHabitacion, category) {
+  $("#cerrar").on("click", function () {
+    $("#modal").css("display", "none");
+    $("#modal").css("cursor", "auto");
+    $("#divOpcion").removeClass("panelHabitacionRemplazar");
+    $("#divOpcion").removeClass("panelHabitacionAsignar");
+    $("#divOpcion").empty();
+  });
+
+  $(".asignarHabitacion").on("click", function () {
+    $("#divOpcion").empty();
+    $("#divOpcion").removeClass("panelHabitacionRemplazar");
+    $("#divOpcion").addClass("panelHabitacionAsignar");
+    $("#divOpcion").load(
+      "editarHabitaciones/asignarHabitacion.php?habitacion=" +
+        numeroHabitacion +
+        "&categoria=" +
+        category,
+      function () {
+        optionOccupyRoom(numeroHabitacion, category);
+      }
+    );
+  });
+
+  $("#btnBuscar").on("click", function (event) {
+    event.preventDefault();
+
+    var idReserva = $("#selectReserva").val();
+
+    fetch(
+      "http://localhost/Sistema%20Hotel/controller/admin/reservas/getHabitaciones.php?idReserva=" +
+        idReserva +
+        "&opcion=remplazar",
+      {
+        method: "GET",
+      }
+    )
+      .then((resp) => resp.json())
+      .then((data_resp) => {
+        if (data_resp == "Sin habitaciones") {
+          $(".lblSinHabitaciones").css("display", "block");
+          $(".subForm").css("display", "none");
+        } else {
+          $(".lblSinHabitaciones").css("display", "none");
+
+          $(".subForm").css("display", "block");
+
+          var llegada = data_resp.llegada;
+          var salida = data_resp.salida;
+          var formAsignar = document.getElementById("formRemplazar");
+          var select = document.getElementById("selectHabitaciones");
+          var inputFechaRemplazo =
+            document.getElementById("inputFechaRemplazo");
+
+          inputFechaRemplazo.innerHTML = "";
+          select.innerHTML = "";
+
+          data_resp.habitaciones.forEach(function (habitacion) {
+            var option = document.createElement("option");
+            option.text = habitacion.numHabitacionReservada;
+            select.add(option);
+          });
+
+          inputFechaRemplazo.min = llegada;
+          inputFechaRemplazo.max = salida;
+        }
+      });
+  });
+
+  $("#formRemplazar").on("submit", function (event) {
+    event.preventDefault();
+
+    const reserva = {
+      idReserva: $("#selectReserva").val().trim(),
+      habitacionNueva: numeroHabitacion,
+      habitacionAnterior: $("#selectHabitaciones").val().trim(),
+      fechaRemplazo: $("#inputFechaRemplazo").val().trim(),
+      opcion: "remplazar",
+    };
+
+    console.log(reserva);
+
+    var opcion = "remplazar";
+
+    fetch(
+      "http://localhost/Sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php",
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          reserva: reserva,
+        }),
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((resp) => resp.json())
+      .then((data_resp) => {
+        if (data_resp.respuesta == true) {
+          $("#modal").css("display", "none");
+          $("#modal").css("cursor", "auto");
+
+          $("#divOpcion").removeClass(".panelHabitacionRemplazar");
+          $("#divOpcion").empty();
+
+          aviso(data_resp.respuesta, "Remplazar habitacion");
+        } else {
+          const lbl = $("#alertaRemplazar").find("label");
+          lbl.text(data_resp.respuesta);
+          $("#alertaRemplazar").addClass("alertaAsignarActive");
+        }
+      });
+  });
+}
+
+function loadFutureBookingsRoomCalendar() {
+  $("#cerrar").on("click", function () {
+    $("#modal").css("display", "none");
+    $("#modal").css("cursor", "auto");
+    $("#divOpcion").removeClass("reservaMasCercana");
+    $("#divOpcion").empty();
+  });
+
+  let calendar = document.getElementById("calendar");
+  let reservaDeHabitacionesMasCercana = JSON.parse(
+    calendar.dataset.reservaCercanaHabitacion
+  );
+
+  if (reservaDeHabitacionesMasCercana.length > 0) {
+    $("#reservaMasCercana").css("width", "550px");
+    $("#reservaMasCercana").css("marginLeft", "35%");
+
+    let events = [];
+
+    events = reservaDeHabitacionesMasCercana.map((reserva) => {
+      let numReserva = reserva.idReservaHabitacion;
+      let inicioReserva = reserva.fechaLlegadaHabitacion;
+      let finReserva = reserva.fechaSalidaHabitacion;
+
+      let evento = {
+        title: "Reserva " + numReserva,
+        start: inicioReserva,
+        end: finReserva,
+        url: "lista.php?idReserva=" + numReserva,
+        backgroundColor: "#329DBF",
+      };
+
+      return evento;
+    });
+    cargarCalendario(calendar, events);
+  }
 }

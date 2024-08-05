@@ -124,14 +124,14 @@ if (empty($usuario)) {
                         <li class="liGraficaPie">
 
                             <img src="../../../img/grafica.png">
-                            <a href="../../views/admin/habitaciones/grafica.php">Grafica</a>
+                            <a href="grafica.php">Grafica</a>
 
                         </li>
 
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../../views/admin/reservas/habitaciones.php">Lista</a>
+                            <a href="habitacionesEstandar.php">Lista</a>
 
                         </li>
 

@@ -168,7 +168,7 @@ if (empty($usuario)) {
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../habitaciones/habitaciones.php">Lista</a>
+                            <a href="../habitaciones/habitacionesEstandar.php">Lista</a>
 
                         </li>
 

@@ -90,7 +90,7 @@ foreach ($reservas->fetch_all(MYSQLI_ASSOC) as $reserva) {
             $hoy = strtotime(date("Y-m-d"));
             $salida =strtotime($reserva['fechaSalida']);
 
-            if ($salida < $hoy) {
+            if ($salida <= $hoy) {
 
                 $idReserva = $reserva['idReserva'];
         
