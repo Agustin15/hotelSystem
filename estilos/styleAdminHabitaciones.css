@@ -10,22 +10,19 @@ body {
   background-attachment: fixed;
   background-color: rgb(243, 243, 243);
 }
-
-.iconoMenu {
+body .iconoMenu {
   width: 36px;
   margin-top: 6px;
   margin-left: -110px;
 }
-
-.lblTituloMenu {
+body .lblTituloMenu {
   margin-top: 20px;
   margin-left: 10px;
   position: absolute;
   font-size: 17px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-
-#navAdmin {
+body #navAdmin {
   margin-left: 0px;
   margin-top: -5px;
   position: fixed;
@@ -36,179 +33,144 @@ body {
   height: 800px;
   font-family: Arial;
 }
-
-#navAdmin ul {
+body #navAdmin ul {
   padding-top: 0px;
 }
-
-#navAdmin li {
+body #navAdmin li {
   margin-top: 11px;
   padding-top: 17px;
   height: 30px;
   cursor: pointer;
 }
-
-#navAdmin li a {
+body #navAdmin li a {
   font-size: 17px;
   margin-left: 8px;
   color: white;
   text-decoration: none;
 }
-
-#navAdmin li:hover {
+body #navAdmin li:hover {
   background-color: rgb(3, 76, 105);
 }
-
-#navAdmin li .subMenu li:hover {
+body #navAdmin li .subMenu li:hover {
   background-color: rgb(65, 65, 65);
 }
-
-#navAdmin ul img {
+body #navAdmin ul img {
   width: 25px;
   display: flex;
   position: absolute;
   margin-top: -5px;
   padding-left: 30px;
 }
-
-#liInicio a {
+body #liInicio a {
   padding-left: 10px;
 }
-
-#liClientes a {
+body #liClientes a {
   padding-left: 16px;
 }
-
-#liClientes .btnFlecha {
+body #liClientes .btnFlecha {
   width: 14px;
   margin-left: 69%;
   margin-top: -18px;
   display: none;
 }
-
-#liClientes:hover > .btnFlecha {
+body #liClientes:hover > .btnFlecha {
   display: block;
 }
-
-.subMenu {
+body .subMenu {
   background-color: rgb(46, 46, 46);
   margin-top: 10px;
   padding-top: 0px;
   display: none;
 }
-
-#navAdmin #liClientes .subMenu li img {
+body #navAdmin #liClientes .subMenu li img {
   width: 22px;
   margin-top: -2px;
   padding-left: 45px;
 }
-
-#navAdmin #liClientes .subMenu li {
+body #navAdmin #liClientes .subMenu li {
   margin-top: 0px;
   border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
-
-#navAdmin #liClientes .subMenu li a {
+body #navAdmin #liClientes .subMenu li a {
   font-size: 14px;
   margin-left: 1px;
 }
-
-#liReserva a {
+body #liReserva a {
   padding-left: 26px;
 }
-
-#liReserva .btnFlecha {
+body #liReserva .btnFlecha {
   width: 14px;
   margin-left: 69%;
   margin-top: -18px;
   display: none;
 }
-
-#liReserva:hover > .btnFlecha {
+body #liReserva:hover > .btnFlecha {
   display: block;
 }
-
-#navAdmin #liReserva .subMenu li img {
+body #navAdmin #liReserva .subMenu li img {
   width: 25px;
   margin-top: -5px;
   padding-left: 45px;
 }
-
-#navAdmin #liReserva .subMenu li {
+body #navAdmin #liReserva .subMenu li {
   margin-top: 0px;
   border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
-
-#navAdmin #liReserva .subMenu li a {
+body #navAdmin #liReserva .subMenu li a {
   font-size: 14px;
   margin-left: 0px;
 }
-
-#navAdmin #liReserva .subMenu .liHabitacion img {
+body #navAdmin #liReserva .subMenu .liHabitacion img {
   padding-left: 47px;
 }
-
-#navAdmin #liReserva .subMenu .liHabitacion a,
-#navAdmin #liReserva .subMenu .liCalendario a {
+body #navAdmin #liReserva .subMenu .liHabitacion a,
+body #navAdmin #liReserva .subMenu .liCalendario a {
   margin-left: 30px;
 }
-
-#liHabitaciones #textHabitaciones {
+body #liHabitaciones #textHabitaciones {
   padding-left: 33px;
 }
-
-#liHabitaciones .btnFlecha {
+body #liHabitaciones .btnFlecha {
   width: 14px;
   margin-left: 70%;
   margin-top: -18px;
   display: none;
 }
-
-#liHabitaciones:hover > .btnFlecha {
+body #liHabitaciones:hover > .btnFlecha {
   display: block;
 }
-
-#liHabitaciones:hover > #iconoHabitaciones {
+body #liHabitaciones:hover > #iconoHabitaciones {
   margin-left: -10px;
 }
-
-#liHabitaciones:hover #textHabitaciones {
+body #liHabitaciones:hover #textHabitaciones {
   padding-left: 10px;
 }
-
-#navAdmin #liHabitaciones .subMenu li img {
+body #navAdmin #liHabitaciones .subMenu li img {
   width: 20px;
   margin-top: -2px;
   padding-left: 45px;
 }
-
-#navAdmin #liHabitaciones .subMenu li {
+body #navAdmin #liHabitaciones .subMenu li {
   margin-top: 0px;
   border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
-
-#navAdmin #liHabitaciones .subMenu li a {
+body #navAdmin #liHabitaciones .subMenu li a {
   font-size: 14px;
   margin-left: 0px;
 }
-
-#navAdmin #liHabitaciones .subMenu .liGraficaPie a {
+body #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
   margin-left: 20px;
 }
-
-#navAdmin #liHabitaciones .subMenu .liHabitacion img {
+body #navAdmin #liHabitaciones .subMenu .liHabitacion img {
   padding-left: 47px;
 }
-
-#navAdmin #liHabitaciones .subMenu .liHabitacion a {
+body #navAdmin #liHabitaciones .subMenu .liHabitacion a {
   margin-left: 17px;
 }
-
-#liGanancias a {
+body #liGanancias a {
   padding-left: 27px;
 }
-
-#userAdmin {
+body #userAdmin {
   width: 180px;
   height: 55px;
   position: absolute;
@@ -216,20 +178,17 @@ body {
   left: 0px;
   background-color: #3dacb4;
 }
-
-#userAdmin img {
+body #userAdmin img {
   width: 33px;
   padding-top: 10px;
   padding-right: 85px;
 }
-
-#userAdmin label {
+body #userAdmin label {
   padding-top: 20px;
   margin-left: -66px;
   position: absolute;
 }
-
-#userAdmin .subMenuAdmin {
+body #userAdmin .subMenuAdmin {
   height: 91px;
   background-color: rgb(46, 46, 46);
   color: white;
@@ -237,114 +196,107 @@ body {
   display: none;
   padding-top: 0px;
 }
-
-#userAdmin .subMenuAdmin li {
+body #userAdmin .subMenuAdmin li {
   color: white;
   list-style: none;
   padding-top: 10px;
   margin-top: 0px;
   border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
-
-#userAdmin .subMenuAdmin li img {
+body #userAdmin .subMenuAdmin li img {
   width: 20px;
   margin-top: -12px;
   padding-left: 50px;
 }
-
-#userAdmin .subMenuAdmin li a {
+body #userAdmin .subMenuAdmin li a {
   font-size: 14px;
   margin-left: 18px;
   color: white;
   text-decoration: none;
 }
-
-#userAdmin .subMenuAdmin li .logout {
+body #userAdmin .subMenuAdmin li .logout {
   margin-left: 10px;
 }
-
-#userAdmin .subMenuAdmin li:hover {
+body #userAdmin .subMenuAdmin li:hover {
   background-color: rgb(65, 65, 65);
 }
-
-#userAdmin .btnFlecha {
+body #userAdmin .btnFlecha {
   width: 14px;
   margin-left: 83%;
   margin-top: -35px;
   display: flex;
   display: none;
 }
-
-#userAdmin:hover > .btnFlecha {
+body #userAdmin:hover > .btnFlecha {
   display: block;
 }
 
-#menuHabitaciones {
-  margin-left: 0;
+#menuOptionPane {
+  margin-left: 0px;
   margin-top: 0px;
   width: 100%;
-  height: 120px;
+  height: 164px;
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   background-color: white;
 }
-
-#menuHabitaciones img {
-  width: 200px;
-  margin-left: 69%;
-  margin-top: -10px;
+#menuOptionPane .title {
   display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin-left: 39rem;
 }
-
-#menuHabitaciones h1 {
+#menuOptionPane img {
+  width: 160px;
+}
+#menuOptionPane h1 {
   color: #6981d8;
-  margin-top: -2px;
+  margin-top: 10px;
   font-size: 27px;
-  margin-left: 49%;
 }
-
-#menuHabitaciones ul {
-  padding-top: 25px;
-  margin-left: 36%;
+#menuOptionPane ul {
+  padding-top: 2.8rem;
+  margin-left: 40%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: center;
 }
-
-#menuHabitaciones ul li {
+#menuOptionPane ul li {
   list-style: none;
-  padding: 20px;
-  margin-top: -10px;
-  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 1px;
   cursor: pointer;
+  width: 100px;
 }
-
-#menuHabitaciones ul li:hover {
+#menuOptionPane ul li:hover {
   border-bottom: 3px solid rgb(96, 185, 219);
 }
-
-#menuHabitaciones ul li a {
+#menuOptionPane ul li a {
   opacity: 50%;
   font-weight: bold;
   text-decoration: none;
   color: black;
-  display: block;
-  margin-top: -13px;
 }
-
-#menuHabitaciones ul li img {
+#menuOptionPane ul li img {
   width: 30px;
   height: 30px;
-  display: block;
-  margin-top: -15px;
-  margin-left: 10px;
+}
+#menuOptionPane ul li .icon {
+  padding-right: 0rem;
 }
 
-#menuHabitaciones ul .liSuite img {
-  margin-left: 5px;
+#menuOptionPane .title {
+  margin-left: 41rem;
 }
 
-#menuHabitaciones ul .liEstandar img {
-  margin-left: 15px;
+#menuOptionPane ul {
+  padding-top: 4.4rem;
+  margin-left: 34rem;
+  gap: 1rem;
 }
 
 #viewGrafica {
@@ -403,8 +355,6 @@ body {
   width: 60px;
   border-radius: 5px;
 }
-
-
 
 #habitaciones .cargarHabitacionesEstandar,
 #habitaciones .cargarHabitacionesDeluxe,
@@ -466,9 +416,9 @@ body {
   display: flex;
 }
 
-#habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"],
-#habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"],
-#habitaciones .cargarHabitacionesSuite #suite input[type="submit"] {
+#habitaciones .cargarHabitacionesEstandar #estandar input[type=submit],
+#habitaciones .cargarHabitacionesDeluxe #deluxe input[type=submit],
+#habitaciones .cargarHabitacionesSuite #suite input[type=submit] {
   background-color: #1e95aa;
   color: white;
   border-radius: 3px;
@@ -479,13 +429,13 @@ body {
   margin-top: -7px;
 }
 
-#habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"]:hover,
-#habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"]:hover,
-#habitaciones .cargarHabitacionesSuite #suite input[type="submit"]:hover {
+#habitaciones .cargarHabitacionesEstandar #estandar input[type=submit]:hover,
+#habitaciones .cargarHabitacionesDeluxe #deluxe input[type=submit]:hover,
+#habitaciones .cargarHabitacionesSuite #suite input[type=submit]:hover {
   background-color: #1a8497;
 }
 
-#habitaciones #estandar #alert ,
+#habitaciones #estandar #alert,
 #habitaciones #deluxe #alert,
 #habitaciones #suite #alert {
   width: 380px;
@@ -510,6 +460,7 @@ body {
   padding-top: 1rem;
   font-weight: bold;
 }
+
 #habitaciones #estandar #alert #bodyAlert img,
 #habitaciones #deluxe #alert #bodyAlert img,
 #habitaciones #suite #alert #bodyAlert img {
@@ -518,7 +469,7 @@ body {
 
 #habitaciones #estandar #alert #containButton button,
 #habitaciones #deluxe #alert #containButton button,
-#habitaciones #suite #alert #containButton button  {
+#habitaciones #suite #alert #containButton button {
   width: 100px;
   height: 25px;
   border-radius: 5px;
@@ -585,17 +536,16 @@ body {
 }
 
 #habitacionesEstandar li .dataBookingRoom,
-#habitacionesDeluxe li .dataBookingRoom ,
+#habitacionesDeluxe li .dataBookingRoom,
 #habitacionesSuite li .dataBookingRoom {
   display: flex;
   flex-direction: row;
   gap: 2rem;
 }
 
-#habitacionesEstandar li .containBooking ,
-#habitacionesDeluxe li .containBooking, 
-#habitacionesSuite li .containBooking
-{
+#habitacionesEstandar li .containBooking,
+#habitacionesDeluxe li .containBooking,
+#habitacionesSuite li .containBooking {
   display: flex;
   flex-direction: column;
   padding-top: 0.4rem;
@@ -634,7 +584,7 @@ body {
 
 #habitacionesEstandar li .infoHuesped,
 #habitacionesDeluxe li .infoHuesped,
-#habitacionesSuite li .infoHuesped   {
+#habitacionesSuite li .infoHuesped {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -654,14 +604,14 @@ body {
 }
 
 #habitacionesEstandar li .infoHuesped label,
-#habitacionesDeluxe li .infoHuesped label ,
+#habitacionesDeluxe li .infoHuesped label,
 #habitacionesSuite li .infoHuesped label {
   font-weight: 100;
 }
 
 #habitacionesEstandar li .infoHuesped .lblHuesped,
 #habitacionesDeluxe li .infoHuesped .lblHuesped,
-#habitacionesSuite li .infoHuesped .lblHuesped   {
+#habitacionesSuite li .infoHuesped .lblHuesped {
   margin-left: -1.2rem;
   margin-top: -0.4rem;
 }
@@ -679,9 +629,10 @@ body {
 #habitacionesSuite li .infoHuesped img {
   width: 24px;
 }
+
 #habitacionesEstandar li .lblCliente,
-#habitacionesDeluxe li .lblCliente ,
-#habitacionesSuite li .lblCliente  {
+#habitacionesDeluxe li .lblCliente,
+#habitacionesSuite li .lblCliente {
   margin-right: 3rem;
 }
 
@@ -692,7 +643,7 @@ body {
 }
 
 #habitacionesEstandar li a,
-#habitacionesDeluxe li a ,
+#habitacionesDeluxe li a,
 #habitacionesSuite li a {
   color: rgb(170, 170, 170);
   text-decoration: none;
@@ -707,24 +658,22 @@ body {
 
 #habitacionesEstandar .containSinReserva,
 #habitacionesDeluxe .containSinReserva,
-#habitacionesSuite .containSinReserva  {
+#habitacionesSuite .containSinReserva {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: start;
-
 }
 
 #habitacionesEstandar .containSinReserva .lblLibre,
-#habitacionesDeluxe .containSinReserva .lblLibre ,
-#habitacionesSuite .containSinReserva .lblLibre  {
-
+#habitacionesDeluxe .containSinReserva .lblLibre,
+#habitacionesSuite .containSinReserva .lblLibre {
   padding-top: 0.5rem;
   padding-left: 1.6rem;
 }
 
 #habitacionesEstandar .sinReservaEnCurso,
-#habitacionesDeluxe .sinReservaEnCurso ,
+#habitacionesDeluxe .sinReservaEnCurso,
 #habitacionesSuite .sinReservaEnCurso {
   display: flex;
   flex-direction: column;
@@ -737,7 +686,7 @@ body {
 }
 
 #habitacionesEstandar .sinReservaEnCurso .message,
-#habitacionesDeluxe .sinReservaEnCurso .message ,
+#habitacionesDeluxe .sinReservaEnCurso .message,
 #habitacionesSuite .sinReservaEnCurso .message {
   width: 140px;
 }
@@ -749,11 +698,11 @@ body {
   font-size: 14px;
 }
 
-#habitacionesEstandar .sinReservaEnCurso img ,
+#habitacionesEstandar .sinReservaEnCurso img,
 #habitacionesDeluxe .sinReservaEnCurso img,
 #habitacionesSuite .sinReservaEnCurso img {
   width: 35px;
-  padding-right:0.6rem ;
+  padding-right: 0.6rem;
 }
 
 #habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar li:hover,
@@ -815,44 +764,44 @@ body {
 
 #habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar .menuHabitacion li:hover,
 #habitaciones .cargarHabitacionesDeluxe #deluxe #habitacionesDeluxe .menuHabitacion li:hover,
-#habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite .menuHabitacion li:hover{
-
-background-color: #1a6a99;
-border-bottom: none;
+#habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite .menuHabitacion li:hover {
+  background-color: #1a6a99;
+  border-bottom: none;
 }
 
 #habitacionesEstandar .menuHabitacion li a,
-#habitacionesDeluxe .menuHabitacion li a ,
+#habitacionesDeluxe .menuHabitacion li a,
 #habitacionesSuite .menuHabitacion li a {
   color: white;
 }
 
 #habitacionesEstandar .menuHabitacion li img,
-#habitacionesDeluxe .menuHabitacion li img ,
+#habitacionesDeluxe .menuHabitacion li img,
 #habitacionesSuite .menuHabitacion li img {
   width: 20px;
 }
 
 #habitacionesEstandar .liHistorial a,
-#habitacionesDeluxe .liHistorial a ,
+#habitacionesDeluxe .liHistorial a,
 #habitacionesSuite .liHistorial a {
   color: white;
   text-decoration: none;
 }
 
 #habitacionesEstandar .liProximamente a,
-#habitacionesDeluxe .liProximamente a ,
+#habitacionesDeluxe .liProximamente a,
 #habitacionesSuite .liProximamente a {
   text-decoration: none;
   color: white;
 }
 
-#habitacionesEstandar .liServicesRoom a ,
-#habitacionesDeluxe .liServicesRoom a ,
+#habitacionesEstandar .liServicesRoom a,
+#habitacionesDeluxe .liServicesRoom a,
 #habitacionesSuite .liServicesRoom a {
   color: white;
   text-decoration: none;
 }
+
 #habitacionesEstandar .menuHabitacion li .iconHistorial,
 #habitacionesDeluxe .menuHabitacion li .iconHistorial,
 #habitacionesSuite .menuHabitacion li .iconHistorial {
@@ -970,8 +919,7 @@ border-bottom: none;
   overflow-y: scroll;
   overflow-x: hidden;
   border-radius: 5px;
-  box-shadow: 0 0 0 2px rgb(230, 230, 230),
-    0.3em 0.3em 1em rgba(15, 15, 15, 0.3);
+  box-shadow: 0 0 0 2px rgb(230, 230, 230), 0.3em 0.3em 1em rgba(15, 15, 15, 0.3);
 }
 
 .panelHistorial #navHistorial ul {
@@ -1207,6 +1155,7 @@ border-bottom: none;
   margin-top: 10%;
   width: 58px;
 }
+
 .panelServicesRoom h1 {
   font-size: 22px;
   color: rgb(55, 124, 214);
@@ -1263,8 +1212,7 @@ border-bottom: none;
   width: 150px;
   height: auto;
   text-align: center;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255),
-    0.3em 0.3em 1em rgba(78, 78, 78, 0.3);
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(78, 78, 78, 0.3);
   margin-left: 30px;
   margin-top: 30px;
 }
@@ -1338,8 +1286,8 @@ border-bottom: none;
   display: block;
 }
 
-.panelPhone #formAddPhoneService input[type="text"],
-.panelMassage #formAddMassageService input[type="number"] {
+.panelPhone #formAddPhoneService input[type=text],
+.panelMassage #formAddMassageService input[type=number] {
   border: 1px solid gray;
   margin-left: 0px;
   margin-top: 0px;
@@ -1351,22 +1299,22 @@ border-bottom: none;
   padding-left: 30px;
 }
 
-.panelPhone #formAddPhoneService input[type="text"] {
+.panelPhone #formAddPhoneService input[type=text] {
   padding-left: 10px;
   padding-right: 30px;
 }
 
-.panelMassage #formAddMassageService input[type="number"] {
+.panelMassage #formAddMassageService input[type=number] {
   width: 80px;
 }
 
-.panelPhone #formAddPhoneService input[type="text"]::placeholder,
-.panelMassage #formAddMassageService input[type="text"]::placeholder {
+.panelPhone #formAddPhoneService input[type=text]::placeholder,
+.panelMassage #formAddMassageService input[type=text]::placeholder {
   color: rgb(175, 175, 175);
 }
 
-.panelPhone #formAddPhoneService input[type="text"]:hover,
-.panelMassage #formAddMassageService input[type="text"]:hover {
+.panelPhone #formAddPhoneService input[type=text]:hover,
+.panelMassage #formAddMassageService input[type=text]:hover {
   border: 1px solid rgb(0, 89, 255);
 }
 
@@ -1460,6 +1408,43 @@ border-bottom: none;
   margin-top: 4px;
 }
 
+#msjServiceAdd {
+  position: absolute;
+  top: 40%;
+  left: 3%;
+  z-index: 1;
+  width: 370px;
+  height: 210px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  display: none;
+}
+
+#msjServiceAdd img {
+  width: 45px;
+}
+
+#msjServiceAdd p {
+  color: black;
+  font-size: 14px;
+}
+
+#msjServiceAdd button {
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 100px;
+  height: 26px;
+  background-color: #0e73ad;
+  box-shadow: 2px 2px 2px grey;
+}
+
+#msjServiceAdd button:hover {
+  background-color: #0b5885;
+}
+
 .serviceAdd {
   position: absolute;
   top: 20%;
@@ -1471,6 +1456,7 @@ border-bottom: none;
   background-color: white;
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
+
 .serviceAdd img {
   width: 45px;
 }
@@ -1479,6 +1465,7 @@ border-bottom: none;
   color: black;
   font-size: 14px;
 }
+
 .serviceAdd button {
   margin-top: 10px;
   border: none;
@@ -1693,6 +1680,7 @@ border-bottom: none;
   color: rgb(255, 255, 255);
   font-weight: bold;
 }
+
 .panelMiniBar #cart #deposito,
 .panelCantina #cart #deposito {
   margin: auto;
@@ -1822,6 +1810,7 @@ border-bottom: none;
   margin-top: 5px;
   margin-right: -30px;
 }
+
 .panelMiniBar #cart #listaProductos .productDetails .deleteProduct img,
 .panelCantina #cart #listaProductos .productDetails .deleteProduct img {
   width: 13px;
@@ -1937,10 +1926,7 @@ border-bottom: none;
   font-weight: bold;
 }
 
-#panelOptionService
-  #serviciosReservaHabitacion
-  .containButtonDelete
-  button:hover {
+#panelOptionService #serviciosReservaHabitacion .containButtonDelete button:hover {
   background-color: rgb(187, 12, 12);
 }
 
@@ -1983,6 +1969,7 @@ border-bottom: none;
   margin-top: 16px;
   border: none;
 }
+
 #avisoServiceDelete button:hover {
   background-color: rgb(212, 3, 3);
 }
@@ -2053,3 +2040,5 @@ border-bottom: none;
   font-weight: bold;
   padding-right: 10px;
 }
+
+/*# sourceMappingURL=styleAdminHabitaciones.css.map */

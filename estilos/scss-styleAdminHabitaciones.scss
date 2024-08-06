@@ -1,0 +1,1769 @@
+
+@import "mixinsGeneral";
+
+
+  body {
+   
+    @include body;
+  }
+  
+  
+  @include menuOptionPane;
+
+  #menuOptionPane .title{
+
+    margin-left: 41rem;
+  }
+  #menuOptionPane ul{
+
+    padding-top: 4.4rem;
+    margin-left: 34rem;
+    gap: 1rem;
+
+
+  }
+  #viewGrafica {
+    width: 900px;
+    height: 400px;
+    margin-left: 300px;
+    margin-top: 3%;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    text-align: center;
+    background-color: white;
+  }
+  
+  #viewGrafica .sinDatos {
+    display: none;
+    opacity: 50%;
+    margin-top: 10%;
+  }
+  
+  #viewGrafica .sinDatos img {
+    width: 80px;
+  }
+  
+  #viewGrafica .sinDatos h2 {
+    color: #000000;
+    font-size: 18px;
+  }
+  
+  #graficaHabitaciones {
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    padding-top: 50px;
+    background-color: white;
+  }
+  
+  #habitaciones {
+    width: 1010px;
+    height: 510px;
+    margin-left: 19%;
+    margin-top: -1%;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  #habitaciones ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 10px;
+    padding-bottom: 30px;
+    color: rgb(177, 177, 177);
+    text-align: center;
+  }
+  
+  #habitaciones ul li img {
+    width: 60px;
+    border-radius: 5px;
+  }
+  
+  
+  
+  #habitaciones .cargarHabitacionesEstandar,
+  #habitaciones .cargarHabitacionesDeluxe,
+  #habitaciones .cargarHabitacionesSuite {
+    margin: auto;
+    margin-top: -30px;
+    width: 99%;
+    height: 88%;
+    overflow-y: scroll;
+    padding-bottom: 10px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe,
+  #habitaciones .cargarHabitacionesSuite #suite {
+    margin: auto;
+    margin-top: 20px;
+    width: 99%;
+    height: auto;
+    padding-bottom: 10px;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar h1,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe h1,
+  #habitaciones .cargarHabitacionesSuite #suite h1 {
+    font-size: 16px;
+    margin: auto;
+    margin-top: 2px;
+    text-align: center;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar label,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe label,
+  #habitaciones .cargarHabitacionesSuite #suite label {
+    font-size: 15px;
+    opacity: 90%;
+    padding-left: 30px;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar #numHabitacion,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe #numHabitacion,
+  #habitaciones .cargarHabitacionesSuite #suite #numHabitacion {
+    width: 62px;
+    border-radius: 3px;
+    border: 1px solid rgb(182, 182, 182);
+    height: 25px;
+    margin-left: 5px;
+    padding-left: 27px;
+    outline: none;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar #iconSearch,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe #iconSearch,
+  #habitaciones .cargarHabitacionesSuite #suite #iconSearch {
+    width: 15px;
+    margin-left: 19.8%;
+    margin-top: -22px;
+    display: flex;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"],
+  #habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"],
+  #habitaciones .cargarHabitacionesSuite #suite input[type="submit"] {
+    background-color: #1e95aa;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    width: 70px;
+    height: 26px;
+    margin-left: 11px;
+    margin-top: -7px;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar input[type="submit"]:hover,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe input[type="submit"]:hover,
+  #habitaciones .cargarHabitacionesSuite #suite input[type="submit"]:hover {
+    background-color: #1a8497;
+  }
+  
+  #habitaciones #estandar #alert ,
+  #habitaciones #deluxe #alert,
+  #habitaciones #suite #alert {
+    width: 380px;
+    height: 220px;
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 38%;
+    z-index: 3;
+    padding: 1rem;
+    display: none;
+  }
+  
+  #habitaciones #estandar #alert #bodyAlert,
+  #habitaciones #deluxe #alert #bodyAlert,
+  #habitaciones #suite #alert #bodyAlert {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    padding-top: 1rem;
+    font-weight: bold;
+  }
+  #habitaciones #estandar #alert #bodyAlert img,
+  #habitaciones #deluxe #alert #bodyAlert img,
+  #habitaciones #suite #alert #bodyAlert img {
+    width: 45px;
+  }
+  
+  #habitaciones #estandar #alert #containButton button,
+  #habitaciones #deluxe #alert #containButton button,
+  #habitaciones #suite #alert #containButton button  {
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: #1d6e9c;
+    color: white;
+    border: none;
+    font-weight: bold;
+  }
+  
+  #habitacionesEstandar,
+  #habitacionesDeluxe,
+  #habitacionesSuite {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    margin-left: 4rem;
+    margin-top: 3rem;
+    gap: 2rem;
+  }
+  
+  #habitacionesEstandar img,
+  #habitacionesDeluxe img,
+  #habitacionesSuite img {
+    width: 30px;
+    float: left;
+    margin-top: -8px;
+  }
+  
+  #habitacionesEstandar .iconoPlus,
+  #habitacionesDeluxe .iconoPlus,
+  #habitacionesSuite .iconoPlus {
+    width: 17px;
+    float: right;
+    margin-right: 1px;
+    opacity: 70%;
+  }
+  
+  #habitacionesEstandar .iconoPlus:hover,
+  #habitacionesDeluxe .iconoPlus:hover,
+  #habitacionesSuite .iconoPlus:hover {
+    opacity: 100%;
+  }
+  
+  #habitacionesEstandar li,
+  #habitacionesDeluxe li,
+  #habitacionesSuite li {
+    width: 240px;
+    height: 75px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    color: black;
+  }
+  
+  #habitacionesEstandar li .containIconRoomAndNumb,
+  #habitacionesDeluxe li .containIconRoomAndNumb,
+  #habitacionesSuite li .containIconRoomAndNumb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 2.7rem;
+  }
+  
+  #habitacionesEstandar li .dataBookingRoom,
+  #habitacionesDeluxe li .dataBookingRoom ,
+  #habitacionesSuite li .dataBookingRoom {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  #habitacionesEstandar li .containBooking ,
+  #habitacionesDeluxe li .containBooking, 
+  #habitacionesSuite li .containBooking
+  {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.4rem;
+    margin-left: -2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  
+  #habitacionesEstandar li h4,
+  #habitacionesDeluxe li h4,
+  #habitacionesSuite li h4 {
+    font-size: 15px;
+    color: #242424;
+  }
+  
+  #habitacionesEstandar li label,
+  #habitacionesDeluxe li label,
+  #habitacionesSuite li label {
+    font-weight: bold;
+  }
+  
+  #habitacionesEstandar li .lblLibre,
+  #habitacionesDeluxe li .lblLibre,
+  #habitacionesSuite li .lblLibre {
+    color: rgb(47, 255, 57);
+    float: left;
+    margin-left: -80px;
+  }
+  
+  #habitacionesEstandar li .lblOcupada,
+  #habitacionesDeluxe li .lblOcupada,
+  #habitacionesSuite li .lblOcupada {
+    color: rgb(228, 35, 35);
+  }
+  
+  #habitacionesEstandar li .infoHuesped,
+  #habitacionesDeluxe li .infoHuesped,
+  #habitacionesSuite li .infoHuesped   {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: -2.1rem;
+  }
+  
+  #habitacionesEstandar li .containIconAndLbl,
+  #habitacionesDeluxe li .containIconAndLbl,
+  #habitacionesSuite li .containIconAndLbl {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-right: 2rem;
+  }
+  
+  #habitacionesEstandar li .infoHuesped label,
+  #habitacionesDeluxe li .infoHuesped label ,
+  #habitacionesSuite li .infoHuesped label {
+    font-weight: 100;
+  }
+  
+  #habitacionesEstandar li .infoHuesped .lblHuesped,
+  #habitacionesDeluxe li .infoHuesped .lblHuesped,
+  #habitacionesSuite li .infoHuesped .lblHuesped   {
+    margin-left: -1.2rem;
+    margin-top: -0.4rem;
+  }
+  
+  #habitacionesEstandar li .infoHuesped .lblHuesped label,
+  #habitacionesDeluxe li .infoHuesped .lblHuesped label,
+  #habitacionesSuite li .infoHuesped .lblHuesped label {
+    color: #242424;
+    font-weight: bold;
+    font-size: 13px;
+  }
+  
+  #habitacionesEstandar li .infoHuesped img,
+  #habitacionesDeluxe li .infoHuesped img,
+  #habitacionesSuite li .infoHuesped img {
+    width: 24px;
+  }
+  #habitacionesEstandar li .lblCliente,
+  #habitacionesDeluxe li .lblCliente ,
+  #habitacionesSuite li .lblCliente  {
+    margin-right: 3rem;
+  }
+  
+  #habitacionesEstandar li .lblReserva label,
+  #habitacionesDeluxe li .lblReserva label,
+  #habitacionesSuite li .lblReserva label {
+    font-weight: 100;
+  }
+  
+  #habitacionesEstandar li a,
+  #habitacionesDeluxe li a ,
+  #habitacionesSuite li a {
+    color: rgb(170, 170, 170);
+    text-decoration: none;
+  }
+  
+  #habitacionesEstandar li a:hover,
+  #habitacionesDeluxe li a:hover,
+  #habitacionesSuite li a:hover {
+    color: rgb(60, 137, 253);
+    text-decoration: underline;
+  }
+  
+  #habitacionesEstandar .containSinReserva,
+  #habitacionesDeluxe .containSinReserva,
+  #habitacionesSuite .containSinReserva  {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+  
+  }
+  
+  #habitacionesEstandar .containSinReserva .lblLibre,
+  #habitacionesDeluxe .containSinReserva .lblLibre ,
+  #habitacionesSuite .containSinReserva .lblLibre  {
+  
+    padding-top: 0.5rem;
+    padding-left: 1.6rem;
+  }
+  
+  #habitacionesEstandar .sinReservaEnCurso,
+  #habitacionesDeluxe .sinReservaEnCurso ,
+  #habitacionesSuite .sinReservaEnCurso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 80%;
+    margin-top: 0.5rem;
+    padding-left: 1.2rem;
+    gap: 0.5rem;
+  }
+  
+  #habitacionesEstandar .sinReservaEnCurso .message,
+  #habitacionesDeluxe .sinReservaEnCurso .message ,
+  #habitacionesSuite .sinReservaEnCurso .message {
+    width: 140px;
+  }
+  
+  #habitacionesEstandar .sinReservaEnCurso h4,
+  #habitacionesDeluxe .sinReservaEnCurso h4,
+  #habitacionesSuite .sinReservaEnCurso h4 {
+    color: rgb(163, 163, 163);
+    font-size: 14px;
+  }
+  
+  #habitacionesEstandar .sinReservaEnCurso img ,
+  #habitacionesDeluxe .sinReservaEnCurso img,
+  #habitacionesSuite .sinReservaEnCurso img {
+    width: 35px;
+    padding-right:0.6rem ;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar li:hover,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe #habitacionesDeluxe li:hover,
+  #habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite li:hover {
+    border-bottom: 3px solid rgb(116, 192, 255);
+  }
+  
+  #habitaciones #sinDatosHabitaciones {
+    margin: auto;
+    margin-top: 60px;
+    display: none;
+    opacity: 50%;
+    width: 330px;
+    height: auto;
+    text-align: center;
+  }
+  
+  #habitaciones #sinDatosHabitaciones img {
+    width: 40px;
+    margin: auto;
+    float: none;
+  }
+  
+  #habitaciones #sinDatosHabitaciones h1 {
+    font-size: 20px;
+  }
+  
+  #habitacionesEstandar .menuHabitacion,
+  #habitacionesDeluxe .menuHabitacion,
+  #habitacionesSuite .menuHabitacion {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    margin-top: 0.6rem;
+    margin-left: 6rem;
+    background-color: #0e73ad;
+    width: 130px;
+    height: auto;
+    z-index: 2;
+  }
+  
+  #habitacionesEstandar .menuHabitacion li,
+  #habitacionesDeluxe .menuHabitacion li,
+  #habitacionesSuite .menuHabitacion li {
+    border-bottom: 1px solid rgb(94, 179, 236);
+    background-color: #0e73ad;
+    width: 100%;
+    height: 3px;
+    box-shadow: none;
+    font-size: 14px;
+    display: flex;
+    padding: 1rem 0 0.8rem 0.6rem;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  #habitaciones .cargarHabitacionesEstandar #estandar #habitacionesEstandar .menuHabitacion li:hover,
+  #habitaciones .cargarHabitacionesDeluxe #deluxe #habitacionesDeluxe .menuHabitacion li:hover,
+  #habitaciones .cargarHabitacionesSuite #suite #habitacionesSuite .menuHabitacion li:hover{
+  
+  background-color: #1a6a99;
+  border-bottom: none;
+  }
+  
+  #habitacionesEstandar .menuHabitacion li a,
+  #habitacionesDeluxe .menuHabitacion li a ,
+  #habitacionesSuite .menuHabitacion li a {
+    color: white;
+  }
+  
+  #habitacionesEstandar .menuHabitacion li img,
+  #habitacionesDeluxe .menuHabitacion li img ,
+  #habitacionesSuite .menuHabitacion li img {
+    width: 20px;
+  }
+  
+  #habitacionesEstandar .liHistorial a,
+  #habitacionesDeluxe .liHistorial a ,
+  #habitacionesSuite .liHistorial a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  #habitacionesEstandar .liProximamente a,
+  #habitacionesDeluxe .liProximamente a ,
+  #habitacionesSuite .liProximamente a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  #habitacionesEstandar .liServicesRoom a ,
+  #habitacionesDeluxe .liServicesRoom a ,
+  #habitacionesSuite .liServicesRoom a {
+    color: white;
+    text-decoration: none;
+  }
+  #habitacionesEstandar .menuHabitacion li .iconHistorial,
+  #habitacionesDeluxe .menuHabitacion li .iconHistorial,
+  #habitacionesSuite .menuHabitacion li .iconHistorial {
+    margin-top: 0.5rem;
+  }
+  
+  #modal {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    margin-top: 0px;
+    display: none;
+    background-color: rgba(83, 83, 83, 0.5);
+    position: absolute;
+  }
+  
+  .panelHistorial {
+    width: 600px;
+    height: 530px;
+    background-color: white;
+    margin-top: -45%;
+    margin-left: 34%;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    color: #000000;
+  }
+  
+  .panelHistorial #cerrarVentana {
+    width: 24px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 3px;
+    opacity: 70%;
+  }
+  
+  .panelHistorial #cerrarVentana:hover {
+    opacity: 100%;
+  }
+  
+  .panelHistorial img {
+    width: 50px;
+    margin: auto;
+    margin-top: 30px;
+  }
+  
+  .panelHistorial h1 {
+    font-size: 22px;
+    color: rgb(55, 124, 214);
+    margin-top: 10px;
+    opacity: 80%;
+  }
+  
+  .panelHistorial h2 {
+    font-size: 20px;
+    color: rgb(50, 115, 201);
+    opacity: 80%;
+  }
+  
+  .panelHistorial h3 {
+    margin: auto;
+    margin-top: 10px;
+    color: #2090d1;
+  }
+  
+  .panelHistorial #searchBooking {
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    width: 99%;
+    height: 34px;
+  }
+  
+  .panelHistorial #searchBooking input {
+    padding-left: 40px;
+    width: 300px;
+    height: 30px;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid rgb(109, 109, 109);
+    margin: auto;
+    padding-top: -20px;
+  }
+  
+  .panelHistorial #searchBooking #iconSearch {
+    width: 20px;
+    margin-left: 10px;
+    position: absolute;
+    margin-top: 5px;
+    opacity: 90%;
+  }
+  
+  .panelHistorial #searchBooking input::placeholder {
+    color: rgb(116, 116, 116);
+    font-size: 14px;
+  }
+  
+  .panelHistorial #sinBookings img {
+    width: 50px;
+    opacity: 80%;
+  }
+  
+  .panelHistorial #sinBookings h3 {
+    font-size: 16px;
+    opacity: 80%;
+    color: rgb(143, 143, 143);
+  }
+  
+  .panelHistorial #navHistorial {
+    width: 96%;
+    margin: auto;
+    margin-top: 10px;
+    height: 270px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(230, 230, 230),
+      0.3em 0.3em 1em rgba(15, 15, 15, 0.3);
+  }
+  
+  .panelHistorial #navHistorial ul {
+    width: 100%;
+  }
+  
+  .panelHistorial #navHistorial li {
+    list-style: none;
+    width: 99%;
+    height: 90px;
+    background-color: rgb(255, 255, 255);
+    padding-top: 10px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid rgb(184, 184, 184);
+    cursor: pointer;
+  }
+  
+  .panelHistorial #navHistorial li hr {
+    margin-top: 2px;
+  }
+  
+  .panelHistorial #navHistorial li img {
+    display: flex;
+    margin-left: 10px;
+    margin-top: -6px;
+    width: 20px;
+  }
+  
+  .panelHistorial #navHistorial li #fechaReserva {
+    background-color: rgb(70, 134, 230);
+    width: 99%;
+    height: 30px;
+    padding-top: 10px;
+    color: white;
+    margin-left: 4px;
+    margin-top: -5px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+  
+  .panelHistorial #navHistorial li #lblLlegada {
+    float: left;
+    margin-left: 120px;
+  }
+  
+  .panelHistorial #navHistorial li #lblSalida {
+    float: right;
+    margin-right: 110px;
+  }
+  
+  .panelHistorial #navHistorial li #lblReserva {
+    float: left;
+    margin-left: 45px;
+    margin-top: -18px;
+  }
+  
+  .panelHistorial #navHistorial li label a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .panelHistorial #navHistorial li label a:hover {
+    text-decoration: underline;
+    color: #3b77d1;
+  }
+  
+  .panelHistorial #navHistorial .reserva {
+    border-right: 1px solid rgb(156, 156, 156);
+    height: 32px;
+    width: 150px;
+    margin-top: -20px;
+    padding-top: 20px;
+  }
+  
+  .panelHistorial #navHistorial .cliente {
+    border-right: 1px solid rgb(156, 156, 156);
+    height: 36px;
+    width: 240px;
+    margin-top: -51px;
+    padding-top: 16px;
+    margin-left: 160px;
+    padding-left: -20px;
+  }
+  
+  .panelHistorial #navHistorial .huespedes {
+    height: 36px;
+    width: 150px;
+    margin-top: -51px;
+    padding-top: 16px;
+    margin-left: 403px;
+    padding-left: 10px;
+  }
+  
+  .panelHistorial #navHistorial #sinResultadosBooking {
+    opacity: 60%;
+    margin: auto;
+    margin-top: 60px;
+    display: none;
+  }
+  
+  .panelHistorial #navHistorial #sinResultadosBooking img {
+    width: 50px;
+  }
+  
+  .panelHistorial #navHistorial #sinResultadosBooking h3 {
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+  }
+  
+  .panelProximamente {
+    width: 600px;
+    height: 530px;
+    background-color: white;
+    margin-top: -45%;
+    margin-left: 34%;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    color: #000000;
+    overflow-y: scroll;
+    overflow-x: none;
+  }
+  
+  .panelProximamente #cerrarVentana {
+    width: 24px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 3px;
+    opacity: 70%;
+  }
+  
+  .panelProximamente #cerrarVentana:hover {
+    opacity: 100%;
+  }
+  
+  .panelProximamente img {
+    width: 70px;
+    margin: auto;
+    margin-top: 30px;
+  }
+  
+  .panelProximamente h1 {
+    font-size: 22px;
+    color: rgb(55, 124, 214);
+    margin-top: 10px;
+    opacity: 80%;
+  }
+  
+  .panelProximamente h2 {
+    font-size: 20px;
+    color: rgb(50, 115, 201);
+    opacity: 80%;
+  }
+  
+  .panelProximamente h3 {
+    margin: auto;
+    margin-top: 10px;
+    color: #2090d1;
+  }
+  
+  .panelProximamente #sinBookings img {
+    width: 50px;
+    opacity: 80%;
+  }
+  
+  .panelProximamente #sinBookings h3 {
+    font-size: 16px;
+    opacity: 70%;
+    color: rgb(143, 143, 143);
+  }
+  
+  .panelProximamente #calendarProximamente {
+    margin: auto;
+    margin-top: 50px;
+    width: 85%;
+    height: 340px;
+    font-size: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .panelProximamente #calendarProximamente button {
+    width: 60px;
+    font-size: 10px;
+    height: 23px;
+  }
+  
+  .panelProximamente #calendarProximamente h2 {
+    font-size: 16px;
+    color: rgb(173, 173, 173);
+  }
+  
+  .panelServicesRoom {
+    width: 900px;
+    height: 590px;
+    background-color: white;
+    margin-top: -46%;
+    margin-left: 24%;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    color: #000000;
+    overflow-y: scroll;
+    overflow-x: none;
+  }
+  
+  .panelServicesRoom #menuServicesRoom {
+    float: left;
+    margin-left: 10px;
+    margin-top: -20px;
+  }
+  
+  .panelServicesRoom #menuServicesRoom ul li {
+    display: inline-block;
+    margin-left: 20px;
+    color: rgb(168, 168, 168);
+    padding-bottom: 3px;
+    cursor: pointer;
+  }
+  
+  .panelServicesRoom #menuServicesRoom ul li img {
+    width: 20px;
+    margin: auto;
+    margin-top: 30px;
+  }
+  
+  .panelServicesRoom #menuServicesRoom li:hover {
+    border-bottom: 2px solid rgb(32, 157, 206);
+  }
+  
+  .panelServicesRoom #iconServiceRoom {
+    margin-top: 10%;
+    width: 58px;
+  }
+  .panelServicesRoom h1 {
+    font-size: 22px;
+    color: rgb(55, 124, 214);
+    margin-top: 0px;
+    opacity: 80%;
+  }
+  
+  .panelServicesRoom h2 {
+    font-size: 20px;
+    color: rgb(50, 115, 201);
+    opacity: 80%;
+  }
+  
+  .panelServicesRoom img {
+    display: block;
+    margin: auto;
+  }
+  
+  #panelOptionService #sinServiciosHabitacion,
+  #panelOptionService #sinServiciosHabitacionHistorial {
+    opacity: 70%;
+    margin: auto;
+    margin-top: 3%;
+    text-align: center;
+  }
+  
+  #panelOptionService #sinServiciosHabitacionHistorial {
+    display: none;
+  }
+  
+  #panelOptionService #sinServiciosHabitacion img,
+  #panelOptionService #sinServiciosHabitacionHistorial img {
+    width: 100px;
+  }
+  
+  #panelOptionService #sinServiciosHabitacion h3,
+  #panelOptionService #sinServiciosHabitacionHistorial h3 {
+    font-size: 20px;
+    color: rgb(172, 172, 172);
+  }
+  
+  #panelOptionService #servicesList {
+    margin-top: -3%;
+    padding-bottom: 20px;
+  }
+  
+  #panelOptionService #servicesList li {
+    background: linear-gradient(#314c86, #3dacb4);
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px grey;
+    width: 150px;
+    height: auto;
+    text-align: center;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255),
+      0.3em 0.3em 1em rgba(78, 78, 78, 0.3);
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  
+  #panelOptionService #servicesList li h4 {
+    font-size: 14px;
+    color: white;
+  }
+  
+  #panelOptionService #servicesList li img {
+    width: 40px;
+    display: block;
+  }
+  
+  #panelOptionService #servicesList #optionSup {
+    margin-left: -30px;
+  }
+  
+  #panelOptionService #servicesList #optionInf {
+    margin-left: -30px;
+  }
+  
+  #panelOptionService #servicesList li:hover {
+    background: linear-gradient(#2a86bb, #2a448d);
+  }
+  
+  .panelPhone,
+  .panelMassage {
+    width: 400px;
+    height: auto;
+    padding-bottom: 60px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    margin-left: 250px;
+    margin-top: -180px;
+  }
+  
+  #optionAddService .panelPhone img,
+  #optionAddService .panelMassage img {
+    display: block;
+    width: 40px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  #optionAddService .panelPhone h1,
+  #optionAddService .panelMassage h1 {
+    color: #0e73ad;
+    font-size: 15px;
+  }
+  
+  .panelPhone #formAddPhoneService,
+  .panelMassage #formAddMassageService {
+    width: 99%;
+    height: auto;
+    text-align: center;
+  }
+  
+  .panelPhone #formAddPhoneService #tarifa,
+  .panelMassage #formAddMassageService #tarifa {
+    color: rgb(177, 177, 177);
+  }
+  
+  .panelPhone #formAddPhoneService #lblPrecio,
+  .panelMassage #formAddMassageService #lblPrecio {
+    color: rgb(177, 177, 177);
+    margin-top: 20px;
+    display: block;
+  }
+  
+  .panelPhone #formAddPhoneService input[type="text"],
+  .panelMassage #formAddMassageService input[type="number"] {
+    border: 1px solid gray;
+    margin-left: 0px;
+    margin-top: 0px;
+    color: rgb(0, 0, 0);
+    width: 120px;
+    height: 26px;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 30px;
+  }
+  
+  .panelPhone #formAddPhoneService input[type="text"] {
+    padding-left: 10px;
+    padding-right: 30px;
+  }
+  
+  .panelMassage #formAddMassageService input[type="number"] {
+    width: 80px;
+  }
+  
+  .panelPhone #formAddPhoneService input[type="text"]::placeholder,
+  .panelMassage #formAddMassageService input[type="text"]::placeholder {
+    color: rgb(175, 175, 175);
+  }
+  
+  .panelPhone #formAddPhoneService input[type="text"]:hover,
+  .panelMassage #formAddMassageService input[type="text"]:hover {
+    border: 1px solid rgb(0, 89, 255);
+  }
+  
+  .panelPhone #formAddPhoneService img,
+  .panelMassage #formAddMassageService img {
+    width: 17px;
+    display: flex;
+    margin-top: -23px;
+    margin-left: 250px;
+  }
+  
+  .panelMassage #formAddMassageService img {
+    margin-left: 149px;
+  }
+  
+  .panelPhone #formAddPhoneService button,
+  .panelMassage #formAddMassageService button {
+    background-color: #0e73ad;
+    box-shadow: 2px 2px 2px gray;
+    margin: auto;
+    margin-top: 10px;
+    color: white;
+    border-radius: 5px;
+    width: 100px;
+    border: none;
+    height: 25px;
+  }
+  
+  .panelPhone #formAddPhoneService button:hover,
+  .panelMassage #formAddMassageService button:hover {
+    background-color: #0b5885;
+  }
+  
+  .panelPhone #avisoErrorAddService,
+  .panelMassage #avisoErrorAddService {
+    margin: auto;
+    width: 300px;
+    height: 30px;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    background-color: #0e73ad;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 12px;
+    transform: scale(0);
+  }
+  
+  .panelPhone #avisoErrorAddService img,
+  .panelMassage #avisoErrorAddService img {
+    width: 24px;
+    float: left;
+    margin-left: 10px;
+    margin-top: -2px;
+  }
+  
+  .panelPhone #avisoErrorAddService label,
+  .panelMassage #avisoErrorAddService label {
+    margin-left: -20px;
+  }
+  
+  #modalServices {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    top: 0px;
+    display: none;
+    position: absolute;
+  }
+  
+  #modalService {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    top: -10%;
+    display: none;
+    position: absolute;
+  }
+  
+  #divOpcion #cerrarPanelService,
+  .panelPhone #cerrar,
+  .panelMassage #cerrar {
+    float: right;
+    margin-right: 3px;
+    margin-top: -15px;
+    opacity: 70%;
+    width: 25px;
+  }
+  
+  #divOpcion #cerrarPanelService {
+    margin-top: 4px;
+  }
+  
+  
+  #msjServiceAdd {
+    position: absolute;
+    top: 40%;
+    left: 3%;
+    z-index: 1;
+    width: 370px;
+    height: 210px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+  #msjServiceAdd img {
+    width: 45px;
+  }
+  
+  #msjServiceAdd p {
+    color: black;
+    font-size: 14px;
+  }
+  #msjServiceAdd button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 100px;
+    height: 26px;
+    background-color: #0e73ad;
+    box-shadow: 2px 2px 2px grey;
+  }
+  
+  #msjServiceAdd button:hover {
+    background-color: #0b5885;
+  }
+  
+  
+  
+  .serviceAdd {
+    position: absolute;
+    top: 20%;
+    left: 2%;
+    z-index: 1;
+    width: 370px;
+    height: 210px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  }
+  .serviceAdd img {
+    width: 45px;
+  }
+  
+  .serviceAdd p {
+    color: black;
+    font-size: 14px;
+  }
+  .serviceAdd button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 100px;
+    height: 26px;
+    background-color: #0e73ad;
+    box-shadow: 2px 2px 2px grey;
+  }
+  
+  .serviceAdd button:hover {
+    background-color: #0b5885;
+  }
+  
+  .panelMiniBar,
+  .panelCantina {
+    width: 850px;
+    height: 580px;
+    position: absolute;
+    z-index: 1;
+    top: 2%;
+    left: 3%;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  }
+  
+  .panelMiniBar #cerrarMinibar,
+  .panelCantina #cerrarCantina {
+    width: 30px;
+    margin-right: 3px;
+    margin-top: 1px;
+    opacity: 60%;
+  }
+  
+  .panelMiniBar #container,
+  .panelCantina #container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .panelMiniBar #title,
+  .panelCantina #title {
+    margin-top: 10px;
+  }
+  
+  .panelMiniBar #title img,
+  .panelCantina #title img {
+    width: 40px;
+  }
+  
+  .panelMiniBar #title h1,
+  .panelMiniCantina #title h1 {
+    font-size: 18px;
+    color: #0b5885;
+  }
+  
+  .panelMiniBar #market,
+  .panelCantina #market {
+    margin-left: -25px;
+    height: 380px;
+    width: 600px;
+    overflow-y: scroll;
+  }
+  
+  .panelMiniBar #market ul,
+  .panelCantina #market ul {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .panelMiniBar #market ul li,
+  .panelCantina #market ul li {
+    list-style: none;
+    text-align: center;
+    background-color: white;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 160px;
+    height: 140px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  
+  .panelMiniBar #market .imagenProducto,
+  .panelCantina #market .imagenProducto {
+    margin-top: 5px;
+  }
+  
+  .panelMiniBar #market ul li img,
+  .panelCantina #market ul li img {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .panelMiniBar #market ul li .supCantidadBtnAgregar,
+  .panelCantina #market ul li .supCantidadBtnAgregar {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 20px;
+  }
+  
+  .panelMiniBar #market ul li .cantidad,
+  .panelMiniBar #market ul li .btnAgregar,
+  .panelCantina #market ul li .cantidad,
+  .panelCantina #market ul li .btnAgregar {
+    margin-top: 12px;
+  }
+  
+  .panelMiniBar #market ul li .cantidad input,
+  .panelCantina #market ul li .cantidad input {
+    border-radius: 3px;
+    width: 40px;
+    outline: none;
+    border: 1px solid gray;
+    padding-left: 5px;
+    height: 20px;
+  }
+  
+  .panelMiniBar #market ul li .btnAgregar button,
+  .panelCantina #market ul li .btnAgregar button {
+    background-color: #0b5885;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px gray;
+    width: 60px;
+    height: 24px;
+    border: none;
+    font-size: 12px;
+  }
+  
+  .panelMiniBar #market ul li .btnAgregar button:hover,
+  .panelCantina #market ul li .btnAgregar button:hover {
+    background-color: #0d4f75;
+  }
+  
+  .panelMiniBar #aviso,
+  .panelCantina #aviso {
+    width: 300px;
+    height: 180px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    left: 33%;
+    top: 30%;
+    text-align: center;
+    padding-top: 20px;
+    display: none;
+  }
+  
+  .panelMiniBar #aviso #imgAviso,
+  .panelCantina #aviso #imgAviso {
+    margin: auto;
+    margin-top: 2px;
+  }
+  
+  .panelMiniBar #aviso #imgAviso img,
+  .panelCantina #aviso #imgAviso img {
+    width: 50px;
+  }
+  
+  .panelMiniBar #aviso #textAviso,
+  .panelCantina #aviso #textAviso {
+    margin-top: 20px;
+    font-size: 17px;
+  }
+  
+  .panelMiniBar #aviso #buttonOk,
+  .panelCantina #aviso #buttonOk {
+    margin-top: 10%;
+  }
+  
+  .panelMiniBar #aviso #buttonOk button,
+  .panelCantina #aviso #buttonOk button {
+    font-size: 13px;
+    width: 120px;
+    height: 25px;
+    background-color: #0b5885;
+    border-radius: 5px;
+    outline: none;
+    color: white;
+    border: none;
+  }
+  
+  .panelMiniBar #aviso #buttonOk button:hover,
+  .panelCantina #aviso #buttonOk button:hover {
+    background-color: #0d4f75;
+  }
+  
+  .panelMiniBar #cart,
+  .panelCantina #cart {
+    margin-top: 0px;
+    margin-left: 3px;
+    width: 255px;
+    height: 420px;
+    background: linear-gradient(#314c86, #3dacb4);
+    box-shadow: 0 0 0 2px #3dacb4, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+  
+  .panelMiniBar #cart #title,
+  .panelCantina #cart #title {
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+  }
+  .panelMiniBar #cart #deposito,
+  .panelCantina #cart #deposito {
+    margin: auto;
+    margin-top: 10px;
+    background-color: white;
+    box-shadow: 0 0 0 2px #ffffff, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    color: rgb(0, 0, 0);
+    width: 170px;
+    height: 24px;
+    padding-top: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  
+  .panelMiniBar #cart #deposito span,
+  .panelCantina #cart #deposito span {
+    font-size: 16px;
+    float: left;
+    margin-left: 10px;
+  }
+  
+  .panelMiniBar #cart #listaProductos,
+  .panelCantina #cart #listaProductos {
+    overflow-y: scroll;
+    height: 280px;
+    padding-bottom: 15px;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails,
+  .panelCantina #cart #listaProductos .productDetails {
+    margin: auto;
+    margin-top: 25px;
+    width: 200px;
+    height: auto;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background-color: white;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails:hover .deleteSup,
+  .panelCantina #cart #listaProductos .productDetails:hover .deleteSup {
+    visibility: visible;
+  }
+  
+  .panelMiniBar #cart #listaProductos .containerDetailsProduct,
+  .panelCantina #cart #listaProductos .containerDetailsProduct {
+    display: flex;
+    width: auto;
+    align-items: stretch;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .imageAndCant,
+  .panelCantina #cart #listaProductos .productDetails .imageAndCant {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+    margin-left: 2px;
+    width: 30px;
+    text-align: center;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .imageProduct,
+  .panelCantina #cart #listaProductos .productDetails .imageProduct {
+    margin-top: 5px;
+    margin-left: 13px;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .imageProduct img,
+  .panelCantina #cart #listaProductos .productDetails .imageProduct img {
+    width: 30px;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .cantProduct,
+  .panelCantina #cart #listaProductos .productDetails .cantProduct {
+    display: flex;
+    padding-left: 3px;
+    gap: 5px;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .cantProduct img,
+  .panelCantina #cart #listaProductos .productDetails .cantProduct img {
+    width: 15px;
+    opacity: 60%;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .nameProduct,
+  .panelCantina #cart #listaProductos .productDetails .nameProduct {
+    width: auto;
+    height: 30px;
+    margin-top: 7px;
+    margin-left: 25px;
+    font-size: 16px;
+    color: rgb(172, 172, 172);
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .nameProduct h5,
+  .panelCantina #cart #listaProductos .productDetails .nameProduct h5 {
+    width: 90px;
+    height: 100%;
+    font-weight: 100;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .priceProduct,
+  .panelCantina #cart #listaProductos .productDetails .priceProduct {
+    width: auto;
+    margin-top: 60px;
+    margin-left: -40px;
+    font-size: 14px;
+    color: rgb(172, 172, 172);
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .deleteSup,
+  .panelCantina #cart #listaProductos .productDetails .deleteSup {
+    display: flex;
+    justify-content: flex-end;
+    width: 20px;
+    height: 20px;
+    visibility: hidden;
+  }
+  
+  .panelMiniBar #cart #listaProductos .productDetails .deleteProduct,
+  .panelCantina #cart #listaProductos .productDetails .deleteProduct {
+    width: 100%;
+    height: 100%;
+    margin-top: 5px;
+    margin-right: -30px;
+  }
+  .panelMiniBar #cart #listaProductos .productDetails .deleteProduct img,
+  .panelCantina #cart #listaProductos .productDetails .deleteProduct img {
+    width: 13px;
+    opacity: 40%;
+  }
+  
+  .panelMiniBar #cart #buttonAgregarServicio,
+  .panelCantina #cart #buttonAgregarServicio {
+    margin-top: 22px;
+    display: none;
+  }
+  
+  .panelMiniBar #cart #buttonAgregarServicio button,
+  .panelCantina #cart #buttonAgregarServicio button {
+    width: 120px;
+    height: 24px;
+    color: rgb(43, 43, 43);
+    background-color: #eeeeee;
+    border-radius: 3px;
+    box-shadow: 0 0 0 2px #ffffff, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    border: none;
+  }
+  
+  .panelMiniBar #buttonAgregarServicio button:hover,
+  .panelCantina #buttonAgregarServicio button:hover {
+    background-color: rgb(219, 219, 219);
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion {
+    margin: auto;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    gap: 15px;
+    width: 100%;
+    height: 320px;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion li {
+    padding-top: 5px;
+    list-style: none;
+    width: 280px;
+    height: 150px;
+    border-radius: 4px;
+    box-shadow: 0 0 0 2px #ffffff, 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    background-color: white;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .titleService {
+    display: flex;
+    margin-top: 8px;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: rgb(41, 41, 41);
+    font-weight: bold;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .iconoService {
+    margin-left: 10px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .iconoService img {
+    width: 24px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .precioAndCantidad {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .cantidad,
+  #panelOptionService #serviciosReservaHabitacion .precio {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .cantidad img,
+  #panelOptionService #serviciosReservaHabitacion .precio img {
+    width: 20px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .containButtonDelete {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  
+  #panelOptionService #serviciosReservaHabitacion .containButtonDelete button {
+    width: 70px;
+    height: 25px;
+    box-shadow: 2px 2px 2px black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(230, 4, 4);
+    font-weight: bold;
+  }
+  
+  #panelOptionService
+    #serviciosReservaHabitacion
+    .containButtonDelete
+    button:hover {
+    background-color: rgb(187, 12, 12);
+  }
+  
+  #avisoServiceDelete {
+    width: 300px;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    left: 33%;
+    top: 50%;
+    text-align: center;
+    padding-top: 20px;
+    display: none;
+  }
+  
+  #avisoServiceDelete #iconAvisoDelete {
+    margin: auto;
+    margin-top: 2px;
+  }
+  
+  #avisoServiceDelete #iconAvisoDelete img {
+    width: 50px;
+  }
+  
+  #avisoServiceDelete #avisoSpan {
+    margin-top: 15px;
+    font-size: 17px;
+  }
+  
+  #avisoServiceDelete button {
+    background-color: rgb(224, 8, 8);
+    color: white;
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-top: 16px;
+    border: none;
+  }
+  #avisoServiceDelete button:hover {
+    background-color: rgb(212, 3, 3);
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso {
+    width: 99%;
+    height: 280px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso li {
+    width: 310px;
+    height: 170px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background-color: white;
+    list-style: none;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .titleService {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 10px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .titleService img {
+    width: 30px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .containQuantityAndPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .quantity,
+  #panelOptionService #serviciosHabitacionEnCurso .price {
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .quantity img,
+  #panelOptionService #serviciosHabitacionEnCurso .price img {
+    width: 24px;
+  }
+  
+  #panelOptionService #serviciosHabitacionEnCurso .totalPrice {
+    float: right;
+    margin-top: 13px;
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 10px;
+  }
+  

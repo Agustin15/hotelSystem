@@ -108,7 +108,7 @@ if (count($serviciosHabitacionReservada) == 0) {
 
                                     if ($servicio['cantidad'] > 1) {
 
-                                       echo $servicio['cantidad'] . "minutos";
+                                       echo $servicio['cantidad'] . " minutos";
                                     }else{
 
                                          echo $servicio['cantidad'] . " minuto";
@@ -173,74 +173,3 @@ if (count($serviciosHabitacionReservada) == 0) {
 
 
 </div>
-
-<script>
-    var buttonsDeletes = document.querySelectorAll(".buttonDelete");
-
-    buttonsDeletes = Array.from(buttonsDeletes);
-
-    buttonsDeletes.forEach(function(buttonDelete) {
-
-        buttonDelete.addEventListener("click", function() {
-
-            var divSupButton = this.parentNode;
-            var nombreServicio = divSupButton.dataset.nombreServicio;
-            var idServicioHabitacion = divSupButton.dataset.idServicioHabitacion;
-            var idReserva = divSupButton.dataset.idReserva;
-            var totalService = divSupButton.dataset.precio * divSupButton.dataset.cantidad;
-
-            var serviceDelete = {
-
-                "idServicioHabitacion": idServicioHabitacion,
-                "idReserva": idReserva,
-                "totalService": totalService
-
-
-            };
-
-            fetch("http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?serviceDelete=" +
-                    JSON.stringify(serviceDelete), {
-
-                        method: "DELETE",
-                        headers: {
-
-                            "Content-Type": "application/json"
-                        }
-
-
-                    }).then(resp => resp.json())
-                .then(respuesta => {
-
-                    console.log(respuesta.resultado);
-                    if (respuesta.resultado == true) {
-
-
-                        $("#avisoServiceDelete").css("display", "block");
-                        $("#avisoSpan").text(`Servicio de ${nombreServicio} eliminado`);
-                        $("#modalService").css("display", "block");
-
-                    }
-
-                });
-
-
-
-        });
-    });
-
-
-
-    $("#btnClose").on("click", function() {
-
-
-        $("#avisoServiceDelete").css("display", "none");
-        $("#avisoSpan").text("");
-        $("#modalService").css("display", "none");
-
-        $("#panelOptionService").empty();
-        $("#panelOptionService").load("opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion=" +
-            <?php echo $numHabitacion ?>);
-
-
-    });
-</script>

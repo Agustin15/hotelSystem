@@ -171,32 +171,46 @@ if (empty($usuario)) {
     </header>
 
 
-    <nav id="menuCliente">
+    <nav id="menuOptionPane">
 
-        <br>
-        <h1>Clientes</h1>
-        <img src="../../../img/clientesBanner.jpg">
+        <div class="title">
+            <div>
+                <h1>Clientes</h1>
+            </div>
+            <div>
+                <img src="../../../img/clientesBanner.jpg">
 
+            </div>
+        </div>
         <ul>
 
             <li class="liGrafica">
 
-                <img class="imgClientes" src="../../../img/grafica.png">
-                <br>
-                <a href="grafica.php">Gráfica</a>
+                <div class="icon">
+                    <img class="imgClientes" src="../../../img/grafica.png">
+                </div>
+                <div>
+                    <a href="grafica.php">Gráfica</a>
+                </div>
 
             </li>
             <li class="liLista">
-                <img class="imgClientes" src="../../../img/listaClientes.png">
-                <br>
-                <a href="lista.php">Gestion</a>
+                <div class="icon">
+                    <img class="imgClientes" src="../../../img/listaClientes.png">
+                </div>
+                <div>
+                    <a href="lista.php">Gestion</a>
+                </div>
 
             </li>
             <li class="liAgregar">
 
-                <img class="imgClientes" src="../../../img/agregarCliente.png">
-                <br>
-                <a>Agregar</a>
+                <div class="icon">
+                    <img class="imgClientes" src="../../../img/agregarCliente.png">
+                </div>
+                <div>
+                    <a>Agregar</a>
+                </div>
 
             </li>
         </ul>
@@ -258,4 +272,3 @@ if (empty($usuario)) {
 </body>
 
 </html>
-

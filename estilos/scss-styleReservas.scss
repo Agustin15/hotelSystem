@@ -1,293 +1,10 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
+@import "mixinsGeneral";
 
 body {
-  font-family: Arial;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgb(243, 243, 243);
-}
-body .iconoMenu {
-  width: 36px;
-  margin-top: 6px;
-  margin-left: -110px;
-}
-body .lblTituloMenu {
-  margin-top: 20px;
-  margin-left: 10px;
-  position: absolute;
-  font-size: 17px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-body #navAdmin {
-  margin-left: 0px;
-  margin-top: -5px;
-  position: fixed;
-  background: linear-gradient(#314c86, #3dacb4);
-  color: rgb(255, 255, 255);
-  text-align: center;
-  width: 180px;
-  height: 800px;
-  font-family: Arial;
-}
-body #navAdmin ul {
-  padding-top: 0px;
-}
-body #navAdmin li {
-  margin-top: 11px;
-  padding-top: 17px;
-  height: 30px;
-  cursor: pointer;
-}
-body #navAdmin li a {
-  font-size: 17px;
-  margin-left: 8px;
-  color: white;
-  text-decoration: none;
-}
-body #navAdmin li:hover {
-  background-color: rgb(3, 76, 105);
-}
-body #navAdmin li .subMenu li:hover {
-  background-color: rgb(65, 65, 65);
-}
-body #navAdmin ul img {
-  width: 25px;
-  display: flex;
-  position: absolute;
-  margin-top: -5px;
-  padding-left: 30px;
-}
-body #liInicio a {
-  padding-left: 10px;
-}
-body #liClientes a {
-  padding-left: 16px;
-}
-body #liClientes .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liClientes:hover > .btnFlecha {
-  display: block;
-}
-body .subMenu {
-  background-color: rgb(46, 46, 46);
-  margin-top: 10px;
-  padding-top: 0px;
-  display: none;
-}
-body #navAdmin #liClientes .subMenu li img {
-  width: 22px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liClientes .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liClientes .subMenu li a {
-  font-size: 14px;
-  margin-left: 1px;
-}
-body #liReserva a {
-  padding-left: 26px;
-}
-body #liReserva .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liReserva:hover > .btnFlecha {
-  display: block;
-}
-body #navAdmin #liReserva .subMenu li img {
-  width: 25px;
-  margin-top: -5px;
-  padding-left: 45px;
-}
-body #navAdmin #liReserva .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liReserva .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion a,
-body #navAdmin #liReserva .subMenu .liCalendario a {
-  margin-left: 30px;
-}
-body #liHabitaciones #textHabitaciones {
-  padding-left: 33px;
-}
-body #liHabitaciones .btnFlecha {
-  width: 14px;
-  margin-left: 70%;
-  margin-top: -18px;
-  display: none;
-}
-body #liHabitaciones:hover > .btnFlecha {
-  display: block;
-}
-body #liHabitaciones:hover > #iconoHabitaciones {
-  margin-left: -10px;
-}
-body #liHabitaciones:hover #textHabitaciones {
-  padding-left: 10px;
-}
-body #navAdmin #liHabitaciones .subMenu li img {
-  width: 20px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liHabitaciones .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liHabitaciones .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
-  margin-left: 20px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion a {
-  margin-left: 17px;
-}
-body #liGanancias a {
-  padding-left: 27px;
-}
-body #userAdmin {
-  width: 180px;
-  height: 55px;
-  position: absolute;
-  top: 74%;
-  left: 0px;
-  background-color: #3dacb4;
-}
-body #userAdmin img {
-  width: 33px;
-  padding-top: 10px;
-  padding-right: 85px;
-}
-body #userAdmin label {
-  padding-top: 20px;
-  margin-left: -66px;
-  position: absolute;
-}
-body #userAdmin .subMenuAdmin {
-  height: 91px;
-  background-color: rgb(46, 46, 46);
-  color: white;
-  margin-top: 20px;
-  display: none;
-  padding-top: 0px;
-}
-body #userAdmin .subMenuAdmin li {
-  color: white;
-  list-style: none;
-  padding-top: 10px;
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #userAdmin .subMenuAdmin li img {
-  width: 20px;
-  margin-top: -12px;
-  padding-left: 50px;
-}
-body #userAdmin .subMenuAdmin li a {
-  font-size: 14px;
-  margin-left: 18px;
-  color: white;
-  text-decoration: none;
-}
-body #userAdmin .subMenuAdmin li .logout {
-  margin-left: 10px;
-}
-body #userAdmin .subMenuAdmin li:hover {
-  background-color: rgb(65, 65, 65);
-}
-body #userAdmin .btnFlecha {
-  width: 14px;
-  margin-left: 83%;
-  margin-top: -35px;
-  display: flex;
-  display: none;
-}
-body #userAdmin:hover > .btnFlecha {
-  display: block;
+  @include body;
 }
 
-#menuOptionPane {
-  margin-left: 0px;
-  margin-top: 0px;
-  width: 100%;
-  height: 164px;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  background-color: white;
-}
-#menuOptionPane .title {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: center;
-  margin-left: 39rem;
-}
-#menuOptionPane img {
-  width: 160px;
-}
-#menuOptionPane h1 {
-  color: #6981d8;
-  margin-top: 10px;
-  font-size: 27px;
-}
-#menuOptionPane ul {
-  padding-top: 2.8rem;
-  margin-left: 40%;
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  align-items: center;
-}
-#menuOptionPane ul li {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 1px;
-  cursor: pointer;
-  width: 100px;
-}
-#menuOptionPane ul li:hover {
-  border-bottom: 3px solid rgb(96, 185, 219);
-}
-#menuOptionPane ul li a {
-  opacity: 50%;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-}
-#menuOptionPane ul li img {
-  width: 30px;
-  height: 30px;
-}
-#menuOptionPane ul li .icon {
-  padding-right: 0rem;
-}
+@include menuOptionPane;
 
 #divTableReservas {
   margin-top: 10px;
@@ -557,10 +274,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .avisoReservaDesactive {
   animation-name: avisoReservaDesactive;
   animation-duration: 0.2s;
@@ -571,10 +290,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(0);
   }
 }
+
 .divEditar {
   margin-top: -46%;
   width: 450px;
@@ -643,8 +364,8 @@ body #userAdmin:hover > .btnFlecha {
   width: 180px;
 }
 
-.divEditar form input[type=number],
-.divEditar form input[type=date],
+.divEditar form input[type="number"],
+.divEditar form input[type="date"],
 .divEditar form select {
   border: 2px solid rgb(224, 224, 224);
   width: 290px;
@@ -663,13 +384,13 @@ body #userAdmin:hover > .btnFlecha {
   height: 40px;
 }
 
-.divEditar form input[type=number]:hover,
-.divEditar form input[type=date]:hover,
+.divEditar form input[type="number"]:hover,
+.divEditar form input[type="date"]:hover,
 .divEditar form select:hover {
   border: 2px solid rgb(41, 122, 214);
 }
 
-.divEditar form input[type=submit],
+.divEditar form input[type="submit"],
 .divEditar form button {
   width: 130px;
   height: 32px;
@@ -679,11 +400,11 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 30px;
 }
 
-.divEditar form input[type=submit] {
+.divEditar form input[type="submit"] {
   margin-left: -170px;
 }
 
-.divEditar form input[type=submit]:hover {
+.divEditar form input[type="submit"]:hover {
   background-color: #3e6c97;
 }
 
@@ -742,10 +463,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .divEditar #menuOpcionEditar {
   width: auto;
   padding-right: 10px;
@@ -913,7 +636,7 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 10px;
 }
 
-.panelHabitacionLibrar #formLibrar input[type=date] {
+.panelHabitacionLibrar #formLibrar input[type="date"] {
   width: 130px;
   border: 1px solid gainsboro;
   text-align: center;
@@ -1041,9 +764,9 @@ body #userAdmin:hover > .btnFlecha {
   display: flex;
 }
 
-#habitaciones .cargarHabitaciones #estandar input[type=submit],
-#habitaciones .cargarHabitaciones #deluxe input[type=submit],
-#habitaciones .cargarHabitaciones #suite input[type=submit] {
+#habitaciones .cargarHabitaciones #estandar input[type="submit"],
+#habitaciones .cargarHabitaciones #deluxe input[type="submit"],
+#habitaciones .cargarHabitaciones #suite input[type="submit"] {
   background-color: #1e95aa;
   color: white;
   border-radius: 3px;
@@ -1054,9 +777,9 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: -7px;
 }
 
-#habitaciones .cargarHabitaciones #estandar input[type=submit]:hover,
-#habitaciones .cargarHabitaciones #deluxe input[type=submit]:hover,
-#habitaciones .cargarHabitaciones #suite input[type=submit]:hover {
+#habitaciones .cargarHabitaciones #estandar input[type="submit"]:hover,
+#habitaciones .cargarHabitaciones #deluxe input[type="submit"]:hover,
+#habitaciones .cargarHabitaciones #suite input[type="submit"]:hover {
   background-color: #1a8497;
 }
 
@@ -1337,7 +1060,7 @@ body #userAdmin:hover > .btnFlecha {
   display: none;
 }
 
-.panelHabitacionAsignar input[type=number] {
+.panelHabitacionAsignar input[type="number"] {
   width: 40px;
   border: 1px solid rgb(207, 207, 207);
   height: 25px;
@@ -1356,7 +1079,7 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 20px;
 }
 
-.panelHabitacionAsignar #formAsignar input[type=submit] {
+.panelHabitacionAsignar #formAsignar input[type="submit"] {
   background-color: red;
   color: white;
   border: none;
@@ -1417,7 +1140,7 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 10px;
 }
 
-.panelHabitacionAsignar #formAsignar input[type=submit]:hover {
+.panelHabitacionAsignar #formAsignar input[type="submit"]:hover {
   background-color: rgb(226, 10, 10);
 }
 
@@ -1426,8 +1149,8 @@ body #userAdmin:hover > .btnFlecha {
   background-color: rgb(226, 10, 10);
 }
 
-.panelHabitacionRemplazar input[type=date],
-.panelHabitacionAsignar input[type=date] {
+.panelHabitacionRemplazar input[type="date"],
+.panelHabitacionAsignar input[type="date"] {
   width: 120px;
   height: 27px;
   outline: none;
@@ -1473,10 +1196,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .avisoHabitacionDesactive {
   animation-name: avisoReservaDesactive;
   animation-duration: 0.2s;
@@ -1487,10 +1212,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(0);
   }
 }
+
 #formAsignar #alertaAsignar,
 #formLibrar #alertaLibrar,
 #formRemplazar #alertaRemplazar {
@@ -1554,10 +1281,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .alertaAsignarActive {
   animation: alertaAsignarActive;
   animation-duration: 0.2s;
@@ -1574,10 +1303,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 #divDetalles,
 #reservaMasCercana {
   width: 400px;
@@ -1643,6 +1374,7 @@ body #userAdmin:hover > .btnFlecha {
   opacity: 70%;
   display: flex;
   margin-right: 1px;
+
   width: 25px;
 }
 
@@ -1868,18 +1600,22 @@ body #userAdmin:hover > .btnFlecha {
   from {
     opacity: 0%;
   }
+
   to {
     opacity: 100%;
   }
 }
+
 @keyframes hideDescription {
   from {
     opacity: 100%;
   }
+
   to {
     opacity: 0%;
   }
 }
+
 #descriptionEvent li {
   justify-content: left;
   margin-top: 3px;
@@ -1995,8 +1731,8 @@ body #userAdmin:hover > .btnFlecha {
   width: 180px;
 }
 
-.newReserve form input[type=number],
-.newReserve form input[type=date],
+.newReserve form input[type="number"],
+.newReserve form input[type="date"],
 .newReserve form select {
   border: 2px solid rgb(224, 224, 224);
   width: 290px;
@@ -2015,13 +1751,13 @@ body #userAdmin:hover > .btnFlecha {
   height: 40px;
 }
 
-.newReserve form input[type=number]:hover,
-.newReserve form input[type=date]:hover,
+.newReserve form input[type="number"]:hover,
+.newReserve form input[type="date"]:hover,
 .newReserve form select:hover {
   border: 2px solid #31e75f;
 }
 
-.newReserve form input[type=submit],
+.newReserve form input[type="submit"],
 .newReserve form button {
   width: 130px;
   height: 32px;
@@ -2031,11 +1767,11 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 30px;
 }
 
-.newReserve form input[type=submit] {
+.newReserve form input[type="submit"] {
   margin-left: -170px;
 }
 
-.newReserve form input[type=submit]:hover {
+.newReserve form input[type="submit"]:hover {
   background-color: #26cf50;
 }
 
@@ -2094,10 +1830,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .bookingAdd {
   width: 390px;
   height: 247px;
@@ -2148,10 +1886,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .panelHabitacionEliminar {
   width: 260px;
   height: 160px;
@@ -2258,10 +1998,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .divInfo {
   width: 600px;
   height: 500px;
@@ -2545,7 +2287,6 @@ body #userAdmin:hover > .btnFlecha {
 .divInfo #serviciosReserva .containBtn {
   margin-top: 1rem;
 }
-
 .divInfo #serviciosReserva button {
   width: 70px;
   height: 25px;
@@ -2711,7 +2452,6 @@ body #userAdmin:hover > .btnFlecha {
   font-size: 25px;
   margin-top: 2rem;
 }
-
 .divInfo #sinDatosInfo img {
   width: 60px;
 }
@@ -2737,5 +2477,3 @@ body #userAdmin:hover > .btnFlecha {
   margin-right: 2rem;
   font-weight: bold;
 }
-
-/*# sourceMappingURL=styleReservas.css.map */

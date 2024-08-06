@@ -193,36 +193,50 @@ if (isset($_GET['idReserva'])) {
     </header>
 
 
-    <nav id="menuReservas">
+    <nav id="menuOptionPane">
 
-        <br>
-        <h1>Reservas</h1>
+    <div class="title">
+        <div>
+            <h1>Reservas</h1>
+        </div>
+        <div>
+            <img src="../../../img/reservasBanner.png">
 
-        <img src="../../../img/reservasBanner.png">
-
+        </div>
+        </div>
         <ul>
 
             <li class="liListaReservas">
 
-                <img class="imgReservas" src="../../../img/reservas.png">
-                <br>
-                <a href="lista.php">Lista</a>
+                <div class="icon">
+                    <img class="imgReservas" src="../../../img/reservas.png">
+                </div>
+                <div>
+                    <a href="lista.php">Lista</a>
+                </div>
 
 
             </li>
             <li>
 
-                <img class="imgAgregarReserva" src="../../../img/agregarReserva.png">
-                <br>
-                <a href="agregar.php">Calendario</a>
+                <div class="icon">
+                    <img class="imgAgregarReserva" src="../../../img/agregarReserva.png">
+                </div>
+                <div>
+                    <a href="agregar.php">Calendario</a>
+                </div>
 
 
             </li>
 
             <li>
-                <img class="imgHabitacionReserva" src="../../../img/habitacionesReserva.png">
-                <br>
-                <a href="habitaciones.php">Habitaciones</a>
+                <div class="icon">
+                    <img class="imgHabitacionReserva" src="../../../img/habitacionesReserva.png">
+                </div>
+                <div>
+                    <a href="habitaciones.php">Habitaciones</a>
+                </div>
+
 
 
 
@@ -248,7 +262,7 @@ if (isset($_GET['idReserva'])) {
         </div>
 
         <div id="containerTable">
-            <table id="tableReservas" data-id-reserva-search="<?php echo $idReserva?>">
+            <table id="tableReservas" data-id-reserva-search="<?php echo $idReserva ?>">
 
 
 

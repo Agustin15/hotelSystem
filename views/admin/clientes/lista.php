@@ -16,12 +16,12 @@ if (empty($usuario)) {
 
 $correo;
 
-if(isset($_GET['cliente'])){
+if (isset($_GET['cliente'])) {
 
-$correo=$_GET['cliente'];
-}else{
+    $correo = $_GET['cliente'];
+} else {
 
-    $correo="";
+    $correo = "";
 }
 
 ?>
@@ -187,31 +187,45 @@ $correo=$_GET['cliente'];
     </header>
 
 
-    <nav id="menuCliente">
+    <nav id="menuOptionPane">
 
-        <br>
-        <h1>Clientes</h1>
-        <img src="../../../img/clientesBanner.jpg">
+        <div class="title">
+            <div>
+                <h1>Clientes</h1>
+            </div>
+            <div>
+                <img src="../../../img/clientesBanner.jpg">
 
+            </div>
+        </div>
         <ul>
 
             <li class="liGrafica">
-                <img class="imgClientes" src="../../../img/grafica.png">
-                <br>
-                <a href="grafica.php">Gráfica</a>
+                <div class="icon">
+                    <img class="imgClientes" src="../../../img/grafica.png">
+                </div>
+                <div>
+                    <a href="grafica.php">Gráfica</a>
+                </div>
             </li>
             <li class="liLista">
 
-                <img class="imgClientes" src="../../../img/listaClientes.png">
-                <br>
-                <a href="lista.php">Gestion</a>
+
+                <div class="icon">
+                    <img class="imgClientes" src="../../../img/listaClientes.png">
+                </div>
+                <div>
+                    <a>Gestion</a>
+                </div>
 
             </li>
             <li>
-                <img class="imgClientes" src="../../../img/agregarCliente.png">
-                <br>
-                <a href="agregar.php">Agregar</a>
-
+            <div class="icon">
+                    <img class="imgClientes" src="../../../img/agregarCliente.png">
+                </div>
+                <div>
+                    <a href="agregar.php">Agregar</a>
+                </div>
             </li>
         </ul>
     </nav>

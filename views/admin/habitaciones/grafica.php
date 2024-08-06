@@ -15,6 +15,26 @@ if (empty($usuario)) {
     require("../../../model/claseReservas.php");
     $claseHabitaciones = new habitaciones();
     $claseReservas = new reservas();
+
+    $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
+    $totalHabitaciones = $habitacionesReservadas->num_rows;
+    $porcentajeEstandar=0;
+    $porcentajeDeluxe=0;
+    $porcentajeSuite=0;
+
+    if ($totalHabitaciones > 0) {
+
+        $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
+        $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
+
+        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
+        $cantDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
+        $cantSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
+
+        $porcentajeEstandar = ($cantEstandar * 100) / $totalHabitaciones;
+        $porcentajeDeluxe = ($cantDeluxe * 100) / $totalHabitaciones;
+        $porcentajeSuite = ($cantSuite * 100) / $totalHabitaciones;
+    }
 }
 
 ?>
@@ -29,8 +49,8 @@ if (empty($usuario)) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../../controller/admin/scriptsAdmin/funcionesAdmin.js"> </script>
-    <script src="../../../controller/admin/scriptsHabitaciones/funcionesHabitaciones.js"> </script>
+    <script src="../../../js/scriptsAdmin.js" defer> </script>
+    <script src="../../../js/scriptsHabitaciones.js" defer> </script>
     <title>Admin-Habitaciones</title>
 </head>
 
@@ -175,35 +195,51 @@ if (empty($usuario)) {
     </header>
 
 
-    
-    <nav id="menuHabitaciones">
 
-        <br>
-        <h1>Habitaciones </h1>
+    <nav id="menuOptionPane">
+
+
+        <div class="title">
+            <h1>Habitaciones </h1>
+        </div>
 
         <ul>
 
             <li class="liGrafica">
 
-                <img src="../../../img/grafica.png">
-                <br>
-                <a href="grafica.php">Gráfica</a>
+                <div class="icon">
+
+                    <img src="../../../img/grafica.png">
+                </div>
+                <div>
+                    <a href="grafica.php">Gráfica</a>
+                </div>
+
             </li>
 
             <li class="liEstandar">
-                <img src="../../../img/standardIcon.png">
-                <br>
-                <a href="habitaciones.php">Estandar</a>
+
+                <div class="icon">
+                    <img src="../../../img/standardIcon.png">
+                </div>
+                <div>
+                    <a href="habitacionesEstandar.php">Estandar</a>
+                </div>
             </li>
             <li class="liDeluxe">
-                <img src="../../../img/deluxeIcon.png">
-                <br>
-                <a href="habitaciones.php">Deluxe</a>
+                <div class="icon">
+                    <img src="../../../img/deluxeIcon.png">
+                </div>
+                <div>
+                    <a href="habitacionesDeluxe.php">Deluxe</a>
+                </div>
             </li>
             <li class="liSuite">
-                <img src="../../../img/suiteIcon.png">
-                <br>
-                <a href="habitaciones.php">Suite</a>
+                <div class="icon">
+                    <img src="../../../img/suiteIcon.png">
+                    <br>
+                    <a href="habitacionesSuie.php">Suite</a>
+                </div>
             </li>
         </ul>
     </nav>
@@ -211,7 +247,7 @@ if (empty($usuario)) {
 
 
     <br>
-    <div id="viewGrafica">
+    <div id="viewGrafica" data-porcentaje-estandar="<?php echo $porcentajeEstandar ?>" data-porcentaje-deluxe="<?php echo $porcentajeDeluxe ?>" data-porcentaje-suite="<?php echo $porcentajeSuite ?>">
 
         <div id="graficaHabitaciones">
 
@@ -227,103 +263,7 @@ if (empty($usuario)) {
 
     </div>
 
-    <?php
 
-    $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
-    $totalHabitaciones = $habitacionesReservadas->num_rows;
-
-    if ($totalHabitaciones > 0) {
-
-        $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
-        $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
-
-        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
-        $cantDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
-        $cantSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
-
-        $porcentajeEstandar = ($cantEstandar * 100) / $totalHabitaciones;
-        $porcentajeDeluxe = ($cantDeluxe * 100) / $totalHabitaciones;
-        $porcentajeSuite = ($cantSuite * 100) / $totalHabitaciones;
-    }
-
-    ?>
-
-    <?php
-
-    if ($genero == "M") {
-
-    ?>
-
-
-        <script>
-            setImg("../../../img/adminBannerM.jpg", "../../../img/perfilM.png");
-        </script>
-
-
-
-    <?php
-    } else {
-
-    ?>
-
-        <script>
-            setImg("../../../img/adminBannerF.jpg", "../../../img/perfilF.png");
-        </script>
-
-
-
-    <?php
-    }
-
-    ?>
 </body>
 
 </html>
-
-<script>
-    liBorderBottom("grafica");
-
-
-    openSubMenu("http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png", "http://localhost/sistema%20Hotel/img/btnFlecha.png");
-
-    dataPointsHabitacionesReservadas = [];
-
-    <?php
-
-    if (isset($porcentajeEstandar)) {
-    ?>
-
-        $("#sinDatos").css("display", "none");
-
-        dataPointsHabitacionesReservadas.push({
-                "y": "<?php echo $porcentajeEstandar ?>",
-                "label": "Estandar"
-            }, {
-                "y": "<?php echo $porcentajeDeluxe ?>",
-                "label": "Deluxe"
-
-            }, {
-                "y": "<?php echo  $porcentajeSuite ?>",
-                "label": "Suite"
-
-            }
-
-        );
-    <?php
-    }
-
-    ?>
-
-    window.onload = function() {
-
-
-        if (dataPointsHabitacionesReservadas.length > 0) {
-
-            graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones",
-                "Categoria de habitaciones mas reservadas");
-
-        }
-
-
-    };
-</script>

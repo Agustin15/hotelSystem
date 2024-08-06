@@ -153,24 +153,22 @@ let cargarHabitacionesEstandar = document.querySelector(
   ".cargarHabitacionesEstandar"
 );
 let cargarHabitacionesDeluxe = document.querySelector(
-    ".cargarHabitacionesDeluxe"
-  );
+  ".cargarHabitacionesDeluxe"
+);
 
-  let cargarHabitacionesSuite = document.querySelector(
-    ".cargarHabitacionesSuite"
-  );
+let cargarHabitacionesSuite = document.querySelector(
+  ".cargarHabitacionesSuite"
+);
 
 if (cargarHabitacionesEstandar) {
   listHabitaciones = $("#habitacionesEstandar");
   loadRoomCategory(listHabitaciones, "Estandar");
-
-}else if (cargarHabitacionesDeluxe) {
+} else if (cargarHabitacionesDeluxe) {
   listHabitaciones = $("#habitacionesDeluxe");
   loadRoomCategory(listHabitaciones, "Deluxe");
-}else{
-
-    listHabitaciones = $("#habitacionesSuite");
-    loadRoomCategory(listHabitaciones, "Suite");
+} else {
+  listHabitaciones = $("#habitacionesSuite");
+  loadRoomCategory(listHabitaciones, "Suite");
 }
 
 function loadRoomCategory(listHabitaciones, page) {
@@ -476,7 +474,10 @@ function optionServicesRoom(numHabitacion) {
     $("#panelOptionService").empty();
     $("#panelOptionService").load(
       "opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion=" +
-        numHabitacion
+        numHabitacion,
+      function () {
+        deleteService(numHabitacion);
+      }
     );
   });
 }
@@ -631,11 +632,11 @@ function addServicesToRoom(numHabitacion) {
 
     $("#optionAddService").load(
       "opcionesHabitacion/opcionesServicios/agregarServicios/masajeServicio.php?numHabitacion=" +
-        numHabitacion
-    ,function(){
-
-        serviceMassage();
-    });
+        numHabitacion,
+      function () {
+        serviceMassage(numHabitacion);
+      }
+    );
   });
 
   $("#liMiniBar").on("click", function () {
@@ -734,19 +735,21 @@ function servicePhone(numHabitacion) {
             $("#modalService").css("display", "block");
             $("#modalService").css("cursor", "none");
 
-            $("#msjServiceAdd").addClass("serviceAdd");
-            $("#msjServiceAdd").load(
-              "opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
-                numHabitacion +
-                "&&idReserva=" +
-                idReserva +
-                "&&servicio=telefono"
-            );
+            $("#msjServiceAdd").css("display", "block");
+            $("#minutosLlamada").val("");
+            $("#lblTotalPhone").text("");
 
             servicio = [];
           }
         });
     }
+  });
+
+  $("#buttonOk").on("click", function () {
+    $("#modalService").css("display", "none");
+    $("#modalService").css("cursor", "auto");
+
+    $("#msjServiceAdd").css("display", "none");
   });
 }
 
@@ -831,18 +834,21 @@ function serviceMassage(numHabitacion) {
             $("#modalService").css("display", "block");
             $("#modalService").css("cursor", "none");
 
-            $("#msjServiceAdd").addClass("serviceAdd");
-            $("#msjServiceAdd").load(
-              "opcionesHabitacion/opcionesServicios/agregarServicios/servicioAgregado.php?numHabitacion=" +
-                numHabitacion +
-                "&&idReserva=" +
-                idReserva +
-                "&&servicio=masaje"
-            );
+            $("#msjServiceAdd").css("display", "block");
+            $("#cantPersonas").val("");
+            $("#totalService").text("");
+
             servicio = [];
           }
         });
     }
+  });
+
+  $("#buttonOk").on("click", function () {
+    $("#modalService").css("display", "none");
+    $("#modalService").css("cursor", "auto");
+
+    $("#msjServiceAdd").css("display", "none");
   });
 }
 
@@ -1141,4 +1147,116 @@ function deleteNotice(alert) {
     var lbl = alert.find("label");
     lbl.text("");
   }, 4000);
+}
+
+function deleteService(numHabitacion) {
+  var buttonsDeletes = document.querySelectorAll(".buttonDelete");
+
+  buttonsDeletes = Array.from(buttonsDeletes);
+
+  buttonsDeletes.forEach(function (buttonDelete) {
+    buttonDelete.addEventListener("click", function () {
+      var divSupButton = this.parentNode;
+      var nombreServicio = divSupButton.dataset.nombreServicio;
+      var idServicioHabitacion = divSupButton.dataset.idServicioHabitacion;
+      var idReserva = divSupButton.dataset.idReserva;
+      var totalService =
+        divSupButton.dataset.precio * divSupButton.dataset.cantidad;
+
+      var serviceDelete = {
+        idServicioHabitacion: idServicioHabitacion,
+        idReserva: idReserva,
+        totalService: totalService,
+      };
+
+      fetch(
+        "http://localhost/sistema%20Hotel/controller/admin/habitaciones/opcionServicio.php?serviceDelete=" +
+          JSON.stringify(serviceDelete),
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((resp) => resp.json())
+        .then((respuesta) => {
+          console.log(respuesta.resultado);
+          if (respuesta.resultado == true) {
+            $("#avisoServiceDelete").css("display", "block");
+            $("#avisoSpan").text(`Servicio de ${nombreServicio} eliminado`);
+            $("#modalService").css("display", "block");
+          }
+        });
+    });
+  });
+
+  $("#btnClose").on("click", function () {
+    $("#avisoServiceDelete").css("display", "none");
+    $("#avisoSpan").text("");
+    $("#modalService").css("display", "none");
+
+    $("#panelOptionService").empty();
+    $("#panelOptionService").load(
+      "opcionesHabitacion/opcionesServicios/eliminarServicio.php?numHabitacion=" +
+        numHabitacion
+    );
+
+    deleteService(numHabitacion);
+  });
+}
+
+
+let viewGrafica=document.getElementById("viewGrafica");
+
+if(viewGrafica){
+
+  liBorderBottom("grafica");
+
+  loadGraphicRooms(viewGrafica.dataset.porcentajeEstandar,viewGrafica.dataset.porcentajeDeluxe,
+    viewGrafica.dataset.porcentajeSuite
+  );
+}
+
+function loadGraphicRooms(porcentajeEstandar,porcentajeDeluxe,porcentajeSuite){
+
+dataPointsHabitacionesReservadas = [];
+
+
+if (porcentajeEstandar!==0 || porcentajeDeluxe!==0|| porcentajeSuite!==0) {
+
+    $("#sinDatos").css("display", "none");
+
+    dataPointsHabitacionesReservadas.push({
+            "y":  porcentajeEstandar,
+            "label": "Estandar"
+        }, {
+            "y": porcentajeDeluxe,
+            "label": "Deluxe"
+
+        }, {
+            "y":porcentajeSuite,
+            "label": "Suite"
+
+        }
+
+    );
+
+}
+
+
+
+window.onload = function() {
+
+
+    if (dataPointsHabitacionesReservadas.length > 0) {
+
+        graficarHabitaciones(dataPointsHabitacionesReservadas, "graficaHabitaciones",
+            "Categoria de habitaciones mas reservadas");
+
+    }
+
+
+};
+
 }

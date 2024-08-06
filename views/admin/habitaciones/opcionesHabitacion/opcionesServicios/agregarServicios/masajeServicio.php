@@ -30,14 +30,24 @@ $cantHuespedes = $habitacion['ninos'] + $habitacion['adultos'];
 
 </div>
 
+
 <div id="msjServiceAdd">
 
+<br>
+    <img src="../../../img/tickServices.gif">
+    <br>
+    <p>servicio de masaje agregado a la habitacion <?php echo $numHabitacion?></p>
+    <p>de la reserva <?php echo $idReserva ?></p>
+
+    <br>
+
+    <button id="buttonOk">OK</button>
 </div>
 
 
-<form id="formAddMassageService" data-id-reserva="<?php echo $idReserva ?>" data-cant-huespedes="<?php echo $cantHuespedes ?>" data-price="<?php echo $service[0]['precio'] ?>" data-id-servicio="<?php echo $idServicio ?>>
+<form id="formAddMassageService" data-id-reserva="<?php echo $idReserva ?>" data-cant-huespedes="<?php echo $cantHuespedes ?>" data-price="<?php echo $service[0]['precio'] ?>" data-id-servicio="<?php echo $idServicio ?>">
 
-    <label id=" tarifa">*Precio por huesped:$<?php echo $service[0]['precio'] ?></label>
+    <label id="tarifa">*Precio por huesped:$<?php echo $service[0]['precio'] ?></label>
     <br><br>
     <label id="lblPrecio">Cantidad de personas:</label>
     <br>

@@ -1,296 +1,15 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
+@import "mixinsGeneral";
 
 body {
-  font-family: Arial;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgb(243, 243, 243);
-}
-body .iconoMenu {
-  width: 36px;
-  margin-top: 6px;
-  margin-left: -110px;
-}
-body .lblTituloMenu {
-  margin-top: 20px;
-  margin-left: 10px;
-  position: absolute;
-  font-size: 17px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-body #navAdmin {
-  margin-left: 0px;
-  margin-top: -5px;
-  position: fixed;
-  background: linear-gradient(#314c86, #3dacb4);
-  color: rgb(255, 255, 255);
-  text-align: center;
-  width: 180px;
-  height: 800px;
-  font-family: Arial;
-}
-body #navAdmin ul {
-  padding-top: 0px;
-}
-body #navAdmin li {
-  margin-top: 11px;
-  padding-top: 17px;
-  height: 30px;
-  cursor: pointer;
-}
-body #navAdmin li a {
-  font-size: 17px;
-  margin-left: 8px;
-  color: white;
-  text-decoration: none;
-}
-body #navAdmin li:hover {
-  background-color: rgb(3, 76, 105);
-}
-body #navAdmin li .subMenu li:hover {
-  background-color: rgb(65, 65, 65);
-}
-body #navAdmin ul img {
-  width: 25px;
-  display: flex;
-  position: absolute;
-  margin-top: -5px;
-  padding-left: 30px;
-}
-body #liInicio a {
-  padding-left: 10px;
-}
-body #liClientes a {
-  padding-left: 16px;
-}
-body #liClientes .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liClientes:hover > .btnFlecha {
-  display: block;
-}
-body .subMenu {
-  background-color: rgb(46, 46, 46);
-  margin-top: 10px;
-  padding-top: 0px;
-  display: none;
-}
-body #navAdmin #liClientes .subMenu li img {
-  width: 22px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liClientes .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liClientes .subMenu li a {
-  font-size: 14px;
-  margin-left: 1px;
-}
-body #liReserva a {
-  padding-left: 26px;
-}
-body #liReserva .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liReserva:hover > .btnFlecha {
-  display: block;
-}
-body #navAdmin #liReserva .subMenu li img {
-  width: 25px;
-  margin-top: -5px;
-  padding-left: 45px;
-}
-body #navAdmin #liReserva .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liReserva .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion a,
-body #navAdmin #liReserva .subMenu .liCalendario a {
-  margin-left: 30px;
-}
-body #liHabitaciones #textHabitaciones {
-  padding-left: 33px;
-}
-body #liHabitaciones .btnFlecha {
-  width: 14px;
-  margin-left: 70%;
-  margin-top: -18px;
-  display: none;
-}
-body #liHabitaciones:hover > .btnFlecha {
-  display: block;
-}
-body #liHabitaciones:hover > #iconoHabitaciones {
-  margin-left: -10px;
-}
-body #liHabitaciones:hover #textHabitaciones {
-  padding-left: 10px;
-}
-body #navAdmin #liHabitaciones .subMenu li img {
-  width: 20px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liHabitaciones .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liHabitaciones .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
-  margin-left: 20px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion a {
-  margin-left: 17px;
-}
-body #liGanancias a {
-  padding-left: 27px;
-}
-body #userAdmin {
-  width: 180px;
-  height: 55px;
-  position: absolute;
-  top: 74%;
-  left: 0px;
-  background-color: #3dacb4;
-}
-body #userAdmin img {
-  width: 33px;
-  padding-top: 10px;
-  padding-right: 85px;
-}
-body #userAdmin label {
-  padding-top: 20px;
-  margin-left: -66px;
-  position: absolute;
-}
-body #userAdmin .subMenuAdmin {
-  height: 91px;
-  background-color: rgb(46, 46, 46);
-  color: white;
-  margin-top: 20px;
-  display: none;
-  padding-top: 0px;
-}
-body #userAdmin .subMenuAdmin li {
-  color: white;
-  list-style: none;
-  padding-top: 10px;
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #userAdmin .subMenuAdmin li img {
-  width: 20px;
-  margin-top: -12px;
-  padding-left: 50px;
-}
-body #userAdmin .subMenuAdmin li a {
-  font-size: 14px;
-  margin-left: 18px;
-  color: white;
-  text-decoration: none;
-}
-body #userAdmin .subMenuAdmin li .logout {
-  margin-left: 10px;
-}
-body #userAdmin .subMenuAdmin li:hover {
-  background-color: rgb(65, 65, 65);
-}
-body #userAdmin .btnFlecha {
-  width: 14px;
-  margin-left: 83%;
-  margin-top: -35px;
-  display: flex;
-  display: none;
-}
-body #userAdmin:hover > .btnFlecha {
-  display: block;
+  @include body;
 }
 
-#menuOptionPane {
-  margin-left: 0px;
-  margin-top: 0px;
-  width: 100%;
-  height: 164px;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  background-color: white;
-}
-#menuOptionPane .title {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: center;
-  margin-left: 39rem;
-}
-#menuOptionPane img {
-  width: 160px;
-}
-#menuOptionPane h1 {
-  color: #6981d8;
-  margin-top: 10px;
-  font-size: 27px;
-}
-#menuOptionPane ul {
-  padding-top: 2.8rem;
-  margin-left: 40%;
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  align-items: center;
-}
-#menuOptionPane ul li {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 1px;
-  cursor: pointer;
-  width: 100px;
-}
-#menuOptionPane ul li:hover {
-  border-bottom: 3px solid rgb(96, 185, 219);
-}
-#menuOptionPane ul li a {
-  opacity: 50%;
-  font-weight: bold;
-  text-decoration: none;
-  color: black;
-}
-#menuOptionPane ul li img {
-  width: 30px;
-  height: 30px;
-}
-#menuOptionPane ul li .icon {
-  padding-right: 0rem;
-}
+@include menuOptionPane;
 
-#menuOptionPane ul {
+#menuOptionPane ul{
+
   padding-top: 1.5rem;
+
 }
 
 #viewGrafica {
@@ -600,8 +319,8 @@ body #userAdmin:hover > .btnFlecha {
   margin-top: 23px;
 }
 
-.divEditar form input[type=text],
-.divEditar form input[type=correo] {
+.divEditar form input[type="text"],
+.divEditar form input[type="correo"] {
   border: 2px solid rgb(224, 224, 224);
   width: 290px;
   border-radius: 3px;
@@ -614,12 +333,12 @@ body #userAdmin:hover > .btnFlecha {
   padding-bottom: 1px;
 }
 
-.divEditar form input[type=correo] {
+.divEditar form input[type="correo"] {
   width: 255px;
 }
 
-.divEditar form input[type=text]:hover,
-.divEditar form input[type=correo]:hover {
+.divEditar form input[type="text"]:hover,
+.divEditar form input[type="correo"]:hover {
   border: 2px solid rgb(41, 122, 214);
 }
 
@@ -643,7 +362,6 @@ body #userAdmin:hover > .btnFlecha {
 .divEditar form button:hover {
   background-color: #3e6c97;
 }
-
 .divInfo {
   margin-top: -44%;
   width: 800px;
@@ -762,6 +480,7 @@ body #userAdmin:hover > .btnFlecha {
   text-align: center;
   background: linear-gradient(#314c86, #46c5ce);
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
   border-radius: 4px;
   color: rgb(255, 255, 255);
 }
@@ -797,6 +516,7 @@ body #userAdmin:hover > .btnFlecha {
   text-align: center;
   background: linear-gradient(#314c86, #3dacb4);
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
   border-radius: 4px;
   color: rgb(255, 255, 255);
 }
@@ -832,6 +552,7 @@ body #userAdmin:hover > .btnFlecha {
   text-align: center;
   background: linear-gradient(#314c86, #3dacb4);
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
   border-radius: 4px;
   color: white;
 }
@@ -867,6 +588,7 @@ body #userAdmin:hover > .btnFlecha {
   text-align: center;
   background: linear-gradient(#314c86, #3dacb4);
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
   border-radius: 4px;
   color: rgb(255, 255, 255);
 }
@@ -1013,10 +735,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .avisoClienteDesactive {
   animation-name: avisoClienteDesactive;
   animation-duration: 0.2s;
@@ -1027,10 +751,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(0);
   }
 }
+
 #alertaEditar {
   color: rgb(255, 255, 255);
   width: 250px;
@@ -1072,10 +798,12 @@ body #userAdmin:hover > .btnFlecha {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 #modalInfo {
   height: 100%;
   width: 100%;
@@ -1413,8 +1141,8 @@ body #userAdmin:hover > .btnFlecha {
   padding-top: 8px;
 }
 
-#formAgregar input[type=text],
-input[type=correo] {
+#formAgregar input[type="text"],
+input[type="correo"] {
   border: 3px solid rgb(212, 212, 212);
   border-radius: 3px;
   width: 200px;
@@ -1427,12 +1155,12 @@ input[type=correo] {
   padding-bottom: 2px;
 }
 
-#formAgregar input[type=text]:hover,
-input[type=correo]:hover {
+#formAgregar input[type="text"]:hover,
+input[type="correo"]:hover {
   border: 3px solid rgb(130, 255, 130);
 }
 
-#formAgregar input[type=submit],
+#formAgregar input[type="submit"],
 #formAgregar button {
   width: 130px;
   height: 32px;
@@ -1442,7 +1170,7 @@ input[type=correo]:hover {
   margin-top: 34px;
 }
 
-#formAgregar input[type=submit] {
+#formAgregar input[type="submit"] {
   margin: auto;
   margin-top: 2%;
 }
@@ -1451,7 +1179,7 @@ input[type=correo]:hover {
   margin-left: 10px;
 }
 
-#formAgregar input[type=submit]:hover,
+#formAgregar input[type="submit"]:hover,
 #formAgregar button:hover {
   background-color: rgb(22, 148, 54);
 }
@@ -1536,18 +1264,22 @@ input[type=correo]:hover {
   from {
     transform: translateY(0px);
   }
+
   to {
     transform: translateY(-20px);
   }
 }
+
 @keyframes lblTranslateRemove {
   from {
     transform: translateY(-20px);
   }
+
   to {
     transform: translateY(0px);
   }
 }
+
 .formAgregarActive {
   animation: bajar;
   animation-duration: 0.3s;
@@ -1564,18 +1296,22 @@ input[type=correo]:hover {
   from {
     margin-top: -1%;
   }
+
   to {
     margin-top: 2%;
   }
 }
+
 @keyframes subir {
   from {
     margin-top: 0%;
   }
+
   to {
     margin-top: -2%;
   }
 }
+
 #alertaAgregar {
   color: rgb(255, 255, 255);
   width: 250px;
@@ -1613,10 +1349,12 @@ input[type=correo]:hover {
   from {
     transform: scale(0);
   }
+
   to {
     transform: scale(1);
   }
 }
+
 .alertaAgregarDesactive {
   animation: alertaAgregarDesactive;
   animation-duration: 0.2s;
@@ -1627,9 +1365,8 @@ input[type=correo]:hover {
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(0);
   }
 }
-
-/*# sourceMappingURL=styleClientes.css.map */

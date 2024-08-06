@@ -33,6 +33,15 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 <div id="msjServiceAdd">
 
+<br>
+    <img src="../../../img/tickServices.gif">
+    <br>
+    <p>Tarifa de telefono agregada a la habitacion <?php echo $numHabitacion?></p>
+    <p>de la reserva <?php echo $idReserva ?></p>
+
+    <br>
+
+    <button id="buttonOk">OK</button>
 </div>
 
 

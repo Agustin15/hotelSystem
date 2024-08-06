@@ -30,9 +30,7 @@ $idReserva = $habitacion['idReservaHabitacion'];
 
 </div>
 
-<div id="msjServiceAdd">
 
-</div>
 
 <div id="container">
     <div id="market">
