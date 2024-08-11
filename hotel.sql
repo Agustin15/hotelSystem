@@ -31,6 +31,9 @@ tipoHabitacion VARCHAR(50) NOT NULL
 
 CREATE TABLE tipo_habitacion(
 categoria VARCHAR(50) NOT NULL PRIMARY KEY,
+imagenUno BLOB NOT NULL,
+imagenDos BLOB NOT NULL,
+imagenTres BLOB NOT NULL,
 camas INT NOT NULL,
 capacidad INT NOT NULL,
 terraza INT,
@@ -125,6 +128,7 @@ INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (9,"Estandar");
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (10,"Estandar");
 
 
+
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (11,"Deluxe");
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (12,"Deluxe");
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (13,"Deluxe");
@@ -148,9 +152,18 @@ INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (29,"Suite");
 INSERT INTO habitaciones (numHabitacion,tipoHabitacion) VALUES (30,"Suite");
 
 
-INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Suite",5,6,1,500);
-INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Deluxe",4,5,1,300);
-INSERT INTO tipo_habitacion (categoria,camas,capacidad,terraza,precio) VALUES ("Estandar",3,4,1,120);
+INSERT INTO tipo_habitacion (categoria,imagenUno,imagenDos,imagenTres,camas,capacidad,terraza,precio) VALUES ("Suite",
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1Suite_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2Suite_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Suite_2.jpg"),5,6,1,500);
+INSERT INTO tipo_habitacion (categoria,imagenUno,imagenDos,imagenTres,camas,capacidad,terraza,precio) VALUES ("Deluxe",
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1Deluxe_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2Deluxe_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Deluxe_2.jpg"),4,5,1,300);
+INSERT INTO tipo_habitacion (categoria,imagenUno,imagenDos,imagenTres,camas,capacidad,terraza,precio) VALUES ("Estandar",
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Suite_2.jpg"),3,4,1,120);
 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50,load_file('C:/xampp/htdocs/Sistema hotel/img/telephone.png'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500,load_file('C:/xampp/htdocs/Sistema hotel/img/massage.png'),null);

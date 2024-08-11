@@ -19,8 +19,6 @@ if (empty($usuario)) {
     date_default_timezone_set('America/Argentina/Buenos_Aires');
 
     $hoy = strtotime(date("Y-m-d"));
-
- 
 }
 
 
@@ -187,34 +185,54 @@ if (empty($usuario)) {
 
     </header>
 
-    <nav id="menuHabitaciones">
+    <nav id="menuOptionPane">
 
-        <br>
-        <h1>Habitaciones </h1>
+        <div class="title">
+            <div>
+                <h1>Habitaciones </h1>
+            </div>
+            <div>
+                <img src="../../../img/keyCardTitle.png">
+            </div>
+        </div>
 
         <ul>
 
             <li class="liGrafica">
 
-                <img src="../../../img/grafica.png">
-                <br>
-                <a href="grafica.php">Gráfica</a>
+
+                <div class="icon">
+
+                    <img src="../../../img/grafica.png">
+                </div>
+                <div>
+                    <a href="grafica.php">Gráfica</a>
+                </div>
             </li>
 
             <li class="liEstandar">
-                <img src="../../../img/standardIcon.png">
-                <br>
-                <a>Estandar</a>
+                <div class="icon">
+                    <img src="../../../img/standardIcon.png">
+                </div>
+                <div>
+                    <a>Estandar</a>
+                </div>
             </li>
             <li class="liDeluxe">
-                <img src="../../../img/deluxeIcon.png">
-                <br>
-                <a href="habitacionesDeluxe.php">Deluxe</a>
+                <div class="icon">
+                    <img src="../../../img/deluxeIcon.png">
+                </div>
+                <div>
+                    <a href="habitacionesDeluxe.php">Deluxe</a>
+                </div>
             </li>
             <li class="liSuite">
-                <img src="../../../img/suiteIcon.png">
-                <br>
-                <a href="habitacionesSuite.php">Suite</a>
+                <div class="icon">
+                    <img src="../../../img/suiteIcon.png">
+                </div>
+                <div>
+                    <a href="habitacionesSuite.php">Deluxe</a>
+                </div>
             </li>
         </ul>
     </nav>

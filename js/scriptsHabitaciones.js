@@ -166,7 +166,7 @@ if (cargarHabitacionesEstandar) {
 } else if (cargarHabitacionesDeluxe) {
   listHabitaciones = $("#habitacionesDeluxe");
   loadRoomCategory(listHabitaciones, "Deluxe");
-} else {
+} else if (cargarHabitacionesSuite){
   listHabitaciones = $("#habitacionesSuite");
   loadRoomCategory(listHabitaciones, "Suite");
 }
@@ -1181,7 +1181,7 @@ function deleteService(numHabitacion) {
       )
         .then((resp) => resp.json())
         .then((respuesta) => {
-          console.log(respuesta.resultado);
+          
           if (respuesta.resultado == true) {
             $("#avisoServiceDelete").css("display", "block");
             $("#avisoSpan").text(`Servicio de ${nombreServicio} eliminado`);

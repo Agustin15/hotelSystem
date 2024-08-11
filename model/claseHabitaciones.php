@@ -15,7 +15,38 @@ class habitaciones
         $this->conexion = new conexion();
     }
 
+    
 
+    public function getAllHabitacionesHotel()
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitaciones");
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    
+
+    public function getHabitacionDisponible($fechaLlegadaNuevaReserva,$fechaSalidaNuevaReserva,$numHabitacion)
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+        (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? ");
+        $consulta->execute();
+
+        $consulta->bind_param("ssi",$fechaSalidaNuevaReserva,$fechaLlegadaNuevaReserva,$numHabitacion);
+
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function getReservasOcupadas($fechaLlegada)
     {
@@ -371,7 +402,7 @@ class habitaciones
         $consulta->execute();
         $resultado = $consulta->get_result();
 
-        return  $resultado->fetch_array(MYSQLI_ASSOC);
+        return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
 
@@ -432,4 +463,9 @@ class habitaciones
         $consulta->bind_param("ii", $idReserva, $numHabitacion);
         return $consulta->execute();
     }
+
+
 }
+
+
+
