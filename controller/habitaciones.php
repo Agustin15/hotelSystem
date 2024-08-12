@@ -1,56 +1,85 @@
 <?php
-
-$dateBooking = json_decode($_GET['dateBooking'], true);
-
-
-
 require "../model/claseHabitaciones.php";
 $habitacion = new habitaciones();
 
-function createRoomData($habitacion, $habitacionHotel)
+
+
+function quantityCategoryRoom($habitacionesDisponibles, $habitacion, $filter)
 {
 
-   $categoriaHabitacion = $habitacion->buscarCategoriaPorNumero($habitacionHotel['numHabitacion']);
+   $cantCategoria = array_reduce($habitacionesDisponibles, function ($ac, $habitacionDisponible) use ($filter) {
 
-   $categoriaHabitacion = $categoriaHabitacion->fetch_array(MYSQLI_ASSOC);
+      ($habitacionDisponible['tipoHabitacion'] == $filter) ? $ac++ : $ac;
+      return $ac;
+   }, 0);
 
-   $datosHabitacion = $habitacion->getPrecioHabitacion($categoriaHabitacion['tipoHabitacion']);
+   return array("category" => $filter, "quantity" => $cantCategoria);
+}
+
+function createRoomData($categoriaHabitaciones)
+{
 
    return array(
-      "category" => $categoriaHabitacion['tipoHabitacion'],
-      "imageOne" => base64_encode($datosHabitacion['imagenUno']),
-      "imageTwo" => base64_encode($datosHabitacion['imagenDos']),
-      "imageThree" => base64_encode($datosHabitacion['imagenTres']),
-      "numberRoom" => $habitacionHotel['numHabitacion'],
-      "beds" => $datosHabitacion['camas'],
-      "ability" => $datosHabitacion['capacidad'],
-      "price" => $datosHabitacion['precio']
+      "category" => $categoriaHabitaciones['categoria'],
+      "imageOne" => base64_encode($categoriaHabitaciones['imagenUno']),
+      "imageTwo" => base64_encode($categoriaHabitaciones['imagenDos']),
+      "imageThree" => base64_encode($categoriaHabitaciones['imagenTres']),
+      "beds" => $categoriaHabitaciones['camas'],
+      "ability" => $categoriaHabitaciones['capacidad'],
+      "price" => $categoriaHabitaciones['precio']
    );
 }
 
+$resultado;
 
-$habitacionesHotel = $habitacion->getAllHabitacionesHotel();
+if ($_GET['option'] == "roomsHotel") {
 
+   $categoriaHabitacionesHotel = $habitacion->getAllCategoryRooms();
 
-$habitacionesDisponibles = array_map(function ($habitacionHotel) use ($habitacion, $dateBooking) {
+   $datosCategoriaHabitaciones = array_map(function ($categoriaHabitacion) {
 
-   $llegada = new DateTime($dateBooking['start']);
-   $salida = new DateTime($dateBooking['end']);
+      return createRoomData($categoriaHabitacion);
+   }, $categoriaHabitacionesHotel);
 
-   $reservasHabitacion = $habitacion->habitacionesReservadas($habitacionHotel['numHabitacion']);
-   $habitacionesConFechaDisponible =  $habitacion->getHabitacionDisponible(
-      $llegada->format("Y-m-d"),
-      $salida->format("Y-m-d"),
-      $habitacionHotel['numHabitacion']
-   );
+   $resultado = $datosCategoriaHabitaciones;
+} else {
 
 
-   if (empty($reservasHabitacion) || count($reservasHabitacion) == count($habitacionesConFechaDisponible)) {
-
-      //esta disponible
-      return createRoomData($habitacion, $habitacionHotel);
-   }
-}, $habitacionesHotel);
+   $dateBooking = json_decode($_GET['dateBooking'], true);
 
 
-echo json_encode($habitacionesDisponibles);
+   $habitacionesHotel = $habitacion->getAllHabitacionesHotel();
+
+
+   $habitacionesLibresEnFechaIngresada = array_map(function ($habitacionHotel) use ($habitacion, $dateBooking) {
+
+      $llegada = new DateTime($dateBooking['start']);
+      $salida = new DateTime($dateBooking['end']);
+
+      $reservasHabitacion = $habitacion->habitacionesReservadas($habitacionHotel['numHabitacion']);
+      $reservasLibresHabitacion =  $habitacion->getHabitacionDisponible(
+         $llegada->format("Y-m-d"),
+         $salida->format("Y-m-d"),
+         $habitacionHotel['numHabitacion']
+      );
+
+
+      if (empty($reservasHabitacion) || count($reservasHabitacion) == count($reservasLibresHabitacion)) {
+
+         //esta disponible
+
+         return $habitacionHotel;
+      }
+   }, $habitacionesHotel);
+
+   $categoriasCantidad = array_map(function ($detallesCategoriaHabitacion) use ($habitacion, $habitacionesLibresEnFechaIngresada) {
+
+      return quantityCategoryRoom($habitacionesLibresEnFechaIngresada, $habitacion, $detallesCategoriaHabitacion['categoria']);
+   }, $habitacion->getAllCategoryRooms());
+
+
+
+   $resultado = $categoriasCantidad;
+}
+
+echo json_encode($resultado);

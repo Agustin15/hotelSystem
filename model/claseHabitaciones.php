@@ -31,6 +31,19 @@ class habitaciones
 
     
 
+    public function getAllCategoryRooms()
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from tipo_habitacion");
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
+
     public function getHabitacionDisponible($fechaLlegadaNuevaReserva,$fechaSalidaNuevaReserva,$numHabitacion)
     {
 
