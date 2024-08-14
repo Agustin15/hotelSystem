@@ -105,7 +105,7 @@
 
                 <div>
                     <div>
-                        <span>Desde:</span>
+                        <span></span>
                     </div>
                     <div>
                         <span class="startBooking"></span>
@@ -114,7 +114,7 @@
 
                 <div>
                     <div>
-                        <span>Hasta:</span>
+                        <span></span>
                     </div>
                     <div>
                         <span class="endBooking"></span>
@@ -147,3 +147,5 @@
 
 
 </body>
+
+    
