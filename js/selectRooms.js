@@ -4,38 +4,8 @@ let salida = document.getElementById("salida");
 let cart = document.getElementById("cart");
 let id = 0;
 let rooms = [];
-
-if (formCheckIn) {
-  formCheckIn.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (llegada.value == "" || salida.value == "") {
-      alerta("Completa todos los campos");
-    } else {
-  
-        cleanRoomCart(document.getElementById("roomsBooking"));
-        cleanDateBooking();
-        cleanQuantityAvailable();
-        rooms=[];
-      
-        startBooking = new Date(llegada.value);
-        endBooking = new Date(salida.value);
-
-        if (salida < llegada) {
-          alerta("Ingresa una fecha válida");
-        } else {
-          const dateBooking = {
-            start: startBooking,
-            end: endBooking,
-          };
-
-          submitDateBooking(dateBooking);
-          printDateBookingInCart(dateBooking);
-        }
-      
-    }
-  });
-}
+let quantityCategorysRooms;
+let nights;
 
 const submitDateBooking = (dateBooking) => {
   fetch(
@@ -50,11 +20,12 @@ const submitDateBooking = (dateBooking) => {
   )
     .then((resp) => resp.json())
     .then((answer) => {
-      printQuantAvailable(answer);
+      quantityCategorysRooms = answer;
+      printQuantAvailable(quantityCategorysRooms);
     });
 };
 
-const printQuantAvailable = (quantityCategorysRooms) => {
+const printQuantAvailable = () => {
   let containRooms = [...document.querySelectorAll(".containRoom")];
 
   containRooms.forEach((containRoom) => {
@@ -237,7 +208,6 @@ const printHotelRooms = (rooms) => {
     `;
   });
 
-
   validateDateInputs();
 };
 
@@ -257,25 +227,6 @@ const submitGetCategoryHotelRooms = () => {
     });
 };
 
-
-
-const printDateBookingInCart = (dateBooking) => {
-  cart.style.display = "flex";
-  document.querySelector(".startBooking").textContent =
-    "Desde" + dateBooking.start.toDateString();
-  document.querySelector(".endBooking").textContent = "Hasta"+
-  dateBooking.end.toDateString();
-
-  let differenceDays = calculateDifferenceNight(
-    dateBooking.start,
-    dateBooking.end
-  );
-  
-  document.querySelector(
-    ".quantityNights"
-  ).textContent = `${differenceDays} noches`;
-};
-
 function calculateDifferenceNight(llegada, salida) {
   let differenceTime = salida.getTime() - llegada.getTime();
 
@@ -283,6 +234,18 @@ function calculateDifferenceNight(llegada, salida) {
 
   return differenceDays;
 }
+
+const printDateBookingInCart = (dateBooking) => {
+  cart.style.display = "flex";
+  document.querySelector(".startBooking").textContent =
+    "Desde" + dateBooking.start.toDateString();
+  document.querySelector(".endBooking").textContent =
+    "Hasta" + dateBooking.end.toDateString();
+
+  nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
+
+  document.querySelector(".quantityNights").textContent = `${nights} noches`;
+};
 
 function validateDateInputs() {
   [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
@@ -299,24 +262,52 @@ function validateDateInputs() {
 }
 
 const createDataRoom = (button) => {
-  
   let adultInput = button.parentNode.parentNode.querySelector(".adult");
   let childrenInput = button.parentNode.parentNode.querySelector(".children");
 
   let dataRoom = JSON.parse(button.parentNode.dataset.dataRoom);
 
   const room = {
-    id: rooms.length+1,
+    id: rooms.length + 1,
     category: dataRoom.category,
     image: dataRoom.imageOne,
     price: dataRoom.price,
     quantity: 1,
     guests: { adult: adultInput.value, children: childrenInput.value },
-    total: dataRoom.price * 1,
+    total: dataRoom.price * nights,
   };
-
   return room;
 };
+
+if (formCheckIn) {
+  formCheckIn.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (llegada.value == "" || salida.value == "") {
+      alerta("Completa todos los campos");
+    } else {
+      cleanRoomCart(document.getElementById("roomsBooking"));
+      cleanDateBooking();
+      cleanQuantityAvailable();
+      rooms = [];
+
+      startBooking = new Date(llegada.value);
+      endBooking = new Date(salida.value);
+
+      if (salida < llegada) {
+        alerta("Ingresa una fecha válida");
+      } else {
+        const dateBooking = {
+          start: startBooking,
+          end: endBooking,
+        };
+
+        submitDateBooking(dateBooking);
+        printDateBookingInCart(dateBooking);
+      }
+    }
+  });
+}
 
 const addRoomToList = (room) => {
   rooms.push(room);
@@ -357,15 +348,19 @@ const printRoomsCart = () => {
 <div class="quantity">
 
   <div>
- <img data-id="${room.id}" class="buttonSubtract" src="../img/minus.png">
+ <img data-room='${JSON.stringify(
+   room
+ )}' class="buttonSubtract" src="../img/minus.png">
   </div>
 
   <div>
 
-  <span>1</span>
+  <span>${room.quantity}</span>
   </div>
   <div>
-  <img data-id="${room.id}" class="buttonPlus" src="../img/add.png">
+  <img data-room='${JSON.stringify(
+    room
+  )}' class="buttonPlus" src="../img/add.png">
   </div>
 </div>
 </div>
@@ -412,7 +407,7 @@ const printRoomsCart = () => {
 </div>
 
 <div class="price">
-<span>Precio:$${room.price}</span>
+<span>Precio:$${room.total}</span>
 </div>
 </div>
 </li>
@@ -422,25 +417,24 @@ const printRoomsCart = () => {
    `;
   });
 
-  [...document.querySelectorAll(".buttonDelete")].forEach((buttonDelete) => {
-    buttonDelete.addEventListener("click",deleteRoomToList(this.dataset.id));
+  document.querySelectorAll(".buttonDelete").forEach((buttonDelete) => {
+    buttonDelete.addEventListener("click", function () {
+      deleteRoomToList(this.dataset.id);
+    });
   });
 
-
-  document.querySelectorAll(".buttonSubtract").forEach(buttonSubtract=>{
-
-    buttonSubtract.addEventListener("click",subtractRoom(this.dataset.id));
+  document.querySelectorAll(".buttonSubtract").forEach((buttonSubtract) => {
+    buttonSubtract.addEventListener("click", function () {
+      subtractRoom(JSON.parse(this.dataset.room));
+    });
   });
 
-  
-
-  document.querySelectorAll(".buttonPlus").forEach(buttonPlus=>{
-
-    buttonplus.addEventListener("click",plusRoom(this.dataset.id));
+  document.querySelectorAll(".buttonPlus").forEach((buttonPlus) => {
+    buttonPlus.addEventListener("click", function () {
+      plusRoom(JSON.parse(this.dataset.room));
+    });
   });
-
-}
-
+};
 
 const deleteRoomToList = (id) => {
   rooms = rooms.filter((roomDelete) => roomDelete.id != id);
@@ -448,59 +442,65 @@ const deleteRoomToList = (id) => {
   printRoomsCart();
 };
 
-
-const subtractRoom = (id) => {
-  rooms = rooms.map((roomQuantitySubtract)=>{
-
-    if(roomQuantitySubtract.id==id){
-
-      if(roomQuantitySubtract.quantity>1){
-      roomQuantitySubtract.quantity--;
+const subtractRoom = (roomToSubstract) => {
+  rooms = rooms.map((roomQuantitySubtract) => {
+    if (roomQuantitySubtract.id == roomToSubstract.id) {
+      console.log(roomQuantitySubtract);
+      if (roomQuantitySubtract.quantity > 1) {
+        roomQuantitySubtract.quantity--;
+        roomQuantitySubtract.total = calculateTotalRoom(roomQuantitySubtract);
       }
     }
-  })
-}
-
-  
-const plusRoom = (id) => {
-  rooms = rooms.map((roomQuantitySubtract)=>{
-
-    if(roomQuantitySubtract.id==id){
-
-      if(roomQuantitySubtract.quantity<10){
-      roomQuantitySubtract.quantity++;
-      }
-    }
-  })
+    return roomQuantitySubtract;
+  });
 
   printRoomsCart();
 };
 
+const plusRoom = (roomToPlus) => {
+  rooms = rooms.map((roomQuantityPlus) => {
+    if (roomQuantityPlus.id == roomToPlus.id) {
+      let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
+        if (categoryRoom.category == roomToPlus.category) {
+          ac = categoryRoom.quantity;
+        }
+        return ac;
+      }, 0);
 
+      if (roomQuantityPlus.quantity < limitRoom) {
+        roomQuantityPlus.quantity++;
+        roomQuantityPlus.total = calculateTotalRoom(roomQuantityPlus);
+      }
+    }
+
+    return roomQuantityPlus;
+  });
+
+  printRoomsCart();
+};
+
+const calculateTotalRoom = (roomToCalculate) => {
+  return roomToCalculate.price * roomToCalculate.quantity * nights;
+};
 
 const cleanRoomCart = (roomsBooking) => {
   roomsBooking.innerHTML = "";
 };
 
-
 const cleanDateBooking = () => {
-
-  if(document.getElementById("dateBooking")){
-  let spans = document.getElementById("dateBooking").querySelectorAll("span");
-  spans.forEach((span) => (span.textContent = ""));
+  if (document.getElementById("dateBooking")) {
+    let spans = document.getElementById("dateBooking").querySelectorAll("span");
+    spans.forEach((span) => (span.textContent = ""));
   }
 };
 
-const cleanQuantityAvailable=()=>{
-
-if(document.querySelector(".quantityAvailableRoom")){
-
-  document.querySelectorAll(".containAvailableRooms").forEach(element=>element.innerHTML="");
- 
-     
-}
-  
-}
+const cleanQuantityAvailable = () => {
+  if (document.querySelector(".quantityAvailableRoom")) {
+    document
+      .querySelectorAll(".containAvailableRooms")
+      .forEach((element) => (element.innerHTML = ""));
+  }
+};
 
 window.onload = function () {
   submitGetCategoryHotelRooms();

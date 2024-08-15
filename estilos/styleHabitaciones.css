@@ -402,12 +402,14 @@ header li img {
 }
 
 #containRoomsAndCart #cart {
-  width: 330px;
+  width: 340px;
   height: 440px;
   background: linear-gradient(#242c49, #36457e);
   margin-top: 3rem;
   margin-right: 3rem;
   text-align: center;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgb(53, 53, 53);
   padding-top: 1rem;
   font-family: Arial, Helvetica, sans-serif;
   flex-direction: column;
@@ -532,12 +534,13 @@ header li img {
 #roomsBooking li .guests{
 
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 1.2rem;
+  width: 170px;
   font-size: 15px;
   margin-top: -2.2rem;
-  margin-left: 2rem;
+  margin-left: 5.4rem;
 }
 
 
