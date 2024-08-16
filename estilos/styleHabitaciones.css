@@ -222,6 +222,56 @@ header li img {
   margin-top: 13px;
 }
 
+#modal{
+
+  width: 100%;
+  height: 210%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(104, 104, 104, 0.3);
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+}
+.bodyModal{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 400px;
+  height: 220px;
+  border-radius: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  background-color: white;
+  padding-top: 1rem;
+
+ 
+}
+.bodyModal .title{
+
+padding-top: 0.5rem;
+}
+.bodyModal img{
+
+  width: 40px;
+}
+#modal button{
+
+  width: 130px;
+  height: 35px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgb(59, 59, 59);
+  color: white;
+  font-weight: bold;
+  border: none;
+  background-color: #242c49;
+}
 #containRoomsAndCart {
   display: flex;
   flex-direction: row;
@@ -383,7 +433,6 @@ header li img {
   font-weight: bold;
 }
 
-
 #containRooms .containRoom .quantityAvailableRoom {
   background-color: black;
   box-shadow: 2px 2px 2px black;
@@ -403,7 +452,7 @@ header li img {
 
 #containRoomsAndCart #cart {
   width: 340px;
-  height: 440px;
+  height:630px;
   background: linear-gradient(#242c49, #36457e);
   margin-top: 3rem;
   margin-right: 3rem;
@@ -411,6 +460,7 @@ header li img {
   border-radius: 3px;
   box-shadow: 2px 2px 2px rgb(53, 53, 53);
   padding-top: 1rem;
+  padding-bottom: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
   flex-direction: column;
   align-items: center;
@@ -427,6 +477,7 @@ header li img {
   color: white;
   display: flex;
   gap: 6rem;
+  padding-top: 1rem;
 }
 
 #containRoomsAndCart #cart .containNight {
@@ -445,7 +496,7 @@ header li img {
 }
 
 #roomsBooking {
-  height: 100%;
+  height: 50%;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -476,7 +527,6 @@ header li img {
   margin-top: -2rem;
   gap: 0.5rem;
   width: 50px;
- 
 }
 
 #roomsBooking li .containIconAndCategory img {
@@ -489,8 +539,6 @@ header li img {
   padding-top: 1rem;
   margin-top: 0rem;
   font-size: 17px;
-  
-
 }
 #roomsBooking li .containIconAndCategory .icon {
   padding-left: 0.2rem;
@@ -516,7 +564,6 @@ header li img {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  
 }
 #roomsBooking li .quantity {
   display: flex;
@@ -526,13 +573,11 @@ header li img {
   padding-left: 0.5rem;
 }
 
-#roomsBooking li .quantity img{
-
+#roomsBooking li .quantity img {
   width: 15px;
 }
 
-#roomsBooking li .guests{
-
+#roomsBooking li .guests {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -543,55 +588,126 @@ header li img {
   margin-left: 5.4rem;
 }
 
-
-#roomsBooking li .guests img{
-
+#roomsBooking li .guests img {
   width: 20px;
-
 }
 
 #roomsBooking li .guests .adult,
-#roomsBooking li .guests .children{
-
+#roomsBooking li .guests .children {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-
-#roomsBooking li .guests .value{
-
+#roomsBooking li .guests .value {
   display: flex;
 }
-#roomsBooking li .guests .title{
-
+#roomsBooking li .guests .title {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-
 }
 
-#roomsBooking li .containFooterDetails{
-
+#roomsBooking li .containFooterDetails {
   display: flex;
   gap: 1rem;
   justify-content: center;
   align-items: end;
   margin-left: 5rem;
 }
-#roomsBooking li .quantityValue{
-
-
+#roomsBooking li .quantityValue {
   margin-top: 0.5rem;
 }
 
-#roomsBooking li .price{
-
+#roomsBooking li .price {
   display: flex;
   justify-content: end;
   margin-top: 0.5rem;
-  margin-right:1rem;
+  margin-right: 1rem;
+}
+
+#containDeposit {
+  background-color: white;
+  width: 90%;
+  height: 220px;
+  border-radius: 3px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 2px rgb(54, 54, 54);
+  gap: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+#containDeposit .span {
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding-left: 1rem;
+  margin-right: 14rem;
+}
+
+#containDeposit .containTotal {
+  display: flex;
+  justify-content: start;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  background: #242c49;
+  padding: 0.5rem;
+  width: 90%;
+  height: 40px;
+  border-radius: 2px;
+}
+
+#containDeposit .containNotice {
+  background: rgba(28, 178, 184, 0.3);
+  color: rgb(33, 182, 241);
+  display: flex;
+  font-size: 12px;
+  border-radius: 3px;
+  justify-content: start;
+  align-items: center;
+  padding: 0.5rem;
+  height: 27px;
+  width: 240px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+
+}
+
+#containDeposit .containNotice img {
+  width: 15px;
+}
+#containDeposit .containNotice .phrase{
+
+  padding-left: 1rem;
+  padding-top: 0.1rem;
+}
+
+
+#containDeposit .containNotice .icon {
+
+  margin-top: -0.5rem;
+}
+
+#containDeposit .containButton {
+
+  margin-top: 0.5rem;
   
+}
+
+#containDeposit .containButton button{
+
+  width:240px;
+  background: rgba(28, 178, 184, 0.3);
+  color: rgb(33, 182, 241);
+  height: 34px;
+  border: none;
+  font-weight: bold;
+
 }

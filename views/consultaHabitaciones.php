@@ -89,6 +89,22 @@
         </div>
     </form>
 
+    <div id="modal">
+
+    <div class="bodyModal">
+    <div class="icon">
+        <img src="../img/alert.png">
+    </div>
+    <div class="title">
+
+    <p>Excede el limite de habitaciones disponibles</p>
+
+    </div>
+    <div>
+        <button>OK</button>
+    </div>
+    </div>
+    </div>
 
     <div id="containRoomsAndCart">
 
@@ -136,6 +152,30 @@
             <ul id="roomsBooking">
 
             </ul>
+
+            <div id="containDeposit">
+
+            <div class="span">
+            <span>Deposito:</span>
+            </div>
+
+            <div class="containNotice">
+                <div class="icon">
+                    <img src="../img/avisoDeposito.png">
+                </div>
+                <div class="phrase">
+                    <span>Reserve ahora, pague despues</span>
+                </div>
+            </div>
+            <div class="containTotal">
+                <span class="total"></span>
+            </div>
+
+            <div class="containButton">
+                <button>Siguiente</button>
+            </div>
+          
+
         </div>
 
     </div>
@@ -147,5 +187,3 @@
 
 
 </body>
-
-    

@@ -2,10 +2,13 @@ const formCheckIn = document.getElementById("checkIn");
 let llegada = document.getElementById("llegada");
 let salida = document.getElementById("salida");
 let cart = document.getElementById("cart");
-let id = 0;
+let divDeposit = document.getElementById("containDeposit");
+let modal = document.getElementById("modal");
+let totalDeposit = 0;
 let rooms = [];
 let quantityCategorysRooms;
 let nights;
+let booking;
 
 const submitDateBooking = (dateBooking) => {
   fetch(
@@ -254,8 +257,21 @@ function validateDateInputs() {
         alerta("Ingresa una fecha válida");
       } else {
         let room = createDataRoom(btn);
-        addRoomToList(room);
-        printRoomsCart();
+        let result = comprobateQuantityRoomForAdd(room);
+        switch (result) {
+          case "quantityAdded":
+            printRoomsCart();
+            break;
+          case "No existe":
+            addRoomToList(room);
+            printRoomsCart();
+
+            break;
+          default:
+            alertModal("show");
+
+            break;
+        }
       }
     });
   });
@@ -289,10 +305,11 @@ if (formCheckIn) {
       cleanRoomCart(document.getElementById("roomsBooking"));
       cleanDateBooking();
       cleanQuantityAvailable();
+      cleanDeposit();
       rooms = [];
 
-      startBooking = new Date(llegada.value);
-      endBooking = new Date(salida.value);
+      let startBooking = new Date(llegada.value);
+      let endBooking = new Date(salida.value);
 
       if (salida < llegada) {
         alerta("Ingresa una fecha válida");
@@ -434,6 +451,9 @@ const printRoomsCart = () => {
       plusRoom(JSON.parse(this.dataset.room));
     });
   });
+
+  totalPriceBooking();
+  printDeposit();
 };
 
 const deleteRoomToList = (id) => {
@@ -479,9 +499,74 @@ const plusRoom = (roomToPlus) => {
   printRoomsCart();
 };
 
+function comprobateQuantityRoomForAdd(roomForAdd) {
+  let result;
+
+  if (rooms.length > 0) {
+    rooms.forEach((roomInCart) => {
+      if (
+        roomInCart.category == roomForAdd.category &&
+        roomInCart.guests.adult == roomForAdd.guests.adult &&
+        roomInCart.guests.children == roomForAdd.guests.children
+      ) {
+        let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
+          if (categoryRoom.category == roomForAdd.category) {
+            ac = categoryRoom.quantity;
+          }
+          return ac;
+        }, 0);
+
+        if (roomForAdd.quantity + roomInCart.quantity <= limitRoom) {
+          roomInCart.quantity++;
+          roomInCart.total = calculateTotalRoom(roomInCart);
+          
+          result = "quantityAdded";
+        } else {
+          result = "Excede el limite de habitaciones disponibles";
+        }
+      } else {
+        result = "No existe";
+      }
+    });
+  } else {
+    result = "No existe";
+  }
+
+  return result;
+}
+
+function printDeposit() {
+  divDeposit.style.display = "flex";
+  divDeposit.querySelector(".total").textContent = "Total:$" + totalDeposit;
+}
+
 const calculateTotalRoom = (roomToCalculate) => {
   return roomToCalculate.price * roomToCalculate.quantity * nights;
 };
+
+function totalPriceBooking() {
+  totalDeposit = rooms.reduce(
+    (ac, roomToCalculate) => (ac += roomToCalculate.total),
+    0
+  );
+
+  return totalDeposit;
+}
+
+const alertModal = (option) => {
+  if (option == "show") {
+    modal.style.display = "flex";
+  } else {
+    modal.style.display = "none";
+  }
+  buttonModalAlert();
+};
+
+function buttonModalAlert() {
+  modal.querySelector("button").addEventListener("click",function(){
+    alertModal("hide")
+  });
+}
 
 const cleanRoomCart = (roomsBooking) => {
   roomsBooking.innerHTML = "";
@@ -492,6 +577,11 @@ const cleanDateBooking = () => {
     let spans = document.getElementById("dateBooking").querySelectorAll("span");
     spans.forEach((span) => (span.textContent = ""));
   }
+};
+
+const cleanDeposit = () => {
+  divDeposit.querySelector(".total").textContent = "";
+  divDeposit.style.display = "none";
 };
 
 const cleanQuantityAvailable = () => {
