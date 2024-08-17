@@ -54,9 +54,21 @@ const printQuantAvailable = () => {
 };
 
 const printHotelRooms = (rooms) => {
-  rooms.forEach((room) => {
-    document.getElementById("containRooms").innerHTML += `
-  
+  hotelRoomsPrint = rooms.map((room) => {
+    return `
+    <div class="alertGuests">
+        
+    <div class="icon">
+        <img src="../img/avisoHuespedes.png">
+    </div>
+
+    <div class="msj">
+
+        <span></span>
+        
+    </div>
+    </div>
+
     <div class="containRoom" data-category="${room.category}">
   
         <div class="containTitleAndRoom">
@@ -183,7 +195,8 @@ const printHotelRooms = (rooms) => {
                         <label>Niños</label>
                     </div>
                     <div>
-                        <input type="number" value="0" min=0 max=${
+                        <input 
+                        type="number" value="0" min=0 max=${
                           room.ability - 1
                         } data-ability="${room.ability - 1}"  class="children">
                            
@@ -211,6 +224,7 @@ const printHotelRooms = (rooms) => {
     `;
   });
 
+  document.getElementById("containRooms").innerHTML = hotelRoomsPrint.join("");
   validateDateInputs();
 };
 
@@ -250,33 +264,6 @@ const printDateBookingInCart = (dateBooking) => {
   document.querySelector(".quantityNights").textContent = `${nights} noches`;
 };
 
-function validateDateInputs() {
-  [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (llegada.value == "" || salida.value == "") {
-        alerta("Ingresa una fecha válida");
-      } else {
-        let room = createDataRoom(btn);
-        let result = comprobateQuantityRoomForAdd(room);
-        switch (result) {
-          case "quantityAdded":
-            printRoomsCart();
-            break;
-          case "No existe":
-            addRoomToList(room);
-            printRoomsCart();
-
-            break;
-          default:
-            alertModal("show");
-
-            break;
-        }
-      }
-    });
-  });
-}
-
 const createDataRoom = (button) => {
   let adultInput = button.parentNode.parentNode.querySelector(".adult");
   let childrenInput = button.parentNode.parentNode.querySelector(".children");
@@ -294,6 +281,62 @@ const createDataRoom = (button) => {
   };
   return room;
 };
+
+function validateQuantityGuestsInputs(adultInput, childrenInput) {
+  let ability = adultInput.ability;
+  let validate = null;
+  if (childrenInput.value == 0 || adultInput.value == 0) {
+    validate = "Ingresa algun huesped";
+  } else if (childrenInput.value + adultInput.value > ability) {
+    validate = "Capacidad de huespedes excedida";
+  }
+
+  return validate;
+}
+
+function validateDateInputs() {
+  [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (llegada.value == "" || salida.value == "") {
+        alerta("Ingresa una fecha válida");
+      } else {
+        if (
+          validateQuantityGuestsInputs(
+            btn.parentNode.parentNode.querySelector(".adult"),
+            btn.parentNode.parentNode.querySelector(".children")
+          ) != null
+        ) {
+
+          alertGuests(
+            validateQuantityGuestsInputs(btn.parentNode.parentNode.querySelector(".adult"),
+            btn.parentNode.parentNode.querySelector(".children")),
+            btn.parentNode.parentNode.parentNode.parentNode.querySelector(
+              ".alertGuests"
+            )
+          );
+        } else {
+          let room = createDataRoom(btn);
+          let result = comprobateQuantityRoomForAdd(room);
+          switch (result) {
+            case "quantityAdded":
+              printRoomsCart();
+              break;
+            case null:
+              addRoomToList(room);
+              printRoomsCart();
+
+              break;
+            default:
+              alertModal("show");
+              window.scroll(0, 90);
+
+              break;
+          }
+        }
+      }
+    });
+  });
+}
 
 if (formCheckIn) {
   formCheckIn.addEventListener("submit", (event) => {
@@ -335,10 +378,9 @@ const printRoomsCart = () => {
 
   cleanRoomCart(roomsBooking);
 
-  rooms.forEach((room) => {
-    roomsBooking.innerHTML += `
+  let roomsToPrint = rooms.map((room) => {
+    return `
 
-   
 <li class="roomSelected">
 
 
@@ -434,6 +476,8 @@ const printRoomsCart = () => {
    `;
   });
 
+  roomsBooking.innerHTML = roomsToPrint.join("");
+
   document.querySelectorAll(".buttonDelete").forEach((buttonDelete) => {
     buttonDelete.addEventListener("click", function () {
       deleteRoomToList(this.dataset.id);
@@ -453,7 +497,12 @@ const printRoomsCart = () => {
   });
 
   totalPriceBooking();
-  printDeposit();
+
+  if (rooms.length > 0) {
+    printDeposit();
+  } else {
+    cleanDeposit();
+  }
 };
 
 const deleteRoomToList = (id) => {
@@ -500,7 +549,7 @@ const plusRoom = (roomToPlus) => {
 };
 
 function comprobateQuantityRoomForAdd(roomForAdd) {
-  let result;
+  let result = null;
 
   if (rooms.length > 0) {
     rooms.forEach((roomInCart) => {
@@ -519,17 +568,13 @@ function comprobateQuantityRoomForAdd(roomForAdd) {
         if (roomForAdd.quantity + roomInCart.quantity <= limitRoom) {
           roomInCart.quantity++;
           roomInCart.total = calculateTotalRoom(roomInCart);
-          
-          result = "quantityAdded";
+
+          return (result = "quantityAdded");
         } else {
-          result = "Excede el limite de habitaciones disponibles";
+          return (result = "Excede el limite de habitaciones disponibles");
         }
-      } else {
-        result = "No existe";
       }
     });
-  } else {
-    result = "No existe";
   }
 
   return result;
@@ -563,8 +608,8 @@ const alertModal = (option) => {
 };
 
 function buttonModalAlert() {
-  modal.querySelector("button").addEventListener("click",function(){
-    alertModal("hide")
+  modal.querySelector("button").addEventListener("click", function () {
+    alertModal("hide");
   });
 }
 
@@ -592,6 +637,6 @@ const cleanQuantityAvailable = () => {
   }
 };
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   submitGetCategoryHotelRooms();
-};
+});

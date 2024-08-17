@@ -222,8 +222,7 @@ header li img {
   margin-top: 13px;
 }
 
-#modal{
-
+#modal {
   width: 100%;
   height: 210%;
   position: absolute;
@@ -231,12 +230,11 @@ header li img {
   left: 0;
   background-color: rgba(104, 104, 104, 0.3);
   justify-content: center;
-  align-items: center;
+  align-items: start;
   display: none;
-
 }
-.bodyModal{
-
+.bodyModal {
+  margin-top: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -250,19 +248,14 @@ header li img {
   font-weight: bold;
   background-color: white;
   padding-top: 1rem;
-
- 
 }
-.bodyModal .title{
-
-padding-top: 0.5rem;
+.bodyModal .title {
+  padding-top: 0.5rem;
 }
-.bodyModal img{
-
+.bodyModal img {
   width: 40px;
 }
-#modal button{
-
+#modal button {
   width: 130px;
   height: 35px;
   border-radius: 3px;
@@ -450,9 +443,74 @@ padding-top: 0.5rem;
   margin-left: -2rem;
 }
 
+.alertGuests {
+  position: absolute;
+  width: 300px;
+  height: 50px;
+  color: white;
+  border-radius: 3px;
+  background: linear-gradient(#242c49, #36457e);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.2rem;
+  top:36%;
+  left: -30%;
+}
+
+.alertGuests .icon {
+  margin-right: 17rem;
+  margin-top: -1.2rem;
+}
+
+.alertGuests .msj {
+  display: flex;
+  margin-top: -0.5rem;
+  font-weight: bold;
+  font-size: 15px;
+}
+.alertGuests img {
+  width: 14px;
+}
+
+.alertGuestsShow {
+  animation-name: alertShow;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+
+.alertGuestsHide {
+  animation-name: alertHide;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes alertShow {
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 4%;
+  }
+}
+
+
+@keyframes alertHide {
+  from {
+    left: 4%;
+  }
+
+  to {
+    left: -30%;
+  }
+}
+
 #containRoomsAndCart #cart {
   width: 340px;
-  height:630px;
+  height: 630px;
   background: linear-gradient(#242c49, #36457e);
   margin-top: 3rem;
   margin-right: 3rem;
@@ -644,7 +702,6 @@ padding-top: 0.5rem;
 }
 
 #containDeposit .span {
-
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   padding-left: 1rem;
@@ -677,37 +734,29 @@ padding-top: 0.5rem;
   width: 240px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-
 }
 
 #containDeposit .containNotice img {
   width: 15px;
 }
-#containDeposit .containNotice .phrase{
-
+#containDeposit .containNotice .phrase {
   padding-left: 1rem;
   padding-top: 0.1rem;
 }
 
-
 #containDeposit .containNotice .icon {
-
   margin-top: -0.5rem;
 }
 
 #containDeposit .containButton {
-
   margin-top: 0.5rem;
-  
 }
 
-#containDeposit .containButton button{
-
-  width:240px;
+#containDeposit .containButton button {
+  width: 240px;
   background: rgba(28, 178, 184, 0.3);
   color: rgb(33, 182, 241);
   height: 34px;
   border: none;
   font-weight: bold;
-
 }
