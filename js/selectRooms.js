@@ -657,6 +657,7 @@ document.addEventListener("DOMContentLoaded", function () {
 buttonNext.addEventListener("click", function () {
   booking = {
     date: dateBooking,
+    nights:nights,
     rooms: rooms,
     totalDeposit: totalDeposit,
   };

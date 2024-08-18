@@ -30,7 +30,7 @@
         </div>
 
 
-        <ul>
+        <ul class="options">
 
             <li><a href="../views/index.html">Inicio</a></li>
             <li><a href="../views/habitaciones.html">Habitaciones</a></li>
@@ -41,7 +41,7 @@
         </ul>
 
 
-        <ul class="redes">
+        <ul class="networks">
             <li><img src="../img/instagram.png"></li>
             <li><img src="../img/facebook.png"></li>
             <li><img src="../img/whatsapp.png"></li>

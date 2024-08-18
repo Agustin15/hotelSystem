@@ -46,44 +46,102 @@
 
 
         <div class="containClientAndBooking">
-        <div>
-        <form>
-        <h4>Complete sus datos</h4>
-        <div class="nameAndLast">
-        <div class="name">
-            <input type="text" name="name" >
+            <div class="client">
+                <form>
+                    <h4>Complete sus datos</h4>
+                    <div class="nameAndLast">
+
+                        <div class="name">
+                            <div>
+
+                                <label for="name">Nombre</label>
+                            </div>
+                            <div>
+                                <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
+
+                            </div>
+                        </div>
+
+
+                        <div class="lastName">
+
+                            <div>
+
+                                <label for="lastName">Apellido</label>
+                            </div>
+                            <div>
+                                <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phoneAndMail">
+                        <div class="phone">
+
+                            <div>
+
+                                <label for="phone">Telefono</label>
+                            </div>
+
+                            <div>
+                                <input type="text" id="phone" placeholder="Ingrese telefono" onkeypress="
+            return event.charCode>= 48 && event.charCode <= 57" name="phone" autocomplete="off">
+                            </div>
+
+                        </div>
+
+                        <div class="mail">
+
+                            <div>
+
+                                <label for="mail">Correo</label>
+                            </div>
+
+                            <input type="mail" placeholder="Ingrese correo" name="mail" autocomplete="off">
+
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <div class="bookingData">
+
+                <h1>Datos de la reserva</h1>
+
+                <div class="dateBooking">
+
+                    <div class="start">
+
+                        <span>Llegada</span>
+                        <span class="startBooking"></span>
+                    </div>
+
+                    <div class="end">
+                        <span>Salida</span>
+                        <span class="endBooking"></span>
+                    </div>
+
+                </div>
+
+                <div class="nights">
+                    <span>Noches</span>
+                </div>
+                <ul class="bookingRooms">
+
+
+                  
+                </ul>
+
+            </div>
+
+
+
 
         </div>
-        
-        <div class="lastName">
-            <input type="text" name="lastName" >
-
-        </div>
-        </div>
-
-        <div class="phoneAndMail">
-        <div class="phone">
-            <input type="text" name="phone" >
-
-        </div>
-        
-        <div class="mail">
-            <input type="mail" name="mail" >
-
-        </div>
-        </div>
-
-
-
-            </form>
-        </div>
-
-        <div class="bookingData">
-
-        </div>
-
-
-    </div>
     </div>
 
 </body>

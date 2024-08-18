@@ -1,0 +1,221 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: Arial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+header {
+  background: linear-gradient(#242c49, #36457e);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 100%;
+  height: 70px;
+  font-family: Arial;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+header ul {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-family: Arial;
+  margin-right: 18rem;
+  margin-top: 0.5rem;
+}
+
+header li {
+  display: inline-block;
+  padding: 14px;
+  text-align: center;
+  transform: scale(1);
+  transition: 0.5s;
+}
+
+header li:hover {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.822);
+  transform: scale(1.1);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+header li img {
+  width: 16px;
+}
+
+.redes {
+  margin-top: 0.7rem;
+  margin-right: 4rem;
+}
+
+.redes li:hover {
+  transform: scale(1);
+  border-bottom: none;
+}
+
+.redes img {
+  opacity: 100%;
+  transition: 0.5s;
+}
+
+.redes img:hover {
+  opacity: 60%;
+  transition: 0.5s;
+}
+
+#logo {
+  display: flex;
+  margin-left: 6%;
+  margin-top: -0.3rem;
+}
+
+#logo h1 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 20px;
+  margin-left: 15px;
+  color: rgb(255, 255, 255);
+}
+
+.options {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-family: Arial;
+  margin-right: 18rem;
+  margin-top: 1.4rem;
+}
+
+.networks {
+  margin-top: 1.4rem;
+  margin-right: 4rem;
+}
+.networks li:hover {
+  transform: scale(1);
+  border-bottom: none;
+}
+.networks img {
+  opacity: 100%;
+  transition: 0.5s;
+}
+.networks img:hover {
+  opacity: 60%;
+  transition: 0.5s;
+}
+
+#bannerEstandar {
+  width: 100%;
+  height: 450px;
+  margin-top: 0%;
+}
+
+.carousel-control-prev:hover {
+  transition: 0.5ms;
+  transform: scale(1.2);
+}
+
+.carousel-control-next:hover {
+  transition: 0.5ms;
+  transform: scale(1.2);
+}
+
+carousel-control-prev-icon {
+  width: 100px;
+}
+
+.tituloStandar {
+  background: rgba(0, 0, 0, 0.6);
+  width: 340px;
+  height: 100px;
+  text-align: center;
+  position: absolute;
+  margin-top: -31%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tituloStandar h1 {
+  padding-top: 8px;
+  font-size: 33px;
+  color: white;
+}
+
+.section {
+  width: 100%;
+  height: 1400px;
+  background: linear-gradient(#242c49, #36457e);
+  margin-top: 4%;
+  margin: auto;
+}
+
+.subSection {
+  width: 90%;
+  height: 800px;
+  background-color: rgb(228, 228, 228);
+  padding-left: 60px;
+  margin: auto;
+  margin-top: 6%;
+}
+.subSection ul {
+  margin-top: 1%;
+}
+
+#habitaciones {
+  width: 1200px;
+  height: 240px;
+  margin: auto;
+  margin-top: 2%;
+}
+#habitaciones li {
+  list-style: none;
+  display: inline-block;
+  padding: 5px;
+  margin-left: 2%;
+  color: white;
+  font-size: 23px;
+  text-align: center;
+}
+#habitaciones li img {
+  width: 330px;
+  height: 240px;
+}
+
+#verMasEstandar {
+  width: 42px;
+  height: 42px;
+  margin-left: 13%;
+  position: absolute;
+  margin-top: 10%;
+  visibility: hidden;
+}
+
+#verMasDeluxe {
+  width: 42px;
+  margin-left: 13%;
+  position: absolute;
+  margin-top: 10%;
+  visibility: hidden;
+}
+
+#verMasSuite {
+  width: 42px;
+  margin-left: 13%;
+  position: absolute;
+  margin-top: 10%;
+  visibility: hidden;
+}
+
+/*# sourceMappingURL=styleInfoRoom.css.map */
