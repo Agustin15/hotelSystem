@@ -110,6 +110,18 @@
 
     <div id="containRoomsAndCart">
 
+    <div id="alertGuests">
+        
+    <div class="icon">
+        <img src="../img/avisoHuespedes.png">
+    </div>
+
+    <div class="msj">
+
+        <span></span>
+        
+    </div>
+    </div>
 
         <div id="containRooms"></div>
 
@@ -123,16 +135,17 @@
 
                 <div>
                     <div>
-                        <span></span>
+                        <label>Desde</label>
                     </div>
                     <div>
+                        
                         <span class="startBooking"></span>
                     </div>
                 </div>
 
                 <div>
                     <div>
-                        <span></span>
+                        <label>Hasta</label>
                     </div>
                     <div>
                         <span class="endBooking"></span>
@@ -174,7 +187,7 @@
             </div>
 
             <div class="containButton">
-                <button>Siguiente</button>
+                <button id="buttonNext">Siguiente</button>
             </div>
           
 
@@ -182,10 +195,6 @@
 
     </div>
     </div>
-
-
-
-
 
 
 </body>

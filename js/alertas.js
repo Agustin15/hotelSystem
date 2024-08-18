@@ -35,9 +35,12 @@ function alertaCompleteDatos(msj) {
   setTimeout(borrarAlerta, 4000);
 }
 
-function alertGuests(msj, alert) {
-  alert.querySelector("span").textContent = msj;
+function alertGuests(msj,alert,roomToDisplay) {
+
   
+
+  alert.style.top=roomToDisplay.offsetTop+"px";
+  alert.querySelector("span").textContent = msj;  
   alert.classList.remove("alertGuestsHide");
   alert.classList.add("alertGuestsShow");
 
