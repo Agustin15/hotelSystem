@@ -53,3 +53,23 @@ function alertGuests(msj,alert,roomToDisplay) {
 
   }, 4000);
 }
+
+
+function alertClientForm(msj){
+  
+let alertClient= document.getElementById("alertClient");
+
+alertClient.querySelector("span").textContent=msj;
+
+alertClient.classList.remove("alertClientHide");
+alertClient.classList.add("alertClientShow");
+
+setTimeout(function(){
+   
+  alertClient.classList.add("alertClientHide");
+  alertClient.classList.remove("alertClientShow");
+ 
+
+}, 4000);
+
+}

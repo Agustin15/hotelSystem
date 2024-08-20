@@ -305,6 +305,7 @@ body {
   width: 44rem;
   height: 21rem;
   box-shadow: 2px 2px 2px grey;
+  border-radius: 3px;
 }
 #containRooms .containRoom .containTitleAndRoom {
   display: flex;
@@ -314,6 +315,7 @@ body {
 #containRooms .containRoom img {
   width: 350px;
   height: 200px;
+  border-radius: 3px;
 }
 #containRooms .containRoom .titleRoom {
   display: flex;
@@ -513,7 +515,7 @@ body {
   }
 }
 #containRoomsAndCart #cart {
-  width: 340px;
+  width: 360px;
   height: 630px;
   background: linear-gradient(#242c49, #36457e);
   margin-top: 3rem;
@@ -596,9 +598,10 @@ body {
 }
 
 #roomsBooking li .containIconAndCategory img {
-  width: 55px;
-  height: 34px;
+  width: 60px;
+  height: 38px;
   border-radius: 3px;
+  box-shadow: 2px 2px 2px gray;
 }
 
 #roomsBooking li .containIconAndCategory .category {
@@ -624,7 +627,11 @@ body {
 
 #roomsBooking li .deleteRoom img {
   width: 15px;
-  opacity: 50%;
+  opacity: 70%;
+}
+
+#roomsBooking li .deleteRoom img:hover {
+  opacity: 100%;
 }
 
 #roomsBooking li .containIconAndQuantity {
@@ -649,11 +656,11 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.5rem;
   width: 170px;
   font-size: 15px;
   margin-top: -2.2rem;
-  margin-left: 5.4rem;
+  margin-left: 6rem;
 }
 
 #roomsBooking li .guests img {

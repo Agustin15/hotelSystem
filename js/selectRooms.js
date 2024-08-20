@@ -267,14 +267,25 @@ function calculateDifferenceNight(llegada, salida) {
 const printDateBookingInCart = (dateBooking) => {
   cart.style.display = "flex";
 
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   document.querySelector(".startBooking").textContent =
-    dateBooking.start.toDateString();
+    dateBooking.start.toLocaleDateString("es-ar",options);
   document.querySelector(".endBooking").textContent =
-    dateBooking.end.toDateString();
+    dateBooking.end.toLocaleDateString("es-ar",options);
 
   nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
 
-  document.querySelector(".quantityNights").textContent = `${nights} noches`;
+  if(nights>1){
+  document.querySelector(".quantityNights").textContent = `${nights} Noches`;
+  }else{
+
+    document.querySelector(".quantityNights").textContent = `${nights} Noche`;
+  }
 };
 
 const createDataRoom = (button) => {
@@ -657,11 +668,11 @@ document.addEventListener("DOMContentLoaded", function () {
 buttonNext.addEventListener("click", function () {
   booking = {
     date: dateBooking,
-    nights:nights,
+    nights: nights,
     rooms: rooms,
     totalDeposit: totalDeposit,
   };
 
-  localStorage.setItem("booking",JSON.stringify(booking));
-  location.href="reserva.php";
+  localStorage.setItem("booking", JSON.stringify(booking));
+  location.href = "reserva.php";
 });

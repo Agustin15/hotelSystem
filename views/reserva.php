@@ -39,15 +39,35 @@
         </ul>
     </header>
 
+    <div id="alertClient">
+
+        <div class="icon">
+            <img src="../img/avisoHuespedes.png">
+        </div>
+        <div class="msj">
+            <span>Complete todos los campos</span>
+        </div>
+    </div>
 
     <div id="contain">
 
-        <h1>Reserva</h1>
+    <div class="title">
+    <div>
+        <img src="../img/iconBookingClient.jpg">
+    </div>
 
+    <div>
+        <h1>Realizar Reserva</h1>
+    </div>
+    </div>
 
         <div class="containClientAndBooking">
             <div class="client">
-                <form>
+
+                <div class="iconTitle">
+                    <img src="../img/formClientBooking.png">
+                </div>
+                <form onsubmit="clientData(event)">
                     <h4>Complete sus datos</h4>
                     <div class="nameAndLast">
 
@@ -57,7 +77,7 @@
                                 <label for="name">Nombre</label>
                             </div>
                             <div>
-                                <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
+                                <input onclick="removeInputAlert(event)" type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
 
                             </div>
                         </div>
@@ -70,7 +90,7 @@
                                 <label for="lastName">Apellido</label>
                             </div>
                             <div>
-                                <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
+                                <input onclick="removeInputAlert(event)" type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
 
                             </div>
                         </div>
@@ -85,7 +105,7 @@
                             </div>
 
                             <div>
-                                <input type="text" id="phone" placeholder="Ingrese telefono" onkeypress="
+                                <input onclick="removeInputAlert(event)" maxlength="9" type="text" id="phone" placeholder="Ingrese telefono" onkeypress="
             return event.charCode>= 48 && event.charCode <= 57" name="phone" autocomplete="off">
                             </div>
 
@@ -98,12 +118,21 @@
                                 <label for="mail">Correo</label>
                             </div>
 
-                            <input type="mail" placeholder="Ingrese correo" name="mail" autocomplete="off">
+                            <input type="mail" onclick="removeInputAlert(event)" placeholder="Ingrese correo" name="mail" autocomplete="off">
 
                         </div>
                     </div>
 
 
+                    <div class="containButtons">
+
+                        <div>
+                            <button type="reset" onclick="location.href='../views/consultaHabitaciones.php'">Volver</button>
+                        </div>
+                        <div>
+                            <button type="submit">Reservar</button>
+                        </div>
+                    </div>
 
                 </form>
             </div>
@@ -116,26 +145,47 @@
 
                     <div class="start">
 
-                        <span>Llegada</span>
-                        <span class="startBooking"></span>
+                        <div>
+                            <img src="../img/arrival.png">
+                        </div>
+                        <div class="date">
+                            <span>Llegada</span>
+                            <span class="startBooking"></span>
+                        </div>
                     </div>
 
                     <div class="end">
-                        <span>Salida</span>
-                        <span class="endBooking"></span>
+
+                        <div>
+                            <img src="../img/exit.png">
+                        </div>
+                        <div class="date">
+                            <span>Salida</span>
+                            <span class="endBooking"></span>
+                        </div>
                     </div>
 
                 </div>
 
                 <div class="nights">
-                    <span>Noches</span>
+
+                    <div>
+                    <img src="../img/moonBooking.png">
+                    </div>
+                    <div>
+                        <span>Noches</span>
+                    </div>
                 </div>
                 <ul class="bookingRooms">
 
 
-                  
+
                 </ul>
 
+
+                <div class="containTotalBooking">
+                    <span></span>
+                </div>
             </div>
 
 
