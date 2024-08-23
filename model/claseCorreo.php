@@ -57,7 +57,7 @@ class correo
             $mail->isHTML(true);
 
             $mail->Subject = "Reserva Realizada";
-            $mail->addEmbeddedImage('../img/revision.png','icono');
+            $mail->addEmbeddedImage('../img/revision.png', 'icono');
             $mail->Body = '
     
     <html>
@@ -84,11 +84,12 @@ class correo
     <br>
     <li>Habitaciones:</li>';
 
-            foreach ($this->habitaciones as $habitacion) {
+            foreach ($this->habitaciones as $room) {
 
-                $mail->Body .= '<li>' . $habitacion['CantHabitaciones'] . " " . $habitacion["Categoria"] . '</li>';
-                $mail->Body .= '<li>Adultos:' . $habitacion["CantAdultos"] . '</li>';
-                $mail->Body .= '<li>Niños:' . $habitacion["CantNinos"] . '</li>
+
+                $mail->Body .= '<li>' . $room['quantity'] . " " . $room['category'] . '</li>';
+                $mail->Body .= '<li>Adultos:'.$room['guests']['adult'] . '</li>';
+                $mail->Body .= '<li>Niños:'.$room['guests']['children'] . '</li>
         <br>
 
         </nav>';

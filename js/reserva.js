@@ -3,15 +3,45 @@ let roomsBooking = document.querySelector(".bookingRooms");
 let rooms = booking.rooms;
 
 function submitBooking(clientBooking) {
-  
-  fetch("../controller/datosReserva.php", {
+  fetch("http://localhost/sistema%20Hotel/controller/datosReserva.php", {
+    method: "POST",
     body: JSON.stringify(clientBooking),
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((resp) => resp.json())
-    .then((answer) => {});
+    .then((response) => {
+      console.log(response);
+    });
+}
+
+function getIfExistingBooking(clientBooking) {
+  const dataBooking = {
+    client: clientBooking.client,
+    date: clientBooking.booking.date,
+  };
+
+ 
+  fetch(
+    "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
+      JSON.stringify(dataBooking),
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((resp) => resp.text())
+
+    .then((response) => {
+      if (response.length>0) {
+
+        
+      
+      }
+    });
 }
 
 function createBooking(client) {
@@ -20,7 +50,7 @@ function createBooking(client) {
     booking: booking,
   };
 
-  submitBooking(clientBooking);
+  getIfExistingBooking(clientBooking);
 }
 
 function inputAlert(key) {
@@ -51,19 +81,18 @@ function clientData(event) {
     } else if (k == "phone" && v.length < 8) {
       inputAlert(k);
       return (validate = "Ingresa un telefono valido");
-    } else if (k == "mail") {
-      if (!v.match(validRegex)) {
-        inputAlert(k);
-        return (validate = "Ingresa un correo valido");
-      }
+    } else if (k == "mail" && !v.match(validRegex)) {
+      inputAlert(k);
+      return (validate = "Ingresa un correo valido");
     } else {
       client[k] = v;
-      createBooking(client);
     }
   });
 
   if (validate) {
     alertClientForm(validate);
+  } else {
+    createBooking(client);
   }
 }
 

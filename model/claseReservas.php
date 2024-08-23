@@ -94,7 +94,7 @@ class reservas
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
-    
+
 
 
 
@@ -124,6 +124,22 @@ class reservas
     }
 
 
+
+
+    public function getReservaPorIdClienteAndFecha($idCliente, $fechaLlegada, $fechaSalida)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where 
+        idClienteReserva=? and fechaLlegada=? and fechaSalida=?");
+        $consulta->bind_param("iss", $idCliente, $fechaLlegada, $fechaSalida);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_array(MYSQLI_ASSOC);
+    }
+
+    
     public function updateReserva()
     {
 
@@ -161,7 +177,7 @@ class reservas
 
         $resultado = $consulta->execute();
 
-        return  $resultado;
+        return $resultado;
     }
 
     public function getCantReservasPendientes($hoy)
@@ -177,7 +193,7 @@ class reservas
             ($reserva['fechaLlegada'] > $hoy) ? $ac++ : $ac;
 
             return $ac;
-        },0);
+        }, 0);
 
         return $totalPendientes;
     }
@@ -196,7 +212,7 @@ class reservas
             ($reserva['fechaSalida'] < $hoy) ? $ac++ : $ac;
 
             return $ac;
-        },0);
+        }, 0);
 
         return $totalFinalizadas;
     }
@@ -215,7 +231,7 @@ class reservas
             ($reserva['fechaLlegada'] <= $hoy && $reserva['fechaSalida'] >= $hoy) ? $ac++ : $ac;
 
             return $ac;
-        },0);
+        }, 0);
 
         return $totalEnCurso;
     }
