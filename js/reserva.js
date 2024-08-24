@@ -2,46 +2,89 @@ let booking = JSON.parse(localStorage.getItem("booking"));
 let roomsBooking = document.querySelector(".bookingRooms");
 let rooms = booking.rooms;
 
-function submitBooking(clientBooking) {
-  fetch("http://localhost/sistema%20Hotel/controller/datosReserva.php", {
-    method: "POST",
-    body: JSON.stringify(clientBooking),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((resp) => resp.json())
-    .then((response) => {
-      console.log(response);
-    });
+async function submitBooking(clientBooking) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+      {
+        method: "POST",
+        body: JSON.stringify(clientBooking),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result=response.json();
+    
+  } catch (error) {
+
+    console.log(error);
+  }
 }
 
-function getIfExistingBooking(clientBooking) {
+async function updateBookingExists(clientBooking, booking) {
+  const updateBooking = {
+    idBooking: booking.idReserva,
+    client: clientBooking.client,
+    quantityRoomsBookingPast: booking.cantidadHabitacion,
+    booking: clientBooking.booking,
+  };
+
+  const response = await fetch(
+    "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+
+    {
+      method: "PUT",
+      body: JSON.stringify(updateBooking),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const result = await response.text();
+
+  console.log(result);
+}
+
+async function getIfExistingBooking(clientBooking) {
   const dataBooking = {
     client: clientBooking.client,
     date: clientBooking.booking.date,
   };
 
- 
-  fetch(
-    "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
-      JSON.stringify(dataBooking),
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
-    .then((resp) => resp.text())
-
-    .then((response) => {
-      if (response.length>0) {
-
-        
-      
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
+        JSON.stringify(dataBooking),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
+
+    const result = await response.json();
+
+    if (result) {
+      const confirm = await confirmAlertBookingExist(
+        "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva"
+      );
+
+      if (confirm) {
+        updateBookingExists(clientBooking, result);
+      } else {
+        document.querySelector(".modalBooking").style.display = "none";
+        return;
+      }
+    } else {
+      submitBooking(clientBooking);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function createBooking(client) {

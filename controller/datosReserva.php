@@ -5,11 +5,15 @@ require "../model/claseReservas.php";
 require "../model/claseCliente.php";
 require "../model/claseCorreo.php";
 require "../model/clasePago.php";
+require "../model/functionsDataBooking.php";
 
 $habitacion = new habitaciones();
 $reserva = new reservas();
 $cliente = new cliente();
 $pago = new pago();
+
+
+
 
 switch ($_SERVER['REQUEST_METHOD']) {
 
@@ -27,70 +31,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $booking = $clientBooking['booking'];
             $respuesta;
 
-            $freeRooms = [];
 
+            $totalRoomsBooking = totalRoomsBookingClient($booking);
 
-            $totalRoomsBooking = array_reduce($booking['rooms'], function ($ac, $room) {
+            $freeRooms = getFreeRooms($habitacion, $booking);
 
-                $ac += $room['quantity'];
-                return $ac;
-            }, 0);
-
-            function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking)
-            {
-
-                $roomsForClient = [];
-                $roomsCategorySelected = array_filter($freeRooms, function ($freeRoom) use ($categoryRoom) {
-                    return $freeRoom['tipoHabitacion'] == $categoryRoom;
-                });
-
-
-                $numRoomsCategorySelected = array_map(function ($room) {
-
-                    return $room['numHabitacion'];
-                }, $roomsCategorySelected);
-
-
-                if (count($numRoomsCategorySelected) < $roomBooking['quantity']) {
-
-                    return "No hay habitaciones " . $categoryRoom . " suficientes";
-                } else {
-
-                    foreach ($numRoomsCategorySelected as $numRoom) {
-
-                        if (count($roomsForClient) == $roomBooking['quantity']) break;
-
-                        $roomForClient = array(
-                            "numRoom" => $numRoom,
-                            "adults" => $roomBooking['guests']['adult'],
-                            "childrens" => $roomBooking['guests']['children']
-                        );
-                        array_push($roomsForClient, $roomForClient);
-                    }
-                }
-
-                return $roomsForClient;
-            }
-
-
-            $freeRooms = array_map(function ($roomHotel) use ($habitacion, $booking) {
-
-                $reservasHabitacion = $habitacion->habitacionesReservadas($roomHotel['numHabitacion']);
-
-                $reservasHabitacionQueNoColisionan = $habitacion->getHabitacionDisponible($booking['date']['start'], $booking['date']['end'], $roomHotel['numHabitacion']);
-
-                if (empty($reservasHabitacion) || count($reservasHabitacion) == count($reservasHabitacionQueNoColisionan)) {
-
-                    return $roomHotel;
-                }
-            }, $habitacion->getAllHabitacionesHotel());
-
-
-
-            $roomsSelectedForClient = array_map(function ($roomBooking) use ($freeRooms) {
-
-                return selectAleatoryRoomCategory($roomBooking['category'], $freeRooms, $roomBooking);
-            }, $booking['rooms']);
+            $roomsSelectedForClient = getRoomsSelectedForClient($booking, $freeRooms);
 
 
             if (gettype($roomsSelectedForClient[0]) == "string") {
@@ -136,39 +82,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
                             $salida->format("Y-m-d")
                         );
 
-                        foreach ($roomsSelectedForClient as $room) {
 
-                            foreach ($room as $roomData) {
-
-                                $roomAdded = $habitacion->setHabitacionReservada(
-                                    $bookingClient['idReserva'],
-                                    $dataClient['idCliente'],
-                                    $roomData['numRoom'],
-                                    $llegada->format("Y-m-d"),
-                                    $salida->format("Y-m-d"),
-                                    $roomData['adults'],
-                                    $roomData['childrens']
-                                );
-                            }
-                        }
+                        $roomAdded = setRoomsToBookingBd($bookingClient['idReserva'], $habitacion, $dataClient, $llegada, $salida, $roomsSelectedForClient);
 
                         if ($roomAdded) {
-
-                            $correo = new correo(
-                                $client['name'],
-                                $client['lastName'],
-                                $client['mail'],
-                                $client['phone'],
-                                $llegada->format("Y-m-d"),
-                                $salida->format("Y-m-d"),
-                                $booking['rooms']
-                            );
 
 
                             $resultPago = $pago->setPago($bookingClient['idReserva'], $dataClient['idCliente'], $booking['totalDeposit']);
 
                             if ($resultPago) {
-                                $resultMail = $correo->sendMail();
+                                $resultMail = sendMail($client, $llegada, $salida, $booking);
 
                                 if ($resultMail) {
 
@@ -183,6 +106,71 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 
         break;
+
+
+    case "PUT":
+
+        $updatebooking = json_decode(file_get_contents("php://input"), true);
+
+        $totalRoomsBooking = totalRoomsBookingClient($updatebooking['booking']);
+        $llegada = new DateTime($updatebooking['booking']['date']['start']);
+        $salida = new DateTime($updatebooking['booking']['date']['end']);
+
+
+        $freeRooms = getFreeRooms($habitacion, $updatebooking['booking']);
+
+        // $roomsSelectedForClient = getRoomsSelectedForClient($updatebooking['booking'], $freeRooms);
+
+
+        // if (gettype($roomsSelectedForClient[0]) == "string") {
+
+        //     $respuesta = array("respuesta" => $roomsSelectedForClient[0]);
+        // } else {
+
+        //     $dataClient = $cliente->getClienteCorreo($updatebooking['client']['mail'])->fetch_array(MYSQLI_ASSOC);
+
+
+
+        //     $reserva->setIdCliente($dataClient['idCliente']);
+        //     $reserva->setLlegada($llegada->format("Y-m-d"));
+        //     $reserva->setSalida($salida->format("Y-m-d"));
+        //     $reserva->setCantidadHabitaciones($totalRoomsBooking + $updatebooking['quantityRoomsBookingPast']);
+
+        //     $resultUpdate = $reserva->updateReserva();
+
+        //     if ($resultUpdate) {
+
+
+        //         $roomAdded = setRoomsToBookingBd(
+        //             $updatebooking['idBooking'],
+        //             $habitacion,
+        //             $dataClient,
+        //             $llegada->format("Y-m-d"),
+        //             $salida->format("Y-m-d"),
+        //             $roomsSelectedForClient
+        //         );
+
+        //         if ($roomAdded) {
+
+        //             $pastPay = $pago->getPago($updatebooking['idBooking']);
+
+        //             $newDeposit = $updatebooking['booking']['totalDeposit'] + $pastPay['deposito'];
+        //             $resultPago = $pago->updatePago($updatebooking['idBooking'], $newDeposit);
+
+        //             if ($resultPay) {
+
+        //                 $respuesta = array("respuesta" => $resultPay);
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        echo json_encode($freeRooms);
+
+
+        break;
+
 
     case "GET":
 

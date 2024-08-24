@@ -51,15 +51,36 @@
 
     <div id="contain">
 
-    <div class="title">
-    <div>
-        <img src="../img/iconBookingClient.jpg">
-    </div>
+        <div class="title">
+            <div>
+                <img src="../img/iconBookingClient.jpg">
+            </div>
 
-    <div>
-        <h1>Realizar Reserva</h1>
-    </div>
-    </div>
+            <div>
+                <h1>Realizar Reserva</h1>
+            </div>
+        </div>
+
+        <div class="modalBooking">
+
+            <div class="alertBookingExists">
+
+                <div>
+                    <img src="../img/advertencia.gif">
+                </div>
+
+                <div class="msj">
+                    <p></p>
+                </div>
+
+                <div class="containButtons">
+                    <button class="btnOK">Ok</button>
+                    <button class="btnCancel">Cancelar</button>
+                </div>
+
+            </div>
+
+        </div>
 
         <div class="containClientAndBooking">
             <div class="client">
@@ -170,7 +191,7 @@
                 <div class="nights">
 
                     <div>
-                    <img src="../img/moonBooking.png">
+                        <img src="../img/moonBooking.png">
                     </div>
                     <div>
                         <span>Noches</span>

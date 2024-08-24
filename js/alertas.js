@@ -35,41 +35,51 @@ function alertaCompleteDatos(msj) {
   setTimeout(borrarAlerta, 4000);
 }
 
-function alertGuests(msj,alert,roomToDisplay) {
-
-  
-
-  alert.style.top=roomToDisplay.offsetTop+"px";
-  alert.querySelector("span").textContent = msj;  
+function alertGuests(msj, alert, roomToDisplay) {
+  alert.style.top = roomToDisplay.offsetTop + "px";
+  alert.querySelector("span").textContent = msj;
   alert.classList.remove("alertGuestsHide");
   alert.classList.add("alertGuestsShow");
 
-  
-  setTimeout(function(){
-   
+  setTimeout(function () {
     alert.classList.add("alertGuestsHide");
     alert.classList.remove("alertGuestsShow");
-   
-
   }, 4000);
 }
 
+function alertClientForm(msj) {
+  let alertClient = document.getElementById("alertClient");
 
-function alertClientForm(msj){
-  
-let alertClient= document.getElementById("alertClient");
+  alertClient.querySelector("span").textContent = msj;
 
-alertClient.querySelector("span").textContent=msj;
+  alertClient.classList.remove("alertClientHide");
+  alertClient.classList.add("alertClientShow");
 
-alertClient.classList.remove("alertClientHide");
-alertClient.classList.add("alertClientShow");
+  setTimeout(function () {
+    alertClient.classList.add("alertClientHide");
+    alertClient.classList.remove("alertClientShow");
+  }, 4000);
+}
 
-setTimeout(function(){
+async function confirmAlertBookingExist(msj) {
+
+  return new Promise((resolve)=>{
+
+  let modalBooking = document.querySelector(".modalBooking");
+  modalBooking.querySelector("p").textContent = msj;
+
+  modalBooking.style.display = "block";
+
+  modalBooking.querySelector(".btnOK").addEventListener("click", function () {
+    resolve(true);
+  });
+
+  modalBooking.querySelector(".btnCancel")
+    .addEventListener("click", function () {
+      
+    resolve(false);
+    });
+
+  });
    
-  alertClient.classList.add("alertClientHide");
-  alertClient.classList.remove("alertClientShow");
- 
-
-}, 4000);
-
 }
