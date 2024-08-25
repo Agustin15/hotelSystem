@@ -170,6 +170,19 @@ class cliente
         return $resultado;
     }
 
+        
+    public function getClienteExistente($nombre,$apellido,$correo)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where
+        nombre=? and apellido=? and correo=?");
+        $consulta->bind_param("sss",$nombre,$apellido,$correo);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_array(MYSQLI_ASSOC);
+    }
+
     
     public function setClienteBd()
     {

@@ -15,22 +15,26 @@ async function submitBooking(clientBooking) {
       }
     );
 
-    const result=response.json();
+    const result=await response.json();
     
+
   } catch (error) {
 
     console.log(error);
   }
 }
 
-async function updateBookingExists(clientBooking, booking) {
+async function updateBookingExists(clientBooking, bookingPast) {
+
+
   const updateBooking = {
-    idBooking: booking.idReserva,
+    idBooking: JSON.stringify(bookingPast.idReserva),
     client: clientBooking.client,
-    quantityRoomsBookingPast: booking.cantidadHabitacion,
+    quantityRoomsBookingPast: bookingPast.cantidadHabitaciones,
     booking: clientBooking.booking,
   };
 
+  console.log(updateBooking);
   const response = await fetch(
     "http://localhost/sistema%20Hotel/controller/datosReserva.php",
 
@@ -38,12 +42,12 @@ async function updateBookingExists(clientBooking, booking) {
       method: "PUT",
       body: JSON.stringify(updateBooking),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applica{tion/json",
       },
     }
   );
 
-  const result = await response.text();
+  const result = await response.json();
 
   console.log(result);
 }
@@ -68,18 +72,29 @@ async function getIfExistingBooking(clientBooking) {
 
     const result = await response.json();
 
-    if (result) {
+    if(result.respuesta=="Este correo ya esta en uso"){
+
+
+
+    }else if(result.respuesta=="Este telefono ya esta en uso"){
+
+
+    }else if (result.respuesta) {
       const confirm = await confirmAlertBookingExist(
         "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva"
       );
 
       if (confirm) {
-        updateBookingExists(clientBooking, result);
+        document.querySelector(".modalBooking").style.display = "none";
+        updateBookingExists(clientBooking,result.respuesta);
       } else {
         document.querySelector(".modalBooking").style.display = "none";
         return;
       }
+
+      
     } else {
+      console.log("new");
       submitBooking(clientBooking);
     }
   } catch (error) {

@@ -13,7 +13,7 @@ use PHPMailer\PHPMailer\Exception;
 class correo
 {
 
-    public $nombre, $apellido, $correo, $telefono, $fechaLlegada, $fechaSalida, $habitaciones;
+    public $nombre, $apellido, $correo, $telefono, $fechaLlegada, $fechaSalida, $habitaciones,$option;
 
 
     public function __construct(
@@ -23,7 +23,8 @@ class correo
         $telefono,
         $fechaLlegada,
         $fechaSalida,
-        $habitaciones
+        $habitaciones,
+        $option
     ) {
 
         $this->nombre = $nombre;
@@ -33,12 +34,47 @@ class correo
         $this->fechaLlegada = $fechaLlegada;
         $this->fechaSalida = $fechaSalida;
         $this->habitaciones = $habitaciones;
+        $this->option = $option;
+    }
+
+
+    public function setMsj()
+    {
+
+        $statusBooking = null;
+        if ($this->option == "new") {
+
+            $statusBooking = "Su reserva se ha realizado exitosamente";
+        } else {
+
+
+            $statusBooking = "Su reserva se ha actualizado exitosamente";
+        }
+        return $statusBooking;
+    }
+
+
+    public function setTitleListRooms()
+    {
+
+        $titleRooms = "";
+        if ($this->option == "new") {
+
+            $titleRooms = "Habitaciones:";
+        } else {
+
+
+            $titleRooms = "Habitaciones con la reserva actualizada:";
+        }
+        return $titleRooms;
     }
 
     public function sendMail()
     {
 
         $respuesta = null;
+        $statusBooking = $this->setMsj();
+        $titleRooms=$this->setTitleListRooms();
 
 
         try {
@@ -71,7 +107,7 @@ class correo
    <h2>Sistema Hotel</h2>
 
     <br>
-    <p>Hola ' . $this->nombre . ',su reserva se ha realizado exitosamente,</p>
+    <p>Hola ' . $this->nombre . ', ' . $statusBooking . ',</p>
     <br>
     <h4>Reserva:</h4>
     <br>
@@ -82,14 +118,14 @@ class correo
     <br>
     <li>Salida:' . $this->fechaSalida . '</li>
     <br>
-    <li>Habitaciones:</li>';
+    <li>'.$titleRooms.'</li>';
 
             foreach ($this->habitaciones as $room) {
 
 
                 $mail->Body .= '<li>' . $room['quantity'] . " " . $room['category'] . '</li>';
-                $mail->Body .= '<li>Adultos:'.$room['guests']['adult'] . '</li>';
-                $mail->Body .= '<li>Niños:'.$room['guests']['children'] . '</li>
+                $mail->Body .= '<li>Adultos:' . $room['guests']['adult'] . '</li>';
+                $mail->Body .= '<li>Niños:' . $room['guests']['children'] . '</li>
         <br>
 
         </nav>';

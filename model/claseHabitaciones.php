@@ -15,7 +15,7 @@ class habitaciones
         $this->conexion = new conexion();
     }
 
-    
+
 
     public function getAllHabitacionesHotel()
     {
@@ -29,7 +29,6 @@ class habitaciones
     }
 
 
-    
 
     public function getAllCategoryRooms()
     {
@@ -42,9 +41,9 @@ class habitaciones
         return $resultados->fetch_all(MYSQLI_ASSOC);
     }
 
-    
 
-    public function getHabitacionDisponible($fechaLlegadaNuevaReserva,$fechaSalidaNuevaReserva,$numHabitacion)
+
+    public function getHabitacionDisponible($fechaLlegadaNuevaReserva, $fechaSalidaNuevaReserva, $numHabitacion)
     {
 
 
@@ -52,7 +51,7 @@ class habitaciones
         (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? ");
         $consulta->execute();
 
-        $consulta->bind_param("ssi",$fechaSalidaNuevaReserva,$fechaLlegadaNuevaReserva,$numHabitacion);
+        $consulta->bind_param("ssi", $fechaSalidaNuevaReserva, $fechaLlegadaNuevaReserva, $numHabitacion);
 
         $consulta->execute();
 
@@ -133,6 +132,24 @@ class habitaciones
 
 
 
+
+    public function habitacionesConCategoriaYHuespedesIguales($idReserva, $categoria, $adultos, $ninos)
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare(
+            "select * from habitaciones 
+        INNER JOIN habitacion_reservada ON 
+        habitaciones.numHabitacion=habitacion_reservada.numHabitacionReservada where 
+        habitacion_reservada.idReservaHabitacion=? and habitaciones.tipoHabitacion=?  
+        and habitacion_reservada.adultos=? and habitacion_reservada.ninos=?"
+        );
+        $consulta->bind_param("isii", $idReserva, $categoria, $adultos, $ninos);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
 
 
     public function getHabitacionReservadaFechaAndNum($hoy, $numHabitacion)
@@ -221,12 +238,12 @@ class habitaciones
     }
 
 
-    public function habitacionesHospedajesAntiguos($numHabitacion,$hoy)
+    public function habitacionesHospedajesAntiguos($numHabitacion, $hoy)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=? and fechaSalidaHabitacion<=?");
-        $consulta->bind_param("is", $numHabitacion,$hoy);
+        $consulta->bind_param("is", $numHabitacion, $hoy);
         $consulta->execute();
 
         $resultado = $consulta->get_result();
@@ -452,7 +469,7 @@ class habitaciones
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
-    
+
     public function habitacionesMasCercanasReservadas($numHabitacion, $hoy)
     {
 
@@ -476,9 +493,4 @@ class habitaciones
         $consulta->bind_param("ii", $idReserva, $numHabitacion);
         return $consulta->execute();
     }
-
-
 }
-
-
-
