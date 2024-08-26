@@ -270,7 +270,14 @@ class habitaciones
 
         $resultado = $consulta->execute();
 
-        return $resultado;
+        if($resultado){
+
+            return $resultado;
+        }else{
+
+            return $consulta->error;
+        }
+        
     }
 
 

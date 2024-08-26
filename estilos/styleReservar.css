@@ -369,23 +369,70 @@ form .containButtons button:hover {
 }
 
 #alertClient {
-  background: linear-gradient(#349db8, #36457e);
+  background-color: white;
   width: 290px;
-  height: 37px;
+  height: 47px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 87%;
-  left: -30%;
+  margin-top: 0.2rem;
+  margin-left: -50rem;
   padding-top: 0.2rem;
   border-radius: 3px;
   font-size: 15px;
-  color: white;
+  color: rgb(72, 64, 194);
   font-weight: bold;
+  gap: 0.5rem;
+}
+#alertClient .bodyAlert {
+  display: flex;
+  flex-direction: row;
+}
+#alertClient .icon {
+  margin-left: -2rem;
+  margin-top: 0.5rem;
+}
+#alertClient img {
+  width: 24px;
+}
+#alertClient .msj {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-left: 0.9rem;
+}
+#alertClient .advertencia {
+  font-weight: bold;
+  color: #222e5f;
+}
+#alertClient .progresBar {
+  width: 100%;
+  height: 3px;
+  margin-top: 0.1rem;
+  background-color: gray;
+}
+#alertClient .progres {
+  width: 100%;
+  background-color: #3b3edf;
+  height: 100%;
 }
 
+.progresBarActive {
+  animation-name: progresBar;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progresBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
 .alertClientShow {
   animation-name: alertClientShow;
   animation-duration: 0.5s;
@@ -400,18 +447,18 @@ form .containButtons button:hover {
 
 @keyframes alertClientShow {
   from {
-    left: -30%;
+    margin-left: -50rem;
   }
   to {
-    left: 17%;
+    margin-left: 7.5rem;
   }
 }
 @keyframes alertClientHide {
   from {
-    left: 17%;
+    margin-left: 7.5rem;
   }
   to {
-    left: -30%;
+    margin-left: -50rem;
   }
 }
 .inputAlert {
@@ -426,20 +473,6 @@ form .containButtons button:hover {
 .inputAlert:hover {
   border: 2px solid rgb(235, 35, 35);
   box-shadow: 1px 1px 1px rgb(235, 48, 48);
-}
-
-#alertClient .icon {
-  margin-right: 17rem;
-  margin-top: -1rem;
-}
-
-#alertClient img {
-  width: 15px;
-  padding-left: 0.3rem;
-}
-
-#alertClient .msj {
-  margin-top: -0.4rem;
 }
 
 .modalBooking {

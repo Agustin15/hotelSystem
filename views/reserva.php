@@ -39,15 +39,7 @@
         </ul>
     </header>
 
-    <div id="alertClient">
 
-        <div class="icon">
-            <img src="../img/avisoHuespedes.png">
-        </div>
-        <div class="msj">
-            <span>Complete todos los campos</span>
-        </div>
-    </div>
 
     <div id="contain">
 
@@ -155,6 +147,27 @@
                         </div>
                     </div>
 
+                    <div id="alertClient">
+
+                    <div class="bodyAlert">
+                        <div class="icon">
+                            <img src="../img/advertenciaService.png">
+                        </div>
+                        <div class="msj">
+                            <div class="advertencia">
+                                <span>Advertencia</span>
+                            </div>
+                            <div>
+                            <p>Complete todos los campos</p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="progresBar">
+                            <div class="progres">
+
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
 

@@ -12,7 +12,7 @@ function totalRoomsBookingClient($booking)
     return $totalRoomsBooking;
 }
 
-function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking)
+function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking, $roomsSelectedForClient)
 {
 
     $roomsForClient = [];
@@ -33,16 +33,39 @@ function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking)
 
         foreach ($numRoomsCategorySelected as $numRoom) {
 
-            if (count($roomsForClient) == $roomBooking['quantity']) break;
+            if (
+                count($roomsForClient) == $roomBooking['quantity']
+            ) break;
 
-            $roomForClient = array(
-                "numRoom" => $numRoom,
-                "adults" => $roomBooking['guests']['adult'],
-                "childrens" => $roomBooking['guests']['children']
-            );
-            array_push($roomsForClient, $roomForClient);
+            $roomIsSelected = false;
+
+            if (!empty($roomsSelectedForClient)) {
+
+                if (array_keys($roomsSelectedForClient) > 3) {
+                    $roomIsSelected = array_filter($roomsSelectedForClient, function ($room) use ($numRoom) {
+
+                        return $room['numRoom'] = $numRoom;
+                    });
+
+                    if (count($roomIsSelected) > 0) $roomIsSelected = true;
+                } else {
+
+                    if (in_array($numRoom, $roomsSelectedForClient)) $roomIsSelected = true;
+                }
+            }
+
+            if ($roomIsSelected == false) {
+                $roomForClient = array(
+                    "numRoom" => $numRoom,
+                    "adults" => $roomBooking['guests']['adult'],
+                    "childrens" => $roomBooking['guests']['children']
+                );
+                array_push($roomsForClient, $roomForClient);
+            }
         }
     }
+
+
 
     return $roomsForClient;
 }
@@ -71,10 +94,19 @@ function getFreeRooms($habitacion, $booking)
 function getRoomsSelectedForClient($booking, $freeRooms)
 {
 
-    $roomsSelectedForClient = array_map(function ($roomBooking) use ($freeRooms) {
+    $roomsSelectedForClient = [];
 
-        return selectAleatoryRoomCategory($roomBooking['category'], $freeRooms, $roomBooking);
-    }, $booking['rooms']);
+    foreach ($booking['rooms'] as $roomBooking) {
+
+        $roomForClient = selectAleatoryRoomCategory(
+            $roomBooking['category'],
+            $freeRooms,
+            $roomBooking,
+            $roomsSelectedForClient
+        );
+
+        array_push($roomsSelectedForClient, $roomForClient);
+    }
 
     return  $roomsSelectedForClient;
 }
@@ -86,24 +118,24 @@ function setRoomsToBookingBd($idReserva, $habitacion, $dataClient, $llegada, $sa
 
     foreach ($roomsSelectedForClient as $room) {
 
-          foreach($room as $roomData){
-        $roomAdded = $habitacion->setHabitacionReservada(
-            $idReserva,
-            $dataClient['idCliente'],
-            $roomData['numRoom'],
-            $llegada,
-            $salida,
-            $roomData['adults'],
-            $roomData['childrens']
-        );
+        foreach ($room as $roomData) {
+            $roomAdded = $habitacion->setHabitacionReservada(
+                $idReserva,
+                $dataClient['idCliente'],
+                $roomData['numRoom'],
+                $llegada,
+                $salida,
+                $roomData['adults'],
+                $roomData['childrens']
+            );
+        }
     }
-}
 
 
     return $roomAdded;
 }
 
-function sendMail($client, $llegada, $salida, $booking,$option)
+function sendMail($client, $llegada, $salida, $booking, $option)
 {
 
     $correo = new correo(
@@ -121,9 +153,10 @@ function sendMail($client, $llegada, $salida, $booking,$option)
 }
 
 
-function validateUserIncome($dataClient,$dataBooking,$msj){
+function validateUserIncome($dataClient, $dataBooking, $msj)
+{
 
-    $respuesta=null;
+    $respuesta = null;
     if (
         $dataClient['nombre'] != $dataBooking['client']['name'] && $dataClient['apellido'] !=
         $dataBooking['client']['lastName']

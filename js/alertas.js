@@ -49,37 +49,35 @@ function alertGuests(msj, alert, roomToDisplay) {
 
 function alertClientForm(msj) {
   let alertClient = document.getElementById("alertClient");
-
-  alertClient.querySelector("span").textContent = msj;
+  let progresBar= document.querySelector(".progres");
+  alertClient.querySelector("p").textContent = msj;
 
   alertClient.classList.remove("alertClientHide");
   alertClient.classList.add("alertClientShow");
-
+  progresBar.classList.add("progresBarActive");
+  
   setTimeout(function () {
     alertClient.classList.add("alertClientHide");
     alertClient.classList.remove("alertClientShow");
-  }, 4000);
+    progresBar.classList.remove("progresBarActive");
+  }, 10000);
 }
 
 async function confirmAlertBookingExist(msj) {
+  return new Promise((resolve) => {
+    let modalBooking = document.querySelector(".modalBooking");
+    modalBooking.querySelector("p").textContent = msj;
 
-  return new Promise((resolve)=>{
+    modalBooking.style.display = "block";
 
-  let modalBooking = document.querySelector(".modalBooking");
-  modalBooking.querySelector("p").textContent = msj;
-
-  modalBooking.style.display = "block";
-
-  modalBooking.querySelector(".btnOK").addEventListener("click", function () {
-    resolve(true);
-  });
-
-  modalBooking.querySelector(".btnCancel")
-    .addEventListener("click", function () {
-      
-    resolve(false);
+    modalBooking.querySelector(".btnOK").addEventListener("click", function () {
+      resolve(true);
     });
 
+    modalBooking
+      .querySelector(".btnCancel")
+      .addEventListener("click", function () {
+        resolve(false);
+      });
   });
-   
 }

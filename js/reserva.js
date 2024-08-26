@@ -15,8 +15,9 @@ async function submitBooking(clientBooking) {
       }
     );
 
-    const result=await response.json();
+    const result=await response.text();
     
+    console.log(result);
 
   } catch (error) {
 
@@ -70,11 +71,12 @@ async function getIfExistingBooking(clientBooking) {
       }
     );
 
-    const result = await response.json();
+    const result = await response.text();
 
+    console.log(result);
     if(result.respuesta=="Este correo ya esta en uso"){
 
-
+     
 
     }else if(result.respuesta=="Este telefono ya esta en uso"){
 
