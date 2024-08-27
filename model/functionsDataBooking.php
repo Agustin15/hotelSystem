@@ -12,8 +12,13 @@ function totalRoomsBookingClient($booking)
     return $totalRoomsBooking;
 }
 
-function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking, $roomsSelectedForClient)
-{
+function selectAleatoryRoomCategory(
+    $categoryRoom,
+    $freeRooms,
+    $roomBooking,
+    $roomsSelectedForClient,
+    $bookingRooms
+) {
 
     $roomsForClient = [];
     $roomsCategorySelected = array_values(array_filter($freeRooms, function ($freeRoom) use ($categoryRoom) {
@@ -26,9 +31,18 @@ function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking, $ro
     }, $roomsCategorySelected);
 
 
-    if (count($numRoomsCategorySelected) < $roomBooking['quantity']) {
 
-        return "No hay habitaciones " . $categoryRoom . " suficientes";
+    $totalCategoryRoomsBooking = array_reduce($bookingRooms, function ($ac, $room) use ($categoryRoom) {
+
+        if ($room['category'] == $categoryRoom) $ac++;
+        return $ac;
+    }, 0);
+
+
+
+    if (count($numRoomsCategorySelected) < $totalCategoryRoomsBooking) {
+
+        return array("advertencia" => "No hay habitaciones " . $categoryRoom . " suficientes");
     } else {
 
         foreach ($numRoomsCategorySelected as $numRoom) {
@@ -41,24 +55,32 @@ function selectAleatoryRoomCategory($categoryRoom, $freeRooms, $roomBooking, $ro
 
             if (!empty($roomsSelectedForClient)) {
 
-                if (array_keys($roomsSelectedForClient) > 3) {
-                    $roomIsSelected = array_filter($roomsSelectedForClient, function ($room) use ($numRoom) {
+                $arrayFlatted = [];
+                foreach ($roomsSelectedForClient as $rooms) {
 
-                        return $room['numRoom'] = $numRoom;
-                    });
+                    foreach ($rooms as $room) {
+                        array_push($arrayFlatted, $room);
+                    }
+                }
 
-                    if (count($roomIsSelected) > 0) $roomIsSelected = true;
-                } else {
+                $roomIsSelected = array_filter($arrayFlatted, function ($room) use ($numRoom) {
 
-                    if (in_array($numRoom, $roomsSelectedForClient)) $roomIsSelected = true;
+                    return $room['numRoom'] == $numRoom;
+                });
+
+                if (count($roomIsSelected) > 0) {
+
+                    $roomIsSelected = true;
                 }
             }
 
             if ($roomIsSelected == false) {
+
                 $roomForClient = array(
                     "numRoom" => $numRoom,
                     "adults" => $roomBooking['guests']['adult'],
                     "childrens" => $roomBooking['guests']['children']
+
                 );
                 array_push($roomsForClient, $roomForClient);
             }
@@ -98,14 +120,20 @@ function getRoomsSelectedForClient($booking, $freeRooms)
 
     foreach ($booking['rooms'] as $roomBooking) {
 
+
         $roomForClient = selectAleatoryRoomCategory(
             $roomBooking['category'],
             $freeRooms,
             $roomBooking,
-            $roomsSelectedForClient
+            $roomsSelectedForClient,
+            $booking['rooms']
         );
 
-        array_push($roomsSelectedForClient, $roomForClient);
+        if (array_key_exists("advertencia", $roomForClient)) {
+            return $roomForClient["advertencia"];
+        } else {
+            array_push($roomsSelectedForClient, $roomForClient);
+        }
     }
 
     return  $roomsSelectedForClient;
@@ -158,12 +186,43 @@ function validateUserIncome($dataClient, $dataBooking, $msj)
 
     $respuesta = null;
     if (
-        $dataClient['nombre'] != $dataBooking['client']['name'] && $dataClient['apellido'] !=
+        $dataClient['nombre'] != $dataBooking['client']['name'] || $dataClient['apellido'] !=
         $dataBooking['client']['lastName']
     ) {
 
-        $respuesta = array("respuesta" => $msj);
+        $respuesta = array('advertencia' => $msj);
     }
 
     return $respuesta;
+}
+
+function updateAtributePhoneClient($dataBooking,$dataClient,$cliente)
+{
+
+    if (
+        $dataClient['nombre'] == $dataBooking['client']['name'] && $dataClient['apellido']
+        == $dataBooking['client']['lastName'] && $dataClient['correo'] ==
+        $dataBooking['client']['mail'] && $dataClient['telefono'] !=
+        $dataBooking['client']['phone']
+    ) {
+
+
+        $cliente->updatePhone($dataBooking['client']['phone'],$dataClient['idCliente']);
+    }
+}
+
+
+function updateAtributeMailClient($dataBooking,$dataClient,$cliente)
+{
+
+    if (
+        $dataClient['nombre'] == $dataBooking['client']['name'] && $dataClient['apellido']
+        == $dataBooking['client']['lastName']  && $dataClient['telefono'] ==
+        $dataBooking['client']['phone'] && $dataClient['correo'] !=
+        $dataBooking['client']['mail']
+    ) {
+
+
+        $cliente->updateMail($dataBooking['client']['mail'],$dataClient['idCliente']);
+    }
 }

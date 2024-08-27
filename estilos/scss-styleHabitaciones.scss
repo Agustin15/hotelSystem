@@ -66,7 +66,7 @@ background-color: rgb(146, 146, 146);
   input[type="submit"] {
     width: 100px;
     height: 30px;
-    background: linear-gradient(#242c49, #36457e);
+    background: linear-gradient(#0f3a4d, #0498a0);
     border: none;
     box-shadow: 2px 2px 2px grey;
     color: white;
@@ -79,12 +79,12 @@ background-color: rgb(146, 146, 146);
   }
 
   input[type="submit"]:hover {
-    background: linear-gradient(rgb(81, 81, 141), #36457e);
+    background: linear-gradient(#0f3a4d, #0a7e85);
   }
 }
 
 .avisoCompleteDatos {
-  background: linear-gradient(#242c49, #36457e);
+  background: linear-gradient(#0f3a4d, #0498a0);
   color: white;
   width: 280px;
   height: 50px;
@@ -182,7 +182,7 @@ background-color: rgb(146, 146, 146);
     color: white;
     font-weight: bold;
     border: none;
-    background-color: #242c49;
+    background: linear-gradient(#0f3a4d, #0498a0);
   }
 }
 #containRoomsAndCart {
@@ -341,7 +341,7 @@ background-color: rgb(146, 146, 146);
  .containRoom .containButton button {
   width: 130px;
   height: 32px;
-  background: linear-gradient(#242c49, #363e5f);
+  background: linear-gradient(#126b91,#0498a0);
   border: none;
   box-shadow: 2px 2px 2px rgb(151, 151, 151);
   color: white;
@@ -351,7 +351,7 @@ background-color: rgb(146, 146, 146);
 
 
 .containRoom .containButton button:hover{
-    background: linear-gradient(#242c49, #1c2031);
+  background: linear-gradient(#0f3a4d, #0b858b);
 }
 
 .buttonAddDisabled {
@@ -387,7 +387,7 @@ background-color: rgb(146, 146, 146);
   height: 50px;
   color: white;
   border-radius: 3px;
-  background: linear-gradient(#242c49, #36457e);
+  background: linear-gradient(#0f3a4d, #0498a0);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -445,7 +445,7 @@ background-color: rgb(146, 146, 146);
 #containRoomsAndCart #cart {
   width: 360px;
   height: 630px;
-  background: linear-gradient(#242c49, #36457e);
+  background: linear-gradient(#0f3a4d, #0498a0);
   margin-top: 3rem;
   margin-right: 3rem;
   text-align: center;
@@ -657,7 +657,7 @@ background-color: rgb(146, 146, 146);
   color: white;
   font-size: 17px;
   font-weight: bold;
-  background: #242c49;
+  background: #0498a0;
   padding: 0.5rem;
   width: 90%;
   height: 40px;

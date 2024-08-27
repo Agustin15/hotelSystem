@@ -129,6 +129,28 @@ class cliente
     }
 
 
+    
+    public function updatePhone($telefono, $idCliente)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("update clientes set telefono=? where idCliente=?");
+        $consulta->bind_param("si",$telefono, $idCliente);
+        $resultado = $consulta->execute();
+
+        return $resultado;
+    }
+    
+    public function updateMail($correo, $idCliente)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("update clientes set correo=? where idCliente=?");
+        $consulta->bind_param("si",$correo, $idCliente);
+        $resultado = $consulta->execute();
+
+        return $resultado;
+    }
+
+
 
     public function getServiciosCliente($idReserva)
     {

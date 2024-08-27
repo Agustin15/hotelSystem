@@ -1,29 +1,20 @@
-
 //styles general for page website
 
-
-@mixin styleMenu{
- * {
-
+@mixin styleMenu {
+  * {
     margin: 0px;
     padding: 0px;
-  
   }
-  
+
   body {
-  
     font-family: Arial;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    
-  
-  
   }
-  
+
   header {
-  
-    background:linear-gradient(#242c49,#36457e);
+    background: linear-gradient(#0f3a4d, #0498a0);
     color: rgb(255, 255, 255);
     text-align: center;
     width: 100%;
@@ -33,147 +24,111 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
   }
-  
+
   header a {
-  
     text-decoration: none;
     color: rgba(255, 255, 255);
   }
-  
-  header ul {
-  
 
+  header ul {
     color: rgba(255, 255, 255);
     font-size: 16px;
     font-family: Arial;
     margin-right: 18rem;
     margin-top: 0.5rem;
-  
   }
-  
+
   header li {
-  
     display: inline-block;
     padding: 14px;
     text-align: center;
-    transform: scale(1.0);
+    transform: scale(1);
     transition: 0.5s;
-  
   }
-  
+
   header li:hover {
-  
     border-bottom: 2px solid rgba(255, 255, 255, 0.822);
     transform: scale(1.1);
     transition: 0.5s;
     cursor: pointer;
   }
-  
+
   header li img {
-  
     width: 16px;
   }
-  
 
-  .redes{
-
+  .redes {
     margin-top: 0.7rem;
-    margin-right:4rem;
+    margin-right: 4rem;
   }
   .redes li:hover {
-  
-    transform: scale(1.0);
+    transform: scale(1);
     border-bottom: none;
   }
-  
+
   .redes img {
-  
     opacity: 100%;
     transition: 0.5s;
   }
-  
+
   .redes img:hover {
-  
     opacity: 60%;
     transition: 0.5s;
   }
-  
-  
+
   #logo {
-  
     display: flex;
     margin-left: 6%;
-    margin-top:-0.3rem;
-    
-
+    margin-top: -0.3rem;
   }
-  
+
   #logo h1 {
-  
     font-size: 18px;
     font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
     margin-top: 20px;
     margin-left: 15px;
     color: rgba(255, 255, 255);
   }
-  
-  
-  
 
-.options {
+  .options {
     color: rgba(255, 255, 255);
     font-size: 16px;
     font-family: Arial;
     margin-right: 18rem;
     margin-top: 1.4rem;
   }
-  
+
   .networks {
     margin-top: 1.4rem;
     margin-right: 4rem;
-  
+
     li:hover {
       transform: scale(1);
       border-bottom: none;
     }
-  
+
     img {
       opacity: 100%;
       transition: 0.5s;
     }
-  
+
     img:hover {
       opacity: 60%;
       transition: 0.5s;
     }
   }
-
-
-
 }
 
-@mixin backgroundsInputs{
-
- 
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: left center;
-    background-position-x: 0.6rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
-   
-
-
+@mixin backgroundsInputs {
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: left center;
+  background-position-x: 0.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-
-@mixin backgroundsInputsImage($backgroundImage){
-
- 
-   background-image: url($backgroundImage);
-
-
+@mixin backgroundsInputsImage($backgroundImage) {
+  background-image: url($backgroundImage);
 }

@@ -71,15 +71,12 @@ async function getIfExistingBooking(clientBooking) {
       }
     );
 
-    const result = await response.text();
+    const result = await response.json();
 
     console.log(result);
-    if(result.respuesta=="Este correo ya esta en uso"){
+    if(result.advertencia){
 
-     
-
-    }else if(result.respuesta=="Este telefono ya esta en uso"){
-
+     alertClientForm(result.advertencia);
 
     }else if (result.respuesta) {
       const confirm = await confirmAlertBookingExist(
@@ -88,6 +85,7 @@ async function getIfExistingBooking(clientBooking) {
 
       if (confirm) {
         document.querySelector(".modalBooking").style.display = "none";
+      
         updateBookingExists(clientBooking,result.respuesta);
       } else {
         document.querySelector(".modalBooking").style.display = "none";
