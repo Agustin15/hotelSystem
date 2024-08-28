@@ -1,6 +1,41 @@
 let booking = JSON.parse(localStorage.getItem("booking"));
+let rooms;
 let roomsBooking = document.querySelector(".bookingRooms");
-let rooms = booking.rooms;
+let confirmationMsj = document.getElementById("confirmationBooking");
+let containClientAndBooking = document.querySelector(
+  ".containClientAndBooking"
+);
+
+
+
+if(booking){
+
+   rooms = booking.rooms;
+}
+
+
+if (confirmationMsj) {
+  confirmationBooking();
+}
+
+function confirmationBooking() {
+  document.addEventListener("DOMContentLoaded", function () {
+    let confirmationMsj = document.getElementById("confirmationBooking");
+    setTimeout(function () {
+      if (confirmationMsj) {
+        let icon = document.querySelector(".icon");
+        let gif = document.querySelector(".gif");
+        icon.classList.add("iconMotion");
+        gif.classList.add("gifWidth");
+      }
+    }, 1000);
+
+    setTimeout(function () {
+      confirmationMsj.querySelector(".body").style.display = "block";
+    }, 2000);
+
+  });
+}
 
 async function submitBooking(clientBooking) {
   try {
@@ -15,19 +50,26 @@ async function submitBooking(clientBooking) {
       }
     );
 
-    const result=await response.text();
-    
+    const result = await response.json();
+
     console.log(result);
 
-  } catch (error) {
+    if (result.respuesta==true) {
+      localStorage.clear();
+      location.href =
+        "../views/confirmacionReserva.php?option=bookingRealized&mailClient=" +
+        clientBooking.client.mail;
+    }else{
 
+      alertClientForm(result.respuesta);
+    }
+
+  } catch (error) {
     console.log(error);
   }
 }
 
 async function updateBookingExists(clientBooking, bookingPast) {
-
-
   const updateBooking = {
     idBooking: JSON.stringify(bookingPast.idReserva),
     client: clientBooking.client,
@@ -50,7 +92,12 @@ async function updateBookingExists(clientBooking, bookingPast) {
 
   const result = await response.json();
 
-  console.log(result);
+  if (result.respuesta) {
+    localStorage.clear();
+    location.href =
+      "../views/confirmacionReserva.php?option=bookingUpdated&mailClient=" +
+      clientBooking.client.mail;
+  }
 }
 
 async function getIfExistingBooking(clientBooking) {
@@ -73,28 +120,22 @@ async function getIfExistingBooking(clientBooking) {
 
     const result = await response.json();
 
-    console.log(result);
-    if(result.advertencia){
-
-     alertClientForm(result.advertencia);
-
-    }else if (result.respuesta) {
+    if (result.advertencia) {
+      alertClientForm(result.advertencia);
+    } else if (result.respuesta) {
       const confirm = await confirmAlertBookingExist(
         "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva"
       );
 
       if (confirm) {
         document.querySelector(".modalBooking").style.display = "none";
-      
-        updateBookingExists(clientBooking,result.respuesta);
+
+        updateBookingExists(clientBooking, result.respuesta);
       } else {
         document.querySelector(".modalBooking").style.display = "none";
         return;
       }
-
-      
     } else {
-      console.log("new");
       submitBooking(clientBooking);
     }
   } catch (error) {
@@ -239,5 +280,16 @@ function printBooking() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  
+if (containClientAndBooking) {
+  if (localStorage.getItem("booking") == null) {
+    location.href = "consultaHabitaciones.php";
+  }else{
+
+    
   printBooking();
+  }
+}
+
 });

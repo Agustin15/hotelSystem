@@ -51,7 +51,7 @@ if ($_GET['option'] == "roomsHotel") {
    $habitacionesHotel = $habitacion->getAllHabitacionesHotel();
 
 
-   $habitacionesLibresEnFechaIngresada = array_map(function ($habitacionHotel) use ($habitacion, $dateBooking) {
+   $habitacionesLibresEnFechaIngresada = array_filter($habitacionesHotel,function ($habitacionHotel) use ($habitacion, $dateBooking) {
 
       $llegada = new DateTime($dateBooking['start']);
       $salida = new DateTime($dateBooking['end']);
@@ -70,11 +70,11 @@ if ($_GET['option'] == "roomsHotel") {
 
          return $habitacionHotel;
       }
-   }, $habitacionesHotel);
+   });
 
    $categoriasCantidad = array_map(function ($detallesCategoriaHabitacion) use ($habitacion, $habitacionesLibresEnFechaIngresada) {
 
-      return quantityCategoryRoom($habitacionesLibresEnFechaIngresada, $habitacion, $detallesCategoriaHabitacion['categoria']);
+      return quantityCategoryRoom(array_values($habitacionesLibresEnFechaIngresada), $habitacion, $detallesCategoriaHabitacion['categoria']);
    }, $habitacion->getAllCategoryRooms());
 
 

@@ -26,6 +26,8 @@ const submitDateBooking = (dateBooking) => {
   )
     .then((resp) => resp.json())
     .then((answer) => {
+    
+      
       quantityCategorysRooms = answer;
       printQuantAvailable(quantityCategorysRooms);
     });

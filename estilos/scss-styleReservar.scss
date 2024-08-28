@@ -453,3 +453,104 @@ form {
     width: 55px;
   }
 }
+
+#confirmationBooking {
+  margin: auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+  width: 450px;
+  height: 250px;
+  padding-top: 1rem;
+  background: linear-gradient(#0f3a4d, #0498a0);
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+
+  .title {
+    font-weight: bold;
+    padding-top: 1rem;
+    font-size: 19px;
+  }
+
+  .icon {
+    margin-top: 4rem;
+
+    .gif {
+      width: 95px;
+    }
+  }
+
+  .msj {
+    padding: 1rem;
+    margin-top: 0.5rem;
+    font-size: 18px;
+  }
+
+  button {
+    width: 130px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+    margin-top: 1rem;
+    background-color: rgba(16, 77, 117, 0.5);
+  }
+
+  button:hover {
+    background-color: rgba(16, 57, 85, 0.5);
+  }
+
+  .body {
+    display: none;
+  }
+
+  a{
+
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover{
+
+    text-decoration: underline;
+  }
+}
+
+.iconMotion {
+  animation-name: motionIcon;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.gifWidth {
+  animation-name: gifWidth;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes motionIcon {
+  from {
+    margin-top: 4rem;
+  }
+
+  to {
+    margin-top: 0.1rem;
+  }
+}
+
+
+@keyframes gifWidth {
+  from {
+    width: 95px;
+  }
+
+  to {
+    width: 60px;
+  }
+}
