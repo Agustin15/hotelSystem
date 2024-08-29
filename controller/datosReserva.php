@@ -39,8 +39,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $roomsSelectedForClient = getRoomsSelectedForClient($booking, $freeRooms);
 
 
-            if (array_key_exists("advertencia", $roomsSelectedForClient)) {
-                $respuesta = array("respuesta" => $roomsSelectedForClient['advertencia']);
+            if (gettype($roomsSelectedForClient)=="string") {
+                $respuesta = array("respuesta" => $roomsSelectedForClient);
             } else {
 
 

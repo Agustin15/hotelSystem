@@ -1,21 +1,26 @@
 function alerta(msj) {
-  $(document).ready(function () {
-    const avisoCompleteDatos = $(".avisoCompleteDatos");
-    const labelMsj = avisoCompleteDatos.find("label");
-
-    labelMsj.text(msj);
-
+ 
+    const avisoCompleteDatos = document.querySelector(".avisoCompleteDatos");
+    const progresBar=avisoCompleteDatos.querySelector(".bar");
+    const labelMsj = avisoCompleteDatos.querySelector("label");
+    labelMsj.textContent=msj;
+   
     window.scroll(0, 0);
-    avisoCompleteDatos.removeClass("desactivarCompleteDatos");
-    avisoCompleteDatos.addClass("activarCompleteDatos");
+  
+   
+    avisoCompleteDatos.classList.remove("desactivarCompleteDatos");
+    avisoCompleteDatos.classList.add("activarCompleteDatos");
+    progresBar.classList.add("barActive");
 
     function borrarAlerta() {
-      avisoCompleteDatos.removeClass("activarCompleteDatos");
-      avisoCompleteDatos.addClass("desactivarCompleteDatos");
+      avisoCompleteDatos.classList.remove("activarCompleteDatos");
+      avisoCompleteDatos.classList.add("desactivarCompleteDatos");
+      progresBar.classList.remove("barActive");
+   
     }
 
-    setTimeout(borrarAlerta, 5000);
-  });
+    setTimeout(borrarAlerta, 6000);
+  
 }
 
 function alertaCompleteDatos(msj) {
@@ -40,10 +45,13 @@ function alertGuests(msj, alert, roomToDisplay) {
   alert.querySelector("span").textContent = msj;
   alert.classList.remove("alertGuestsHide");
   alert.classList.add("alertGuestsShow");
+  alert.querySelector(".bar").classList.add("barActive");
+  
 
   setTimeout(function () {
     alert.classList.add("alertGuestsHide");
     alert.classList.remove("alertGuestsShow");
+    alert.querySelector(".bar").classList.remove(".barActive");
   }, 4000);
 }
 
@@ -80,4 +88,20 @@ async function confirmAlertBookingExist(msj) {
         resolve(false);
       });
   });
+}
+
+
+function alertErrorBooking(msj){
+
+  let modalBooking = document.querySelector(".modalBooking");
+  modalBooking.querySelector("p").textContent = msj;
+  modalBooking.style.display = "block";
+  modalBooking.querySelector(".btnCancel").style.display="none";
+
+  
+  modalBooking.querySelector(".btnOK").addEventListener("click", function () {
+    
+    modalBooking.style.display = "none";
+  });
+
 }

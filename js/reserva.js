@@ -1,4 +1,5 @@
 let booking = JSON.parse(localStorage.getItem("booking"));
+let loadingSpinner = document.querySelector(".loading");
 let rooms;
 let roomsBooking = document.querySelector(".bookingRooms");
 let confirmationMsj = document.getElementById("confirmationBooking");
@@ -6,16 +7,20 @@ let containClientAndBooking = document.querySelector(
   ".containClientAndBooking"
 );
 
-
-
-if(booking){
-
-   rooms = booking.rooms;
+if (booking) {
+  rooms = booking.rooms;
 }
-
 
 if (confirmationMsj) {
   confirmationBooking();
+}
+
+function loading(loadingState) {
+  if (loadingState) {
+    loadingSpinner.style.display = "block";
+  } else {
+    loadingSpinner.style.display = "none";
+  }
 }
 
 function confirmationBooking() {
@@ -33,12 +38,12 @@ function confirmationBooking() {
     setTimeout(function () {
       confirmationMsj.querySelector(".body").style.display = "block";
     }, 2000);
-
   });
 }
 
 async function submitBooking(clientBooking) {
   try {
+    loading(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/datosReserva.php",
       {
@@ -52,20 +57,18 @@ async function submitBooking(clientBooking) {
 
     const result = await response.json();
 
-    console.log(result);
-
-    if (result.respuesta==true) {
+    if (result.respuesta == true) {
       localStorage.clear();
       location.href =
         "../views/confirmacionReserva.php?option=bookingRealized&mailClient=" +
         clientBooking.client.mail;
-    }else{
-
-      alertClientForm(result.respuesta);
+    } else {
+      throw result.respuesta;
     }
-
   } catch (error) {
-    console.log(error);
+    alertErrorBooking(error);
+  } finally {
+    loading(false);
   }
 }
 
@@ -77,26 +80,34 @@ async function updateBookingExists(clientBooking, bookingPast) {
     booking: clientBooking.booking,
   };
 
-  console.log(updateBooking);
-  const response = await fetch(
-    "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+  try {
+    loading(true);
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
 
-    {
-      method: "PUT",
-      body: JSON.stringify(updateBooking),
-      headers: {
-        "Content-Type": "applica{tion/json",
-      },
+      {
+        method: "PUT",
+        body: JSON.stringify(updateBooking),
+        headers: {
+          "Content-Type": "applica{tion/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.respuesta) {
+      localStorage.clear();
+      location.href =
+        "../views/confirmacionReserva.php?option=bookingUpdated&mailClient=" +
+        clientBooking.client.mail;
+    } else {
+      throw result.respuesta;
     }
-  );
-
-  const result = await response.json();
-
-  if (result.respuesta) {
-    localStorage.clear();
-    location.href =
-      "../views/confirmacionReserva.php?option=bookingUpdated&mailClient=" +
-      clientBooking.client.mail;
+  } catch (error) {
+    alertErrorBooking(error);
+  } finally {
+    loading(false);
   }
 }
 
@@ -107,6 +118,8 @@ async function getIfExistingBooking(clientBooking) {
   };
 
   try {
+    
+    loading(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
         JSON.stringify(dataBooking),
@@ -121,7 +134,7 @@ async function getIfExistingBooking(clientBooking) {
     const result = await response.json();
 
     if (result.advertencia) {
-      alertClientForm(result.advertencia);
+      throw result.advertencia;
     } else if (result.respuesta) {
       const confirm = await confirmAlertBookingExist(
         "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva"
@@ -139,7 +152,9 @@ async function getIfExistingBooking(clientBooking) {
       submitBooking(clientBooking);
     }
   } catch (error) {
-    console.log(error);
+    alertClientForm(error);
+  } finally {
+    loading(false);
   }
 }
 
@@ -165,6 +180,7 @@ function removeInputAlert(event) {
 
 function clientData(event) {
   event.preventDefault();
+
   const form = event.target;
 
   const formData = new FormData(form);
@@ -280,16 +296,11 @@ function printBooking() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  
-if (containClientAndBooking) {
-  if (localStorage.getItem("booking") == null) {
-    location.href = "consultaHabitaciones.php";
-  }else{
-
-    
-  printBooking();
+  if (containClientAndBooking) {
+    if (localStorage.getItem("booking") == null) {
+      location.href = "consultaHabitaciones.php";
+    } else {
+      printBooking();
+    }
   }
-}
-
 });

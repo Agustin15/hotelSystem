@@ -147,6 +147,13 @@ header li img {
 #contain .title img {
   width: 80px;
 }
+#contain .loading {
+  margin-top: -5rem;
+  display: none;
+}
+#contain .loading img {
+  width: 50px;
+}
 
 .containClientAndBooking {
   display: flex;

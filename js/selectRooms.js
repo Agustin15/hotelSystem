@@ -26,8 +26,6 @@ const submitDateBooking = (dateBooking) => {
   )
     .then((resp) => resp.json())
     .then((answer) => {
-    
-      
       quantityCategorysRooms = answer;
       printQuantAvailable(quantityCategorysRooms);
     });
@@ -242,21 +240,26 @@ const printHotelRooms = (rooms) => {
   validateDateInputs();
 };
 
-const submitGetCategoryHotelRooms = () => {
-  fetch(
-    "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsHotel",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+async function submitGetCategoryHotelRooms() {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsHotel",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (result) {
+      printHotelRooms(result);
     }
-  )
-    .then((resp) => resp.json())
-    .then((answer) => {
-      printHotelRooms(answer);
-    });
-};
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function calculateDifferenceNight(llegada, salida) {
   let differenceTime = salida.getTime() - llegada.getTime();
@@ -276,16 +279,15 @@ const printDateBookingInCart = (dateBooking) => {
     day: "numeric",
   };
   document.querySelector(".startBooking").textContent =
-    dateBooking.start.toLocaleDateString("es-ar",options);
+    dateBooking.start.toLocaleDateString("es-ar", options);
   document.querySelector(".endBooking").textContent =
-    dateBooking.end.toLocaleDateString("es-ar",options);
+    dateBooking.end.toLocaleDateString("es-ar", options);
 
   nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
 
-  if(nights>1){
-  document.querySelector(".quantityNights").textContent = `${nights} Noches`;
-  }else{
-
+  if (nights > 1) {
+    document.querySelector(".quantityNights").textContent = `${nights} Noches`;
+  } else {
     document.querySelector(".quantityNights").textContent = `${nights} Noche`;
   }
 };
@@ -324,7 +326,7 @@ function validateDateInputs() {
   [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
     btn.addEventListener("click", () => {
       if (llegada.value == "" || salida.value == "") {
-        alerta("Ingresa una fecha válida");
+        alerta("Ingresa una fecha valida");
       } else {
         if (
           validateQuantityGuestsInputs(
@@ -369,7 +371,7 @@ if (formCheckIn) {
     event.preventDefault();
 
     if (llegada.value == "" || salida.value == "") {
-      alerta("Completa todos los campos");
+      alerta("Ingresa una fecha válida");
     } else {
       cleanRoomCart(document.getElementById("roomsBooking"));
       cleanDateBooking();
@@ -415,7 +417,10 @@ const printRoomsCart = () => {
 
 <div class="deleteRoom">
 
-<img data-id="${room.id}" class="buttonDelete" src="../img/basura.png">
+<img data-id="${
+      room.id
+    }" onmouseenter="hoverClose(event,'enter')" onmouseleave="hoverClose(event,'leave')" 
+class="buttonDelete" src="../img/cerrarVentana.png">
 </div>
 
 <div class="containIconAndCategory">
@@ -435,7 +440,11 @@ const printRoomsCart = () => {
   <div>
  <img data-room='${JSON.stringify(
    room
- )}' class="buttonSubtract" src="../img/minus.png">
+ )}' class="buttonSubtract" src="../img/minus.png" 
+  onmouseenter="hoverMinus(event,'enter')" 
+  onmouseleave="hoverMinus(event,'leave')"
+  >
+  
   </div>
 
   <div>
@@ -445,7 +454,8 @@ const printRoomsCart = () => {
   <div>
   <img data-room='${JSON.stringify(
     room
-  )}' class="buttonPlus" src="../img/add.png">
+  )}' class="buttonPlus" src="../img/add.png" onmouseenter="hoverAdd(event,'enter')" 
+  onmouseleave="hoverAdd(event,'leave')">
   </div>
 </div>
 </div>
@@ -530,6 +540,30 @@ const printRoomsCart = () => {
     cleanDeposit();
   }
 };
+
+function hoverClose(event, option) {
+  if (option == "enter") {
+    event.target.src = "../img/cerrarHover.png";
+  } else {
+    event.target.src = "../img/cerrarVentana.png";
+  }
+}
+
+function hoverAdd(event, option) {
+  if (option == "enter") {
+    event.target.src = "../img/addHover.png";
+  } else {
+    event.target.src = "../img/add.png";
+  }
+}
+
+function hoverMinus(event, option) {
+  if (option == "enter") {
+    event.target.src = "../img/minusHover.png";
+  } else {
+    event.target.src = "../img/minus.png";
+  }
+}
 
 const deleteRoomToList = (id) => {
   rooms = rooms.filter((roomDelete) => roomDelete.id != id);

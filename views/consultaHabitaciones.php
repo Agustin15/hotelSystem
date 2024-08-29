@@ -52,10 +52,21 @@
 
     <div class="avisoCompleteDatos">
 
-        <img class="imgAvisoMsj" src="../img/avisoHuespedes.png">
+        <div class="msj">
+            <div class="icon">
+                <img src="../img/avisoHuespedes.png">
 
-        <label></label>
+            </div>
 
+            <div>
+                <label></label>
+
+            </div>
+        </div>
+
+        <div class="progresBar">
+            <div class="bar"></div>
+        </div>
     </div>
 
     <form id="checkIn">
@@ -91,37 +102,44 @@
 
     <div id="modal">
 
-    <div class="bodyModal">
-    <div class="icon">
-        <img src="../img/alert.png">
-    </div>
-    <div class="title">
+        <div class="bodyModal">
+            <div class="icon">
+                <img src="../img/alert.png">
+            </div>
+            <div class="title">
 
-    <p>Excede el limite de habitaciones disponibles</p>
+                <p>Excede el limite de habitaciones disponibles</p>
 
-    </div>
-    <div>
-        <button>OK</button>
-    </div>
-    </div>
+            </div>
+            <div>
+                <button>OK</button>
+            </div>
+        </div>
     </div>
 
-   
+
 
     <div id="containRoomsAndCart">
 
-    <div id="alertGuests">
-        
-    <div class="icon">
-        <img src="../img/avisoHuespedes.png">
-    </div>
+        <div id="alertGuests">
+        <div class="msj">
+            <div class="icon">
+                <img src="../img/avisoHuespedes.png">
 
-    <div class="msj">
+            </div>
 
-        <span></span>
-        
-    </div>
-    </div>
+            <div>
+                <span>Ingresa algun huesped</span>
+
+            </div>
+        </div>
+
+        <div class="progresBar">
+            <div class="bar"></div>
+        </div>
+
+
+        </div>
 
         <div id="containRooms"></div>
 
@@ -138,7 +156,7 @@
                         <label>Desde</label>
                     </div>
                     <div>
-                        
+
                         <span class="startBooking"></span>
                     </div>
                 </div>
@@ -164,36 +182,34 @@
 
             </div>
 
-            <ul id="roomsBooking">
-
-            </ul>
+            <ul id="roomsBooking"></ul>
 
             <div id="containDeposit">
 
-            <div class="span">
-            <span>Deposito:</span>
-            </div>
-
-            <div class="containNotice">
-                <div class="icon">
-                    <img src="../img/avisoDeposito.png">
+                <div class="span">
+                    <span>Deposito:</span>
                 </div>
-                <div class="phrase">
-                    <span>Reserve ahora, pague despues</span>
-                </div>
-            </div>
-            <div class="containTotal">
-                <span class="total"></span>
-            </div>
 
-            <div class="containButton">
-                <button id="buttonNext">Siguiente</button>
+                <div class="containNotice">
+                    <div class="icon">
+                        <img src="../img/avisoDeposito.png">
+                    </div>
+                    <div class="phrase">
+                        <span>Reserve ahora, pague despues</span>
+                    </div>
+                </div>
+                <div class="containTotal">
+                    <span class="total"></span>
+                </div>
+
+                <div class="containButton">
+                    <button id="buttonNext">Siguiente</button>
+                </div>
+
+
             </div>
-          
 
         </div>
-
-    </div>
     </div>
 
 

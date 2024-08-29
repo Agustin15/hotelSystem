@@ -35,6 +35,16 @@
   .title img {
     width: 80px;
   }
+
+  .loading {
+
+    margin-top: -5rem;
+    display: none;
+  }
+  .loading img{
+
+    width: 50px;
+  }
 }
 
 .containClientAndBooking {
@@ -409,7 +419,7 @@ form {
   height: 100%;
   display: none;
 
-  .alertBookingExists {
+  .alertBookingExists{
     padding-top: 1rem;
     margin-top: 15%;
     margin-left: 34%;

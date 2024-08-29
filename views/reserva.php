@@ -61,7 +61,7 @@
                     <img src="../img/advertencia.gif">
                 </div>
 
-                <div class="msj">
+                <div  class="msj">
                     <p></p>
                 </div>
 
@@ -71,6 +71,7 @@
                 </div>
 
             </div>
+            
 
         </div>
 
@@ -226,6 +227,16 @@
 
 
         </div>
+
+        <div class="loading">
+
+        <div class="gif">
+            <img src="../img/spinner.gif">
+        </div>
+
+        <div class="msj">
+      
+
     </div>
 
 </body>
