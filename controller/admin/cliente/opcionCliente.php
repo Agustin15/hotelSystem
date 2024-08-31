@@ -22,14 +22,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     if ($clientesCorreo->num_rows > 0) {
 
-      $peticion = array("respuesta"=> "Correo ya en uso");
+      $peticion = array("respuesta" => "Correo ya en uso");
     } else {
 
       $clientesTelefono = $claseCliente->getClienteTelefono($telefono);
 
       if ($clientesTelefono->num_rows > 0) {
 
-        $peticion = array("respuesta"=> "Telefono ya en uso");
+        $peticion = array("respuesta" => "Telefono ya en uso");
       } else {
 
         $claseCliente->setCorreo($correo);
@@ -39,11 +39,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $resultado = $claseCliente->setClienteBd();
 
-        $peticion = array("respuesta"=> $resultado);
+        $peticion = array("respuesta" => $resultado);
       }
     }
 
-    $peticionJson=json_encode($peticion);
+    $peticionJson = json_encode($peticion);
 
     echo $peticionJson;
 
@@ -108,13 +108,29 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
     $datosCliente = json_decode($_GET['cliente'], true);
-   
+
     $resultado = $claseCliente->deleteCliente($datosCliente['idCliente']);
 
     $peticion = array("resultado" => $resultado);
     $peticionJson = json_encode($peticion);
 
     echo $peticionJson;
+
+    break;
+
+  case "GET":
+
+    if ($_GET['option'] == "dashboardGraphic") {
+      $dataGraphic= json_decode($_GET['dataGraphic'], true);
+
+
+      $clientesMes = $claseCliente->getClientesAnioMes($dataGraphic['month'], $dataGraphic['year']);
+        
+      $peticion = array("quantity" => $clientesMes);
+    }
+
+
+    echo json_encode($peticion);
 
     break;
 }

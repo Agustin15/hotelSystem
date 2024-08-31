@@ -145,7 +145,7 @@ openSubMenu(
   "http://localhost/sistema%20Hotel/img/btnFlecha.png"
 );
 
-function graficar(dataPoints, grafica, titulo, theme) {
+function graphicClients(dataPoints, grafica, titulo, theme) {
   var chart = new CanvasJS.Chart(grafica, {
     theme: theme,
     animationEnabled: true,
@@ -226,35 +226,6 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
   chart.render();
 };
 
-//Grafica clientes
-
-let viewClientes = document.getElementById("viewClientes");
-let dataPointsClientes = [];
-
-if (viewClientes) {
-  var mesesClientes = JSON.parse(viewClientes.dataset.mesesClientes);
-
-  let sumaClientes = mesesClientes.reduce((ac, element) => {
-    return ac + element.cantClientes + element.cantClientes;
-  }, 0);
-
-  if (sumaClientes > 0) {
-    $("#containButtonClientes").css("display", "block");
-    $("#sinDatosGraficaClientes").css("display", "none");
-
-    var mes = 0;
-    var cantClientes = 0;
-
-    dataPointsClientes = mesesClientes.map((mesCliente) => {
-      var dataPointCliente = {
-        label: getMes(mesCliente.mes),
-        y: mesCliente.cantClientes,
-      };
-
-      return dataPointCliente;
-    });
-  }
-}
 //grafica habitaciones
 
 dataPointsHabitacionesReservadas = [];
@@ -310,12 +281,6 @@ if (viewGanancias) {
     });
   }
 }
-
-if (dataPointsClientes.length > 0) {
-  graficar(dataPointsClientes, "graficaClientes", "", "light2");
-  $("#navAdmin").css("marginTop", "-22px");
-}
-
 if (dataPointsHabitacionesReservadas.length > 0) {
   graficarHabitaciones(
     dataPointsHabitacionesReservadas,
@@ -327,3 +292,91 @@ if (dataPointsHabitacionesReservadas.length > 0) {
 if (dataPointsGanancias.length > 0) {
   graficarGananciasPorMes(dataPointsGanancias, "graficaGanancias", "");
 }
+
+async function getClientsByMonthActualYear(actualYear) {
+  let monthConsult = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+  let monthsClients = [];
+
+  monthsClients = await Promise.all(
+    monthConsult.map(async (month) => {
+      const dataGraphic = {
+        month: month,
+        year: actualYear,
+      };
+
+      let dataGraphicJson = JSON.stringify(dataGraphic);
+
+      try {
+        const response = await fetch(
+          "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=dashboardGraphic&dataGraphic=" +
+            dataGraphicJson,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const result = await response.json();
+
+        let monthClients = {
+          month: month,
+          quantity: result.quantity,
+        };
+        return monthClients;
+      } catch (error) {
+        console.log(error);
+      }
+    })
+  );
+
+  dataPointsToGraphicClients(monthsClients);
+}
+
+function dataPointsToGraphicClients(monthsClients) {
+  let dataPointsMonthsClients = [];
+
+  let totalClients = monthsClients.reduce((ac, element) => {
+    return (ac += element.quantity);
+  }, 0);
+
+  if (totalClients > 0) {
+    $("#containButtonClientes").css("display", "block");
+    $("#sinDatosGraficaClientes").css("display", "none");
+
+    dataPointsMonthsClients = monthsClients.map((monthClients) => {
+      let dataPointMonthClients = {
+        label: getMes(monthClients.month),
+        y: monthClients.quantity,
+      };
+
+      return dataPointMonthClients;
+    });
+  }
+
+  if (dataPointsMonthsClients.length > 0) {
+    graphicClients(dataPointsMonthsClients, "graficaClientes", "", "light2");
+    $("#navAdmin").css("marginTop", "-22px");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  let actualDate = new Date();
+  let actualYear = actualDate.getFullYear();
+
+  getClientsByMonthActualYear(actualYear);
+});

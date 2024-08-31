@@ -123,4 +123,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
     echo $peticionJson;
 
     break;
+
+ 
 }

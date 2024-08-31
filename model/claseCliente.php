@@ -52,14 +52,14 @@ class cliente
         return $resultados;
     }
 
+    
 
-
-
-    public function getClientesReservas($mes,$anio)
+    public function getClientesAnioMes($mes,$anio)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where MONTH(fechaLlegada)=? 
-        and YEAR(fechaLlegada)=?");
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes 
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where MONTH(reserva_habitacion.fechaLlegada)=? 
+        and YEAR(reserva_habitacion.fechaLlegada)=?");
         $consulta->bind_param("ss", $mes,$anio);
         $consulta->execute();
         $resultados = $consulta->get_result();

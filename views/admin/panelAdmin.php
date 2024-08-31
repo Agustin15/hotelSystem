@@ -197,25 +197,6 @@ if (empty($usuario)) {
 
     //datos para graficas
 
-    //traer clientes
-    $mesesConsulta = array(
-        "1", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "11", "12"
-    );
-    $mesesClientes = [];
-
-    $mesesClientes =  array_map(function ($mes) use ($claseCliente, $anioActual) {
-
-        $cantClientes =  $claseCliente->getClientesReservas($mes, $anioActual);
-
-        $mesCliente = array("mes" => $mes, "cantClientes" => $cantClientes);
-
-        return $mesCliente;
-    }, $mesesConsulta);
-
-
-
-
 
     //traer habitaciones
 
@@ -247,6 +228,11 @@ if (empty($usuario)) {
 
     //traer ganancias por mes
 
+    $mesesConsulta = array(
+        "1", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "11", "12"
+    );
+    
     $gananciasPorMes = [];
     $gananciasPorMes = array_map(function ($mes) use ($clasePago, $anioActual) {
 

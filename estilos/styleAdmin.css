@@ -5,6 +5,7 @@
 
 body {
   background-color: rgb(243, 243, 243);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #loginAdmin {
@@ -109,12 +110,16 @@ body {
   border-radius: 3px;
   outline: none;
   padding-left: 2.8rem;
-  padding-right: 30px;
   font-size: 16px;
 }
 
 #loginAdmin form input::placeholder {
   opacity: 70%;
+}
+
+#loginAdmin form #userId{
+
+  width: 300px;
 }
 
 #loginAdmin form #userId,
@@ -129,6 +134,8 @@ body {
 #loginAdmin form #passwordId {
   background-image: url("../img/candado.png");
   padding-right: 2rem;
+  padding-right: 2rem;
+  width: 268px;
 }
 
 #loginAdmin form input[type="text"]::placeholder,
@@ -173,12 +180,28 @@ body {
   background: linear-gradient(#176080, #2b8a8f);
 }
 
-.inputAlert {
+#loginAdmin form .inputAlert {
   border: 2px solid red;
 }
 
-.inputAlert::placeholder {
+#loginAdmin form .inputAlert::placeholder {
   color: red;
+}
+
+
+#loginAdmin form .passwordContain{
+
+  position: relative;
+}
+
+#loginAdmin form .passwordContain img{
+
+
+  width: 20px;
+  position: absolute;
+  right: 3%;
+  top: 25%;
+  
 }
 
 #alertLogin {

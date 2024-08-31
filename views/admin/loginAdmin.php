@@ -42,7 +42,7 @@
                         <label for="userId">Usuario</label>
                     </div>
                     <div>
-                        <input placeholder="Ingrese su usuario" id="userId" type="text" name="user">
+                        <input autocomplete="off" placeholder="Ingrese su usuario" id="userId" type="text" name="user">
                     </div>
                 </div>
 
@@ -50,8 +50,10 @@
                     <div>
                         <label for="passwordId">Contraseña</label>
                     </div>
-                    <div>
-                        <input placeholder="Ingrese su contraseña" id="passwordId" type="password" name="password">
+                    <div class="passwordContain">
+                        <input autocomplete="off" placeholder="Ingrese su contraseña" id="passwordId" type="password" name="password">
+                   
+                        <img onclick="passwordStatus(event)" src="../../img/ojo.png">
                     </div>
                 </div>
 
