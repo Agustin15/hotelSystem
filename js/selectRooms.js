@@ -7,7 +7,7 @@ let modal = document.getElementById("modal");
 let buttonNext = document.getElementById("buttonNext");
 
 let totalDeposit = 0;
-let rooms = [];
+let rooms = [] || JSON.parse(localStorage.getItem("rooms"));
 let quantityCategorysRooms;
 let nights;
 let dateBooking;
@@ -269,15 +269,16 @@ function calculateDifferenceNight(llegada, salida) {
   return differenceDays;
 }
 
-const printDateBookingInCart = (dateBooking) => {
+function printDateBookingInCart (dateBooking)  {
   cart.style.display = "flex";
 
-  var options = {
+  let options = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+
   document.querySelector(".startBooking").textContent =
     dateBooking.start.toLocaleDateString("es-ar", options);
   document.querySelector(".endBooking").textContent =
@@ -373,12 +374,10 @@ if (formCheckIn) {
     if (llegada.value == "" || salida.value == "") {
       alerta("Ingresa una fecha válida");
     } else {
-      cleanRoomCart(document.getElementById("roomsBooking"));
+      
       cleanDateBooking();
       cleanQuantityAvailable();
-      cleanDeposit();
-      rooms = [];
-
+  
       let startBooking = new Date(llegada.value);
       let endBooking = new Date(salida.value);
 
@@ -390,8 +389,15 @@ if (formCheckIn) {
           end: endBooking,
         };
 
+        localStorage.setItem("dateBooking", JSON.stringify(dateBooking));
+
         submitDateBooking(dateBooking);
         printDateBookingInCart(dateBooking);
+        if(rooms){
+
+          editTotalPriceRooms();
+        }
+        
       }
     }
   });
@@ -399,6 +405,8 @@ if (formCheckIn) {
 
 const addRoomToList = (room) => {
   rooms.push(room);
+
+  localStorage.setItem("rooms", JSON.stringify(rooms));
 };
 
 const printRoomsCart = () => {
@@ -541,6 +549,7 @@ class="buttonDelete" src="../img/cerrarVentana.png">
   }
 };
 
+
 function hoverClose(event, option) {
   if (option == "enter") {
     event.target.src = "../img/cerrarHover.png";
@@ -565,9 +574,23 @@ function hoverMinus(event, option) {
   }
 }
 
+
+function editTotalPriceRooms(){
+
+ rooms=rooms.map(roomEdit=>{
+
+  roomEdit.total=calculateTotalRoom(roomEdit);
+    return roomEdit;
+  });
+
+  localStorage.setItem("rooms",JSON.stringify(rooms));
+  printRoomsCart();
+}
+
 const deleteRoomToList = (id) => {
   rooms = rooms.filter((roomDelete) => roomDelete.id != id);
 
+  localStorage.setItem("rooms", JSON.stringify(rooms));
   printRoomsCart();
 };
 
@@ -583,6 +606,7 @@ const subtractRoom = (roomToSubstract) => {
     return roomQuantitySubtract;
   });
 
+  localStorage.setItem("rooms", JSON.stringify(rooms));
   printRoomsCart();
 };
 
@@ -605,6 +629,7 @@ const plusRoom = (roomToPlus) => {
     return roomQuantityPlus;
   });
 
+  localStorage.setItem("rooms", JSON.stringify(rooms));
   printRoomsCart();
 };
 
@@ -628,6 +653,7 @@ function comprobateQuantityRoomForAdd(roomForAdd) {
         if (roomForAdd.quantity + roomInCart.quantity <= limitRoom) {
           roomInCart.quantity++;
           roomInCart.total = calculateTotalRoom(roomInCart);
+          localStorage.setItem("rooms", JSON.stringify(rooms));
 
           return (result = "quantityAdded");
         } else {
@@ -699,6 +725,22 @@ const cleanQuantityAvailable = () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   submitGetCategoryHotelRooms();
+
+  if (JSON.parse(localStorage.getItem("rooms"))) {
+    dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
+
+    let startBooking = new Date(dateBooking.start);
+    let endBooking = new Date(dateBooking.end);
+
+    dateBooking = {
+      start: startBooking,
+      end: endBooking
+    };
+
+    printDateBookingInCart(dateBooking);
+    rooms = JSON.parse(localStorage.getItem("rooms"));
+    printRoomsCart();
+  }
 });
 
 buttonNext.addEventListener("click", function () {

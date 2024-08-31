@@ -9,13 +9,13 @@ if (empty($usuario)) {
     header("location:loginAdmin.php");
 } else {
 
-    require("../../model/claseAdmin.php");
+    require("../../model/claseUsuario.php");
     require("../../model/claseHabitaciones.php");
     require("../../model/clasePago.php");
     require("../../model/claseReservas.php");
     require("../../model/claseCliente.php");
 
-    $admin = new admin();
+    $admin = new usuario();
     $claseHabitaciones = new habitaciones;
     $clasePago = new pago();
     $claseReservas = new reservas();

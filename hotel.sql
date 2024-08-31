@@ -2,9 +2,10 @@ CREATE DATABASE HOTEL;
 use HOTEL;
 
 
-CREATE TABLE admin(
+CREATE TABLE usuarios(
 usuario VARCHAR(50) primary key,
 genero CHAR,
+rol VARCHAR(11),
 contrasenia VARCHAR(200)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

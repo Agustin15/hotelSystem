@@ -1,5 +1,5 @@
-INSERT INTO admin(usuario,genero,contrasenia) values("Agustin","M","Agus2004");
-INSERT INTO admin(usuario,genero,contrasenia) values("Andrea","F","andre123");
+INSERT INTO usuarios(usuario,genero,rol,contrasenia) values("Agustin","M","admin","Agus2004");
+INSERT INTO usuarios(usuario,genero,rol,contrasenia) values("Andrea","F","encargado","andre123");
 
 INSERT INTO clientes(correo,nombre,apellido,telefono) values("valu@gmail.com","Valentin","Miranda","094335741");
 INSERT INTO clientes(correo,nombre,apellido,telefono) values("seba@gmail.com","Srbastian","Miranda","094335741");

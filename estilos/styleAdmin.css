@@ -4,298 +4,287 @@
 }
 
 body {
-  font-family: Arial;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgb(238, 238, 238);
-}
-
-#headerLogin {
-  background: linear-gradient(#242c49, #36457e);
-  color: rgb(255, 255, 255);
-  text-align: center;
-  width: 100%;
-  height: 70px;
-  font-family: Arial;
-}
-
-#headerLogin a {
-  text-decoration: none;
-  color: rgba(255, 255, 255);
-}
-
-#headerLogin ul {
-  margin-right: 3%;
-  margin-top: -46px;
-  color: rgba(255, 255, 255);
-  font-size: 16px;
-  font-family: Arial;
-}
-
-#headerLogin li {
-  display: inline-block;
-  padding: 14px;
-  text-align: center;
-  transform: scale(1);
-  transition: 0.5s;
-}
-
-#headerLogin li:hover {
-  border-bottom: 2px solid rgba(255, 255, 255, 0.822);
-  transform: scale(1.1);
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-#headerLogin li img {
-  width: 16px;
-}
-
-.redes {
-  margin-left: 46%;
-  margin-top: -46px;
-}
-
-.redes li:hover {
-  transform: scale(1);
-  border-bottom: none;
-}
-
-.redes img {
-  opacity: 100%;
-  transition: 0.5s;
-}
-
-.redes img:hover {
-  opacity: 60%;
-  transition: 0.5s;
-}
-
-#logo {
-  display: flex;
-  margin-left: 11%;
-  padding-top: 10px;
-}
-
-#logo h1 {
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Courier New", Courier, monospace;
-  margin-top: 20px;
-  margin-left: 15px;
-  color: rgba(255, 255, 255);
+  background-color: rgb(243, 243, 243);
 }
 
 #loginAdmin {
-  width: 532px;
-  height: 460px;
   margin: auto;
-  margin-top: 7%;
+  height: 660px;
+  display: flex;
+  margin-top: 0px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0rem;
 }
 
-#loginAdmin form {
-  margin-top: 1%;
-  width: 490px;
-  height: 400px;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  margin-left: 0%;
-  float: left;
-  padding-left: 40px;
+#loginAdmin .panelInfo {
+  width: 30%;
+  height: 70%;
+  background: linear-gradient(#1a5a5c, #0ea7af);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px grey;
+}
+
+#loginAdmin .panelInfo h4 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  font-style: italic;
+  font-size: 20px;
+}
+
+#loginAdmin .panelInfo img {
+  width: 90px;
+  margin-top: 5rem;
+}
+
+#loginAdmin .panelInfo p {
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+#loginAdmin .containForm {
+  width: 30%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  box-shadow: 2px 2px 2px grey;
   background-color: white;
 }
 
-#loginAdmin form h1 {
-  font-size: 18px;
-  margin-top: 2px;
-  margin-left: 20px;
+#loginAdmin .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(172, 172, 172);
+  margin-top: 0.4rem;
+  font-size: 20px;
 }
 
-#loginAdmin form input[type="text"],
-#loginAdmin form input[type="password"] {
-  margin-top: 30px;
-  margin-left: -16px;
-  height: 30px;
-  width: 180px;
-  border: 1px solid rgb(37, 127, 179);
+#loginAdmin .title img {
+  width: 100px;
+}
+
+#loginAdmin form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.3rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 1rem;
+}
+
+#loginAdmin label {
+  color: rgb(170, 170, 170);
+}
+
+#loginAdmin .user,
+#loginAdmin .password {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: bold;
+  font-size: 16px;
+}
+#loginAdmin form input {
+  height: 2.6rem;
+  width: 17rem;
+  border: 1px solid #0498a0;
   border-radius: 3px;
   outline: none;
-  padding-left: 13px;
+  padding-left: 2.8rem;
   padding-right: 30px;
+  font-size: 16px;
+}
+
+#loginAdmin form input::placeholder {
+  opacity: 70%;
+}
+
+#loginAdmin form #userId,
+#loginAdmin form #passwordId {
+  background-image: url("../img/usuario.png");
+  background-repeat: no-repeat;
+  background-position-x: 0.6rem;
+  background-position-y: 0.6rem;
+  background-size: 20px;
+}
+
+#loginAdmin form #passwordId {
+  background-image: url("../img/candado.png");
+  padding-right: 2rem;
 }
 
 #loginAdmin form input[type="text"]::placeholder,
 #loginAdmin form input[type="password"]::placeholder {
-  opacity: 70%;
   font-size: 17px;
-  margin-left: 30px;
 }
 
-#loginAdmin form input[type="text"]:hover,
-#loginAdmin form input[type="password"]:hover {
-  border-bottom: 1px solid rgb(42, 141, 180);
+#loginAdmin form input:hover {
+  border: 2px solid #0498a0;
 }
 
-.lblUsuario {
-  position: absolute;
-  font-size: 17px;
-  margin-top: 37px;
-  margin-left: -213px;
-  color: rgb(121, 121, 121);
-  background-color: white;
+#loginAdmin .containButton {
+  margin-top: 1rem;
 }
-
-.lblPass {
-  position: absolute;
-  font-size: 17px;
-  color: rgb(121, 121, 121);
-  margin-top: 37px;
-  margin-left: -213px;
-  background-color: rgb(255, 255, 255);
-  width: 100px;
-}
-
-.lblInputEfect {
-  animation-name: lblTranslate;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
-}
-
-.lblInputEfectRemove {
-  animation-name: lblTranslateRemove;
-  animation-duration: 0.2s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes lblTranslate {
-  from {
-    transform: translateY(0px);
-  }
-
-  to {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes lblTranslateRemove {
-  from {
-    transform: translateY(-20px);
-  }
-
-  to {
-    transform: translateY(0px);
-  }
-}
-
-#loginAdmin form input[type="submit"] {
-  margin-top: 40px;
-  margin-left: 10px;
-  width: 170px;
-  height: 32px;
+#loginAdmin form button {
+  width: 320px;
+  height: 38px;
   color: white;
   font-size: 17px;
   font-weight: bold;
   border-radius: 6px;
   border: none;
-  background: linear-gradient(#69a6d8, #36457e);
+  background: linear-gradient(#0f3a4d, #0498a0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-#loginAdmin form input[type="submit"]:hover {
-  background: linear-gradient(#6981d8, #36457e);
-}
+#loginAdmin form button .spinner{
 
-#loginAdmin form img {
-  width: 18px;
-  position: absolute;
-  margin-top: 36px;
-  margin-left: 185px;
-  opacity: 30%;
-}
-
-#loginAdmin form .iconoPass {
-  width: 21px;
-  position: absolute;
-  margin-top: 35px;
-  margin-left: -30px;
-}
-
-#disenioForm {
-  width: 262px;
-  height: 404px;
-  margin-top: -257px;
-  margin-left: 230px;
-  background: linear-gradient(#6981d8, #36457e);
-  color: white;
-  text-align: center;
-}
-
-#disenioForm h2 {
-  font-size: 22px;
-}
-
-#disenioForm .imgForm {
-  width: 140px;
-  margin-top: 3%;
-  opacity: 100%;
-  margin-left: -60px;
-}
-
-.avisoCompleteDatosFormulario {
-  background: linear-gradient(#242c49, #36457e);
-  color: rgb(255, 255, 255);
-  width: 300px;
-  height: 43px;
-  margin-left: -100%;
+  width: 26px;
   display: none;
-  margin-top: 2%;
-  position: absolute;
+}
+
+#loginAdmin form button img{
+
+  width: 25px;
+}
+
+#loginAdmin form button:hover {
+  background: linear-gradient(#176080, #2b8a8f);
+}
+
+.inputAlert {
+  border: 2px solid red;
+}
+
+.inputAlert::placeholder {
+  color: red;
+}
+
+#alertLogin {
+  background: linear-gradient(#2e888b, #0ea7af);
+  width: 0px;
+  height: 47px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
+  margin-top: 0.2rem;
+  padding-top: 0.2rem;
   border-radius: 3px;
-}
-
-.avisoCompleteDatosFormulario label {
-  font-size: 14px;
+  font-size: 15px;
+  color: #fafafa;
   font-weight: bold;
-  margin-left: 60px;
-  margin-top: 13px;
-  display: block;
+  gap: 0.5rem;
+  box-shadow: 2px 2px 2px grey;
+}
+#alertLogin .bodyAlert {
+
+  flex-direction: row;
+  display: none;
+  justify-content:flex-start;
 }
 
-.avisoCompleteDatosFormulario img {
-  width: 22px;
-  float: left;
-  margin-left: 10px;
-  margin-top: 9px;
+#alertLogin .icon {
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.activarCompleteDatosFormulario {
-  animation-name: activoAvisoForm;
+#alertLogin img {
+  width: 24px;
+}
+
+#alertLogin .msj {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-left: 0.9rem;
+}
+
+#alertLogin .advertencia {
+  font-weight: bold;
+  color: #fcfcfc;
+}
+
+#alertLogin .progresBar {
+  width: 100%;
+  height: 3px;
+  margin-top: 0rem;
+  background-color: gray;
+}
+
+#alertLogin .progres {
+  width: 100%;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.progresBarActive {
+  animation-name: progresBar;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progresBar {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.alertLoginShow {
+  animation-name: alertLoginShow;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
-  display: block;
 }
 
-.desactivarCompleteDatosFormulario {
-  animation-name: desactivoAvisoForm;
+.alertLoginHide {
+  animation-name: alertLoginHide;
   animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-@keyframes activoAvisoForm {
+@keyframes alertLoginShow {
   from {
-    margin-left: -100%;
+    width: 0px;
   }
 
   to {
-    margin-left: 38%;
+   width: 290px;
   }
 }
 
-@keyframes desactivoAvisoForm {
+@keyframes alertLoginHide {
   from {
-    margin-left: 38%;
+    width: 290px;
   }
 
   to {
-    margin-left: -100%;
+    width: 0px;
   }
 }
 
@@ -315,9 +304,9 @@ body {
 
 #navAdmin {
   margin-left: 0px;
-  margin-top:-14px;
+  margin-top: -14px;
   position: fixed;
-  background: linear-gradient(#314c86, #3dacb4);
+  background: linear-gradient(#30aaa0, #0498a0);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 180px;
@@ -344,7 +333,7 @@ body {
 }
 
 #navAdmin li:hover {
-  background-color: rgb(3, 76, 105);
+  background-color: rgb(25, 135, 143);
 }
 
 #navAdmin li .subMenu li:hover {
@@ -502,7 +491,7 @@ body {
   position: absolute;
   top: 76%;
   left: 0px;
-  background-color: #3dacb4;
+  background: linear-gradient(#30aaa0, #0498a0);
 }
 
 #userAdmin img {
@@ -599,7 +588,8 @@ body {
 #dataHabitaciones {
   width: 540px;
   height: 160px;
-  box-shadow: 0px 5px 0px 0px rgb(76, 180, 221), 6px 6px 6px rgba(44, 44, 44, 0.3);
+  box-shadow: 0px 5px 0px 0px rgb(76, 180, 221),
+    6px 6px 6px rgba(44, 44, 44, 0.3);
   color: rgb(76, 180, 221);
   background-color: white;
   margin-left: 50px;
@@ -621,7 +611,6 @@ body {
   padding-left: 20px;
   font-size: 20px;
   font-weight: bolder;
-
 }
 
 #dataHabitaciones #stateRooms {
@@ -635,9 +624,7 @@ body {
   padding-left: 20px;
   font-size: 20px;
   font-weight: bolder;
-
 }
-
 
 #dataHabitaciones #libres #cantHabitaciones,
 #dataHabitaciones #ocupadas #cantHabitaciones {
@@ -648,8 +635,7 @@ body {
   margin-top: 10px;
 }
 
-#dataGeneral #panelReservaAndGanancias{
-
+#dataGeneral #panelReservaAndGanancias {
   display: flex;
   flex-direction: row;
 }
@@ -673,21 +659,18 @@ body {
   padding-top: 5px;
 }
 
-#dataGeneral #ganancias #total ,
+#dataGeneral #ganancias #total,
 #dataGeneral #ganancias #ultimoMes,
-#dataGeneral #ganancias #ingresosUltimoMes{
+#dataGeneral #ganancias #ingresosUltimoMes {
   padding-left: 20px;
   font-size: 16px;
   font-weight: bolder;
   color: rgb(255, 75, 75);
 }
 
-#dataGeneral #ganancias #ingresosUltimoMes{
-
-    font-size: 16px;
+#dataGeneral #ganancias #ingresosUltimoMes {
+  font-size: 16px;
 }
-
-
 
 #dataGeneral #reservas {
   width: 250px;
@@ -701,47 +684,38 @@ body {
   flex-direction: column;
   gap: 10px;
   margin-top: 4%;
-  
 }
 
 #dataGeneral #reservas #title,
 #dataGeneral #reservas #antiguas,
 #dataGeneral #reservas #enCurso,
 #dataGeneral #reservas #pendientes {
-  color:rgb(90, 67, 219);
+  color: rgb(90, 67, 219);
   padding-top: 5px;
   font-size: 20px;
   font-weight: bold;
   padding-left: 20px;
 }
 
-
-
 #dataGeneral #reservas #antiguas,
 #dataGeneral #reservas #enCurso,
-#dataGeneral #reservas #pendientes  {
-
+#dataGeneral #reservas #pendientes {
   font-size: 15px;
 }
 
-
-#containViewHabitacionAndGananacias{
-
-  display:flex;
+#containViewHabitacionAndGananacias {
+  display: flex;
   flex-direction: row;
   gap: 54px;
-  
 }
 
-
 .titleGraphic {
-  background: #3dacb4;
+  background: #34b1a6;
   width: 100%;
   height: 35px;
   padding-top: 17px;
   margin-top: 0px;
 }
-
 
 #viewClientes,
 #viewHabitaciones,
@@ -758,8 +732,7 @@ body {
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-#viewGanancias{
-
+#viewGanancias {
   margin-left: 0px;
 }
 
@@ -774,8 +747,7 @@ body {
 #containButtonClientes,
 #containButtonHabitaciones,
 #containButtonGanancias {
-
-display: none;
+  display: none;
 }
 
 #viewClientes button,
@@ -793,31 +765,27 @@ display: none;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-#viewGanancias button{
+#viewGanancias button {
   display: block;
 }
 
 #viewHabitaciones button,
 #viewGanancias button {
-
   margin-top: 25px;
-
 }
 
 #sinDatosGraficaHabitaciones,
 #sinDatosGraficaClientes,
-#sinDatosGraficaGanancias{
+#sinDatosGraficaGanancias {
   margin: auto;
   font-size: 14px;
   margin-top: -29%;
   text-align: center;
 }
 
-
-
 #sinDatosGraficaHabitaciones img,
-#sinDatosGraficaClientes img ,
-#sinDatosGraficaGanancias img{
+#sinDatosGraficaClientes img,
+#sinDatosGraficaGanancias img {
   width: 70px;
   opacity: 65%;
   margin-top: 10px;
@@ -825,7 +793,7 @@ display: none;
 
 #sinDatosGraficaHabitaciones h1,
 #sinDatosGraficaClientes h1,
-#sinDatosGraficaGanancias h1  {
+#sinDatosGraficaGanancias h1 {
   font-size: 20px;
   opacity: 30%;
 }
@@ -838,15 +806,12 @@ display: none;
 
 #graficaClientes,
 #graficaHabitaciones,
-#graficaGanancias   {
+#graficaGanancias {
   width: 80%;
   height: 160px;
   margin: auto;
 }
 
-
 #graficaGanancias {
-
   margin-top: 25px;
 }
-

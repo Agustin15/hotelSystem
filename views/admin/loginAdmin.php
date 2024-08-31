@@ -7,80 +7,88 @@
     <link rel="stylesheet" href="../../estilos/styleAdmin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../../js/alertas.js" defer></script>
-    <script src="../../js/scriptsLogin.js" defer ></script>
+    <script src="../../js/scriptsLogin.js" defer></script>
 
     <title>Admin-Login</title>
 
 <body>
-    <header id="headerLogin">
-
-        <div id="logo">
-            <img src="../../img/revision.png" width="50px">
-            <h1>Sistema Hotel</h1>
-        </div>
 
 
-        <ul>
-
-            <li><a href="../../views/index.html">Inicio</a></li>
-            <li><a href="../../views/habitaciones.html">Habitaciones</a></li>
-            <li><a href="../../views/index.html #sobreNosotros">Sobre nosotros</a></li>
-            <li><a href="../../views/index.html #contacto">Contacto</a></li>
-
-
-        </ul>
-
-
-        <ul class="redes">
-            <li><img src="../../img/instagram.png"></li>
-            <li><img src="../../img/facebook.png"></li>
-            <li><img src="../../img/whatsapp.png"></li>
-
-        </ul>
-    </header>
-
-
-
-    <div class="avisoCompleteDatosFormulario">
-
-        <img src="../../img/avisoHuespedes.png">
-
-        <label></label>
-
-    </div>
 
     <div id="loginAdmin">
 
-        <br>
-        <form method="POST" id="formLogin">
+        <div class="panelInfo">
 
-            <br>
-            <h1>Ingresa los datos</h1>
-            <br>
 
-            <img class="iconoUser" src="../../img/usuario.png">
-            <input id="usuario" type="text" name="user" autocomplete="off">
-            <label class="lblUsuario">Usuario</label>
-            <br>
+            <img src="../../img/iconSystem.png">
+            <h4>Hotel System</h4>
+            <p>Inicie sesion como administrador o usuario comun </p>
 
-            <input id="password" type="password" name="password" autocomplete="off">
-            <label class="lblPass">Contraseña</label>
-            <img class="iconoPass" src="../../img/ojo.png">
-            <br>
 
-            <input type="submit" value="Login">
+        </div>
 
-            <div id="disenioForm">
+        <div class="containForm">
 
-                <br>
-                <h2>Inicio de sesion de Admin</h2>
-                <br>
-                <img class="imgForm" src="../../img/imgForm.png">
 
+            <div class="title">
+                <img src="../../img/iconFormLogin.png">
+
+                <h4>Complete sus datos</h4>
             </div>
 
-        </form>
+            <form onsubmit="setUser(event)">
+                <div class="user">
+                    <div>
+                        <label for="userId">Usuario</label>
+                    </div>
+                    <div>
+                        <input placeholder="Ingrese su usuario" id="userId" type="text" name="user">
+                    </div>
+                </div>
 
+                <div class="password">
+                    <div>
+                        <label for="passwordId">Contraseña</label>
+                    </div>
+                    <div>
+                        <input placeholder="Ingrese su contraseña" id="passwordId" type="password" name="password">
+                    </div>
+                </div>
+
+                <div class="containButton">
+
+
+                    <button type="submit">Ingresar
+
+                    <img class="spinner" src="../../img/spinner.gif">
+
+                    </button>
+                </div>
+
+                <div id="alertLogin">
+
+                    <div class="bodyAlert">
+                        <div class="icon">
+                            <img src="../../img/advertenciaLogin.png">
+                        </div>
+                        <div class="msj">
+                            <div class="advertencia">
+                                <span>Advertencia</span>
+                            </div>
+                            <div>
+                                <p>Complete todos los campos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progresBar">
+                        <div class="progres">
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
 
     </div>
 
@@ -89,4 +97,3 @@
 </body>
 
 </html>
-

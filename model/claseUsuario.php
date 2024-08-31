@@ -3,7 +3,7 @@
 
 require_once(__DIR__ . "/../conexion/conexion.php");
 
-class admin
+class usuario
 {
 
     private $conexion;
@@ -22,7 +22,7 @@ class admin
     public function getAdminGenero($usuario)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from admin where usuario=?");
+        $consulta = $this->conexion->conectar()->prepare("select * from usuarios where usuario=?");
         $consulta->bind_param("s", $usuario);
         $consulta->execute();
         $resultados = $consulta->get_result();
@@ -31,11 +31,11 @@ class admin
     }
 
 
-    public function selectAdminUser($user, $pass)
+    public function selectUser($user)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from admin where usuario=? and contrasenia=?");
-        $consulta->bind_param("ss", $user, $pass);
+        $consulta = $this->conexion->conectar()->prepare("select * from usuarios where usuario=?");
+        $consulta->bind_param("s", $user);
         $consulta->execute();
 
         $resultados = $consulta->get_result();

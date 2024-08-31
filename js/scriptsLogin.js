@@ -1,88 +1,95 @@
-var password = document.getElementById("password");
-var iconoPass = document.querySelector(".iconoPass");
 
-iconoPass.addEventListener("click", function () {
-  if (password.type == "password") {
-    password.type = "text";
-    iconoPass.src = "../../img/ver.png";
-  } else {
-    password.type = "password";
-    iconoPass.src = "../../img/ojo.png";
-  }
-});
+function inputAlert(inputName){
 
-$("#password").on("click", function () {
-  lblInputsLoginActive($(".lblPass"), "lblInputEfect", "lblInputEfectRemove");
-});
+let inputsName= [...document.getElementsByName(inputName)];
 
-$("#password").on("mouseleave", function () {
-  lblInputsLoginDesactive($(".lblPass"), $(this), "lblInputEfectRemove");
-});
+     inputsName[0].classList.add("inputAlert");
 
-$("#usuario").on("click", function () {
-  lblInputsLoginActive(
-    $(".lblUsuario"),
-    "lblInputEfect",
-    "lblInputEfectRemove"
-  );
-});
 
-$("#usuario").on("mouseleave", function () {
-  lblInputsLoginDesactive($(".lblUsuario"), $(this), "lblInputEfectRemove");
-});
-
-function lblInputsLoginActive(label, clase, claseRemove) {
-  label.removeClass(claseRemove);
-  label.addClass(clase);
 }
 
-function lblInputsLoginDesactive(label, input, claseAdd) {
-  if (input.val() == "") {
-    label.addClass(claseAdd);
-  }
-}
+function setUser(event){
 
-let formLogin = document.getElementById("formLogin");
-
-formLogin.addEventListener("submit", function (event) {
   event.preventDefault();
+  const form=event.target;
 
-  let user = document.getElementById("usuario");
-  let password = document.getElementById("password");
+  const formUser=new FormData(form);
+  let validate=null;
+  const user={};
 
-  login(user, password);
+  formUser.forEach((v,k)=>{
+   
+    if(v.trim()==""){
+      validate="Complete todos los campos";
+      inputAlert(k); 
+      return;
+    }else{
+    user[k]=v;
+  
+    }
 });
+  
+if(validate){
 
-const login = (user, password) => {
-  if (user.value == "" || password.value == "") {
-    alertaCompleteDatos("Complete todos los campos");
-  } else {
-    let dataUser = {
-      user: user.value,
-      password: password.value,
-    };
+  alertaLoginAdmin(validate);
+}else{
 
-    fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/autenticacionLogin.php",
-      {
-        method: "POST",
-        body: JSON.stringify(dataUser),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((resp) => resp.json())
-      .then((respuesta) => {
-        console.log(respuesta);
-        if (respuesta.resultado == true) {
-          
+  comprobateUser(user);
+}
 
-          location.href="http://localhost/sistema%20Hotel/views/admin/panelAdmin.php";
-        }else{
+}
 
-          alertaCompleteDatos(respuesta.resultado);
-        }
-      });
+
+function loading(status){
+
+  if(status){
+    document.querySelector(".spinner").style.display="block";
+  }else{
+    document.querySelector(".spinner").style.display="none";
   }
-};
+
+}
+
+
+async function comprobateUser(user){
+
+  loading(true);
+
+  let userJson=JSON.stringify(user);
+  try {
+    
+  const response= await fetch("http://localhost/sistema%20Hotel/controller/admin/autenticacionLogin.php?user="+userJson,{
+
+      method:"GET",
+      headers:{
+        "Content-type":"application/json"
+      }
+    
+
+  });
+
+  const result= await response.json();
+
+  
+  if(result.respuesta==true){
+
+    location.href="panelAdmin.php";    
+  }else{
+
+    throw result.respuesta;
+  }
+
+
+} catch (error) {
+ 
+  alertaLoginAdmin(error);
+
+}finally{
+
+  loading(false);
+
+}
+
+
+
+}
