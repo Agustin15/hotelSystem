@@ -94,6 +94,23 @@ class habitaciones
     }
 
 
+    
+    public function getAllHabitacionesReservadasYear($year)
+    {
+
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where YEAR(fechaLlegadaHabitacion)=?");
+        $consulta->bind_param("s",$year);
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados;
+    }
+
+    
+    
     public function getHabitaciones($idReserva)
     {
 
@@ -230,6 +247,36 @@ class habitaciones
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=?");
         $consulta->bind_param("i", $numHabitacion);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
+
+    public function reservasHabitacionDisponible($numHabitacion,$hoy)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+      numHabitacionReservada=? and (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?)");
+        $consulta->bind_param("iss",$numHabitacion,$hoy,$hoy);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
+
+    public function reservasHabitacionOcupada($numHabitacion,$hoy)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+      numHabitacionReservada=? and fechaLlegadaHabitacion <=? and fechaSalidaHabitacion>=?");
+        $consulta->bind_param("iss",$numHabitacion,$hoy,$hoy);
         $consulta->execute();
 
         $resultado = $consulta->get_result();

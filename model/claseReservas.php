@@ -57,6 +57,19 @@ class reservas
         return $consulta->get_result();
     }
 
+    
+
+    public function getAllReservasAnio($year)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where 
+        YEAR(fechaLlegada) =?");
+        $consulta->bind_param("s",$year);
+        $consulta->execute();
+
+        return $consulta->get_result();
+    }
+
     public function getReservasHabilitadas($hoy)
     {
 
@@ -183,9 +196,8 @@ class reservas
     {
 
 
-        $reservas = $this->getAllReservas();
+        $reservas = $this->getAllReservasAnio(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
-        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
 
         $totalPendientes = array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
 
@@ -201,10 +213,8 @@ class reservas
     public function getCantReservasFinalizadas($hoy)
     {
 
+        $reservas = $this->getAllReservasAnio(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
-        $reservas = $this->getAllReservas();
-
-        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
 
         $totalFinalizadas =  array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
 
@@ -221,9 +231,7 @@ class reservas
     {
 
 
-        $reservas = $this->getAllReservas();
-
-        $reservas = $reservas->fetch_all(MYSQLI_ASSOC);
+        $reservas = $this->getAllReservasAnio(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
         $totalEnCurso = array_reduce($reservas, function ($ac, $reserva) use ($hoy) {
 

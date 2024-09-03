@@ -640,38 +640,109 @@ function add(cliente, h2, img) {
     .catch((error) => console.error("Error:", error));
 }
 
-//grafica clientes
+function diplaySelectYearGraphic() {
+  let searchYear = document.querySelector(".searchYear");
+  let selectYear = searchYear.querySelector("select");
 
-let viewGrafica = document.getElementById("viewGrafica");
+  searchYear.style.display = "flex";
+  let valueYear = selectYear.options[selectYear.selectedIndex].value;
 
-if (viewGrafica) {
-  liBorderBottom("grafica");
-
-  var mesesClientes = JSON.parse(viewGrafica.dataset.mesesClientes);
-
-  dataPointsClientes = [];
-
-  dataPointsClientes = mesesClientes.map((mesCliente) => {
-    var dataPointCliente = {
-      label: getMes(mesCliente.mes),
-      y: mesCliente.cantClientes,
-    };
-
-    return dataPointCliente;
+  selectYear.addEventListener("change", function () {
+    valueYear = selectYear.options[selectYear.selectedIndex].value;
   });
 
-  let sumClientes = dataPointsClientes.reduce((ac, element) => {
-    return ac + element.y + element.y;
+
+  document
+    .querySelector(".btnGraphicClients")
+    .addEventListener("click", function () {
+      getDataClientsTOGraphic(valueYear);
+    });
+}
+
+function graphicClients(dataPoints, grafica, titulo, theme) {
+  var chart = new CanvasJS.Chart(grafica, {
+    theme: "light2",
+    animationEnabled: true,
+    title: {
+      text: titulo,
+    },
+
+    axisY: {
+      title: "Personas",
+      titleFontSize: 25,
+      margin: 0,
+      labelFontSize: 18,
+    },
+
+    axisX: {
+      titleFontSize: 25,
+      margin: 0,
+      labelFontSize: 18,
+    },
+
+    data: [
+      {
+        type: "column",
+        dataPoints: dataPoints,
+      },
+    ],
+  });
+  chart.render();
+
+  diplaySelectYearGraphic();
+}
+
+function dataPointsToGraphicClients(monthsClients) {
+  
+  let dataPoints = monthsClients.map((monthClients) => {
+    let monthString = getMes(monthClients.month);
+
+    const dataPoint = {
+      label: monthString,
+      y: monthClients.quantity,
+    };
+
+    return dataPoint;
+  });
+
+  let totalMonthsClients = dataPoints.reduce((ac, dataPoint) => {
+    return (ac += dataPoint.y);
   }, 0);
 
-  if (sumClientes > 0) {
-    graficar(
-      dataPointsClientes,
-      "graficaClientes",
-      "Clientes por mes",
-      "light2"
-    );
+  if (totalMonthsClients > 0) {
+    graphicClients(dataPoints, "graficaClientes", "", "light2");
   } else {
     $(".sinDatos").css("display", "block");
   }
 }
+
+async function getDataClientsTOGraphic(year) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsGraphic&year=" +
+        year,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    dataPointsToGraphicClients(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  let viewGrafica = document.getElementById("viewGrafica");
+
+  if (viewGrafica) {
+    liBorderBottom("grafica");
+    let year = new Date().getFullYear();
+    getDataClientsTOGraphic(year);
+  }
+});

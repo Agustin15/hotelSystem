@@ -309,13 +309,42 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $resultado = $claseHabitacion->deleteHabitacionReserva($idReserva, $numHabitacion);
                 $peticion = array("respuesta" => $resultado);
             }
-
-            
         }
 
-       $peticionJson=json_encode($peticion);
+        $peticionJson = json_encode($peticion);
 
-       echo $peticionJson;
+        echo $peticionJson;
 
+        break;
+
+    case "GET":
+
+    
+        if ($_GET['option'] == "dashboardGraphic") {
+
+            
+            $allRoomsReserved = $claseHabitacion->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
+
+            $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved, $claseHabitacion) {
+
+                $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
+                use ($categoryRoom, $claseHabitacion) {
+
+                    $dataRoomReserved = $claseHabitacion->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
+
+                    return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
+                });
+
+                return array('categoryRoom'=>$categoryRoom['categoria'],'quantityReserved'=>count($categoryRoomsReserved));
+            }, $claseHabitacion->getAllCategoryRooms());
+
+
+            $peticion=$quantityCategorysRoomsReserved;
+           
+        }
+
+       
+
+        echo json_encode($peticion);
         break;
 }

@@ -1,5 +1,6 @@
 <?php
 
+require_once(__DIR__ . "/../conexion/conexion.php");
 class pago
 {
 
@@ -81,14 +82,13 @@ class pago
     }
 
 
-
-    public function getAllIngresosMes($mes,$anio)
+    public function getAllIngresosAnio($year)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
-         where MONTH(reserva_habitacion.fechaSalida)=? and YEAR(reserva_habitacion.fechaSalida)=? ");
-        $consulta->bind_param("ii", $mes,$anio);
+         where YEAR(reserva_habitacion.fechaSalida)=?");
+        $consulta->bind_param("i", $year);
         $consulta->execute();
         $resultado = $consulta->get_result();
 
@@ -96,10 +96,25 @@ class pago
     }
 
 
-    public function calculateTotalIngresos()
+
+    public function getAllIngresosMes($mes, $anio)
     {
 
-        $ingresos = $this->getAllIngresos();
+        $consulta = $this->conexion->conectar()->prepare("select * from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
+         where MONTH(reserva_habitacion.fechaSalida)=? and YEAR(reserva_habitacion.fechaSalida)=? ");
+        $consulta->bind_param("ii", $mes, $anio);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function calculateTotalIngresosAnio()
+    {
+
+        $ingresos = $this->getAllIngresosAnio(date("Y"));
 
         $totalIngresos = array_reduce($ingresos, function ($ac, $ingreso) {
 
@@ -111,10 +126,10 @@ class pago
 
 
 
-    public function calculateTotalIngresosMes($mes,$anio)
+    public function calculateTotalIngresosMes($mes, $anio)
     {
 
-        $ingresosMes = $this->getAllIngresosMes($mes,$anio);
+        $ingresosMes = $this->getAllIngresosMes($mes, $anio);
 
         $totalIngresosMes = array_reduce($ingresosMes, function ($ac, $ingresoMes) {
 

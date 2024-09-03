@@ -67,6 +67,20 @@ class cliente
         return $resultados->num_rows;
     }
 
+    
+    public function getAllYearsVisitClients()
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select YEAR(fechaLlegada) from reserva_habitacion INNER JOIN clientes 
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva");
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
 
     public function deleteCliente($idCliente)
     {

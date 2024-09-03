@@ -21,15 +21,60 @@ if (empty($usuario)) {
     $claseReservas = new reservas();
     $claseCliente = new cliente();
 
-    
+
 
     $adminUser = $admin->getAdminGenero($usuario);
 
     $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
-    
+
     $genero = $datoAdminUser['genero'];
     $_SESSION['genero'] = $genero;
+
+
+    function getRoomsCategoryStatus($claseHabitaciones, $quantityCategoryRoom, $hoy, $status)
+    {
+
+
+        $roomsCategoryHotel = $claseHabitaciones->getAllHabitacionesCategoria($quantityCategoryRoom['categoryRoom']);
+
+        $totalCategoryRoomsStatus= array_reduce($roomsCategoryHotel, function ($ac, $roomCategoryHotel)
+        use ($claseHabitaciones, $hoy, $status) {
+
+            $bookingsRoomStatus =[];
+            $bookingsRoom = $claseHabitaciones->habitacionesReservadas($roomCategoryHotel['numHabitacion']);
+
+            if ($status == "libre") {
+                $bookingsRoomStatus = $claseHabitaciones->reservasHabitacionDisponible(
+                    $roomCategoryHotel['numHabitacion'],
+                    $hoy
+                );
+
+                if (empty($bookingsRoom) || count($bookingsRoomStatus) == count($bookingsRoom)) {
+
+                    $ac++;
+                }
+            } else {
+
+                $bookingsRoomStatus = $claseHabitaciones->reservasHabitacionOcupada(
+                    $roomCategoryHotel['numHabitacion'],
+                    $hoy
+                );
+
+                if (count($bookingsRoomStatus)>1) {
+
+                    $ac++;
+                }
+            }
+        
+
+            return $ac;
+        }, 0);
+
+
+        return $totalCategoryRoomsStatus;
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -195,74 +240,28 @@ if (empty($usuario)) {
     $anioActual = date("Y");
     $hoy = date("Y-m-d");
 
-    //datos para graficas
-
-
-    //traer habitaciones
-
-
-    $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
-    $totalHabitaciones = $habitacionesReservadas->num_rows;
-
-    $cantEstandar = 0;
-    $cantDeluxe = 0;
-    $cantSuite = 0;
-    $porcentajeEstandar = null;
-    $porcentajeDeluxe = null;
-    $porcentajeSuite = null;
-
-    if ($totalHabitaciones > 0) {
-
-        $habitacionesReservadas = $claseHabitaciones->getAllHabitacionesReservadas();
-        $habitacionesReservadas = $habitacionesReservadas->fetch_all(MYSQLI_ASSOC);
-
-        $cantEstandar = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Estandar");
-        $cantDeluxe = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Deluxe");
-        $cantSuite = $claseHabitaciones->totalHabitacionesCategoriaReservadas($habitacionesReservadas, "Suite");
-
-        $porcentajeEstandar = ($cantEstandar * 100) / $totalHabitaciones;
-        $porcentajeDeluxe = ($cantDeluxe * 100) / $totalHabitaciones;
-        $porcentajeSuite = ($cantSuite * 100) / $totalHabitaciones;
-    }
-
-
-    //traer ganancias por mes
-
-    $mesesConsulta = array(
-        "1", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "11", "12"
-    );
-    
-    $gananciasPorMes = [];
-    $gananciasPorMes = array_map(function ($mes) use ($clasePago, $anioActual) {
-
-
-        $totalIngresosMes = $clasePago->calculateTotalIngresosMes($mes, $anioActual);
-
-        $totalGananciasMes = array("mes" => $mes, "ganancias" => $totalIngresosMes);
-
-        return $totalGananciasMes;
-    }, $mesesConsulta);
-
 
     //datos para los panels de informacion 
 
     //habitaciones
 
-    $totalEstandarHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Estandar"));
-    $totalDeluxeHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Deluxe"));
-    $totalSuiteHotel = count($claseHabitaciones->getAllHabitacionesCategoria("Suite"));
+
+    $quantityCategoryRooms = array_map(function ($categoryRoom) use ($claseHabitaciones) {
+
+        $quantityCategory = count($claseHabitaciones->getAllHabitacionesCategoria($categoryRoom['categoria']));
+
+        return array("categoryRoom" => $categoryRoom['categoria'], "quantity" => $quantityCategory);
+    }, $claseHabitaciones->getAllCategoryRooms());
 
     $cantidadHabitacionesHotel = $claseHabitaciones->getCantidadHabitaciones();
 
     //ingresos
 
-    $totalIngresos = $clasePago->calculateTotalIngresos();
+    $totalIngresos = $clasePago->calculateTotalIngresosAnio();
 
     $ingresosDelUlimoMes = $clasePago->calculateTotalIngresosMes(intval($mesActual), $anioActual);
 
     //reservas
-
 
     $cantReservasFinalizadas =  $claseReservas->getCantReservasFinalizadas($hoy);
     $cantReservasPendientes =  $claseReservas->getCantReservasPendientes($hoy);
@@ -275,7 +274,7 @@ if (empty($usuario)) {
 
     <div id="containClienteAndGeneral">
 
-        <div id="viewClientes" data-meses-clientes='<?php echo json_encode($mesesClientes) ?>'>
+        <div id="viewClientesDashboard">
 
             <div class="titleGraphic">
                 <h3>Clientes <?php echo $anioActual ?></h3>
@@ -283,7 +282,7 @@ if (empty($usuario)) {
             <br>
 
             <br>
-            <div id="graficaClientes"></div>
+            <div id="graficaClientesDashboard"></div>
 
             <div id="containButtonClientes">
 
@@ -320,20 +319,25 @@ if (empty($usuario)) {
 
                         <div id="cantHabitaciones">
 
-                            <div id="estandar">
+                            <?php
 
-                                <span>Estandar:<?php echo ($totalEstandarHotel - $cantEstandar) ?></span>
-                            </div>
 
-                            <div id="deluxe">
+                            foreach ($quantityCategoryRooms as $quantityCategoryRoom) {
 
-                                <span>Deluxe:<?php echo ($totalDeluxeHotel - $cantDeluxe) ?></span>
-                            </div>
+                                $totalCategoryRoomsFrees = getRoomsCategoryStatus($claseHabitaciones, $quantityCategoryRoom, $hoy, "libre");
 
-                            <div id="suite">
+                            ?>
+                                <div id="category">
 
-                                <span>Suite:<?php echo ($totalSuiteHotel - $cantSuite) ?></span>
-                            </div>
+                                    <span><?php echo $quantityCategoryRoom['categoryRoom'] . ":" . $totalCategoryRoomsFrees;
+                                            ?></span>
+                                </div>
+
+                            <?php
+
+                            }
+                            ?>
+
                         </div>
                     </div>
 
@@ -343,20 +347,25 @@ if (empty($usuario)) {
 
                         <div id="cantHabitaciones">
 
-                            <div id="estandar">
+                            <?php
 
-                                <span>Estandar:<?php echo $cantEstandar ?></span>
-                            </div>
+                            foreach ($quantityCategoryRooms as $quantityCategoryRoom) {
 
-                            <div id="deluxe">
+                                $totalCategoryRoomsBusy = getRoomsCategoryStatus($claseHabitaciones, $quantityCategoryRoom, $hoy, "ocupada");
 
-                                <span>Deluxe:<?php echo $cantDeluxe ?></span>
-                            </div>
+                            ?>
+                                <div id="category">
 
-                            <div id="suite">
+                                    <span><?php echo $quantityCategoryRoom['categoryRoom'] . ":" . $totalCategoryRoomsBusy;
+                                            ?></span>
+                                </div>
 
-                                <span>Suite:<?php echo $cantSuite ?></span>
-                            </div>
+                            <?php
+
+                            }
+                            ?>
+
+
                         </div>
                     </div>
                 </div>
@@ -368,7 +377,7 @@ if (empty($usuario)) {
 
                     <div id="title">
 
-                        <span>Reservas</span>
+                        <span>Reservas <?php echo $anioActual ?></span>
 
                     </div>
 
@@ -397,7 +406,7 @@ if (empty($usuario)) {
 
                     <div id="title">
 
-                        <span>Ganancias</span>
+                        <span>Ganancias <?php echo $anioActual ?></span>
                     </div>
 
                     <div id="total">
@@ -425,13 +434,13 @@ if (empty($usuario)) {
     </div>
 
     <div id="containViewHabitacionAndGananacias">
-        <div id="viewHabitaciones" data-porcentaje-estandar=<?php echo $porcentajeEstandar ?> data-porcentaje-deluxe=<?php echo $porcentajeDeluxe ?> data-porcentaje-suite=<?php echo $porcentajeSuite ?>>
+        <div id="viewHabitacionesDashboard">
 
             <div class="titleGraphic">
-                <h3>Categorias de habitaciones mas reservadas</h3>
+                <h3>Categorias de habitaciones mas reservadas <?php echo $anioActual ?></h3>
             </div>
             <br>
-            <div id="graficaHabitaciones"></div>
+            <div id="graficaHabitacionesDashboard"></div>
 
             <div id="containButtonHabitaciones">
 
@@ -447,14 +456,14 @@ if (empty($usuario)) {
             </div>
         </div>
 
-        <div id="viewGanancias" data-ganancias-mes='<?php echo json_encode($gananciasPorMes)?>'>
+        <div id="viewGananciasDashboard">
 
             <div class="titleGraphic"">
 
       <h3>Ganancias <?php echo $anioActual ?></h3>
       </div>
 
-      <div id="graficaGanancias"></div>
+      <div id="graficaGananciasDashboard"></div>
 
             <div id="containButtonGanancias">
 

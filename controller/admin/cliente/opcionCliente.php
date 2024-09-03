@@ -120,14 +120,33 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
   case "GET":
 
-    if ($_GET['option'] == "dashboardGraphic") {
-      $dataGraphic= json_decode($_GET['dataGraphic'], true);
+      $year=$_GET['year'];
+      $months = array(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+    );
+     
+      $clientsMonths= array_map(function($month) use($claseCliente,$year){
 
-
-      $clientesMes = $claseCliente->getClientesAnioMes($dataGraphic['month'], $dataGraphic['year']);
+          $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
         
-      $peticion = array("quantity" => $clientesMes);
-    }
+          return array("month" => $month,"quantity"=>$clientsMonth);
+    
+        },$months); 
+    
+    
+        $peticion = $clientsMonths;
+    
 
 
     echo json_encode($peticion);

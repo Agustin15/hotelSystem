@@ -16,21 +16,8 @@ if (empty($usuario)) {
     $claseCliente = new cliente();
     $claseReservas = new reservas();
 
-    //traer clientes
-    $mesesConsulta = array(
-        "1", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "11", "12"
-    );
-    $mesesClientes = [];
 
-    $mesesClientes = array_map(function ($mes) use ($claseReservas) {
-
-        $cantClientes = $claseReservas->getClientesReservas($mes);
-
-        $mesCliente = array("mes" => $mes, "cantClientes" => $cantClientes);
-
-        return $mesCliente;
-    }, $mesesConsulta);
+    $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 }
 
 ?>
@@ -196,7 +183,7 @@ if (empty($usuario)) {
 
     <nav id="menuOptionPane">
 
-    <div class="title">
+        <div class="title">
             <div>
                 <h1>Clientes</h1>
             </div>
@@ -243,11 +230,37 @@ if (empty($usuario)) {
     </div>
 
     <br>
-    <div id="viewGrafica" data-meses-clientes='<?php echo json_encode($mesesClientes) ?>'>
+    <div id="viewGrafica">
 
 
+        <div class="titleGraphicClients">
+
+            <h4>Grafica Clientes</h4>
+        </div>
+        <div class="searchYear">
+            <select>
+                <?php
+
+                if ($allYearsVisitClients)
+                    foreach ($allYearsVisitClients as $year) {
+
+                        foreach ($year as $value) {
+
+                ?>
+
+                        <option><?php echo $value ?></option>
+
+
+                <?php
+
+                        }
+                    }
+                ?>
+
+            </select>
+            <button class="btnGraphicClients">Graficar</button>
+        </div>
         <div id="graficaClientes">
-
 
             <div class="sinDatos">
 

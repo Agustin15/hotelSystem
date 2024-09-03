@@ -79,39 +79,36 @@ if (iconAdmin) {
 function liBorderBottom(pagina) {
   switch (pagina) {
     case "grafica":
-      $(".liGrafica").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liGrafica").css("border-bottom", "3px solid #3ec7bb");
       break;
 
     case "listaClientes":
-      $(".liLista").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liLista").css("border-bottom", "3px solid #3ec7bb");
       break;
 
     case "agregar":
-      $(".liAgregar").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liAgregar").css("border-bottom", "3px solid #3ec7bb");
       break;
 
     case "listaReservas":
-      $(".liListaReservas").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liListaReservas").css("border-bottom", "3px solid #3ec7bb");
       break;
     case "agregarReserva":
-      $(".liAgregarReserva").css(
-        "border-bottom",
-        "3px solid rgb(96, 185, 219)"
-      );
+      $(".liAgregarReserva").css("border-bottom", "3px solid #3ec7bb");
       break;
 
     case "habitaciones":
-      $(".liHabitaciones").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liHabitaciones").css("border-bottom", "3px solid #3ec7bb");
       break;
 
     case "Estandar":
-      $(".liEstandar").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liEstandar").css("border-bottom", "3px solid #3ec7bb");
       break;
     case "Deluxe":
-      $(".liDeluxe").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liDeluxe").css("border-bottom", "3px solid #3ec7bb");
       break;
     case "Suite":
-      $(".liSuite").css("border-bottom", "3px solid rgb(96, 185, 219)");
+      $(".liSuite").css("border-bottom", "3px solid #3ec7bb");
       break;
   }
 }
@@ -145,7 +142,7 @@ openSubMenu(
   "http://localhost/sistema%20Hotel/img/btnFlecha.png"
 );
 
-function graphicClients(dataPoints, grafica, titulo, theme) {
+function graphicClientsDashboard(dataPoints, grafica, titulo, theme) {
   var chart = new CanvasJS.Chart(grafica, {
     theme: theme,
     animationEnabled: true,
@@ -226,151 +223,165 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
   chart.render();
 };
 
-//grafica habitaciones
+async function getClientsByMonthActualYear(actualYear) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsGraphic&year=" +
+        actualYear,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-dataPointsHabitacionesReservadas = [];
-let viewHabitaciones = document.getElementById("viewHabitaciones");
+    const result = await response.json();
 
-if (viewHabitaciones) {
-  let porcentajeEstandar = viewHabitaciones.dataset.porcentajeEstandar;
-  let porcentajeDeluxe = viewHabitaciones.dataset.porcentajeDeluxe;
-  let porcentajeSuite = viewHabitaciones.dataset.porcentajeSuite;
+    dataPointsToGraphicClientsDashboard(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-  if (porcentajeEstandar.length > 0) {
+function dataPointsToGraphicClientsDashboard(monthsClients) {
+  let dataPointsMonthsClients = [];
+
+  dataPointsMonthsClients = monthsClients.map((monthClients) => {
+    let monthString = getMes(monthClients.month);
+
+    const dataPoint = {
+      label: monthString,
+      y: monthClients.quantity,
+    };
+
+    return dataPoint;
+  });
+
+  let totalMonthsClients = dataPointsMonthsClients.reduce((ac, dataPoint) => {
+    return (ac += dataPoint.y);
+  }, 0);
+
+  if (totalMonthsClients > 0) {
+    $("#containButtonClientes").css("display", "block");
+    $("#sinDatosGraficaClientes").css("display", "none");
+
+    graphicClientsDashboard(
+      dataPointsMonthsClients,
+      "graficaClientesDashboard",
+      "",
+      "light2"
+    );
+    $("#navAdmin").css("marginTop", "-22px");
+  }
+}
+
+async function getCategoryRoomsMostReserved() {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php?option=dashboardGraphic",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    dataPointsToGraphicRooms(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
+  let dataPointsRoomsReserved = [];
+
+  let totalRoomsReserved = quantitysRoomsCategoryReserved.reduce(
+    (ac, categoryRoomQuantity) => {
+      return (ac += categoryRoomQuantity.quantityReserved);
+    },
+    0
+  );
+
+  if (totalRoomsReserved > 0) {
     $("#containButtonHabitaciones").css("display", "block");
     $("#sinDatosGraficaHabitaciones").css("display", "none");
 
-    dataPointsHabitacionesReservadas.push(
-      {
-        y: porcentajeEstandar,
-        label: "Estandar",
-      },
-      {
-        y: porcentajeDeluxe,
-        label: "Deluxe",
-      },
-      {
-        y: porcentajeSuite,
-        label: "Suite",
+    dataPointsRoomsReserved = quantitysRoomsCategoryReserved.map(
+      (roomCategory) => {
+        let percentageCategory =
+          (roomCategory.quantityReserved * 100) / totalRoomsReserved;
+
+        const roomCategoryQuantityReserved = {
+          y: percentageCategory,
+          label: roomCategory.categoryRoom,
+        };
+
+        return roomCategoryQuantityReserved;
       }
+    );
+  }
+
+  if (dataPointsRoomsReserved.length > 0) {
+    graficarHabitaciones(
+      dataPointsRoomsReserved,
+      "graficaHabitacionesDashboard",
+      ""
     );
   }
 }
 
-let viewGanancias = document.getElementById("viewGanancias");
-let dataPointsGanancias = [];
+async function getRevenueActualYear() {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/ganancias/opcionPago.php?option=dashboardGraphic",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
 
-if (viewGanancias) {
-  let gananciasPorMes = JSON.parse(viewGanancias.dataset.gananciasMes);
+    const result = await response.json();
 
-  let totalGanancias = gananciasPorMes.reduce(
-    (ac, ganancia) => (ac += ganancia.ganancias),
+    dataPointsToGraphicRevenues(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function dataPointsToGraphicRevenues(revenuesByMonth) {
+  let dataPointsRevenues = [];
+
+  let totalRevenues = revenuesByMonth.reduce(
+    (ac, ganancia) => (ac += ganancia.revenues),
     0
   );
 
-  if (totalGanancias > 0) {
+  if (totalRevenues > 0) {
     $("#containButtonGanancias").css("display", "block");
     $("#sinDatosGraficaGanancias").css("display", "none");
-    dataPointsGanancias = gananciasPorMes.map((ganancia) => {
-      dataPointGanancia = {
-        x: new Date(ganancia.mes),
-        y: ganancia.ganancias,
+
+    dataPointsRevenues = revenuesByMonth.map((ganancia) => {
+      dataPointRevenue = {
+        x: new Date(ganancia.month),
+        y: ganancia.revenues,
       };
 
-      return dataPointGanancia;
-    });
-  }
-}
-if (dataPointsHabitacionesReservadas.length > 0) {
-  graficarHabitaciones(
-    dataPointsHabitacionesReservadas,
-    "graficaHabitaciones",
-    ""
-  );
-}
-
-if (dataPointsGanancias.length > 0) {
-  graficarGananciasPorMes(dataPointsGanancias, "graficaGanancias", "");
-}
-
-async function getClientsByMonthActualYear(actualYear) {
-  let monthConsult = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-  ];
-  let monthsClients = [];
-
-  monthsClients = await Promise.all(
-    monthConsult.map(async (month) => {
-      const dataGraphic = {
-        month: month,
-        year: actualYear,
-      };
-
-      let dataGraphicJson = JSON.stringify(dataGraphic);
-
-      try {
-        const response = await fetch(
-          "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=dashboardGraphic&dataGraphic=" +
-            dataGraphicJson,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        const result = await response.json();
-
-        let monthClients = {
-          month: month,
-          quantity: result.quantity,
-        };
-        return monthClients;
-      } catch (error) {
-        console.log(error);
-      }
-    })
-  );
-
-  dataPointsToGraphicClients(monthsClients);
-}
-
-function dataPointsToGraphicClients(monthsClients) {
-  let dataPointsMonthsClients = [];
-
-  let totalClients = monthsClients.reduce((ac, element) => {
-    return (ac += element.quantity);
-  }, 0);
-
-  if (totalClients > 0) {
-    $("#containButtonClientes").css("display", "block");
-    $("#sinDatosGraficaClientes").css("display", "none");
-
-    dataPointsMonthsClients = monthsClients.map((monthClients) => {
-      let dataPointMonthClients = {
-        label: getMes(monthClients.month),
-        y: monthClients.quantity,
-      };
-
-      return dataPointMonthClients;
+      return dataPointRevenue;
     });
   }
 
-  if (dataPointsMonthsClients.length > 0) {
-    graphicClients(dataPointsMonthsClients, "graficaClientes", "", "light2");
-    $("#navAdmin").css("marginTop", "-22px");
+  if (dataPointsRevenues.length > 0) {
+    graficarGananciasPorMes(
+      dataPointsRevenues,
+      "graficaGananciasDashboard",
+      ""
+    );
   }
 }
 
@@ -378,5 +389,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
 
-  getClientsByMonthActualYear(actualYear);
+  if (document.getElementById("viewClientesDashboard")) {
+    getClientsByMonthActualYear(actualYear);
+    getCategoryRoomsMostReserved();
+    getRevenueActualYear();
+  }
 });

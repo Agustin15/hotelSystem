@@ -740,9 +740,9 @@ body {
   margin-top: 0px;
 }
 
-#viewClientes,
-#viewHabitaciones,
-#viewGanancias {
+#viewClientesDashboard,
+#viewHabitacionesDashboard,
+#viewGananciasDashboard {
   width: 520px;
   height: 290px;
   display: block;
@@ -755,13 +755,13 @@ body {
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
-#viewGanancias {
+#viewGananciasDashboard {
   margin-left: 0px;
 }
 
-#viewClientes h3,
-#viewHabitaciones h3,
-#viewGanancias h3 {
+#viewClientesDashboard h3,
+#viewHabitacionesDashboard h3,
+#viewGananciasDashboard h3 {
   font-size: 18px;
   margin-left: -20px;
   color: white;
@@ -773,9 +773,9 @@ body {
   display: none;
 }
 
-#viewClientes button,
-#viewHabitaciones button,
-#viewGanancias button {
+#viewClientesDashboard button,
+#viewHabitacionesDashboard button,
+#viewGananciasDashboard button {
   width: 80px;
   height: 30px;
   color: rgb(0, 0, 0);
@@ -788,12 +788,12 @@ body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-#viewGanancias button {
+#viewGananciasDashboard button {
   display: block;
 }
 
-#viewHabitaciones button,
-#viewGanancias button {
+#viewHabitacionesDashboard button,
+#viewGananciasDashboard button {
   margin-top: 25px;
 }
 
@@ -821,20 +821,20 @@ body {
   opacity: 30%;
 }
 
-#viewClientes button:hover,
-#viewHabitaciones button:hover,
-#viewGanancias button:hover {
+#viewClientesDashboard button:hover,
+#viewHabitacionesDashboard button:hover,
+#viewGananciasDashboard button:hover {
   opacity: 100%;
 }
 
-#graficaClientes,
-#graficaHabitaciones,
-#graficaGanancias {
+#graficaClientesDashboard,
+#graficaHabitacionesDashboard,
+#graficaGananciasDashboard {
   width: 80%;
   height: 160px;
   margin: auto;
 }
 
-#graficaGanancias {
+#graficaGananciasDashboard {
   margin-top: 25px;
 }
