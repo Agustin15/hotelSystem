@@ -121,19 +121,19 @@ form {
   }
 
   .name input {
-    @include backgroundsInputsImage("../img/imgNombre.png");
+    @include backgroundsInputsImage("../img/usuario.png");
   }
 
   .lastName input {
-    @include backgroundsInputsImage("../img/imgApellido.png");
+    @include backgroundsInputsImage("../img/lastNameForm.png");
   }
 
   .mail input {
-    @include backgroundsInputsImage("../img/imgCorreo.png");
+    @include backgroundsInputsImage("../img/mailForm.png");
   }
 
   .phone input {
-    @include backgroundsInputsImage("../img/imgTelefono.png");
+    @include backgroundsInputsImage("../img/phoneForm.png");
   }
 
   .containButtons {

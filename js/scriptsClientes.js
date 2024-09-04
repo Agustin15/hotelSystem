@@ -14,18 +14,113 @@ function buscadorParametroCliente(valueFind, tdClass, dataSet) {
   });
 }
 
-$("#tableClientes").load("cargarTabla.php", function () {
-  var cliente = $(this).data("idClienteSearch");
+function displayYearClientsTable() {
+  let selectYearTable = document.querySelector(".selectYearTable");
+  let optionYears = document.querySelector(".years");
 
-  if (cliente !== "") {
-    buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
+  optionYears.style.display = "flex";
+  let valueYear = selectYearTable.options[selectYearTable.selectedIndex].value;
+
+  selectYearTable.addEventListener("change", function () {
+    valueYear = selectYearTable.options[selectYearTable.selectedIndex].value;
+    getDataClientsToTable(valueYear);
+  });
+}
+
+async function getDataClientsToTable(year) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsTable&year=" +
+        year,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    loadTableClients(result, year);
+  } catch (error) {
+    console.log(error);
   }
+}
+
+async function loadTableClients(clientsData, year) {
+  let tableClientes = document.getElementById("tableClientes");
+
+  if (clientsData) {
+    document.querySelector("#buscador").style.display = "block";
+    document.querySelector(".clientesVacio").style.display = "none";
+    document.querySelector(
+      ".titleTableClients"
+    ).textContent = `Clientes ${year}`;
+
+    let rowsClients = clientsData.map((clientData) => {
+      return `
+      <tr class="trBody">
+      <td class="tdNombre">
+
+      <div class="containName">
+          <img src="../../../img/usuarioTable.png">
+          <a>${clientData.nombre}</a>
+
+          </div>
+      </td>
+      <td>${clientData.apellido}</td>
+
+      <td data-correo-cliente="${clientData.correo}" class="tdCorreo">${clientData.correo}</td>
+
+      <td>${clientData.telefono}</td>
+
+      <td>
+
+          <button class="btnEliminar" data-opcion="eliminar" data-id="${clientData.idCliente}" data-correo="${clientData.correo}" 
+          data-nombre="${clientData.nombre}" data-apellido="${clientData.apellido}" 
+          data-telefono="${clientData.telefono}">
+
+
+              <img src="../../../img/borrar.png">
+          </button>
+
+          <button class="btnEditar" data-opcion="editar" data-id="${clientData.idCliente}" data-correo="${clientData.correo}" 
+          data-nombre="${clientData.nombre}" data-apellido="${clientData.apellido}" 
+          data-telefono="${clientData.telefono}">
+
+              <img src="../../../img/editar.png">
+
+          </button>
+          <button class="btnInfo" data-opcion="info" data-id="${clientData.idCliente}" data-correo="${clientData.correo}" 
+          data-nombre="${clientData.nombre}" data-apellido="${clientData.apellido}" 
+          data-telefono="${clientData.telefono}">
+
+              <img src="../../../img/detalles.png">
+
+          </button>
+      </td>
+
+
+  </tr>
+   `;
+    });
+
+    tableClientes.innerHTML += rowsClients.join("");
+
+    displayYearClientsTable();
+  } else {
+    document.querySelector(".clientesVacio").style.display = "block";
+    document.querySelector("#buscador").style.display = "none";
+  }
+  // var cliente = $(this).data("idClienteSearch");
+
+  // if (cliente !== "") {
+  //   buscadorParametroCliente(cliente, ".tdCorreo", "correo-cliente");
+  // }
 
   chooseOption();
-
-  liBorderBottom("listaClientes");
-});
-
+}
 $("#buscador").on("keydown", function () {
   buscadorCliente();
 });
@@ -85,8 +180,7 @@ function buscadorCliente() {
 function opcionCliente(datosCliente, opcion) {
   var cliente = datosCliente[0];
 
-  $("#modal").css("display", "block");
-  $("#modal").css("cursor", "none");
+  $("#modal").css("display", "flex");
 
   switch (opcion) {
     case "eliminar":
@@ -126,54 +220,39 @@ function opcionCliente(datosCliente, opcion) {
 }
 
 function aviso(resultado, opcion) {
-  console.log(resultado);
-
-  const aviso = document.getElementById("avisoCliente");
-  var imgAvisoCliente = null;
-  var lblClienteAviso = null;
-
-  aviso.classList.remove("avisoClienteDesactive");
-  aviso.classList.add("avisoClienteActive");
+  const aviso = document.getElementById("alertClient");
+  const modal = document.getElementById("modal");
 
   switch (opcion) {
     case "Eliminar":
-      aviso.style.background = "linear-gradient(red,rgb(226, 4, 4))";
-      if (resultado) {
-        imgAvisoCliente = "../../../img/tickEliminar.png";
-        lblClienteAviso = "Cliente eliminado";
-      } else {
-        imgAvisoCliente = "../../../img/cruzEliminar.png";
-        lblClienteAviso = "Error al eliminar el cliente";
-      }
+      // aviso.querySelector("img").src=;
+
+      aviso.querySelector("img").src = "../../../img/tickDelete.gif";
+      aviso.querySelector("p").textContent = "Cliente eliminado exitosamente";
+      aviso.querySelector("button").style.background = "red";
+
       break;
 
     case "Editar":
-      aviso.style.background = "rgb(0, 89, 255)";
-
       if (resultado) {
-        imgAvisoCliente = "../../../img/tickEditar.png";
-        lblClienteAviso = "Cliente actualizado";
+        aviso.querySelector("img").src = "../../../img/tickServices.gif";
+        aviso.querySelector("p").textContent =
+          "Cliente actualizado exitosamente";
+        aviso.querySelector("button").style.background = "rgb(9, 72, 131)";
       }
 
       break;
   }
 
-  aviso.innerHTML = `
-    
-    <img src="${imgAvisoCliente}">
+  aviso.style.display = "flex";
 
-    <label>${lblClienteAviso}</label>
-    `;
+  aviso.querySelector("button").addEventListener("click", function () {
+    aviso.querySelector("img").src = "";
+    aviso.style.display = "none";
+    modal.style.display = "none";
 
-  borrarAviso(aviso);
-
-  recargar();
-}
-
-function borrarAviso(aviso) {
-  setTimeout(function () {
-    aviso.classList.add("avisoClienteDesactive");
-  }, 2000);
+    recargar();
+  });
 }
 
 function recargar() {
@@ -224,11 +303,27 @@ function chooseOption() {
   });
 }
 
-function submitUpdate() {
+function alertEdit(advertencia) {
+  let modalEdit = document.querySelector(".modalEditar");
+  let alertEditDiv = document.querySelector(".alertaEditar");
+
+  modalEdit.style.display = "flex";
+  alertEditDiv.style.display = "flex";
+
+  alertEditDiv.querySelector("img").src = "../../img/advertencia.gif";
+  alertEditDiv.querySelector("p").textContent = advertencia;
+
+  alertEditDiv.addEventListener("click", function () {
+    alertEditDiv.querySelector("img").src = "";
+    modalEdit.style.display = "none";
+    alertEditDiv.style.display = "none";
+  });
+}
+async function submitUpdate() {
   let formEditar = document.getElementById("formEditar");
 
   if (formEditar) {
-    formEditar.addEventListener("submit", function (event) {
+    formEditar.addEventListener("submit", async function (event) {
       event.preventDefault();
 
       let idCliente = this.dataset.idCliente;
@@ -240,34 +335,33 @@ function submitUpdate() {
         telefono: $("#inputTelefono").val().trim(),
       };
 
-      fetch(
-        "http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            cliente: datosCliente,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((resp) => resp.json())
-        .then((data_resp) => {
-          if (data_resp.respuesta == true) {
-            $("#modal").css("display", "none");
-            $("#modal").css("cursor", "auto");
-
-            $(".divOpcion").removeClass("divEditar");
-            $(".divOpcion").empty();
-
-            aviso(data_resp.respuesta, "Editar");
-          } else {
-            const lbl = $("#alertaEditar").find("label");
-            lbl.text(data_resp.respuesta);
-            $("#alertaEditar").addClass("alertaEditarActive");
+      try {
+        const response = await fetch(
+          "http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              cliente: datosCliente,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        });
+        );
+        const result = await response.json();
+
+        console.log(result);
+        if (result.advertencia) {
+          throw result.advertencia;
+        } else if (result.respuesta == true) {
+          $(".divOpcion").removeClass("divEditar");
+          $(".divOpcion").empty();
+
+          aviso(result.respuesta, "Editar");
+        }
+      } catch (error) {
+        alertEdit();
+      }
     });
   }
   cancelUpdate();
@@ -315,24 +409,30 @@ function submitDelete() {
   cancelEliminar();
 }
 
-function eliminar(datosCliente) {
-  var datosClienteJson = [];
+async function eliminar(datosCliente) {
+  let datosClienteJson = [];
 
   datosClienteJson.push(encodeURIComponent(JSON.stringify(datosCliente)));
 
-  var url = `http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php?cliente=
+  let url = `http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php?cliente=
     ${datosClienteJson}`;
-  fetch(url, {
-    method: "DELETE",
-  })
-    .then((resp) => resp.json())
-    .then((data_resp) => {
-      if (data_resp) {
-        $(".divOpcion").removeClass("divConfirmacionDelete");
-        $(".divOpcion").empty();
-      }
-      aviso(data_resp, "Eliminar");
+
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
     });
+    const result = await response.json();
+
+    if (result) {
+      $(".divOpcion").removeClass("divConfirmacionDelete");
+      $(".divOpcion").empty();
+      aviso(result, "Eliminar");
+    } else {
+      throw "¡Ups hubo un error al eliminar el cliente!";
+    }
+  } catch (error) {
+    alertDelete(error);
+  }
 }
 
 function cancelEliminar() {
@@ -474,114 +574,55 @@ function closeHuespedes() {
   }
 }
 
-//opcion agregar
-function lblInputsLoginActive(label, clase, claseRemove) {
-  label.removeClass(claseRemove);
-  label.addClass(clase);
+function inputAlertClient(input) {
+  let inputAlert = [...document.getElementsByName(input)];
+
+  inputAlert[0].classList.add("inputAlert");
 }
 
-function lblInputsLoginDesactive(label, input, claseAdd) {
-  if (input.val() == "") {
-    label.addClass(claseAdd);
-  }
+function removeInputAlert(input) {
+  input.classList.remove("inputAlert");
 }
 
-let formAgregar = document.getElementById("formAgregar");
+function alertFormClient(validate){
 
-if (formAgregar) {
-  liBorderBottom("agregar");
-  var inputs = $("#formAgregar").find("input");
+  
 
-  inputs.each(function () {
-    $(this).on("click", function () {
-      var lbl = $(this).prev("label");
-
-      lblInputsLoginActive(lbl, "lblInputEfect", "lblInputEfectRemove");
-    });
-
-    $(this).on("mouseleave", function () {
-      var lbl = $(this).prev("label");
-      if ($(this).val() == "") {
-        lblInputsLoginDesactive(lbl, $(this), "lblInputEfectRemove");
-      }
-    });
-  });
-
-  submitAdd();
 }
 
-let alertaAgregar = document.getElementById("alertaAgregar");
-
-if (alertaAgregar) {
-  function alertaSetsError(h2, msj, img, claseAviso, claseForm) {
-    img.attr("src", "../../../img/cruzAgregar.png");
-    h2.text(msj);
-
-    $("#alertaAgregar").removeClass("alertaAgregarDesactive");
-    $("#alertaAgregar").addClass(claseAviso);
-    $("#formAgregar").removeClass("formAgregarDesactive");
-    $("#formAgregar").addClass(claseForm);
-  }
-
-  function borrarAlerta() {
-    setTimeout(function () {
-      $("#alertaAgregar").addClass("alertaAgregarDesactive");
-      $("#formAgregar").addClass("formAgregarDesactive");
-    }, 2020);
-  }
-}
-
-function submitAdd() {
+function submitAdd(formAgregar) {
   formAgregar.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    var img = $("#alertaAgregar").find("img");
-    var h2 = $("#alertaAgregar").find("h2");
+    let validate;
+    const formData = new FormData(formAgregar);
 
-    if (
-      $("#inputNombre").val() === "" ||
-      $("#inputApellido").val() === "" ||
-      $("#inputCorreo").val() === "" ||
-      $("#inputTelefono").val() === ""
-    ) {
-      alertaSetsError(
-        h2,
-        "Complete todos los campos",
-        img,
-        "alertaAgregarActive",
-        "formAgregarActive"
-      );
-      borrarAlerta();
-    } else {
-      var correo = $("#inputCorreo").val().trim();
-      var nombre = $("#inputNombre").val().trim();
-      var apellido = $("#inputApellido").val().trim();
-      var telefono = $("#inputTelefono").val().trim();
-
-      if (
-        correo.includes("@gmail.com") == false &&
-        correo.includes("@hotmail.com") == false &&
-        correo.includes("@outlook.com") == false
-      ) {
-        alertaSetsError(
-          h2,
-          "Formato del correo no valido",
-          img,
-          "alertaAgregarActive",
-          "formAgregarActive"
-        );
-        borrarAlerta();
+    const client = {};
+    formData.forEach((v, k) => {
+      if (v.trim() == "") {
+        inputAlertClient(k);
+        return (validate = "Complete todos los campos");
+      } else if (k == "phone" && v.length < 8) {
+        inputAlert(k);
+        return (validate = "Ingresa un telefono valido");
+      } else if (k == "mail" && !v.match(validRegex)) {
+        inputAlert(k);
+        return (validate = "Ingresa un correo valido");
       } else {
-        const cliente = {
-          correo: correo,
-          nombre: nombre,
-          apellido: apellido,
-          telefono: telefono,
-        };
-
-        add(cliente, h2, img);
+        client[k] = v;
       }
+
+    });
+
+    if(validate){
+      alertFormClient(validate);
     }
+  });
+
+  [...document.querySelectorAll("input")].forEach((input) => {
+    input.addEventListener("click", function () {
+      removeInputAlert(input);
+    });
   });
 }
 
@@ -640,7 +681,7 @@ function add(cliente, h2, img) {
     .catch((error) => console.error("Error:", error));
 }
 
-function diplaySelectYearGraphic() {
+function displaySelectYearGraphic() {
   let searchYear = document.querySelector(".searchYear");
   let selectYear = searchYear.querySelector("select");
 
@@ -650,7 +691,6 @@ function diplaySelectYearGraphic() {
   selectYear.addEventListener("change", function () {
     valueYear = selectYear.options[selectYear.selectedIndex].value;
   });
-
 
   document
     .querySelector(".btnGraphicClients")
@@ -689,11 +729,10 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
   });
   chart.render();
 
-  diplaySelectYearGraphic();
+  displaySelectYearGraphic();
 }
 
 function dataPointsToGraphicClients(monthsClients) {
-  
   let dataPoints = monthsClients.map((monthClients) => {
     let monthString = getMes(monthClients.month);
 
@@ -739,10 +778,23 @@ async function getDataClientsTOGraphic(year) {
 
 document.addEventListener("DOMContentLoaded", function () {
   let viewGrafica = document.getElementById("viewGrafica");
+  let tableClientes = document.getElementById("tableClientes");
+  let formAgregar = document.getElementById("formAgregar");
 
+  let year = new Date().getFullYear();
   if (viewGrafica) {
     liBorderBottom("grafica");
-    let year = new Date().getFullYear();
     getDataClientsTOGraphic(year);
+  }
+
+  if (tableClientes) {
+    liBorderBottom("listaClientes");
+    getDataClientsToTable(year);
+  }
+
+  if (formAgregar) {
+    liBorderBottom("agregar");
+
+    submitAdd(formAgregar);
   }
 });

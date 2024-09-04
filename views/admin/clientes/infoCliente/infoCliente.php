@@ -4,18 +4,18 @@
 $cliente = json_decode($_GET['cliente'], true);
 
 require("../../../../model/claseCliente.php");
-require("../../../../model/claseReserva.php");
+require("../../../../model/claseReservas.php");
 require("../../../../model/claseHabitaciones.php");
 require("../../../../model/clasePago.php");
 require("../../../../model/claseServicios.php");
 
-$claseReserva = new reserva();
+$claseReserva = new reservas();
 $claseCliente = new cliente();
 $claseHabitaciones = new habitaciones();
 $clasePago= new pago();
 $claseServicio = new servicio();
 
-$reservasCliente = $claseReserva->getReservaIdCliente($cliente['idCliente']);
+$reservasCliente = $claseReserva->getReservaPorIdCliente($cliente['idCliente']);
 
 ?>
 
@@ -47,7 +47,7 @@ $reservasCliente = $claseReserva->getReservaIdCliente($cliente['idCliente']);
 
 <?php
 
-if ($reservasCliente->num_rows == 0) {
+if (empty($reservasCliente)) {
 
 ?>
 
@@ -79,7 +79,7 @@ if ($reservasCliente->num_rows == 0) {
 
             <?php
 
-            foreach ($reservasCliente->fetch_all(MYSQLI_ASSOC) as $reservaCliente) {
+            foreach ($reservasCliente as $reservaCliente) {
 
                 $fechaLlegada = new DateTime($reservaCliente['fechaLlegada']);
                 $fechaSalida = new DateTime($reservaCliente['fechaSalida']);
@@ -157,23 +157,8 @@ if ($reservasCliente->num_rows == 0) {
 
                         </div>
 
-                        <?php
-                        $habitacionesReservas = $claseHabitaciones->getHabitaciones($reservaCliente['idReserva']);
-                        $pago =  $clasePago->getPago($reservaCliente['idReserva']);
-        
-                        $factura = array(
-                            "llegada" => $reservaCliente['fechaLlegada'],
-                            "salida" => $reservaCliente['fechaSalida'],
-                            "habitaciones" => $habitacionesReservas->fetch_all(MYSQLI_ASSOC),
-                            "servicios" => $serviciosCliente->fetch_all(MYSQLI_ASSOC),
-                            "deposito" => $pago
-                        );
-
-
-                        ?>
-
-
-                        <div class="pago" data-pago="<?php echo htmlentities(json_encode($factura)) ?>">
+                    
+                        <div class="pago">
 
                             <img src="../../../img/pagoInfo.png">
                             <br>

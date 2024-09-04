@@ -74,24 +74,25 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         if ($clienteDistinto['correo'] ==  $datosCliente['cliente']['correo']) {
 
-          $peticion = array("respuesta" => "Este correo ya ha sido ingresado");
+          $peticion = array("advertencia" => "Este correo ya ha sido ingresado");
+          echo json_encode($peticion);
+          break;
+        } else  if ($clienteDistinto['telefono'] ==  $datosCliente['cliente']['telefono']) {
+
+          $peticion = array("advertencia" => "Este telefono ya ha sido ingresado");
+          echo json_encode($peticion);
+          break;
         } else {
 
-          if ($clienteDistinto['telefono'] ==  $datosCliente['cliente']['telefono']) {
 
-            $peticion = array("respuesta" => "Este telefono ya ha sido ingresado");
-          } else {
-
-
-            $resultado = $claseCliente->updateCliente(
-              $datosCliente['cliente']['correo'],
-              $datosCliente['cliente']['nombre'],
-              $datosCliente['cliente']['apellido'],
-              $datosCliente['cliente']['telefono'],
-              $datosCliente['cliente']['idCliente']
-            );
-            $peticion = array("respuesta" => $resultado);
-          }
+          $resultado = $claseCliente->updateCliente(
+            $datosCliente['cliente']['correo'],
+            $datosCliente['cliente']['nombre'],
+            $datosCliente['cliente']['apellido'],
+            $datosCliente['cliente']['telefono'],
+            $datosCliente['cliente']['idCliente']
+          );
+          $peticion = array("respuesta" => $resultado);
         }
       }
     }
@@ -120,7 +121,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
   case "GET":
 
-      $year=$_GET['year'];
+    if ($_GET['option'] == "clientsGraphic") {
+
+      $year = $_GET['year'];
       $months = array(
         "1",
         "2",
@@ -134,22 +137,29 @@ switch ($_SERVER['REQUEST_METHOD']) {
         "10",
         "11",
         "12"
-    );
-     
-      $clientsMonths= array_map(function($month) use($claseCliente,$year){
+      );
 
-          $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
-        
-          return array("month" => $month,"quantity"=>$clientsMonth);
-    
-        },$months); 
-    
-    
-        $peticion = $clientsMonths;
-    
+      $clientsMonths = array_map(function ($month) use ($claseCliente, $year) {
 
+        $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
+
+        return array("month" => $month, "quantity" => $clientsMonth);
+      }, $months);
+
+
+      $peticion = $clientsMonths;
+    } else {
+
+      $year = $_GET['year'];
+
+      $clients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+
+      $peticion = $clients;
+    }
 
     echo json_encode($peticion);
+
+
 
     break;
 }

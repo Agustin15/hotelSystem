@@ -7,6 +7,18 @@ $cliente = json_decode($cliente, true);
 
 ?>
 
+
+<div class="modalEliminar">
+<div class="alertaEliminar">
+<img src="">
+<br>
+<p></p>
+<br>
+<button>Ok</button>
+</div>
+
+</div>
+
 <br>
 <img src="http://localhost/Sistema%20Hotel/img/borrarAlerta.png">
 <br>

@@ -237,33 +237,60 @@ if (empty($usuario)) {
         <h1>Agregar Cliente</h1>
 
 
-        <label class="lblNombre">Nombre</label>
-        <input type="text" id="inputNombre" name="nombre" autocomplete="off">
-        <img src="../../../img/imgNombre.png" class="imgNombre">
+        <div class="row1">
+        <div class="name">
+        <label for="inputName">Nombre</label>
+        <input type="text" id="inputName" name="name" placeholder="Ingresa nombre" autocomplete="off">
+             
+        </div>
+
+        <div class="lastName">
+        <label for="inputLastName">Apellido</label>
+        <input type="text" id="inputLastName" placeholder="Ingresa apellido" name="lastName" autocomplete="off">
+             
+        </div>
+     
+        </div>
+
+        <div class="row2">
+        <div class="mail">
+        <label for="inputMail">Correo</label>
+        <input type="mail" id="inputMail" name="mail" placeholder="Ingresa correo" autocomplete="off">
+             
+        </div>
+
+        <div class="phone">
+        <label for="inputPhone">Phone</label>
+        <input type="text" id="inputPhone" name="phone" placeholder="Ingresa telefono" autocomplete="off">
+             
+        </div>
+     
+        </div>
 
 
         <br>
+      
+        <button type="submit">
+            
+        Agregar
+        <img src="../../../img/spinner.gif">
+    
+    </button>
 
-        <label class="lblApellido">Apellido</label>
-        <input id="inputApellido" type="text" autocomplete="off" name="apellido">
-        <img src="../../../img/imgApellido.png" class="imgApellido">
+    <div class="alertFormClient">
 
-        <br>
+    <div class="header">
+    <img src="../../../img/advertencia.png">
+    <span>Advertencia</span>
+    </div>
+    <p>Complete todos los campos</p>
+    <div class="progressBar">
 
-        <label class="lblCorreo">Correo</label>
-        <input id="inputCorreo" type="correo" autocomplete="off" name="correo">
-        <img src="../../../img/imgCorreo.png" class="imgCorreo">
+    <div class="bar">
 
-        <br>
-        <label class="lblTelefono">Telefono</label>
-        <input id="inputTelefono" maxlength="9" onkeypress="if 
-            (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" type="text" autocomplete="off">
-        <img src="../../../img/imgTelefono.png" class="imgTelefono">
-
-        <br>
-        <input type="submit" value="Guardar">
-
-
+    </div>
+    </div>
+    </div>
 
     </form>
     <br>

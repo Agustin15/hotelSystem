@@ -24,6 +24,8 @@ if (isset($_GET['cliente'])) {
     $correo = "";
 }
 
+
+$allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 ?>
 
 
@@ -46,6 +48,15 @@ if (isset($_GET['cliente'])) {
 
     <div id="modal">
 
+        <div id="alertClient">
+
+            <img src="">
+            <br>
+            <p></p>
+            <br>
+            <button>OK</button>
+
+        </div>
 
     </div>
 
@@ -220,7 +231,7 @@ if (isset($_GET['cliente'])) {
 
             </li>
             <li>
-            <div class="icon">
+                <div class="icon">
                     <img class="imgClientes" src="../../../img/agregarCliente.png">
                 </div>
                 <div>
@@ -236,19 +247,63 @@ if (isset($_GET['cliente'])) {
     <br>
 
 
+
     <div id="divTableClientes">
 
 
-        <input id="buscador" placeholder="Buscador..."></input>
-        <img class="lupa" src="../../../img/lupa.png">
+        <div class="header">
+            <input id="buscador" placeholder="Buscador..."></input>
 
-        <div id="avisoCliente">
+            <div class="years">
+                <span>Año</span>
 
+                <select class="selectYearTable">
+                    <?php
+
+                    if ($allYearsVisitClients)
+                        foreach ($allYearsVisitClients as $year) {
+
+                            foreach ($year as $value) {
+
+                    ?>
+
+                            <option><?php echo $value ?></option>
+
+
+                    <?php
+
+                            }
+                        }
+                    ?>
+
+
+
+
+                </select>
+            </div>
         </div>
-
         <div id="containerTable">
+
+            <h4 class="titleTableClients"></h4>
             <table id="tableClientes" data-id-cliente-search="<?php echo $correo ?>">
 
+
+                <tr class="headerTable">
+
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Opciones</th>
+                </tr>
+
+
+                <div class="clientesVacio">
+
+                    <img src="../../../img/sinDatos.png">
+                    <br>
+                    <h3>No hay datos aun</h3>
+                </div>
 
             </table>
 

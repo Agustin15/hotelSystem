@@ -5,6 +5,18 @@ $cliente = $_GET['cliente'];
 $cliente = json_decode($cliente, true);
 
 ?>
+
+<div class="modalEditar">
+<div class="alertaEditar">
+<img src="">
+<br>
+<p></p>
+<br>
+<button>Ok</button>
+</div>
+
+</div>
+
 <form id="formEditar" data-id-cliente="<?php echo $cliente['idCliente']?>">
 
     <img class="iconoFormEditar" src="http://localhost/Sistema%20Hotel/img/editar.png">
@@ -40,12 +52,5 @@ $cliente = json_decode($cliente, true);
     <button id="btnCancelar" value="Cancelar">Cancelar</button>
     </div>
 
-    <div id="alertaEditar">
-
-        <br>
-        <img src="../../../img/cruzEditar.png">
-        <label></label>
-
-    </div>
 
 </form>
