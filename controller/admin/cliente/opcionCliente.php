@@ -10,32 +10,25 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
   case "POST":
 
-    $datosCliente = json_decode(file_get_contents("php://input"), true);
+    $client = json_decode(file_get_contents("php://input"), true);
 
-    $correo = $datosCliente['cliente']['correo'];
-    $nombre = $datosCliente['cliente']['nombre'];
-    $telefono = $datosCliente['cliente']['telefono'];
-    $apellido = $datosCliente['cliente']['apellido'];
+    $dataClientMail = $claseCliente->getClienteCorreo($client['mail'])->fetch_array(MYSQLI_ASSOC);
 
-    $clientesCorreo = $claseCliente->getClienteCorreo($correo);
+    if ($dataClientMail) {
 
-
-    if ($clientesCorreo->num_rows > 0) {
-
-      $peticion = array("respuesta" => "Correo ya en uso");
+      $peticion = array("advertencia" => "Este correo ya esta en uso");
     } else {
 
-      $clientesTelefono = $claseCliente->getClienteTelefono($telefono);
+      $dataClientPhone = $claseCliente->getClienteTelefono($client['phone'])->fetch_array(MYSQLI_ASSOC);
+      if ($dataClientPhone) {
 
-      if ($clientesTelefono->num_rows > 0) {
-
-        $peticion = array("respuesta" => "Telefono ya en uso");
+        $peticion = array("advertencia" => "Este telefono ya esta en uso");
       } else {
 
-        $claseCliente->setCorreo($correo);
-        $claseCliente->setNombre($nombre);
-        $claseCliente->setApellido($apellido);
-        $claseCliente->setTelefono($telefono);
+        $claseCliente->setCorreo($client['mail']);
+        $claseCliente->setNombre($client['name']);
+        $claseCliente->setApellido($client['lastName']);
+        $claseCliente->setTelefono($client['phone']);
 
         $resultado = $claseCliente->setClienteBd();
 
@@ -121,41 +114,51 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
   case "GET":
 
-    if ($_GET['option'] == "clientsGraphic") {
+    $option = $_GET['option'];
 
-      $year = $_GET['year'];
-      $months = array(
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12"
-      );
+    switch ($option) {
 
-      $clientsMonths = array_map(function ($month) use ($claseCliente, $year) {
+      case "clientsGraphic":
 
-        $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
+        $year = $_GET['year'];
+        $months = array(
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
+        );
 
-        return array("month" => $month, "quantity" => $clientsMonth);
-      }, $months);
+        $clientsMonths = array_map(function ($month) use ($claseCliente, $year) {
+
+          $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
+
+          return array("month" => $month, "quantity" => $clientsMonth);
+        }, $months);
 
 
-      $peticion = $clientsMonths;
-    } else {
+        $peticion = $clientsMonths;
 
-      $year = $_GET['year'];
+        break;
 
-      $clients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+      case "clientsTable":
 
-      $peticion = $clients;
+        $year = $_GET['year'];
+
+        $clients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+
+        $peticion = $clients;
+
+        break;
     }
+
 
     echo json_encode($peticion);
 

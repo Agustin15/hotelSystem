@@ -170,6 +170,18 @@ if (empty($usuario)) {
 
     </header>
 
+    
+    <div class="modalAdd">
+
+        <div class="alertAddClient">
+
+            <img src="">
+            <p></p>
+         
+            <button>OK</button>
+
+        </div>
+    </div>
 
     <nav id="menuOptionPane">
 
@@ -218,18 +230,7 @@ if (empty($usuario)) {
 
     </div>
 
-    <br>
 
-    <br>
-
-    <br>
-    <div id="alertaAgregar">
-
-        <br>
-        <img src="">
-        <h2></h2>
-
-    </div>
     <form id="formAgregar">
 
         <img class="imgAgregar" src="../../../img/agregarCliente.png">
@@ -238,59 +239,59 @@ if (empty($usuario)) {
 
 
         <div class="row1">
-        <div class="name">
-        <label for="inputName">Nombre</label>
-        <input type="text" id="inputName" name="name" placeholder="Ingresa nombre" autocomplete="off">
-             
-        </div>
+            <div class="name">
+                <label for="inputName">Nombre</label>
+                <input type="text" id="inputName" name="name" placeholder="Ingresa nombre" autocomplete="off">
 
-        <div class="lastName">
-        <label for="inputLastName">Apellido</label>
-        <input type="text" id="inputLastName" placeholder="Ingresa apellido" name="lastName" autocomplete="off">
-             
-        </div>
-     
+            </div>
+
+            <div class="lastName">
+                <label for="inputLastName">Apellido</label>
+                <input type="text" id="inputLastName" placeholder="Ingresa apellido" name="lastName" autocomplete="off">
+
+            </div>
+
         </div>
 
         <div class="row2">
-        <div class="mail">
-        <label for="inputMail">Correo</label>
-        <input type="mail" id="inputMail" name="mail" placeholder="Ingresa correo" autocomplete="off">
-             
-        </div>
+            <div class="mail">
+                <label for="inputMail">Correo</label>
+                <input type="mail" id="inputMail" name="mail" placeholder="Ingresa correo" autocomplete="off">
 
-        <div class="phone">
-        <label for="inputPhone">Phone</label>
-        <input type="text" id="inputPhone" name="phone" placeholder="Ingresa telefono" autocomplete="off">
-             
-        </div>
-     
+            </div>
+
+            <div class="phone">
+                <label for="inputPhone">Phone</label>
+                <input type="text" id="inputPhone" maxlength="9" name="phone" placeholder="Ingresa telefono" autocomplete="off">
+
+            </div>
+
         </div>
 
 
         <br>
-      
+
         <button type="submit">
-            
-        Agregar
-        <img src="../../../img/spinner.gif">
-    
-    </button>
 
-    <div class="alertFormClient">
+            Agregar
+            <img src="../../../img/spinner.gif">
 
-    <div class="header">
-    <img src="../../../img/advertencia.png">
-    <span>Advertencia</span>
-    </div>
-    <p>Complete todos los campos</p>
-    <div class="progressBar">
+        </button>
 
-    <div class="bar">
+        <div class="alertFormClient">
 
-    </div>
-    </div>
-    </div>
+            <div class="contain">
+                <div class="header">
+                    <img src="../../../img/advertencia.png">
+                    <span>Advertencia</span>
+                </div>
+                <p></p>
+                <div class="progressBar">
+                    <div class="bar">
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </form>
     <br>

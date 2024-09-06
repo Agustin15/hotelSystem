@@ -225,8 +225,6 @@ function aviso(resultado, opcion) {
 
   switch (opcion) {
     case "Eliminar":
-      // aviso.querySelector("img").src=;
-
       aviso.querySelector("img").src = "../../../img/tickDelete.gif";
       aviso.querySelector("p").textContent = "Cliente eliminado exitosamente";
       aviso.querySelector("button").style.background = "red";
@@ -250,15 +248,7 @@ function aviso(resultado, opcion) {
     aviso.querySelector("img").src = "";
     aviso.style.display = "none";
     modal.style.display = "none";
-
-    recargar();
   });
-}
-
-function recargar() {
-  setTimeout(function () {
-    location.reload();
-  }, 2020);
 }
 
 const showHideBuscador = (estado) => {
@@ -390,8 +380,6 @@ function submitDelete() {
 
   if (btnSiEliminar) {
     $(".btnSi").on("click", function () {
-      $("#modal").css("display", "none");
-      $("#modal").css("cursor", "auto");
       $(".divOpcion").remove();
 
       const datosCliente = {
@@ -445,7 +433,6 @@ function cancelEliminar() {
 
       $(".divOpcion").removeClass("divConfirmacionDelete");
       $(".divOpcion").empty();
-      location.reload();
     });
   }
 }
@@ -584,38 +571,114 @@ function removeInputAlert(input) {
   input.classList.remove("inputAlert");
 }
 
-function alertFormClient(validate){
+async function alertFormClient(validate) {
+  let alertForm = document.querySelector(".alertFormClient");
+  let barProgress = alertForm.querySelector(".bar");
 
-  
+  alertForm.classList.remove("alertFormClientDesactive");
+  alertForm.classList.add("alertFormClientActive");
+  alertForm.querySelector("p").textContent = validate;
 
+  setTimeout(function () {
+    alertForm.querySelector(".contain").style.display = "block";
+    barProgress.classList.add("barActive");
+  }, 500);
+
+  setTimeout(() => {
+    alertForm.querySelector("p").textContent = "";
+    alertForm.querySelector(".contain").style.display = "none";
+    alertForm.classList.add("alertFormClientDesactive");
+    alertForm.classList.remove("alertFormClientActive");
+    barProgress.classList.remove("barActive");
+  }, 10000);
 }
 
-function submitAdd(formAgregar) {
-  formAgregar.addEventListener("submit", function (event) {
+async function validationClient(formData) {
+  let validate;
+  let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+
+  const client = {};
+  formData.forEach((v, k) => {
+    if (v.trim() == "") {
+      inputAlertClient(k);
+      return (validate = "Complete todos los campos");
+    } else if (k == "phone" && v.length < 8) {
+      inputAlertClient(k);
+      return (validate = "Ingresa un telefono valido");
+    } else if (k == "mail" && !v.match(validRegex)) {
+      inputAlertClient(k);
+      return (validate = "Ingresa un correo valido");
+    } else {
+      client[k] = v;
+    }
+  });
+
+  if (validate) {
+    alertFormClient(validate);
+  } else {
+    return client;
+  }
+}
+
+async function POSTClient(client) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
+      {
+        method: "POST",
+        body: JSON.stringify(client),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.advertencia) {
+      throw result.advertencia;
+    } else if (result.respuesta) {
+      return result.respuesta;
+    }
+  } catch (error) {
+    alertFormClient(error);
+  }
+}
+
+function alertClientAdded() {
+  let modalAdd = document.querySelector(".modalAdd");
+  let alertAddClient = modalAdd.querySelector(".alertAddClient");
+
+  modalAdd.style.display = "flex";
+
+  alertAddClient.querySelector("img").src = "../../../img/tick.gif";
+  alertAddClient.querySelector("p").textContent =
+    "Cliente agregado exitosamente";
+  alertAddClient.style.display = "flex";
+
+  alertAddClient.querySelector("button").addEventListener("click", function () {
+    alertAddClient.querySelector("img").src = "";
+    alertAddClient.querySelector("p").textContent = "";
+    alertAddClient.style.display = "none";
+    modalAdd.style.display = "none";
+
+    cleanInputs();
+  });
+}
+
+async function addClient(formAgregar) {
+  formAgregar.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    let validate;
     const formData = new FormData(formAgregar);
+    let client = await validationClient(formData);
 
-    const client = {};
-    formData.forEach((v, k) => {
-      if (v.trim() == "") {
-        inputAlertClient(k);
-        return (validate = "Complete todos los campos");
-      } else if (k == "phone" && v.length < 8) {
-        inputAlert(k);
-        return (validate = "Ingresa un telefono valido");
-      } else if (k == "mail" && !v.match(validRegex)) {
-        inputAlert(k);
-        return (validate = "Ingresa un correo valido");
-      } else {
-        client[k] = v;
+    if (client) {
+      let result = await POSTClient(client);
+
+      if (result) {
+        alertClientAdded();
       }
-
-    });
-
-    if(validate){
-      alertFormClient(validate);
     }
   });
 
@@ -632,53 +695,9 @@ function cleanInputs() {
   inputs.forEach(
     (input) =>
       function () {
-        if (input.type !== "submit") {
-          input.value = "";
-        }
+        input.value = "";
       }
   );
-}
-function add(cliente, h2, img) {
-  fetch(
-    "http://localhost/Sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        cliente: cliente,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
-    .then((resp) => resp.json())
-    .then((data_resp) => {
-      if (data_resp.respuesta == true) {
-        img.attr("src", "../../../img/tickAgregar.png");
-        h2.text("Cliente agregado");
-
-        $("#alertaAgregar").removeClass("alertaAgregarDesactive");
-        $("#alertaAgregar").addClass("alertaAgregarActive");
-        $("#formAgregar").removeClass("formAgregarDesactive");
-        $("#formAgregar").addClass("formAgregarActive");
-
-        borrarAlerta();
-
-        cleanInputs();
-      } else {
-        var msj = data_resp.respuesta;
-
-        alertaSetsError(
-          h2,
-          msj,
-          img,
-          "alertaAgregarActive",
-          "formAgregarActive"
-        );
-        borrarAlerta();
-      }
-    })
-    .catch((error) => console.error("Error:", error));
 }
 
 function displaySelectYearGraphic() {
@@ -795,6 +814,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (formAgregar) {
     liBorderBottom("agregar");
 
-    submitAdd(formAgregar);
+    addClient(formAgregar);
   }
 });
