@@ -48,16 +48,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     $peticion = null;
 
-    $clientesDistintos = $claseCliente->getClientesDistintos($datosCliente['cliente']['idCliente']);
+    $clientesDistintos = $claseCliente->getClientesDistintos($datosCliente['idClient']);
 
     if ($clientesDistintos->num_rows == null) {
 
       $resultado = $claseCliente->updateCliente(
-        $datosCliente['cliente']['correo'],
-        $datosCliente['cliente']['nombre'],
-        $datosCliente['cliente']['apellido'],
-        $datosCliente['cliente']['telefono'],
-        $datosCliente['cliente']['idCliente']
+        $datosCliente['mail'],
+        $datosCliente['name'],
+        $datosCliente['lastName'],
+        $datosCliente['phone'],
+        $datosCliente['idClient']
       );
       $peticion = array("respuesta" => $resultado);
     } else {
@@ -65,25 +65,25 @@ switch ($_SERVER['REQUEST_METHOD']) {
       foreach ($clientesDistintos->fetch_all(MYSQLI_ASSOC) as $clienteDistinto) {
 
 
-        if ($clienteDistinto['correo'] ==  $datosCliente['cliente']['correo']) {
+        if ($clienteDistinto['correo'] ==  $datosCliente['mail']) {
 
-          $peticion = array("advertencia" => "Este correo ya ha sido ingresado");
+          $peticion = array("advertencia" =>'Este correo ya ha sido ingresado');
           echo json_encode($peticion);
           break;
-        } else  if ($clienteDistinto['telefono'] ==  $datosCliente['cliente']['telefono']) {
+        } else  if ($clienteDistinto['telefono'] ==  $datosCliente['phone']) {
 
-          $peticion = array("advertencia" => "Este telefono ya ha sido ingresado");
+          $peticion = array("advertencia" =>'Este telefono ya ha sido ingresado');
           echo json_encode($peticion);
           break;
         } else {
 
 
           $resultado = $claseCliente->updateCliente(
-            $datosCliente['cliente']['correo'],
-            $datosCliente['cliente']['nombre'],
-            $datosCliente['cliente']['apellido'],
-            $datosCliente['cliente']['telefono'],
-            $datosCliente['cliente']['idCliente']
+            $datosCliente['mail'],
+            $datosCliente['name'],
+            $datosCliente['lastName'],
+            $datosCliente['phone'],
+            $datosCliente['idClient']
           );
           $peticion = array("respuesta" => $resultado);
         }

@@ -28,7 +28,7 @@ if (empty($usuario)) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script src="../../../js/scriptsAdmin.js" defer> </script>
-    <script src="../../../js/scriptsClientes.js" defer> </script>
+    <script src="../../../js/scriptsClientes/scriptsAgregarCliente.js" defer> </script>
 
     <title>Admin-Clientes</title>
 </head>
@@ -274,8 +274,8 @@ if (empty($usuario)) {
         <button type="submit">
 
             Agregar
-            <img src="../../../img/spinner.gif">
-
+            <img class="spinnerLoad" src="../../../img/spinner.gif">
+            
         </button>
 
         <div class="alertFormClient">

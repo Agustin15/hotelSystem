@@ -39,7 +39,7 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script src="../../../js/scriptsAdmin.js" defer> </script>
-    <script src="../../../js/scriptsClientes.js" defer> </script>
+    <script src="../../../js/scriptsClientes/scriptListaClientes.js" defer> </script>
 
     <title>Admin-Clientes</title>
 </head>
@@ -57,6 +57,8 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
             <button>OK</button>
 
         </div>
+        <div class="divOpcion"></div>
+
 
     </div>
 
@@ -288,15 +290,20 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
             <table id="tableClientes" data-id-cliente-search="<?php echo $correo ?>">
 
 
-                <tr class="headerTable">
+                <thead>
+                    <tr class="headerTable">
 
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Opciones</th>
-                </tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Opciones</th>
+                    </tr>
 
+                </thead>
+                <tbody>
+
+                </tbody>
 
                 <div class="clientesVacio">
 
@@ -322,9 +329,6 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
     <?php
     ?>
 
-    <div class="divOpcion">
-
-    </div>
 
 
 </body>
