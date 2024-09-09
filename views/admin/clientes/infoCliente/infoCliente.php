@@ -19,14 +19,10 @@ $reservasCliente = $claseReserva->getReservaPorIdCliente($cliente['idCliente']);
 
 ?>
 
-<div class="subVentanas">
-
-</div>
-
 
 <div id="modalInfo">
 
-
+<div class="subVentanas"></div>
 </div>
 
 <div class="cerrar">

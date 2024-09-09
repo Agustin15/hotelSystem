@@ -170,14 +170,14 @@ if (empty($usuario)) {
 
     </header>
 
-    
+
     <div class="modalAdd">
 
         <div class="alertAddClient">
 
             <img src="">
             <p></p>
-         
+
             <button>OK</button>
 
         </div>
@@ -262,7 +262,9 @@ if (empty($usuario)) {
 
             <div class="phone">
                 <label for="inputPhone">Phone</label>
-                <input type="text" id="inputPhone" maxlength="9" name="phone" placeholder="Ingresa telefono" autocomplete="off">
+                <input type="text" id="inputPhone" maxlength="9" name="phone"
+                    placeholder="Ingresa telefono" autocomplete="off" onpaste="return false"
+                    oninput="replaceCharacter(event)">
 
             </div>
 
@@ -275,7 +277,7 @@ if (empty($usuario)) {
 
             Agregar
             <img class="spinnerLoad" src="../../../img/spinner.gif">
-            
+
         </button>
 
         <div class="alertFormClient">

@@ -101,6 +101,23 @@ function removeAlertFormClient() {
   barProgress.classList.remove("barActive");
 }
 
+
+function replaceCharacter(event) {
+  let valid = /\d/;
+
+  let input = event.target;
+
+  let ultimateCharacter = input.value
+    .trim()
+    .charAt(input.value.trim().length - 1);
+
+  if (!ultimateCharacter.match(valid)) {
+    let newValue = input.value.replace(ultimateCharacter, "");
+    input.value=newValue;
+    
+  }
+}
+
 async function validationClient(formData) {
   let validate;
   let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;

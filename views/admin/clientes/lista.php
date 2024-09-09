@@ -59,6 +59,15 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
         </div>
         <div class="divOpcion"></div>
 
+        <div class="alertaEliminar">
+            <img src="">
+            <br>
+            <p></p>
+            <br>
+            <button>Ok</button>
+        </div>
+
+
 
     </div>
 
@@ -255,34 +264,6 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 
         <div class="header">
             <input id="buscador" placeholder="Buscador..."></input>
-
-            <div class="years">
-                <span>Año</span>
-
-                <select class="selectYearTable">
-                    <?php
-
-                    if ($allYearsVisitClients)
-                        foreach ($allYearsVisitClients as $year) {
-
-                            foreach ($year as $value) {
-
-                    ?>
-
-                            <option><?php echo $value ?></option>
-
-
-                    <?php
-
-                            }
-                        }
-                    ?>
-
-
-
-
-                </select>
-            </div>
         </div>
         <div id="containerTable">
 

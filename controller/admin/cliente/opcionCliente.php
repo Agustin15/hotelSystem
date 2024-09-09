@@ -67,14 +67,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         if ($clienteDistinto['correo'] ==  $datosCliente['mail']) {
 
-          $peticion = array("advertencia" =>'Este correo ya ha sido ingresado');
-          echo json_encode($peticion);
-          break;
+          $peticion = array('advertencia'=>'Este correo ya ha sido ingresado');
+         
+        
         } else  if ($clienteDistinto['telefono'] ==  $datosCliente['phone']) {
 
-          $peticion = array("advertencia" =>'Este telefono ya ha sido ingresado');
-          echo json_encode($peticion);
-          break;
+          $peticion = array("advertencia"=>'Este telefono ya ha sido ingresado');
+          
         } else {
 
 
@@ -103,7 +102,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     $datosCliente = json_decode($_GET['cliente'], true);
 
-    $resultado = $claseCliente->deleteCliente($datosCliente['idCliente']);
+    $resultado = $claseCliente->deleteCliente($datosCliente['idClient']);
 
     $peticion = array("resultado" => $resultado);
     $peticionJson = json_encode($peticion);
@@ -150,15 +149,22 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
       case "clientsTable":
 
-        $year = $_GET['year'];
 
         $clients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
 
         $peticion = $clients;
 
         break;
+
+        case "dataClient":
+          $idClient = $_GET['idClient'];
+
+          $peticion=$claseCliente->getClienteUpdate($idClient);
+          
+          break;
     }
 
+  
 
     echo json_encode($peticion);
 

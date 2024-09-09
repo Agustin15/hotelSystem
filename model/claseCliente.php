@@ -68,6 +68,19 @@ class cliente
     }
 
     
+    public function getClientesAnio($anio)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes 
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(reserva_habitacion.fechaLlegada)=?");
+        $consulta->bind_param("s",$anio);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+    
     public function getAllYearsVisitClients()
     {
 
