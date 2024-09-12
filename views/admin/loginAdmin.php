@@ -52,7 +52,7 @@
                     </div>
                     <div class="passwordContain">
                         <input autocomplete="off" placeholder="Ingrese su contraseña" id="passwordId" type="password" name="password">
-                   
+
                         <img onclick="passwordStatus(event)" src="../../img/ojo.png">
                     </div>
                 </div>
@@ -62,29 +62,22 @@
 
                     <button type="submit">Ingresar
 
-                    <img class="spinner" src="../../img/spinner.gif">
+                        <img class="spinner" src="../../img/spinner.gif">
 
                     </button>
                 </div>
 
-                <div id="alertLogin">
+                <div class="alertLogin">
 
-                    <div class="bodyAlert">
-                        <div class="icon">
+                    <div class="contain">
+                        <div class="header">
                             <img src="../../img/advertenciaLogin.png">
+                            <span>Advertencia</span>
                         </div>
-                        <div class="msj">
-                            <div class="advertencia">
-                                <span>Advertencia</span>
+                        <p></p>
+                        <div class="progressBar">
+                            <div class="bar">
                             </div>
-                            <div>
-                                <p>Complete todos los campos</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progresBar">
-                        <div class="progres">
-
                         </div>
                     </div>
                 </div>

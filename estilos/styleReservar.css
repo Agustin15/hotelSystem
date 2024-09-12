@@ -130,23 +130,6 @@ header li img {
   justify-content: center;
   align-items: center;
 }
-#contain .title {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  width: 72.2rem;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-#contain .title h1 {
-  font-size: 25px;
-  opacity: 90%;
-}
-#contain .title img {
-  width: 80px;
-}
 #contain .loading {
   margin-top: -5rem;
   display: none;
@@ -157,18 +140,47 @@ header li img {
 
 .containClientAndBooking {
   display: flex;
+  flex-direction: column;
   justify-content: start;
-  align-items: start;
+  align-items: center;
   margin-top: -0.9rem;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.containClientAndBooking .header {
+  width: 100%;
+}
+.containClientAndBooking .header .title {
+  width: 100%;
+  display: flex;
+  background-color: white;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.containClientAndBooking .header .title h1 {
+  font-size: 25px;
+  opacity: 90%;
+}
+.containClientAndBooking .header .title img {
+  width: 80px;
+}
+
+.bodyClientAndBooking {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: center;
+  gap: 2em;
 }
 
 .client {
-  background: linear-gradient(#0f3a4d, #0498a0);
   height: 24rem;
   padding: 1rem;
-  color: white;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-  border-bottom-left-radius: 3px;
+  color: rgb(0, 0, 0);
 }
 
 h4 {
@@ -186,19 +198,20 @@ form {
   padding-top: 0.4rem;
 }
 form input {
-  width: 200px;
-  height: 38px;
-  border: 1px solid rgb(180, 180, 180);
+  width: 230px;
+  height: 43px;
+  border: 1px solid rgb(23, 161, 150);
+  box-shadow: 2px 2px 2px rgb(0, 141, 129);
   border-radius: 3px;
   padding-left: 2.6rem;
   outline: none;
-  font-size: 16px;
+  font-size: 18px;
 }
 form input::placeholder {
   font-size: 15px;
 }
 form input:hover {
-  border: 1px solid rgb(255, 255, 255);
+  border: 2px solid rgb(4, 128, 117);
   box-shadow: 1px 1px 1px rgb(182, 182, 182);
 }
 form .nameAndLast,
@@ -227,16 +240,16 @@ form .phone input {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 form .name input {
-  background-image: url("../img/imgNombre.png");
+  background-image: url("../img/usuario.png");
 }
 form .lastName input {
-  background-image: url("../img/imgApellido.png");
+  background-image: url("../img/lastNameForm.png");
 }
 form .mail input {
-  background-image: url("../img/imgCorreo.png");
+  background-image: url("../img/mailForm.png");
 }
 form .phone input {
-  background-image: url("../img/imgTelefono.png");
+  background-image: url("../img/phoneForm.png");
 }
 form .containButtons {
   display: flex;
@@ -246,28 +259,26 @@ form .containButtons {
   margin-top: 0.5rem;
 }
 form .containButtons button {
-  width: 130px;
-  height: 30px;
+  width: 200px;
+  height: 34px;
   border-radius: 3px;
   border: none;
-  background: rgba(241, 241, 241, 0.3);
+  background: linear-gradient(#215c75, #0498a0);
   color: white;
   font-weight: bold;
 }
 form .containButtons button:hover {
-  background: rgba(241, 241, 241, 0.2);
+  background: linear-gradient(#0f3a4d, #0f848a);
 }
 
 .bookingData {
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
   color: white;
   padding: 1rem;
-  background: linear-gradient(#0f3a4d, #0498a0);
   height: 24rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
-  border-bottom-right-radius: 3px;
 }
 .bookingData h1 {
   font-size: 16px;
@@ -308,64 +319,67 @@ form .containButtons button:hover {
   width: 20px;
 }
 .bookingData .bookingRooms {
-  margin-top: 1rem;
   width: 100%;
-  height: 200px;
+  height: 300px;
   display: flex;
   gap: 1.8rem;
-  flex-direction: row;
   align-items: center;
+  justify-content: start;
+  color: black;
+}
+.bookingData .bookingRooms .next {
+  background-color: #0ea7af;
+  width: 30px;
+  height: 90%;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
-  overflow-y: scroll;
+  padding-left: 0.4rem;
+}
+.bookingData .bookingRooms .next img {
+  width: 24px;
+}
+.bookingData .bookingRooms .next img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 .bookingData .bookingRooms li {
   list-style: none;
-  width: 210px;
-  height: 100px;
-  border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(34, 34, 34);
-  background-color: white;
-  color: black;
+  display: flex;
+}
+.bookingData .bookingRooms li span {
   font-weight: bold;
-  font-size: 13px;
 }
 .bookingData .bookingRooms li img {
-  width: 70px;
-  height: 40px;
-  box-shadow: 2px 2px 2px grey;
+  width: 300px;
+  height: 200px;
 }
-.bookingData .bookingRooms li .headerLi {
+.bookingData .bookingRooms li .header {
   display: flex;
-  gap: 0.5rem;
-  padding-top: 0.2rem;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  font-size: 17px;
 }
-.bookingData .bookingRooms li .headerLi .icon {
-  padding-left: 0.2rem;
-}
-.bookingData .bookingRooms li .headerLi .iconTwo {
-  padding-right: 0.5rem;
+.bookingData .bookingRooms li .data {
+  display: flex;
+  flex-direction: column;
   margin-top: -1rem;
 }
-.bookingData .bookingRooms li .headerLi .iconTwo img {
-  width: 20px;
-  height: 20px;
-  box-shadow: none;
+.bookingData .bookingRooms li .data span {
+  margin-top: 1rem;
 }
-.bookingData .bookingRooms li .bodyLi {
+.bookingData .bookingRooms li .data .details {
   display: flex;
-  flex-direction: row;
-  margin-left: 0.4rem;
-  padding-top: 0.3rem;
-  gap: 1.6rem;
+  flex-direction: column;
+  gap: 1rem;
 }
-.bookingData .bookingRooms li .footerLi {
-  display: flex;
-  margin-top: 0.6rem;
-  gap: 1.3rem;
-  margin-left: 0.4rem;
+.bookingData .bookingRooms li .data li {
+  margin-top: 1rem;
+}
+.bookingData .bookingRooms li .data .total {
+  font-weight: bold;
 }
 .bookingData .containTotalBooking {
   font-family: Arial, Helvetica, sans-serif;
@@ -376,96 +390,95 @@ form .containButtons button:hover {
 }
 
 #alertClient {
-  background-color: white;
-  width: 290px;
-  height: 47px;
+  width: 0px;
+  height: 54px;
+  background: linear-gradient(#2e888b, #0ea7af);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.2rem;
-  margin-left: -50rem;
-  padding-top: 0.2rem;
   border-radius: 3px;
-  font-size: 15px;
-  color: rgb(72, 64, 194);
-  font-weight: bold;
-  gap: 0.5rem;
+  margin-top: 0rem;
+  margin: auto;
 }
-#alertClient .bodyAlert {
+#alertClient .contain {
+  display: none;
+}
+#alertClient .header {
   display: flex;
   flex-direction: row;
+  color: #ffffff;
+  font-size: 14px;
+  padding-left: 0.3rem;
+  padding-top: 0.2rem;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
 }
-#alertClient .icon {
-  margin-left: -2rem;
-  margin-top: 0.5rem;
+#alertClient p {
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: -0.6rem;
+  text-align: center;
+}
+#alertClient span {
+  margin-top: -1rem;
 }
 #alertClient img {
   width: 24px;
+  height: 24px;
+  margin-top: 0.5rem;
 }
-#alertClient .msj {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  padding-left: 0.9rem;
-}
-#alertClient .advertencia {
-  font-weight: bold;
-  color: #222e5f;
-}
-#alertClient .progresBar {
+#alertClient .progressBar {
   width: 100%;
-  height: 3px;
-  margin-top: 0.1rem;
-  background-color: gray;
+  height: 4px;
+  margin-top: 6px;
+  background-color: #555555;
 }
-#alertClient .progres {
+#alertClient .bar {
+  background-color: #ececec;
   width: 100%;
-  background-color: #3b3edf;
   height: 100%;
 }
 
-.progresBarActive {
-  animation-name: progresBar;
+.barActive {
+  animation-name: barActive;
   animation-duration: 10s;
+}
+
+.alertClientActive {
+  animation-name: alertClientActive;
+  animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
 
-@keyframes progresBar {
+@keyframes alertClientActive {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 300px;
+  }
+}
+.alertClientDesactive {
+  animation-name: alertClientDesactive;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes alertClientDesactive {
+  from {
+    width: 300px;
+  }
+  to {
+    width: 0px;
+  }
+}
+@keyframes barActive {
   from {
     width: 100%;
   }
   to {
     width: 0%;
-  }
-}
-.alertClientShow {
-  animation-name: alertClientShow;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-.alertClientHide {
-  animation-name: alertClientHide;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertClientShow {
-  from {
-    margin-left: -50rem;
-  }
-  to {
-    margin-left: 7.5rem;
-  }
-}
-@keyframes alertClientHide {
-  from {
-    margin-left: 7.5rem;
-  }
-  to {
-    margin-left: -50rem;
   }
 }
 .inputAlert {

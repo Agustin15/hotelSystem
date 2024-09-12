@@ -637,8 +637,8 @@ body #userAdmin:hover > .btnFlecha {
 }
 
 .alertaEliminar {
-  width: 300px;
-  height: 240px;
+  width: 350px;
+  height: 170px;
   border-radius: 3px;
   display: none;
   background-color: white;
@@ -647,6 +647,7 @@ body #userAdmin:hover > .btnFlecha {
   align-items: center;
   padding-top: 0.5rem;
   padding-bottom: 1rem;
+  margin-left: 5rem;
 }
 .alertaEliminar img {
   width: 50px;
@@ -664,6 +665,15 @@ body #userAdmin:hover > .btnFlecha {
   border: none;
   margin-top: 0.4rem;
   background-color: rgb(219, 8, 8);
+}
+.alertaEliminar button:hover {
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  margin-top: 0.4rem;
+  background-color: rgb(189, 13, 13);
 }
 
 .divEditar {

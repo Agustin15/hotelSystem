@@ -1,6 +1,8 @@
 let booking = JSON.parse(localStorage.getItem("booking"));
 let loadingSpinner = document.querySelector(".loading");
 let rooms;
+let indiceRoom=0;
+let btnNext=document.querySelector(".btnNext");
 let roomsBooking = document.querySelector(".bookingRooms");
 let confirmationMsj = document.getElementById("confirmationBooking");
 let containClientAndBooking = document.querySelector(
@@ -118,7 +120,6 @@ async function getIfExistingBooking(clientBooking) {
   };
 
   try {
-    
     loading(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
@@ -152,7 +153,7 @@ async function getIfExistingBooking(clientBooking) {
       submitBooking(clientBooking);
     }
   } catch (error) {
-    alertClientForm(error);
+    alertClientFormBooking(error);
   } finally {
     loading(false);
   }
@@ -205,90 +206,99 @@ function clientData(event) {
   });
 
   if (validate) {
-    alertClientForm(validate);
+    alertClientFormBooking(validate);
   } else {
     createBooking(client);
   }
 }
 
+function replaceCharacter(event) {
+  let valid = /\d/;
+
+  let input = event.target;
+
+  let ultimateCharacter = input.value
+    .trim()
+    .charAt(input.value.trim().length - 1);
+
+  if (!ultimateCharacter.match(valid)) {
+    let newValue = input.value.replace(ultimateCharacter, "");
+    input.value = newValue;
+  }
+}
+
 function printBookingRooms() {
   let roomsToPrint = rooms.map((room) => {
-    return `<li>
+    let textAdult;
+    let textChildren="";
+    if (room.guests.adult > 1) {
+      textAdult = `${room.guests.adult} adultos`;
+     
+    }else{
+        textAdult = `${room.guests.adult} adulto`;
+      }
+    
+    if (room.guests.children > 0) {
+      textChildren = `${room.guests.children} niños`;
+      if (room.guests.adult == 1) {
+        textChildren = `${room.guests.children} niño`;
+      }
+    }
+    return `
+    
+    
+                            <div class="header">
 
-        <div class="headerLi">
-            <div class="icon">
+                                <img src="data:image/png;base64,${room.image}">
+                                <div class="data">
+                                <span>Habitacion ${room.category}</span>
 
-                <img src="data:image/png;base64,${room.image}">
-            </div>
+                                <div class="details">
+                                <ul>
+                                    <li>${textAdult}</li>
+                                    <li>${textChildren}</li>
+                                    <li>Precio:$${room.price}</li>
+                                    <li>Cantidad:${room.quantity}</li>
+                                    <li class="total">Total:$${room.total}</li>
+                         
+                                </div>
+                            
+                                </div>
 
-            <div class="category">
-                <span>${room.category}</span>
-            </div>
-
-            <div class="iconTwo">
-
-            <img src="../img/roomIconBooking.png">
-            </div>
-
-        </div>
-
-        <div class="bodyLi">
-            <div>
-
-                <span>Adultos:${room.guests.adult}</span>
-            </div>
-
-            <div>
-                <span>Niños:${room.guests.children}</span>
-            </div>
-
-        </div>
-
-        <div class="footerLi">
-            <div>
-                <span>Cantidad:${room.quantity}</span>
-            </div>
-            <div>
-                <span>Total:$${room.total}</span>
-            </div>
-        </div>
-    </li>
+                            </div>
     `;
   });
 
-  roomsBooking.innerHTML = roomsToPrint.join("");
+  roomsBooking.querySelector("li").innerHTML=roomsToPrint[indiceRoom];
 
-  document
-    .querySelector(".containTotalBooking")
-    .querySelector("span").textContent = `Total:$${booking.totalDeposit}`;
 }
 
 function printBooking() {
-  var optionsFormat = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  let startBooking = new Date(booking.date.start);
-  let endBooking = new Date(booking.date.end);
+  // var optionsFormat = {
+  //   weekday: "long",
+  //   year: "numeric",
+  //   month: "long",
+  //   day: "numeric",
+  // };
+  // let startBooking = new Date(booking.date.start);
+  // let endBooking = new Date(booking.date.end);
 
-  document.querySelector(
-    ".startBooking"
-  ).textContent = `${startBooking.toLocaleDateString("es-ar", optionsFormat)}`;
-  document.querySelector(
-    ".endBooking"
-  ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  // document.querySelector(
+  //   ".startBooking"
+  // ).textContent = `${startBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  // document.querySelector(
+  //   ".endBooking"
+  // ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
 
-  if (booking.nights > 1) {
-    document
-      .querySelector(".nights")
-      .querySelector("span").textContent = `${booking.nights} Noches`;
-  } else {
-    document
-      .querySelector(".nights")
-      .querySelector("span").textContent = `${booking.nights} Noche`;
-  }
+  // if (booking.nights > 1) {
+  //   document
+  //     .querySelector(".nights")
+  //     .querySelector("span").textContent = `${booking.nights} Noches`;
+  // } else {
+  //   document
+  //     .querySelector(".nights")
+  //     .querySelector("span").textContent = `${booking.nights} Noche`;
+  // }
 
   if (roomsBooking) {
     printBookingRooms();
@@ -299,8 +309,18 @@ document.addEventListener("DOMContentLoaded", function () {
   if (containClientAndBooking) {
     if (localStorage.getItem("booking") == null) {
       location.href = "consultaHabitaciones.php";
-    } else {
+
+    }else{
+
       printBooking();
+
+
+     
+      btnNext.addEventListener("click",function(){
+
+        indiceRoom++;
+        printBooking();
+      });
     }
   }
 });

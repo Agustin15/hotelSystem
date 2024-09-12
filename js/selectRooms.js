@@ -311,16 +311,17 @@ const createDataRoom = (button) => {
   return room;
 };
 
-function validateQuantityGuestsInputs(adultInput, childrenInput) {
-  let ability = adultInput.ability;
+function validateQuantityGuestsInputs(adultInput,childrenInput) {
+  let ability = adultInput.dataset.ability;
   let validate = null;
   if (childrenInput.value == 0 && adultInput.value == 0) {
     validate = "Ingresa algun huesped";
-  } else if (childrenInput.value + adultInput.value > ability) {
-    validate = "Capacidad de huespedes excedida";
+  } else if ((parseInt(childrenInput.value) + parseInt(adultInput.value)) > ability) {
+    validate = "Capacidad excedida";
   }
-
+ 
   return validate;
+  
 }
 
 function validateDateInputs() {
@@ -332,9 +333,7 @@ function validateDateInputs() {
         if (
           validateQuantityGuestsInputs(
             btn.parentNode.parentNode.querySelector(".adult"),
-            btn.parentNode.parentNode.querySelector(".children")
-          ) != null
-        ) {
+            btn.parentNode.parentNode.querySelector(".children")) != null) {
           alertGuests(
             validateQuantityGuestsInputs(
               btn.parentNode.parentNode.querySelector(".adult"),

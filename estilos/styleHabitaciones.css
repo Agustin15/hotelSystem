@@ -187,52 +187,103 @@ body {
   background: linear-gradient(#0f3a4d, #0a7e85);
 }
 
-.avisoCompleteDatos {
-  background: linear-gradient(#0f3a4d, #0498a0);
-  color: white;
-  width: 280px;
-  height: 50px;
-  left: 40%;
-  top: -10%;
+#alertGuests, .avisoCompleteDatos {
   position: absolute;
+  left: -30%;
+  width: 300px;
+  height: 55px;
+  color: white;
   border-radius: 3px;
+  background: linear-gradient(#0f3a4d, #0498a0);
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
 }
-.avisoCompleteDatos img {
-  width: 20px;
+#alertGuests .contain, .avisoCompleteDatos .contain {
+  display: block;
 }
-.avisoCompleteDatos .icon {
-  padding-left: 0.7rem;
-  margin-top: 0.4rem;
-}
-.avisoCompleteDatos .msj {
+#alertGuests .header, .avisoCompleteDatos .header {
   display: flex;
+  flex-direction: row;
+  color: #ffffff;
+  font-size: 14px;
+  padding-left: 0.3rem;
+  padding-top: 0.2rem;
   justify-content: start;
   align-items: center;
-  gap: 2.1rem;
-}
-.avisoCompleteDatos label {
-  font-size: 14px;
-  margin-top: 13px;
+  gap: 0.5rem;
   font-weight: bold;
 }
-.avisoCompleteDatos .progresBar {
-  width: 100%;
-  height: 5px;
-  background-color: rgb(92, 92, 92);
+#alertGuests p, .avisoCompleteDatos p {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: -1rem;
+  text-align: center;
+}
+#alertGuests span, .avisoCompleteDatos span {
+  margin-top: -1rem;
+}
+#alertGuests img, .avisoCompleteDatos img {
+  width: 24px;
+  height: 24px;
   margin-top: 0.7rem;
 }
-.avisoCompleteDatos .bar {
-  background-color: #21dae4;
+#alertGuests .progressBar, .avisoCompleteDatos .progressBar {
+  width: 100%;
+  height: 4px;
+  margin-top: -10px;
+  background-color: #333333;
+}
+#alertGuests .bar, .avisoCompleteDatos .bar {
+  background-color: #ffffff;
   width: 100%;
   height: 100%;
 }
-.avisoCompleteDatos .barActive {
-  animation-name: progresBar;
-  animation-duration: 6s;
+
+.barActive {
+  animation-name: barActive;
+  animation-duration: 10s;
+}
+
+@keyframes barActive {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+.alertGuestsShow {
+  animation-name: alertShow;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+.alertGuestsHide {
+  animation-name: alertHide;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes alertShow {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 5.5%;
+  }
+}
+@keyframes alertHide {
+  from {
+    left: 5.3%;
+  }
+  to {
+    left: -30%;
+  }
+}
+.avisoCompleteDatos {
+  left: 40%;
+  top: -50%;
 }
 
 .desactivarCompleteDatos {
@@ -247,14 +298,6 @@ body {
   animation-fill-mode: forwards;
 }
 
-@keyframes progresBar {
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0%;
-  }
-}
 @keyframes activo {
   from {
     top: -10%;
@@ -485,82 +528,9 @@ body {
   margin-left: -2rem;
 }
 
-#alertGuests {
-  position: absolute;
-  left: -30%;
-  width: 300px;
-  height: 50px;
-  color: white;
-  border-radius: 3px;
-  background: linear-gradient(#0f3a4d, #0498a0);
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  padding-top: 0.2rem;
-}
-#alertGuests .icon {
-  margin-left: 1rem;
-}
-#alertGuests .msj {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 15px;
-  gap: 2.2rem;
-  padding-top: 0.5rem;
-}
-#alertGuests img {
-  width: 20px;
-}
-#alertGuests .progresBar {
-  width: 100%;
-  height: 5px;
-  background-color: rgb(92, 92, 92);
-  margin-top: 0.7rem;
-}
-#alertGuests .bar {
-  background-color: #21dae4;
-  width: 100%;
-  height: 100%;
-}
-#alertGuests .barActive {
-  animation-name: progresBar;
-  animation-duration: 5s;
-}
-
-.alertGuestsShow {
-  animation-name: alertShow;
-  animation-duration: 0.7s;
-  animation-fill-mode: forwards;
-}
-
-.alertGuestsHide {
-  animation-name: alertHide;
-  animation-duration: 0.7s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertShow {
-  from {
-    left: -30%;
-  }
-  to {
-    left: 5.5%;
-  }
-}
-@keyframes alertHide {
-  from {
-    left: 5.3%;
-  }
-  to {
-    left: -30%;
-  }
-}
 #containRoomsAndCart #cart {
   width: 360px;
-  height: 630px;
+  height: 700px;
   background: linear-gradient(#0f3a4d, #0498a0);
   margin-top: 3rem;
   margin-right: 3rem;
@@ -620,7 +590,7 @@ body {
 
 #roomsBooking li {
   border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(0, 0, 0);
+  box-shadow: 2px 2px 2px rgb(121, 121, 121);
   width: 95%;
   height: 120px;
   display: flex;
@@ -645,7 +615,6 @@ body {
   width: 60px;
   height: 38px;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px gray;
 }
 
 #roomsBooking li .containIconAndCategory .category {

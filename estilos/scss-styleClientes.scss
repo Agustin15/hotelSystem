@@ -367,8 +367,8 @@ body {
 }
 
 .alertaEliminar {
-  width: 300px;
-  height: 240px;
+  width: 350px;
+  height: 170px;
   border-radius: 3px;
   display: none;
   background-color: white;
@@ -377,6 +377,7 @@ body {
   align-items: center;
   padding-top: 0.5rem;
   padding-bottom: 1rem;
+  margin-left: 5rem;
 
   img {
     width: 50px;
@@ -396,6 +397,16 @@ body {
     border: none;
     margin-top: 0.4rem;
     background-color: rgb(219, 8, 8);
+  }
+
+  button:hover {
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    margin-top: 0.4rem;
+    background-color: rgb(189, 13, 13);
   }
 }
 

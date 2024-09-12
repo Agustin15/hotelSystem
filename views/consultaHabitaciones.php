@@ -52,20 +52,16 @@
 
     <div class="avisoCompleteDatos">
 
-        <div class="msj">
-            <div class="icon">
-                <img src="../img/avisoHuespedes.png">
-
+        <div class="contain">
+            <div class="header">
+                <img src="../img/advertenciaLogin.png">
+                <span>Advertencia</span>
             </div>
-
-            <div>
-                <label></label>
-
+            <p>Ingresa una fecha válida</p>
+            <div class="progressBar">
+                <div class="bar">
+                </div>
             </div>
-        </div>
-
-        <div class="progresBar">
-            <div class="bar"></div>
         </div>
     </div>
 
@@ -104,7 +100,7 @@
 
         <div class="bodyModal">
             <div class="icon">
-                <img src="../img/alert.png">
+                <img src="../img/advertencia.gif">
             </div>
             <div class="title">
 
@@ -122,23 +118,18 @@
     <div id="containRoomsAndCart">
 
         <div id="alertGuests">
-        <div class="msj">
-            <div class="icon">
-                <img src="../img/avisoHuespedes.png">
 
+            <div class="contain">
+                <div class="header">
+                    <img src="../img/advertenciaLogin.png">
+                    <span>Advertencia</span>
+                </div>
+                <p>Ingresa algun huesped</p>
+                <div class="progressBar">
+                    <div class="bar">
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <span>Ingresa algun huesped</span>
-
-            </div>
-        </div>
-
-        <div class="progresBar">
-            <div class="bar"></div>
-        </div>
-
-
         </div>
 
         <div id="containRooms"></div>

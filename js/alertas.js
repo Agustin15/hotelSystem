@@ -1,7 +1,7 @@
 function alerta(msj) {
   const avisoCompleteDatos = document.querySelector(".avisoCompleteDatos");
   const progresBar = avisoCompleteDatos.querySelector(".bar");
-  const labelMsj = avisoCompleteDatos.querySelector("label");
+  const labelMsj = avisoCompleteDatos.querySelector("p");
   labelMsj.textContent = msj;
 
   window.scroll(0, 0);
@@ -16,32 +16,41 @@ function alerta(msj) {
     progresBar.classList.remove("barActive");
   }
 
-  setTimeout(borrarAlerta, 6000);
+  setTimeout(borrarAlerta, 10000);
 }
 
 function alertaLoginAdmin(msj) {
-  const aviso = document.querySelector("#alertLogin");
-  let bar = aviso.querySelector(".progres");
+  let alertForm = document.querySelector(".alertLogin");
+  let barProgress = alertForm.querySelector(".bar");
 
-  aviso.querySelector("p").textContent = msj;
-
-  aviso.classList.remove("alertLoginHide");
-  aviso.classList.add("alertLoginShow");
-  aviso.querySelector(".bodyAlert").style.display = "flex";
-
-  bar.classList.add("progresBarActive");
+  alertForm.classList.remove("alertLoginDesactive");
+  alertForm.classList.add("alertLoginActive");
+  alertForm.querySelector("p").textContent = msj;
 
   setTimeout(function () {
-    aviso.querySelector(".bodyAlert").style.display = "none";
-    aviso.classList.add("alertLoginHide");
-    aviso.classList.remove("alertLoginShow");
-    bar.classList.remove("progresBarActive");
+    alertForm.querySelector(".contain").style.display = "block";
+    barProgress.classList.add("barActive");
+  }, 500);
+
+  setTimeout(() => {
+    removeAlertLoginAdmin();
   }, 10000);
+}
+
+function removeAlertLoginAdmin() {
+  let alertForm = document.querySelector(".alertLogin");
+  let barProgress = alertForm.querySelector(".bar");
+
+  alertForm.querySelector("p").textContent = "";
+  alertForm.querySelector(".contain").style.display = "none";
+  alertForm.classList.add("alertLoginDesactive");
+  alertForm.classList.remove("alertLoginActive");
+  barProgress.classList.remove("barActive");
 }
 
 function alertGuests(msj, alert, roomToDisplay) {
   alert.style.top = roomToDisplay.offsetTop + "px";
-  alert.querySelector("span").textContent = msj;
+  alert.querySelector("p").textContent = msj;
   alert.classList.remove("alertGuestsHide");
   alert.classList.add("alertGuestsShow");
   alert.querySelector(".bar").classList.add("barActive");
@@ -49,24 +58,37 @@ function alertGuests(msj, alert, roomToDisplay) {
   setTimeout(function () {
     alert.classList.add("alertGuestsHide");
     alert.classList.remove("alertGuestsShow");
-    alert.querySelector(".bar").classList.remove(".barActive");
-  }, 4000);
+    alert.querySelector(".bar").classList.remove("barActive");
+  }, 10000);
 }
 
-function alertClientForm(msj) {
-  let alertClient = document.getElementById("alertClient");
-  let progresBar = document.querySelector(".progres");
-  alertClient.querySelector("p").textContent = msj;
+function alertClientFormBooking(msj) {
+  let alertClientForm = document.querySelector("#alertClient");
+  let barProgress = alertClientForm.querySelector(".bar");
 
-  alertClient.classList.remove("alertClientHide");
-  alertClient.classList.add("alertClientShow");
-  progresBar.classList.add("progresBarActive");
+  alertClientForm.classList.remove("alertClientDesactive");
+  alertClientForm.classList.add("alertClientActive");
+  alertClientForm.querySelector("p").textContent = msj;
 
   setTimeout(function () {
-    alertClient.classList.add("alertClientHide");
-    alertClient.classList.remove("alertClientShow");
-    progresBar.classList.remove("progresBarActive");
+    alertClientForm.querySelector(".contain").style.display = "block";
+    barProgress.classList.add("barActive");
+  }, 500);
+
+  setTimeout(() => {
+    removeAlertClientFormBooking();
   }, 10000);
+}
+
+function removeAlertClientFormBooking() {
+  let alertClientForm = document.querySelector("#alertClient");
+  let barProgress = alertClientForm.querySelector(".bar");
+
+  alertClientForm.querySelector("p").textContent = "";
+  alertClientForm.querySelector(".contain").style.display = "none";
+  alertClientForm.classList.add("alertClientDesactive");
+  alertClientForm.classList.remove("alertClientActive");
+  barProgress.classList.remove("barActive");
 }
 
 async function confirmAlertBookingExist(msj) {
