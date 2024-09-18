@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background: linear-gradient(#0f3a4d, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 100%;
@@ -156,7 +156,7 @@ carousel-control-prev-icon {
 .section {
   width: 100%;
   height: 1400px;
-  background: linear-gradient(#002535, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   margin-top: 4%;
   margin: auto;
 }

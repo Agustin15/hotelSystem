@@ -22,7 +22,7 @@ body {
 #loginAdmin .panelInfo {
   width: 30%;
   height: 70%;
-  background: linear-gradient(#1a5a5c, #0ea7af);
+  background: linear-gradient(#126b91, #0498a0);
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -315,7 +315,7 @@ body {
   margin-left: 0px;
   margin-top: -14px;
   position: fixed;
-  background: linear-gradient(#30aaa0, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 180px;

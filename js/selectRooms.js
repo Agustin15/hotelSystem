@@ -12,24 +12,35 @@ let quantityCategorysRooms;
 let nights;
 let dateBooking;
 let booking;
+let ultimateItemIndex;
+let indexsImgRooms = [
+  { category: "Estandar", indexValue: 1 },
+  { category: "Deluxe", indexValue: 1 },
+  { category: "Suite", indexValue: 1 },
+];
 
-const submitDateBooking = (dateBooking) => {
-  fetch(
-    "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsAvailable&dateBooking=" +
-      JSON.stringify(dateBooking),
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
-    .then((resp) => resp.json())
-    .then((answer) => {
-      quantityCategorysRooms = answer;
+async function submitDateBooking(dateBooking) {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsAvailable&dateBooking=" +
+        JSON.stringify(dateBooking),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (result) {
+      quantityCategorysRooms = result;
       printQuantAvailable(quantityCategorysRooms);
-    });
-};
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function disabledRoomWithoutStock(containRoom, quantity) {
   let buttonDisabled = containRoom.querySelector("button");
@@ -87,10 +98,34 @@ const printHotelRooms = (rooms) => {
   
 
         <div class="containTitleAndRoom">
-            <div class="img">
-  
-                <img src="data:image/png;base64,${room.imageOne}">
-  
+            <div class="img">  
+            <ul>
+            <li>
+             <img src="data:image/png;base64,${room.imageTwo}">
+            </li>
+             <li>
+             <img src="data:image/png;base64,${room.imageOne}">
+            </li>
+             <li>
+             <img src="data:image/png;base64,${room.imageThree}">
+            </li>
+            </ul>  
+              <div class="controls">
+
+              <img class="prev"  onclick="controlsSlider(event,'prev','${
+                room.category
+              }')" src="../img/prevRoom.png">
+                  <img onclick="controlsSlider(event,'next','${
+                    room.category
+                  }')" class="next" src="../img/nextRoom.png">
+            </div>
+
+            <div class="indexImagesRoom">
+
+              <li></li>
+              <li></li>
+              <li></li>
+            </div>
             </div>
             <div class="titleRoom">
   
@@ -216,11 +251,9 @@ const printHotelRooms = (rooms) => {
                         } data-ability="${room.ability - 1}"  class="children">
                            
                    
-                    </div>
-  
+                    </div>  
                 </div>
-  
-  
+
             </div>
   
             <div class="containButton" data-data-room='${JSON.stringify(room)}'>
@@ -240,6 +273,62 @@ const printHotelRooms = (rooms) => {
   validateDateInputs();
 };
 
+function controlsSlider(event, orientacion, category) {
+  let arrow = event.target;
+  let ul = arrow.parentNode.parentNode.querySelector("ul");
+  let imgsRoom = ul.querySelectorAll("li");
+  let index;
+
+  index = indexGetValue(index, category);
+
+  if (index < imgsRoom.length - 1 && orientacion == "next") {
+    ul.style.transform += "translateX(-40%)";
+    index++;
+  } else if (index > 0 && orientacion == "prev") {
+    ul.style.transform += "translateX(40%)";
+    index--;
+  }
+
+  displayIndexItemRoom(ul, index);
+  indexSetValue(category, index);
+}
+
+function displayIndexItemRoom(ul, indexImg) {
+  let containRoom = ul.parentNode.parentNode;
+  let itemsIndex = containRoom
+    .querySelector(".indexImagesRoom")
+    .querySelectorAll("li");
+
+  let itemIndex = itemsIndex[indexImg];
+
+  itemsIndex.forEach((item) => {
+    if (item.classList.contains("itemIndexActive")) {
+      item.classList.remove("itemIndexActive");
+    }
+  });
+  itemIndex.classList.add("itemIndexActive");
+}
+
+function indexSetValue(category, newValueIndex) {
+  let indexsRoomsUpdate = indexsImgRooms.map((indexRoom) => {
+    if (indexRoom.category == category) {
+      indexRoom.indexValue = newValueIndex;
+    }
+    return indexRoom;
+  });
+
+  indexsImgRooms = indexsRoomsUpdate;
+}
+
+function indexGetValue(index, category) {
+  let indexRoom = indexsImgRooms.find(
+    (indexRoom) => indexRoom.category == category
+  );
+
+  index = indexRoom.indexValue;
+  return index;
+}
+
 async function submitGetCategoryHotelRooms() {
   try {
     const response = await fetch(
@@ -253,9 +342,7 @@ async function submitGetCategoryHotelRooms() {
     );
 
     const result = await response.json();
-    if (result) {
-      printHotelRooms(result);
-    }
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -269,7 +356,7 @@ function calculateDifferenceNight(llegada, salida) {
   return differenceDays;
 }
 
-function printDateBookingInCart (dateBooking)  {
+function printDateBookingInCart(dateBooking) {
   cart.style.display = "flex";
 
   let options = {
@@ -291,7 +378,7 @@ function printDateBookingInCart (dateBooking)  {
   } else {
     document.querySelector(".quantityNights").textContent = `${nights} Noche`;
   }
-};
+}
 
 const createDataRoom = (button) => {
   let adultInput = button.parentNode.parentNode.querySelector(".adult");
@@ -302,7 +389,11 @@ const createDataRoom = (button) => {
   const room = {
     id: rooms.length + 1,
     category: dataRoom.category,
-    image: dataRoom.imageOne,
+    images: {
+      imageOne: dataRoom.imageOne,
+      imageTwo: dataRoom.imageTwo,
+      imageThree: dataRoom.imageThree,
+    },
     price: dataRoom.price,
     quantity: 1,
     guests: { adult: adultInput.value, children: childrenInput.value },
@@ -311,17 +402,19 @@ const createDataRoom = (button) => {
   return room;
 };
 
-function validateQuantityGuestsInputs(adultInput,childrenInput) {
+function validateQuantityGuestsInputs(adultInput, childrenInput) {
   let ability = adultInput.dataset.ability;
   let validate = null;
   if (childrenInput.value == 0 && adultInput.value == 0) {
     validate = "Ingresa algun huesped";
-  } else if ((parseInt(childrenInput.value) + parseInt(adultInput.value)) > ability) {
+  } else if (
+    parseInt(childrenInput.value) + parseInt(adultInput.value) >
+    ability
+  ) {
     validate = "Capacidad excedida";
   }
- 
+
   return validate;
-  
 }
 
 function validateDateInputs() {
@@ -333,7 +426,9 @@ function validateDateInputs() {
         if (
           validateQuantityGuestsInputs(
             btn.parentNode.parentNode.querySelector(".adult"),
-            btn.parentNode.parentNode.querySelector(".children")) != null) {
+            btn.parentNode.parentNode.querySelector(".children")
+          ) != null
+        ) {
           alertGuests(
             validateQuantityGuestsInputs(
               btn.parentNode.parentNode.querySelector(".adult"),
@@ -373,10 +468,9 @@ if (formCheckIn) {
     if (llegada.value == "" || salida.value == "") {
       alerta("Ingresa una fecha válida");
     } else {
-      
       cleanDateBooking();
       cleanQuantityAvailable();
-  
+
       let startBooking = new Date(llegada.value);
       let endBooking = new Date(salida.value);
 
@@ -392,11 +486,9 @@ if (formCheckIn) {
 
         submitDateBooking(dateBooking);
         printDateBookingInCart(dateBooking);
-        if(rooms){
-
+        if (rooms) {
           editTotalPriceRooms();
         }
-        
       }
     }
   });
@@ -433,7 +525,7 @@ class="buttonDelete" src="../img/cerrarVentana.png">
 <div class="containIconAndCategory">
 
 <div class="icon">
-<img src="data:image/png;base64,${room.image}">
+<img src="data:image/png;base64,${room.images.imageTwo}">
 </div>
 
 <div class="category">
@@ -548,7 +640,6 @@ class="buttonDelete" src="../img/cerrarVentana.png">
   }
 };
 
-
 function hoverClose(event, option) {
   if (option == "enter") {
     event.target.src = "../img/cerrarHover.png";
@@ -573,16 +664,13 @@ function hoverMinus(event, option) {
   }
 }
 
-
-function editTotalPriceRooms(){
-
- rooms=rooms.map(roomEdit=>{
-
-  roomEdit.total=calculateTotalRoom(roomEdit);
+function editTotalPriceRooms() {
+  rooms = rooms.map((roomEdit) => {
+    roomEdit.total = calculateTotalRoom(roomEdit);
     return roomEdit;
   });
 
-  localStorage.setItem("rooms",JSON.stringify(rooms));
+  localStorage.setItem("rooms", JSON.stringify(rooms));
   printRoomsCart();
 }
 
@@ -722,8 +810,19 @@ const cleanQuantityAvailable = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  submitGetCategoryHotelRooms();
+document.addEventListener("DOMContentLoaded", async function () {
+  let resultGetCategoryRooms = await submitGetCategoryHotelRooms();
+
+  if (resultGetCategoryRooms) {
+    printHotelRooms(resultGetCategoryRooms);
+
+    document.querySelectorAll(".containRoom").forEach((element) => {
+      let index;
+      let category = element.dataset.category;
+      index=indexGetValue(index, category);
+      displayIndexItemRoom(element.querySelector("ul"),index);
+    });
+  }
 
   if (JSON.parse(localStorage.getItem("rooms"))) {
     dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
@@ -733,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dateBooking = {
       start: startBooking,
-      end: endBooking
+      end: endBooking,
     };
 
     printDateBookingInCart(dateBooking);

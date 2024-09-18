@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background: linear-gradient(#0f3a4d, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 100%;
@@ -116,7 +116,9 @@ header li img {
 }
 
 body {
-  background-color: rgb(146, 146, 146);
+  background-image: url("../img/backgroundBodyRooms.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #checkIn {
@@ -172,7 +174,7 @@ body {
 #checkIn input[type=submit] {
   width: 100px;
   height: 30px;
-  background: linear-gradient(#0f3a4d, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   border: none;
   box-shadow: 2px 2px 2px grey;
   color: white;
@@ -187,7 +189,8 @@ body {
   background: linear-gradient(#0f3a4d, #0a7e85);
 }
 
-#alertGuests, .avisoCompleteDatos {
+#alertGuests,
+.avisoCompleteDatos {
   position: absolute;
   left: -30%;
   width: 300px;
@@ -198,10 +201,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-#alertGuests .contain, .avisoCompleteDatos .contain {
+#alertGuests .contain,
+.avisoCompleteDatos .contain {
   display: block;
 }
-#alertGuests .header, .avisoCompleteDatos .header {
+#alertGuests .header,
+.avisoCompleteDatos .header {
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -213,28 +218,33 @@ body {
   gap: 0.5rem;
   font-weight: bold;
 }
-#alertGuests p, .avisoCompleteDatos p {
+#alertGuests p,
+.avisoCompleteDatos p {
   color: #ffffff;
   font-weight: bold;
   font-size: 16px;
   margin-top: -1rem;
   text-align: center;
 }
-#alertGuests span, .avisoCompleteDatos span {
+#alertGuests span,
+.avisoCompleteDatos span {
   margin-top: -1rem;
 }
-#alertGuests img, .avisoCompleteDatos img {
+#alertGuests img,
+.avisoCompleteDatos img {
   width: 24px;
   height: 24px;
   margin-top: 0.7rem;
 }
-#alertGuests .progressBar, .avisoCompleteDatos .progressBar {
+#alertGuests .progressBar,
+.avisoCompleteDatos .progressBar {
   width: 100%;
   height: 4px;
   margin-top: -10px;
   background-color: #333333;
 }
-#alertGuests .bar, .avisoCompleteDatos .bar {
+#alertGuests .bar,
+.avisoCompleteDatos .bar {
   background-color: #ffffff;
   width: 100%;
   height: 100%;
@@ -385,10 +395,67 @@ body {
   align-items: start;
   gap: 5.5rem;
 }
-#containRooms .containRoom img {
-  width: 350px;
+#containRooms .containRoom .img {
+  width: 340px;
   height: 200px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+#containRooms .containRoom .img ul {
+  width: 1020px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -4rem;
+}
+#containRooms .containRoom .img li {
+  width: 400px;
+  height: 200px;
+  list-style: none;
+}
+#containRooms .containRoom .img li img {
+  width: 400px;
+  height: 100%;
   border-radius: 3px;
+}
+#containRooms .moveCarrouselNext {
+  transform: translateX(-40%);
+}
+#containRooms .controls {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  position: absolute;
+  top: 5.2rem;
+  left: 0rem;
+  gap: 18.7rem;
+}
+#containRooms .controls img {
+  width: 20px;
+  opacity: 80%;
+}
+#containRooms .controls img:hover {
+  opacity: 100%;
+}
+#containRooms .containRoom .indexImagesRoom {
+  display: flex;
+  gap: 2rem;
+  position: absolute;
+  top: 12rem;
+  left: 1rem;
+}
+#containRooms .containRoom .indexImagesRoom li {
+  width: 80px;
+  height: 3px;
+  background-color: rgb(201, 201, 201);
+}
+#containRooms .containRoom .indexImagesRoom .itemIndexActive {
+  background-color: white;
 }
 #containRooms .containRoom .titleRoom {
   display: flex;
@@ -531,12 +598,12 @@ body {
 #containRoomsAndCart #cart {
   width: 360px;
   height: 700px;
-  background: linear-gradient(#0f3a4d, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   margin-top: 3rem;
   margin-right: 3rem;
   text-align: center;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(53, 53, 53);
+  box-shadow: 2px 2px 2px rgb(107, 107, 107);
   padding-top: 1rem;
   padding-bottom: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -547,14 +614,16 @@ body {
 }
 
 #containRoomsAndCart #cart #title h6 {
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 19px;
+  font-weight: bold;
 }
 
 #containRoomsAndCart #cart #dateBooking {
-  color: white;
+  color: rgb(255, 255, 255);
   display: flex;
   gap: 6rem;
+  font-weight: bold;
   padding-top: 1rem;
 }
 
@@ -567,8 +636,9 @@ body {
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 1rem;
-  color: white;
+  color: rgb(245, 245, 245);
   font-size: 16px;
+  font-weight: bold;
   align-items: baseline;
   justify-content: center;
 }
@@ -585,13 +655,14 @@ body {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: start;
+  justify-content: start;
   gap: 1rem;
 }
 
 #roomsBooking li {
-  border-radius: 3px;
   box-shadow: 2px 2px 2px rgb(121, 121, 121);
-  width: 95%;
+  width: 100%;
   height: 120px;
   display: flex;
   flex-direction: column;
