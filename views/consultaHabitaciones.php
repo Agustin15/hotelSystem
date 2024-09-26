@@ -12,6 +12,7 @@
 
 
     <script defer src="../js/selectRooms.js"></script>
+  
 
 
     <title>Reserva</title>

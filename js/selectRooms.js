@@ -500,114 +500,56 @@ const addRoomToList = (room) => {
   localStorage.setItem("rooms", JSON.stringify(rooms));
 };
 
+function quantityGuestRoomCart(roomGuest, typeGuest) {
+  let span = "";
+  
+  if (roomGuest >1) {
+    span = roomGuest+" "+typeGuest;
+ 
+  }else if(roomGuest == 1) {
+      span = roomGuest+" "+typeGuest.substring(0,typeGuest.length-1); 
+  
+    }
+  
+  return span;
+}
+
 const printRoomsCart = () => {
   let roomsBooking = document.getElementById("roomsBooking");
-
   cleanRoomCart(roomsBooking);
 
   let roomsToPrint = rooms.map((room) => {
+
+    let spanAdults = quantityGuestRoomCart(room.guests.adult, "Adultos");
+    let spanChildrens = quantityGuestRoomCart(room.guests.children, "Niños");
+
     return `
 
 <li class="roomSelected">
 
-
-<div class="containIconAndQuantity">
-
-
-<div class="deleteRoom">
-
-<img data-id="${
-      room.id
-    }" onmouseenter="hoverClose(event,'enter')" onmouseleave="hoverClose(event,'leave')" 
-class="buttonDelete" src="../img/cerrarVentana.png">
-</div>
-
-<div class="containIconAndCategory">
-
-<div class="icon">
+<div class="imgRoom">
 <img src="data:image/png;base64,${room.images.imageTwo}">
 </div>
+<div class="dataRoom">
 
-<div class="category">
-
-<span>${room.category}<span>
-</div>
-
-</div>
-<div class="quantity">
-
-  <div>
- <img data-room='${JSON.stringify(
-   room
- )}' class="buttonSubtract" src="../img/minus.png" 
-  onmouseenter="hoverMinus(event,'enter')" 
-  onmouseleave="hoverMinus(event,'leave')"
-  >
-  
-  </div>
-
-  <div>
-
-  <span>${room.quantity}</span>
-  </div>
-  <div>
-  <img data-room='${JSON.stringify(
-    room
-  )}' class="buttonPlus" src="../img/add.png" onmouseenter="hoverAdd(event,'enter')" 
-  onmouseleave="hoverAdd(event,'leave')">
-  </div>
-</div>
+<div class="header">
+<span class="category">Habitacion ${room.category}</span>
+<img class="buttonDelete" src="../img/cerrarInfo.png">
 </div>
 
-<div class="guests">
+<span class="adults">${spanAdults}</span>
+<span class="childrens">${spanChildrens}</span>
 
-<div class="adult">
-<div>
-<img src="../img/adultRoom.png">
-</div>
-<div class="value">
-<div>
-<span>Adultos:</span>
-</div>
-<div>
-<span>${room.guests.adult}</span>
-</div>
+<div class="changeQuantity">
+<img class="buttonSubtract" data-room='${JSON.stringify(room)}' src="../img/substract.png">
+<span>${room.quantity}</span>
+<img class="buttonPlus" data-room='${JSON.stringify(room)}' src="../img/plus.png">
 </div>
 
-</div>
-
-<div class="children">
-<div>
-<img src="../img/children.png">
-</div>
-<div class="value">
-<div>
-<span>Niños:</span>
-</div>
-<div>
-<span>${room.guests.children}</span>
-</div>
-</div>
-
-
-</div>
-
-</div>
-
-<div class="containFooterDetails">
-<div class="quantityValue">
-
-<span>Cantidad:${room.quantity}</span>
-</div>
-
-<div class="price">
-<span>Precio:$${room.total}</span>
-</div>
+<span class="total">Precio:$${room.total}</span>
 </div>
 </li>
-
-
-
+<hr>
    `;
   });
 
@@ -640,29 +582,7 @@ class="buttonDelete" src="../img/cerrarVentana.png">
   }
 };
 
-function hoverClose(event, option) {
-  if (option == "enter") {
-    event.target.src = "../img/cerrarHover.png";
-  } else {
-    event.target.src = "../img/cerrarVentana.png";
-  }
-}
 
-function hoverAdd(event, option) {
-  if (option == "enter") {
-    event.target.src = "../img/addHover.png";
-  } else {
-    event.target.src = "../img/add.png";
-  }
-}
-
-function hoverMinus(event, option) {
-  if (option == "enter") {
-    event.target.src = "../img/minusHover.png";
-  } else {
-    event.target.src = "../img/minus.png";
-  }
-}
 
 function editTotalPriceRooms() {
   rooms = rooms.map((roomEdit) => {
@@ -698,6 +618,7 @@ const subtractRoom = (roomToSubstract) => {
 };
 
 const plusRoom = (roomToPlus) => {
+;
   rooms = rooms.map((roomQuantityPlus) => {
     if (roomQuantityPlus.id == roomToPlus.id) {
       let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
@@ -819,8 +740,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.querySelectorAll(".containRoom").forEach((element) => {
       let index;
       let category = element.dataset.category;
-      index=indexGetValue(index, category);
-      displayIndexItemRoom(element.querySelector("ul"),index);
+      index = indexGetValue(index, category);
+      displayIndexItemRoom(element.querySelector("ul"), index);
     });
   }
 

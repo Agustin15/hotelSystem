@@ -531,7 +531,7 @@ body {
 #containRoomsAndCart #cart {
   width: 360px;
   height: 700px;
-  background: linear-gradient(#126b91, #0498a0);
+  background: white;
   margin-top: 3rem;
   margin-right: 3rem;
   text-align: center;
@@ -547,13 +547,13 @@ body {
 }
 
 #containRoomsAndCart #cart #title h6 {
-  color: rgb(255, 255, 255);
+  color: rgb(5, 68, 104);
   font-size: 19px;
   font-weight: bold;
 }
 
 #containRoomsAndCart #cart #dateBooking {
-  color: rgb(255, 255, 255);
+  color: rgb(5, 68, 104);
   display: flex;
   gap: 6rem;
   font-weight: bold;
@@ -568,7 +568,7 @@ body {
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 1rem;
-  color: rgb(245, 245, 245);
+  color: rgb(5, 68, 104);
   font-size: 16px;
   font-weight: bold;
   align-items: baseline;
@@ -581,148 +581,139 @@ body {
 
 #roomsBooking {
   height: 50%;
-  width: 100%;
+  width: 360px;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  gap: 1rem;
-}
+  gap: 0.1rem;
+  margin-top:1rem;
 
-#roomsBooking li {
-  box-shadow: 2px 2px 2px rgb(121, 121, 121);
-  width: 100%;
+
+ li {
+
+  width:342px;
   height: 120px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 15px;
-  background-color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#roomsBooking li .containIconAndCategory {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
   align-items: start;
-  margin-top: -2.3rem;
-  gap: 0.5rem;
-  width: 50px;
-}
-
-#roomsBooking li .containIconAndCategory img {
-  width: 60px;
-  height: 38px;
-  border-radius: 3px;
-}
-
-#roomsBooking li .containIconAndCategory .category {
-  padding-top: 1rem;
-  margin-top: 0rem;
-  font-size: 17px;
-}
-#roomsBooking li .containIconAndCategory .icon {
-  padding-left: 0.2rem;
-  padding-top: 0.8rem;
-  margin-left: 0.2rem;
-  margin-top: 0rem;
-}
-
-#roomsBooking li .deleteRoom {
-  padding-right: 0.3rem;
-  margin-top: 0rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-}
-#roomsBooking li .deleteRoom img {
-  width: 25px;
-  opacity: 70%;
-}
-
-#roomsBooking li .containIconAndQuantity {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-#roomsBooking li .quantity {
-  display: flex;
-  flex-direction: row;
-  gap: 0.4rem;
-  font-size: 18px;
-  padding-left: 0.5rem;
-}
-
-#roomsBooking li .quantity img {
-  width: 15px;
-}
-
-#roomsBooking li .guests {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 1.5rem;
-  width: 170px;
+  justify-content:center;
   font-size: 15px;
-  margin-top: -2.4rem;
-  margin-left: 6rem;
+  gap: 0.1rem;
+  background:none;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: -2rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(194, 194, 194);
+  border-top: 1px solid rgb(194, 194, 194);
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+
+
+  li:hover>.buttonDelete{
+
+    visibility: visible;
+
+  }
+
+  .imgRoom{
+
+    width: 160px;
+    height: 110px;
+    padding-top: 0.5rem;
+    padding-left: 0.1rem;
+
+    img{
+
+      width: 160px;
+      height: 100%;
+    }
+  }
+
+
+  .dataRoom{
+
+    display: flex;
+    color: white;
+    height: 102px;
+    width: 175px;
+    background: linear-gradient(#126b91, #0498a0);
+    padding-top: 0.2rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+
+    .header{
+
+      display: flex;
+      justify-content:space-evenly;
+    
+      span{
+
+        margin-left: 1.1rem;
+      }
+    
+      img{
+
+        width: 12px;
+        height: 12px;
+        margin-left: 1rem;
+        padding-top: 0.1rem;
+        visibility: hidden;
+        
+      }
+    }
+  }
+
+  .changeQuantity{
+
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: -0.5rem;
+    
+    span{
+
+      font-size: 16px;
+
+    }
+
+    img{
+      width: 17px;
+      height: 17px;
+      
+    }
+
+    img:hover{
+     
+      transform: scale(1.1);
+      
+    }
+  }
+
+  .total{
+
+    margin-left: 4.3rem;
+    padding: 0.1rem;
+  }
 }
 
-#roomsBooking li .guests img {
-  width: 20px;
-}
 
-#roomsBooking li .guests .adult,
-#roomsBooking li .guests .children {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#roomsBooking li .guests .value {
-  display: flex;
-}
-#roomsBooking li .guests .title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-#roomsBooking li .containFooterDetails {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: end;
-  margin-left: 5rem;
-}
-#roomsBooking li .quantityValue {
-  margin-top: 0.5rem;
-}
-
-#roomsBooking li .price {
-  display: flex;
-  justify-content: end;
-  margin-top: 0.5rem;
-  margin-right: 1rem;
 }
 
 #containDeposit {
   background-color: white;
-  width: 90%;
+  width: 100%;
   height: 220px;
   border-radius: 3px;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 2px rgb(54, 54, 54);
   gap: 1rem;
+  border-top: 1px solid rgb(194, 194, 194);
   padding-top: 0.5rem;
   padding-bottom: 1rem;
 }
