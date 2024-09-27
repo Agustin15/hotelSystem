@@ -284,6 +284,7 @@ body {
   gap: 2rem;
   padding-left: 2rem;
 
+
   .containRoom {
     background-color: white;
     padding: 1rem 0 0 1rem;
@@ -291,6 +292,8 @@ body {
     height: 21rem;
     box-shadow: 2px 2px 2px grey;
     border-radius: 3px;
+    position: relative;
+  
   }
 
   .containRoom .containTitleAndRoom {
@@ -510,7 +513,14 @@ body {
   .inputGuestDisabled {
     opacity: 40%;
   }
-  .containRoom .quantityAvailableRoom {
+
+  .containAvailableRooms{
+
+    position: absolute;
+    left: 41rem;
+    top:0.5rem;
+  }
+  .containAvailableRooms .quantityAvailableRoom {
     background-color: black;
     box-shadow: 2px 2px 2px black;
     color: white;
@@ -523,14 +533,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    margin-top: -2.1rem;
-    margin-left: -2rem;
   }
 }
 
 #containRoomsAndCart #cart {
   width: 360px;
-  height: 700px;
+  height:auto;
+  max-height:800px;
   background: white;
   margin-top: 3rem;
   margin-right: 3rem;
@@ -580,7 +589,8 @@ body {
 }
 
 #roomsBooking {
-  height: 50%;
+  height: auto;
+  max-height: 650px;
   width: 360px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -588,14 +598,13 @@ body {
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  gap: 0.1rem;
   margin-top:1rem;
 
 
  li {
 
   width:342px;
-  height: 120px;
+  height: 90px;
   display: flex;
   align-items: start;
   justify-content:center;
@@ -610,12 +619,6 @@ body {
   color: rgb(0, 0, 0);
   font-size: 13px;
 
-
-  li:hover>.buttonDelete{
-
-    visibility: visible;
-
-  }
 
   .imgRoom{
 
@@ -661,8 +664,13 @@ body {
         height: 12px;
         margin-left: 1rem;
         padding-top: 0.1rem;
-        visibility: hidden;
-        
+        opacity: 60%;
+
+      }
+
+      img:hover{
+
+        opacity: 100%;
       }
     }
   }

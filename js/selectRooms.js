@@ -10,7 +10,7 @@ let totalDeposit = 0;
 let rooms = [] || JSON.parse(localStorage.getItem("rooms"));
 let quantityCategorysRooms;
 let nights;
-let dateBooking;
+let dateBooking=null;
 let booking;
 let ultimateItemIndex;
 let indexsImgRooms = [
@@ -18,6 +18,94 @@ let indexsImgRooms = [
   { category: "Deluxe", indexValue: 1 },
   { category: "Suite", indexValue: 1 },
 ];
+
+document.addEventListener("DOMContentLoaded", async function () {
+  let resultGetCategoryRooms = await submitGetCategoryHotelRooms();
+
+  if (resultGetCategoryRooms) {
+    printHotelRooms(resultGetCategoryRooms);
+
+    document.querySelectorAll(".containRoom").forEach((element) => {
+      let index;
+      let category = element.dataset.category;
+      index = indexGetValue(index, category);
+      displayIndexItemRoom(element.querySelector("ul"), index);
+    });
+  }
+
+  if (JSON.parse(localStorage.getItem("rooms"))) {
+    dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
+
+    let startBooking = new Date(dateBooking.start);
+    let endBooking = new Date(dateBooking.end);
+
+    dateBooking = {
+      start: startBooking,
+      end: endBooking,
+    };
+
+    submitDateBooking(dateBooking);
+    printDateBookingInCart(dateBooking);
+    rooms = JSON.parse(localStorage.getItem("rooms"));
+    printRoomsCart();
+  }
+});
+
+
+async function submitGetCategoryHotelRooms() {
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsHotel",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+if (formCheckIn) {
+  formCheckIn.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (llegada.value=="" || salida.value=="") {
+      alerta("Ingresa una fecha válida");
+    } else {
+      cleanDateBooking();
+      cleanQuantityAvailable();
+
+      let startBooking = new Date(llegada.value);
+      let endBooking = new Date(salida.value);
+
+      if (endBooking <= startBooking) {
+        alerta("Ingresa una fecha válida");
+      } else {
+        dateBooking = {
+          start: startBooking,
+          end: endBooking,
+        };
+
+        localStorage.setItem("dateBooking", JSON.stringify(dateBooking));
+
+        submitDateBooking(dateBooking);
+        printDateBookingInCart(dateBooking);
+        if (rooms) {
+          editTotalPriceRooms();
+        }
+      }
+    }
+  });
+}
+
+
 
 async function submitDateBooking(dateBooking) {
   try {
@@ -329,24 +417,6 @@ function indexGetValue(index, category) {
   return index;
 }
 
-async function submitGetCategoryHotelRooms() {
-  try {
-    const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsHotel",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 function calculateDifferenceNight(llegada, salida) {
   let differenceTime = salida.getTime() - llegada.getTime();
@@ -372,6 +442,7 @@ function printDateBookingInCart(dateBooking) {
     dateBooking.end.toLocaleDateString("es-ar", options);
 
   nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
+  
 
   if (nights > 1) {
     document.querySelector(".quantityNights").textContent = `${nights} Noches`;
@@ -420,7 +491,7 @@ function validateQuantityGuestsInputs(adultInput, childrenInput) {
 function validateDateInputs() {
   [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (llegada.value == "" || salida.value == "") {
+      if (!dateBooking) {
         alerta("Ingresa una fecha valida");
       } else {
         if (
@@ -461,38 +532,6 @@ function validateDateInputs() {
   });
 }
 
-if (formCheckIn) {
-  formCheckIn.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (llegada.value == "" || salida.value == "") {
-      alerta("Ingresa una fecha válida");
-    } else {
-      cleanDateBooking();
-      cleanQuantityAvailable();
-
-      let startBooking = new Date(llegada.value);
-      let endBooking = new Date(salida.value);
-
-      if (endBooking <= startBooking) {
-        alerta("Ingresa una fecha válida");
-      } else {
-        dateBooking = {
-          start: startBooking,
-          end: endBooking,
-        };
-
-        localStorage.setItem("dateBooking", JSON.stringify(dateBooking));
-
-        submitDateBooking(dateBooking);
-        printDateBookingInCart(dateBooking);
-        if (rooms) {
-          editTotalPriceRooms();
-        }
-      }
-    }
-  });
-}
 
 const addRoomToList = (room) => {
   rooms.push(room);
@@ -502,15 +541,13 @@ const addRoomToList = (room) => {
 
 function quantityGuestRoomCart(roomGuest, typeGuest) {
   let span = "";
-  
-  if (roomGuest >1) {
-    span = roomGuest+" "+typeGuest;
- 
-  }else if(roomGuest == 1) {
-      span = roomGuest+" "+typeGuest.substring(0,typeGuest.length-1); 
-  
-    }
-  
+
+  if (roomGuest > 1) {
+    span = roomGuest + " " + typeGuest;
+  } else if (roomGuest == 1) {
+    span = roomGuest + " " + typeGuest.substring(0, typeGuest.length - 1);
+  }
+
   return span;
 }
 
@@ -519,7 +556,6 @@ const printRoomsCart = () => {
   cleanRoomCart(roomsBooking);
 
   let roomsToPrint = rooms.map((room) => {
-
     let spanAdults = quantityGuestRoomCart(room.guests.adult, "Adultos");
     let spanChildrens = quantityGuestRoomCart(room.guests.children, "Niños");
 
@@ -534,16 +570,20 @@ const printRoomsCart = () => {
 
 <div class="header">
 <span class="category">Habitacion ${room.category}</span>
-<img class="buttonDelete" src="../img/cerrarInfo.png">
+<img data-id=${room.id} class="buttonDelete" src="../img/borrar.png">
 </div>
 
 <span class="adults">${spanAdults}</span>
 <span class="childrens">${spanChildrens}</span>
 
 <div class="changeQuantity">
-<img class="buttonSubtract" data-room='${JSON.stringify(room)}' src="../img/substract.png">
+<img class="buttonSubtract" data-room='${JSON.stringify(
+      room
+    )}' src="../img/substract.png">
 <span>${room.quantity}</span>
-<img class="buttonPlus" data-room='${JSON.stringify(room)}' src="../img/plus.png">
+<img class="buttonPlus" data-room='${JSON.stringify(
+      room
+    )}' src="../img/plus.png">
 </div>
 
 <span class="total">Precio:$${room.total}</span>
@@ -582,8 +622,6 @@ const printRoomsCart = () => {
   }
 };
 
-
-
 function editTotalPriceRooms() {
   rooms = rooms.map((roomEdit) => {
     roomEdit.total = calculateTotalRoom(roomEdit);
@@ -618,7 +656,6 @@ const subtractRoom = (roomToSubstract) => {
 };
 
 const plusRoom = (roomToPlus) => {
-;
   rooms = rooms.map((roomQuantityPlus) => {
     if (roomQuantityPlus.id == roomToPlus.id) {
       let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
@@ -731,36 +768,6 @@ const cleanQuantityAvailable = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", async function () {
-  let resultGetCategoryRooms = await submitGetCategoryHotelRooms();
-
-  if (resultGetCategoryRooms) {
-    printHotelRooms(resultGetCategoryRooms);
-
-    document.querySelectorAll(".containRoom").forEach((element) => {
-      let index;
-      let category = element.dataset.category;
-      index = indexGetValue(index, category);
-      displayIndexItemRoom(element.querySelector("ul"), index);
-    });
-  }
-
-  if (JSON.parse(localStorage.getItem("rooms"))) {
-    dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
-
-    let startBooking = new Date(dateBooking.start);
-    let endBooking = new Date(dateBooking.end);
-
-    dateBooking = {
-      start: startBooking,
-      end: endBooking,
-    };
-
-    printDateBookingInCart(dateBooking);
-    rooms = JSON.parse(localStorage.getItem("rooms"));
-    printRoomsCart();
-  }
-});
 
 buttonNext.addEventListener("click", function () {
   booking = {
@@ -773,3 +780,5 @@ buttonNext.addEventListener("click", function () {
   localStorage.setItem("booking", JSON.stringify(booking));
   location.href = "reserva.php";
 });
+
+
