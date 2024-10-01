@@ -573,8 +573,10 @@ const printRoomsCart = () => {
 <img data-id=${room.id} class="buttonDelete" src="../img/borrar.png">
 </div>
 
+<div class="guests">
 <span class="adults">${spanAdults}</span>
 <span class="childrens">${spanChildrens}</span>
+</div>
 
 <div class="changeQuantity">
 <img class="buttonSubtract" data-room='${JSON.stringify(

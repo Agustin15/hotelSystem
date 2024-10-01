@@ -135,6 +135,7 @@
 
         <div id="containRooms"></div>
 
+        <div class="containCart">
         <div id="cart">
 
             <div id="title">
@@ -145,7 +146,7 @@
 
                 <div>
                     <div>
-                        <label>Desde</label>
+                        <label>Llegada</label>
                     </div>
                     <div>
 
@@ -155,7 +156,7 @@
 
                 <div>
                     <div>
-                        <label>Hasta</label>
+                        <label>Salida</label>
                     </div>
                     <div>
                         <span class="endBooking"></span>
@@ -178,9 +179,6 @@
 
             <div id="containDeposit">
 
-                <div class="span">
-                    <span>Deposito:</span>
-                </div>
 
                 <div class="containNotice">
                     <div class="icon">
@@ -201,6 +199,7 @@
 
             </div>
 
+        </div>
         </div>
     </div>
 

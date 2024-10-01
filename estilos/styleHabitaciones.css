@@ -200,6 +200,7 @@ body {
   background: linear-gradient(#0f3a4d, #0498a0);
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 #alertGuests .contain,
 .avisoCompleteDatos .contain {
@@ -334,6 +335,7 @@ body {
   justify-content: center;
   align-items: start;
   display: none;
+  z-index: 2;
 }
 #modal .bodyModal {
   margin-top: 20rem;
@@ -372,6 +374,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: auto;
 }
 
 #containRooms {
@@ -381,6 +384,7 @@ body {
   justify-content: start;
   gap: 2rem;
   padding-left: 2rem;
+  padding-bottom: 1rem;
 }
 #containRooms .containRoom {
   background-color: white;
@@ -599,16 +603,16 @@ body {
   justify-content: start;
 }
 
-#containRoomsAndCart #cart {
-  width: 360px;
+.containCart #cart {
+  width: 460px;
   height: auto;
   max-height: 800px;
   background: white;
   margin-top: 3rem;
-  margin-right: 3rem;
+  margin-right: 1rem;
   text-align: center;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(107, 107, 107);
+  box-shadow: 2px 2px 2px rgb(175, 175, 175);
   padding-top: 1rem;
   padding-bottom: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -617,85 +621,83 @@ body {
   justify-content: start;
   display: none;
 }
-
-#containRoomsAndCart #cart #title h6 {
+.containCart #cart #title h6 {
   color: rgb(5, 68, 104);
   font-size: 19px;
   font-weight: bold;
 }
-
-#containRoomsAndCart #cart #dateBooking {
+.containCart #cart #dateBooking {
   color: rgb(5, 68, 104);
   display: flex;
+  justify-content: center;
+  padding-right: 1rem;
   gap: 6rem;
   font-weight: bold;
   padding-top: 1rem;
 }
-
-#containRoomsAndCart #cart #dateBooking span {
+.containCart #cart #dateBooking span {
   padding-left: 0.5rem;
 }
-
-#containRoomsAndCart #cart .containNight {
+.containCart #cart .containNight {
   display: flex;
+  width: 100%;
+  color: white;
+  background: linear-gradient(#126b91, #0498a0);
+  padding: 1rem;
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 1rem;
-  color: rgb(5, 68, 104);
   font-size: 16px;
   font-weight: bold;
   align-items: baseline;
   justify-content: center;
 }
-
-#containRoomsAndCart #cart .containNight img {
+.containCart #cart .containNight img {
   width: 20px;
 }
-
-#roomsBooking {
+.containCart #roomsBooking {
   height: auto;
   max-height: 650px;
-  width: 360px;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
+  justify-content: center;
   margin-top: 1rem;
+  padding-left: 0;
 }
-#roomsBooking li {
-  width: 342px;
-  height: 90px;
+.containCart #roomsBooking li {
+  width: 100%;
+  height: 125px;
+  gap: 0.1rem;
   display: flex;
   align-items: start;
   justify-content: center;
   font-size: 15px;
-  gap: 0.1rem;
   background: none;
   font-family: Arial, Helvetica, sans-serif;
-  margin-left: -2rem;
   font-weight: bold;
-  border-bottom: 1px solid rgb(194, 194, 194);
   border-top: 1px solid rgb(194, 194, 194);
   color: rgb(0, 0, 0);
   font-size: 13px;
 }
-#roomsBooking li .imgRoom {
-  width: 160px;
-  height: 110px;
+.containCart #roomsBooking li .imgRoom {
+  width: 220px;
+  height: 112px;
   padding-top: 0.5rem;
   padding-left: 0.1rem;
 }
-#roomsBooking li .imgRoom img {
-  width: 160px;
+.containCart #roomsBooking li .imgRoom img {
+  width: 220px;
   height: 100%;
 }
-#roomsBooking li .dataRoom {
+.containCart #roomsBooking li .dataRoom {
   display: flex;
   color: white;
-  height: 102px;
-  width: 175px;
+  height: 104px;
+  width: 230px;
   background: linear-gradient(#126b91, #0498a0);
   padding-top: 0.2rem;
   flex-direction: column;
@@ -703,45 +705,53 @@ body {
   gap: 0.3rem;
   margin-top: 0.5rem;
 }
-#roomsBooking li .dataRoom .header {
+.containCart #roomsBooking li .dataRoom .header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 100%;
 }
-#roomsBooking li .dataRoom .header span {
-  margin-left: 1.1rem;
-}
-#roomsBooking li .dataRoom .header img {
-  width: 12px;
-  height: 12px;
+.containCart #roomsBooking li .dataRoom .header span {
   margin-left: 1rem;
-  padding-top: 0.1rem;
-  opacity: 60%;
 }
-#roomsBooking li .dataRoom .header img:hover {
+.containCart #roomsBooking li .dataRoom .header img {
+  width: 12px;
+  height: 11px;
+  opacity: 70%;
+  margin-right: 0.3rem;
+}
+.containCart #roomsBooking li .dataRoom .header img:hover {
   opacity: 100%;
 }
-#roomsBooking li .changeQuantity {
+.containCart #roomsBooking li .guests {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.7rem;
-  margin-top: -0.5rem;
+  gap: 1.2rem;
+  width: 100%;
 }
-#roomsBooking li .changeQuantity span {
+.containCart #roomsBooking li .changeQuantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.7rem;
+  margin-top: 0.1rem;
+}
+.containCart #roomsBooking li .changeQuantity span {
   font-size: 16px;
 }
-#roomsBooking li .changeQuantity img {
+.containCart #roomsBooking li .changeQuantity img {
   width: 17px;
   height: 17px;
 }
-#roomsBooking li .changeQuantity img:hover {
+.containCart #roomsBooking li .changeQuantity img:hover {
   transform: scale(1.1);
 }
-#roomsBooking li .total {
-  margin-left: 4.3rem;
+.containCart #roomsBooking li .total {
+  margin-left: 7.2rem;
   padding: 0.1rem;
 }
-
-#containDeposit {
+.containCart #containDeposit {
   background-color: white;
   width: 100%;
   height: 220px;
@@ -755,15 +765,13 @@ body {
   padding-top: 0.5rem;
   padding-bottom: 1rem;
 }
-
-#containDeposit .span {
+.containCart #containDeposit .span {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   padding-left: 1rem;
   margin-right: 14rem;
 }
-
-#containDeposit .containTotal {
+.containCart #containDeposit .containTotal {
   display: flex;
   justify-content: start;
   color: white;
@@ -775,8 +783,7 @@ body {
   height: 40px;
   border-radius: 2px;
 }
-
-#containDeposit .containNotice {
+.containCart #containDeposit .containNotice {
   background: rgba(28, 178, 184, 0.3);
   color: rgb(33, 182, 241);
   display: flex;
@@ -790,34 +797,28 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
-
-#containDeposit .containNotice img {
+.containCart #containDeposit .containNotice img {
   width: 15px;
 }
-
-#containDeposit .containNotice .phrase {
+.containCart #containDeposit .containNotice .phrase {
   padding-left: 1rem;
   padding-top: 0.1rem;
 }
-
-#containDeposit .containNotice .icon {
+.containCart #containDeposit .containNotice .icon {
   margin-top: -0.5rem;
 }
-
-#containDeposit .containButton {
+.containCart #containDeposit .containButton {
   margin-top: 0.5rem;
 }
-
-#containDeposit .containButton button {
-  width: 240px;
+.containCart #containDeposit .containButton button {
+  width: 400px;
   background: rgba(28, 178, 184, 0.3);
   color: rgb(33, 182, 241);
   height: 34px;
   border: none;
   font-weight: bold;
 }
-
-#containDeposit .containButton button:hover {
+.containCart #containDeposit .containButton button:hover {
   background: rgba(49, 209, 214, 0.3);
 }
 

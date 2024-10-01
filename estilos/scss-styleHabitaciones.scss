@@ -96,6 +96,7 @@ body {
   background: linear-gradient(#0f3a4d, #0498a0);
   display: flex;
   flex-direction: column;
+  z-index: 2;
 
   .contain {
     display: block;
@@ -236,6 +237,7 @@ body {
   justify-content: center;
   align-items: start;
   display: none;
+  z-index: 2;
 
   .bodyModal {
     margin-top: 20rem;
@@ -274,6 +276,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: auto;
+
 }
 
 #containRooms {
@@ -283,7 +287,7 @@ body {
   justify-content: start;
   gap: 2rem;
   padding-left: 2rem;
-
+  padding-bottom: 1rem;
 
   .containRoom {
     background-color: white;
@@ -293,7 +297,6 @@ body {
     box-shadow: 2px 2px 2px grey;
     border-radius: 3px;
     position: relative;
-  
   }
 
   .containRoom .containTitleAndRoom {
@@ -514,11 +517,10 @@ body {
     opacity: 40%;
   }
 
-  .containAvailableRooms{
-
+  .containAvailableRooms {
     position: absolute;
     left: 41rem;
-    top:0.5rem;
+    top: 0.5rem;
   }
   .containAvailableRooms .quantityAvailableRoom {
     background-color: black;
@@ -536,16 +538,19 @@ body {
   }
 }
 
-#containRoomsAndCart #cart {
-  width: 360px;
-  height:auto;
-  max-height:800px;
+.containCart{
+
+
+ #cart {
+  width: 460px;
+  height: auto;
+  max-height: 800px;
   background: white;
   margin-top: 3rem;
-  margin-right: 3rem;
+  margin-right: 1rem;
   text-align: center;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(107, 107, 107);
+  box-shadow: 2px 2px 2px rgb(175, 175, 175);
   padding-top: 1rem;
   padding-bottom: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -555,160 +560,155 @@ body {
   display: none;
 }
 
-#containRoomsAndCart #cart #title h6 {
+ #cart #title h6 {
   color: rgb(5, 68, 104);
   font-size: 19px;
   font-weight: bold;
 }
 
-#containRoomsAndCart #cart #dateBooking {
+#cart #dateBooking {
   color: rgb(5, 68, 104);
   display: flex;
+  justify-content: center;
+  padding-right: 1rem;
   gap: 6rem;
   font-weight: bold;
   padding-top: 1rem;
+
 }
 
-#containRoomsAndCart #cart #dateBooking span {
+ #cart #dateBooking span {
   padding-left: 0.5rem;
 }
-#containRoomsAndCart #cart .containNight {
+ #cart .containNight {
   display: flex;
+  width: 100%;
+  color: white;
+  background: linear-gradient(#126b91, #0498a0);
+  padding: 1rem;
   flex-direction: row;
   gap: 0.5rem;
   margin-top: 1rem;
-  color: rgb(5, 68, 104);
   font-size: 16px;
   font-weight: bold;
   align-items: baseline;
   justify-content: center;
 }
-
-#containRoomsAndCart #cart .containNight img {
+ #cart .containNight img {
   width: 20px;
 }
 
 #roomsBooking {
+  
   height: auto;
   max-height: 650px;
-  width: 360px;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
-  margin-top:1rem;
-
-
- li {
-
-  width:342px;
-  height: 90px;
-  display: flex;
-  align-items: start;
   justify-content:center;
-  font-size: 15px;
-  gap: 0.1rem;
-  background:none;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-left: -2rem;
-  font-weight: bold;
-  border-bottom: 1px solid rgb(194, 194, 194);
-  border-top: 1px solid rgb(194, 194, 194);
-  color: rgb(0, 0, 0);
-  font-size: 13px;
+  margin-top: 1rem;
+  padding-left: 0;
+  
 
-
-  .imgRoom{
-
-    width: 160px;
-    height: 110px;
-    padding-top: 0.5rem;
-    padding-left: 0.1rem;
-
-    img{
-
-      width: 160px;
-      height: 100%;
-    }
-  }
-
-
-  .dataRoom{
-
+  li {
+    width:100%;
+    height: 125px;
+    gap: 0.1rem;
     display: flex;
-    color: white;
-    height: 102px;
-    width: 175px;
-    background: linear-gradient(#126b91, #0498a0);
-    padding-top: 0.2rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: 0.5rem;
+    align-items: start;
+    justify-content: center;
+    font-size: 15px;
+    background: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-top: 1px solid rgb(194, 194, 194);
+    color: rgb(0, 0, 0);
+    font-size: 13px;
 
-    .header{
+    .imgRoom {
+      width: 220px;
+      height: 112px;
+      padding-top: 0.5rem;
+      padding-left: 0.1rem;
 
+      img {
+        width: 220px;
+        height: 100%;
+      }
+    }
+
+    .dataRoom {
       display: flex;
-      justify-content:space-evenly;
-    
-      span{
+      color: white;
+      height: 104px;
+      width: 230px;
+      background: linear-gradient(#126b91, #0498a0);
+      padding-top: 0.2rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
 
-        margin-left: 1.1rem;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        span {
+          margin-left: 1rem;
+        }
+
+        img {
+          width: 12px;
+          height: 11px;
+          opacity: 70%;
+          margin-right: 0.3rem;
+        }
+
+        img:hover {
+          opacity: 100%;
+        }
       }
-    
-      img{
+    }
 
-        width: 12px;
-        height: 12px;
-        margin-left: 1rem;
-        padding-top: 0.1rem;
-        opacity: 60%;
+    .guests {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      width: 100%;
+    }
 
+    .changeQuantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 0.7rem;
+      margin-top: 0.1rem;
+
+      span {
+        font-size: 16px;
       }
 
-      img:hover{
-
-        opacity: 100%;
+      img {
+        width: 17px;
+        height: 17px;
       }
+
+      img:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .total {
+      margin-left: 7.2rem;
+      padding: 0.1rem;
     }
   }
-
-  .changeQuantity{
-
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: -0.5rem;
-    
-    span{
-
-      font-size: 16px;
-
-    }
-
-    img{
-      width: 17px;
-      height: 17px;
-      
-    }
-
-    img:hover{
-     
-      transform: scale(1.1);
-      
-    }
-  }
-
-  .total{
-
-    margin-left: 4.3rem;
-    padding: 0.1rem;
-  }
-}
-
-
 }
 
 #containDeposit {
@@ -778,7 +778,7 @@ body {
 }
 
 #containDeposit .containButton button {
-  width: 240px;
+  width:400px;
   background: rgba(28, 178, 184, 0.3);
   color: rgb(33, 182, 241);
   height: 34px;
@@ -788,4 +788,5 @@ body {
 
 #containDeposit .containButton button:hover {
   background: rgba(49, 209, 214, 0.3);
+}
 }
