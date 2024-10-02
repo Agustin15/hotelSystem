@@ -7,10 +7,10 @@ let modal = document.getElementById("modal");
 let buttonNext = document.getElementById("buttonNext");
 
 let totalDeposit = 0;
-let rooms = [] || JSON.parse(localStorage.getItem("rooms"));
+let rooms = [];
 let quantityCategorysRooms;
 let nights;
-let dateBooking=null;
+let dateBooking = null;
 let booking;
 let ultimateItemIndex;
 let indexsImgRooms = [
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  if (JSON.parse(localStorage.getItem("rooms"))) {
+  if (JSON.parse(localStorage.getItem("rooms")).length > 0) {
     dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
 
     let startBooking = new Date(dateBooking.start);
@@ -47,10 +47,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     submitDateBooking(dateBooking);
     printDateBookingInCart(dateBooking);
     rooms = JSON.parse(localStorage.getItem("rooms"));
+   
     printRoomsCart();
   }
 });
-
 
 async function submitGetCategoryHotelRooms() {
   try {
@@ -71,12 +71,11 @@ async function submitGetCategoryHotelRooms() {
   }
 }
 
-
 if (formCheckIn) {
   formCheckIn.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    if (llegada.value=="" || salida.value=="") {
+    if (llegada.value == "" || salida.value == "") {
       alerta("Ingresa una fecha válida");
     } else {
       cleanDateBooking();
@@ -104,8 +103,6 @@ if (formCheckIn) {
     }
   });
 }
-
-
 
 async function submitDateBooking(dateBooking) {
   try {
@@ -417,7 +414,6 @@ function indexGetValue(index, category) {
   return index;
 }
 
-
 function calculateDifferenceNight(llegada, salida) {
   let differenceTime = salida.getTime() - llegada.getTime();
 
@@ -442,7 +438,6 @@ function printDateBookingInCart(dateBooking) {
     dateBooking.end.toLocaleDateString("es-ar", options);
 
   nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
-  
 
   if (nights > 1) {
     document.querySelector(".quantityNights").textContent = `${nights} Noches`;
@@ -531,7 +526,6 @@ function validateDateInputs() {
     });
   });
 }
-
 
 const addRoomToList = (room) => {
   rooms.push(room);
@@ -667,7 +661,10 @@ const plusRoom = (roomToPlus) => {
         return ac;
       }, 0);
 
-      if (roomQuantityPlus.quantity < limitRoom) {
+      let totalQuantityRoomsCategory = comprobateQuantityLimitCategotyRooms(
+        roomToPlus.category
+      );
+      if (totalQuantityRoomsCategory < limitRoom) {
         roomQuantityPlus.quantity++;
         roomQuantityPlus.total = calculateTotalRoom(roomQuantityPlus);
       }
@@ -680,34 +677,49 @@ const plusRoom = (roomToPlus) => {
   printRoomsCart();
 };
 
+function comprobateQuantityLimitCategotyRooms(categoryRoom) {
+  let roomsCategory = rooms.filter((room) => {
+    return room.category == categoryRoom;
+  });
+
+  let totalQuantityRoomsCategory = roomsCategory.reduce((ac, roomCategory) => {
+    return (ac += roomCategory.quantity);
+  }, 0);
+
+  return totalQuantityRoomsCategory;
+}
 function comprobateQuantityRoomForAdd(roomForAdd) {
   let result = null;
 
   if (rooms.length > 0) {
-    rooms.forEach((roomInCart) => {
-      if (
-        roomInCart.category == roomForAdd.category &&
-        roomInCart.guests.adult == roomForAdd.guests.adult &&
-        roomInCart.guests.children == roomForAdd.guests.children
-      ) {
-        let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
-          if (categoryRoom.category == roomForAdd.category) {
-            ac = categoryRoom.quantity;
-          }
-          return ac;
-        }, 0);
+    let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
+      if (categoryRoom.category == roomForAdd.category) {
+        ac = categoryRoom.quantity;
+      }
+      return ac;
+    }, 0);
 
-        if (roomForAdd.quantity + roomInCart.quantity <= limitRoom) {
+    let totalQuantityRoomsCategory = comprobateQuantityLimitCategotyRooms(
+      roomForAdd.category
+    );
+
+    if (totalQuantityRoomsCategory < limitRoom) {
+      rooms.forEach((roomInCart) => {
+        if (
+          roomInCart.category == roomForAdd.category &&
+          roomInCart.guests.adult == roomForAdd.guests.adult &&
+          roomInCart.guests.children == roomForAdd.guests.children
+        ) {
           roomInCart.quantity++;
           roomInCart.total = calculateTotalRoom(roomInCart);
           localStorage.setItem("rooms", JSON.stringify(rooms));
 
           return (result = "quantityAdded");
-        } else {
-          return (result = "Excede el limite de habitaciones disponibles");
         }
-      }
-    });
+      });
+    } else {
+      result = "Excede el limite de habitaciones";
+    }
   }
 
   return result;

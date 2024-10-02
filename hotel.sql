@@ -164,7 +164,7 @@ load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Deluxe_2.jpg"),4,5,1,300)
 INSERT INTO tipo_habitacion (categoria,imagenUno,imagenDos,imagenTres,camas,capacidad,terraza,precio) VALUES ("Estandar",
 load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1_2.jpg"),
 load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2_2.jpg"),
-load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Suite_2.jpg"),3,4,1,120);
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3_2.jpg"),3,4,1,120);
 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 50 pesos por minuto",50,load_file('C:/xampp/htdocs/Sistema hotel/img/telephone.png'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion 500 pesos por persona",500,load_file('C:/xampp/htdocs/Sistema hotel/img/massage.png'),null);

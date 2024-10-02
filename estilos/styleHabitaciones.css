@@ -657,15 +657,15 @@ body {
 }
 .containCart #roomsBooking {
   height: auto;
-  max-height: 650px;
+  max-height: 700px;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: center;
   margin-top: 1rem;
+  padding-top: 1rem;
   padding-left: 0;
 }
 .containCart #roomsBooking li {

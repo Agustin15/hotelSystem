@@ -1,8 +1,9 @@
 let booking = JSON.parse(localStorage.getItem("booking"));
 let loadingSpinner = document.querySelector(".loading");
 let rooms;
-let indiceRoom=0;
-let btnNext=document.querySelector(".btnNext");
+let indexRoom = 0;
+let btnNext = document.querySelector(".btnNext");
+let btnPrev = document.querySelector(".btnPrev");
 let roomsBooking = document.querySelector(".bookingRooms");
 let confirmationMsj = document.getElementById("confirmationBooking");
 let containClientAndBooking = document.querySelector(
@@ -227,36 +228,41 @@ function replaceCharacter(event) {
   }
 }
 
+function quantityGuestRoom(roomGuest, typeGuest) {
+  let span = "";
+  let liGuest = "";
+
+  if (roomGuest > 1) {
+    span = roomGuest + " " + typeGuest;
+  } else if (roomGuest == 1) {
+    span = roomGuest + " " + typeGuest.substring(0, typeGuest.length - 1);
+  }
+
+  if (span.length > 0) {
+    liGuest = `<li>${span}</li>`;
+  }
+
+  return liGuest;
+}
+
 function printBookingRooms() {
   let roomsToPrint = rooms.map((room) => {
-    let textAdult;
-    let textChildren="";
-    if (room.guests.adult > 1) {
-      textAdult = `${room.guests.adult} adultos`;
-     
-    }else{
-        textAdult = `${room.guests.adult} adulto`;
-      }
-    
-    if (room.guests.children > 0) {
-      textChildren = `${room.guests.children} niños`;
-      if (room.guests.adult == 1) {
-        textChildren = `${room.guests.children} niño`;
-      }
-    }
+    let liAdult = quantityGuestRoom(room.guests.adult, "Adultos");
+    let liChildren = quantityGuestRoom(room.guests.children, "Niños");
+
     return `
     
     
                             <div class="header">
 
-                                <img src="data:image/png;base64,${room.image}">
+                                <img src="data:image/png;base64,${room.images.imageTwo}">
                                 <div class="data">
                                 <span>Habitacion ${room.category}</span>
 
                                 <div class="details">
                                 <ul>
-                                    <li>${textAdult}</li>
-                                    <li>${textChildren}</li>
+                                    ${liAdult}
+                                    ${liChildren}
                                     <li>Precio:$${room.price}</li>
                                     <li>Cantidad:${room.quantity}</li>
                                     <li class="total">Total:$${room.total}</li>
@@ -269,8 +275,7 @@ function printBookingRooms() {
     `;
   });
 
-  roomsBooking.querySelector("li").innerHTML=roomsToPrint[indiceRoom];
-
+  roomsBooking.querySelector("li").innerHTML = roomsToPrint[indexRoom];
 }
 
 function printBooking() {
@@ -309,18 +314,31 @@ document.addEventListener("DOMContentLoaded", function () {
   if (containClientAndBooking) {
     if (localStorage.getItem("booking") == null) {
       location.href = "consultaHabitaciones.php";
-
-    }else{
-
+    } else {
       printBooking();
-
-
-     
-      btnNext.addEventListener("click",function(){
-
-        indiceRoom++;
-        printBooking();
-      });
+      displayIndexRoom();
     }
   }
 });
+
+btnNext.addEventListener("click", function () {
+  if (indexRoom < rooms.length - 1) {
+    indexRoom++;
+    printBooking();
+    displayIndexRoom();
+  }
+});
+
+btnPrev.addEventListener("click", function () {
+  if (indexRoom > 0) {
+    indexRoom--;
+    printBooking();
+    displayIndexRoom();
+  }
+});
+
+function displayIndexRoom() {
+  let indexSpan = document.querySelector(".indexRoom");
+
+  indexSpan.textContent= `${indexRoom+1} / ${rooms.length}`;
+}

@@ -161,18 +161,23 @@
                 </div>
 
                 <div class="bookingData">
+
+                    <div class="title">
+                        <span>Habitaciones</span>
+                    </div>
                     <ul class="bookingRooms">
 
                         <li>
 
 
                         </li>
-
-                        <div class="next">
-
-                            <img class="btnNext" src="../img/nextRoom.png">
-                        </div>
                     </ul>
+                    <div class="controls">
+
+                        <img class="btnPrev" src="../img/prevRoom.png">
+                        <span class="indexRoom"></span>
+                        <img class="btnNext" src="../img/nextRoom.png">
+                    </div>
 
 
                     <div class="containTotalBooking">

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background: linear-gradient(#0f3a4d, #0498a0);
+  background: linear-gradient(#126b91, #0498a0);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 100%;
@@ -278,71 +278,24 @@ form .containButtons button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
 }
-.bookingData h1 {
-  font-size: 16px;
-}
-.bookingData .dateBooking {
-  display: flex;
-  gap: 6rem;
-  justify-content: center;
-  align-items: center;
-  padding-top: 0.5rem;
-}
-.bookingData .dateBooking .start,
-.bookingData .dateBooking .end {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+.bookingData .title {
+  width: 101%;
+  background: linear-gradient(#126b91, #0498a0);
+  color: white;
+  padding: 0.7rem;
   font-weight: bold;
-}
-.bookingData .dateBooking .date {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-.bookingData .dateBooking .start img {
-  width: 30px;
-}
-.bookingData .dateBooking .end img {
-  width: 30px;
-}
-.bookingData .nights {
-  margin-top: 0.5rem;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-.bookingData .nights img {
-  width: 20px;
+  border-radius: 3px;
 }
 .bookingData .bookingRooms {
-  width: 100%;
-  height: 300px;
+  width: 105%;
+  height: 210px;
   display: flex;
   gap: 1.8rem;
   align-items: center;
-  justify-content: start;
-  color: black;
-}
-.bookingData .bookingRooms .next {
-  background-color: #0ea7af;
-  width: 30px;
-  height: 90%;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding-left: 0.4rem;
-}
-.bookingData .bookingRooms .next img {
-  width: 24px;
-}
-.bookingData .bookingRooms .next img:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+  color: black;
+  box-shadow: 2px 2px 2px gray;
 }
 .bookingData .bookingRooms li {
   list-style: none;
@@ -353,7 +306,7 @@ form .containButtons button:hover {
 }
 .bookingData .bookingRooms li img {
   width: 300px;
-  height: 200px;
+  height: 170px;
 }
 .bookingData .bookingRooms li .header {
   display: flex;
@@ -370,15 +323,13 @@ form .containButtons button:hover {
 .bookingData .bookingRooms li .data span {
   margin-top: 1rem;
 }
-.bookingData .bookingRooms li .data .details {
+.bookingData .bookingRooms li .data .details ul {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.7rem;
+  padding-top: 0.5rem;
 }
-.bookingData .bookingRooms li .data li {
-  margin-top: 1rem;
-}
-.bookingData .bookingRooms li .data .total {
+.bookingData .bookingRooms li .data .details ul .total {
   font-weight: bold;
 }
 .bookingData .containTotalBooking {
@@ -387,6 +338,21 @@ form .containButtons button:hover {
   font-weight: bold;
   margin-left: 30rem;
   padding-top: 0.5rem;
+}
+.bookingData .controls {
+  width: 102%;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  background: linear-gradient(#126b91, #0498a0);
+  border-radius: 3px;
+}
+.bookingData .controls img {
+  width: 20px;
+}
+.bookingData .controls img:hover {
+  transform: scale();
 }
 
 #alertClient {
