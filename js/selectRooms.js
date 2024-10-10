@@ -792,7 +792,7 @@ buttonNext.addEventListener("click", function () {
   };
 
   localStorage.setItem("booking", JSON.stringify(booking));
-  location.href = "reserva.php";
+  location.href = "reserva-datosCliente.php";
 });
 
 

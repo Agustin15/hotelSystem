@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/styleReservar.css">
     <script defer src="../js/alertas.js"></script>
-    <script defer src="../js/reserva.js"></script>
+    <script defer type="module" src="../js/scriptsReserva/personalData.js"></script>
 
+  
     <title>Reserva</title>
 </head>
 
@@ -61,9 +62,13 @@
                 </div>
 
             </div>
-
-
         </div>
+
+        <div class="barStageAdvance">
+         
+    
+        </div>
+
 
         <div class="containClientAndBooking">
 
@@ -74,7 +79,7 @@
                     <div class="iconTitle">
                         <img src="../img/formClientBooking.png">
                     </div>
-                    <form onsubmit="clientData(event)">
+                    <form>
                         <h4>Complete sus datos</h4>
                         <div class="nameAndLast">
 
@@ -84,7 +89,7 @@
                                     <label for="name">Nombre</label>
                                 </div>
                                 <div>
-                                    <input onclick="removeInputAlert(event)" type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
+                                    <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
 
                                 </div>
                             </div>
@@ -97,7 +102,7 @@
                                     <label for="lastName">Apellido</label>
                                 </div>
                                 <div>
-                                    <input onclick="removeInputAlert(event)" type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
+                                    <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
 
                                 </div>
                             </div>
@@ -112,7 +117,7 @@
                                 </div>
 
                                 <div>
-                                    <input onclick="removeInputAlert(event)" maxlength="9" type="text"
+                                    <input maxlength="9" type="text"
                                         id="phone" placeholder="Ingrese telefono" onpaste="return false"
                                         oninput="replaceCharacter(event)"
                                         name="phone" autocomplete="off">
@@ -127,19 +132,8 @@
                                     <label for="mail">Correo</label>
                                 </div>
 
-                                <input type="mail" onclick="removeInputAlert(event)" placeholder="Ingrese correo" name="mail" autocomplete="off">
+                                <input type="mail" placeholder="Ingrese correo" name="mail" autocomplete="off">
 
-                            </div>
-                        </div>
-
-
-                        <div class="containButtons">
-
-                            <div>
-                                <button type="reset" onclick="location.href='../views/consultaHabitaciones.php'">Volver</button>
-                            </div>
-                            <div>
-                                <button type="submit">Siguiente</button>
                             </div>
                         </div>
 
@@ -189,6 +183,16 @@
 
             </div>
 
+        </div>
+
+        <div class="containButtons">
+
+            <div>
+                <button onclick="location.href='../views/consultaHabitaciones.php'">Volver</button>
+            </div>
+            <div>
+                <button class="btnNextStage">Siguiente</button>
+            </div>
         </div>
 
         <div class="loading">

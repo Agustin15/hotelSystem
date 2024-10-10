@@ -232,6 +232,30 @@ class cliente
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
+    public function comprobateCorreoEnUso($correo,$nombre,$apellido){
+
+        $consulta=$this->conexion->conectar()->prepare("select * from clientes where correo=? and nombre!=? and 
+        apellido!=?");
+        $consulta->bind_param("sss",$correo,$nombre,$apellido);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+          
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+
+    }
+    
+    public function comprobateTelefonoEnUso($telefono,$nombre,$apellido){
+
+        $consulta=$this->conexion->conectar()->prepare("select * from clientes where telefono=? and nombre!=? and 
+        apellido!=?");
+        $consulta->bind_param("sss",$telefono,$nombre,$apellido);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+          
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+
+    }
+
     
     public function setClienteBd()
     {

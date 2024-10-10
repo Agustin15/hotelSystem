@@ -138,6 +138,51 @@ header li img {
   width: 50px;
 }
 
+.barStageAdvance {
+  display: flex;
+  margin: auto;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+.barStageAdvance .itemStage {
+  padding: 1rem;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cecece;
+}
+.barStageAdvance .itemStage img {
+  width: 35px;
+}
+.barStageAdvance .line {
+  width: 20rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  background-color: #cecece;
+}
+
+.progressStage {
+  width: 0%;
+  height: 100%;
+  background-color: #0ea7af;
+  animation-name: progressStage;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progressStage {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
 .containClientAndBooking {
   display: flex;
   flex-direction: column;
@@ -178,9 +223,10 @@ header li img {
 }
 
 .client {
-  height: 24rem;
+  height: 20rem;
   padding: 1rem;
   color: rgb(0, 0, 0);
+  margin-top: 3rem;
 }
 
 h4 {
@@ -253,10 +299,10 @@ form .phone input {
 }
 form .containButtons {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0rem;
 }
 form .containButtons button {
   width: 200px;
@@ -350,6 +396,7 @@ form .containButtons button:hover {
 }
 .bookingData .controls img {
   width: 20px;
+  visibility: hidden;
 }
 .bookingData .controls img:hover {
   transform: scale();
@@ -487,26 +534,6 @@ form .containButtons button:hover {
 .modalBooking .alertBookingExists .msj {
   padding: 0.4rem;
 }
-.modalBooking .alertBookingExists .containButtons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-.modalBooking .alertBookingExists .containButtons button {
-  width: 100px;
-  height: 30px;
-  background-color: #349db8;
-  color: white;
-  border: none;
-  font-weight: bold;
-  border-radius: 3px;
-  font-size: 15px;
-  box-shadow: 2px 2px 2px gray;
-}
-.modalBooking .alertBookingExists .containButtons button:hover {
-  background-color: #2f8ca3;
-}
 .modalBooking img {
   width: 55px;
 }
@@ -595,6 +622,26 @@ form .containButtons button:hover {
   to {
     width: 60px;
   }
+}
+.containButtons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.containButtons button {
+  width: 200px;
+  height: 34px;
+  background-color: #349db8;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 3px;
+  font-size: 15px;
+  box-shadow: 2px 2px 2px gray;
+}
+.containButtons button:hover {
+  background-color: #2f8ca3;
 }
 
 /*# sourceMappingURL=styleReservar.css.map */

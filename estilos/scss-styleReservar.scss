@@ -26,6 +26,59 @@
   }
 }
 
+.barStageAdvance {
+  display: flex;
+  margin: auto;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+
+  .itemStage {
+    padding: 1rem;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #cecece;
+
+    img {
+      width: 35px;
+    }
+  }
+  .line {
+    width: 20rem;
+    height: 0.6rem;
+    border-radius: 2px;
+    background-color: #cecece;
+
+  }
+}
+
+
+
+
+.progressStage {
+  width: 0%;
+  height: 100%;
+  background-color: #0ea7af;
+  animation-name: progressStage;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progressStage {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
 .containClientAndBooking {
   display: flex;
   flex-direction: column;
@@ -70,9 +123,10 @@
 }
 
 .client {
-  height: 24rem;
+  height: 20rem;
   padding: 1rem;
   color: rgb(0, 0, 0);
+  margin-top: 3rem;
 }
 
 h4 {
@@ -151,10 +205,10 @@ form {
 
   .containButtons {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 0rem;
 
     button {
       width: 200px;
@@ -180,18 +234,16 @@ form {
   flex-direction: column;
   justify-content: center;
 
-.title{
-
-  width:101%;
-  background: linear-gradient(#126b91, #0498a0);
-  color: white;
-  padding: 0.7rem;
-  font-weight: bold;
-  border-radius: 3px;
-}
+  .title {
+    width: 101%;
+    background: linear-gradient(#126b91, #0498a0);
+    color: white;
+    padding: 0.7rem;
+    font-weight: bold;
+    border-radius: 3px;
+  }
 
   .bookingRooms {
- 
     width: 105%;
     height: 210px;
     display: flex;
@@ -201,62 +253,47 @@ form {
     color: black;
     box-shadow: 2px 2px 2px gray;
 
-
-    li{
-
+    li {
       list-style: none;
       display: flex;
-     
 
-      span{
-
+      span {
         font-weight: bold;
       }
 
-     img{
-
-      width: 300px;
-      height: 170px;
-    }
-    
-
-    .header{
-
-      display: flex;
-      justify-content: center;
-      align-items: start;
-      gap: 1rem;
-      font-size: 17px;
-
-    }
-    .data{
-
-      display: flex;
-      flex-direction: column;
-      margin-top: -1rem;
-
-      span{
-
-        margin-top: 1rem;
+      img {
+        width: 300px;
+        height: 170px;
       }
-      .details ul{
 
+      .header {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        gap: 1rem;
+        font-size: 17px;
+      }
+      .data {
         display: flex;
         flex-direction: column;
-        gap: 0.7rem;
-        padding-top: 0.5rem;
-    
-      .total{
+        margin-top: -1rem;
 
-        font-weight: bold;
+        span {
+          margin-top: 1rem;
+        }
+        .details ul {
+          display: flex;
+          flex-direction: column;
+          gap: 0.7rem;
+          padding-top: 0.5rem;
+
+          .total {
+            font-weight: bold;
+          }
+        }
       }
     }
-    }
-
   }
-  }
-
-
 
   .containTotalBooking {
     font-family: Arial, Helvetica, sans-serif;
@@ -266,24 +303,22 @@ form {
     padding-top: 0.5rem;
   }
 
-  .controls{
-
-
-    width:102%;
+  .controls {
+    width: 102%;
     padding: 0.5rem;
-    display:flex;
+    display: flex;
     justify-content: center;
     gap: 1.5rem;
     background: linear-gradient(#126b91, #0498a0);
     border-radius: 3px;
 
-    img{
-
-      width: 20px;  
+    img {
+      width: 20px;
+      visibility: hidden;
     }
-  img:hover{
-    transform: scale();
-  }
+    img:hover {
+      transform: scale();
+    }
   }
 }
 
@@ -296,7 +331,6 @@ form {
   border-radius: 3px;
   margin-top: 0rem;
   margin: auto;
-
 
   .contain {
     display: none;
@@ -428,28 +462,6 @@ form {
     .msj {
       padding: 0.4rem;
     }
-
-    .containButtons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: center;
-
-      button {
-        width: 100px;
-        height: 30px;
-        background-color: #349db8;
-        color: white;
-        border: none;
-        font-weight: bold;
-        border-radius: 3px;
-        font-size: 15px;
-        box-shadow: 2px 2px 2px gray;
-      }
-      button:hover {
-        background-color: #2f8ca3;
-      }
-    }
   }
   img {
     width: 55px;
@@ -551,5 +563,27 @@ form {
 
   to {
     width: 60px;
+  }
+}
+
+.containButtons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 200px;
+    height: 34px;
+    background-color: #349db8;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 15px;
+    box-shadow: 2px 2px 2px gray;
+  }
+  button:hover {
+    background-color: #2f8ca3;
   }
 }

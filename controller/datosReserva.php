@@ -39,7 +39,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $roomsSelectedForClient = getRoomsSelectedForClient($booking, $freeRooms);
 
 
-            if (gettype($roomsSelectedForClient)=="string") {
+            if (gettype($roomsSelectedForClient) == "string") {
                 $respuesta = array("respuesta" => $roomsSelectedForClient);
             } else {
 
@@ -228,62 +228,50 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $dataBooking = json_decode($_GET['dataBooking'], true);
 
-        $dataClientMail = $cliente->getClienteCorreo($dataBooking['client']['mail'])->fetch_array(MYSQLI_ASSOC);
-        $dataClientPhone = $cliente->getClienteTelefono($dataBooking['client']['phone'])->fetch_array(MYSQLI_ASSOC);
 
-        if ($dataClientMail) {
-
-
-            $respuesta = validateUserIncome($dataClientMail, $dataBooking, "Este correo ya esta en uso");
-
-            if ($respuesta) {
-
-                echo json_encode($respuesta);
-                break;
-            } else {
-
-                updateAtributePhoneClient($dataBooking, $dataClientMail, $cliente);
-            }
-        }
-        if ($dataClientPhone) {
-
-            $respuesta = validateUserIncome($dataClientPhone, $dataBooking, "Este telefono ya esta en uso");
-
-            if ($respuesta) {
-
-                echo json_encode($respuesta);
-                break;
-            } else {
-
-
-                updateAtributeMailClient($dataBooking, $dataClientPhone, $cliente);
-            }
-        }
-
-
-        $dataClient = $cliente->getClienteExistente(
+        $mailInUse = $cliente->comprobateCorreoEnUso(
+            $dataBooking['client']['mail'],
             $dataBooking['client']['name'],
-            $dataBooking['client']['lastName'],
-            $dataBooking['client']['mail']
+            $dataBooking['client']['lastName']
+        );
+        $phoneInUse = $cliente->comprobateTelefonoEnUso(
+            $dataBooking['client']['phone'],
+            $dataBooking['client']['name'],
+            $dataBooking['client']['lastName']
         );
 
+        if ($mailInUse) {
 
-        if ($dataClient) {
-            $llegada = new DateTime($dataBooking['date']['start']);
-            $salida = new DateTime($dataBooking['date']['end']);
 
-            $bookingExisting = $reserva->getReservaPorIdClienteAndFecha(
-                $dataClient['idCliente'],
-                $llegada->format("Y-m-d"),
-                $salida->format("Y-m-d")
-            );
-            $respuesta = array("respuesta" => $bookingExisting);
+            $respuesta = array("advertencia" => "Correo ingresado ya en uso");
+        } else if ($phoneInUse) {
+
+            $respuesta = array("advertencia" => "Telefono ingresado ya en uso");
         } else {
 
-            $respuesta = array("respuesta" => $dataClient);
+
+            $dataClientExist = $cliente->getClienteExistente(
+                $dataBooking['client']['name'],
+                $dataBooking['client']['lastName'],
+                $dataBooking['client']['mail']
+            );
+
+
+            if ($dataClientExist) {
+                $llegada = new DateTime($dataBooking['date']['start']);
+                $salida = new DateTime($dataBooking['date']['end']);
+
+                $bookingExisting = $reserva->getReservaPorIdClienteAndFecha(
+                    $dataClientExist['idCliente'],
+                    $llegada->format("Y-m-d"),
+                    $salida->format("Y-m-d")
+                );
+                $respuesta = array("respuesta" => $bookingExisting);
+            } else {
+
+                $respuesta = array("respuesta" => $dataClient);
+            }
         }
-
-
         echo json_encode($respuesta);
 
         break;
