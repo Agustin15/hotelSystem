@@ -8,7 +8,6 @@ let indexRoom = 0;
 let btnNext = document.querySelector(".btnNext");
 let btnPrev = document.querySelector(".btnPrev");
 let roomsBooking = document.querySelector(".bookingRooms");
-let confirmationMsj = document.getElementById("confirmationBooking");
 let containClientAndBooking = document.querySelector(
   ".containClientAndBooking"
 );
@@ -25,42 +24,42 @@ document.addEventListener("DOMContentLoaded", function () {
       displayBarStagesAdvance("#lineRoomsSelected");
       printBooking();
       displayIndexRoom();
-}
+    }
 
-      btnNext.addEventListener("click", function () {
-        if (indexRoom < rooms.length - 1) {
-          indexRoom++;
-          printBooking();
-          displayIndexRoom();
-        }
-      });
+    btnNext.addEventListener("click", function () {
+      if (indexRoom < rooms.length - 1) {
+        indexRoom++;
+        printBooking();
+        displayIndexRoom();
+      }
+    });
 
-      btnPrev.addEventListener("click", function () {
-        if (indexRoom > 0) {
-          indexRoom--;
-          printBooking();
-          displayIndexRoom();
-        }
+    btnPrev.addEventListener("click", function () {
+      if (indexRoom > 0) {
+        indexRoom--;
+        printBooking();
+        displayIndexRoom();
+      }
+    });
+
+    if (btnNextStage) {
+      btnNextStage.addEventListener("click", function () {
+        clientData();
+        clickRemoveAlertInputs();
       });
-      
-      if (btnNextStage) {
-        btnNextStage.addEventListener("click", function () {
-          clientData();
-          clickRemoveAlertInputs();
-        });
-      
+    }
+
+    if (document.querySelector("form")) {
+      eventOnInputPhone();
     }
   }
 });
-
 
 function displayIndexRoom() {
   let indexSpan = document.querySelector(".indexRoom");
 
   indexSpan.textContent = `${indexRoom + 1} / ${rooms.length}`;
 }
-
-
 
 function quantityGuestRoom(roomGuest, typeGuest) {
   let span = "";
@@ -153,8 +152,6 @@ function printBooking() {
   }
 }
 
-
-
 function inputAlert(key) {
   let input = [...document.getElementsByName(key)];
 
@@ -197,8 +194,6 @@ function clientData() {
   }
 }
 
-
-
 function createBooking(client) {
   const clientBooking = {
     client: client,
@@ -239,13 +234,13 @@ async function getIfExistingBooking(clientBooking) {
       if (confirm) {
         document.querySelector(".modalBooking").style.display = "none";
 
-        updateBookingExists(clientBooking, result.respuesta);
+        nextStage(clientBooking, "PUT");
       } else {
         document.querySelector(".modalBooking").style.display = "none";
         return;
       }
     } else {
-      alert("Good");
+      nextStage(clientBooking, "POST");
     }
   } catch (error) {
     alertClientFormBooking(error);
@@ -254,19 +249,25 @@ async function getIfExistingBooking(clientBooking) {
   }
 }
 
-
 function loading(loadingState) {
   if (loadingState) {
     loadingSpinner.style.display = "block";
+    loadingSpinner.querySelector("span").classList.add("loadingSpanActive");
   } else {
     loadingSpinner.style.display = "none";
+    loadingSpinner.querySelector("span").classList.remove("loadingSpanActive");
   }
 }
 
-function replaceCharacter(event) {
-  let valid = /\d/;
+function eventOnInputPhone() {
+  document.querySelector("#phone").addEventListener("input", (input) => {
+      
+    replaceCharacter(input.target);
+  });
+}
 
-  let input = event.target;
+function replaceCharacter(input) {
+  let valid = /\d/;
 
   let ultimateCharacter = input.value
     .trim()
@@ -288,4 +289,12 @@ function clickRemoveAlertInputs() {
       });
     });
 }
+
+const nextStage = (clientBooking, method) => {
+  clientBooking.option = method;
+  localStorage.setItem("bookingStagePerson",JSON.stringify(clientBooking));
+     
+ console.log(JSON.parse(localStorage.getItem("bookingStagePerson")));
+
+};
 

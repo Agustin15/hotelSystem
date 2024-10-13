@@ -117,7 +117,7 @@ header li img {
 
 #contain {
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
   gap: 1rem;
   width: 80rem;
   height: 400px;
@@ -131,13 +131,30 @@ header li img {
   align-items: center;
 }
 #contain .loading {
-  margin-top: -5rem;
+  margin-top: -4rem;
   display: none;
 }
-#contain .loading img {
-  width: 50px;
+#contain .loading .gif {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#contain .loading .gif img {
+  width: 40px;
 }
 
+.loadingSpanActive {
+  animation: loadingSpanIntermitent 1s infinite;
+}
+
+@keyframes loadingSpanIntermitent {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 50%;
+  }
+}
 .barStageAdvance {
   display: flex;
   margin: auto;
@@ -160,7 +177,7 @@ header li img {
   width: 35px;
 }
 .barStageAdvance .line {
-  width: 20rem;
+  width: 30rem;
   height: 0.6rem;
   border-radius: 2px;
   background-color: #cecece;
@@ -228,22 +245,19 @@ header li img {
   color: rgb(0, 0, 0);
   margin-top: 3rem;
 }
-
-h4 {
+.client h4 {
   font-size: 20px;
 }
-
-.iconTitle img {
+.client .iconTitle img {
   width: 40px;
 }
-
-form {
+.client form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding-top: 0.4rem;
 }
-form input {
+.client form input {
   width: 230px;
   height: 43px;
   border: 1px solid rgb(23, 161, 150);
@@ -253,58 +267,58 @@ form input {
   outline: none;
   font-size: 18px;
 }
-form input::placeholder {
+.client form input::placeholder {
   font-size: 15px;
 }
-form input:hover {
+.client form input:hover {
   border: 2px solid rgb(4, 128, 117);
   box-shadow: 1px 1px 1px rgb(182, 182, 182);
 }
-form .nameAndLast,
-form .phoneAndMail {
+.client form .nameAndLast,
+.client form .phoneAndMail {
   display: flex;
   gap: 2rem;
 }
-form .name,
-form .lastName,
-form .mail,
-form .phone {
+.client form .name,
+.client form .lastName,
+.client form .mail,
+.client form .phone {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   justify-content: start;
   align-items: start;
 }
-form .name input,
-form .lastName input,
-form .mail input,
-form .phone input {
+.client form .name input,
+.client form .lastName input,
+.client form .mail input,
+.client form .phone input {
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: left center;
   background-position-x: 0.6rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-form .name input {
+.client form .name input {
   background-image: url("../img/usuario.png");
 }
-form .lastName input {
+.client form .lastName input {
   background-image: url("../img/lastNameForm.png");
 }
-form .mail input {
+.client form .mail input {
   background-image: url("../img/mailForm.png");
 }
-form .phone input {
+.client form .phone input {
   background-image: url("../img/phoneForm.png");
 }
-form .containButtons {
+.client form .containButtons {
   display: flex;
   gap: 2rem;
   justify-content: center;
   align-items: center;
   margin-top: 0rem;
 }
-form .containButtons button {
+.client form .containButtons button {
   width: 200px;
   height: 34px;
   border-radius: 3px;
@@ -313,7 +327,7 @@ form .containButtons button {
   color: white;
   font-weight: bold;
 }
-form .containButtons button:hover {
+.client form .containButtons button:hover {
   background: linear-gradient(#0f3a4d, #0f848a);
 }
 
@@ -538,91 +552,6 @@ form .containButtons button:hover {
   width: 55px;
 }
 
-#confirmationBooking {
-  margin: auto;
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: stretch;
-  width: 450px;
-  height: 250px;
-  padding-top: 1rem;
-  background: linear-gradient(#0f3a4d, #0498a0);
-  border-radius: 3px;
-  color: white;
-  text-align: center;
-}
-#confirmationBooking .title {
-  font-weight: bold;
-  padding-top: 1rem;
-  font-size: 19px;
-}
-#confirmationBooking .icon {
-  margin-top: 4rem;
-}
-#confirmationBooking .icon .gif {
-  width: 95px;
-}
-#confirmationBooking .msj {
-  padding: 1rem;
-  margin-top: 0.5rem;
-  font-size: 18px;
-}
-#confirmationBooking button {
-  width: 130px;
-  height: 30px;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 3px;
-  border: none;
-  color: white;
-  margin-top: 1rem;
-  background-color: rgba(16, 77, 117, 0.5);
-}
-#confirmationBooking button:hover {
-  background-color: rgba(16, 57, 85, 0.5);
-}
-#confirmationBooking .body {
-  display: none;
-}
-#confirmationBooking a {
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-#confirmationBooking a:hover {
-  text-decoration: underline;
-}
-
-.iconMotion {
-  animation-name: motionIcon;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
-
-.gifWidth {
-  animation-name: gifWidth;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes motionIcon {
-  from {
-    margin-top: 4rem;
-  }
-  to {
-    margin-top: 0.1rem;
-  }
-}
-@keyframes gifWidth {
-  from {
-    width: 95px;
-  }
-  to {
-    width: 60px;
-  }
-}
 .containButtons {
   display: flex;
   gap: 2rem;
@@ -642,6 +571,87 @@ form .containButtons button:hover {
 }
 .containButtons button:hover {
   background-color: #2f8ca3;
+}
+
+.payForm {
+  margin: auto;
+  margin-top: 4rem;
+}
+.payForm form {
+  width: 440px;
+  height: auto;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 2px 2px rgb(224, 224, 224);
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 3px;
+}
+.payForm form h3 {
+  color: rgb(88, 88, 88);
+}
+.payForm form label {
+  color: rgb(88, 88, 88);
+}
+.payForm form input {
+  border-radius: 3px;
+  border: 1px solid rgb(212, 212, 212);
+  outline: none;
+  font-size: 18px;
+  padding-left: 1rem;
+  opacity: 70%;
+}
+.payForm form input:hover {
+  border: 1px solid rgb(0, 181, 194);
+}
+.payForm form input::placeholder {
+  font-size: 18px;
+  color: rgb(138, 138, 138);
+}
+.payForm form .containTitular,
+.payForm form .containNumCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.payForm form .containTitular input,
+.payForm form .containNumCard input {
+  width: 350px;
+  height: 2.3rem;
+}
+.payForm form .maturityAndCVV {
+  display: flex;
+  gap: 2rem;
+}
+.payForm form .maturityAndCVV .maturity,
+.payForm form .maturityAndCVV .CVV {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.payForm form .maturityAndCVV .maturity input,
+.payForm form .maturityAndCVV .CVV input {
+  width: 150px;
+  height: 2rem;
+}
+.payForm form .maturityAndCVV .maturity input[type=date],
+.payForm form .maturityAndCVV .CVV input[type=date] {
+  font-size: 16px;
+}
+.payForm form button {
+  margin-top: 1rem;
+  width: 20rem;
+  height: 2.2rem;
+  padding: 0.2rem;
+  background: linear-gradient(#317592, #0498a0);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
 }
 
 /*# sourceMappingURL=styleReservar.css.map */

@@ -199,10 +199,10 @@ const printHotelRooms = (rooms) => {
 
               <img class="prev"  onclick="controlsSlider(event,'prev','${
                 room.category
-              }')" src="../img/prevRoom.png">
+              }')" src="../../img/prevRoom.png">
                   <img onclick="controlsSlider(event,'next','${
                     room.category
-                  }')" class="next" src="../img/nextRoom.png">
+                  }')" class="next" src="../../img/nextRoom.png">
             </div>
 
             <div class="indexImagesRoom">
@@ -220,7 +220,7 @@ const printHotelRooms = (rooms) => {
   
                 <div class="icon">
   
-                    <img src="../img/room.png">
+                    <img src="../../img/room.png">
                 </div>
             </div>
             <div class="containAvailableRooms">
@@ -235,7 +235,7 @@ const printHotelRooms = (rooms) => {
   
                 <div class="title">
                     <div>
-                        <img src="../img/audience.png">
+                        <img src="../../img/audience.png">
                     </div>
                     <div>
                         <h6>Capacidad</h6>
@@ -252,7 +252,7 @@ const printHotelRooms = (rooms) => {
   
                 <div class="title">
                     <div>
-                        <img src="../img/night.png">
+                        <img src="../../img/night.png">
                     </div>
   
                     <div>
@@ -271,7 +271,7 @@ const printHotelRooms = (rooms) => {
                 <div class="title">
   
                     <div>
-                        <img src="../img/bed.png">
+                        <img src="../../img/bed.png">
                     </div>
   
                     <div>
@@ -289,7 +289,7 @@ const printHotelRooms = (rooms) => {
             <li class="price">
                 <div class="title">
                     <div>
-                        <img src="../img/coin.png">
+                        <img src="../../img/coin.png">
                     </div>
                     <div>
                         <h6>Precio</h6>
@@ -564,7 +564,7 @@ const printRoomsCart = () => {
 
 <div class="header">
 <span class="category">Habitacion ${room.category}</span>
-<img data-id=${room.id} class="buttonDelete" src="../img/borrar.png">
+<img data-id=${room.id} class="buttonDelete" src="../../img/borrar.png">
 </div>
 
 <div class="guests">
@@ -575,11 +575,11 @@ const printRoomsCart = () => {
 <div class="changeQuantity">
 <img class="buttonSubtract" data-room='${JSON.stringify(
       room
-    )}' src="../img/substract.png">
+    )}' src="../../img/substract.png">
 <span>${room.quantity}</span>
 <img class="buttonPlus" data-room='${JSON.stringify(
       room
-    )}' src="../img/plus.png">
+    )}' src="../../img/plus.png">
 </div>
 
 <span class="total">Precio:$${room.total}</span>
@@ -792,7 +792,7 @@ buttonNext.addEventListener("click", function () {
   };
 
   localStorage.setItem("booking", JSON.stringify(booking));
-  location.href = "reserva-datosCliente.php";
+  location.href = "datosCliente.php";
 });
 
 

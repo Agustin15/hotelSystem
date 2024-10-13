@@ -227,7 +227,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
         $dataBooking = json_decode($_GET['dataBooking'], true);
-
+    
 
         $mailInUse = $cliente->comprobateCorreoEnUso(
             $dataBooking['client']['mail'],
@@ -269,7 +269,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $respuesta = array("respuesta" => $bookingExisting);
             } else {
 
-                $respuesta = array("respuesta" => $dataClient);
+                $respuesta = array("respuesta" => $dataClientExist);
             }
         }
         echo json_encode($respuesta);

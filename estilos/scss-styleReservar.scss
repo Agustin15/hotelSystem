@@ -4,7 +4,7 @@
 
 #contain {
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
   gap: 1rem;
   width: 80rem;
   height: 400px;
@@ -18,11 +18,31 @@
   align-items: center;
 
   .loading {
-    margin-top: -5rem;
+    margin-top: -4rem;
     display: none;
   }
-  .loading img {
-    width: 50px;
+  .loading .gif {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      width: 40px;
+    }
+  }
+}
+
+.loadingSpanActive {
+  animation: loadingSpanIntermitent 1s infinite;
+}
+
+@keyframes loadingSpanIntermitent {
+  from {
+    opacity: 100%;
+  }
+
+  to {
+    opacity: 50%;
   }
 }
 
@@ -49,16 +69,12 @@
     }
   }
   .line {
-    width: 20rem;
+    width: 30rem;
     height: 0.6rem;
     border-radius: 2px;
     background-color: #cecece;
-
   }
 }
-
-
-
 
 .progressStage {
   width: 0%;
@@ -127,105 +143,104 @@
   padding: 1rem;
   color: rgb(0, 0, 0);
   margin-top: 3rem;
-}
 
-h4 {
-  font-size: 20px;
-}
-
-.iconTitle img {
-  width: 40px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-top: 0.4rem;
-
-  input {
-    width: 230px;
-    height: 43px;
-    border: 1px solid rgb(23, 161, 150);
-    box-shadow: 2px 2px 2px rgb(0, 141, 129);
-    border-radius: 3px;
-    padding-left: 2.6rem;
-    outline: none;
-    font-size: 18px;
+  h4 {
+    font-size: 20px;
   }
 
-  input::placeholder {
-    font-size: 15px;
+  .iconTitle img {
+    width: 40px;
   }
 
-  input:hover {
-    border: 2px solid rgb(4, 128, 117);
-    box-shadow: 1px 1px 1px rgb(182, 182, 182);
-  }
-
-  .nameAndLast,
-  .phoneAndMail {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .name,
-  .lastName,
-  .mail,
-  .phone {
+  form {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    justify-content: start;
-    align-items: start;
-  }
+    gap: 1.5rem;
+    padding-top: 0.4rem;
 
-  .name input,
-  .lastName input,
-  .mail input,
-  .phone input {
-    @include backgroundsInputs;
-  }
-
-  .name input {
-    @include backgroundsInputsImage("../img/usuario.png");
-  }
-
-  .lastName input {
-    @include backgroundsInputsImage("../img/lastNameForm.png");
-  }
-
-  .mail input {
-    @include backgroundsInputsImage("../img/mailForm.png");
-  }
-
-  .phone input {
-    @include backgroundsInputsImage("../img/phoneForm.png");
-  }
-
-  .containButtons {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0rem;
-
-    button {
-      width: 200px;
-      height: 34px;
+    input {
+      width: 230px;
+      height: 43px;
+      border: 1px solid rgb(23, 161, 150);
+      box-shadow: 2px 2px 2px rgb(0, 141, 129);
       border-radius: 3px;
-      border: none;
-      background: linear-gradient(#215c75, #0498a0);
-      color: white;
-      font-weight: bold;
+      padding-left: 2.6rem;
+      outline: none;
+      font-size: 18px;
     }
 
-    button:hover {
-      background: linear-gradient(#0f3a4d, #0f848a);
+    input::placeholder {
+      font-size: 15px;
+    }
+
+    input:hover {
+      border: 2px solid rgb(4, 128, 117);
+      box-shadow: 1px 1px 1px rgb(182, 182, 182);
+    }
+
+    .nameAndLast,
+    .phoneAndMail {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .name,
+    .lastName,
+    .mail,
+    .phone {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      justify-content: start;
+      align-items: start;
+    }
+
+    .name input,
+    .lastName input,
+    .mail input,
+    .phone input {
+      @include backgroundsInputs;
+    }
+
+    .name input {
+      @include backgroundsInputsImage("../img/usuario.png");
+    }
+
+    .lastName input {
+      @include backgroundsInputsImage("../img/lastNameForm.png");
+    }
+
+    .mail input {
+      @include backgroundsInputsImage("../img/mailForm.png");
+    }
+
+    .phone input {
+      @include backgroundsInputsImage("../img/phoneForm.png");
+    }
+
+    .containButtons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0rem;
+
+      button {
+        width: 200px;
+        height: 34px;
+        border-radius: 3px;
+        border: none;
+        background: linear-gradient(#215c75, #0498a0);
+        color: white;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background: linear-gradient(#0f3a4d, #0f848a);
+      }
     }
   }
 }
-
 .bookingData {
   color: white;
   padding: 1rem;
@@ -468,104 +483,6 @@ form {
   }
 }
 
-#confirmationBooking {
-  margin: auto;
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: stretch;
-  width: 450px;
-  height: 250px;
-  padding-top: 1rem;
-  background: linear-gradient(#0f3a4d, #0498a0);
-  border-radius: 3px;
-  color: white;
-  text-align: center;
-
-  .title {
-    font-weight: bold;
-    padding-top: 1rem;
-    font-size: 19px;
-  }
-
-  .icon {
-    margin-top: 4rem;
-
-    .gif {
-      width: 95px;
-    }
-  }
-
-  .msj {
-    padding: 1rem;
-    margin-top: 0.5rem;
-    font-size: 18px;
-  }
-
-  button {
-    width: 130px;
-    height: 30px;
-    font-weight: bold;
-    font-size: 15px;
-    border-radius: 3px;
-    border: none;
-    color: white;
-    margin-top: 1rem;
-    background-color: rgba(16, 77, 117, 0.5);
-  }
-
-  button:hover {
-    background-color: rgba(16, 57, 85, 0.5);
-  }
-
-  .body {
-    display: none;
-  }
-
-  a {
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-}
-
-.iconMotion {
-  animation-name: motionIcon;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
-
-.gifWidth {
-  animation-name: gifWidth;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes motionIcon {
-  from {
-    margin-top: 4rem;
-  }
-
-  to {
-    margin-top: 0.1rem;
-  }
-}
-
-@keyframes gifWidth {
-  from {
-    width: 95px;
-  }
-
-  to {
-    width: 60px;
-  }
-}
-
 .containButtons {
   display: flex;
   gap: 2rem;
@@ -585,5 +502,97 @@ form {
   }
   button:hover {
     background-color: #2f8ca3;
+  }
+}
+
+.payForm {
+  margin: auto;
+  margin-top: 4rem;
+
+  form {
+    width: 440px;
+    height: auto;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgb(224, 224, 224);
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 3px;
+
+    h3{
+      color: rgb(88, 88, 88);
+    }
+
+    label{
+
+      color: rgb(88, 88, 88);
+    }
+
+    input {
+      border-radius: 3px;
+      border: 1px solid rgb(212, 212, 212);
+      outline: none;
+      font-size: 18px;
+      padding-left: 1rem;
+      opacity: 70%;
+    }
+
+    input:hover{
+      border: 1px solid rgb(0, 181, 194);
+    }
+
+    input::placeholder{
+      font-size: 18px;
+      color: rgb(138, 138, 138);
+    }
+    .containTitular,
+    .containNumCard {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      input {
+        width: 350px;
+        height: 2.3rem;
+      }
+    }
+    .maturityAndCVV {
+      display: flex;
+      gap: 2rem;
+
+      .maturity,
+      .CVV {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input {
+          width: 150px;
+          height: 2rem;
+        }
+
+        input[type=date]{
+          
+          font-size: 16px;
+
+        }
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+      width: 20rem;
+      height: 2.2rem;
+      padding: 0.2rem;
+      background: linear-gradient(#317592, #0498a0);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+    }
   }
 }
