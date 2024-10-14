@@ -64,11 +64,29 @@
             </div>
         </div>
 
-        <div class="barStageAdvance">
+        <div class="barStageAdvance"></div>
 
 
+        <div class="dateBooking">
+
+            <div class="start">
+                <h4>Fecha de llegada:</h4>
+                <span class="startBooking"></span>
+
+            </div>
+
+            <div class="containNights">
+                <img src="../../img/moonBooking.png">
+                <span class="nights"></span>
+
+            </div>
+
+            <div class="end">
+                <h4>Fecha de salida:</h4> 
+                <span class="endBooking"></span>
+
+            </div>
         </div>
-
 
         <div class="containClientAndBooking">
 
@@ -188,7 +206,7 @@
         <div class="loading">
 
             <div class="gif">
-                <span class="loadingSpan">Cargando</span>
+                <span class="loadingSpan">Buscando habitaciones</span>
                 <img src="../../img/spinnerBooking.gif">
 
             </div>
@@ -196,11 +214,11 @@
         <div class="containButtons">
 
             <div>
-            
+
                 <button onclick="location.href='../reserva/consultaHabitaciones.php'">Volver</button>
             </div>
             <div>
-                <button class="btnNextStage">Siguiente</button>
+                <button class="btnNextStage">Realizar reserva</button>
             </div>
         </div>
 

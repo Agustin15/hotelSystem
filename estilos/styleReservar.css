@@ -117,14 +117,14 @@ header li img {
 
 #contain {
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 1rem;
   gap: 1rem;
   width: 80rem;
-  height: 400px;
+  height: 100%;
   background-color: white;
   border-radius: 2px;
   text-align: center;
-  padding-top: 0.5rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,7 +158,7 @@ header li img {
 .barStageAdvance {
   display: flex;
   margin: auto;
-  margin-top: 3rem;
+  margin-top: 0rem;
   justify-content: center;
   align-items: center;
 }
@@ -186,7 +186,7 @@ header li img {
 .progressStage {
   width: 0%;
   height: 100%;
-  background-color: #0ea7af;
+  background: linear-gradient(#126b91, #0498a0);
   animation-name: progressStage;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -200,12 +200,38 @@ header li img {
     width: 100%;
   }
 }
+.dateBooking {
+  width: 104%;
+  color: white;
+  padding: 0.5rem;
+  background: linear-gradient(#126b91, #0498a0);
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.dateBooking .star, .dateBooking .end {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dateBooking .containNights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.dateBooking .containNights img {
+  width: 25px;
+}
+
 .containClientAndBooking {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: -0.9rem;
+  margin-top: -2rem;
   border-radius: 3px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -237,6 +263,7 @@ header li img {
   align-items: start;
   justify-content: center;
   gap: 2em;
+  padding-bottom: 2rem;
 }
 
 .client {
@@ -316,7 +343,6 @@ header li img {
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  margin-top: 0rem;
 }
 .client form .containButtons button {
   width: 200px;
@@ -414,6 +440,7 @@ header li img {
 }
 .bookingData .controls img:hover {
   transform: scale();
+  cursor: pointer;
 }
 
 #alertClient {
@@ -555,6 +582,7 @@ header li img {
 .containButtons {
   display: flex;
   gap: 2rem;
+  margin-top: -3rem;
   justify-content: center;
   align-items: center;
 }
@@ -571,87 +599,7 @@ header li img {
 }
 .containButtons button:hover {
   background-color: #2f8ca3;
-}
-
-.payForm {
-  margin: auto;
-  margin-top: 4rem;
-}
-.payForm form {
-  width: 440px;
-  height: auto;
-  padding-bottom: 2rem;
-  padding-top: 1rem;
-  display: flex;
-  gap: 1.5rem;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 2px 2px 2px rgb(224, 224, 224);
-  background-color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 3px;
-}
-.payForm form h3 {
-  color: rgb(88, 88, 88);
-}
-.payForm form label {
-  color: rgb(88, 88, 88);
-}
-.payForm form input {
-  border-radius: 3px;
-  border: 1px solid rgb(212, 212, 212);
-  outline: none;
-  font-size: 18px;
-  padding-left: 1rem;
-  opacity: 70%;
-}
-.payForm form input:hover {
-  border: 1px solid rgb(0, 181, 194);
-}
-.payForm form input::placeholder {
-  font-size: 18px;
-  color: rgb(138, 138, 138);
-}
-.payForm form .containTitular,
-.payForm form .containNumCard {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.payForm form .containTitular input,
-.payForm form .containNumCard input {
-  width: 350px;
-  height: 2.3rem;
-}
-.payForm form .maturityAndCVV {
-  display: flex;
-  gap: 2rem;
-}
-.payForm form .maturityAndCVV .maturity,
-.payForm form .maturityAndCVV .CVV {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.payForm form .maturityAndCVV .maturity input,
-.payForm form .maturityAndCVV .CVV input {
-  width: 150px;
-  height: 2rem;
-}
-.payForm form .maturityAndCVV .maturity input[type=date],
-.payForm form .maturityAndCVV .CVV input[type=date] {
-  font-size: 16px;
-}
-.payForm form button {
-  margin-top: 1rem;
-  width: 20rem;
-  height: 2.2rem;
-  padding: 0.2rem;
-  background: linear-gradient(#317592, #0498a0);
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  border: none;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styleReservar.css.map */

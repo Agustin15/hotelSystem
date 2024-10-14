@@ -65,7 +65,7 @@ function definedCompleteBars() {
 
 function completeStages(stagesToComplete) {
   stagesToComplete.forEach((element) => {
-    document.querySelector(element).style.background = "#0498a0";
+    document.querySelector(element).style.background = "linear-gradient(#126b91, #0498a0)";
   });
 }
 

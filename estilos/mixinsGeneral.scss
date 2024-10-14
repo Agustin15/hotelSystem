@@ -57,10 +57,12 @@
 
   #navAdmin li:hover {
     background-color: rgb(25, 135, 143);
+    cursor: pointer;
   }
 
   #navAdmin li .subMenu li:hover {
     background-color: rgb(65, 65, 65);
+    cursor: pointer;
   }
 
   #navAdmin ul img {

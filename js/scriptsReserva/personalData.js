@@ -121,31 +121,29 @@ function printBookingRooms() {
 }
 
 function printBooking() {
-  // var optionsFormat = {
-  //   weekday: "long",
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  // };
-  // let startBooking = new Date(booking.date.start);
-  // let endBooking = new Date(booking.date.end);
+  var optionsFormat = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let startBooking = new Date(booking.date.start);
+  let endBooking = new Date(booking.date.end);
 
-  // document.querySelector(
-  //   ".startBooking"
-  // ).textContent = `${startBooking.toLocaleDateString("es-ar", optionsFormat)}`;
-  // document.querySelector(
-  //   ".endBooking"
-  // ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  document.querySelector(
+    ".startBooking"
+  ).textContent = `${startBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  document.querySelector(
+    ".endBooking"
+  ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
 
-  // if (booking.nights > 1) {
-  //   document
-  //     .querySelector(".nights")
-  //     .querySelector("span").textContent = `${booking.nights} Noches`;
-  // } else {
-  //   document
-  //     .querySelector(".nights")
-  //     .querySelector("span").textContent = `${booking.nights} Noche`;
-  // }
+  if (booking.nights > 1) {
+    document
+      .querySelector(".nights").textContent = `${booking.nights} Noches`;
+  } else {
+    document
+      .querySelector(".nights").textContent = `${booking.nights} Noche`;
+  }
 
   if (roomsBooking) {
     printBookingRooms();
@@ -234,13 +232,13 @@ async function getIfExistingBooking(clientBooking) {
       if (confirm) {
         document.querySelector(".modalBooking").style.display = "none";
 
-        nextStage(clientBooking, "PUT");
+        updateBooking(clientBooking);
       } else {
         document.querySelector(".modalBooking").style.display = "none";
         return;
       }
     } else {
-      nextStage(clientBooking, "POST");
+      realizeBooking(clientBooking);
     }
   } catch (error) {
     alertClientFormBooking(error);
@@ -261,7 +259,6 @@ function loading(loadingState) {
 
 function eventOnInputPhone() {
   document.querySelector("#phone").addEventListener("input", (input) => {
-      
     replaceCharacter(input.target);
   });
 }
@@ -290,11 +287,64 @@ function clickRemoveAlertInputs() {
     });
 }
 
-const nextStage = (clientBooking, method) => {
-  clientBooking.option = method;
-  localStorage.setItem("bookingStagePerson",JSON.stringify(clientBooking));
-     
- console.log(JSON.parse(localStorage.getItem("bookingStagePerson")));
+async function updateBooking(clientBooking) {
+  loading(true);
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+      {
+        method: "PUT",
+        body: JSON.stringify(clientBooking),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const result = await response.json();
 
-};
+    if (typeof result == "string") {
+      throw result;
+    } else {
+      location.href = "pay/public/checkout.html";
+    }
+  } catch (error) {
+    alertErrorBooking(error);
+  }finally{
 
+    loading(false);
+  }
+}
+
+async function realizeBooking(clientBooking) {
+  loading(true);
+
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+      {
+        method: "POST",
+        body: JSON.stringify(clientBooking),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const result = await response.json();
+
+    if (typeof result == "string") {
+      throw result;
+    } else if(result==false){
+      throw "¡Ups!,hubo un error,vuelve a intentarlo"
+    }else{
+      createStorageRooms(clientBooking.booking.rooms);
+    }
+  } catch (error) {
+    alertErrorBooking(error);
+  }finally{
+    loading(false);
+  }
+}
+
+const createStorageRooms=(rooms)=>{
+
+  localStorage.setItem("rooms",rooms);
+  console.log(rooms);
+  location.href="pay/public/checkout.html"
+  
+}

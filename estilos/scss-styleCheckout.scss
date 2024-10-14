@@ -308,7 +308,7 @@ td {
 .progressStage {
   width: 0%;
   height: 100%;
-  background-color: #0ea7af;
+  background: linear-gradient(#126b91, #0498a0);
   animation-name: progressStage;
   animation-duration: 1s;
   animation-fill-mode: forwards;
