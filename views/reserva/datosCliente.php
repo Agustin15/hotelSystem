@@ -69,7 +69,7 @@
 
         <div class="dateBooking">
 
-            <div class="start">
+            <div class="arrival">
                 <h4>Fecha de llegada:</h4>
                 <span class="startBooking"></span>
 
@@ -81,7 +81,7 @@
 
             </div>
 
-            <div class="end">
+            <div class="exit">
                 <h4>Fecha de salida:</h4> 
                 <span class="endBooking"></span>
 

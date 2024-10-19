@@ -82,6 +82,10 @@ function printBookingRooms() {
   let roomsToPrint = rooms.map((room) => {
     let liAdult = quantityGuestRoom(room.guests.adult, "Adultos");
     let liChildren = quantityGuestRoom(room.guests.children, "Niños");
+    let quantityRoomsType = 1 + " Habitacion";
+    if (room.quantity > 1) {
+      quantityRoomsType = room.quantity + " Habitaciones";
+    }
 
     return `
     
@@ -96,9 +100,9 @@ function printBookingRooms() {
                                 <ul>
                                     ${liAdult}
                                     ${liChildren}
-                                    <li>Precio:$${room.price}</li>
-                                    <li>Cantidad:${room.quantity}</li>
-                                    <li class="total">Total:$${room.total}</li>
+                                    <li>$USD ${room.price}</li>
+                                    <li>${quantityRoomsType}</li>
+                                    <li class="total">U$S ${room.total}</li>
                          
                                 </div>
                             
@@ -138,11 +142,9 @@ function printBooking() {
   ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
 
   if (booking.nights > 1) {
-    document
-      .querySelector(".nights").textContent = `${booking.nights} Noches`;
+    document.querySelector(".nights").textContent = `${booking.nights} Noches`;
   } else {
-    document
-      .querySelector(".nights").textContent = `${booking.nights} Noche`;
+    document.querySelector(".nights").textContent = `${booking.nights} Noche`;
   }
 
   if (roomsBooking) {
@@ -307,8 +309,7 @@ async function updateBooking(clientBooking) {
     }
   } catch (error) {
     alertErrorBooking(error);
-  }finally{
-
+  } finally {
     loading(false);
   }
 }
@@ -329,22 +330,14 @@ async function realizeBooking(clientBooking) {
 
     if (typeof result == "string") {
       throw result;
-    } else if(result==false){
-      throw "¡Ups!,hubo un error,vuelve a intentarlo"
-    }else{
-      createStorageRooms(clientBooking.booking.rooms);
+    } else if (result == false) {
+      throw "¡Ups!,hubo un error,vuelve a intentarlo";
+    } else {
+      location.href = "checkout.html";
     }
   } catch (error) {
     alertErrorBooking(error);
-  }finally{
+  } finally {
     loading(false);
   }
-}
-
-const createStorageRooms=(rooms)=>{
-
-  localStorage.setItem("rooms",rooms);
-  console.log(rooms);
-  location.href="pay/public/checkout.html"
-  
 }

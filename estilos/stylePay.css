@@ -1,0 +1,442 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: Arial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+header {
+  background: linear-gradient(#126b91, #0498a0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 100%;
+  height: 70px;
+  font-family: Arial;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+header ul {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-family: Arial;
+  margin-right: 18rem;
+  margin-top: 0.5rem;
+}
+
+header li {
+  display: inline-block;
+  padding: 14px;
+  text-align: center;
+  transform: scale(1);
+  transition: 0.5s;
+}
+
+header li:hover {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.822);
+  transform: scale(1.1);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+header li img {
+  width: 16px;
+}
+
+.redes {
+  margin-top: 0.7rem;
+  margin-right: 4rem;
+}
+
+.redes li:hover {
+  transform: scale(1);
+  border-bottom: none;
+}
+
+.redes img {
+  opacity: 100%;
+  transition: 0.5s;
+}
+
+.redes img:hover {
+  opacity: 60%;
+  transition: 0.5s;
+}
+
+#logo {
+  display: flex;
+  margin-left: 6%;
+  margin-top: -0.3rem;
+}
+
+#logo h1 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 20px;
+  margin-left: 15px;
+  color: rgb(255, 255, 255);
+}
+
+.options {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-family: Arial;
+  margin-right: 18rem;
+  margin-top: 1.4rem;
+}
+
+.networks {
+  margin-top: 1.4rem;
+  margin-right: 4rem;
+}
+.networks li:hover {
+  transform: scale(1);
+  border-bottom: none;
+}
+.networks img {
+  opacity: 100%;
+  transition: 0.5s;
+}
+.networks img:hover {
+  opacity: 60%;
+  transition: 0.5s;
+}
+
+.containFather {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  margin: auto;
+  position: relative;
+}
+
+.panelItems {
+  display: flex;
+}
+
+.controlItems {
+  background: linear-gradient(#126b91, #0498a0);
+  width: 2.5rem;
+  margin-top: 3rem;
+  height: 4rem;
+  border-radius: 90%;
+  border-top-right-radius: 3%;
+  border-bottom-right-radius: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.controlItems img {
+  width: 20px;
+  height: 20px;
+}
+
+.containItems {
+  margin-top: 3rem;
+  padding: 1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(224, 224, 224);
+  display: none;
+  width: 0;
+}
+
+.containItemsShow {
+  display: block;
+  animation-name: itemsShow;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes itemsShow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 20rem;
+  }
+}
+.containItemsHide {
+  animation-name: itemsHide;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes itemsHide {
+  from {
+    width: 20rem;
+  }
+  to {
+    width: 0rem;
+  }
+}
+.amount {
+  display: none;
+}
+
+.items {
+  padding-top: 1.5rem;
+  flex-direction: column;
+  gap: 1rem;
+  display: none;
+}
+.items li {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+.items li .body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.items li .header {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
+.items li .footer {
+  display: flex;
+  justify-content: space-between;
+}
+.items li img {
+  width: 130px;
+  height: 60px;
+}
+
+.containForm {
+  margin-top: 3rem;
+  padding-bottom: 2rem;
+}
+.containForm form {
+  padding-top: 1rem;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 5px;
+  width: 850px;
+  height: auto;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: white;
+}
+.containForm form .contentForm {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.containForm form .cardInfo,
+.containForm form .direcionInfo {
+  display: flex;
+  flex-direction: column;
+}
+.containForm form .headerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.containForm form .headerCard .cards {
+  display: flex;
+  gap: 2rem;
+}
+.containForm form .headerCard img {
+  width: 300px;
+}
+.containForm form .bodyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+.containForm form input {
+  height: 36px;
+  width: 20rem;
+  border-radius: 3px;
+  border: 1px solid rgb(214, 214, 214);
+  outline: none;
+  padding-left: 1rem;
+  font-size: 17px;
+}
+.containForm form input::placeholder {
+  opacity: 70%;
+}
+.containForm form .name,
+.containForm form .number,
+.containForm form .expiration,
+.containForm form .CVV {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.containForm form #idName {
+  background-image: url("../img/usuario.png");
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position-x: 19rem;
+  background-position-y: 0.5rem;
+}
+.containForm form #idNumber {
+  background-image: url("../img/iconCardForm.png");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position-x: 19rem;
+  background-position-y: 0.4rem;
+}
+.containForm form #idCvv {
+  background-image: url("../img/cvv.png");
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position-x: 7rem;
+  background-position-y: 0.4rem;
+}
+.containForm form #idStreet {
+  background-image: url("../img/direccion.png");
+  background-repeat: no-repeat;
+  background-size: 21px;
+  background-position-x: 19rem;
+  background-position-y: 0.4rem;
+}
+.containForm form #idCity {
+  background-image: url("../img/city.png");
+  background-repeat: no-repeat;
+  background-size: 21px;
+  background-position-x: 19rem;
+  background-position-y: 0.4rem;
+}
+.containForm form .rowCard {
+  display: flex;
+  gap: 3rem;
+}
+.containForm form .rowCard input {
+  width: 130px;
+  justify-content: center;
+  align-items: center;
+}
+.containForm form .direction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.containForm form .direction .headerDirection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+.containForm form .direction h4 {
+  font-size: 19px;
+}
+.containForm form .direction img {
+  width: 44px;
+}
+.containForm form .direction .bodyDirection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.containForm form .direction .street,
+.containForm form .direction .city {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.containForm form .direction .rowCodeAndCountry {
+  display: flex;
+  gap: 1rem;
+}
+.containForm form .direction .rowCodeAndCountry .postalCode,
+.containForm form .direction .rowCodeAndCountry .country {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.containForm form .direction .rowCodeAndCountry input,
+.containForm form .direction .rowCodeAndCountry select {
+  width: 9.5rem;
+  height: 36px;
+}
+.containForm form .direction .rowCodeAndCountry select {
+  border-radius: 3px;
+  border: 1px solid rgb(221, 221, 221);
+  outline: none;
+  color: rgb(131, 131, 131);
+}
+.containForm form .direction input {
+  width: 20rem;
+}
+.containForm button {
+  margin-top: 1.5rem;
+  width: 300px;
+  height: 34px;
+  background: linear-gradient(#126b91, #0498a0);
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.barStageAdvance {
+  display: flex;
+  margin: auto;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.barStageAdvance .itemStage {
+  padding: 1rem;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cecece;
+}
+.barStageAdvance .itemStage img {
+  width: 35px;
+}
+.barStageAdvance .line {
+  width: 30rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  background-color: #cecece;
+}
+
+.progressStage {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(#126b91, #0498a0);
+  animation-name: progressStage;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes progressStage {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=stylePay.css.map */

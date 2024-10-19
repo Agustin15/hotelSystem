@@ -47,7 +47,7 @@ const displayBarStagesAdvance = (lineStage) => {
 function definedCompleteBars() {
   let completeStages;
   switch (window.location.href) {
-    case "http://localhost/sistema%20Hotel/views/reserva/pay/public/checkout.html":
+    case "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html":
       completeStages = ["#itemRoomsSelected","#lineRoomsSelected","#itemPersonalData"];
 
       break;

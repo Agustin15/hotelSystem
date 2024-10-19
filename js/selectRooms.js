@@ -297,7 +297,7 @@ const printHotelRooms = (rooms) => {
                 </div>
   
                 <div class="value">
-                    <span>$${room.price}</span>
+                    <span>U$S ${room.price}</span>
                 </div>
   
             </li>
@@ -582,7 +582,7 @@ const printRoomsCart = () => {
     )}' src="../../img/plus.png">
 </div>
 
-<span class="total">Precio:$${room.total}</span>
+<span class="total">U$S ${room.total}</span>
 </div>
 </li>
 <hr>
@@ -727,7 +727,7 @@ function comprobateQuantityRoomForAdd(roomForAdd) {
 
 function printDeposit() {
   divDeposit.style.display = "flex";
-  divDeposit.querySelector(".total").textContent = "Total:$" + totalDeposit;
+  divDeposit.querySelector(".total").textContent = "Total:U$S " + totalDeposit;
 }
 
 const calculateTotalRoom = (roomToCalculate) => {
