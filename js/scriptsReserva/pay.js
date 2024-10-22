@@ -4,6 +4,7 @@ let containItems = document.querySelector(".containItems");
 let containAmount = document.querySelector(".amount");
 let itemsDiv = document.querySelector(".items");
 let controlItems = document.querySelector(".controlItems");
+let lengthNumberCard = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   displayBarStagesAdvance("#linePersonalData");
@@ -14,11 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (controlItems) {
     controlItems.addEventListener("click", () => {
-      if (controlItems.dataset.state == "close") {
-        displayItemsRoomAmount();
-      } else {
-        closeItemsRoomAmount();
-      }
+      displayItemsRoomAmount(controlItems.dataset.state);
     });
   }
 });
@@ -58,27 +55,99 @@ const calculateAmount = (items) => {
     .querySelector("span").textContent = `U$S ${amount}`;
 };
 
-const displayItemsRoomAmount = () => {
-  controlItems.dataset.state = "open";
-  controlItems.querySelector("img").src = "../../../img/nextRoom.png";
-  containItems.classList.remove("containItemsHide");
-  containItems.classList.add("containItemsShow");
+const displayItemsRoomAmount = (state) => {
+  let propsDisplayItems;
+  if (state == "close") {
+    propsDisplayItems = {
+      img: "../../../img/closeCart.png",
+      classToRemove: "containItemsHide",
+      classToAdd: "containItemsShow",
+      containAmountDisplay: "block",
+      itemsDivDisplay: "flex",
+      stateDisplay: "open",
+    };
+  } else {
+    propsDisplayItems = {
+      img: "../../../img/closeCart.png",
+      classToRemove: "containItemsShow",
+      classToAdd: "containItemsHide",
+      containAmountDisplay: "none",
+      itemsDivDisplay: "none",
+      stateDisplay: "close",
+    };
+  }
 
-  setTimeout(() => {
-    containAmount.style.display = "block";
-    itemsDiv.style.display = "flex";
-  }, 400);
+  propsItemsRoomAmount(propsDisplayItems);
 };
 
-const closeItemsRoomAmount = () => {
-  controlItems.dataset.state = "close";
-  controlItems.querySelector("img").src = "../../../img/prevRoom.png";
-  containAmount.style.display = "none";
-  itemsDiv.style.display = "none";
-  containItems.classList.add("containItemsHide");
+function propsItemsRoomAmount(propsDisplayItems) {
+  controlItems.querySelector("img").src = propsDisplayItems.img;
+  containItems.classList.add(propsDisplayItems.classToAdd);
 
   setTimeout(() => {
-    containItems.style.display = "none";
-    containItems.classList.remove("containItemsShow");
-  }, 350);
+    containAmount.style.display = propsDisplayItems.containAmountDisplay;
+    itemsDiv.style.display = propsDisplayItems.itemsDivDisplay;
+    containItems.classList.remove(propsDisplayItems.classToRemove);
+    controlItems.dataset.state = propsDisplayItems.stateDisplay;
+  }, 200);
+}
+
+document
+  .querySelector("#idNumber")
+  .addEventListener("input", (input) => {
+    let digitEnter = validAloneNumberCard(input.target);
+
+    lengthNumberCard = [...input.target.value.trim()].reduce((ac, char) => {
+      char == "" || char == " " ? ac : ac++;
+      return ac;
+    }, 0);
+
+    if (digitEnter && lengthNumberCard > 0 && lengthNumberCard % 4 == 0) {
+      validSpacesNumberCard(input.target);
+    }
+  });
+
+const validAloneNumberCard = (input) => {
+  let digitEnter = replaceCharacter(input);
+  return digitEnter;
 };
+
+const validSpacesNumberCard = (input) => {
+  let newValue = input.value + " ";
+  input.value = newValue;
+};
+
+function replaceCharacter(input) {
+  let digitEnter = true;
+  let ultimateCharacter = input.value
+    .trim()
+    .charAt(input.value.trim().length - 1);
+
+  let valid = /\d/;
+  if (!ultimateCharacter.match(valid)) {
+    let newValue = input.value.replace(ultimateCharacter, "");
+    input.value = newValue;
+    digitEnter = false;
+  }
+
+  if (input.id == "idNumber") {
+    return digitEnter;
+  }
+}
+
+document.querySelector("#idExpire").addEventListener("input", function(input) {
+
+
+  console.log(input.target);
+  let inputExpire=input.target;
+  replaceCharacter(inputExpire);
+
+  // if (inputExpire.value.length >5) {
+   
+  
+  // }
+
+  if (inputExpire.value.length == 2) {
+    inputExpire.value += "/";
+  }
+});

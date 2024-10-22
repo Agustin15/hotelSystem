@@ -141,8 +141,7 @@ header li img {
   cursor: pointer;
 }
 .controlItems img {
-  width: 20px;
-  height: 20px;
+  width: 30px;
 }
 
 .containItems {
@@ -151,7 +150,7 @@ header li img {
   border-radius: 3px;
   border: 1px solid rgb(224, 224, 224);
   display: none;
-  width: 0;
+  width: 0rem;
 }
 
 .containItemsShow {
@@ -163,7 +162,7 @@ header li img {
 
 @keyframes itemsShow {
   from {
-    width: 0;
+    width: 0rem;
   }
   to {
     width: 20rem;
@@ -223,7 +222,7 @@ header li img {
 }
 .containForm form {
   padding-top: 1rem;
-  border: 1px solid rgb(235, 235, 235);
+  border: 1px solid rgb(218, 218, 218);
   border-radius: 5px;
   width: 850px;
   height: auto;
@@ -272,6 +271,7 @@ header li img {
   border: 1px solid rgb(214, 214, 214);
   outline: none;
   padding-left: 1rem;
+  padding-right: 2.5rem;
   font-size: 17px;
 }
 .containForm form input::placeholder {
@@ -289,43 +289,43 @@ header li img {
   background-image: url("../img/usuario.png");
   background-repeat: no-repeat;
   background-size: 20px;
-  background-position-x: 19rem;
-  background-position-y: 0.5rem;
+  background-position-x: 21.6rem;
+  background-position-y: 0.4rem;
 }
 .containForm form #idNumber {
   background-image: url("../img/iconCardForm.png");
   background-repeat: no-repeat;
   background-size: 24px;
-  background-position-x: 19rem;
+  background-position-x: 21.4rem;
   background-position-y: 0.4rem;
 }
 .containForm form #idCvv {
   background-image: url("../img/cvv.png");
   background-repeat: no-repeat;
   background-size: 24px;
-  background-position-x: 7rem;
+  background-position-x: 8.8rem;
   background-position-y: 0.4rem;
 }
 .containForm form #idStreet {
   background-image: url("../img/direccion.png");
   background-repeat: no-repeat;
   background-size: 21px;
-  background-position-x: 19rem;
+  background-position-x: 21.5rem;
   background-position-y: 0.4rem;
 }
 .containForm form #idCity {
   background-image: url("../img/city.png");
   background-repeat: no-repeat;
   background-size: 21px;
-  background-position-x: 19rem;
+  background-position-x: 21.5rem;
   background-position-y: 0.4rem;
 }
 .containForm form .rowCard {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
 }
 .containForm form .rowCard input {
-  width: 130px;
+  width: 114px;
   justify-content: center;
   align-items: center;
 }

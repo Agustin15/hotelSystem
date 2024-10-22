@@ -34,8 +34,7 @@
 
   img{
 
-    width: 20px;
-    height: 20px;
+    width: 30px;
   }
 }
 
@@ -45,7 +44,7 @@
   border-radius: 3px;
   border: 1px solid rgb(224, 224, 224);
   display: none;
-  width: 0;
+  width: 0rem;
 
 }
 
@@ -60,7 +59,7 @@
 @keyframes itemsShow {
   
   from{
-    width: 0;
+    width: 0rem;
   }
   to{
 
@@ -130,7 +129,7 @@ display: none;
 
   form {
     padding-top: 1rem;
-    border: 1px solid rgb(235, 235, 235);
+    border: 1px solid rgb(218, 218, 218);
     border-radius: 5px;
     width: 850px;
     height: auto;
@@ -183,6 +182,7 @@ display: none;
       border: 1px solid rgb(214, 214, 214);
       outline: none;
       padding-left: 1rem;
+      padding-right: 2.5rem;
       font-size: 17px;
     }
 
@@ -202,15 +202,15 @@ display: none;
       background-image: url("../img/usuario.png");
       background-repeat: no-repeat;
       background-size: 20px;
-      background-position-x: 19rem;
-      background-position-y: 0.5rem;
+      background-position-x: 21.6rem;
+      background-position-y: 0.4rem;
     }
 
     #idNumber {
       background-image: url("../img/iconCardForm.png");
       background-repeat: no-repeat;
       background-size: 24px;
-      background-position-x: 19rem;
+      background-position-x: 21.4rem;
       background-position-y: 0.4rem;
     }
 
@@ -218,7 +218,7 @@ display: none;
       background-image: url("../img/cvv.png");
       background-repeat: no-repeat;
       background-size: 24px;
-      background-position-x: 7rem;
+      background-position-x: 8.8rem;
       background-position-y: 0.4rem;
     }
 
@@ -226,7 +226,7 @@ display: none;
       background-image: url("../img/direccion.png");
       background-repeat: no-repeat;
       background-size: 21px;
-      background-position-x: 19rem;
+      background-position-x: 21.5rem;
       background-position-y: 0.4rem;
     }
 
@@ -234,16 +234,16 @@ display: none;
       background-image: url("../img/city.png");
       background-repeat: no-repeat;
       background-size: 21px;
-      background-position-x: 19rem;
+      background-position-x: 21.5rem;
       background-position-y: 0.4rem;
     }
 
     .rowCard {
       display: flex;
-      gap: 3rem;
+      gap: 2rem;
 
       input {
-        width: 130px;
+        width: 114px;
         justify-content: center;
         align-items: center;
       }
