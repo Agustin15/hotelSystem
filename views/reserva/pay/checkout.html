@@ -46,7 +46,7 @@
     <div class="containFather">
 
         <div class="panelItems">
-            <div class="controlItems" data-state="close" >
+            <div class="controlItems" data-state="close">
 
 
                 <img src="../../../img/openCart.png">
@@ -65,25 +65,34 @@
         </div>
 
         <div class="containForm">
-            <form>
+            <form method="POST">
 
                 <div class="contentForm">
                     <div class="cardInfo">
                         <div class="headerCard">
                             <h3>Complete los datos de su tarjeta</h3>
 
-                            <img src="../../../img/cards.png">
+                            <div class="cards">
+                                <img src="../../../img/visa.png">
+                                <img src="../../../img/mastercard.png">
+                                <img src="../../../img/amex.png">
+                                <img src="../../../img/discover.png">
+                            </div>
                         </div>
                         <div class="bodyCard">
                             <div class="name">
 
                                 <label for="idName">Nombre del titular</label>
+                                <span class="alertErrorInput"></span>   
                                 <input type="text" placeholder="Nombre y Apellido" name="name" id="idName">
+                                
                             </div>
                             <div class="number">
 
                                 <label for="idName">Número de tarjeta</label>
-                                <input type="text" name="number" placeholder="1234 5678 9876 5432" id="idNumber">
+                                <span class="alertErrorInput"></span>  
+                                <input type="text" class="denyBackSpace" name="number" placeholder="1234 5678 9876 5432"
+                                    id="idNumber">
                             </div>
 
 
@@ -91,12 +100,16 @@
                                 <div class="expiration">
 
                                     <label for="idExpire">Vencimiento</label>
-                                    <input type="text" placeholder="MM/AA" name="expiration" id="idExpire">
+                                    <span class="alertErrorInput" ></span>  
+                                    <input type="text" class="denyBackSpace" placeholder="MM/AA" name="expiration"
+                                        id="idExpire">
                                 </div>
 
                                 <div class="CVV">
                                     <label for="idCVV">Código de seguridad</label>
-                                    <input type="text" name="cvv" maxlength="3" placeholder="CVV" id="idCvv">
+                                    <span class="alertErrorInput" ></span>  
+                                    <input type="text" class="denyBackSpace" name="cvv" maxlength="3" placeholder="CVV"
+                                        id="idCvv">
                                 </div>
                             </div>
                         </div>
@@ -109,43 +122,61 @@
                             <div class="headerDirection">
 
                                 <h4>Direccion de facturacion</h4>
-                                <img src="../../../img/facturacionIcon.png">
+
                             </div>
 
                             <div class="bodyDirection">
                                 <div class="street">
                                     <label for="idStreet">Direccion</label>
+                                    <span class="alertErrorInput" ></span>  
                                     <input type="text" placeholder="Calle y número" name="steet" id="idStreet">
                                 </div>
 
                                 <div class="city">
                                     <label for="idCity">Ciudad</label>
+                                    <span class="alertErrorInput" ></span>  
                                     <input type="text" placeholder="Ingrese ciudad" name="city" id="idCity">
                                 </div>
 
-                                <div class="rowCodeAndCountry">
-                                    <div class="postalCode">
-                                        <label for="idPostalCode">Código postal</label>
-                                        <input type="text" placeholder="1100" name="postalCode" id="idPostalCode">
-                                    </div>
 
-                                    <div class="country">
-                                        <label for="idCountry">Ciudad</label>
-                                        <select name="country" id="idCountry">
-
-                                            <option>Uruguay</option>
-                                            <option>Argentina</option>
-                                            <option>Brasil</option>
-                                        </select>
-                                    </div>
-
+                                <div class="postalCode">
+                                    <label for="idPostalCode">Código postal</label>
+                                    <span class="alertErrorInput" ></span>  
+                                    <input type="text" class="denyBackSpace" placeholder="11000" name="postalCode"
+                                        id="idPostalCode">
                                 </div>
+
+                                <div class="country">
+                                    <label for="idCountry">Pais</label>
+                                    <span class="alertErrorInput"></span>  
+                                    <select name="country" id="idCountry">
+
+                                        <option value="Uruguay">Uruguay</option>
+                                        <option value="Argentina">Argentina</option>
+                                        <option value="Brasil">Brasil</option>
+                                    </select>
+                                </div>
+
 
                             </div>
                         </div>
                     </div>
                 </div>
 
+
+                <div id="alert">
+                    <div class="contain">
+                        <div class="header">
+                            <img src="../../../img/advertenciaLogin.png">
+                            <span>Advertencia</span>
+                        </div>
+                        <p></p>
+                        <div class="progressBar">
+                            <div class="bar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <button>Pagar</button>

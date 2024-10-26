@@ -1,10 +1,13 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
+import { alertErrorPay } from "./alertsPay.js";
+import { inputsAlert } from "./alertsPay.js";
 
 let containItems = document.querySelector(".containItems");
 let containAmount = document.querySelector(".amount");
 let itemsDiv = document.querySelector(".items");
 let controlItems = document.querySelector(".controlItems");
-let lengthNumberCard = 0;
+let formPay = document.querySelector("form");
+let validCard;
 
 document.addEventListener("DOMContentLoaded", () => {
   displayBarStagesAdvance("#linePersonalData");
@@ -68,7 +71,7 @@ const displayItemsRoomAmount = (state) => {
     };
   } else {
     propsDisplayItems = {
-      img: "../../../img/closeCart.png",
+      img: "../../../img/openCart.png",
       classToRemove: "containItemsShow",
       classToAdd: "containItemsHide",
       containAmountDisplay: "none",
@@ -91,21 +94,6 @@ function propsItemsRoomAmount(propsDisplayItems) {
     controlItems.dataset.state = propsDisplayItems.stateDisplay;
   }, 200);
 }
-
-document
-  .querySelector("#idNumber")
-  .addEventListener("input", (input) => {
-    let digitEnter = validAloneNumberCard(input.target);
-
-    lengthNumberCard = [...input.target.value.trim()].reduce((ac, char) => {
-      char == "" || char == " " ? ac : ac++;
-      return ac;
-    }, 0);
-
-    if (digitEnter && lengthNumberCard > 0 && lengthNumberCard % 4 == 0) {
-      validSpacesNumberCard(input.target);
-    }
-  });
 
 const validAloneNumberCard = (input) => {
   let digitEnter = replaceCharacter(input);
@@ -135,19 +123,191 @@ function replaceCharacter(input) {
   }
 }
 
-document.querySelector("#idExpire").addEventListener("input", function(input) {
-
-
-  console.log(input.target);
-  let inputExpire=input.target;
-  replaceCharacter(inputExpire);
-
-  // if (inputExpire.value.length >5) {
-   
-  
-  // }
-
-  if (inputExpire.value.length == 2) {
-    inputExpire.value += "/";
-  }
+document.querySelectorAll(".denyBackSpace").forEach((input) => {
+  input.addEventListener("keydown", function (event) {
+    event.key == " " ? event.preventDefault() : true;
+  });
 });
+
+const eventInputs = (idInput, lengthMax) => {
+  document.querySelector(idInput).maxLength = lengthMax;
+  document.querySelector(idInput).addEventListener("input", function (input) {
+    switch (idInput) {
+      case "#idNumber":
+        let digitEnter = validAloneNumberCard(input.target);
+
+        let numbersCard = removeSpacesCard(input.target.value.trim());
+
+        if (
+          digitEnter &&
+          numbersCard.length > 0 &&
+          numbersCard.length % 4 == 0
+        ) {
+          validSpacesNumberCard(input.target);
+        }
+
+        if (numbersCard.length == 16) {
+          validCard = algoritmLuhnCard(numbersCard);
+          if (!validCard) {
+            inputsAlert("number", "*N° de Tarjeta ingresado incorrecto");
+          } else {
+            typeCardInputNumber(numbersCard);
+          }
+        } else {
+          document.querySelector("#idNumber").style.backgroundImage =
+            "url('../../../img/iconCardForm.png')";
+        }
+        break;
+
+      case "#idExpire":
+        let inputExpire = input.target;
+        replaceCharacter(inputExpire);
+
+        if (inputExpire.value.length == 2) {
+          inputExpire.value += "/";
+        }
+        break;
+
+      case "#idCvv":
+        replaceCharacter(input.target);
+
+        break;
+
+      case "#idPostalCode":
+        replaceCharacter(input.target);
+
+        break;
+    }
+  });
+};
+
+eventInputs("#idNumber", 19);
+eventInputs("#idExpire", 5);
+eventInputs("#idCvv", 3);
+eventInputs("#idPostalCode", 5);
+
+formPay.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formData = new FormData(formPay);
+
+  let validate = false;
+  const dataPay = {};
+
+  const validationsInputs = [
+    {
+      key: "number",
+      validation: 19,
+      msj: "Ingresa un número de tarjeta entre (12 o 19 digitos)",
+    },
+    {
+      key: "expiration",
+      validation: 5,
+      msj: "Ingresa una fecha de vencimiento válida",
+    },
+    {
+      key: "cvv",
+      validation: 3,
+      msj: "Ingresa CVV (3 digitos)",
+    },
+    {
+      key: "postalCode",
+      validation: 5,
+      msj: "Ingresa un código postal (5 digitos)",
+    },
+  ];
+
+  formData.forEach((value, key) => {
+
+      let inputToAlert = validationsInputs.find(
+        (validInput) =>
+          validInput.key == key && value.length < validInput.validation
+      );
+
+      if (inputToAlert) {
+        inputsAlert(inputToAlert.key,inputToAlert.msj);
+        return;
+      } else {
+        dataPay[key] = value.trim();
+        validate=true;
+      }
+    
+  });
+
+  if(validate){
+    console.log(dataPay);
+  }
+  
+});
+
+let inputs = [...formPay.querySelectorAll("input")];
+
+inputs.forEach((input) => {
+  input.addEventListener("click", () => {
+    input.classList.remove("inputAlert");
+  });
+});
+
+const removeSpacesCard = (value) => {
+  let array = Array.from(value);
+
+  let numberCard = array.reduce((ac, number) => {
+    number !== " " ? (ac += number) : ac;
+    return ac;
+  }, 0);
+
+  return numberCard.toString().substring(1, numberCard.length);
+};
+
+const algoritmLuhnCard = (value) => {
+  let valid = false;
+  let arrayNumbers = Array.from(value);
+  let total = arrayNumbers.reduce((ac, number, index) => {
+    let numberCard = parseInt(number);
+
+    if ((index + 1) % 2 != 0) {
+      if (numberCard * 2 > 9) {
+        let digitOne = parseInt((numberCard * 2).toString().charAt(0));
+        let digitTwO = parseInt((numberCard * 2).toString().charAt(1));
+        ac += digitOne + digitTwO;
+      } else {
+        ac += numberCard * 2;
+      }
+    } else {
+      ac += numberCard * 1;
+    }
+
+    return ac;
+  }, 0);
+
+  if (total % 10 == 0) {
+    valid = true;
+  }
+
+  return valid;
+};
+
+const typeCardInputNumber = (numbersCard) => {
+  let iconCard = null;
+
+  let firstNumber = numbersCard.charAt(0);
+  switch (firstNumber) {
+    case "3":
+      iconCard = "../../../img/amex.png";
+      break;
+    case "4":
+      iconCard = "../../../img/visa.png";
+      break;
+
+    case "5":
+      iconCard = "../../../img/mastercard.png";
+      break;
+
+    case "6":
+      iconCard = "../../../img/discover.png";
+      break;
+  }
+
+  document.querySelector(
+    "#idNumber"
+  ).style.backgroundImage = ` url(${iconCard})`;
+};
