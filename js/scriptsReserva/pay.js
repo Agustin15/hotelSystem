@@ -7,6 +7,8 @@ let containAmount = document.querySelector(".amount");
 let itemsDiv = document.querySelector(".items");
 let controlItems = document.querySelector(".controlItems");
 let formPay = document.querySelector("form");
+let inputs = [...formPay.querySelectorAll("input")];
+
 let validCard;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -95,6 +97,60 @@ function propsItemsRoomAmount(propsDisplayItems) {
   }, 200);
 }
 
+
+
+document.querySelectorAll("input").forEach((input) => {
+  input.addEventListener("input", (input) => {
+    console.log(input.target.id);
+    switch (input.target.id) {
+      case "idNumber":
+        let digitEnter = validAloneNumberCard(input.target);
+
+        let numbersCard = removeSpacesCard(input.target.value.trim());
+
+        if (digitEnter && numbersCard.length > 0) {
+          if (numbersCard.charAt(0) == "3") {
+            document.querySelector("#idNumber").maxLength = 17;
+
+            if (numbersCard.length == 4 || numbersCard.length == 10) {
+              validSpacesNumberCard(input.target);
+            }
+          } else if (numbersCard.length % 4 == 0) {
+            document.querySelector("#idNumber").maxLength = 19;
+            validSpacesNumberCard(input.target);
+          }
+        }
+
+        if (numbersCard.length > 13 && numbersCard.length < 19) {
+          validCard = algoritmLuhnCard(numbersCard);
+          if (!validCard) {
+            inputsAlert("number", "*N° de Tarjeta ingresado incorrecto");
+          } else {
+            typeCardInputNumber(numbersCard);
+          }
+        } else {
+          document.querySelector("#idNumber").style.backgroundImage =
+            "url('../../../img/iconCardForm.png')";
+        }
+        break;
+
+      case "idExpire":
+        let inputExpire = input.target;
+        replaceCharacter(inputExpire);
+
+        if (inputExpire.value.length == 2) {
+          inputExpire.value += "/";
+        }
+        break;
+
+      case "#idPostalCode":
+      case "idCvv":
+        replaceCharacter(input.target);
+        break;
+    }
+  });
+});
+
 const validAloneNumberCard = (input) => {
   let digitEnter = replaceCharacter(input);
   return digitEnter;
@@ -129,123 +185,47 @@ document.querySelectorAll(".denyBackSpace").forEach((input) => {
   });
 });
 
-const eventInputs = (idInput, lengthMax) => {
-  document.querySelector(idInput).maxLength = lengthMax;
-  document.querySelector(idInput).addEventListener("input", function (input) {
-    switch (idInput) {
-      case "#idNumber":
-        let digitEnter = validAloneNumberCard(input.target);
-
-        let numbersCard = removeSpacesCard(input.target.value.trim());
-
-        if (
-          digitEnter &&
-          numbersCard.length > 0 &&
-          numbersCard.length % 4 == 0
-        ) {
-          validSpacesNumberCard(input.target);
-        }
-
-        if (numbersCard.length == 16) {
-          validCard = algoritmLuhnCard(numbersCard);
-          if (!validCard) {
-            inputsAlert("number", "*N° de Tarjeta ingresado incorrecto");
-          } else {
-            typeCardInputNumber(numbersCard);
-          }
-        } else {
-          document.querySelector("#idNumber").style.backgroundImage =
-            "url('../../../img/iconCardForm.png')";
-        }
-        break;
-
-      case "#idExpire":
-        let inputExpire = input.target;
-        replaceCharacter(inputExpire);
-
-        if (inputExpire.value.length == 2) {
-          inputExpire.value += "/";
-        }
-        break;
-
-      case "#idCvv":
-        replaceCharacter(input.target);
-
-        break;
-
-      case "#idPostalCode":
-        replaceCharacter(input.target);
-
-        break;
-    }
-  });
-};
-
-eventInputs("#idNumber", 19);
-eventInputs("#idExpire", 5);
-eventInputs("#idCvv", 3);
-eventInputs("#idPostalCode", 5);
-
-formPay.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const formData = new FormData(formPay);
-
-  let validate = false;
-  const dataPay = {};
-
-  const validationsInputs = [
+const validationsInputs = (value) => {
+  const validations = [
+    {
+      key: "name",
+      validation: value !== "",
+      msj: "*Ingresa nombre y apellido completos",
+    },
     {
       key: "number",
-      validation: 19,
-      msj: "Ingresa un número de tarjeta entre (12 o 19 digitos)",
+      validation: value.length >= 12 && value.length <= 19,
+      msj: "*Ingresa un número de tarjeta entre (12 o 19 digitos)",
     },
     {
       key: "expiration",
-      validation: 5,
-      msj: "Ingresa una fecha de vencimiento válida",
+      validation: value.length == 5,
+      msj: "*Ingresa fecha de vencimiento",
     },
     {
       key: "cvv",
-      validation: 3,
-      msj: "Ingresa CVV (3 digitos)",
+      validation: value.length == 3,
+      msj: "*Ingresa CVV (3 digitos)",
+    },
+    {
+      key: "street",
+      validation: value !== "",
+      msj: "*Ingresa una direccion",
+    },
+    {
+      key: "city",
+      validation: value !== "",
+      msj: "*Ingresa una ciudad",
     },
     {
       key: "postalCode",
-      validation: 5,
-      msj: "Ingresa un código postal (5 digitos)",
+      validation: value.length == 5,
+      msj: "*Ingresa un código postal (5 digitos)",
     },
   ];
 
-  formData.forEach((value, key) => {
-
-      let inputToAlert = validationsInputs.find(
-        (validInput) =>
-          validInput.key == key && value.length < validInput.validation
-      );
-
-      if (inputToAlert) {
-        inputsAlert(inputToAlert.key,inputToAlert.msj);
-        return;
-      } else {
-        dataPay[key] = value.trim();
-        validate=true;
-      }
-    
-  });
-
-  if(validate){
-    console.log(dataPay);
-  }
-  
-});
-
-let inputs = [...formPay.querySelectorAll("input")];
-
-inputs.forEach((input) => {
-  input.addEventListener("click", () => {
-    input.classList.remove("inputAlert");
-  });
-});
+  return validations;
+};
 
 const removeSpacesCard = (value) => {
   let array = Array.from(value);
@@ -286,13 +266,14 @@ const algoritmLuhnCard = (value) => {
   return valid;
 };
 
-const typeCardInputNumber = (numbersCard) => {
+const typeCardInputNumber = (numbersCard, option) => {
   let iconCard = null;
 
   let firstNumber = numbersCard.charAt(0);
   switch (firstNumber) {
     case "3":
       iconCard = "../../../img/amex.png";
+      card = "amex";
       break;
     case "4":
       iconCard = "../../../img/visa.png";
@@ -311,3 +292,38 @@ const typeCardInputNumber = (numbersCard) => {
     "#idNumber"
   ).style.backgroundImage = ` url(${iconCard})`;
 };
+
+formPay.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formData = new FormData(formPay);
+
+  let validate = false;
+  const dataPay = {};
+  let inputsValidates = [];
+  let quantityInputs = inputs.length;
+
+  formData.forEach((value, key) => {
+    let inputToAlert = validationsInputs(value).find(
+      (validInput) => key == validInput.key && !validInput.validation
+    );
+
+    if (inputToAlert) {
+      inputsAlert(inputToAlert.key, inputToAlert.msj);
+    } else {
+      inputsValidates.push({ key: key, value: value });
+    }
+  });
+
+  if (inputsValidates == quantityInputs) {
+    inputsValidates.forEach((inputVal) => {
+      dataPay[inputVal.key] = inputVal.value;
+    });
+    console.log(dataPay);
+  }
+});
+
+inputs.forEach((input) => {
+  input.addEventListener("click", () => {
+    input.classList.remove("inputAlert");
+  });
+});
