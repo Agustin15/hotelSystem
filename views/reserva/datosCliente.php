@@ -82,7 +82,7 @@
             </div>
 
             <div class="exit">
-                <h4>Fecha de salida:</h4> 
+                <h4>Fecha de salida:</h4>
                 <span class="endBooking"></span>
 
             </div>
@@ -106,10 +106,9 @@
 
                                     <label for="name">Nombre</label>
                                 </div>
-                                <div>
-                                    <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
+                                <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
 
-                                </div>
+                                <span class="alertErrorInput"></span>
                             </div>
 
 
@@ -119,10 +118,9 @@
 
                                     <label for="lastName">Apellido</label>
                                 </div>
-                                <div>
-                                    <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
+                                <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
+                                <span class="alertErrorInput"></span>
 
-                                </div>
                             </div>
                         </div>
 
@@ -134,12 +132,12 @@
                                     <label for="phone">Telefono</label>
                                 </div>
 
-                                <div>
-                                    <input maxlength="9" type="text"
-                                        id="phone" placeholder="Ingrese telefono" onpaste="return false"
+                                <input maxlength="9" type="text"
+                                    id="phone" placeholder="Ingrese telefono" onpaste="return false"
 
-                                        name="phone" autocomplete="off">
-                                </div>
+                                    name="phone" autocomplete="off">
+                                <span class="alertErrorInput"></span>
+
 
                             </div>
 
@@ -149,9 +147,9 @@
 
                                     <label for="mail">Correo</label>
                                 </div>
-
                                 <input type="mail" placeholder="Ingrese correo" name="mail" autocomplete="off">
 
+                                <span class="alertErrorInput"></span>
                             </div>
                         </div>
 
@@ -197,12 +195,12 @@
                     </div>
                 </div>
 
-
-
             </div>
 
         </div>
 
+
+        <div class="containFooter">
         <div class="loading">
 
             <div class="gif">
@@ -220,6 +218,7 @@
             <div>
                 <button class="btnNextStage">Realizar reserva</button>
             </div>
+        </div>
         </div>
 
     </div>

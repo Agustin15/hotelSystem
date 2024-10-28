@@ -130,31 +130,7 @@ header li img {
   justify-content: center;
   align-items: center;
 }
-#contain .loading {
-  margin-top: -4rem;
-  display: none;
-}
-#contain .loading .gif {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-#contain .loading .gif img {
-  width: 40px;
-}
 
-.loadingSpanActive {
-  animation: loadingSpanIntermitent 1s infinite;
-}
-
-@keyframes loadingSpanIntermitent {
-  from {
-    opacity: 100%;
-  }
-  to {
-    opacity: 50%;
-  }
-}
 .barStageAdvance {
   display: flex;
   margin: auto;
@@ -211,7 +187,8 @@ header li img {
   gap: 10rem;
   font-family: Arial, Helvetica, sans-serif;
 }
-.dateBooking .arrival, .dateBooking .exit {
+.dateBooking .arrival,
+.dateBooking .exit {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -359,9 +336,10 @@ header li img {
 
 .bookingData {
   color: white;
-  padding: 1rem;
-  height: 24rem;
+  padding: 0.5rem;
+  height: 20rem;
   display: flex;
+  margin-top: 2rem;
   flex-direction: column;
   justify-content: center;
 }
@@ -549,6 +527,16 @@ header li img {
   box-shadow: 1px 1px 1px rgb(235, 48, 48);
 }
 
+.alertErrorInput {
+  display: none;
+  color: red;
+  font-size: 14px;
+}
+
+.alertErrorInputShow {
+  display: block;
+}
+
 .modalBooking {
   position: absolute;
   top: 0;
@@ -579,14 +567,43 @@ header li img {
   width: 55px;
 }
 
-.containButtons {
+.containFooter {
+  margin-top: 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+.containFooter .loading {
+  display: none;
+}
+.containFooter .loading .gif {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.containFooter .loading .gif img {
+  width: 40px;
+}
+.containFooter .loadingSpanActive {
+  animation: loadingSpanIntermitent 1s infinite;
+}
+@keyframes loadingSpanIntermitent {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 50%;
+  }
+}
+.containFooter .containButtons {
   display: flex;
   gap: 2rem;
   margin-top: -3rem;
   justify-content: center;
   align-items: center;
 }
-.containButtons button {
+.containFooter .containButtons button {
   width: 200px;
   height: 34px;
   background-color: #349db8;
@@ -597,7 +614,7 @@ header li img {
   font-size: 15px;
   box-shadow: 2px 2px 2px gray;
 }
-.containButtons button:hover {
+.containFooter .containButtons button:hover {
   background-color: #2f8ca3;
   cursor: pointer;
 }

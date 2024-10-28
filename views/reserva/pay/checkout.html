@@ -84,14 +84,14 @@
 
                                 <label for="idName">Nombre del titular</label>
                                 <span class="alertErrorInput"></span>   
-                                <input type="text" placeholder="Nombre y Apellido" name="name" id="idName">
+                                <input onpaste="return false" type="text" placeholder="Nombre y Apellido" name="name" id="idName">
                                 
                             </div>
                             <div class="number">
 
                                 <label for="idName">Número de tarjeta</label>
                                 <span class="alertErrorInput"></span>  
-                                <input type="text" class="denyBackSpace" maxlength="19" name="number" placeholder="1234 5678 9876 5432"
+                                <input type="text"  onpaste="return false"class="denySpace" maxlength="19" name="number" placeholder="1234 5678 9876 5432"
                                     id="idNumber">
                             </div>
 
@@ -101,66 +101,21 @@
 
                                     <label for="idExpire">Vencimiento</label>
                                     <span class="alertErrorInput" ></span>  
-                                    <input type="text" class="denyBackSpace" maxlength="5" placeholder="MM/AA" name="expiration"
+                                    <input onpaste="return false" type="text" class="denySpace" maxlength="5" placeholder="MM/AA" name="expiration"
                                         id="idExpire">
                                 </div>
 
                                 <div class="CVV">
                                     <label for="idCVV">Código de seguridad</label>
                                     <span class="alertErrorInput" ></span>  
-                                    <input type="text" class="denyBackSpace" name="cvv" maxlength="3" placeholder="CVV"
+                                    <input type="text" onpaste="return false" class="denySpace" name="cvv" maxlength="3" placeholder="CVV"
                                         id="idCvv">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="directionInfo">
-
-                        <div class="direction">
-
-                            <div class="headerDirection">
-
-                                <h4>Direccion de facturacion</h4>
-
-                            </div>
-
-                            <div class="bodyDirection">
-                                <div class="street">
-                                    <label for="idStreet">Direccion</label>
-                                    <span class="alertErrorInput" ></span>  
-                                    <input type="text" placeholder="Calle y número" name="street" id="idStreet">
-                                </div>
-
-                                <div class="city">
-                                    <label for="idCity">Ciudad</label>
-                                    <span class="alertErrorInput" ></span>  
-                                    <input type="text" placeholder="Ingrese ciudad" name="city" id="idCity">
-                                </div>
-
-
-                                <div class="postalCode">
-                                    <label for="idPostalCode">Código postal</label>
-                                    <span class="alertErrorInput" ></span>  
-                                    <input type="text" class="denyBackSpace"maxlength="5"  placeholder="11000" name="postalCode"
-                                        id="idPostalCode">
-                                </div>
-
-                                <div class="country">
-                                    <label for="idCountry">Pais</label>
-                                    <span class="alertErrorInput"></span>  
-                                    <select name="country" id="idCountry">
-
-                                        <option value="Uruguay">Uruguay</option>
-                                        <option value="Argentina">Argentina</option>
-                                        <option value="Brasil">Brasil</option>
-                                    </select>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
 
 

@@ -152,10 +152,15 @@ function printBooking() {
   }
 }
 
-function inputAlert(key) {
+function inputAlert(key,msjAlertInput) {
   let input = [...document.getElementsByName(key)];
 
   input[0].classList.add("inputAlert");
+
+  let spanError = input[0].parentNode.querySelector("span");
+
+  spanError.classList.add("alertErrorInputShow");
+  spanError.textContent = msjAlertInput;
 }
 
 function removeInputAlert(input) {
@@ -163,35 +168,63 @@ function removeInputAlert(input) {
   input.classList.remove("inputAlert::placeholder");
 }
 
+const validationsInputs = (value) => {
+  
+  let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+  const validations = [
+    {
+      key: "name",
+      validation: value !== "",
+      msj: "*Ingrese un nombre",
+    },
+    {
+      key: "lastName",
+      validation: value !== "",
+      msj: "*Ingrese un apellido",
+    },
+    {
+      key: "mail",
+      validation: value.match(validRegex),
+      msj: "*Ingrese un correo válido",
+    },
+    {
+      key: "phone",
+      validation: value.length==8,
+      msj: "*Ingrese un telefono válido",
+    },
+  ];
+  return validations;
+};
+
 function clientData() {
   const form = document.querySelector("form");
 
   const formData = new FormData(form);
 
   const client = {};
-  let validate = null;
-  let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+  let inputsValidates = [];
+  let quantityInputs = [...form.querySelectorAll("input")].length;
 
   formData.forEach((v, k) => {
-    if (v.trim() == "") {
-      inputAlert(k);
-      return (validate = "Completa todos los campos");
-    } else if (k == "phone" && v.length < 8) {
-      inputAlert(k);
-      return (validate = "Ingresa un telefono valido");
-    } else if (k == "mail" && !v.match(validRegex)) {
-      inputAlert(k);
-      return (validate = "Ingresa un correo valido");
+    let inputToAlert = validationsInputs(v).find(
+      (validInput) => k == validInput.key && !validInput.validation
+    );
+
+    if (inputToAlert) {
+      console.log(inputToAlert);
+      inputAlert(inputToAlert.key, inputToAlert.msj);
     } else {
-      client[k] = v;
+      inputsValidates.push({ key: k, value: v });
     }
   });
 
-  if (validate) {
-    alertClientFormBooking(validate);
-  } else {
+  if (inputsValidates == quantityInputs) {
+    inputsValidates.forEach((inputVal) => {
+      client[inputVal.key] = inputVal.value;
+    });
     createBooking(client);
   }
+  console.log(quantityInputs);
 }
 
 function createBooking(client) {

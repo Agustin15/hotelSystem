@@ -7,6 +7,7 @@ let containAmount = document.querySelector(".amount");
 let itemsDiv = document.querySelector(".items");
 let controlItems = document.querySelector(".controlItems");
 let formPay = document.querySelector("form");
+let inputNumberCard = document.getElementById("idNumber");
 let inputs = [...formPay.querySelectorAll("input")];
 
 let validCard;
@@ -97,11 +98,8 @@ function propsItemsRoomAmount(propsDisplayItems) {
   }, 200);
 }
 
-
-
 document.querySelectorAll("input").forEach((input) => {
   input.addEventListener("input", (input) => {
-    console.log(input.target.id);
     switch (input.target.id) {
       case "idNumber":
         let digitEnter = validAloneNumberCard(input.target);
@@ -113,11 +111,11 @@ document.querySelectorAll("input").forEach((input) => {
             document.querySelector("#idNumber").maxLength = 17;
 
             if (numbersCard.length == 4 || numbersCard.length == 10) {
-              validSpacesNumberCard(input.target);
+              validSpacesNumberCard(input.target, 17);
             }
           } else if (numbersCard.length % 4 == 0) {
             document.querySelector("#idNumber").maxLength = 19;
-            validSpacesNumberCard(input.target);
+            validSpacesNumberCard(input.target, 19);
           }
         }
 
@@ -156,9 +154,11 @@ const validAloneNumberCard = (input) => {
   return digitEnter;
 };
 
-const validSpacesNumberCard = (input) => {
-  let newValue = input.value + " ";
-  input.value = newValue;
+const validSpacesNumberCard = (input, limit) => {
+  if (limit != input.value.length) {
+    let newValue = input.value + " ";
+    input.value = newValue;
+  }
 };
 
 function replaceCharacter(input) {
@@ -179,10 +179,24 @@ function replaceCharacter(input) {
   }
 }
 
-document.querySelectorAll(".denyBackSpace").forEach((input) => {
+document.querySelectorAll(".denySpace").forEach((input) => {
   input.addEventListener("keydown", function (event) {
     event.key == " " ? event.preventDefault() : true;
   });
+});
+
+const denyBackspaceCard = (input, event) => {
+  if (event.key == "Backspace") {
+    if (input.value.charAt(input.selectionStart - 1) == " ") {
+      event.preventDefault();
+    }
+  }
+};
+
+inputNumberCard.addEventListener("keydown", function (event) {
+  {
+    denyBackspaceCard(this, event);
+  }
 });
 
 const validationsInputs = (value) => {

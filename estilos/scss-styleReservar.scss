@@ -16,34 +16,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .loading {
-    margin-top: -4rem;
-    display: none;
-  }
-  .loading .gif {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    img {
-      width: 40px;
-    }
-  }
-}
-
-.loadingSpanActive {
-  animation: loadingSpanIntermitent 1s infinite;
-}
-
-@keyframes loadingSpanIntermitent {
-  from {
-    opacity: 100%;
-  }
-
-  to {
-    opacity: 50%;
-  }
 }
 
 .barStageAdvance {
@@ -96,7 +68,6 @@
 }
 
 .dateBooking {
-
   width: 104%;
   color: white;
   padding: 0.5rem;
@@ -107,7 +78,8 @@
   gap: 10rem;
   font-family: Arial, Helvetica, sans-serif;
 
-  .arrival,.exit {
+  .arrival,
+  .exit {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -174,6 +146,7 @@
   padding: 1rem;
   color: rgb(0, 0, 0);
   margin-top: 3rem;
+
 
   h4 {
     font-size: 20px;
@@ -273,9 +246,10 @@
 }
 .bookingData {
   color: white;
-  padding: 1rem;
-  height: 24rem;
+  padding: 0.5rem;
+  height: 20rem;
   display: flex;
+  margin-top: 2rem;
   flex-direction: column;
   justify-content: center;
 
@@ -482,6 +456,16 @@
   box-shadow: 1px 1px 1px rgb(235, 48, 48);
 }
 
+.alertErrorInput {
+  display: none;
+  color: red;
+  font-size: 14px;
+}
+
+.alertErrorInputShow {
+  display: block;
+}
+
 .modalBooking {
   position: absolute;
   top: 0;
@@ -514,26 +498,60 @@
   }
 }
 
-.containButtons {
-  display: flex;
-  gap: 2rem;
-  margin-top: -3rem;
-  justify-content: center;
-  align-items: center;
+.containFooter {
 
-  button {
-    width: 200px;
-    height: 34px;
-    background-color: #349db8;
-    color: white;
-    border: none;
-    font-weight: bold;
-    border-radius: 3px;
-    font-size: 15px;
-    box-shadow: 2px 2px 2px gray;
+  margin-top: 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+  .loading {
+    display: none;
   }
-  button:hover {
-    background-color: #2f8ca3;
-    cursor: pointer;
+  .loading .gif {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .loadingSpanActive {
+    animation: loadingSpanIntermitent 1s infinite;
+  }
+
+  @keyframes loadingSpanIntermitent {
+    from {
+      opacity: 100%;
+    }
+
+    to {
+      opacity: 50%;
+    }
+  }
+  .containButtons {
+    display: flex;
+    gap: 2rem;
+    margin-top: -3rem;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      width: 200px;
+      height: 34px;
+      background-color: #349db8;
+      color: white;
+      border: none;
+      font-weight: bold;
+      border-radius: 3px;
+      font-size: 15px;
+      box-shadow: 2px 2px 2px gray;
+    }
+    button:hover {
+      background-color: #2f8ca3;
+      cursor: pointer;
+    }
   }
 }
