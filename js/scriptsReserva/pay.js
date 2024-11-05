@@ -311,7 +311,6 @@ formPay.addEventListener("submit", function (event) {
   event.preventDefault();
   const formData = new FormData(formPay);
 
-  let validate = false;
   const dataPay = {};
   let inputsValidates = [];
   let quantityInputs = inputs.length;
@@ -328,11 +327,11 @@ formPay.addEventListener("submit", function (event) {
     }
   });
 
-  if (inputsValidates == quantityInputs) {
+  if (inputsValidates.length == quantityInputs) {
     inputsValidates.forEach((inputVal) => {
       dataPay[inputVal.key] = inputVal.value;
     });
-    console.log(dataPay);
+    
   }
 });
 

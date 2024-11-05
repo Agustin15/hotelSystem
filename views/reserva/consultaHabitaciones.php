@@ -12,7 +12,7 @@
 
 
     <script defer src="../../js/selectRooms.js"></script>
-  
+
 
 
     <title>Reserva</title>
@@ -97,6 +97,7 @@
         </div>
     </form>
 
+
     <div id="modal">
 
         <div class="bodyModal">
@@ -114,9 +115,22 @@
         </div>
     </div>
 
+    <div class="loading">
+
+        <span>Cargando habitaciones</span>
+        <img src="../../img/spinnerMain.gif">
+    </div>
+
+    <div class="errorHotelRooms">
+
+        <img src="../../img/sinDatos.png">
+        <span>¡Ups!, estamos teniendo problemas en estos momentos,
+            inténtalo más tarde</span>
+    </div>
 
 
     <div id="containRoomsAndCart">
+
 
         <div id="alertGuests">
 
@@ -136,70 +150,70 @@
         <div id="containRooms"></div>
 
         <div class="containCart">
-        <div id="cart">
+            <div id="cart">
 
-            <div id="title">
-                <h6>Reserva</h6>
-            </div>
+                <div id="title">
+                    <h6>Reserva</h6>
+                </div>
 
-            <div id="dateBooking">
+                <div id="dateBooking">
 
-                <div>
                     <div>
-                        <label>Llegada</label>
+                        <div>
+                            <label>Llegada</label>
+                        </div>
+                        <div>
+
+                            <span class="startBooking"></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label>Salida</label>
+                        </div>
+                        <div>
+                            <span class="endBooking"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="containNight">
+
+                    <div>
+                        <span class="quantityNights"></span>
                     </div>
                     <div>
-
-                        <span class="startBooking"></span>
+                        <img src="../../img/moonBooking.png">
                     </div>
+
                 </div>
 
-                <div>
-                    <div>
-                        <label>Salida</label>
+                <ul id="roomsBooking"></ul>
+
+                <div id="containDeposit">
+
+
+                    <div class="containNotice">
+                        <div class="icon">
+                            <img src="../../img/avisoDeposito.png">
+                        </div>
+                        <div class="phrase">
+                            <span>Reserve ahora, pague despues</span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="endBooking"></span>
+                    <div class="containTotal">
+                        <span class="total"></span>
                     </div>
-                </div>
-            </div>
 
-            <div class="containNight">
-
-                <div>
-                    <span class="quantityNights"></span>
-                </div>
-                <div>
-                    <img src="../../img/moonBooking.png">
-                </div>
-
-            </div>
-
-            <ul id="roomsBooking"></ul>
-
-            <div id="containDeposit">
-
-
-                <div class="containNotice">
-                    <div class="icon">
-                        <img src="../../img/avisoDeposito.png">
+                    <div class="containButton">
+                        <button id="buttonNext">Siguiente</button>
                     </div>
-                    <div class="phrase">
-                        <span>Reserve ahora, pague despues</span>
-                    </div>
-                </div>
-                <div class="containTotal">
-                    <span class="total"></span>
-                </div>
 
-                <div class="containButton">
-                    <button id="buttonNext">Siguiente</button>
-                </div>
 
+                </div>
 
             </div>
-
-        </div>
         </div>
     </div>
 

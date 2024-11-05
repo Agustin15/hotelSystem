@@ -319,31 +319,61 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     case "GET":
 
-    
-        if ($_GET['option'] == "dashboardGraphic") {
 
-            
-            $allRoomsReserved = $claseHabitacion->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
+        switch ($_GET['option']) {
+            case "dashboardGraphic":
 
-            $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved, $claseHabitacion) {
+                $allRoomsReserved = $claseHabitacion->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
-                $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
-                use ($categoryRoom, $claseHabitacion) {
+                $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved, $claseHabitacion) {
 
-                    $dataRoomReserved = $claseHabitacion->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
+                    $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
+                    use ($categoryRoom, $claseHabitacion) {
 
-                    return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
-                });
+                        $dataRoomReserved = $claseHabitacion->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
 
-                return array('categoryRoom'=>$categoryRoom['categoria'],'quantityReserved'=>count($categoryRoomsReserved));
-            }, $claseHabitacion->getAllCategoryRooms());
+                        return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
+                    });
+
+                    return array('categoryRoom' => $categoryRoom['categoria'], 'quantityReserved' => count($categoryRoomsReserved));
+                }, $claseHabitacion->getAllCategoryRooms());
 
 
-            $peticion=$quantityCategorysRoomsReserved;
-           
+                $peticion = $quantityCategorysRoomsReserved;
+
+                break;
+
+            case "itemDataDashboard":
+
+                $categoryRooms = $claseHabitacion->getAllCategoryRooms();
+
+                $dataCategoryRooms = array_map(function ($categoryRoom) use ($claseHabitacion) {
+                    $totalRoomCategory = count($claseHabitacion->getAllHabitacionesCategoria($categoryRoom['categoria']));
+
+                    $roomsCategory = $claseHabitacion->getAllHabitacionesCategoria($categoryRoom['categoria']);
+
+                    $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) use ($claseHabitacion) {
+
+                        $today = date("Y-m-d");
+                        $habitacionOcupada = $claseHabitacion->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
+
+                        ($habitacionOcupada) ? $ac++ : $ac;
+
+                        return $ac;
+                    }, 0);
+
+                    return array(
+                        "category" => $categoryRoom['categoria'],
+                        "totalRoomCategory" => $totalRoomCategory,
+                        "totalRoomCategoryBusy" => $totalRoomCategoryBusy,
+                        "totalRoomCategoryFree" => $totalRoomCategory - $totalRoomCategoryBusy
+                    );
+                }, $categoryRooms);
+
+                $peticion=$dataCategoryRooms;
+                break;
         }
 
-       
 
         echo json_encode($peticion);
         break;

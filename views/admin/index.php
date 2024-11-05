@@ -1,0 +1,247 @@
+<?php
+
+session_id("login");
+session_start();
+$usuario = $_SESSION['usuario'];
+
+if (empty($usuario)) {
+
+    header("location:loginAdmin.php");
+} else {
+
+    require("../../model/claseUsuario.php");
+    require("../../model/claseHabitaciones.php");
+    require("../../model/clasePago.php");
+    require("../../model/claseReservas.php");
+    require("../../model/claseCliente.php");
+
+    $admin = new usuario();
+    $claseHabitaciones = new habitaciones;
+    $clasePago = new pago();
+    $claseReservas = new reservas();
+    $claseCliente = new cliente();
+
+
+
+    $adminUser = $admin->getAdminGenero($usuario);
+
+    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
+
+    $genero = $datoAdminUser['genero'];
+    $_SESSION['genero'] = $genero;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../estilos/styleAdmin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
+    <script type="module" src="../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
+    <script src="../../js/alertas.js" defer></script>
+
+    <title>Admin</title>
+
+<body>
+
+    <header>
+        <nav id="navAdmin">
+            <br>
+
+            <img class="iconoMenu" src="../../img/revision.png">
+            <label class="lblTituloMenu">Sistema hotel</label>
+
+            <br><br>
+
+            <ul>
+                <li id="liInicio">
+                    <img src="../../img/inicio.png">
+                    <a>Inicio</a>
+                </li>
+
+                <li id="liClientes">
+                    <img src="../../img/clientes.png">
+                    <a>Clientes</a>
+                    <img class="btnFlecha" src="../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li>
+
+                            <img src="../../img/grafica.png">
+                            <a href="clientes/grafica.php">Grafica</a>
+
+                        </li>
+                        <li>
+
+                            <img src="../../img/tablaClientes.png">
+                            <a href="clientes/lista.php">Lista</a>
+
+                        </li>
+                        <li>
+
+                            <img src="../../img/agregarCliente.png">
+                            <a href="clientes/agregar.php">Agregar</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li id="liReserva">
+
+                    <img src="../../img/reserva.png">
+                    <a>Reservas</a>
+                    <img class="btnFlecha" src="../../img/btnFlecha.png">
+
+
+                    <ul class="subMenu">
+
+                        <li>
+
+                            <img src="../../img/reservas.png">
+                            <a href="../../views/admin/reservas/lista.php">Lista</a>
+
+                        </li>
+                        <li class="liCalendario">
+
+                            <img src="../../img/agregarReserva.png">
+                            <a href="../../views/admin/reservas/agregar.php">Calendario</a>
+                        </li>
+
+
+                        <li class="liHabitacion">
+
+                            <img src="../../img/habitacionesReserva.png">
+                            <a href="../../views/admin/reservas/habitaciones.php">Habitaciones</a>
+
+                        </li>
+
+
+                    </ul>
+
+
+                </li>
+
+                <li id="liHabitaciones">
+
+                    <img id="iconoHabitaciones" src="../../img/habitaciones.png">
+                    <a id="textHabitaciones">Habitaciones</a>
+                    <img class="btnFlecha" src="../../img/btnFlecha.png">
+
+                    <ul class="subMenu">
+
+                        <li class="liGrafica">
+
+                            <img src="../../img/grafica.png">
+                            <a href="../../views/admin/habitaciones/grafica.php">Grafica</a>
+
+                        </li>
+
+                        <li class="liHabitacion">
+
+                            <img src="../../img/key-card.png">
+                            <a href="../../views/admin/habitaciones/habitacionesEstandar.php">Lista</a>
+
+                        </li>
+
+
+                    </ul>
+                </li>
+
+
+
+                <li id="liGanancias" class="optionGanancias">
+                    <img src="../../img/ganancias.png">
+                    <a>Ganancias</a>
+
+                </li>
+            </ul>
+
+            <div id="userAdmin">
+
+                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
+                <label><?php echo $usuario ?></label>
+                <img class="btnFlecha" src="../../img/btnFlecha.png">
+
+                <ul class="subMenuAdmin">
+
+
+                    <li>
+                        <img src="../../img/configuracion.png">
+                        <a>Editar</a>
+
+                    </li>
+
+                    <a href="../../controller/admin/cerrarSesion.php">
+                        <li>
+
+                            <img src="../../img/apagar.png">
+                            <a class="logout">Log out</a>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
+
+
+
+
+    <div id="dashboard">
+
+        <div class="itemsRoomsData"></div>
+
+        <div class="containGraphicBookings">
+
+            <h3>Reservas de este año (2024)</h3>
+            <div class="loadingBookings">
+                <img src="../../img/barCharSpinner.gif">
+                <span>Cargando datos</span>
+
+            </div>
+
+            <div class="noDataBookings">
+
+                <img src="../../img/sinDatosGrafica.png">
+                <span>No hay datos aún</span>
+
+            </div>
+
+            <div id="charBookings"></div>
+
+        </div>
+
+        <div class="containGraphicRevenues">
+
+            <h3>Ganancias de este año (2024)</h3>
+            <div class="loadingRevenues">
+                <img src="../../img/barCharSpinner.gif">
+                <span>Cargando datos</span>
+
+            </div>
+
+            <div class="noDataRevenues">
+
+                <img src="../../img/sinDatosGrafica.png">
+                <span>No hay datos aún</span>
+
+            </div>
+
+            <div id="charRevenues"></div>
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -94,14 +94,14 @@ class habitaciones
     }
 
 
-    
+
     public function getAllHabitacionesReservadasYear($year)
     {
 
 
 
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where YEAR(fechaLlegadaHabitacion)=?");
-        $consulta->bind_param("s",$year);
+        $consulta->bind_param("s", $year);
         $consulta->execute();
 
         $resultados = $consulta->get_result();
@@ -109,8 +109,8 @@ class habitaciones
         return $resultados;
     }
 
-    
-    
+
+
     public function getHabitaciones($idReserva)
     {
 
@@ -254,14 +254,14 @@ class habitaciones
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    
 
-    public function reservasHabitacionDisponible($numHabitacion,$hoy)
+
+    public function reservasHabitacionDisponible($numHabitacion, $hoy)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=? and (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?)");
-        $consulta->bind_param("iss",$numHabitacion,$hoy,$hoy);
+        $consulta->bind_param("iss", $numHabitacion, $hoy, $hoy);
         $consulta->execute();
 
         $resultado = $consulta->get_result();
@@ -269,14 +269,14 @@ class habitaciones
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    
 
-    public function reservasHabitacionOcupada($numHabitacion,$hoy)
+
+    public function reservasHabitacionOcupada($numHabitacion, $hoy)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=? and fechaLlegadaHabitacion <=? and fechaSalidaHabitacion>=?");
-        $consulta->bind_param("iss",$numHabitacion,$hoy,$hoy);
+        $consulta->bind_param("iss", $numHabitacion, $hoy, $hoy);
         $consulta->execute();
 
         $resultado = $consulta->get_result();
@@ -311,20 +311,18 @@ class habitaciones
         $ninos
     ) {
 
+
         $consulta = $this->conexion->conectar()->prepare("insert into habitacion_reservada
         (idReservaHabitacion,idClienteHabitacion,numHabitacionReservada,fechaLlegadaHabitacion,fechaSalidaHabitacion,adultos,ninos) values (?,?,?,?,?,?,?)");
         $consulta->bind_param("iiissii", $idReserva, $idCliente, $numHabitacion, $fechaLlegada, $fechaSalida, $adultos, $ninos);
 
         $resultado = $consulta->execute();
 
-        if($resultado){
-
+        if ($resultado) {
             return $resultado;
-        }else{
-
+        } else {
             return $consulta->error;
         }
-        
     }
 
 

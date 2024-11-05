@@ -1,4 +1,9 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
+import {
+  alertClientFormBooking,
+  confirmAlertBookingExist,
+  alertErrorBooking,
+} from "./alertsBooking.js";
 
 let btnNextStage = document.querySelector(".btnNextStage");
 let booking = JSON.parse(localStorage.getItem("booking"));
@@ -54,6 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+const removeMsjAlertInputs = () => [
+  document
+    .querySelector("form")
+    .querySelectorAll(".alertErrorInput")
+    .forEach((alertMsj) => {
+      alertMsj.textContent = "";
+    }),
+];
 
 function displayIndexRoom() {
   let indexSpan = document.querySelector(".indexRoom");
@@ -152,7 +166,7 @@ function printBooking() {
   }
 }
 
-function inputAlert(key,msjAlertInput) {
+function inputAlert(key, msjAlertInput) {
   let input = [...document.getElementsByName(key)];
 
   input[0].classList.add("inputAlert");
@@ -169,7 +183,6 @@ function removeInputAlert(input) {
 }
 
 const validationsInputs = (value) => {
-  
   let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
   const validations = [
     {
@@ -189,7 +202,7 @@ const validationsInputs = (value) => {
     },
     {
       key: "phone",
-      validation: value.length==8,
+      validation: value.length == 9,
       msj: "*Ingrese un telefono válido",
     },
   ];
@@ -211,20 +224,20 @@ function clientData() {
     );
 
     if (inputToAlert) {
-      console.log(inputToAlert);
       inputAlert(inputToAlert.key, inputToAlert.msj);
     } else {
       inputsValidates.push({ key: k, value: v });
     }
   });
 
-  if (inputsValidates == quantityInputs) {
+  if (inputsValidates.length == quantityInputs) {
     inputsValidates.forEach((inputVal) => {
       client[inputVal.key] = inputVal.value;
     });
+
+    removeMsjAlertInputs();
     createBooking(client);
   }
-  console.log(quantityInputs);
 }
 
 function createBooking(client) {
@@ -236,59 +249,65 @@ function createBooking(client) {
   getIfExistingBooking(clientBooking);
 }
 
-async function getIfExistingBooking(clientBooking) {
+const getIfExistingBooking = (clientBooking) => {
   const dataBooking = {
     client: clientBooking.client,
     date: clientBooking.booking.date,
   };
 
-  try {
-    loading(true);
-    const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
-        JSON.stringify(dataBooking),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const result = await response.json();
-
-    if (result.advertencia) {
-      throw result.advertencia;
-    } else if (result.respuesta) {
-      const confirm = await confirmAlertBookingExist(
-        "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva"
+  loading(true, "Cargando");
+  setTimeout(async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
+          JSON.stringify(dataBooking),
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      if (confirm) {
-        document.querySelector(".modalBooking").style.display = "none";
+      const result = await response.json();
 
-        updateBooking(clientBooking);
+      if (result.advertencia) {
+        throw result.advertencia;
+      } else if (result.respuesta) {
+        loading(false);
+        const confirm = await confirmAlertBookingExist(
+          "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva",
+          "../../img/advertencia.gif"
+        );
+
+        if (confirm) {
+          let bookingToUpdate = result.respuesta;
+          clientBooking.idBooking = bookingToUpdate.idReserva;
+          updateBooking(clientBooking);
+        } else {
+          return;
+        }
       } else {
-        document.querySelector(".modalBooking").style.display = "none";
-        return;
+        realizeBooking(clientBooking);
       }
-    } else {
-      realizeBooking(clientBooking);
+    } catch (error) {
+      loading(false);
+      alertClientFormBooking(error);
     }
-  } catch (error) {
-    alertClientFormBooking(error);
-  } finally {
-    loading(false);
-  }
-}
+  }, 2000);
+};
 
-function loading(loadingState) {
+function loading(loadingState, msj) {
+  if (msj) {
+    loadingSpinner.querySelector("span").textContent = msj;
+  }
+
   if (loadingState) {
-    loadingSpinner.style.display = "block";
-    loadingSpinner.querySelector("span").classList.add("loadingSpanActive");
+    loadingSpinner.style.display = "flex";
+    document.querySelector(".modalBooking").style.display = "flex";
   } else {
     loadingSpinner.style.display = "none";
-    loadingSpinner.querySelector("span").classList.remove("loadingSpanActive");
+    document.querySelector(".modalBooking").style.display = "none";
   }
 }
 
@@ -323,54 +342,60 @@ function clickRemoveAlertInputs() {
 }
 
 async function updateBooking(clientBooking) {
-  loading(true);
-  try {
-    const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
-      {
-        method: "PUT",
-        body: JSON.stringify(clientBooking),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    const result = await response.json();
+  loading(true, "Buscando habitaciones");
 
-    if (typeof result == "string") {
-      throw result;
-    } else {
-      location.href = "pay/public/checkout.html";
+  setTimeout(async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(clientBooking),
+        }
+      );
+      const result = await response.json();
+
+      if (typeof result.respuesta == "string") {
+        throw result.respuesta;
+      } else if (result.respuesta == true) {
+        loading(false);
+        location.href =
+          "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+      }
+    } catch (error) {
+      loading(false);
+
+      alertErrorBooking(error, "../../img/advertencia.gif");
     }
-  } catch (error) {
-    alertErrorBooking(error);
-  } finally {
-    loading(false);
-  }
+  }, 2000);
 }
 
 async function realizeBooking(clientBooking) {
-  loading(true);
+  loading(true, "Buscando habitaciones");
 
-  try {
-    const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/datosReserva.php",
-      {
-        method: "POST",
-        body: JSON.stringify(clientBooking),
-        headers: { "Content-Type": "application/json" },
+  setTimeout(async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+        {
+          method: "POST",
+          body: JSON.stringify(clientBooking),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const result = await response.json();
+
+      if (typeof result.respuesta == "string") {
+        throw response.respuesta;
+      } else {
+        loading(false);
+        location.href =
+          "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
       }
-    );
-    const result = await response.json();
-
-    if (typeof result == "string") {
-      throw result;
-    } else if (result == false) {
-      throw "¡Ups!,hubo un error,vuelve a intentarlo";
-    } else {
-      location.href = "checkout.html";
+    } catch (error) {
+      loading(false);
+      alertErrorBooking(error, "../../img/advertencia.gif");
     }
-  } catch (error) {
-    alertErrorBooking(error);
-  } finally {
-    loading(false);
-  }
+  }, 2000);
 }

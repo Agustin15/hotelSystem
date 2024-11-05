@@ -370,6 +370,40 @@ body {
   background: linear-gradient(#0f3a4d, #0498a0);
 }
 
+.loading {
+  display: none;
+  align-items: start;
+  justify-content: center;
+  margin: auto;
+  gap: 1rem;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10rem;
+  opacity: 50%;
+}
+.loading img {
+  width: 40px;
+}
+
+.errorHotelRooms {
+  font-size: 23px;
+  opacity: 60%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 7rem;
+  text-align: center;
+}
+.errorHotelRooms img {
+  width: 100px;
+}
+.errorHotelRooms span {
+  font-weight: 200;
+  width: 600px;
+}
+
 #containRoomsAndCart {
   display: flex;
   flex-direction: row;

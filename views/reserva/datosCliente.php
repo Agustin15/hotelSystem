@@ -46,7 +46,13 @@
 
         <div class="modalBooking">
 
-            <div class="alertBookingExists">
+        <div class="loading">
+
+        <span>Cargando</span>
+        <img src="../../img/spinnerBooking.gif">
+        </div>
+        
+            <div class="alertBooking">
 
                 <div>
                     <img src="../../img/advertencia.gif">
@@ -56,7 +62,7 @@
                     <p></p>
                 </div>
 
-                <div class="containButtons">
+                <div class="containButtonsAlert">
                     <button class="btnOK">Ok</button>
                     <button class="btnCancel">Cancelar</button>
                 </div>
@@ -199,17 +205,7 @@
 
         </div>
 
-
-        <div class="containFooter">
-        <div class="loading">
-
-            <div class="gif">
-                <span class="loadingSpan">Buscando habitaciones</span>
-                <img src="../../img/spinnerBooking.gif">
-
-            </div>
-        </div>
-        <div class="containButtons">
+        <div class="containButtonsForm">
 
             <div>
 
@@ -219,7 +215,7 @@
                 <button class="btnNextStage">Realizar reserva</button>
             </div>
         </div>
-        </div>
+
 
     </div>
 </body>

@@ -1,3 +1,32 @@
+function alertaLoginAdmin(msj) {
+  let alertForm = document.querySelector(".alertLogin");
+  let barProgress = alertForm.querySelector(".bar");
+
+  alertForm.classList.remove("alertLoginDesactive");
+  alertForm.classList.add("alertLoginActive");
+  alertForm.querySelector("p").textContent = msj;
+
+  setTimeout(function () {
+    alertForm.querySelector(".contain").style.display = "block";
+    barProgress.classList.add("barActive");
+  }, 500);
+
+  setTimeout(() => {
+    removeAlertLoginAdmin();
+  }, 10000);
+}
+
+function removeAlertLoginAdmin() {
+  let alertForm = document.querySelector(".alertLogin");
+  let barProgress = alertForm.querySelector(".bar");
+
+  alertForm.querySelector("p").textContent = "";
+  alertForm.querySelector(".contain").style.display = "none";
+  alertForm.classList.add("alertLoginDesactive");
+  alertForm.classList.remove("alertLoginActive");
+  barProgress.classList.remove("barActive");
+}
+
 function inputAlert(inputName) {
   let inputsName = [...document.getElementsByName(inputName)];
 
@@ -62,35 +91,39 @@ async function comprobateUser(user) {
   loading(true);
 
   let userJson = JSON.stringify(user);
-  try {
-    const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/autenticacionLogin.php?user=" +
-        userJson,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
+
+  setTimeout(async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/sistema%20Hotel/controller/admin/autenticacionLogin.php?user=" +
+          userJson,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.respuesta == true) {
+        location.href =
+          "http://localhost/sistema%20Hotel/views/admin/index.php";
+      } else {
+        throw result.respuesta;
       }
-    );
-
-    const result = await response.json();
-
-    if (result.respuesta == true) {
-      location.href = "panelAdmin.php";
-    } else {
-      throw result.respuesta;
+    } catch (error) {
+      if (error == "Contraseña incorrecta") {
+        inputAlert("password");
+      } else if (error == "No reconocemos este usuario") {
+        inputAlert("user");
+      }
+      alertaLoginAdmin(error);
+    } finally {
+      loading(false);
     }
-  } catch (error) {
-    if (error == "Contraseña incorrecta") {
-      inputAlert("password");
-    } else if (error == "No reconocemos este usuario") {
-      inputAlert("user");
-    }
-    alertaLoginAdmin(error);
-  } finally {
-    loading(false);
-  }
+  }, 200);
 }
 
 document.addEventListener("DOMContentLoaded", function () {

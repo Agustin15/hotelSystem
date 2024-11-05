@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . "/../conexion/conexion.php");
+
 function totalRoomsBookingClient($booking)
 {
 
@@ -144,18 +146,32 @@ function setRoomsToBookingBd($idReserva, $habitacion, $dataClient, $llegada, $sa
 {
 
 
+    $conexion = new conexion();
+
     foreach ($roomsSelectedForClient as $room) {
 
         foreach ($room as $roomData) {
-            $roomAdded = $habitacion->setHabitacionReservada(
-                $idReserva,
-                $dataClient['idCliente'],
-                $roomData['numRoom'],
-                $llegada,
-                $salida,
-                $roomData['adults'],
-                $roomData['childrens']
-            );
+
+            try {
+                $conexion->conectar()->begin_transaction();
+
+                $roomAdded = $habitacion->setHabitacionReservada(
+                    $idReserva,
+                    $dataClient['idCliente'],
+                    $roomData['numRoom'],
+                    $llegada,
+                    $salida,
+                    $roomData['adults'],
+                    $roomData['childrens']
+                );
+
+                $conexion->conectar()->commit();
+            } catch (Exception $error) {
+                $conexion->conectar()->rollback();
+                return $error;
+            } finally {
+                $conexion->cerrarConexion();
+            }
         }
     }
 
@@ -179,5 +195,3 @@ function sendMail($client, $llegada, $salida, $booking, $option)
 
     return $correo->sendMail();
 }
-
-

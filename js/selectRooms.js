@@ -47,13 +47,29 @@ document.addEventListener("DOMContentLoaded", async function () {
     submitDateBooking(dateBooking);
     printDateBookingInCart(dateBooking);
     rooms = JSON.parse(localStorage.getItem("rooms"));
-   
+
     printRoomsCart();
   }
 });
 
+const loading = (status) => {
+  if (status) {
+    document.querySelector(".loading").style.display = "flex";
+  } else {
+    document.querySelector(".loading").style.display = "none";
+  }
+};
+
+const displayErrorGetHotelRooms = (status) => {
+  if (status) {
+    document.querySelector(".errorHotelRooms").style.display = "flex";
+  } else {
+    document.querySelector(".errorHotelRooms").style.display = "none";
+  }
+};
 async function submitGetCategoryHotelRooms() {
   try {
+    loading(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/habitaciones.php?option=roomsHotel",
       {
@@ -65,9 +81,12 @@ async function submitGetCategoryHotelRooms() {
     );
 
     const result = await response.json();
+    displayErrorGetHotelRooms(false);
     return result;
   } catch (error) {
-    console.log(error);
+    displayErrorGetHotelRooms(true);
+  } finally {
+    loading(false);
   }
 }
 
@@ -782,7 +801,6 @@ const cleanQuantityAvailable = () => {
   }
 };
 
-
 buttonNext.addEventListener("click", function () {
   booking = {
     date: dateBooking,
@@ -794,5 +812,3 @@ buttonNext.addEventListener("click", function () {
   localStorage.setItem("booking", JSON.stringify(booking));
   location.href = "datosCliente.php";
 });
-
-

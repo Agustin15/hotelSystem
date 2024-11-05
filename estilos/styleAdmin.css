@@ -6,6 +6,8 @@
 body {
   background-color: rgb(243, 243, 243);
   font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  gap: 13rem;
 }
 
 #loginAdmin {
@@ -315,7 +317,7 @@ body {
   margin-left: 0px;
   margin-top: -14px;
   position: fixed;
-  background: linear-gradient(#126b91, #0498a0);
+  background: linear-gradient(#055b5e, #04b8c2);
   color: rgb(255, 255, 255);
   text-align: center;
   width: 180px;
@@ -583,244 +585,78 @@ body {
   margin-top: 20px;
 }
 
-#containClienteAndGeneral {
+#dashboard {
   display: flex;
-  flex-direction: row;
+  gap: 2rem;
+  margin-top: 2rem;
+
 }
 
-#dataGeneral {
+.containGraphicBookings,
+.containGraphicRevenues{
+
   display: flex;
   flex-direction: column;
-  margin-top: -5px;
-}
-
-#dataHabitaciones {
-  width: 540px;
-  height: 160px;
-  box-shadow: 0px 5px 0px 0px rgb(76, 180, 221),
-    6px 6px 6px rgba(44, 44, 44, 0.3);
-  color: rgb(76, 180, 221);
+  align-items: center;
+  gap:2rem;
+  width:34rem;
+  height: 17rem;
+  padding-top: 1rem;
   background-color: white;
-  margin-left: 50px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 4%;
+  box-shadow: 2px 2px 2px rgb(180, 180, 180);
+  border-radius: 4px;
+  position: relative;
+
 }
 
-#dataHabitaciones #title,
-#dataGeneral #ganancias #title {
-  font-weight: bolder;
-  font-size: 25px;
-  padding-left: 20px;
-}
+.containGraphicBookings .loadingBookings,
+.containGraphicRevenues .loadingRevenues{
 
-#dataHabitaciones #total {
-  padding-left: 20px;
-  font-size: 20px;
-  font-weight: bolder;
-}
-
-#dataHabitaciones #stateRooms {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-#dataHabitaciones #libres,
-#dataHabitaciones #ocupadas {
-  padding-left: 20px;
-  font-size: 20px;
-  font-weight: bolder;
-}
-
-#dataHabitaciones #libres #cantHabitaciones,
-#dataHabitaciones #ocupadas #cantHabitaciones {
-  display: flex;
-  flex-direction: row;
-  font-size: 14px;
-  gap: 20px;
-  margin-top: 10px;
-}
-
-#dataGeneral #panelReservaAndGanancias {
-  display: flex;
-  flex-direction: row;
-}
-
-#dataGeneral #ganancias {
-  width: 250px;
-  height: 140px;
-  box-shadow: 0px 5px 0px 0px rgb(219, 67, 67),
-    6px 6px 6px rgba(44, 44, 44, 0.3);
-  background-color: white;
-  margin-left: 50px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 4%;
-}
-
-#dataGeneral #ganancias #title {
-  color: rgb(255, 75, 75);
-  padding-top: 5px;
-}
-
-#dataGeneral #ganancias #total,
-#dataGeneral #ganancias #ultimoMes,
-#dataGeneral #ganancias #ingresosUltimoMes {
-  padding-left: 20px;
-  font-size: 16px;
-  font-weight: bolder;
-  color: rgb(255, 75, 75);
-}
-
-#dataGeneral #ganancias #ingresosUltimoMes {
-  font-size: 16px;
-}
-
-#dataGeneral #reservas {
-  width: 250px;
-  height: 140px;
-  box-shadow: 0px 5px 0px 0px rgb(90, 67, 219),
-    6px 6px 6px rgba(44, 44, 44, 0.3);
-  background-color: white;
-  margin-left: 50px;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 4%;
-}
-
-#dataGeneral #reservas #title,
-#dataGeneral #reservas #antiguas,
-#dataGeneral #reservas #enCurso,
-#dataGeneral #reservas #pendientes {
-  color: rgb(90, 67, 219);
-  padding-top: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  padding-left: 20px;
-}
-
-#dataGeneral #reservas #antiguas,
-#dataGeneral #reservas #enCurso,
-#dataGeneral #reservas #pendientes {
-  font-size: 15px;
-}
-
-#containViewHabitacionAndGananacias {
-  display: flex;
-  flex-direction: row;
-  gap: 54px;
-}
-
-.titleGraphic {
-  background: #34b1a6;
-  width: 100%;
-  height: 35px;
-  padding-top: 17px;
-  margin-top: 0px;
-}
-
-#viewClientesDashboard,
-#viewHabitacionesDashboard,
-#viewGananciasDashboard {
-  width: 520px;
-  height: 290px;
-  display: block;
-  margin-left: 15%;
-  margin-top: 20px;
-  text-align: center;
-  list-style: none;
-  border: 1px solid rgb(238, 238, 238);
-  background-color: rgba(255, 255, 255, 0.822);
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-}
-
-#viewGananciasDashboard {
-  margin-left: 0px;
-}
-
-#viewClientesDashboard h3,
-#viewHabitacionesDashboard h3,
-#viewGananciasDashboard h3 {
-  font-size: 18px;
-  margin-left: -20px;
-  color: white;
-}
-
-#containButtonClientes,
-#containButtonHabitaciones,
-#containButtonGanancias {
   display: none;
-}
-
-#viewClientesDashboard button,
-#viewHabitacionesDashboard button,
-#viewGananciasDashboard button {
-  width: 80px;
-  height: 30px;
-  color: rgb(0, 0, 0);
-  border: none;
-  font-size: 18px;
-  background: none;
-  opacity: 50%;
-  float: right;
-  margin-top: 10px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-}
-
-#viewGananciasDashboard button {
-  display: block;
-}
-
-#viewHabitacionesDashboard button,
-#viewGananciasDashboard button {
-  margin-top: 25px;
-}
-
-#sinDatosGraficaHabitaciones,
-#sinDatosGraficaClientes,
-#sinDatosGraficaGanancias {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  font-size: 14px;
-  margin-top: -29%;
-  text-align: center;
-}
-
-#sinDatosGraficaHabitaciones img,
-#sinDatosGraficaClientes img,
-#sinDatosGraficaGanancias img {
-  width: 70px;
-  opacity: 65%;
-  margin-top: 10px;
-}
-
-#sinDatosGraficaHabitaciones h1,
-#sinDatosGraficaClientes h1,
-#sinDatosGraficaGanancias h1 {
+  margin-top:2.3rem;
+  gap: 0.3rem;
+  opacity: 40%;
   font-size: 20px;
-  opacity: 30%;
 }
 
-#viewClientesDashboard button:hover,
-#viewHabitacionesDashboard button:hover,
-#viewGananciasDashboard button:hover {
-  opacity: 100%;
+
+
+.containGraphicBookings .loadingRevenues img,
+.containGraphicRevenues .loadingBookings img{
+
+  width: 40px;
 }
 
-#graficaClientesDashboard,
-#graficaHabitacionesDashboard,
-#graficaGananciasDashboard {
-  width: 80%;
-  height: 160px;
+.containGraphicBookings .noDataBookings,
+.containGraphicRevenues .noDataRevenues{
+
+  display:none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
+  margin-top:2.3rem;
+  gap: 0.5rem;
+  opacity: 50%;
+  font-size: 22px;
 }
 
-#graficaGananciasDashboard {
-  margin-top: 25px;
+.containGraphicBookings .noData img,
+.containGraphicRevenues .noDataRevenues img{
+
+  width: 60px;
 }
+
+#charBookings,
+#charRevenues{
+
+width: 99%;
+min-height: 78%;
+color: black;
+
+}
+

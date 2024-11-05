@@ -272,12 +272,49 @@ body {
     background: linear-gradient(#0f3a4d, #0498a0);
   }
 }
+
+.loading {
+  display: none;
+  align-items: start;
+  justify-content: center;
+  margin: auto;
+  gap: 1rem;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10rem;
+  opacity: 50%;
+
+  img {
+    width: 40px;
+  }
+}
+
+.errorHotelRooms {
+  font-size: 23px;
+  opacity: 60%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 7rem;
+  text-align: center;
+  img {
+    width: 100px;
+  }
+
+  span{
+
+    font-weight:200;
+    width:600px;
+  }
+}
+
 #containRoomsAndCart {
-  display: flex;
+  display:flex;
   flex-direction: row;
   justify-content: space-between;
   height: auto;
-
 }
 
 #containRooms {
@@ -538,255 +575,250 @@ body {
   }
 }
 
-.containCart{
-
-
- #cart {
-  width: 460px;
-  height: auto;
-  max-height: 800px;
-  background: white;
-  margin-top: 3rem;
-  margin-right: 1rem;
-  text-align: center;
-  border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(175, 175, 175);
-  padding-top: 1rem;
-  padding-bottom: 0.7rem;
-  font-family: Arial, Helvetica, sans-serif;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  display: none;
-}
-
- #cart #title h6 {
-  color: rgb(5, 68, 104);
-  font-size: 19px;
-  font-weight: bold;
-}
-
-#cart #dateBooking {
-  color: rgb(5, 68, 104);
-  display: flex;
-  justify-content: center;
-  padding-right: 1rem;
-  gap: 6rem;
-  font-weight: bold;
-  padding-top: 1rem;
-
-}
-
- #cart #dateBooking span {
-  padding-left: 0.5rem;
-}
- #cart .containNight {
-  display: flex;
-  width: 100%;
-  color: white;
-  background: linear-gradient(#126b91, #0498a0);
-  padding: 1rem;
-  flex-direction: row;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  font-size: 16px;
-  font-weight: bold;
-  align-items: baseline;
-  justify-content: center;
-}
- #cart .containNight img {
-  width: 20px;
-}
-
-#roomsBooking {
-  
-  height: auto;
-  max-height: 700px;
-  width: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin-top: 1rem;
-  padding-top:1rem;
-  padding-left: 0;
-  
-
-  li {
-    width:100%;
-    height: 125px;
-    gap: 0.1rem;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    font-size: 15px;
-    background: none;
+.containCart {
+  #cart {
+    width: 460px;
+    height: auto;
+    max-height: 800px;
+    background: white;
+    margin-top: 3rem;
+    margin-right: 1rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px rgb(175, 175, 175);
+    padding-top: 1rem;
+    padding-bottom: 0.7rem;
     font-family: Arial, Helvetica, sans-serif;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    display: none;
+  }
+
+  #cart #title h6 {
+    color: rgb(5, 68, 104);
+    font-size: 19px;
     font-weight: bold;
-    border-top: 1px solid rgb(194, 194, 194);
-    color: rgb(0, 0, 0);
-    font-size: 13px;
+  }
 
-    .imgRoom {
-      width: 220px;
-      height: 112px;
-      padding-top: 0.5rem;
-      padding-left: 0.1rem;
+  #cart #dateBooking {
+    color: rgb(5, 68, 104);
+    display: flex;
+    justify-content: center;
+    padding-right: 1rem;
+    gap: 6rem;
+    font-weight: bold;
+    padding-top: 1rem;
+  }
 
-      img {
-        width: 220px;
-        height: 100%;
-      }
-    }
+  #cart #dateBooking span {
+    padding-left: 0.5rem;
+  }
+  #cart .containNight {
+    display: flex;
+    width: 100%;
+    color: white;
+    background: linear-gradient(#126b91, #0498a0);
+    padding: 1rem;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: baseline;
+    justify-content: center;
+  }
+  #cart .containNight img {
+    width: 20px;
+  }
 
-    .dataRoom {
+  #roomsBooking {
+    height: auto;
+    max-height: 700px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    padding-left: 0;
+
+    li {
+      width: 100%;
+      height: 125px;
+      gap: 0.1rem;
       display: flex;
-      color: white;
-      height: 104px;
-      width: 230px;
-      background: linear-gradient(#126b91, #0498a0);
-      padding-top: 0.2rem;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 0.5rem;
+      align-items: start;
+      justify-content: center;
+      font-size: 15px;
+      background: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      border-top: 1px solid rgb(194, 194, 194);
+      color: rgb(0, 0, 0);
+      font-size: 13px;
 
-      .header {
+      .imgRoom {
+        width: 220px;
+        height: 112px;
+        padding-top: 0.5rem;
+        padding-left: 0.1rem;
+
+        img {
+          width: 220px;
+          height: 100%;
+        }
+      }
+
+      .dataRoom {
         display: flex;
-        justify-content: space-between;
+        color: white;
+        height: 104px;
+        width: 230px;
+        background: linear-gradient(#126b91, #0498a0);
+        padding-top: 0.2rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+
+        .header {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          span {
+            margin-left: 1rem;
+          }
+
+          img {
+            width: 12px;
+            height: 11px;
+            opacity: 70%;
+            margin-right: 0.3rem;
+          }
+
+          img:hover {
+            opacity: 100%;
+          }
+        }
+      }
+
+      .guests {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.2rem;
         width: 100%;
+      }
+
+      .changeQuantity {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 0.7rem;
+        margin-top: 0.1rem;
 
         span {
-          margin-left: 1rem;
+          font-size: 16px;
         }
 
         img {
-          width: 12px;
-          height: 11px;
-          opacity: 70%;
-          margin-right: 0.3rem;
+          width: 17px;
+          height: 17px;
         }
 
         img:hover {
-          opacity: 100%;
+          transform: scale(1.1);
         }
       }
-    }
 
-    .guests {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.2rem;
-      width: 100%;
-    }
-
-    .changeQuantity {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      gap: 0.7rem;
-      margin-top: 0.1rem;
-
-      span {
-        font-size: 16px;
+      .total {
+        margin-left: 7.2rem;
+        padding: 0.1rem;
       }
-
-      img {
-        width: 17px;
-        height: 17px;
-      }
-
-      img:hover {
-        transform: scale(1.1);
-      }
-    }
-
-    .total {
-      margin-left: 7.2rem;
-      padding: 0.1rem;
     }
   }
-}
 
-#containDeposit {
-  background-color: white;
-  width: 100%;
-  height: 220px;
-  border-radius: 3px;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  border-top: 1px solid rgb(194, 194, 194);
-  padding-top: 0.5rem;
-  padding-bottom: 1rem;
-}
+  #containDeposit {
+    background-color: white;
+    width: 100%;
+    height: 220px;
+    border-radius: 3px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-top: 1px solid rgb(194, 194, 194);
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+  }
 
-#containDeposit .span {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  padding-left: 1rem;
-  margin-right: 14rem;
-}
+  #containDeposit .span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-left: 1rem;
+    margin-right: 14rem;
+  }
 
-#containDeposit .containTotal {
-  display: flex;
-  justify-content: start;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  background: #0498a0;
-  padding: 0.5rem;
-  width: 90%;
-  height: 40px;
-  border-radius: 2px;
-}
+  #containDeposit .containTotal {
+    display: flex;
+    justify-content: start;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    background: #0498a0;
+    padding: 0.5rem;
+    width: 90%;
+    height: 40px;
+    border-radius: 2px;
+  }
 
-#containDeposit .containNotice {
-  background: rgba(28, 178, 184, 0.3);
-  color: rgb(33, 182, 241);
-  display: flex;
-  font-size: 12px;
-  border-radius: 3px;
-  justify-content: start;
-  align-items: center;
-  padding: 0.5rem;
-  height: 27px;
-  width: 240px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-}
+  #containDeposit .containNotice {
+    background: rgba(28, 178, 184, 0.3);
+    color: rgb(33, 182, 241);
+    display: flex;
+    font-size: 12px;
+    border-radius: 3px;
+    justify-content: start;
+    align-items: center;
+    padding: 0.5rem;
+    height: 27px;
+    width: 240px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
 
-#containDeposit .containNotice img {
-  width: 15px;
-}
-#containDeposit .containNotice .phrase {
-  padding-left: 1rem;
-  padding-top: 0.1rem;
-}
+  #containDeposit .containNotice img {
+    width: 15px;
+  }
+  #containDeposit .containNotice .phrase {
+    padding-left: 1rem;
+    padding-top: 0.1rem;
+  }
 
-#containDeposit .containNotice .icon {
-  margin-top: -0.5rem;
-}
+  #containDeposit .containNotice .icon {
+    margin-top: -0.5rem;
+  }
 
-#containDeposit .containButton {
-  margin-top: 0.5rem;
-}
+  #containDeposit .containButton {
+    margin-top: 0.5rem;
+  }
 
-#containDeposit .containButton button {
-  width:400px;
-  background: rgba(28, 178, 184, 0.3);
-  color: rgb(33, 182, 241);
-  height: 34px;
-  border: none;
-  font-weight: bold;
-}
+  #containDeposit .containButton button {
+    width: 400px;
+    background: rgba(28, 178, 184, 0.3);
+    color: rgb(33, 182, 241);
+    height: 34px;
+    border: none;
+    font-weight: bold;
+  }
 
-#containDeposit .containButton button:hover {
-  background: rgba(49, 209, 214, 0.3);
-}
+  #containDeposit .containButton button:hover {
+    background: rgba(49, 209, 214, 0.3);
+  }
 }

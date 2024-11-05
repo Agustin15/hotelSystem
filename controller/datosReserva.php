@@ -36,74 +36,81 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
             $freeRooms = getFreeRooms($habitacion, $booking);
 
-            $roomsSelectedForClient = getRoomsSelectedForClient($booking, $freeRooms);
-
-
-            if (gettype($roomsSelectedForClient) == "string") {
-                $respuesta = array("respuesta" => $roomsSelectedForClient);
+            if (empty($freeRooms)) {
+                $respuesta = array("respuesta" => "¡Ups!,ya no nos quedan habitaciones disponibles");
             } else {
+                $roomsSelectedForClient = getRoomsSelectedForClient($booking, $freeRooms);
+                $roomsSelectedForClient = getRoomsSelectedForClient($updatebooking['booking'], $freeRooms);
+
+                if (gettype($roomsSelectedForClient) == "string") {
+
+                    $respuesta = array("respuesta" => $roomsSelectedForClient);
+                } else {
 
 
-                $clientExisted = $cliente->getClienteCorreo($client['mail']);
-                $resultAddClient = true;
-                $roomAdded;
+                    $clientExisted = $cliente->getClienteCorreo($client['mail']);
+                    $resultAddClient = true;
+                    $roomAdded;
 
-                if (empty($clientExisted->fetch_array(MYSQLI_ASSOC))) {
+                    if (empty($clientExisted->fetch_array(MYSQLI_ASSOC))) {
 
-                    //agregar cliente
-                    $cliente->setNombre($client['name']);
-                    $cliente->setApellido($client['lastName']);
-                    $cliente->setCorreo($client['mail']);
-                    $cliente->setTelefono($client['phone']);
-                    $resultAddClient = $cliente->setClienteBd();
-                }
-                if ($resultAddClient) {
-
-
-                    //agregar reserva
-                    $dataClient = $cliente->getClienteCorreo($client['mail'])->fetch_array(MYSQLI_ASSOC);
-                    $llegada = new DateTime($booking['date']['start']);
-                    $salida = new DateTime($booking['date']['end']);
-
-                    $reserva->setIdCliente($dataClient['idCliente']);
-                    $reserva->setLlegada($llegada->format("Y-m-d"));
-                    $reserva->setSalida($salida->format("Y-m-d"));
-                    $reserva->setCantidadHabitaciones($totalRoomsBooking);
-
-                    $resultAddBooking = $reserva->addReservaBd();
+                        //agregar cliente
+                        $cliente->setNombre($client['name']);
+                        $cliente->setApellido($client['lastName']);
+                        $cliente->setCorreo($client['mail']);
+                        $cliente->setTelefono($client['phone']);
+                        $resultAddClient = $cliente->setClienteBd();
+                    }
+                    if ($resultAddClient) {
 
 
-                    if ($resultAddBooking) {
+                        //agregar reserva
+                        $dataClient = $cliente->getClienteCorreo($client['mail'])->fetch_array(MYSQLI_ASSOC);
+                        $llegada = new DateTime($booking['date']['start']);
+                        $salida = new DateTime($booking['date']['end']);
 
-                        $bookingClient = $reserva->getReservaPorIdClienteAndFecha(
-                            $dataClient['idCliente'],
-                            $llegada->format("Y-m-d"),
-                            $salida->format("Y-m-d")
-                        );
+                        $reserva->setIdCliente($dataClient['idCliente']);
+                        $reserva->setLlegada($llegada->format("Y-m-d"));
+                        $reserva->setSalida($salida->format("Y-m-d"));
+                        $reserva->setCantidadHabitaciones($totalRoomsBooking);
 
-
-                        $roomAdded = setRoomsToBookingBd(
-                            $bookingClient['idReserva'],
-                            $habitacion,
-                            $dataClient,
-                            $llegada->format("Y-m-d"),
-                            $salida->format("Y-m-d"),
-                            $roomsSelectedForClient
-                        );
-
-                        if ($roomAdded) {
+                        $resultAddBooking = $reserva->addReservaBd();
 
 
-                            $resultPago = $pago->setPago($bookingClient['idReserva'], $dataClient['idCliente'], $booking['totalDeposit']);
+                        if ($resultAddBooking) {
 
-                            $respuesta = array("respuesta" => $resultPago);
+                            $bookingClient = $reserva->getReservaPorIdClienteAndFecha(
+                                $dataClient['idCliente'],
+                                $llegada->format("Y-m-d"),
+                                $salida->format("Y-m-d")
+                            );
+
+
+                            $roomAdded = setRoomsToBookingBd(
+                                $bookingClient['idReserva'],
+                                $habitacion,
+                                $dataClient,
+                                $llegada->format("Y-m-d"),
+                                $salida->format("Y-m-d"),
+                                $roomsSelectedForClient
+                            );
+                            if ($roomAdded !== true) {
+                                $respuesta = array("respuesta" => "¡Ups!, 
+                                hubo un error al realizar la reserva,
+                                vuelve a intentarlo más tarde");
+                            } else {
+
+
+                                $resultPago = $pago->setPago($bookingClient['idReserva'], $dataClient['idCliente'], $booking['totalDeposit']);
+
+                                $respuesta = array("respuesta" => $resultPago);
+                            }
                         }
                     }
+                    echo json_encode($respuesta);
                 }
             }
-            echo json_encode($respuesta);
         }
-
         break;
 
 
@@ -119,52 +126,57 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $freeRooms = getFreeRooms($habitacion, $updatebooking['booking']);
 
-        $roomsSelectedForClient = getRoomsSelectedForClient($updatebooking['booking'], $freeRooms);
-
-
-        if (gettype($roomsSelectedForClient) == "string") {
-            $respuesta = array("respuesta" => $roomsSelectedForClient);
+        if (empty($freeRooms)) {
+            $respuesta = array("respuesta" => "¡Ups!,ya no nos quedan habitaciones disponibles");
         } else {
+            $roomsSelectedForClient = getRoomsSelectedForClient($updatebooking['booking'], $freeRooms);
 
-            $dataClient = $cliente->getClienteCorreo($updatebooking['client']['mail'])->fetch_array(MYSQLI_ASSOC);
+            if (gettype($roomsSelectedForClient) == "string") {
 
-            $reserva->setIdReserva($updatebooking['idBooking']);
-            $reserva->setIdCliente($dataClient['idCliente']);
-            $reserva->setLlegada($llegada->format("Y-m-d"));
-            $reserva->setSalida($salida->format("Y-m-d"));
+                $respuesta = array("respuesta" => $roomsSelectedForClient);
+            } else {
+                $dataClient = $cliente->getClienteCorreo($updatebooking['client']['mail'])->fetch_array(MYSQLI_ASSOC);
 
-            $dataBookingPast = $reserva->getReservaPoridReserva($updatebooking['idBooking']);
+                $reserva->setIdReserva($updatebooking['idBooking']);
+                $reserva->setIdCliente($dataClient['idCliente']);
+                $reserva->setLlegada($llegada->format("Y-m-d"));
+                $reserva->setSalida($salida->format("Y-m-d"));
 
-            $newQuantityRooms = $totalRoomsBooking + $dataBookingPast['cantidadHabitaciones'];
-            $reserva->setCantidadHabitaciones($newQuantityRooms);
+                $dataBookingPast = $reserva->getReservaPoridReserva($updatebooking['idBooking']);
 
-            $resultUpdate = $reserva->updateReserva();
+                $newQuantityRooms = $totalRoomsBooking + $dataBookingPast['cantidadHabitaciones'];
+                $reserva->setCantidadHabitaciones($newQuantityRooms);
 
-            if ($resultUpdate) {
+                $resultUpdate = $reserva->updateReserva();
+
+                if ($resultUpdate) {
 
 
-                $roomAdded = setRoomsToBookingBd(
-                    $updatebooking['idBooking'],
-                    $habitacion,
-                    $dataClient,
-                    $llegada->format("Y-m-d"),
-                    $salida->format("Y-m-d"),
-                    $roomsSelectedForClient
-                );
+                    $roomAdded = setRoomsToBookingBd(
+                        $updatebooking['idBooking'],
+                        $habitacion,
+                        $dataClient,
+                        $llegada->format("Y-m-d"),
+                        $salida->format("Y-m-d"),
+                        $roomsSelectedForClient
+                    );
 
-                if ($roomAdded) {
+                    if ($roomAdded !== true) {
 
-                    $pastPay = $pago->getPago($updatebooking['idBooking']);
+                        $respuesta = array("respuesta" => "¡Ups!, hubo un error al realizar la reserva,
+                        vuelve a intentarlo más tarde");
+                    } else {
 
-                    $newDeposit = $updatebooking['booking']['totalDeposit'] + $pastPay['deposito'];
-                    $resultPay = $pago->updatePago($updatebooking['idBooking'], $newDeposit);
+                        $pastPay = $pago->getPago($updatebooking['idBooking']);
 
-                    $respuesta = array("respuesta" => $resultPay);
+                        $newDeposit = $updatebooking['booking']['totalDeposit'] + $pastPay['deposito'];
+                        $resultPay = $pago->updatePago($updatebooking['idBooking'], $newDeposit);
+
+                        $respuesta = array("respuesta" => $resultPay);
+                    }
                 }
             }
         }
-
-
         echo json_encode($respuesta);
 
 
