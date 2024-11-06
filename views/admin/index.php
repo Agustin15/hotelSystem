@@ -6,7 +6,7 @@ $usuario = $_SESSION['usuario'];
 
 if (empty($usuario)) {
 
-    header("location:loginAdmin.php");
+    header("location:../loginAdmin");
 } else {
 
     require("../../model/claseUsuario.php");
@@ -31,6 +31,7 @@ if (empty($usuario)) {
     $_SESSION['genero'] = $genero;
 }
 
+$actualYear=date("Y");
 ?>
 
 <!DOCTYPE html>
@@ -189,17 +190,26 @@ if (empty($usuario)) {
 
     </header>
 
-
-
-
-
     <div id="dashboard">
 
-        <div class="itemsRoomsData"></div>
+    <div class="rowOne">
+        <div class="containItemsData">
+            <ul class="itemsData"></ul>
+           
+        </div>
+    
+        <div class="containGraphicRooms">
+        <h4>Categorias de habitacion mas reservadas en este año (<?php echo $actualYear ?>) </h4>
+        <br>
+        <div id="charRooms"></div>
+        </div>
+        </div>
+         
 
+        <div class="rowTwo">
         <div class="containGraphicBookings">
 
-            <h3>Reservas de este año (2024)</h3>
+            <h3>Reservas de este año (<?php echo $actualYear ?>)</h3>
             <div class="loadingBookings">
                 <img src="../../img/barCharSpinner.gif">
                 <span>Cargando datos</span>
@@ -235,6 +245,7 @@ if (empty($usuario)) {
 
             <div id="charRevenues"></div>
 
+        </div>
         </div>
 
 

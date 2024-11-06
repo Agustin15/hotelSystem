@@ -1,5 +1,12 @@
-import { getClientsByMonthActualYear,getRevenueActualYear } from "./chart.js";
-import displayItemsDataCategoryRooms from "./itemsData.js";
+import {
+  getClientsByMonthActualYear,
+  getRevenueActualYear,
+  getCategoryRoomsMostReserved,
+} from "./chart.js";
+import {
+  displayItemsDataCategoryRooms,
+  displayItemDataRevenuesActual,
+} from "./itemsData.js";
 
 function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
@@ -128,9 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.getElementById("dashboard")) {
     getClientsByMonthActualYear(actualYear);
-    // getCategoryRoomsMostReserved();
+    getCategoryRoomsMostReserved();
     getRevenueActualYear();
     displayItemsDataCategoryRooms();
-
+    displayItemDataRevenuesActual();
   }
 });

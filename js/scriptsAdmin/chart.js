@@ -1,5 +1,7 @@
+CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
+
 function getMes(numMes) {
- let meses = [
+  let meses = [
     "Enero",
     "Febrero",
     "Marzo",
@@ -65,7 +67,7 @@ async function getClientsByMonthActualYear(actualYear) {
 
 function dataPointsToGraphicClientsDashboard(monthsClients) {
   let dataPointsMonthsClients = [];
-  
+
   dataPointsMonthsClients = monthsClients.map((monthClients) => {
     let monthString = getMes(monthClients.month);
 
@@ -89,8 +91,6 @@ function dataPointsToGraphicClientsDashboard(monthsClients) {
   }
 }
 function graphicClientsDashboard(dataPoints, grafica, titulo) {
-  CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
-
   var chart = new CanvasJS.Chart(grafica, {
     animationEnabled: true,
     colorSet: "greenShades",
@@ -169,34 +169,6 @@ function dataPointsToGraphicRevenues(revenuesByMonth) {
   }
 }
 
-function graficarHabitaciones(
-  dataPointsHabitacionesReservadas,
-  graficaHabitaciones,
-  title
-) {
-  var chart = new CanvasJS.Chart(graficaHabitaciones, {
-    theme: "light2",
-    animationEnabled: true,
-    title: {
-      text: title,
-    },
-
-    data: [
-      {
-        type: "pie",
-        startAngle: 25,
-        toolTipContent: "<b>{label}</b>: {y}%",
-        showInLegend: "true",
-        legendText: "{label}",
-        indexLabelFontSize: 16,
-        indexLabel: "{label} - {y}%",
-        dataPoints: dataPointsHabitacionesReservadas,
-      },
-    ],
-  });
-  chart.render();
-}
-
 const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
   var chart = new CanvasJS.Chart(graficaGanancias, {
     animationEnabled: true,
@@ -271,9 +243,6 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
   );
 
   if (totalRoomsReserved > 0) {
-    $("#containButtonHabitaciones").css("display", "block");
-    $("#sinDatosGraficaHabitaciones").css("display", "none");
-
     dataPointsRoomsReserved = quantitysRoomsCategoryReserved.map(
       (roomCategory) => {
         let percentageCategory =
@@ -290,12 +259,41 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
   }
 
   if (dataPointsRoomsReserved.length > 0) {
-    graficarHabitaciones(
-      dataPointsRoomsReserved,
-      "graficaHabitacionesDashboard",
-      ""
-    );
+    graficarHabitaciones(dataPointsRoomsReserved, "charRooms", "");
   }
 }
 
-export { getClientsByMonthActualYear, getRevenueActualYear };
+function graficarHabitaciones(
+  dataPointsHabitacionesReservadas,
+  graficaHabitaciones,
+  title
+) {
+  var chart = new CanvasJS.Chart(graficaHabitaciones, {
+    animationEnabled: true,
+    colorSet: "greenShades",
+    title: {
+      text: title,
+    },
+
+    data: [
+      {
+        type: "pie",
+        startAngle: 25,
+        toolTipContent: "<b>{label}</b>: {y}%",
+        showInLegend: "true",
+        legendText: "{label}",
+        indexLabelFontSize: 14,
+        indexLabel: "{label} - {y}%",
+        dataPoints: dataPointsHabitacionesReservadas,
+      },
+    ],
+  });
+  chart.render();
+}
+
+export {
+  getClientsByMonthActualYear,
+  getRevenueActualYear,
+  getCategoryRoomsMostReserved,
+  getMes
+};

@@ -8,37 +8,52 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
     case "GET":
+        switch ($_GET['option']) {
+            case "dashboardGraphic":
 
-        if ($_GET['option'] == "dashboardGraphic") {
-
-            $mesesConsulta = array(
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12"
-            );
-
-
-            $gananciasPorMes = [];
-            $gananciasPorMes = array_map(function ($mes) use ($clasePago) {
+                $mesesConsulta = array(
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12"
+                );
 
 
-                $totalIngresosMes = $clasePago->calculateTotalIngresosMes($mes, date("Y"));
+                $gananciasPorMes = [];
+                $gananciasPorMes = array_map(function ($mes) use ($clasePago) {
 
-                $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
-                return $totalGananciasMes;
-            }, $mesesConsulta);
+                    $totalIngresosMes = $clasePago->calculateTotalIngresosMes($mes, date("Y"));
 
-            $peticion = $gananciasPorMes;
+                    $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
+
+                    return $totalGananciasMes;
+                }, $mesesConsulta);
+
+                $peticion = $gananciasPorMes;
+
+                break;
+
+            case "itemDataDashboard":
+
+                $totalRevenuesActualYear = $clasePago->calculateTotalIngresosAnio();
+                $totalRevenuesActualMonth = $clasePago->calculateTotalIngresosMes(date("m"), date("Y"));
+
+                $dataRevenuesActual =  array(
+                    "totalRevenuesActualYear" => $totalRevenuesActualYear,
+                    "totalRevenuesActualMonth" => $totalRevenuesActualMonth
+                );
+
+                $peticion=$dataRevenuesActual;
+                break;
         }
 
         echo json_encode($peticion);
