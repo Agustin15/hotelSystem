@@ -3,31 +3,29 @@
 session_id("login");
 session_start();
 $usuario = $_SESSION['usuario'];
-$genero = $_SESSION['genero'];
 
 if (empty($usuario)) {
 
-    header("location:../../views/loginAdmin.php");
+    header("location:../../loginAdmin");
 } else {
 
+    require("../../../model/claseUsuario.php");
     require("../../../model/claseCliente.php");
+    $admin = new usuario();
     $claseCliente = new cliente();
+
+
+
+    $adminUser = $admin->getAdminGenero($usuario);
+
+    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
+
+    $genero = $datoAdminUser['genero'];
+    $_SESSION['genero'] = $genero;
 }
 
-$correo;
-
-if (isset($_GET['cliente'])) {
-
-    $correo = $_GET['cliente'];
-} else {
-
-    $correo = "";
-}
-
-
-$allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
+$actualYear = date("Y");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,38 +36,15 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
     <link rel="stylesheet" href="../../../estilos/styleClientes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="../../../js/scriptsAdmin.js" defer> </script>
-    <script src="../../../js/scriptsClientes/scriptListaClientes.js" defer> </script>
+    <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
+    <script type="module" src="../../../js/scriptsClientes/scriptCliente.js" defer> </script>
+    
+    
 
-    <title>Admin-Clientes</title>
-</head>
+
+    <title>Clientes</title>
 
 <body>
-
-    <div id="modal">
-
-        <div id="alertClient">
-
-            <img src="">
-            <br>
-            <p></p>
-            <br>
-            <button>OK</button>
-
-        </div>
-        <div class="divOpcion"></div>
-
-        <div class="alertaEliminar">
-            <img src="">
-            <br>
-            <p></p>
-            <br>
-            <button>Ok</button>
-        </div>
-
-
-
-    </div>
 
     <header>
         <nav id="navAdmin">
@@ -83,7 +58,7 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
             <ul>
                 <li id="liInicio">
                     <img src="../../../img/inicio.png">
-                    <a href="../../admin/panelAdmin.php">Inicio</a>
+                    <a>Inicio</a>
                 </li>
 
                 <li id="liClientes">
@@ -93,24 +68,24 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 
                     <ul class="subMenu">
 
-
                         <li>
 
                             <img src="../../../img/grafica.png">
-                            <a href="grafica.php">Grafica</a>
+                            <a>Grafica</a>
 
                         </li>
                         <li>
 
                             <img src="../../../img/tablaClientes.png">
-                            <a href="lista.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
                         <li>
 
                             <img src="../../../img/agregarCliente.png">
-                            <a href="agregar.php">Agregar</a>
+                            <a>Agregar</a>
                         </li>
+
                     </ul>
                 </li>
                 <li id="liReserva">
@@ -125,19 +100,20 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
                         <li>
 
                             <img src="../../../img/reservas.png">
-                            <a href="../reservas/lista.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
                         <li class="liCalendario">
 
                             <img src="../../../img/agregarReserva.png">
-                            <a href="../reservas/agregar.php">Calendario</a>
+                            <a>Calendario</a>
                         </li>
+
 
                         <li class="liHabitacion">
 
                             <img src="../../../img/habitacionesReserva.png">
-                            <a href="../reservas/habitaciones.php">Habitaciones</a>
+                            <a>Habitaciones</a>
 
                         </li>
 
@@ -155,23 +131,25 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 
                     <ul class="subMenu">
 
-                        <li class="liGraficaPie">
+                        <li class="liGrafica">
 
                             <img src="../../../img/grafica.png">
-                            <a href="../habitaciones/grafica.php">Grafica</a>
+                            <a>Grafica</a>
 
                         </li>
 
                         <li class="liHabitacion">
 
                             <img src="../../../img/key-card.png">
-                            <a href="../habitaciones/habitacionesEstandar.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
 
 
                     </ul>
                 </li>
+
+
 
                 <li id="liGanancias" class="optionGanancias">
                     <img src="../../../img/ganancias.png">
@@ -182,9 +160,9 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin">
+                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
                 <label><?php echo $usuario ?></label>
-                <img class="btnFlecha" src="../../../img/btnFlecha.png">
+                <img class="btnFlecha" src="../../img/btnFlecha.png">
 
                 <ul class="subMenuAdmin">
 
@@ -208,109 +186,36 @@ $allYearsVisitClients = $claseCliente->getAllYearsVisitClients();
 
     </header>
 
+    <div class="bodyClient">
 
-    <nav id="menuOptionPane">
-
-        <div class="title">
-            <div>
-                <h1>Clientes</h1>
-            </div>
-            <div>
+        <div class="menuBar">
+            <div class="title">
                 <img src="../../../img/clientesBanner.jpg">
-
+                <h3>Clientes</h3>
             </div>
+            <nav>
+                <ul>
+                    <li>
+                        <img src="../../../img/grafica.png">
+                        <a>Grafica</a>
+                    </li>
+                    <li>
+                    <img src="../../../img/listaClientes.png">
+                        <a>Lista</a>
+                    </li>
+                    <li>
+                    <img src="../../../img/agregarCliente.png">
+                        <a>Agregar</a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
-        <ul>
 
-            <li class="liGrafica">
-                <div class="icon">
-                    <img class="imgClientes" src="../../../img/grafica.png">
-                </div>
-                <div>
-                    <a href="grafica.php">Gráfica</a>
-                </div>
-            </li>
-            <li class="liLista">
-
-
-                <div class="icon">
-                    <img class="imgClientes" src="../../../img/listaClientes.png">
-                </div>
-                <div>
-                    <a>Gestion</a>
-                </div>
-
-            </li>
-            <li>
-                <div class="icon">
-                    <img class="imgClientes" src="../../../img/agregarCliente.png">
-                </div>
-                <div>
-                    <a href="agregar.php">Agregar</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
+        <div class="option"></div>
 
     </div>
-
-    <br>
-    <br>
-
-
-
-    <div id="divTableClientes">
-
-
-        <div class="header">
-            <input id="buscador" placeholder="Buscador..."></input>
-        </div>
-        <div id="containerTable">
-
-            <h4 class="titleTableClients"></h4>
-            <table id="tableClientes" data-id-cliente-search="<?php echo $correo ?>">
-
-
-                <thead>
-                    <tr class="headerTable">
-
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Correo</th>
-                        <th>Telefono</th>
-                        <th>Opciones</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-
-                </tbody>
-
-                <div class="clientesVacio">
-
-                    <img src="../../../img/sinDatos.png">
-                    <br>
-                    <h3>No hay datos aun</h3>
-                </div>
-
-            </table>
-
-            <div id="sinDatosTblClientes">
-
-                <img src="../../../img/advertenciaClientes.png">
-                <br>
-                <h3>No hay resultados</h3>
-            </div>
-
-
-
-        </div>
-
-    </div>
-    <?php
-    ?>
-
-
+    
 
 </body>
 

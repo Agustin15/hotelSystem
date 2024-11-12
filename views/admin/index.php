@@ -31,7 +31,7 @@ if (empty($usuario)) {
     $_SESSION['genero'] = $genero;
 }
 
-$actualYear=date("Y");
+$actualYear = date("Y");
 ?>
 
 <!DOCTYPE html>
@@ -75,19 +75,19 @@ $actualYear=date("Y");
                         <li>
 
                             <img src="../../img/grafica.png">
-                            <a href="clientes/grafica.php">Grafica</a>
+                            <a>Grafica</a>
 
                         </li>
                         <li>
 
                             <img src="../../img/tablaClientes.png">
-                            <a href="clientes/lista.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
                         <li>
 
                             <img src="../../img/agregarCliente.png">
-                            <a href="clientes/agregar.php">Agregar</a>
+                            <a>Agregar</a>
                         </li>
 
                     </ul>
@@ -104,20 +104,20 @@ $actualYear=date("Y");
                         <li>
 
                             <img src="../../img/reservas.png">
-                            <a href="../../views/admin/reservas/lista.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
                         <li class="liCalendario">
 
                             <img src="../../img/agregarReserva.png">
-                            <a href="../../views/admin/reservas/agregar.php">Calendario</a>
+                            <a>Calendario</a>
                         </li>
 
 
                         <li class="liHabitacion">
 
                             <img src="../../img/habitacionesReserva.png">
-                            <a href="../../views/admin/reservas/habitaciones.php">Habitaciones</a>
+                            <a>Habitaciones</a>
 
                         </li>
 
@@ -138,14 +138,14 @@ $actualYear=date("Y");
                         <li class="liGrafica">
 
                             <img src="../../img/grafica.png">
-                            <a href="../../views/admin/habitaciones/grafica.php">Grafica</a>
+                            <a>Grafica</a>
 
                         </li>
 
                         <li class="liHabitacion">
 
                             <img src="../../img/key-card.png">
-                            <a href="../../views/admin/habitaciones/habitacionesEstandar.php">Lista</a>
+                            <a>Lista</a>
 
                         </li>
 
@@ -192,60 +192,72 @@ $actualYear=date("Y");
 
     <div id="dashboard">
 
-    <div class="rowOne">
-        <div class="containItemsData">
-            <ul class="itemsData"></ul>
-           
+        <div class="rowOne">
+            <div class="containItemsData">
+                <ul class="itemsData"></ul>
+
+            </div>
+
+            <div class="containGraphicRooms">
+
+                <h4>Categorias de habitacion mas reservadas en este año (<?php echo $actualYear ?>) </h4>
+                <br>
+                <div class="loadingRooms">
+                    <img src="../../img/barCharSpinner.gif">
+                    <span>Cargando datos</span>
+
+                </div>
+                <div class="noDataRooms">
+
+                    <img src="../../img/sinDatosGrafica.png">
+                    <span>No hay datos aún</span>
+
+                </div>
+                <div id="charRooms"></div>
+            </div>
         </div>
-    
-        <div class="containGraphicRooms">
-        <h4>Categorias de habitacion mas reservadas en este año (<?php echo $actualYear ?>) </h4>
-        <br>
-        <div id="charRooms"></div>
-        </div>
-        </div>
-         
+
 
         <div class="rowTwo">
-        <div class="containGraphicBookings">
+            <div class="containGraphicBookings">
 
-            <h3>Reservas de este año (<?php echo $actualYear ?>)</h3>
-            <div class="loadingBookings">
-                <img src="../../img/barCharSpinner.gif">
-                <span>Cargando datos</span>
+                <h3>Clientes de este año (<?php echo $actualYear ?>)</h3>
+                <div class="loadingBookings">
+                    <img src="../../img/barCharSpinner.gif">
+                    <span>Cargando datos</span>
 
-            </div>
+                </div>
 
-            <div class="noDataBookings">
+                <div class="noDataBookings">
 
-                <img src="../../img/sinDatosGrafica.png">
-                <span>No hay datos aún</span>
+                    <img src="../../img/sinDatosGrafica.png">
+                    <span>No hay datos aún</span>
 
-            </div>
+                </div>
 
-            <div id="charBookings"></div>
-
-        </div>
-
-        <div class="containGraphicRevenues">
-
-            <h3>Ganancias de este año (2024)</h3>
-            <div class="loadingRevenues">
-                <img src="../../img/barCharSpinner.gif">
-                <span>Cargando datos</span>
+                <div id="charBookings"></div>
 
             </div>
 
-            <div class="noDataRevenues">
+            <div class="containGraphicRevenues">
 
-                <img src="../../img/sinDatosGrafica.png">
-                <span>No hay datos aún</span>
+                <h3>Ganancias de este año (2024)</h3>
+                <div class="loadingRevenues">
+                    <img src="../../img/barCharSpinner.gif">
+                    <span>Cargando datos</span>
+
+                </div>
+
+                <div class="noDataRevenues">
+
+                    <img src="../../img/sinDatosGrafica.png">
+                    <span>No hay datos aún</span>
+
+                </div>
+
+                <div id="charRevenues"></div>
 
             </div>
-
-            <div id="charRevenues"></div>
-
-        </div>
         </div>
 
 

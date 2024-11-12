@@ -15,6 +15,7 @@ const getCategoryRoomsData = async () => {
     return data;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 
@@ -33,6 +34,7 @@ const getRevenuesActualYear = async () => {
     return data;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 
@@ -44,14 +46,28 @@ const displayItemDataRevenuesActual = async () => {
   let actualMonth = actualDate.getMonth();
   let actualMonthString = getMes(actualMonth);
 
+  let details;
+  if(dataRevenues){
+
+    details=` <h5>Ganancias actuales</h5>
+               <span><a>${actualMonthString}:</a>US$${dataRevenues.totalRevenuesActualMonth}</span>
+                 <span><a>${actualYear}</a>: US$${dataRevenues.totalRevenuesActualMonth}</span>`;
+  }else{
+    details=`
+      <div class="noData">
+           <img src="../../img/sinDatos.png">
+           <h3>No hay datos</h3>
+           </div>
+    `;
+  }
+
   liDataRevenues.innerHTML = `
       <div class="icon">
          <img src="../../img/revenuesDashboard.png">
          </div>
          <div class="dataRevenues">
-               <h5>Ganancias actuales</h5>
-               <span><a>${actualMonthString}:</a>US$${dataRevenues.totalRevenuesActualMonth}</span>
-                 <span><a>${actualYear}</a>: US$${dataRevenues.totalRevenuesActualMonth}</span>
+              
+         ${details}
                  </div>
                  
         `;
@@ -61,23 +77,33 @@ const displayItemDataRevenuesActual = async () => {
 
 const displayItemsDataCategoryRooms = async () => {
   const data = await getCategoryRoomsData();
+  let details;
 
   let items = data.map((dataRoom) => {
+    if (data) {
+      details = `  <h5>Habitacion ${dataRoom.category}</h5>
+                    <span><a>Total:</a>${dataRoom.totalRoomCategory}</span>
+                    <div class="data">
+                    <span><a>Libres:</a>${dataRoom.totalRoomCategoryFree}</span>
+                    <span><a>Ocupadas:</a>${dataRoom.totalRoomCategoryBusy}</span>
+                    </div>`;
+    } else {
+      details = ` 
+           <div class="noData">
+           <img src="../../img/sinDatos.png">
+           <h3>No hay datos</h3>
+           </div>
+           `;
+    }
     return `  <li>
     <div class="icon">
-       <img src="../../img/">
+       <img src="../../img/roomInfo.png">
        </div>
        <div class="category">
-             <h5>Habitacion ${dataRoom.category}</h5>
-             <span><a>Total:</a>${dataRoom.totalRoomCategory}</span>
-             <div class="data">
-             <span><a>Libres:</a>${dataRoom.totalRoomCategoryFree}</span>
-             <span><a>Ocupadas:</a>${dataRoom.totalRoomCategoryBusy}</span>
-             </div>
+            ${details}
              </div>
        </li>`;
   });
-
   document.querySelector(".itemsData").innerHTML += items.join("");
 };
 

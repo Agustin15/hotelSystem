@@ -592,16 +592,13 @@ body {
   margin-top: 2rem;
 }
 
-
-.rowOne{
-
+.rowOne {
   display: flex;
   align-items: start;
   gap: 2.4rem;
 }
 
-.containItemsData{
-
+.containItemsData {
   display: flex;
   gap: 2rem;
 }
@@ -624,21 +621,17 @@ body {
   width: 17rem;
 }
 
-.itemsData li a{
-
+.itemsData li a {
   font-weight: bold;
 }
-.itemsData li .dataRevenues{
-
+.itemsData li .dataRevenues {
   display: flex;
   padding-top: 0.5rem;
   flex-direction: column;
   gap: 0.7rem;
 }
 
-
 .containGraphicRooms {
-
   display: flex;
   padding-top: 0.5rem;
   width: 31rem;
@@ -648,11 +641,9 @@ body {
   border-radius: 7px;
   box-shadow: 2px 2px 2px rgb(192, 192, 192);
   background-color: white;
-  
 }
 
-.containGraphicRooms h4{
-
+.containGraphicRooms h4 {
   font-size: 15px;
 }
 
@@ -662,11 +653,10 @@ body {
   align-items: center;
   width: 6rem;
   height: 6rem;
-  background: linear-gradient(#0498a0,#046e69);
+  background: linear-gradient(#0498a0, #046e69);
 }
 
-.itemsData li .icon img{
-
+.itemsData li .icon img {
   width: 50px;
 }
 
@@ -681,6 +671,29 @@ body {
   display: flex;
   gap: 0.5rem;
 }
+
+.itemsData li .noData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 60%;
+  gap: 0.5rem;
+  height: 10rem;
+  width: 10rem;
+ 
+}
+.itemsData li .noData h3{
+
+  font-size: 15px;
+}
+
+
+.itemsData li .noData img{
+
+  width: 40px;
+}
+
 .itemsData li h5 {
   font-size: 16px;
 }
@@ -689,11 +702,9 @@ body {
   font-size: 15px;
 }
 
-
-.rowTwo{
+.rowTwo {
   display: flex;
   gap: 2rem;
-
 }
 
 .containGraphicBookings,
@@ -715,7 +726,8 @@ body {
 }
 
 .containGraphicBookings .loadingBookings,
-.containGraphicRevenues .loadingRevenues {
+.containGraphicRevenues .loadingRevenues,
+.containGraphicRooms .loadingRooms {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -728,12 +740,14 @@ body {
 }
 
 .containGraphicBookings .loadingRevenues img,
-.containGraphicRevenues .loadingBookings img {
+.containGraphicRevenues .loadingBookings img,
+.containGraphicRooms .loadingRooms img {
   width: 40px;
 }
 
 .containGraphicBookings .noDataBookings,
-.containGraphicRevenues .noDataRevenues {
+.containGraphicRevenues .noDataRevenues,
+.containGraphicRooms .noDataRooms {
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -746,7 +760,8 @@ body {
 }
 
 .containGraphicBookings .noData img,
-.containGraphicRevenues .noDataRevenues img {
+.containGraphicRevenues .noDataRevenues img,
+.containGraphicRooms .noDataRooms img {
   width: 60px;
 }
 
@@ -758,6 +773,6 @@ body {
   color: black;
 }
 
-#charRooms{
+#charRooms {
   width: 90%;
 }

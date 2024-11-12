@@ -31,6 +31,9 @@ const loading = (status, char) => {
     case "bookings":
       displayLoading(status, ".loadingBookings");
       break;
+    case "rooms":
+      displayLoading(status, ".loadingRooms");
+      break;
   }
 };
 
@@ -213,6 +216,7 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
 };
 
 async function getCategoryRoomsMostReserved() {
+  loading(true, "rooms");
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php?option=dashboardGraphic",
@@ -229,6 +233,8 @@ async function getCategoryRoomsMostReserved() {
     dataPointsToGraphicRooms(result);
   } catch (error) {
     console.log(error);
+  }finally{
+    loading(false, "rooms");
   }
 }
 
@@ -256,6 +262,8 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
         return roomCategoryQuantityReserved;
       }
     );
+  } else {
+    document.querySelector(".noDataRooms").style.display = "flex";
   }
 
   if (dataPointsRoomsReserved.length > 0) {
@@ -295,5 +303,5 @@ export {
   getClientsByMonthActualYear,
   getRevenueActualYear,
   getCategoryRoomsMostReserved,
-  getMes
+  getMes,
 };

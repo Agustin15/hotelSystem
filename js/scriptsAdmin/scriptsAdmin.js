@@ -86,43 +86,6 @@ if (iconAdmin) {
   }
 }
 
-function liBorderBottom(pagina) {
-  switch (pagina) {
-    case "grafica":
-      $(".liGrafica").css("border-bottom", "3px solid #3ec7bb");
-      break;
-
-    case "listaClientes":
-      $(".liLista").css("border-bottom", "3px solid #3ec7bb");
-      break;
-
-    case "agregar":
-      $(".liAgregar").css("border-bottom", "3px solid #3ec7bb");
-      break;
-
-    case "listaReservas":
-      $(".liListaReservas").css("border-bottom", "3px solid #3ec7bb");
-      break;
-    case "agregarReserva":
-      $(".liAgregarReserva").css("border-bottom", "3px solid #3ec7bb");
-      break;
-
-    case "habitaciones":
-      $(".liHabitaciones").css("border-bottom", "3px solid #3ec7bb");
-      break;
-
-    case "Estandar":
-      $(".liEstandar").css("border-bottom", "3px solid #3ec7bb");
-      break;
-    case "Deluxe":
-      $(".liDeluxe").css("border-bottom", "3px solid #3ec7bb");
-      break;
-    case "Suite":
-      $(".liSuite").css("border-bottom", "3px solid #3ec7bb");
-      break;
-  }
-}
-
 //abrir subMenus
 openSubMenu(
   "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
