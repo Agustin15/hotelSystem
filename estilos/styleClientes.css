@@ -265,7 +265,7 @@ body #userAdmin:hover > .btnFlecha {
 }
 .menuBar ul {
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
   list-style: none;
   font-size: 18px;
   color: rgb(177, 177, 177);
@@ -276,13 +276,19 @@ body #userAdmin:hover > .btnFlecha {
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
+  padding: 1rem;
   padding-bottom: 0.4rem;
+  cursor: pointer;
 }
 .menuBar ul li img {
   width: 30px;
 }
 .menuBar ul li:hover {
   border-bottom: 2px solid rgb(1, 187, 147);
+}
+
+.optionMarkActual {
+  border-bottom: 3px solid rgb(1, 187, 147);
 }
 
 .option {
@@ -328,6 +334,9 @@ body #userAdmin:hover > .btnFlecha {
   height: 1.8rem;
   border-radius: 4px;
   border: 1px solid rgb(158, 158, 158);
+  outline: none;
+  background: rgba(202, 202, 202, 0.3);
+  box-shadow: 1px 1px 1px rgb(179, 179, 179);
 }
 .option .containChart .header .search button {
   width: 6rem;
@@ -345,7 +354,32 @@ body #userAdmin:hover > .btnFlecha {
 }
 .option .containChart #graficaClientes {
   width: 90%;
-  height: 70%;
+  min-height: 70%;
+}
+.option .containChart .loading {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 50%;
+  font-size: 20px;
+  margin-top: 5rem;
+}
+.option .containChart .loading img {
+  width: 100px;
+}
+.option .containChart .noData {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  opacity: 60%;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 5rem;
+}
+.option .containChart img {
+  width: 100px;
 }
 
 /*# sourceMappingURL=styleClientes.css.map */

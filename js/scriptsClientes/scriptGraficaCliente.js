@@ -1,3 +1,16 @@
+let today = new Date();
+let actualYear = today.getFullYear();
+
+const loadingChart = (state) => {
+  const spinnerChar = document.querySelector(".loading");
+
+  if (state) {
+    spinnerChar.style.display = "flex";
+  } else {
+    spinnerChar.style.display = "none";
+  }
+};
+
 function getMes(numMes) {
   let meses = [
     "Enero",
@@ -25,10 +38,48 @@ CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
 
 const loadYears = async () => {
   {
-    let selectYear = document.querySelector(".selectYear");
-
-    const response = await fetch("");
+    try {
+      let url =
+        "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=AllYearsVisitClients";
+      const response = await fetch(url);
+      const results = await response.json();
+      if (results) {
+        selectYearChar(results);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
+};
+
+const selectYearChar = (results) => {
+  let selectYear = document.querySelector(".selectYear");
+  let yearSelected;
+
+  let options = results.map((result) => {
+    return `
+          <option value=${Object.values(result)}>${Object.values(
+      result
+    )}</option>
+        `;
+  });
+
+  selectYear.innerHTML += options.join("");
+
+  selectYear.querySelectorAll("option").forEach((option) => {
+    if (option.value == actualYear) {
+      option.selected;
+    }
+  });
+
+  selectYear.addEventListener("change", () => {
+    yearSelected = selectYear.value;
+  });
+
+  document.querySelector(".btnSearch").addEventListener("click", () => {
+    console.log(yearSelected);
+    getDataClientsTOGraphic(yearSelected);
+  });
 };
 
 function graphicClients(dataPoints, grafica, titulo, theme) {
@@ -62,6 +113,8 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     ],
   });
   chart.render();
+
+  loadYears();
 }
 
 function dataPointsToGraphicClients(monthsClients) {
@@ -85,12 +138,21 @@ function dataPointsToGraphicClients(monthsClients) {
   }
 }
 
-async function getDataClientsTOGraphic() {
-  let year = new Date().getFullYear();
+async function getDataClientsTOGraphic(year) {
+  let yearToConsult;
+  let data=null;
+
+  if (typeof year == "undefined") {
+    yearToConsult = actualYear;
+  } else {
+    yearToConsult = year;
+  }
+
   try {
+    loadingChart(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsGraphic&year=" +
-        year,
+        yearToConsult,
       {
         method: "GET",
         headers: {
@@ -100,10 +162,16 @@ async function getDataClientsTOGraphic() {
     );
 
     const result = await response.json();
-
-    dataPointsToGraphicClients(result);
+    data = result;
   } catch (error) {
     console.log(error);
+  } finally {
+    loadingChart(false);
+    if (data) {
+      dataPointsToGraphicClients(data);
+    }else{
+      document.querySelector(".noData").style.display="flex";
+    }
   }
 }
 

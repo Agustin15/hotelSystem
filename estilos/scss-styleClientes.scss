@@ -38,7 +38,7 @@ body {
 
   ul {
     display: flex;
-    gap: 5rem;
+    gap: 3rem;
     list-style: none;
     font-size: 18px;
     color: rgb(177, 177, 177);
@@ -49,7 +49,9 @@ body {
       flex-direction: column;
       gap: 0.5rem;
       align-items: center;
+      padding: 1rem;
       padding-bottom: 0.4rem;
+      cursor: pointer;
 
       img {
         width: 30px;
@@ -60,6 +62,10 @@ body {
       border-bottom: 2px solid rgb(1, 187, 147);
     }
   }
+}
+
+.optionMarkActual {
+  border-bottom: 3px solid rgb(1, 187, 147);
 }
 
 .option {
@@ -106,6 +112,9 @@ body {
           height: 1.8rem;
           border-radius: 4px;
           border: 1px solid rgb(158, 158, 158);
+          outline: none;
+          background: rgba(#cacaca, 0.3);
+          box-shadow: 1px 1px 1px rgb(179, 179, 179);
         }
 
         button {
@@ -127,7 +136,36 @@ body {
 
     #graficaClientes {
       width: 90%;
-      height: 70%;
+      min-height: 70%;
+    }
+
+    .loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 50%;
+      font-size: 20px;
+      margin-top: 5rem;
+
+      img {
+        width: 100px;
+      }
+    }
+
+    .noData {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      opacity: 60%;
+      font-weight: bold;
+      font-size: 22px;
+      margin-top: 5rem;
+    }
+
+    img {
+      width: 100px;
     }
   }
 }

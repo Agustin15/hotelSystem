@@ -28,7 +28,7 @@ $actualYear = date("Y");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -195,15 +195,15 @@ $actualYear = date("Y");
             </div>
             <nav>
                 <ul>
-                    <li>
+                    <li class="chartLi">
                         <img src="../../../img/grafica.png">
                         <a>Grafica</a>
                     </li>
-                    <li>
+                    <li class="listLi">
                     <img src="../../../img/listaClientes.png">
                         <a>Lista</a>
                     </li>
-                    <li>
+                    <li class="addLi">
                     <img src="../../../img/agregarCliente.png">
                         <a>Agregar</a>
                     </li>

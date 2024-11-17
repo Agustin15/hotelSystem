@@ -67,13 +67,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         if ($clienteDistinto['correo'] ==  $datosCliente['mail']) {
 
-          $peticion = array('advertencia'=>'Este correo ya ha sido ingresado');
-         
-        
+          $peticion = array('advertencia' => 'Este correo ya ha sido ingresado');
         } else  if ($clienteDistinto['telefono'] ==  $datosCliente['phone']) {
 
-          $peticion = array("advertencia"=>'Este telefono ya ha sido ingresado');
-          
+          $peticion = array("advertencia" => 'Este telefono ya ha sido ingresado');
         } else {
 
 
@@ -117,6 +114,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     switch ($option) {
 
+      case "AllYearsVisitClients":
+
+        $years = $claseCliente->getAllYearsVisitClients();
+
+        $ac = null;
+        $yearsFilter = array_filter($years, function ($year) use (&$ac) {
+          if ($ac !== $year) {
+            $ac = $year;
+            return $year['YEAR(fechaLlegada)'];
+          }
+        });
+
+
+        $peticion = $yearsFilter;
+        break;
       case "clientsGraphic":
 
         $year = $_GET['year'];
@@ -142,8 +154,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
           return array("month" => $month, "quantity" => $clientsMonth);
         }, $months);
 
+        $totalMonthQuantity = array_reduce($clientsMonths, function ($ac,$clientMonth) {
+          return  $ac += $clientMonth['quantity'];
+        }, 0);
 
-        $peticion = $clientsMonths;
+        if ($totalMonthQuantity == 0) {
+          $peticion = null;
+        } else {
+          $peticion = $clientsMonths;
+        }
+
 
         break;
 
@@ -156,15 +176,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         break;
 
-        case "dataClient":
-          $idClient = $_GET['idClient'];
+      case "dataClient":
+        $idClient = $_GET['idClient'];
 
-          $peticion=$claseCliente->getClienteUpdate($idClient);
-          
-          break;
+        $peticion = $claseCliente->getClienteUpdate($idClient);
+
+        break;
     }
 
-  
+
 
     echo json_encode($peticion);
 
