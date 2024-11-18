@@ -1,4 +1,5 @@
 import getDataClientsTOGraphic from "./scriptGraficaCliente.js";
+import displayTable from "./scriptClientsTable.js";
 
 let option = document.querySelector(".option");
 let optionChartLi = document.querySelector(".chartLi");
@@ -34,6 +35,7 @@ const drawDocument = (result) => {
     getDataClientsTOGraphic();
   } else if (clientsTable) {
     markActualOption(optionListLi);
+    displayTable();
   }
 };
 

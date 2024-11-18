@@ -54,6 +54,19 @@ class cliente
 
     
 
+    public function getAllClientesLimit()
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 1");
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados;
+    }
+
+    
+
     public function getClientesAnioMes($mes,$anio)
     {
 

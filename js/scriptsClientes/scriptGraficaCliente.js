@@ -140,7 +140,7 @@ function dataPointsToGraphicClients(monthsClients) {
 
 async function getDataClientsTOGraphic(year) {
   let yearToConsult;
-  let data=null;
+  let data = null;
 
   if (typeof year == "undefined") {
     yearToConsult = actualYear;
@@ -148,6 +148,10 @@ async function getDataClientsTOGraphic(year) {
     yearToConsult = year;
   }
 
+  document
+    .querySelector(".header")
+    .querySelector("h3").innerHTML += ` ${yearToConsult}`;
+    
   try {
     loadingChart(true);
     const response = await fetch(
@@ -169,8 +173,8 @@ async function getDataClientsTOGraphic(year) {
     loadingChart(false);
     if (data) {
       dataPointsToGraphicClients(data);
-    }else{
-      document.querySelector(".noData").style.display="flex";
+    } else {
+      document.querySelector(".noData").style.display = "flex";
     }
   }
 }

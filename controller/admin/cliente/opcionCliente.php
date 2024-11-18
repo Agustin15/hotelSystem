@@ -154,7 +154,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
           return array("month" => $month, "quantity" => $clientsMonth);
         }, $months);
 
-        $totalMonthQuantity = array_reduce($clientsMonths, function ($ac,$clientMonth) {
+        $totalMonthQuantity = array_reduce($clientsMonths, function ($ac, $clientMonth) {
           return  $ac += $clientMonth['quantity'];
         }, 0);
 

@@ -190,8 +190,8 @@ $actualYear = date("Y");
 
         <div class="menuBar">
             <div class="title">
-                <img src="../../../img/clientesBanner.jpg">
                 <h3>Clientes</h3>
+                <img src="../../../img/clientsBanner.png">
             </div>
             <nav>
                 <ul>
