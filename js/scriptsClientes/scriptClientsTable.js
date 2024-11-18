@@ -1,5 +1,5 @@
 let initRegister = 0;
-let limitRegister = 1;
+let limitRegister = 9;
 let page = 1;
 let limitPage;
 
@@ -28,9 +28,13 @@ const displayTable = async () => {
   let pagesText = document.querySelector(".pageIndex");
   let clients = await getDataClients();
 
-  limitPage = clients.length / 2;
-
   if (clients) {
+    if (clients.length <= 10) {
+      limitPage = 1;
+    } else {
+      limitPage = clients.length / 10;
+    }
+
     let clientsFilter = clients.filter((client, index) => {
       if (index >= initRegister && index <= limitRegister) {
         return client;
@@ -42,6 +46,9 @@ const displayTable = async () => {
       if (index % 2 == 0) {
         classRow = "trGray";
       }
+
+      table.classList.remove("tableClientsNoData");
+
       return `
       
       <tr class=${classRow}>
@@ -76,6 +83,10 @@ const displayTable = async () => {
     pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
 
     controls(next, prev);
+
+    search(table);
+  } else {
+    noData(table);
   }
 };
 
@@ -99,6 +110,60 @@ const controls = (next, prev) => {
       displayTable();
     }
   });
+};
+
+const search = () => {
+  let inputSearch = document.querySelector(".inputSearch");
+  let rows = $("tbody").find("tr");
+
+  inputSearch.addEventListener("keydown", function () {
+    let value = this.value.trim();
+
+    rows.each(function () {
+      let rowText = $(this).text();
+
+      if (rowText.indexOf(value) == -1) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
+
+    let rowsHide = rows.filter(":hidden");
+    if (rows.length == rowsHide.length) {
+
+    
+      document.querySelector(".message").innerHTML = `
+
+      <td rowspan="6" colspan="6">
+      <div class="noResults">
+      <img src="../../../img/noFind.png">
+      <span>Sin resultados</span>
+      </td>
+  </div>
+
+   `;
+    } else {
+      document.querySelector(".message").innerHTML = ``;
+    }
+  });
+};
+
+const noData = () => {
+
+
+  document.querySelector(".message").innerHTML += `
+      <td rowspan="6" colspan="6">
+  <div class="noDataClients">
+
+      <img src="../../../img/sinDatos.png">
+      <span>Sin clientes aún</span>
+  </div>
+  </td>
+  `;
+
+  let containControls = document.querySelector(".controls");
+  containControls.style.display = "none";
 };
 
 export default displayTable;

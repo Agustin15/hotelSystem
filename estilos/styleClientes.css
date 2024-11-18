@@ -336,7 +336,6 @@ body #userAdmin:hover > .btnFlecha {
   border-radius: 4px;
   border: 1px solid rgb(158, 158, 158);
   outline: none;
-  background: rgba(202, 202, 202, 0.3);
   box-shadow: 1px 1px 1px rgb(179, 179, 179);
 }
 .option .containChart .header .search button {
@@ -392,19 +391,46 @@ body #userAdmin:hover > .btnFlecha {
   padding-bottom: 1.5rem;
   padding-top: 1rem;
   margin-top: 3rem;
-  margin-left: 8rem;
+  margin-left: 10rem;
   border-radius: 6px;
   font-size: 18px;
   box-shadow: 2px 2px 2px gray;
   background-color: white;
   gap: 1rem;
+  width: auto;
+}
+.containTable .header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 13rem;
+  width: 99%;
+  margin-left: 1.5rem;
+}
+.containTable .header input {
+  padding-left: 2rem;
+  border: 1px solid rgb(173, 173, 173);
+  width: 11rem;
+  height: 2rem;
+  font-size: 16px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgb(230, 230, 230);
+  background-image: url("../img/buscarInfo.png");
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position-x: 0.5rem;
+  background-position-y: 0.5rem;
+  outline: none;
 }
 .containTable h3 {
   color: rgb(167, 167, 167);
+  font-size: 22px;
 }
 
 .scroll {
   height: auto;
+  min-width: 60rem;
+  width: auto;
   max-height: 30rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -416,7 +442,7 @@ body #userAdmin:hover > .btnFlecha {
   font-size: 17px;
   color: rgb(119, 119, 119);
   width: 100px;
-  margin-right: 5rem;
+  margin-right: 9rem;
 }
 .controls span:hover {
   cursor: pointer;
@@ -424,6 +450,7 @@ body #userAdmin:hover > .btnFlecha {
 }
 
 .tableClients {
+  min-width: 60rem;
   width: auto;
   padding-top: 1rem;
 }
@@ -455,6 +482,7 @@ body #userAdmin:hover > .btnFlecha {
   gap: 1.5rem;
   color: white;
   width: 15rem;
+  padding-left: 1rem;
 }
 .tableClients tbody td .buttons img {
   width: 25px;
@@ -498,6 +526,137 @@ body #userAdmin:hover > .btnFlecha {
 }
 .tableClients .trGray {
   background-color: rgb(235, 235, 235);
+}
+
+.noDataClients,
+.noResults {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  opacity: 50%;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 5rem;
+}
+.noDataClients img,
+.noResults img {
+  width: 70px;
+}
+
+.containFormAdd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 6rem;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+.containFormAdd form {
+  width: 41rem;
+  padding: 1rem;
+  padding-bottom: 3rem;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 4px;
+}
+.containFormAdd form .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.containFormAdd form .title img {
+  width: 60px;
+}
+.containFormAdd form .title h3 {
+  color: rgb(160, 160, 160);
+}
+.containFormAdd form label {
+  background-color: white;
+  color: rgb(173, 173, 173);
+  position: absolute;
+  top: -1rem;
+  left: 0.8rem;
+}
+.containFormAdd form input {
+  width: 16rem;
+  height: 1.2rem;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  border: 1px solid rgb(173, 173, 173);
+  border-radius: 3px;
+  padding-left: 2.5rem;
+  font-size: 18px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position-x: 0.5rem;
+  background-position-y: 1rem;
+  outline: none;
+}
+.containFormAdd form input:hover {
+  border: 2px solid rgb(0, 156, 156);
+}
+.containFormAdd form .inputAlert {
+  border: 1px solid rgb(216, 3, 3);
+}
+.containFormAdd form .inputAlert::placeholder {
+  color: red;
+}
+.containFormAdd form .inputAlert:hover {
+  border: 2px solid rgb(216, 3, 3);
+}
+.containFormAdd form #inputName {
+  background-image: url("../img/usuario.png");
+}
+.containFormAdd form #inputLastName {
+  background-image: url("../img/lastNameForm.png");
+}
+.containFormAdd form #inputMail {
+  background-image: url("../img/mailForm.png");
+}
+.containFormAdd form #inputPhone {
+  background-image: url("../img/phoneForm.png");
+}
+.containFormAdd form .row1,
+.containFormAdd form .row2 {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.containFormAdd form .name,
+.containFormAdd form .lastName,
+.containFormAdd form .phone,
+.containFormAdd form .mail {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: relative;
+}
+.containFormAdd form .buttons {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.containFormAdd form .buttons button {
+  width: 10rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
+  border: none;
+  background-color: rgb(1, 156, 167);
+}
+.containFormAdd form .buttons button:hover {
+  background-color: rgb(3, 126, 134);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styleClientes.css.map */

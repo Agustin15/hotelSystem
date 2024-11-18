@@ -77,7 +77,6 @@ const selectYearChar = (results) => {
   });
 
   document.querySelector(".btnSearch").addEventListener("click", () => {
-    console.log(yearSelected);
     getDataClientsTOGraphic(yearSelected);
   });
 };
