@@ -1,13 +1,15 @@
-let initRegister = 0;
-let limitRegister = 9;
+import configDeleteClient from "./scriptOptionsTable/scriptDeleteClient.js";
+
+let indexRegister = 0;
 let page = 1;
 let limitPage;
 
-const getDataClients = async () => {
+const getRowsClients = async () => {
   let data = null;
+
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsTable";
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsRows";
     const response = await fetch(url);
     const result = await response.json();
 
@@ -21,27 +23,59 @@ const getDataClients = async () => {
   }
 };
 
+const getDataLimitClients = async () => {
+  let data = null;
+
+  loading(true);
+
+  try {
+    let url =
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsTable&&index=" +
+      indexRegister;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    return data;
+  }
+};
+
+const loading = (state) => {
+  if (state) {
+    document.querySelector(".message").innerHTML = ` 
+    
+    <div class="loading">
+      <span>Cargando datos</span>
+      <img src="../../../img/spinnerMain.gif">
+    </div>
+    `;
+  } else {
+    document.querySelector(".message").innerHTML = ``;
+  }
+};
+
 const displayTable = async () => {
   let table = document.querySelector(".tableClients");
   let next = document.querySelector(".next");
   let prev = document.querySelector(".prev");
   let pagesText = document.querySelector(".pageIndex");
-  let clients = await getDataClients();
+  let clientsRows = await getRowsClients();
+  let clients = await getDataLimitClients();
 
   if (clients) {
-    if (clients.length <= 10) {
+    if (clientsRows <= 10) {
       limitPage = 1;
     } else {
-      limitPage = clients.length / 10;
+      limitPage = clientsRows / 2;
     }
 
-    let clientsFilter = clients.filter((client, index) => {
-      if (index >= initRegister && index <= limitRegister) {
-        return client;
-      }
-    });
-
-    let dataClients = clientsFilter.map((client, index) => {
+    let dataClients = clients.map((client, index) => {
       let classRow;
       if (index % 2 == 0) {
         classRow = "trGray";
@@ -64,7 +98,7 @@ const displayTable = async () => {
            <td>${client.correo}</td>
            <td class="tdOptions">
 
-           <div class="buttons">
+           <div class="buttons" id=${client.idCliente}>
 
             <button class="btnDelete"><img src="../../../img/borrar.png"></button>
                 <button class="btnEdit"><img src="../../../img/editar.png"></button>
@@ -83,8 +117,8 @@ const displayTable = async () => {
     pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
 
     controls(next, prev);
-
     search(table);
+    optionsClient();
   } else {
     noData(table);
   }
@@ -93,9 +127,7 @@ const displayTable = async () => {
 const controls = (next, prev) => {
   next.addEventListener("click", function () {
     if (page < limitPage) {
-      initRegister += 2;
-      limitRegister += 2;
-
+      indexRegister += 2;
       page++;
       displayTable();
     }
@@ -103,9 +135,7 @@ const controls = (next, prev) => {
 
   prev.addEventListener("click", function () {
     if (page > 1) {
-      initRegister -= 2;
-      limitRegister -= 2;
-
+      indexRegister -= 2;
       page--;
       displayTable();
     }
@@ -131,8 +161,6 @@ const search = () => {
 
     let rowsHide = rows.filter(":hidden");
     if (rows.length == rowsHide.length) {
-
-    
       document.querySelector(".message").innerHTML = `
 
       <td rowspan="6" colspan="6">
@@ -150,8 +178,6 @@ const search = () => {
 };
 
 const noData = () => {
-
-
   document.querySelector(".message").innerHTML += `
       <td rowspan="6" colspan="6">
   <div class="noDataClients">
@@ -166,4 +192,41 @@ const noData = () => {
   containControls.style.display = "none";
 };
 
-export default displayTable;
+const getOptionClient = async (url) => {
+  const response = await fetch(url);
+  const result = await response.text();
+  return result;
+};
+
+const optionsClient = () => {
+  let btnsDelete = [...document.querySelectorAll(".btnDelete")];
+  let btnsEdit = [...document.querySelectorAll(".btnEdit")];
+  let btnsDetails = [...document.querySelectorAll(".btnDetails")];
+  let result;
+
+  btnsDelete.forEach((btnDelete) => {
+    btnDelete.addEventListener("click", async () => {
+      let id = btnDelete.parentElement.id;
+      result = await getOptionClient("optionClient/delete.php?client=" + id);
+      openModal(result);
+      configDeleteClient();
+    });
+  });
+
+  btnsEdit.forEach((btnEdit) => {
+    btnEdit.addEventListener("click", async () => {
+      let id = btnEdit.parentElement.id;
+      console.log(id);
+      result = await getOptionClient("optionClient/edit.php?client=" + id);
+      openModal(result);
+    });
+  });
+};
+
+const openModal = (result) => {
+  let modalMainClient = document.querySelector(".modalMainClient");
+  modalMainClient.style.display = "flex";
+  modalMainClient.innerHTML = result;
+};
+
+export { displayTable };

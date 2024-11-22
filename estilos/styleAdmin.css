@@ -23,7 +23,7 @@ body {
 
 #loginAdmin .panelInfo {
   width: 50%;
-  height: 70%;
+  height: 75%;
   background: linear-gradient(#126b91, #0498a0);
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@ body {
 
 #loginAdmin .containForm {
   width: 50%;
-  height: 70%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,103 +199,30 @@ body {
 }
 
 .alertLogin {
-  width: 0px;
-  height: 54px;
-  background: linear-gradient(#2e888b, #0ea7af);
-  display: flex;
-  flex-direction: column;
-  border-radius: 3px;
-  margin-top: 0rem;
-}
-
-.alertLogin .contain {
   display: none;
-}
-
-.alertLogin .header {
-  display: flex;
-  flex-direction: row;
-  color: #ffffff;
-  font-size: 14px;
-  padding-left: 0.3rem;
-  padding-top: 0.2rem;
   justify-content: start;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: bold;
+  width: auto;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  background: linear-gradient(#2e888b, #065357);
+  border-radius: 3px;
+  color: white;
+  box-shadow: 2px 2px 2px gray;
+  font-size: 17px;
 }
-
-.alertLogin p {
-  color: #ffffff;
-  font-weight: bold;
-  margin-top: -0.6rem;
-  text-align: center;
-}
-
 .alertLogin span {
-  margin-top: -1rem;
+  font-weight: bold;
+}
+
+.alertLogin .body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .alertLogin img {
-  width: 24px;
-  height: 24px;
-  margin-top: 0.5rem;
-}
-
-.alertLogin .progressBar {
-  width: 100%;
-  height: 4px;
-  margin-top: 6px;
-  background-color: #555555;
-}
-.progressBar .bar {
-  background-color: #ffffff;
-  width: 100%;
-  height: 100%;
-}
-
-.barActive {
-  animation-name: barActive;
-  animation-duration: 10s;
-}
-
-.alertLoginActive {
-  animation-name: alertLoginActive;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertLoginActive {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 300px;
-  }
-}
-
-.alertLoginDesactive {
-  animation-name: alertLoginDesactive;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertLoginDesactive {
-  from {
-    width: 300px;
-  }
-  to {
-    width: 0px;
-  }
-}
-
-@keyframes barActive {
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0%;
-  }
+  width: 30px;
 }
 
 .iconoMenu {
@@ -681,16 +608,12 @@ body {
   gap: 0.5rem;
   height: 10rem;
   width: 10rem;
- 
 }
-.itemsData li .noData h3{
-
+.itemsData li .noData h3 {
   font-size: 15px;
 }
 
-
-.itemsData li .noData img{
-
+.itemsData li .noData img {
   width: 40px;
 }
 

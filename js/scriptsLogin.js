@@ -1,31 +1,11 @@
-function alertaLoginAdmin(msj) {
-  let alertForm = document.querySelector(".alertLogin");
-  let barProgress = alertForm.querySelector(".bar");
+const alertLoginAdmin = (img, msj, title) => {
+  let alertLogin = document.querySelector(".alertLogin");
 
-  alertForm.classList.remove("alertLoginDesactive");
-  alertForm.classList.add("alertLoginActive");
-  alertForm.querySelector("p").textContent = msj;
-
-  setTimeout(function () {
-    alertForm.querySelector(".contain").style.display = "block";
-    barProgress.classList.add("barActive");
-  }, 500);
-
-  setTimeout(() => {
-    removeAlertLoginAdmin();
-  }, 10000);
-}
-
-function removeAlertLoginAdmin() {
-  let alertForm = document.querySelector(".alertLogin");
-  let barProgress = alertForm.querySelector(".bar");
-
-  alertForm.querySelector("p").textContent = "";
-  alertForm.querySelector(".contain").style.display = "none";
-  alertForm.classList.add("alertLoginDesactive");
-  alertForm.classList.remove("alertLoginActive");
-  barProgress.classList.remove("barActive");
-}
+  alertLogin.querySelector("span").textContent = title;
+  alertLogin.querySelector("img").src = img;
+  alertLogin.querySelector("p").textContent = msj;
+  alertLogin.style.display = "flex";
+};
 
 function inputAlert(inputName) {
   let inputsName = [...document.getElementsByName(inputName)];
@@ -73,7 +53,7 @@ function setUser(event) {
   });
 
   if (validate) {
-    alertaLoginAdmin(validate);
+    alertLoginAdmin("../../img/advertenciaLogin.png", validate, "Advertencia");
   } else {
     comprobateUser(user);
   }
@@ -107,19 +87,16 @@ async function comprobateUser(user) {
 
       const result = await response.json();
 
-      if (result.respuesta == true) {
+      if (result.advertencia) {
+        throw result.advertencia;
+      } else if (result.respuesta) {
         location.href =
           "http://localhost/sistema%20Hotel/views/admin/index.php";
       } else {
-        throw result.respuesta;
+        throw "Ups,no se pudo iniciar sesion";
       }
     } catch (error) {
-      if (error == "Contraseña incorrecta") {
-        inputAlert("password");
-      } else if (error == "No reconocemos este usuario") {
-        inputAlert("user");
-      }
-      alertaLoginAdmin(error);
+      alertLoginAdmin("../../img/advertenciaLogin.png", error, "Error");
     } finally {
       loading(false);
     }

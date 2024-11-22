@@ -38,13 +38,17 @@ $actualYear = date("Y");
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
     <script type="module" src="../../../js/scriptsClientes/scriptCliente.js" defer> </script>
-    
-    
+
+
 
 
     <title>Clientes</title>
 
 <body>
+
+    <div class="modalMainClient">
+    </div>
+
 
     <header>
         <nav id="navAdmin">
@@ -186,7 +190,9 @@ $actualYear = date("Y");
 
     </header>
 
+
     <div class="bodyClient">
+
 
         <div class="menuBar">
             <div class="title">
@@ -200,11 +206,11 @@ $actualYear = date("Y");
                         <a>Grafica</a>
                     </li>
                     <li class="listLi">
-                    <img src="../../../img/listaClientes.png">
+                        <img src="../../../img/listaClientes.png">
                         <a>Lista</a>
                     </li>
                     <li class="addLi">
-                    <img src="../../../img/agregarCliente.png">
+                        <img src="../../../img/agregarCliente.png">
                         <a>Agregar</a>
                     </li>
                 </ul>
@@ -215,7 +221,7 @@ $actualYear = date("Y");
         <div class="option"></div>
 
     </div>
-    
+
 
 </body>
 

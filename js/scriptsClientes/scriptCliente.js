@@ -1,5 +1,5 @@
 import getDataClientsTOGraphic from "./scriptGraficaCliente.js";
-import displayTable from "./scriptClientsTable.js";
+import { displayTable } from "./scriptClientsTable.js";
 import submitAddForm from "./scriptAddClient.js";
 
 let option = document.querySelector(".option");

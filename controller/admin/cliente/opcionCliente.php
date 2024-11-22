@@ -16,13 +16,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     if ($dataClientMail) {
 
-      $peticion = array("advertencia" => "Este correo ya esta en uso");
+      $peticion = array("advertencia" => "El correo ingresado ya esta en uso");
     } else {
 
       $dataClientPhone = $claseCliente->getClienteTelefono($client['phone'])->fetch_array(MYSQLI_ASSOC);
       if ($dataClientPhone) {
 
-        $peticion = array("advertencia" => "Este telefono ya esta en uso");
+        $peticion = array("advertencia" => "El telefono ingresado ya esta en uso");
       } else {
 
         $claseCliente->setCorreo($client['mail']);
@@ -97,9 +97,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case "DELETE":
 
 
-    $datosCliente = json_decode($_GET['cliente'], true);
+    $idClient = json_decode($_GET['idClient']);
 
-    $resultado = $claseCliente->deleteCliente($datosCliente['idClient']);
+    $resultado = $claseCliente->deleteCliente($idClient);
 
     $peticion = array("resultado" => $resultado);
     $peticionJson = json_encode($peticion);
@@ -169,17 +169,35 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
       case "clientsTable":
 
+        $index = $_GET['index'];
 
-        $clients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+        if ($index == 0) {
+          $clients = $claseCliente->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
 
-        $peticion = $clients;
+          $peticion = $clients;
+        } else {
+          $clients = $claseCliente->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
+
+          $peticion = $clients;
+        }
+
+
+        break;
+
+
+      case "clientsRows":
+
+
+        $clientsRows = $claseCliente->getAllClientsRows();
+
+        $peticion = $clientsRows;
 
         break;
 
       case "dataClient":
         $idClient = $_GET['idClient'];
 
-        $peticion = $claseCliente->getClienteUpdate($idClient);
+        $peticion = $claseCliente->getClientById($idClient);
 
         break;
     }

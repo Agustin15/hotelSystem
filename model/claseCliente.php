@@ -52,12 +52,12 @@ class cliente
         return $resultados;
     }
 
-    
+
 
     public function getAllClientesLimit()
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 1");
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 10");
         $consulta->execute();
 
         $resultados = $consulta->get_result();
@@ -65,35 +65,63 @@ class cliente
         return $resultados;
     }
 
-    
 
-    public function getClientesAnioMes($mes,$anio)
+
+    public function getAllClientesLimitAndIndex($index)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 10,$index");
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados;
+    }
+
+
+
+    public function getAllClientsRows()
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes");
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados->num_rows;
+    }
+
+
+
+
+
+    public function getClientesAnioMes($mes, $anio)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes 
         ON clientes.idCliente=reserva_habitacion.idClienteReserva where MONTH(reserva_habitacion.fechaLlegada)=? 
         and YEAR(reserva_habitacion.fechaLlegada)=?");
-        $consulta->bind_param("ss", $mes,$anio);
+        $consulta->bind_param("ss", $mes, $anio);
         $consulta->execute();
         $resultados = $consulta->get_result();
 
         return $resultados->num_rows;
     }
 
-    
+
     public function getClientesAnio($anio)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes 
         ON clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(reserva_habitacion.fechaLlegada)=?");
-        $consulta->bind_param("s",$anio);
+        $consulta->bind_param("s", $anio);
         $consulta->execute();
         $resultados = $consulta->get_result();
 
         return $resultados->fetch_all(MYSQLI_ASSOC);
     }
 
-    
+
     public function getAllYearsVisitClients()
     {
 
@@ -129,7 +157,7 @@ class cliente
 
     //
 
-    public function getClienteUpdate($idCliente)
+    public function getClientById($idCliente)
     {
 
 
@@ -141,8 +169,8 @@ class cliente
 
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
-    
-    
+
+
 
     public function getClientesDistintos($idCliente)
     {
@@ -169,22 +197,22 @@ class cliente
     }
 
 
-    
+
     public function updatePhone($telefono, $idCliente)
     {
 
         $consulta = $this->conexion->conectar()->prepare("update clientes set telefono=? where idCliente=?");
-        $consulta->bind_param("si",$telefono, $idCliente);
+        $consulta->bind_param("si", $telefono, $idCliente);
         $resultado = $consulta->execute();
 
         return $resultado;
     }
-    
+
     public function updateMail($correo, $idCliente)
     {
 
         $consulta = $this->conexion->conectar()->prepare("update clientes set correo=? where idCliente=?");
-        $consulta->bind_param("si",$correo, $idCliente);
+        $consulta->bind_param("si", $correo, $idCliente);
         $resultado = $consulta->execute();
 
         return $resultado;
@@ -205,7 +233,7 @@ class cliente
     }
 
 
-    
+
     public function getClienteCorreo($correo)
     {
 
@@ -218,8 +246,8 @@ class cliente
         return $resultado;
     }
 
-    
-    
+
+
     public function getClienteTelefono($telefono)
     {
 
@@ -232,57 +260,52 @@ class cliente
         return $resultado;
     }
 
-        
-    public function getClienteExistente($nombre,$apellido,$correo)
+
+    public function getClienteExistente($nombre, $apellido, $correo)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from clientes where
         nombre=? and apellido=? and correo=?");
-        $consulta->bind_param("sss",$nombre,$apellido,$correo);
+        $consulta->bind_param("sss", $nombre, $apellido, $correo);
         $consulta->execute();
         $resultado = $consulta->get_result();
 
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
-    public function comprobateCorreoEnUso($correo,$nombre,$apellido){
+    public function comprobateCorreoEnUso($correo, $nombre, $apellido)
+    {
 
-        $consulta=$this->conexion->conectar()->prepare("select * from clientes where correo=? and (nombre!=? or 
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where correo=? and (nombre!=? or 
         apellido!=?)");
-        $consulta->bind_param("sss",$correo,$nombre,$apellido);
+        $consulta->bind_param("sss", $correo, $nombre, $apellido);
         $consulta->execute();
         $resultado = $consulta->get_result();
-          
+
         return $resultado->fetch_all(MYSQLI_ASSOC);
-
     }
-    
-    public function comprobateTelefonoEnUso($telefono,$nombre,$apellido){
 
-        $consulta=$this->conexion->conectar()->prepare("select * from clientes where telefono=? and (nombre!=? or 
+    public function comprobateTelefonoEnUso($telefono, $nombre, $apellido)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where telefono=? and (nombre!=? or 
         apellido!=?)");
-        $consulta->bind_param("sss",$telefono,$nombre,$apellido);
+        $consulta->bind_param("sss", $telefono, $nombre, $apellido);
         $consulta->execute();
         $resultado = $consulta->get_result();
-          
-        return $resultado->fetch_all(MYSQLI_ASSOC);
 
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    
+
     public function setClienteBd()
     {
 
-        $consulta=$this->conexion->conectar()->prepare("insert into clientes (correo,nombre,apellido,telefono)
+        $consulta = $this->conexion->conectar()->prepare("insert into clientes (correo,nombre,apellido,telefono)
         values (?,?,?,?)");
-        $consulta->bind_param("ssss",$this->correo,$this->nombre,$this->apellido,$this->telefono);
-        $resultado=$consulta->execute();
+        $consulta->bind_param("ssss", $this->correo, $this->nombre, $this->apellido, $this->telefono);
+        $resultado = $consulta->execute();
 
         return $resultado;
-
     }
-
-
-    
-    
 }

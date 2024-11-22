@@ -1,30 +1,50 @@
 const inputAlert = (inputError) => {
   let namesInputs = [...document.getElementsByName(inputError.key)];
   let input = namesInputs[0];
-
   input.classList.add("inputAlert");
-  
+
+  let msjError = input.parentNode.querySelector(".msjError");
+  msjError.querySelector("span").textContent = inputError.msj;
+  msjError.classList.add("msjErrorShow");
 
   removeAlertInputs();
 };
 
-const removeAlertInputs = () => {
-  document.querySelectorAll("input").
-    forEach((input) => {
-      input.addEventListener("click", () => {
-        input.classList.remove("inputAlert");
-      });
+const cleanInputs = () => {
+  document.querySelector(".btnClean").addEventListener("click", function () {
+    document.querySelectorAll("input").forEach((input) => {
+      input.value = "";
     });
+  });
+};
+
+const removeAlertInputs = () => {
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("click", () => {
+      input.classList.remove("inputAlert");
+    });
+  });
+};
+
+const removeAllMsjErrors = () => {
+  document.querySelectorAll(".msjError").forEach((msj) => {
+    msj.classList.remove("msjErrorShow");
+    msj.querySelector("span").textContent = "";
+  });
 };
 
 const submitAddForm = () => {
   let form = document.querySelector("form");
+
+  phoneConfig();
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const client = {};
     let inputsCorrects = [];
     let formData = new FormData(event.target);
+
+    removeAllMsjErrors();
 
     formData.forEach((v, k) => {
       let inputToAlert = validations(v).find(
@@ -34,10 +54,70 @@ const submitAddForm = () => {
       if (inputToAlert) {
         inputAlert(inputToAlert);
       } else {
-        inputsCorrects.push({ k: v });
+        inputsCorrects.push({ key: k, value: v });
       }
     });
+
+    if (inputsCorrects.length == 4) {
+      inputsCorrects.forEach((inputCorrect) => {
+        client[inputCorrect.key] = inputCorrect.value;
+      });
+
+      fetchPost(client);
+    }
   });
+
+  cleanInputs();
+};
+
+const fetchPost = async (client) => {
+  loading(true);
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(client),
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+    if (result.advertencia) {
+      throw result.advertencia;
+    } else if (result.respuesta) {
+      alertForm(
+        "../../../img/tickAdmin.png",
+        "¡Cliente agregado exitosamente! ",
+        "Exito"
+      );
+    } else {
+      throw "Ups, no se pudo agregar el cliente";
+    }
+  } catch (error) {
+    console.log(error);
+    alertForm("../../../img/advertenciaLogin.png", error, "Error");
+  } finally {
+    loading(false);
+  }
+};
+
+const alertForm = (img, msj, title) => {
+  let alertForm = document.querySelector(".alertForm");
+
+  alertForm.querySelector("span").textContent = title;
+  alertForm.querySelector("img").src = img;
+  alertForm.querySelector("p").textContent = msj;
+  alertForm.style.display = "flex";
+
+  if (title == "Exito") {
+    setTimeout(() => {
+      alertForm.style.display = "none";
+    }, 3500);
+  }
 };
 
 const validations = (value) => {
@@ -68,4 +148,37 @@ const validations = (value) => {
 
   return validations;
 };
+
+const phoneConfig = () => {
+  let inputPhone = document.querySelector("#inputPhone");
+  inputPhone.maxLength = 9;
+
+  inputPhone.addEventListener("input", (event) => {
+    replaceCharacter(event.target);
+  });
+};
+
+const replaceCharacter = (input) => {
+  let valid = /\d/;
+
+  let ultimateCharacter = input.value
+    .trim()
+    .charAt(input.value.trim().length - 1);
+
+  if (!ultimateCharacter.match(valid)) {
+    let newValue = input.value.replace(ultimateCharacter, "");
+    input.value = newValue;
+  }
+};
+
+const loading = (state) => {
+  let loading = document.querySelector(".loading");
+
+  if (state) {
+    loading.style.display = "flex";
+  } else {
+    loading.style.display = "none";
+  }
+};
+
 export default submitAddForm;

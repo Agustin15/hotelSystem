@@ -1,5 +1,10 @@
+<?php
+
+$idCliente = $_GET['client'];
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -10,13 +15,14 @@
 <body>
 
 
-    <div class="containFormAdd">
+
+    <div class="containFormEdit">
         <form>
 
             <div class="title">
 
-                <h3>Agregar cliente</h3>
-                <img src="../../../img/agregarCliente.png">
+                <h3>Editar cliente </h3>
+                <img src="../../../img/editarUser.png">
             </div>
 
             <div class="row1">
