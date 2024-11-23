@@ -44,48 +44,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case "PUT":
 
 
-    $datosCliente = json_decode(file_get_contents("php://input"), true);
+    $client = json_decode(file_get_contents("php://input"), true);
 
-    $peticion = null;
-
-    $clientesDistintos = $claseCliente->getClientesDistintos($datosCliente['idClient']);
-
-    if ($clientesDistintos->num_rows == null) {
-
-      $resultado = $claseCliente->updateCliente(
-        $datosCliente['mail'],
-        $datosCliente['name'],
-        $datosCliente['lastName'],
-        $datosCliente['phone'],
-        $datosCliente['idClient']
-      );
-      $peticion = array("respuesta" => $resultado);
-    } else {
-
-      foreach ($clientesDistintos->fetch_all(MYSQLI_ASSOC) as $clienteDistinto) {
-
-
-        if ($clienteDistinto['correo'] ==  $datosCliente['mail']) {
-
-          $peticion = array('advertencia' => 'Este correo ya ha sido ingresado');
-        } else  if ($clienteDistinto['telefono'] ==  $datosCliente['phone']) {
-
-          $peticion = array("advertencia" => 'Este telefono ya ha sido ingresado');
-        } else {
-
-
-          $resultado = $claseCliente->updateCliente(
-            $datosCliente['mail'],
-            $datosCliente['name'],
-            $datosCliente['lastName'],
-            $datosCliente['phone'],
-            $datosCliente['idClient']
-          );
-          $peticion = array("respuesta" => $resultado);
-        }
-      }
-    }
-
+    $resultado = $claseCliente->updateCliente(
+      $client['mail'],
+      $client['name'],
+      $client['lastName'],
+      $client['phone'],
+      $client['id']
+    );
+    $peticion = array("respuesta" => $resultado);
 
     $peticionJson = json_encode($peticion);
 
@@ -199,6 +167,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $peticion = $claseCliente->getClientById($idClient);
 
+        break;
+
+      case "ifExistClient":
+        $client = json_decode($_GET['client'], true);
+
+        $existClientMail = $claseCliente->comprobateMailInUseById($client['id'], $client['mail']);
+
+        if ($existClientMail) {
+
+          $peticion = array("warning" => "Ups,ya existe un cliente con este correo");
+        } else {
+
+          $existClientPhone = $claseCliente->comprobatePhoneInUseById($client['id'], $client['phone']);
+
+          if ($existClientPhone) {
+
+
+            $peticion = array("warning" => "Ups,ya existe un cliente con este telefono");
+          }
+        }
         break;
     }
 

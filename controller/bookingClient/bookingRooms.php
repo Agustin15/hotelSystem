@@ -1,5 +1,5 @@
 <?php
-require "../model/claseHabitaciones.php";
+require "../../model/claseHabitaciones.php";
 $habitacion = new habitaciones();
 
 

@@ -2,7 +2,7 @@ import { getMes } from "./chart.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php?option=itemDataDashboard";
+    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=itemDataDashboard";
 
   try {
     const response = await fetch($url, {
@@ -21,7 +21,7 @@ const getCategoryRoomsData = async () => {
 
 const getRevenuesActualYear = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/controller/admin/ganancias/opcionPago.php?option=itemDataDashboard";
+    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php?option=itemDataDashboard";
 
   try {
     const response = await fetch($url, {

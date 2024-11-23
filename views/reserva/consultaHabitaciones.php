@@ -11,7 +11,7 @@
     <script defer src="../../js/alertas.js"></script>
 
 
-    <script defer src="../../js/selectRooms.js"></script>
+    <script defer type="module" src="../../js/scriptsSelectRooms/selectRooms.js"></script>
 
 
 

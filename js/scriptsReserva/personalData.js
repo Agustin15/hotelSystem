@@ -259,7 +259,7 @@ const getIfExistingBooking = (clientBooking) => {
   setTimeout(async () => {
     try {
       const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/datosReserva.php?dataBooking=" +
+        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php?dataBooking=" +
           JSON.stringify(dataBooking),
         {
           method: "GET",
@@ -347,7 +347,7 @@ async function updateBooking(clientBooking) {
   setTimeout(async () => {
     try {
       const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -377,7 +377,7 @@ async function realizeBooking(clientBooking) {
   setTimeout(async () => {
     try {
       const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/datosReserva.php",
+        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php",
         {
           method: "POST",
           body: JSON.stringify(clientBooking),

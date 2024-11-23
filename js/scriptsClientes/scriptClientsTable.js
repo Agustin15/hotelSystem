@@ -1,4 +1,5 @@
 import configDeleteClient from "./scriptOptionsTable/scriptDeleteClient.js";
+import { configEditClient } from "./scriptOptionsTable/scriptEditClient.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -9,7 +10,7 @@ const getRowsClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsRows";
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsRows";
     const response = await fetch(url);
     const result = await response.json();
 
@@ -30,7 +31,7 @@ const getDataLimitClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsTable&&index=" +
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsTable&&index=" +
       indexRegister;
     const response = await fetch(url);
     const result = await response.json();
@@ -216,9 +217,9 @@ const optionsClient = () => {
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener("click", async () => {
       let id = btnEdit.parentElement.id;
-      console.log(id);
       result = await getOptionClient("optionClient/edit.php?client=" + id);
       openModal(result);
+      configEditClient();
     });
   });
 };

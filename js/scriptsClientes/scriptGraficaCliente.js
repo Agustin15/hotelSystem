@@ -40,7 +40,7 @@ const loadYears = async () => {
   {
     try {
       let url =
-        "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=AllYearsVisitClients";
+        "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=AllYearsVisitClients";
       const response = await fetch(url);
       const results = await response.json();
       if (results) {
@@ -150,11 +150,11 @@ async function getDataClientsTOGraphic(year) {
   document
     .querySelector(".header")
     .querySelector("h3").innerHTML += ` ${yearToConsult}`;
-    
+
   try {
     loadingChart(true);
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsGraphic&year=" +
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsGraphic&year=" +
         yearToConsult,
       {
         method: "GET",

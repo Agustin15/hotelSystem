@@ -1,11 +1,11 @@
 <?php
 
-require "../model/claseHabitaciones.php";
-require "../model/claseReservas.php";
-require "../model/claseCliente.php";
-require "../model/claseCorreo.php";
-require "../model/clasePago.php";
-require "../model/functionsDataBooking.php";
+require "../../model/claseHabitaciones.php";
+require "../../model/claseReservas.php";
+require "../../model/claseCliente.php";
+require "../../model/claseCorreo.php";
+require "../../model/clasePago.php";
+require "../../model/functionsDataBooking.php";
 
 $habitacion = new habitaciones();
 $reserva = new reservas();

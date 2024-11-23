@@ -665,6 +665,8 @@ body {
     margin-left: 6rem;
     margin-top: 2rem;
     gap: 1rem;
+    background-color: white;
+    border-radius: 3px;
 
     form {
       width: 41rem;
@@ -679,6 +681,13 @@ body {
       font-size: 18px;
       background-color: white;
       border-radius: 4px;
+
+      .contentForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+      }
 
       .title {
         display: flex;
@@ -839,7 +848,7 @@ body {
       width: auto;
       gap: 0.7rem;
       padding: 0.5rem;
-      background: linear-gradient(#2e888b, #065357);
+      background: linear-gradient(#3879a5, #2858b1);
       border-radius: 3px;
       color: white;
       box-shadow: 2px 2px 2px gray;
@@ -855,6 +864,39 @@ body {
       }
       img {
         width: 30px;
+      }
+    }
+
+    .noData {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 70%;
+      color: rgb(153, 153, 153);
+      font-size: 17px;
+      font-weight: bold;
+
+      img {
+        width: 60px;
+      }
+    }
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
+      button {
+        background-color: rgb(29, 140, 204);
+        padding: 0.5rem;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: rgb(20, 112, 165);
       }
     }
   }

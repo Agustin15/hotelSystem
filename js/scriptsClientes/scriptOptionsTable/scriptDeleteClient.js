@@ -1,5 +1,6 @@
 import { displayTable } from "../scriptClientsTable.js";
 
+
 const configDeleteClient = async () => {
   let containDelete = document.querySelector(".containDelete");
   let idClient = containDelete.id;
@@ -9,7 +10,7 @@ const configDeleteClient = async () => {
   if (dataClient) {
     containDelete.querySelector(
       "h3"
-    ).innerHTML += ` ${dataClient.nombre} ${dataClient.apellido}`;
+    ).innerHTML += ` ${dataClient.nombre} ${dataClient.apellido}?`;
 
     eventsDelete(idClient);
   } else {
@@ -17,11 +18,11 @@ const configDeleteClient = async () => {
   }
 };
 
-const getDataClient = async (id) => {
+export const getDataClient = async (id) => {
   let data = null;
 
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=dataClient&&idClient=" +
+    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=dataClient&&idClient=" +
     id;
   try {
     const response = await fetch(url);
@@ -58,7 +59,7 @@ const eventsDelete = (idClient) => {
 
 const fetchDelete = async (idClient) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?idClient=" +
+    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?idClient=" +
     idClient;
 
   let data = null;
@@ -79,7 +80,8 @@ const fetchDelete = async (idClient) => {
   }
 };
 
-const closeModal = () => {
+
+export const closeModal = () => {
   let modalMainClient = document.querySelector(".modalMainClient");
   modalMainClient.style.display = "none";
   modalMainClient.innerHTML = ``;

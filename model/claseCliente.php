@@ -155,8 +155,6 @@ class cliente
     }
 
 
-    //
-
     public function getClientById($idCliente)
     {
 
@@ -170,21 +168,6 @@ class cliente
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
-
-
-    public function getClientesDistintos($idCliente)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes where idCliente!=?");
-        $consulta->bind_param("i", $idCliente);
-        $consulta->execute();
-
-
-        $resultado = $consulta->get_result();
-
-        return $resultado;
-    }
-
     public function updateCliente($correo, $nombre, $apellido, $telefono, $idCliente)
     {
 
@@ -195,43 +178,6 @@ class cliente
 
         return $resultado;
     }
-
-
-
-    public function updatePhone($telefono, $idCliente)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("update clientes set telefono=? where idCliente=?");
-        $consulta->bind_param("si", $telefono, $idCliente);
-        $resultado = $consulta->execute();
-
-        return $resultado;
-    }
-
-    public function updateMail($correo, $idCliente)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("update clientes set correo=? where idCliente=?");
-        $consulta->bind_param("si", $correo, $idCliente);
-        $resultado = $consulta->execute();
-
-        return $resultado;
-    }
-
-
-
-    public function getServiciosCliente($idReserva)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from serviciosExtra_habitacion where
-        idReservaHabitacionServicio=?");
-        $consulta->bind_param("i", $idReserva);
-        $consulta->execute();
-        $resultado = $consulta->get_result();
-
-        return $resultado;
-    }
-
 
 
     public function getClienteCorreo($correo)
@@ -291,6 +237,29 @@ class cliente
         $consulta = $this->conexion->conectar()->prepare("select * from clientes where telefono=? and (nombre!=? or 
         apellido!=?)");
         $consulta->bind_param("sss", $telefono, $nombre, $apellido);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function comprobateMailInUseById($id, $correo)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where idCliente!=? and correo=?");
+        $consulta->bind_param("is", $id, $correo);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function comprobatePhoneInUseById($id, $telefono)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where idCliente=? and telefono=? ");
+        $consulta->bind_param("is", $id, $telefono);
         $consulta->execute();
         $resultado = $consulta->get_result();
 

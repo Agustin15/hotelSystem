@@ -49,7 +49,7 @@ async function getClientsByMonthActualYear(actualYear) {
   loading(true, "bookings");
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php?option=clientsGraphic&year=" +
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsGraphic&year=" +
         actualYear,
       {
         method: "GET",
@@ -127,7 +127,7 @@ async function getRevenueActualYear() {
 
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/ganancias/opcionPago.php?option=dashboardGraphic",
+      "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php?option=dashboardGraphic",
       {
         method: "GET",
         headers: {
@@ -219,7 +219,7 @@ async function getCategoryRoomsMostReserved() {
   loading(true, "rooms");
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/reservas/opcionHabitacion.php?option=dashboardGraphic",
+      "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=dashboardGraphic",
       {
         method: "GET",
         headers: {

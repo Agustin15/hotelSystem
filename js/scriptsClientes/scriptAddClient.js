@@ -1,4 +1,4 @@
-const inputAlert = (inputError) => {
+export const inputAlert = (inputError) => {
   let namesInputs = [...document.getElementsByName(inputError.key)];
   let input = namesInputs[0];
   input.classList.add("inputAlert");
@@ -26,7 +26,7 @@ const removeAlertInputs = () => {
   });
 };
 
-const removeAllMsjErrors = () => {
+export const removeAllMsjErrors = () => {
   document.querySelectorAll(".msjError").forEach((msj) => {
     msj.classList.remove("msjErrorShow");
     msj.querySelector("span").textContent = "";
@@ -74,7 +74,7 @@ const fetchPost = async (client) => {
   loading(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/cliente/opcionCliente.php",
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php",
       {
         method: "POST",
         headers: {
@@ -105,7 +105,7 @@ const fetchPost = async (client) => {
   }
 };
 
-const alertForm = (img, msj, title) => {
+export const alertForm = (img, msj, title) => {
   let alertForm = document.querySelector(".alertForm");
 
   alertForm.querySelector("span").textContent = title;
@@ -120,7 +120,7 @@ const alertForm = (img, msj, title) => {
   }
 };
 
-const validations = (value) => {
+export const validations = (value) => {
   let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
 
   let validations = [
@@ -149,7 +149,7 @@ const validations = (value) => {
   return validations;
 };
 
-const phoneConfig = () => {
+export const phoneConfig = () => {
   let inputPhone = document.querySelector("#inputPhone");
   inputPhone.maxLength = 9;
 
@@ -158,7 +158,7 @@ const phoneConfig = () => {
   });
 };
 
-const replaceCharacter = (input) => {
+export const replaceCharacter = (input) => {
   let valid = /\d/;
 
   let ultimateCharacter = input.value
@@ -171,7 +171,7 @@ const replaceCharacter = (input) => {
   }
 };
 
-const loading = (state) => {
+export const loading = (state) => {
   let loading = document.querySelector(".loading");
 
   if (state) {
