@@ -1,4 +1,4 @@
-import {closeModal,getDataClient} from "./scriptDeleteClient.js";
+import { closeModal, getDataClient } from "./scriptDeleteClient.js";
 
 import {
   inputAlert,
@@ -6,7 +6,7 @@ import {
   alertForm,
   phoneConfig,
   removeAllMsjErrors,
-  loading
+  loading,
 } from "../scriptAddClient.js";
 
 let dataClient;
@@ -27,8 +27,8 @@ export const configEditClient = async () => {
   }
 };
 
-const cleanInputs = () => {
-  document.querySelectorAll("input", (input) => {
+const cleanInputs = (form) => {
+  form.querySelectorAll("input", (input) => {
     input.value = "";
   });
 };
@@ -36,20 +36,22 @@ const cleanInputs = () => {
 const eventsButtons = () => {
   let btnClean = document.querySelector(".btnClean");
   let btnClose = document.querySelector(".btnClose");
+  let form = document.querySelector("form");
 
   btnClean.addEventListener("click", () => {
-    cleanInputs();
+    cleanInputs(form);
   });
 
-  
   btnClose.addEventListener("click", () => {
     closeModal();
   });
 };
 
 const inputsActualValues = () => {
-  let inputs = document.querySelectorAll("input");
+  let form = document.querySelector("form");
+  let inputs = form.querySelectorAll("input");
 
+   
   inputs.forEach((input) => {
     input.value = dataClient[input.dataset.ref];
   });
@@ -108,7 +110,7 @@ const submitEditForm = () => {
     }
   });
 
-  cleanInputs();
+  cleanInputs(form);
 };
 
 const getIfExist = async (client) => {
@@ -163,7 +165,9 @@ const fetchPOST = async (client) => {
 };
 
 const noData = () => {
-  let contentForm = document.querySelector("form").querySelector(".contentForm");
+  let contentForm = document
+    .querySelector("form")
+    .querySelector(".contentForm");
   let noData = document.querySelector(".noData");
 
   contentForm.style.display = "none";

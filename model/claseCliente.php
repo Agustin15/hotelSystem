@@ -121,6 +121,29 @@ class cliente
         return $resultados->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getRowsBookingsClient($id)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes INNER JOIN reserva_habitacion
+     ON clientes.idCliente=reserva_habitacion.idClienteReserva where clientes.idCliente=?");
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado->num_rows;
+    }
+
+
+
+    public function getLimitBookingsClient($id)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes INNER JOIN reserva_habitacion
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where clientes.idCliente=? LIMIT 1");
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado;
+    }
 
     public function getAllYearsVisitClients()
     {

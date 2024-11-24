@@ -188,6 +188,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
           }
         }
         break;
+
+      case "rowsClient":
+
+        $idClient = $_GET['client'];
+        $numRows = $claseCliente->getRowsBookingsClient($idClient);
+        $peticion = $numRows;
+        break;
+
+        case "bookingsClient":
+
+          $idClient = $_GET['client'];
+          $bookingClient = $claseCliente->getLimitBookingsClient($idClient)->fetch_array(MYSQLI_ASSOC);
+          $peticion = $bookingClient;
+          break;
     }
 
 

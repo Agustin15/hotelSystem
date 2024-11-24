@@ -1,5 +1,6 @@
 import configDeleteClient from "./scriptOptionsTable/scriptDeleteClient.js";
 import { configEditClient } from "./scriptOptionsTable/scriptEditClient.js";
+import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -207,21 +208,28 @@ const optionsClient = () => {
 
   btnsDelete.forEach((btnDelete) => {
     btnDelete.addEventListener("click", async () => {
-      let id = btnDelete.parentElement.id;
-      result = await getOptionClient("optionClient/delete.php?client=" + id);
-      openModal(result);
-      configDeleteClient();
+      drawOption(btnDelete,"optionClient/delete.php?client=",configDeleteClient);
     });
   });
 
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener("click", async () => {
-      let id = btnEdit.parentElement.id;
-      result = await getOptionClient("optionClient/edit.php?client=" + id);
-      openModal(result);
-      configEditClient();
+      drawOption(btnEdit,"optionClient/edit.php?client=",configEditClient);
     });
   });
+
+  btnsDetails.forEach((btnDetails) => {
+    btnDetails.addEventListener("click", async () => {
+      drawOption(btnDetails,"optionClient/details.php?client=",configDetailsClient);
+    });
+  });
+};
+
+const drawOption = async (btn, url, configOption) => {
+  let id = btn.parentElement.id;
+  let result = await getOptionClient(url + id);
+  openModal(result);
+  configOption();
 };
 
 const openModal = (result) => {
