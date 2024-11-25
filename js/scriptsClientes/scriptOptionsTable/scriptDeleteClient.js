@@ -1,5 +1,5 @@
 import { displayTable } from "../scriptClientsTable.js";
-
+import { loading } from "../scriptAddClient.js";
 
 const configDeleteClient = async () => {
   let containDelete = document.querySelector(".containDelete");
@@ -8,9 +8,18 @@ const configDeleteClient = async () => {
   let dataClient = await getDataClient(idClient);
 
   if (dataClient) {
-    containDelete.querySelector(
-      "h3"
-    ).innerHTML += ` ${dataClient.nombre} ${dataClient.apellido}?`;
+    containDelete.querySelector(".body").innerHTML += `
+    <h3>¿Desea borrar al cliente ${dataClient.nombre} ${dataClient.apellido}?</h3>
+
+    <div class="buttons">
+        <button class="btnAccept">Aceptar</button>
+        <button class="btnCancel">Cancelar</button>
+    </div>
+    <div class="error">
+
+        <img src="../../../img/advertenciaDelete.png">
+        <span>Ups, no se pudo eliminar el cliente</span>
+    </div>`;
 
     eventsDelete(idClient);
   } else {
@@ -24,6 +33,8 @@ export const getDataClient = async (id) => {
   let url =
     "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=dataClient&&idClient=" +
     id;
+
+  loading(true);
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -33,6 +44,7 @@ export const getDataClient = async (id) => {
   } catch (error) {
     console.log(error);
   } finally {
+    loading(false);
     return data;
   }
 };
@@ -51,7 +63,6 @@ const eventsDelete = (idClient) => {
       closeModal();
       displayTable();
     } else {
-
       errorDelete();
     }
   });
@@ -65,11 +76,11 @@ const fetchDelete = async (idClient) => {
   let data = null;
   try {
     const response = await fetch(url, {
-      method: "DELETE"
+      method: "DELETE",
     });
 
     const result = await response.json();
-  
+
     if (result) {
       data = result;
     }
@@ -80,7 +91,6 @@ const fetchDelete = async (idClient) => {
   }
 };
 
-
 export const closeModal = () => {
   let modalMainClient = document.querySelector(".modalMainClient");
   modalMainClient.style.display = "none";
@@ -88,12 +98,17 @@ export const closeModal = () => {
 };
 
 const noData = () => {
-  let containDeleteBody = document.querySelector(".body");
-  let btnClose = document.querySelector(".btnClose");
   let noData = document.querySelector(".noData");
-  containDeleteBody.style.display = "none";
-  noData.style.display = "flex";
 
+  noData.innerHTML = `
+  <div class="content">
+  <img src="../../../img/sinDatos.png">
+  <span>Ups, no se pudo encontrar al cliente</span>
+</div>
+<button class="btnClose">Cerrar</button>
+`;
+
+  let btnClose = noData.querySelector(".btnClose");
   btnClose.addEventListener("click", () => {
     closeModal();
   });

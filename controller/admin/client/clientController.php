@@ -79,6 +79,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case "GET":
 
     $option = $_GET['option'];
+    $peticion = null;
 
     switch ($option) {
 
@@ -182,26 +183,32 @@ switch ($_SERVER['REQUEST_METHOD']) {
           $existClientPhone = $claseCliente->comprobatePhoneInUseById($client['id'], $client['phone']);
 
           if ($existClientPhone) {
-
-
             $peticion = array("warning" => "Ups,ya existe un cliente con este telefono");
           }
         }
         break;
 
-      case "rowsClient":
+      case "rowsBookingsClient":
 
         $idClient = $_GET['client'];
         $numRows = $claseCliente->getRowsBookingsClient($idClient);
         $peticion = $numRows;
         break;
 
-        case "bookingsClient":
+      case "bookingsClient":
 
-          $idClient = $_GET['client'];
-          $bookingClient = $claseCliente->getLimitBookingsClient($idClient)->fetch_array(MYSQLI_ASSOC);
+        $idClient = $_GET['client'];
+        $index = $_GET['index'];
+
+        if ($index == 0) {
+
+          $bookingClient = $claseCliente->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
           $peticion = $bookingClient;
-          break;
+        } else {
+          $bookingClient = $claseCliente->getLimitAndIndexBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
+          $peticion = $bookingClient;
+        }
+        break;
     }
 
 

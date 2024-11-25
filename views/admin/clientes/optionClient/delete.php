@@ -16,30 +16,15 @@ $idClient = $_GET['client'];
 
 
     <div class="containDelete" id="<?php echo $idClient ?> ">
+        <img src="../../../img/deleteClient.png">
 
+        <div class="loading">
+            <span>Cargando cliente</span>
+            <img src="../../../img/spinnerMain.gif">
+        </div>
         <div class="body">
-            <img src="../../../img/deleteClient.png">
-            <h3>¿Desea borrar al cliente</h3>
-
-            <div class="buttons">
-                <button class="btnAccept">Aceptar</button>
-                <button class="btnCancel">Cancelar</button>
-            </div>
-            <div class="error">
-
-                <img src="../../../img/advertenciaDelete.png">
-                <span>Ups, no se pudo eliminar el cliente</span>
-            </div>
         </div>
-        <div class="noData">
-
-            <div class="content">
-                <img src="../../../img/sinDatos.png">
-                <span>Ups, no se encontro al cliente</span>
-            </div>
-            <button class="btnClose">Cerrar</button>
-
-        </div>
+        <div class="noData"></div>
 
     </div>
 

@@ -145,6 +145,18 @@ class cliente
         return $resultado;
     }
 
+    
+    public function getLimitAndIndexBookingsClient($id,$index)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes INNER JOIN reserva_habitacion
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where clientes.idCliente=? LIMIT 1, $index");
+        $consulta->bind_param("i", $id);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado;
+    }
+
     public function getAllYearsVisitClients()
     {
 
@@ -281,7 +293,7 @@ class cliente
     public function comprobatePhoneInUseById($id, $telefono)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes where idCliente=? and telefono=? ");
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes where idCliente!=? and telefono=? ");
         $consulta->bind_param("is", $id, $telefono);
         $consulta->execute();
         $resultado = $consulta->get_result();

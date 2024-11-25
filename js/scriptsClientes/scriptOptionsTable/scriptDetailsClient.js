@@ -1,19 +1,26 @@
 import { getDataClient } from "./scriptDeleteClient.js";
 import { loading } from "../scriptAddClient.js";
+import { generateItemsInfo } from "./scriptsDetailsClient/scriptItemsBooking.js";
+import { configGuestsDetails } from "./scriptsDetailsClient/scriptGuests.js";
+
+let pages;
+let indexPage = 1;
+let indexBooking = 0;
+let totalBookings;
 
 export const configDetailsClient = async () => {
   let containDetails = document.querySelector(".containDetailsClientBooking");
-  let id = containDetails.id;
+  let idClient = containDetails.id;
   let title = document.querySelector(".name");
 
-  let dataClient = await getDataClient(id);
+  let dataClient = await getDataClient(idClient);
 
   if (dataClient) {
     title.textContent += ` ${dataClient.nombre} ${dataClient.apellido} `;
+    totalBookings = await getRowsBookingClients(idClient);
 
-    let result = await getRowsBookingClients(id);
-    if (result) {
-      displayBookingsClient(id);
+    if (totalBookings) {
+      displayBookingClient(idClient);
     } else {
       noBookingsClient("Ups, este cliente no tiene reservas aun");
     }
@@ -22,7 +29,7 @@ export const configDetailsClient = async () => {
 
 const getRowsBookingClients = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=rowsClient&&client=" +
+    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=rowsBookingsClient&&client=" +
     id;
   let data = null;
 
@@ -52,7 +59,10 @@ const noBookingsClient = (msj) => {
 const getClientBookingLimit = async (id) => {
   let url =
     "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=bookingsClient&&client=" +
-    id;
+    id +
+    "&&index=" +
+    indexBooking;
+
   let data = null;
 
   loading(true);
@@ -70,10 +80,12 @@ const getClientBookingLimit = async (id) => {
   }
 };
 
-const displayBookingsClient = async (id) => {
+const displayBookingClient = async (idClient) => {
   let containBookings = document.querySelector(".bookings");
 
-  let booking = await getClientBookingLimit(id);
+  let booking = await getClientBookingLimit(idClient);
+  pages = totalBookings / 1;
+
   if (booking) {
     let options = {
       weekday: "long",
@@ -88,7 +100,7 @@ const displayBookingsClient = async (id) => {
     startBooking = startBooking.toLocaleDateString("es", options);
     endBooking = endBooking.toLocaleDateString("es", options);
 
-    let items = generateItemsInfo();
+    let items = generateItemsInfo(booking.idReserva);
 
     containBookings.innerHTML = `
   
@@ -105,63 +117,71 @@ const displayBookingsClient = async (id) => {
                       </div>
                   </div>
   
-                  <div class="items">
+                  <div class="items" >
                   ${items}
   
                   </div>
                  
           
     `;
+
+    buttonsOptions();
+    controlsIndexBooking();
   } else {
     noBookingsClient("Ups, no se pudo cargar la reserva");
   }
 };
 
-const generateItemsInfo = () => {
-  let itemsInfo = [
-    {
-      icon: "../../../img/guestInfo.png",
-      title: "Huespedes",
-      class: "guests",
-      description:
-        "Puede ver la cantidad de huespedes de la reserva,y la cantidad que estan hospedados por cada habitacion reservada",
-    },
+const controlsIndexBooking = () => {
+  let containIndexBookings = document.querySelector(".indexBookings");
 
-    {
-      icon: "../../../img/roomInfoIcon.png",
-      title: "Habitaciones",
-      class: "rooms",
-      description:
-        "Detalles de las habitaciones reservadas por el cliente , como numero de habitacion y categoria",
-    },
+  containIndexBookings.innerHTML = ` 
+  <span class="prevBooking">Anterior</span>
+           ${indexPage}/${pages}
+     <span class="nextBooking">Siguiente</span>
+`;
 
-    {
-        icon: "../../../img/minibarInfo.png",
-        title: "Servicios",
-        class: "services",
-        description:
-          "Detalles sobre los productos consumidos en la habitaciones como el minibar y la cantina del hotel durante la estadia"
-      },
-  ];
+  let prevBooking = document.querySelector(".prevBooking");
+  let nextBooking = document.querySelector(".nextBooking");
 
-  let items = itemsInfo.map((item) => {
-    return `
+  prevBooking.addEventListener("click", () => {
+    if (indexPage > 1) {
+      indexPage--;
+      indexBooking--;
 
-    <div class=${item}>
-  
-        <div class="headerItem">
-  
-            <img src="${item.icon}">
-            <p>${item.description}</p>
-        </div>
-        <div class="footer">
-  
-        <span>${item.title}</span>
-            <img src="../../../img/ver.png">
-        </div>
-  
-    </div>`;
+      displayBookingClient();
+    }
   });
 
-  return items;
+  nextBooking.addEventListener("click", () => {
+    if (indexPage < pages) {
+      indexBooking++;
+      indexPage++;
+      displayBookingClient();
+    }
+  });
+};
+
+const buttonsOptions = () => {
+  let btnGuests = document.querySelector(".viewGuests");
+
+  btnGuests.addEventListener("click", () => {
+    let idBooking = btnGuests.parentNode.id;
+    drawOptionDetail(
+      "optionClient/optionsDetails/guest.php?idBooking="+idBooking
+    ,configGuestsDetails);
+  });
+};
+
+const drawOptionDetail = async (url, configOptionDetail) => {
+  const modal = document.querySelector(".modalOptionsBookingClient");
+  const response = await fetch(url);
+  const result = await response.text();
+  modal.innerHTML = result;
+  optionModal(modal, "flex");
+  configOptionDetail();
+};
+
+export const optionModal = (modal, option) => {
+  modal.style.display = option;
 };

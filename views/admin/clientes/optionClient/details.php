@@ -14,6 +14,8 @@ $idCliente = $_GET['client'];
 
 <body>
 
+    <div class="modalOptionsBookingClient"> </div>
+
     <div class="containDetailsClientBooking" id="<?php echo $idCliente ?>">
 
         <div class="header">
@@ -38,18 +40,16 @@ $idCliente = $_GET['client'];
 
             <div class="bookings">
 
-              
-            
-                    <div class="noBookings">
+                <div class="noBookings">
 
-                        <img src="../../../img/noBookings.png">
-                        <h4></h4>
-                    </div>
+                    <img src="../../../img/noBookings.png">
+                    <h4></h4>
                 </div>
-
             </div>
-        </div>
+            <div class="indexBookings"></div>
 
+        </div>
+    </div>
 </body>
 
 

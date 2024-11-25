@@ -59,7 +59,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     );
                 }, $categoryRooms);
 
-                $peticion=$dataCategoryRooms;
+                $peticion = $dataCategoryRooms;
+                break;
+
+            case "getDataRoomsBooking":
+
+                $idBooking = $_GET['idBooking'];
+                $roomsDetailsBooking = $claseHabitacion->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
+                $peticion = $roomsDetailsBooking;
                 break;
         }
 

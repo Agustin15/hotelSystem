@@ -1,12 +1,13 @@
 import { closeModal, getDataClient } from "./scriptDeleteClient.js";
+import { drawForm } from "./scriptsEditClient/drawForm.js";
+import { displayTable } from "../scriptClientsTable.js";
 
 import {
   inputAlert,
   validations,
   alertForm,
   phoneConfig,
-  removeAllMsjErrors,
-  loading,
+  removeAllMsjErrors
 } from "../scriptAddClient.js";
 
 let dataClient;
@@ -14,52 +15,25 @@ let idClient;
 
 export const configEditClient = async () => {
   let containEdit = document.querySelector(".containFormEdit");
-  idClient = containEdit.id;
-  dataClient = await getDataClient(idClient);
-
-  eventsButtons();
-
-  if (dataClient) {
-    inputsActualValues();
-    submitEditForm(dataClient);
-  } else {
-    noData();
-  }
-};
-
-const cleanInputs = (form) => {
-  form.querySelectorAll("input", (input) => {
-    input.value = "";
-  });
-};
-
-const eventsButtons = () => {
-  let btnClean = document.querySelector(".btnClean");
   let btnClose = document.querySelector(".btnClose");
   let form = document.querySelector("form");
-
-  btnClean.addEventListener("click", () => {
-    cleanInputs(form);
-  });
+  idClient = containEdit.id;
+  dataClient = await getDataClient(idClient);
 
   btnClose.addEventListener("click", () => {
     closeModal();
   });
-};
 
-const inputsActualValues = () => {
-  let form = document.querySelector("form");
-  let inputs = form.querySelectorAll("input");
-
-   
-  inputs.forEach((input) => {
-    input.value = dataClient[input.dataset.ref];
-  });
+  if (dataClient) {
+    drawForm(dataClient);
+    submitEditForm(form);
+  } else {
+    noData(containEdit);
+  }
 };
 
 const submitEditForm = () => {
   let form = document.querySelector("form");
-
   phoneConfig();
 
   form.addEventListener("submit", async (event) => {
@@ -99,6 +73,7 @@ const submitEditForm = () => {
             "¡Cliente actualizado exitosamente!",
             "Exito"
           );
+          displayTable();
         } else {
           alertForm(
             "../../../img/advertenciaLogin.png",
@@ -109,8 +84,6 @@ const submitEditForm = () => {
       }
     }
   });
-
-  cleanInputs(form);
 };
 
 const getIfExist = async (client) => {
@@ -120,10 +93,11 @@ const getIfExist = async (client) => {
 
   let data = null;
 
-  loading(true);
+  loadingForm(true);
   try {
     const response = await fetch(url);
     const result = await response.json();
+   
 
     if (result) {
       data = result;
@@ -131,7 +105,7 @@ const getIfExist = async (client) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loadingForm(false);
     return data;
   }
 };
@@ -142,7 +116,7 @@ const fetchPOST = async (client) => {
 
   let data = null;
 
-  loading(true);
+  loadingForm(true);
   try {
     const response = await fetch(url, {
       method: "PUT",
@@ -159,17 +133,25 @@ const fetchPOST = async (client) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loadingForm(false);
     return data;
   }
 };
 
-const noData = () => {
-  let contentForm = document
-    .querySelector("form")
-    .querySelector(".contentForm");
-  let noData = document.querySelector(".noData");
+const noData = (containEdit) => {
+  let noData =containEdit.querySelector(".noData");
+  noData.innerHTML = `
+  <img src="../../../img/sinDatos.png">
+  <span>Ups, no se pudo encontrar al cliente</span>
+`;
+};
 
-  contentForm.style.display = "none";
-  noData.style.display = "flex";
+const loadingForm = (state) => {
+  let loading = document.querySelector(".loadingForm");
+
+  if (state) {
+    loading.style.display = "flex";
+  } else {
+    loading.style.display = "none";
+  }
 };

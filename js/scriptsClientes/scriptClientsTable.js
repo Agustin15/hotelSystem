@@ -74,7 +74,7 @@ const displayTable = async () => {
     if (clientsRows <= 10) {
       limitPage = 1;
     } else {
-      limitPage = clientsRows / 2;
+      limitPage = clientsRows /10;
     }
 
     let dataClients = clients.map((client, index) => {
@@ -129,7 +129,7 @@ const displayTable = async () => {
 const controls = (next, prev) => {
   next.addEventListener("click", function () {
     if (page < limitPage) {
-      indexRegister += 2;
+      indexRegister += 10;
       page++;
       displayTable();
     }
@@ -137,7 +137,7 @@ const controls = (next, prev) => {
 
   prev.addEventListener("click", function () {
     if (page > 1) {
-      indexRegister -= 2;
+      indexRegister -= 10;
       page--;
       displayTable();
     }
