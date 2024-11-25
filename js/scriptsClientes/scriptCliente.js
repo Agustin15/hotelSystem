@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-const actualOptionClient = async (optionActual) => {
+export const actualOptionClient = async (optionActual) => {
   let optionDocument = await getDocument(optionActual);
   drawDocument(optionDocument);
 };

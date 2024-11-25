@@ -8,6 +8,8 @@ import {
   displayItemDataRevenuesActual,
 } from "./itemsData.js";
 
+import { optionsMenuAdmin } from "./menuAdminOptions.js";
+
 function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
 
@@ -68,29 +70,25 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   });
 }
 
-let iconAdmin = document.querySelector(".iconoAdmin");
+const iconMenuAvatar = () => {
+  let iconAdmin = document.querySelector(".iconoAdmin");
 
-if (iconAdmin) {
-  let genreData = iconAdmin.dataset.genre;
+  if (iconAdmin) {
+    let genreData = iconAdmin.dataset.genre;
 
-  if ((genreData = "M")) {
-    $(".iconoAdmin").attr(
-      "src",
-      "http://localhost/sistema%20Hotel/img/perfilM.png"
-    );
-  } else {
-    $(".iconoAdmin").attr(
-      "src",
-      "http://localhost/sistema%20Hotel/img/perfilF.png"
-    );
+    if ((genreData = "M")) {
+      $(".iconoAdmin").attr(
+        "src",
+        "http://localhost/sistema%20Hotel/img/perfilM.png"
+      );
+    } else {
+      $(".iconoAdmin").attr(
+        "src",
+        "http://localhost/sistema%20Hotel/img/perfilF.png"
+      );
+    }
   }
-}
-
-//abrir subMenus
-openSubMenu(
-  "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
-  "http://localhost/sistema%20Hotel/img/btnFlecha.png"
-);
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   let actualDate = new Date();
@@ -103,4 +101,12 @@ document.addEventListener("DOMContentLoaded", () => {
     displayItemsDataCategoryRooms();
     displayItemDataRevenuesActual();
   }
+
+  iconMenuAvatar();
+  optionsMenuAdmin();
+
+  openSubMenu(
+    "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
+    "http://localhost/sistema%20Hotel/img/btnFlecha.png"
+  );
 });

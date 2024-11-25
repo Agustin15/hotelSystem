@@ -1,7 +1,9 @@
-import { getDataClient } from "./scriptDeleteClient.js";
+import { closeModal, getDataClient } from "./scriptDeleteClient.js";
 import { loading } from "../scriptAddClient.js";
 import { generateItemsInfo } from "./scriptsDetailsClient/scriptItemsBooking.js";
 import { configGuestsDetails } from "./scriptsDetailsClient/scriptGuests.js";
+import { configRoomsDetails } from "./scriptsDetailsClient/scriptRooms.js";
+import { configServicesDetails } from "./scriptsDetailsClient/scriptServices.js";
 
 let pages;
 let indexPage = 1;
@@ -12,6 +14,7 @@ export const configDetailsClient = async () => {
   let containDetails = document.querySelector(".containDetailsClientBooking");
   let idClient = containDetails.id;
   let title = document.querySelector(".name");
+  closeDetails();
 
   let dataClient = await getDataClient(idClient);
 
@@ -164,12 +167,31 @@ const controlsIndexBooking = () => {
 
 const buttonsOptions = () => {
   let btnGuests = document.querySelector(".viewGuests");
+  let btnRooms = document.querySelector(".viewRooms");
+  let btnServices = document.querySelector(".viewServices");
 
   btnGuests.addEventListener("click", () => {
     let idBooking = btnGuests.parentNode.id;
     drawOptionDetail(
-      "optionClient/optionsDetails/guest.php?idBooking="+idBooking
-    ,configGuestsDetails);
+      "optionClient/optionsDetails/guest.php?idBooking=" + idBooking,
+      configGuestsDetails
+    );
+  });
+  
+  btnRooms.addEventListener("click", () => {
+    let idBooking = btnRooms.parentNode.id;
+    drawOptionDetail(
+      "optionClient/optionsDetails/rooms.php?idBooking=" + idBooking,
+      configRoomsDetails
+    );
+  });
+
+  btnServices.addEventListener("click", () => {
+    let idBooking = btnServices.parentNode.id;
+    drawOptionDetail(
+      "optionClient/optionsDetails/services.php?idBooking=" + idBooking,
+      configServicesDetails
+    );
   });
 };
 
@@ -184,4 +206,12 @@ const drawOptionDetail = async (url, configOptionDetail) => {
 
 export const optionModal = (modal, option) => {
   modal.style.display = option;
+};
+
+const closeDetails = () => {
+  let btnCloseDetails = document.querySelector(".btnCloseDetails");
+
+  btnCloseDetails.addEventListener("click", () => {
+    closeModal();
+  });
 };

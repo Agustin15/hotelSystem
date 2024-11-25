@@ -1,7 +1,6 @@
 <?php
 
 $idBooking = $_GET['idBooking'];
-
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,7 @@ $idBooking = $_GET['idBooking'];
 
 <body>
 
-    <div class="containGuestDetails" id="<?php echo $idBooking ?>">
+    <div class="containRoomsDetails" id="<?php echo $idBooking ?>">
 
         <div class="header">
 
@@ -23,8 +22,8 @@ $idBooking = $_GET['idBooking'];
                 <button class="btnCloseWindow">x</button>
             </div>
             <div class="title">
-                <img src="../../../img/guestInfo.png">
-                <span>Huespedes</span>
+                <img src="../../../img/roomInfoIcon.png">
+                <span>Habitaciones</span>
             </div>
         </div>
 

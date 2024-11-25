@@ -20,8 +20,14 @@ $idCliente = $_GET['client'];
 
         <div class="header">
 
-            <h3 class="name">Detalles del cliente <!-- nameClient--></h3>
-            <img src="../../../img/clienteInfo.png">
+            <div class="closeDetails">
+
+                <button class="btnCloseDetails">x</button>
+            </div>
+            <div class="title">
+                <h3 class="name">Detalles del cliente <!-- nameClient--></h3>
+                <img src="../../../img/clienteInfo.png">
+            </div>
         </div>
 
         <div class="bookingsClient">
@@ -40,6 +46,7 @@ $idCliente = $_GET['client'];
 
             <div class="bookings">
 
+                   
                 <div class="noBookings">
 
                     <img src="../../../img/noBookings.png">

@@ -3,12 +3,11 @@
 require("../../../model/claseHabitaciones.php");
 
 $claseHabitacion = new habitaciones();
-
+$peticion=null;
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case "GET":
-
-
+        
         switch ($_GET['option']) {
             case "dashboardGraphic":
 
@@ -67,6 +66,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 $idBooking = $_GET['idBooking'];
                 $roomsDetailsBooking = $claseHabitacion->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
                 $peticion = $roomsDetailsBooking;
+                break;
+
+            case "getDataRoomsBookingAndCategory":
+
+                $idBooking = $_GET['idBooking'];
+                $roomsDetailsBooking = $claseHabitacion->roomsBookingAndDetails($idBooking);
+
+                if (count($roomsDetailsBooking) > 0) {
+                    $roomsDetailsBookingFixed = array_map(function ($room) {
+
+                        return array(
+                            "numRoom" => $room['numHabitacionReservada'],
+                            "category" => $room['categoria'],
+                            "image" => base64_encode($room['imagenDos'])
+
+                        );
+                    }, $roomsDetailsBooking);
+                    $peticion = $roomsDetailsBookingFixed;
+                }
+
                 break;
         }
 

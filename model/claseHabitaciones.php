@@ -256,6 +256,23 @@ class habitaciones
 
 
 
+    public function roomsBookingAndDetails($idBooking)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada 
+        INNER JOIN habitaciones ON habitacion_reservada.numHabitacionReservada=habitaciones.numHabitacion
+       INNER JOIN tipo_habitacion ON habitaciones.tipoHabitacion=tipo_habitacion.categoria 
+       where habitacion_reservada.idReservaHabitacion=?");
+        $consulta->bind_param("i", $idBooking);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
     public function reservasHabitacionDisponible($numHabitacion, $hoy)
     {
 
@@ -400,65 +417,6 @@ class habitaciones
 
         return $resultado;
     }
-
-
-
-    public function getCategoria($numHabitcion)
-    {
-
-        $categoria = null;
-        switch ($numHabitcion) {
-
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-
-                $categoria = "Estandar";
-
-                break;
-
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-
-                $categoria = "Deluxe";
-
-                break;
-
-            case 21:
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-            case 27:
-            case 28:
-            case 29:
-            case 30:
-
-                $categoria = "Suite";
-
-                break;
-        }
-
-        return $categoria;
-    }
-
-
 
 
     function totalHabitacionesCategoriaReservadas($habitacionesReservadas, $categoriaFilter)

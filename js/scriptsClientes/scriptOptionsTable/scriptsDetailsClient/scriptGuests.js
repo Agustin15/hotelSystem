@@ -9,9 +9,11 @@ export const configGuestsDetails = async () => {
   let body = containGuestDetails.querySelector(".body");
   dataBooking = await getDataBookingRooms(idBooking);
 
+  closeWindow();
+
   if (dataBooking) {
     let guestsTotal = totalGuests();
-    body.innerHTML = ` 
+    body.innerHTML+= ` 
        
     <div class="totalGuests">
 
@@ -33,13 +35,12 @@ export const configGuestsDetails = async () => {
     
     `;
 
-    closeWindow();
   } else {
     noData(body);
   }
 };
 
-const getDataBookingRooms = async (idBooking) => {
+export const getDataBookingRooms = async (idBooking) => {
   let url =
     "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=getDataRoomsBooking&&idBooking=" +
     idBooking;
@@ -56,7 +57,7 @@ const getDataBookingRooms = async (idBooking) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(true);
+    loading(false);
     return data;
   }
 };
@@ -114,7 +115,7 @@ const roomsGuests = () => {
   });
 };
 
-const closeWindow = () => {
+export const closeWindow = () => {
   let btnCloseWindow = document.querySelector(".btnCloseWindow");
   const modal = document.querySelector(".modalOptionsBookingClient");
 

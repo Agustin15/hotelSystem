@@ -62,7 +62,7 @@ $actualYear = date("Y");
             <ul>
                 <li id="liInicio">
                     <img src="../../../img/inicio.png">
-                    <a>Inicio</a>
+                    <a href="../index.php">Inicio</a>
                 </li>
 
                 <li id="liClientes">
@@ -72,19 +72,19 @@ $actualYear = date("Y");
 
                     <ul class="subMenu">
 
-                        <li>
+                        <li data-sub-url="grafica.html">
 
                             <img src="../../../img/grafica.png">
                             <a>Grafica</a>
 
                         </li>
-                        <li>
+                        <li data-sub-url="clientsTable.html">
 
                             <img src="../../../img/tablaClientes.png">
                             <a>Lista</a>
 
                         </li>
-                        <li>
+                        <li data-sub-url="addClient.html">
 
                             <img src="../../../img/agregarCliente.png">
                             <a>Agregar</a>
@@ -166,7 +166,7 @@ $actualYear = date("Y");
 
                 <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
                 <label><?php echo $usuario ?></label>
-                <img class="btnFlecha" src="../../img/btnFlecha.png">
+                <img class="btnFlecha" src="../../../img/btnFlecha.png">
 
                 <ul class="subMenuAdmin">
 

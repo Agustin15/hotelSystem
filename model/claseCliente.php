@@ -157,6 +157,7 @@ class cliente
         return $resultado;
     }
 
+
     public function getAllYearsVisitClients()
     {
 
