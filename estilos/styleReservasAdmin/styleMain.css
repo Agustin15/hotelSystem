@@ -1,0 +1,318 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: Arial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  width: 100%;
+}
+body .iconoMenu {
+  width: 36px;
+  margin-top: 6px;
+  margin-left: -110px;
+}
+body .lblTituloMenu {
+  margin-top: 20px;
+  margin-left: 10px;
+  position: absolute;
+  font-size: 17px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+body #navAdmin {
+  margin-left: 0px;
+  margin-top: -5px;
+  position: fixed;
+  background: linear-gradient(#055b5e, #04b8c2);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 180px;
+  height: 800px;
+  font-family: Arial;
+}
+body #navAdmin ul {
+  padding-top: 0px;
+}
+body #navAdmin li {
+  margin-top: 11px;
+  padding-top: 17px;
+  height: 30px;
+  cursor: pointer;
+}
+body #navAdmin li a {
+  font-size: 17px;
+  margin-left: 8px;
+  color: white;
+  text-decoration: none;
+}
+body #navAdmin li:hover {
+  background-color: rgb(25, 135, 143);
+  cursor: pointer;
+}
+body #navAdmin li .subMenu li:hover {
+  background-color: rgb(65, 65, 65);
+  cursor: pointer;
+}
+body #navAdmin ul img {
+  width: 25px;
+  display: flex;
+  position: absolute;
+  margin-top: -5px;
+  padding-left: 30px;
+}
+body #liInicio a {
+  padding-left: 10px;
+}
+body #liClientes a {
+  padding-left: 16px;
+}
+body #liClientes .btnFlecha {
+  width: 14px;
+  margin-left: 69%;
+  margin-top: -18px;
+  display: none;
+}
+body #liClientes:hover > .btnFlecha {
+  display: block;
+}
+body .subMenu {
+  background-color: rgb(46, 46, 46);
+  margin-top: 10px;
+  padding-top: 0px;
+  display: none;
+}
+body #navAdmin #liClientes .subMenu li img {
+  width: 22px;
+  margin-top: -2px;
+  padding-left: 45px;
+}
+body #navAdmin #liClientes .subMenu li {
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+body #navAdmin #liClientes .subMenu li a {
+  font-size: 14px;
+  margin-left: 1px;
+}
+body #liReserva a {
+  padding-left: 26px;
+}
+body #liReserva .btnFlecha {
+  width: 14px;
+  margin-left: 69%;
+  margin-top: -18px;
+  display: none;
+}
+body #liReserva:hover > .btnFlecha {
+  display: block;
+}
+body #navAdmin #liReserva .subMenu li img {
+  width: 25px;
+  margin-top: -5px;
+  padding-left: 45px;
+}
+body #navAdmin #liReserva .subMenu li {
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+body #navAdmin #liReserva .subMenu li a {
+  font-size: 14px;
+  margin-left: 0px;
+}
+body #navAdmin #liReserva .subMenu .liHabitacion img {
+  padding-left: 47px;
+}
+body #navAdmin #liReserva .subMenu .liHabitacion a,
+body #navAdmin #liReserva .subMenu .liCalendario a {
+  margin-left: 30px;
+}
+body #liHabitaciones #textHabitaciones {
+  padding-left: 33px;
+}
+body #liHabitaciones .btnFlecha {
+  width: 14px;
+  margin-left: 70%;
+  margin-top: -18px;
+  display: none;
+}
+body #liHabitaciones:hover > .btnFlecha {
+  display: block;
+}
+body #liHabitaciones:hover > #iconoHabitaciones {
+  margin-left: -10px;
+}
+body #liHabitaciones:hover #textHabitaciones {
+  padding-left: 10px;
+}
+body #navAdmin #liHabitaciones .subMenu li img {
+  width: 20px;
+  margin-top: -2px;
+  padding-left: 45px;
+}
+body #navAdmin #liHabitaciones .subMenu li {
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+body #navAdmin #liHabitaciones .subMenu li a {
+  font-size: 14px;
+  margin-left: 0px;
+}
+body #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
+  margin-left: 20px;
+}
+body #navAdmin #liHabitaciones .subMenu .liHabitacion img {
+  padding-left: 47px;
+}
+body #navAdmin #liHabitaciones .subMenu .liHabitacion a {
+  margin-left: 17px;
+}
+body #liGanancias a {
+  padding-left: 27px;
+}
+body #userAdmin {
+  width: 180px;
+  height: 55px;
+  position: absolute;
+  top: 74%;
+  left: 0px;
+  background: linear-gradient(#30aaa0, #0498a0);
+}
+body #userAdmin img {
+  width: 33px;
+  padding-top: 10px;
+  padding-right: 85px;
+}
+body #userAdmin label {
+  padding-top: 20px;
+  margin-left: -66px;
+  position: absolute;
+}
+body #userAdmin .subMenuAdmin {
+  height: 91px;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  margin-top: 20px;
+  display: none;
+  padding-top: 0px;
+}
+body #userAdmin .subMenuAdmin li {
+  color: white;
+  list-style: none;
+  padding-top: 10px;
+  margin-top: 0px;
+  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
+}
+body #userAdmin .subMenuAdmin li img {
+  width: 20px;
+  margin-top: -12px;
+  padding-left: 50px;
+}
+body #userAdmin .subMenuAdmin li a {
+  font-size: 14px;
+  margin-left: 18px;
+  color: white;
+  text-decoration: none;
+}
+body #userAdmin .subMenuAdmin li .logout {
+  margin-left: 10px;
+}
+body #userAdmin .subMenuAdmin li:hover {
+  background-color: rgb(65, 65, 65);
+}
+body #userAdmin .btnFlecha {
+  width: 14px;
+  margin-left: 83%;
+  margin-top: -35px;
+  display: flex;
+  display: none;
+}
+body #userAdmin:hover > .btnFlecha {
+  display: block;
+}
+
+.bodyBookings {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.menuBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+  margin-left: 8rem;
+  padding-top: 0.5rem;
+  box-shadow: 2px 2px 2px rgb(172, 172, 172);
+}
+.menuBar .title {
+  font-size: 20px;
+  color: rgb(168, 168, 168);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.menuBar .title img {
+  width: 50px;
+}
+.menuBar ul {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  font-size: 18px;
+  color: rgb(177, 177, 177);
+  font-weight: bold;
+}
+.menuBar ul li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+}
+.menuBar ul li img {
+  width: 30px;
+}
+.menuBar ul li:hover {
+  border-bottom: 2px solid rgb(1, 187, 147);
+}
+
+.optionMarkActual {
+  border-bottom: 3px solid rgb(1, 187, 147);
+}
+
+.option {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalMainBookings {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 104%;
+  background: rgba(44, 44, 44, 0.6);
+}
+
+/*# sourceMappingURL=styleMain.css.map */

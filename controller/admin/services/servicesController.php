@@ -2,7 +2,7 @@
 require("../../../model/claseServicios.php");
 $service = new servicio();
 
-$request = null;
+$response = null;
 
 switch ($_SERVER['REQUEST_METHOD']) {
 
@@ -27,11 +27,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         );
                     }, $bookingServices);
 
-                    $request = $bookingServicesDetails;
+                    $response = $bookingServicesDetails;
                 }
                 break;
         }
 
-        echo json_encode($request);
+        echo json_encode($response);
         break;
 }

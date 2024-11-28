@@ -83,6 +83,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     switch ($option) {
 
+
+      case "allClients":
+
+        $allClients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+
+        if ($allClients) {
+          $peticion = $allClients;
+        }
+
+        break;
+
+
       case "AllYearsVisitClients":
 
         $years = $claseCliente->getAllYearsVisitClients();

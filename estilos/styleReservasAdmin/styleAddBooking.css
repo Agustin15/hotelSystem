@@ -1,0 +1,166 @@
+.containCalendar {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  width: auto;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 2px 2px 2px gray;
+  border-radius: 3px;
+  margin-left: 17rem;
+  border-top: 3px solid rgb(0, 192, 199);
+}
+
+#mainCalendar {
+  width: 60rem;
+  height: 30rem;
+}
+#mainCalendar h2 {
+  color: rgb(189, 189, 189);
+}
+#mainCalendar button {
+  background-color: rgb(2, 179, 155);
+  border: none;
+}
+#mainCalendar button:hover {
+  background-color: rgb(4, 145, 126);
+}
+
+.containForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 45rem;
+  height: auto;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 6rem;
+  padding: 1rem;
+  padding-top: 1.5rem;
+}
+.containForm .title {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.containForm .title h3 {
+  font-size: 19px;
+  color: rgb(184, 184, 184);
+}
+.containForm .title img {
+  width: 50px;
+}
+.containForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  font-size: 18px;
+  color: rgb(165, 165, 165);
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+.containForm form .rowOne,
+.containForm form .rowTwo {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.containForm form label {
+  font-size: 16px;
+}
+.containForm form .dateStart,
+.containForm form .dateEnd,
+.containForm form .client,
+.containForm form .quantityRooms {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+}
+.containForm form select {
+  width: 19rem;
+  height: 3.2rem;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 3px;
+  padding-left: 2.5rem;
+  font-size: 16px;
+  outline: none;
+}
+.containForm form input {
+  padding-left: 3rem;
+  font-size: 16px;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 3px;
+  width: 16rem;
+  height: 3rem;
+  outline: none;
+}
+.containForm form select,
+.containForm form input {
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position-x: 0.8rem;
+  background-position-y: 0.7rem;
+}
+.containForm form #startInput {
+  background-image: url("../../img/enterDate.png");
+}
+.containForm form #endInput {
+  background-image: url("../../img/exitDate.png");
+}
+.containForm form #clientsSelect {
+  background-image: url("../../img/usuario.png");
+}
+.containForm form #roomsQuantityInput {
+  background-image: url("../../img/roomInfoIconInput.png");
+}
+.containForm form button {
+  width: 12rem;
+  border: none;
+  background-color: rgb(0, 155, 155);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  border-radius: 3px;
+  height: 2.5rem;
+  cursor: pointer;
+}
+.containForm form button:hover {
+  background-color: rgb(5, 134, 134);
+}
+.containForm form .msjError {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  margin-left: 0.6rem;
+  gap: 0.5rem;
+  border-radius: 3px;
+  background-color: rgb(255, 77, 77);
+  color: white;
+  font-size: 14px;
+  margin-top: 0.3rem;
+  position: relative;
+}
+.containForm form .msjError img {
+  width: 16px;
+}
+.containForm form .msjError .arrow {
+  width: 0;
+  height: 0;
+  border-top: 10px solid rgb(255, 77, 77);
+  border-right: 10px solid transparent;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -0.2rem;
+  left: 0.2rem;
+}
+
+/*# sourceMappingURL=styleAddBooking.css.map */

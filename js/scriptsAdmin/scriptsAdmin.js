@@ -49,7 +49,7 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
         } else {
           itemNext = item.nextElementSibling;
 
-          if (itemNext.id == "liGanancias") {
+          if (itemNext.id == "liGanancias"  || itemNext.id == "liHabitaciones") {
             itemNext.style.marginTop = "110px";
           } else {
             itemNext.style.marginTop = "145px";

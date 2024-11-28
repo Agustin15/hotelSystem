@@ -1,5 +1,3 @@
-CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
-
 function getMes(numMes) {
   let meses = [
     "Enero",
@@ -94,6 +92,7 @@ function dataPointsToGraphicClientsDashboard(monthsClients) {
   }
 }
 function graphicClientsDashboard(dataPoints, grafica, titulo) {
+  CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
   var chart = new CanvasJS.Chart(grafica, {
     animationEnabled: true,
     colorSet: "greenShades",
@@ -233,7 +232,7 @@ async function getCategoryRoomsMostReserved() {
     dataPointsToGraphicRooms(result);
   } catch (error) {
     console.log(error);
-  }finally{
+  } finally {
     loading(false, "rooms");
   }
 }
@@ -276,6 +275,7 @@ function graficarHabitaciones(
   graficaHabitaciones,
   title
 ) {
+  CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
   var chart = new CanvasJS.Chart(graficaHabitaciones, {
     animationEnabled: true,
     colorSet: "greenShades",

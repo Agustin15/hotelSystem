@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+
+    <div class="containForm">
+
+        <div class="title">
+            <h3>Agregar reserva</h3>
+            <img src="../../../img/addBooking.png">
+        </div>
+        <form>
+
+            <div class="rowOne">
+                <div class="dateStart">
+                    <label>Fecha de llegada</label>
+                    <input name="startBooking" type="text" readonly id="startInput">
+                </div>
+
+                <div class="dateEnd">
+                    <label>Fecha de Salida</label>
+                    <input name="endBooking" type="text" readonly id="endInput">
+                </div>
+
+            </div>
+
+            <div class="rowTwo">
+                <div class="client">
+                    <label>Cliente</label>
+                    <select name="client" id="clientsSelect"></select>
+                </div>
+
+
+                <div class="quantityRooms">
+
+                    <label>Cantidad de habitaciones</label>
+                    <input id="roomsQuantityInput" name="roomsQuantity" type="number" readonly
+                        placeholder="Cantidad habitaciones seleccionadas">
+                    <div class="msjError">
+                        <div class="arrow"></div>
+                        <img src="../../../img/advertenciaLogin.png">
+                        <span></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <button type="submit">Agregar reserva</button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

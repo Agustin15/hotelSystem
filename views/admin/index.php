@@ -113,15 +113,6 @@ $actualYear = date("Y");
                             <a>Calendario</a>
                         </li>
 
-
-                        <li class="liHabitacion">
-
-                            <img src="../../img/habitacionesReserva.png">
-                            <a>Habitaciones</a>
-
-                        </li>
-
-
                     </ul>
 
 

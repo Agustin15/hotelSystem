@@ -25,6 +25,25 @@ const getRowsClients = async () => {
   }
 };
 
+export const getAllClients = async () => {
+  let data = null;
+
+  try {
+    let url =
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=allClients";
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
 const getDataLimitClients = async () => {
   let data = null;
 
@@ -74,7 +93,7 @@ const displayTable = async () => {
     if (clientsRows <= 10) {
       limitPage = 1;
     } else {
-      limitPage = clientsRows /10;
+      limitPage = clientsRows / 10;
     }
 
     let dataClients = clients.map((client, index) => {
@@ -208,19 +227,27 @@ const optionsClient = () => {
 
   btnsDelete.forEach((btnDelete) => {
     btnDelete.addEventListener("click", async () => {
-      drawOption(btnDelete,"optionClient/delete.php?client=",configDeleteClient);
+      drawOption(
+        btnDelete,
+        "optionClient/delete.php?client=",
+        configDeleteClient
+      );
     });
   });
 
   btnsEdit.forEach((btnEdit) => {
     btnEdit.addEventListener("click", async () => {
-      drawOption(btnEdit,"optionClient/edit.php?client=",configEditClient);
+      drawOption(btnEdit, "optionClient/edit.php?client=", configEditClient);
     });
   });
 
   btnsDetails.forEach((btnDetails) => {
     btnDetails.addEventListener("click", async () => {
-      drawOption(btnDetails,"optionClient/details.php?client=",configDetailsClient);
+      drawOption(
+        btnDetails,
+        "optionClient/details.php?client=",
+        configDetailsClient
+      );
     });
   });
 };
