@@ -1,5 +1,6 @@
 import { loading } from "../../scriptAddClient.js";
 import { optionModal } from "../scriptDetailsClient.js";
+import { getDataBookingRoomsGuests } from "../../../scriptsRooms/scriptRooms.js";
 
 let dataBooking;
 
@@ -7,13 +8,13 @@ export const configGuestsDetails = async () => {
   let containGuestDetails = document.querySelector(".containGuestDetails");
   let idBooking = containGuestDetails.id;
   let body = containGuestDetails.querySelector(".body");
-  dataBooking = await getDataBookingRooms(idBooking);
+  dataBooking = await getBookingRoomsGuests(idBooking);
 
   closeWindow();
 
   if (dataBooking) {
     let guestsTotal = totalGuests();
-    body.innerHTML+= ` 
+    body.innerHTML += ` 
        
     <div class="totalGuests">
 
@@ -34,22 +35,16 @@ export const configGuestsDetails = async () => {
     </ul>
     
     `;
-
   } else {
     noData(body);
   }
 };
 
-export const getDataBookingRooms = async (idBooking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=getDataRoomsBooking&&idBooking=" +
-    idBooking;
-
+export const getBookingRoomsGuests = async (idBooking) => {
   let data = null;
   loading(true);
   try {
-    const response = await fetch(url);
-    const result = await response.json();
+    const result= await getDataBookingRoomsGuests(idBooking);
 
     if (result) {
       data = result;

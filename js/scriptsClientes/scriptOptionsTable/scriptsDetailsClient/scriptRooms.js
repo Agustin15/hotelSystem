@@ -1,5 +1,6 @@
 import { closeWindow } from "./scriptGuests.js";
 import { loading } from "../../scriptAddClient.js";
+import { getDataBookingRoomsWithCategory } from "../../../scriptsRooms/scriptRooms.js";
 
 let roomsBooking;
 
@@ -7,8 +8,7 @@ export const configRoomsDetails = async () => {
   let containRoomsDetails = document.querySelector(".containRoomsDetails");
   let idBooking = containRoomsDetails.id;
   let body = containRoomsDetails.querySelector(".body");
-  roomsBooking = await getDataBookingRoomsWithCategory(idBooking);
-
+  roomsBooking = await getDataBookingRooms(idBooking);
 
   closeWindow();
   if (roomsBooking) {
@@ -25,16 +25,11 @@ export const configRoomsDetails = async () => {
   }
 };
 
-export const getDataBookingRoomsWithCategory = async (idBooking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=getDataRoomsBookingAndCategory&&idBooking=" +
-    idBooking;
-
+export const getDataBookingRooms = async (idBooking) => {
   let data = null;
   loading(true);
   try {
-    const response = await fetch(url);
-    const result = await response.json();
+    const result = await getDataBookingRoomsWithCategory(idBooking);
 
     if (result) {
       data = result;

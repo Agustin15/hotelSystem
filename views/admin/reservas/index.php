@@ -48,8 +48,8 @@ $actualYear = date("Y");
 
         import {
             createEventsCalendar,
-            formAddBooking
-        } from "../../../js/scriptsReservas/scriptsOptionsCalendar.js";
+            optionsAddBooking
+        } from "../../../js/scriptsReservas/scriptOptionsCalendar.js";
 
         let optionAddLi = document.querySelector(".addLi");
 
@@ -95,7 +95,7 @@ $actualYear = date("Y");
                     },
 
                     select: (info) => {
-                        formAddBooking(info.startStr,info.endStr);
+                        optionsAddBooking(info.startStr, info.endStr);
                     }
 
                 });

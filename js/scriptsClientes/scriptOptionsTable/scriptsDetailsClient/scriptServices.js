@@ -1,5 +1,6 @@
 import { closeWindow } from "./scriptGuests.js";
 import { loading } from "../../scriptAddClient.js";
+import { getDataServices } from "../../../scriptsServices/scriptServices.js";
 
 let servicesBooking;
 
@@ -9,12 +10,11 @@ export const configServicesDetails = async () => {
   );
   let idBooking = containServicesDetails.id;
   let body = containServicesDetails.querySelector(".body");
-  servicesBooking = await getDataServices(idBooking);
+  servicesBooking = await getServices(idBooking);
 
   closeWindow();
 
   if (servicesBooking) {
-
     body.innerHTML += ` 
 
       <ul class="services">
@@ -28,17 +28,12 @@ export const configServicesDetails = async () => {
   }
 };
 
-export const getDataServices = async (idBooking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/services/servicesController.php?option=getServicesBooking&&idBooking=" +
-    idBooking;
-
+export const getServices = async (idBooking) => {
   let data = null;
+
   loading(true);
   try {
-    const response = await fetch(url);
-    const result = await response.json();
-
+    const result = await getDataServices(idBooking);
     if (result) {
       data = result;
     }
@@ -51,7 +46,6 @@ export const getDataServices = async (idBooking) => {
 };
 
 const services = () => {
-  
   let liServicesBooking = servicesBooking.map((service) => {
     let nameService;
     let title;

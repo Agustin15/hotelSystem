@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,14 @@
             <h3>Agregar reserva</h3>
             <img src="../../../img/addBooking.png">
         </div>
-        <form>
 
+        <div class="loading">
+
+            <span>Cargando datos</span>
+            <img src="../../../img/spinnerMain.gif">
+        </div>
+
+        <form>
             <div class="rowOne">
                 <div class="dateStart">
                     <label>Fecha de llegada</label>
@@ -55,7 +61,11 @@
             <button type="submit">Agregar reserva</button>
 
         </form>
+        <div class="noDataFormAdd">
 
+            <img src="../../../img/sinDatos.png">
+            <h3>Ups, no se pudieron cargar los clientes para la reserva</h3>
+        </div>
     </div>
 
 </body>
