@@ -1,8 +1,10 @@
-import { quantityCategorysRooms } from "./selectRooms.js";
+import { quantityCategorysRooms, guestsAlert, modal } from "./selectRooms.js";
+import { alertGuests, alertModal } from "../alertas.js";
 
 let nights;
 let totalDeposit = 0;
 let booking;
+let bookingDate;
 let cart = document.getElementById("cart");
 export let rooms = [];
 
@@ -10,10 +12,10 @@ export const changeRooms = (roomsChanged) => {
   rooms = roomsChanged;
 };
 
-
-
 export function printDateBookingInCart(dateBooking) {
   cart.style.display = "flex";
+
+  bookingDate = dateBooking;
 
   let options = {
     weekday: "long",
@@ -22,12 +24,15 @@ export function printDateBookingInCart(dateBooking) {
     day: "numeric",
   };
 
-  document.querySelector(".startBooking").textContent =
-    dateBooking.start.toLocaleDateString("es-ar", options);
-  document.querySelector(".endBooking").textContent =
-    dateBooking.end.toLocaleDateString("es-ar", options);
+  let startDate = new Date(dateBooking.start);
+  let endDate = new Date(dateBooking.end);
 
-  nights = calculateDifferenceNight(dateBooking.start, dateBooking.end);
+  document.querySelector(".startBooking").textContent =
+    startDate.toLocaleDateString("es-ar", options);
+  document.querySelector(".endBooking").textContent =
+    endDate.toLocaleDateString("es-ar", options);
+
+  nights = calculateDifferenceNight(startDate, endDate);
 
   if (nights > 1) {
     document.querySelector(".quantityNights").textContent = `${nights} Noches`;
@@ -58,9 +63,14 @@ export const createDataRoom = (button) => {
   return room;
 };
 
-export function validateQuantityGuestsInputs(adultInput, childrenInput) {
+export function validateQuantityGuestsInputs(
+  adultInput,
+  childrenInput,
+  roomToDisplayError
+) {
   let ability = adultInput.dataset.ability;
   let validate = null;
+
   if (childrenInput.value == 0 && adultInput.value == 0) {
     validate = "Ingresa algun huesped";
   } else if (
@@ -70,13 +80,17 @@ export function validateQuantityGuestsInputs(adultInput, childrenInput) {
     validate = "Capacidad excedida";
   }
 
+  if (validate) {
+    alertGuests(validate, guestsAlert, roomToDisplayError);
+  }
+
   return validate;
 }
 
 export const addRoomToList = (room) => {
   rooms.push(room);
-
   localStorage.setItem("rooms", JSON.stringify(rooms));
+  printRoomsCart();
 };
 
 function quantityGuestRoomCart(roomGuest, typeGuest) {
@@ -235,9 +249,8 @@ function comprobateQuantityLimitCategotyRooms(categoryRoom) {
 
   return totalQuantityRoomsCategory;
 }
-export function comprobateQuantityRoomForAdd(roomForAdd) {
-  let result = null;
 
+export function comprobateQuantityRoomForAdd(roomForAdd) {
   if (rooms.length > 0) {
     let limitRoom = quantityCategorysRooms.reduce((ac, categoryRoom) => {
       if (categoryRoom.category == roomForAdd.category) {
@@ -251,25 +264,31 @@ export function comprobateQuantityRoomForAdd(roomForAdd) {
     );
 
     if (totalQuantityRoomsCategory < limitRoom) {
-      rooms.forEach((roomInCart) => {
+      let roomFind = rooms.find((room) => {
         if (
-          roomInCart.category == roomForAdd.category &&
-          roomInCart.guests.adult == roomForAdd.guests.adult &&
-          roomInCart.guests.children == roomForAdd.guests.children
+          room.category == roomForAdd.category &&
+          room.guests.adult == roomForAdd.guests.adult &&
+          room.guests.children == roomForAdd.guests.children
         ) {
-          roomInCart.quantity++;
-          roomInCart.total = calculateTotalRoom(roomInCart);
-          localStorage.setItem("rooms", JSON.stringify(rooms));
-
-          return (result = "quantityAdded");
+          return room;
         }
       });
-    } else {
-      result = "Excede el limite de habitaciones";
-    }
-  }
 
-  return result;
+      if (roomFind) {
+        roomFind.quantity++;
+        roomFind.total = calculateTotalRoom(roomFind);
+        localStorage.setItem("rooms", JSON.stringify(rooms));
+        printRoomsCart();
+      } else {
+        addRoomToList(roomForAdd);
+      }
+    } else {
+      alertModal(modal, "show");
+      window.scroll(0, 90);
+    }
+  } else {
+    addRoomToList(roomForAdd);
+  }
 }
 
 function printDeposit(divDeposit) {
@@ -315,9 +334,8 @@ function calculateDifferenceNight(llegada, salida) {
 
 export const next = (buttonNext) => {
   buttonNext.addEventListener("click", function () {
-
     booking = {
-      date: dateBooking,
+      date: bookingDate,
       nights: nights,
       rooms: rooms,
       totalDeposit: totalDeposit,

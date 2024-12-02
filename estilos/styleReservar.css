@@ -421,98 +421,6 @@ header li img {
   cursor: pointer;
 }
 
-#alertClient {
-  width: 0px;
-  height: 54px;
-  background: linear-gradient(#2e888b, #0ea7af);
-  display: flex;
-  flex-direction: column;
-  border-radius: 3px;
-  margin-top: 0rem;
-  margin: auto;
-}
-#alertClient .contain {
-  display: none;
-}
-#alertClient .header {
-  display: flex;
-  flex-direction: row;
-  color: #ffffff;
-  font-size: 14px;
-  padding-left: 0.3rem;
-  padding-top: 0.2rem;
-  justify-content: start;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: bold;
-}
-#alertClient p {
-  color: #ffffff;
-  font-weight: bold;
-  margin-top: -0.6rem;
-  text-align: center;
-}
-#alertClient span {
-  margin-top: -1rem;
-}
-#alertClient img {
-  width: 24px;
-  height: 24px;
-  margin-top: 0.5rem;
-}
-#alertClient .progressBar {
-  width: 100%;
-  height: 4px;
-  margin-top: 6px;
-  background-color: #555555;
-}
-#alertClient .bar {
-  background-color: #ececec;
-  width: 100%;
-  height: 100%;
-}
-
-.barActive {
-  animation-name: barActive;
-  animation-duration: 10s;
-}
-
-.alertClientActive {
-  animation-name: alertClientActive;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertClientActive {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 300px;
-  }
-}
-.alertClientDesactive {
-  animation-name: alertClientDesactive;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes alertClientDesactive {
-  from {
-    width: 300px;
-  }
-  to {
-    width: 0px;
-  }
-}
-@keyframes barActive {
-  from {
-    width: 100%;
-  }
-  to {
-    width: 0%;
-  }
-}
 .inputAlert {
   border: 2px solid rgb(235, 62, 62);
   box-shadow: 1px 1px 1px rgb(202, 117, 117);
@@ -625,6 +533,34 @@ header li img {
 .containButtonsForm button:hover {
   background-color: #2f8ca3;
   cursor: pointer;
+}
+
+#alertClient {
+  display: none;
+  margin: auto;
+  justify-content: start;
+  align-items: center;
+  width: auto;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: white;
+  box-shadow: 2px 2px 2px gray;
+  font-size: 17px;
+  background: linear-gradient(#d31010, #860606);
+}
+#alertClient span {
+  font-weight: bold;
+  width: 0px;
+}
+#alertClient .body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  width: auto;
+}
+#alertClient img {
+  width: 30px;
 }
 
 /*# sourceMappingURL=styleReservar.css.map */

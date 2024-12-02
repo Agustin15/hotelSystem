@@ -1,11 +1,21 @@
 <?php
 
 require("../../../model/clasePago.php");
-$clasePago = new pago();
-$peticion = null;
+$pay = new pago();
+$response = null;
 
 switch ($_SERVER['REQUEST_METHOD']) {
 
+    case "POST":
+        $dataBooking = json_decode(file_get_contents("php://input"), true);
+
+        $resultPay = $pay->setPago($dataBooking['idBooking'], $dataBooking['client'], $dataBooking['amount']);
+
+
+        $response = array("response" => $resultPay);
+
+       echo json_encode($response);
+        break;
 
     case "GET":
         switch ($_GET['option']) {
@@ -28,35 +38,35 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
                 $gananciasPorMes = [];
-                $gananciasPorMes = array_map(function ($mes) use ($clasePago) {
+                $gananciasPorMes = array_map(function ($mes) use ($pay) {
 
 
-                    $totalIngresosMes = $clasePago->calculateTotalIngresosMes($mes, date("Y"));
+                    $totalIngresosMes = $pay->calculateTotalIngresosMes($mes, date("Y"));
 
                     $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
                     return $totalGananciasMes;
                 }, $mesesConsulta);
 
-                $peticion = $gananciasPorMes;
+                $response = $gananciasPorMes;
 
                 break;
 
             case "itemDataDashboard":
 
-                $totalRevenuesActualYear = $clasePago->calculateTotalIngresosAnio();
-                $totalRevenuesActualMonth = $clasePago->calculateTotalIngresosMes(date("m"), date("Y"));
+                $totalRevenuesActualYear = $pay->calculateTotalIngresosAnio();
+                $totalRevenuesActualMonth = $pay->calculateTotalIngresosMes(date("m"), date("Y"));
 
                 $dataRevenuesActual =  array(
                     "totalRevenuesActualYear" => $totalRevenuesActualYear,
                     "totalRevenuesActualMonth" => $totalRevenuesActualMonth
                 );
 
-                $peticion=$dataRevenuesActual;
+                $response = $dataRevenuesActual;
                 break;
         }
 
-        echo json_encode($peticion);
+        echo json_encode($response);
 
         break;
 }

@@ -11,6 +11,38 @@
   border-radius: 3px;
   margin-left: 17rem;
   border-top: 3px solid rgb(0, 192, 199);
+  padding-bottom: 2rem;
+
+  .referencesBookingStatus {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 1.5rem;
+
+    .end,
+    .next,
+    .inCurse {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #c20000;
+      box-shadow: 1px 1px 1px rgb(133, 133, 133);
+      width: 13rem;
+      height: 2rem;
+      border-radius: 4px;
+    }
+    .next {
+      background-color: #0924bb;
+    }
+
+    .inCurse {
+      background-color: #0ba8ad;
+    }
+  }
 }
 
 #mainCalendar {
@@ -31,6 +63,62 @@
   }
 }
 
+.modalOptionAddBooking {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+
+  .alertGuests {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 1rem;
+    align-items: center;
+    width: 20rem;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-left: 4rem;
+    color: rgb(153, 153, 153);
+
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    img {
+      width: 72px;
+    }
+
+    button {
+      width: 7rem;
+      height: 2rem;
+      color: white;
+      font-weight: bold;
+      box-shadow: 2px 2px 2px black;
+      border: none;
+      border-radius: 3px;
+      background-color: #c40303;
+      font-size: 18px;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #920606;
+    }
+  }
+}
+
 .containOptions {
   width: 60rem;
   height: 36rem;
@@ -39,6 +127,26 @@
   margin-left: 6rem;
   margin-top: 2rem;
 
+  .close {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+
+    button {
+      background-color: rgb(3, 145, 121);
+      padding: 0.5rem;
+      padding-top: 0.4rem;
+      height: 1.6rem;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(6, 129, 109);
+    }
+  }
+
   ul {
     display: flex;
     width: 100%;
@@ -46,6 +154,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 1rem;
+    margin-top: -2rem;
 
     li {
       list-style: none;
@@ -76,12 +185,13 @@
     gap: 1rem;
     align-items: center;
     opacity: 60%;
-    font-size: 19px;
+    font-size: 21px;
     text-align: center;
+    margin-top: 7rem;
     color: rgb(151, 151, 151);
 
     img {
-      width: 63px;
+      width: 113px;
     }
 
     h3 {
@@ -96,6 +206,7 @@
     justify-content: center;
     font-size: 18px;
     opacity: 60%;
+    margin-top: 7rem;
 
     img {
       width: 50px;
@@ -107,7 +218,7 @@
   display: flex;
   align-items: start;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
 }
 .cartRooms {
   display: flex;
@@ -115,8 +226,9 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  height: 25rem;
-  width: 15rem;
+  height: auto;
+  max-height: 25rem;
+  width: 16rem;
   border-radius: 4px;
   padding: 1rem;
   border: 1px solid rgb(202, 202, 202);
@@ -130,6 +242,27 @@
     gap: 1rem;
     align-items: center;
     width: 99%;
+    height: auto;
+    max-height: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 1rem;
+  }
+
+  .noRoomsCart {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 80%;
+
+    img {
+      width: 53px;
+    }
+    span {
+      color: white;
+      font-size: 17px;
+    }
   }
 
   li {
@@ -217,6 +350,20 @@
       }
     }
   }
+
+  .total {
+    display: none;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 1rem;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 4px;
+  }
 }
 .containForm {
   display: flex;
@@ -247,15 +394,28 @@
     }
   }
 
+  .nights {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgb(172, 172, 172);
+
+    img {
+      width: 30px;
+      opacity: 33%;
+    }
+  }
+
   form {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 2rem;
     align-items: center;
     font-size: 18px;
     color: rgb(165, 165, 165);
     padding-top: 1rem;
-    padding-bottom: 2rem;
 
     .rowOne,
     .rowTwo {
@@ -334,6 +494,10 @@
     }
 
     button {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
       width: 12rem;
       border: none;
       background-color: rgb(0, 155, 155);
@@ -344,6 +508,11 @@
       border-radius: 3px;
       height: 2.5rem;
       cursor: pointer;
+
+      img {
+        width: 25px;
+        display: none;
+      }
     }
 
     button:hover {
@@ -381,6 +550,42 @@
     .msjErrorShow {
       display: flex;
     }
+  }
+
+  .alertForm {
+    display: none;
+    justify-content: start;
+    align-items: center;
+    width: auto;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+    background: linear-gradient(#dd0e0e, #a00404);
+    font-size: 17px;
+  }
+  .alertForm span {
+    font-weight: bold;
+  }
+
+  .alertForm .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .alertForm img {
+    width: 30px;
+  }
+
+  .alertFormCorrect {
+    background: linear-gradient(#2e888b, #065357);
+    display: flex;
+  }
+  .alertFormError {
+    background: linear-gradient(#dd0e0e, #a00404);
+    display: flex;
   }
 }
 
@@ -428,6 +633,7 @@
       height: 3rem;
       padding-bottom: 1.5rem;
       gap: 1rem;
+      margin-top: 0.5rem;
       justify-content: flex-start;
       align-items: start;
       border-bottom: 1px solid rgb(209, 209, 209);
@@ -467,6 +673,21 @@
     color: rgb(189, 189, 189);
   }
 
+  .noDataFreeRooms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 70%;
+    font-size: 18px;
+
+    h3 {
+      color: rgb(112, 112, 112);
+    }
+    img {
+      width: 100px;
+    }
+  }
   .loading {
     display: none;
     justify-content: center;
@@ -488,7 +709,8 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1.5rem;
-    height: 22%;
+    height: 21%;
+    margin-top: 0.1rem;
     overflow-y: scroll;
 
     li {

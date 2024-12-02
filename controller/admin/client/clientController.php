@@ -67,9 +67,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
     $idClient = json_decode($_GET['idClient']);
 
-    $resultado = $claseCliente->deleteCliente($idClient);
+    $resultDelete = $claseCliente->deleteCliente($idClient);
 
-    $peticion = array("resultado" => $resultado);
+    $peticion = array("response" => $resultDelete);
     $peticionJson = json_encode($peticion);
 
     echo $peticionJson;

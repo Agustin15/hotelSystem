@@ -69,24 +69,28 @@ async function getClientsByMonthActualYear(actualYear) {
 function dataPointsToGraphicClientsDashboard(monthsClients) {
   let dataPointsMonthsClients = [];
 
-  dataPointsMonthsClients = monthsClients.map((monthClients) => {
-    let monthString = getMes(monthClients.month);
+  if (monthsClients) {
+    dataPointsMonthsClients = monthsClients.map((monthClients) => {
+      let monthString = getMes(monthClients.month);
 
-    const dataPoint = {
-      label: monthString,
-      y: monthClients.quantity,
-    };
+      const dataPoint = {
+        label: monthString,
+        y: monthClients.quantity,
+      };
 
-    return dataPoint;
-  });
+      return dataPoint;
+    });
 
-  let totalMonthsClients = dataPointsMonthsClients.reduce((ac, dataPoint) => {
-    return (ac += dataPoint.y);
-  }, 0);
+    let totalMonthsClients = dataPointsMonthsClients.reduce((ac, dataPoint) => {
+      return (ac += dataPoint.y);
+    }, 0);
 
-  if (totalMonthsClients > 0) {
-    graphicClientsDashboard(dataPointsMonthsClients, "charBookings", "");
-    $("#navAdmin").css("marginTop", "-22px");
+    if (totalMonthsClients > 0) {
+      graphicClientsDashboard(dataPointsMonthsClients, "charBookings", "");
+      $("#navAdmin").css("marginTop", "-22px");
+    } else {
+      document.querySelector(".noDataBookings").style.display = "flex";
+    }
   } else {
     document.querySelector(".noDataBookings").style.display = "flex";
   }

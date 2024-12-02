@@ -46,28 +46,12 @@
 
         <div class="modalBooking">
 
-        <div class="loading">
+            <div class="loading">
 
-        <span>Cargando</span>
-        <img src="../../img/spinnerBooking.gif">
-        </div>
-        
-            <div class="alertBooking">
-
-                <div>
-                    <img src="../../img/advertencia.gif">
-                </div>
-
-                <div class="msj">
-                    <p></p>
-                </div>
-
-                <div class="containButtonsAlert">
-                    <button class="btnOK">Ok</button>
-                    <button class="btnCancel">Cancelar</button>
-                </div>
-
+                <span></span>
+                <img src="../../img/spinnerBooking.gif">
             </div>
+
         </div>
 
         <div class="barStageAdvance"></div>
@@ -159,19 +143,16 @@
                             </div>
                         </div>
 
+
                         <div id="alertClient">
 
-                            <div class="contain">
-                                <div class="header">
-                                    <img src="../../img/advertenciaLogin.png">
-                                    <span>Advertencia</span>
-                                </div>
+                            <img src="../../img/advertenciaLogin.png">
+                            <div class="body">
+                                <span>Error</span>
+
                                 <p></p>
-                                <div class="progressBar">
-                                    <div class="bar">
-                                    </div>
-                                </div>
                             </div>
+
                         </div>
                     </form>
                 </div>

@@ -29,6 +29,20 @@ class habitaciones
     }
 
 
+    public function getAllRoomsHotelWithDetails($category)
+    {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitaciones INNER JOIN tipo_habitacion ON 
+        habitaciones.tipoHabitacion=tipo_habitacion.categoria where habitaciones.tipoHabitacion=?");
+        $consulta->bind_param("s", $category);
+        $consulta->execute();
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
+
+
 
     public function getAllCategoryRooms()
     {

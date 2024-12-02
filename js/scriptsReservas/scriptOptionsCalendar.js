@@ -1,14 +1,19 @@
-import { configFormAddBooking } from "./scriptsOptionsCalendar/scriptFormAdd.js";
+import {
+  configFormAddBooking,
+  resultBookingAdd,
+} from "./scriptsOptionsCalendar/scriptFormAdd.js";
 import { configFreeRooms } from "./scriptsOptionsCalendar/scriptFreeRooms.js";
 
 let startBookingLocal;
 let endBookingLocal;
+let modalMainBookings;
+let today = new Date();
 
 const getBookings = async () => {
   let data = null;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php"
+      "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php?option=allBookings"
     );
     const result = await response.json();
 
@@ -28,10 +33,23 @@ export const createEventsCalendar = async () => {
 
   if (bookings) {
     events = bookings.map((booking) => {
+      let eventColor = "#0924bb";
+
+      if (new Date(booking.fechaSalida) < today) {
+        eventColor = "#c20000";
+      } else if (
+        new Date(booking.fechaLlegada) <= today &&
+        new Date(booking.fechaSalida) >= today
+      ) {
+        eventColor = "#0ba8ad";
+      }
+
       return {
         title: `Reserva ${booking.idReserva}`,
         start: booking.fechaLlegada,
         end: booking.fechaSalida,
+        backgroundColor: eventColor,
+        borderColor: eventColor,
       };
     });
   }
@@ -57,7 +75,7 @@ const modal = (state) => {
 };
 
 export const optionsAddBooking = async (startBooking, endBooking) => {
-  let modalMainBookings = document.querySelector(".modalMainBookings");
+  modalMainBookings = document.querySelector(".modalMainBookings");
   modal(true);
   let result = await getOptionsAddBooking();
 
@@ -70,6 +88,8 @@ const configOptionsAddBooking = async (startBooking, endBooking) => {
   let optionAddBooking = document.querySelector(".optionAddBooking");
   let liOptionBooking = document.querySelector(".optionBooking");
   let liOptionFreeRooms = document.querySelector(".optionFreeRooms");
+
+  closeWindowAddBooking();
 
   startBookingLocal = startBooking;
   endBookingLocal = endBooking;
@@ -94,6 +114,18 @@ const drawOption = async (optionAddBooking, url) => {
   if (optionAddBooking.querySelector("form")) {
     configFormAddBooking(startBookingLocal, endBookingLocal);
   } else if (optionAddBooking.querySelector(".containFreeRooms")) {
-    configFreeRooms();
+    configFreeRooms(startBookingLocal, endBookingLocal);
   }
+};
+
+const closeWindowAddBooking = () => {
+  let close = document.querySelector(".close").querySelector("button");
+
+  close.addEventListener("click", () => {
+    modalMainBookings.innerHTML = ``;
+    modal(false);
+    if (resultBookingAdd) {
+      location.reload();
+    }
+  });
 };

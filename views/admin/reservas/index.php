@@ -85,7 +85,7 @@ $actualYear = date("Y");
                                 calendar.today();
                             },
 
-                        }
+                        },
 
                     },
 
@@ -93,7 +93,6 @@ $actualYear = date("Y");
                         left: 'title',
                         right: 'buttonViewMonths buttonViewOneMonth buttonToday prev,next',
                     },
-
                     select: (info) => {
                         optionsAddBooking(info.startStr, info.endStr);
                     }

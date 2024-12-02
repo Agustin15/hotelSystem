@@ -1,13 +1,11 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
-import {
-  alertClientFormBooking,
-  confirmAlertBookingExist,
-  alertErrorBooking,
-} from "./alertsBooking.js";
 
+import { fetchPOSTClient } from "./scriptsFetchsBooking/scriptClient.js";
+import { getBookingByClientMailAndDate } from "./scriptsFetchsBooking/scriptBooking.js";
+
+let loadingSpinner = document.querySelector(".loading");
 let btnNextStage = document.querySelector(".btnNextStage");
 let booking = JSON.parse(localStorage.getItem("booking"));
-let loadingSpinner = document.querySelector(".loading");
 let rooms;
 let indexRoom = 0;
 let btnNext = document.querySelector(".btnNext");
@@ -19,7 +17,7 @@ let containClientAndBooking = document.querySelector(
 
 document.addEventListener("DOMContentLoaded", function () {
   if (containClientAndBooking) {
-    if (localStorage.getItem("booking") == null) {
+    if (!localStorage.getItem("booking")) {
       location.href = "consultaHabitaciones.php";
     } else {
       if (booking) {
@@ -145,6 +143,7 @@ function printBooking() {
     month: "long",
     day: "numeric",
   };
+
   let startBooking = new Date(booking.date.start);
   let endBooking = new Date(booking.date.end);
 
@@ -240,64 +239,27 @@ function clientData() {
   }
 }
 
-function createBooking(client) {
+async function createBooking(client) {
   const clientBooking = {
     client: client,
     booking: booking,
   };
 
-  getIfExistingBooking(clientBooking);
+  let clientAdded = await fetchPOSTClient(clientBooking.client);
+
+  if (clientAdded) {
+    let bookingFind = getBookingByClientMailAndDate(clientBooking);
+
+    if(bookingFind){
+
+    }else{
+
+      console.log("No hay reserva que coincida");
+    }
+  }
 }
 
-const getIfExistingBooking = (clientBooking) => {
-  const dataBooking = {
-    client: clientBooking.client,
-    date: clientBooking.booking.date,
-  };
-
-  loading(true, "Cargando");
-  setTimeout(async () => {
-    try {
-      const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php?dataBooking=" +
-          JSON.stringify(dataBooking),
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.advertencia) {
-        throw result.advertencia;
-      } else if (result.respuesta) {
-        loading(false);
-        const confirm = await confirmAlertBookingExist(
-          "Ya tiene una reserva en esta fecha, por lo tanto las habitaciones seleccionadas se agregaran a esa reserva",
-          "../../img/advertencia.gif"
-        );
-
-        if (confirm) {
-          let bookingToUpdate = result.respuesta;
-          clientBooking.idBooking = bookingToUpdate.idReserva;
-          updateBooking(clientBooking);
-        } else {
-          return;
-        }
-      } else {
-        realizeBooking(clientBooking);
-      }
-    } catch (error) {
-      loading(false);
-      alertClientFormBooking(error);
-    }
-  }, 2000);
-};
-
-function loading(loadingState, msj) {
+export function loadingBooking(loadingState, msj) {
   if (msj) {
     loadingSpinner.querySelector("span").textContent = msj;
   }

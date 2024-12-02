@@ -544,7 +544,6 @@ body {
       width: auto;
       gap: 0.7rem;
       padding: 0.5rem;
-      background: linear-gradient(#2e888b, #065357);
       border-radius: 3px;
       color: white;
       box-shadow: 2px 2px 2px gray;
@@ -561,6 +560,14 @@ body {
       img {
         width: 30px;
       }
+    }
+
+    .alertFormCorrect {
+      background: linear-gradient(#2e888b, #065357);
+    }
+
+    .alertFormError {
+      background: linear-gradient(#dd0e0e, #a00404);
     }
   }
 }
@@ -885,7 +892,6 @@ body {
       width: auto;
       gap: 0.7rem;
       padding: 0.5rem;
-      background: linear-gradient(#3879a5, #2858b1);
       border-radius: 3px;
       color: white;
       box-shadow: 2px 2px 2px gray;
@@ -904,6 +910,13 @@ body {
       }
     }
 
+    .alertFormCorrect {
+      background: linear-gradient(#3879a5, #2858b1);
+    }
+
+    .alertFormError {
+      background: linear-gradient(#dd0e0e, #a00404);
+    }
     .noData {
       display: flex;
       flex-direction: column;
@@ -994,6 +1007,9 @@ body {
           width: 1.6rem;
           cursor: pointer;
           font-size: 20px;
+        }
+        button:hover {
+          background-color: rgb(231, 231, 231);
         }
       }
     }
@@ -1213,6 +1229,9 @@ body {
           font-size: 17px;
           cursor: pointer;
         }
+        button:hover {
+          background-color: rgb(231, 231, 231);
+        }
       }
     }
 
@@ -1296,7 +1315,7 @@ body {
           align-items: start;
           gap: 1rem;
           color: white;
-          background:#0ba8ad;
+          background: #0ba8ad;
 
           .roomNumb {
             width: 100%;
@@ -1471,7 +1490,7 @@ body {
           align-items: start;
           gap: 1rem;
           color: white;
-          background:#0ba8ad;
+          background: #0ba8ad;
 
           .icon {
             padding: 0.5rem;
@@ -1521,7 +1540,6 @@ body {
         .info {
           width: 14rem;
           background-color: #027074;
-
         }
         .icon {
           padding: 0.5rem;

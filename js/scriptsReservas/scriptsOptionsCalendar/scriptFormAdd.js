@@ -1,39 +1,71 @@
 import { inputAlert } from "../../scriptsClientes/scriptAddClient.js";
 import { getAllClients } from "../../scriptsClientes/scriptClientsTable.js";
+import {
+  configCartRooms,
+  calculateDifferenceNight,
+  roomsCart,
+  amount,
+  cleanRoomCart,
+} from "./scriptCartRooms.js";
+
+import {
+  POSTBooking,
+  getBookingByClientAndDate,
+  alertForm,
+  removeAlertForm,
+} from "./scriptsMethodsFetch.js";
+
+import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
+import { POSTPay } from "../../scriptsRevenues/scriptRevenues.js";
+
+export let nights;
+export let resultBookingAdd;
+
+let startBookingLocal;
+let endBookingLocal;
+let clients;
+let startInput;
+let endInput;
+let form;
 
 export const configFormAddBooking = async (startBooking, endBooking) => {
-  let form = document.querySelector("form");
+  form = document.querySelector("form");
+  let containForm = document.querySelector(".containForm");
+  let cartRooms = document.querySelector(".cartRooms");
 
-  const clients = await getClients();
+  clients = await getClients();
+  startBookingLocal = startBooking;
+  endBookingLocal = endBooking;
 
   if (clients) {
-    form.style.display = "flex";
-    displayClients(form, clients);
-    setStartAndEndInputs(startBooking, endBooking, form);
-    formAddSubmit(form);
+    draw(containForm, cartRooms);
   } else {
-    form.style.display = "none";
-    noData();
+    noData(containForm, cartRooms);
   }
 };
 
-const setStartAndEndInputs = async (startBooking, endBooking, form) => {
-  let startInput = form.querySelector("#startInput");
-  let endInput = form.querySelector("#endInput");
+const draw = (containForm, cartRooms) => {
+  containForm.style.display = "flex";
+  cartRooms.style.display = "flex";
+  displayNights();
+  displayClients();
+  setInputsForm();
+  formAddSubmit();
+  configCartRooms();
+};
+const setInputsForm = async () => {
+  startInput = form.querySelector("#startInput");
+  endInput = form.querySelector("#endInput");
+  let quantityInput = form.querySelector("#roomsQuantityInput");
 
-  const options = {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  };
-  startBooking = new Date(startBooking);
-  endBooking = new Date(endBooking);
+  startInput.value = startBookingLocal;
 
-  startInput.value = startBooking.toLocaleDateString("es-ar", options);
-  endInput.value = endBooking.toLocaleDateString("es-ar", options);
+  endInput.value = endBookingLocal;
+
+  quantityInput.value = roomsCart.length || null;
 };
 
-const displayClients = async (form, clients) => {
+const displayClients = async () => {
   let select = form.querySelector("select");
 
   let clientsOptions = clients.map((client) => {
@@ -64,9 +96,11 @@ const getClients = async () => {
   }
 };
 
-const formAddSubmit = (form) => {
-  form.addEventListener("submit", (event) => {
+const formAddSubmit = () => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    removeAlertForm();
+
     const formData = new FormData(form);
     const booking = {};
     let error;
@@ -79,11 +113,48 @@ const formAddSubmit = (form) => {
         });
       } else {
         booking[key] = value;
+        if (key == "roomsQuantity" || key == "client") {
+          booking[key] = parseInt(value);
+        }
       }
     });
 
     if (error) {
       inputAlert(error);
+    } else {
+      let bookingFind = await getBookingByClientAndDate(booking);
+      if (bookingFind) {
+        alertForm(
+          "../../../img/advertenciaLogin.png",
+          "Ups, este cliente ya tiene una reserva en esta fecha",
+          "Error",
+          "alertFormError"
+        );
+      } else {
+        let resultBooking = await POSTBooking(booking);
+        resultBookingAdd = resultBooking;
+        if (resultBooking) {
+          booking.rooms = roomsCart;
+          booking.idBooking = bookingFind.idReserva;
+          let resultRoomsBooking = await POSTRooms(booking);
+
+          if (resultRoomsBooking) {
+            booking.amount = amount;
+            let resultPayBooking = await POSTPay(booking);
+            if (resultPayBooking) {
+              alertForm(
+                "../../../img/tickAdmin.png",
+                "¡Reserva agregada exitosamente!",
+                "Exito",
+                "alertFormCorrect"
+              );
+
+              cleanRoomCart();
+              setInputsForm();
+            }
+          }
+        }
+      }
     }
   });
 };
@@ -98,9 +169,26 @@ const loading = (state) => {
   }
 };
 
-const noData = (error) => {
+const noData = (containForm, cartRooms) => {
   let containNoData = document.querySelector(".noDataFormAdd");
+  containForm.style.display = "none";
+  cartRooms.style.display = "none";
 
-  containNoData.display = "flex";
-  containNoData.querySelector("h3").textContent = error;
+  containNoData.style.display = "flex";
+};
+
+const displayNights = () => {
+  nights = calculateDifferenceNight(
+    new Date(startBookingLocal),
+    new Date(endBookingLocal)
+  );
+
+  let textNights = `${nights} noche`;
+
+  if (nights > 1) {
+    textNights = `${nights} noches`;
+  }
+  document
+    .querySelector(".nights")
+    .querySelector("h3").textContent = `${textNights}`;
 };

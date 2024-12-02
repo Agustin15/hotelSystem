@@ -716,7 +716,6 @@ body #userAdmin:hover > .btnFlecha {
   width: auto;
   gap: 0.7rem;
   padding: 0.5rem;
-  background: linear-gradient(#2e888b, #065357);
   border-radius: 3px;
   color: white;
   box-shadow: 2px 2px 2px gray;
@@ -732,6 +731,12 @@ body #userAdmin:hover > .btnFlecha {
 }
 .containFormAdd form .alertForm img {
   width: 30px;
+}
+.containFormAdd form .alertFormCorrect {
+  background: linear-gradient(#2e888b, #065357);
+}
+.containFormAdd form .alertFormError {
+  background: linear-gradient(#dd0e0e, #a00404);
 }
 
 .modalMainClient {
@@ -1021,7 +1026,6 @@ body #userAdmin:hover > .btnFlecha {
   width: auto;
   gap: 0.7rem;
   padding: 0.5rem;
-  background: linear-gradient(#3879a5, #2858b1);
   border-radius: 3px;
   color: white;
   box-shadow: 2px 2px 2px gray;
@@ -1037,6 +1041,12 @@ body #userAdmin:hover > .btnFlecha {
 }
 .modalMainClient .containFormEdit .alertForm img {
   width: 30px;
+}
+.modalMainClient .containFormEdit .alertFormCorrect {
+  background: linear-gradient(#3879a5, #2858b1);
+}
+.modalMainClient .containFormEdit .alertFormError {
+  background: linear-gradient(#dd0e0e, #a00404);
 }
 .modalMainClient .containFormEdit .noData {
   display: flex;
@@ -1122,6 +1132,9 @@ body #userAdmin:hover > .btnFlecha {
   width: 1.6rem;
   cursor: pointer;
   font-size: 20px;
+}
+.modalMainClient .containDetailsClientBooking .header .closeDetails button:hover {
+  background-color: rgb(231, 231, 231);
 }
 .modalMainClient .containDetailsClientBooking .bookingsClient {
   display: flex;
@@ -1320,6 +1333,9 @@ body #userAdmin:hover > .btnFlecha {
   height: 1.2rem;
   font-size: 17px;
   cursor: pointer;
+}
+.modalOptionsBookingClient .containGuestDetails .header .close button:hover {
+  background-color: rgb(231, 231, 231);
 }
 .modalOptionsBookingClient .containGuestDetails .body {
   height: auto;

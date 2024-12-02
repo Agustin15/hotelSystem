@@ -40,6 +40,8 @@ const submitAddForm = () => {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    removeAlertForm();
+
     const client = {};
     let inputsCorrects = [];
     let formData = new FormData(event.target);
@@ -85,7 +87,7 @@ const fetchPost = async (client) => {
     );
 
     const result = await response.json();
-    console.log(result);
+
     if (result.advertencia) {
       throw result.advertencia;
     } else if (result.respuesta) {
@@ -111,13 +113,29 @@ export const alertForm = (img, msj, title) => {
   alertForm.querySelector("span").textContent = title;
   alertForm.querySelector("img").src = img;
   alertForm.querySelector("p").textContent = msj;
+
   alertForm.style.display = "flex";
 
   if (title == "Exito") {
+    alertForm.classList.add("alertFormCorrect");
     setTimeout(() => {
-      alertForm.style.display = "none";
+      removeAlertForm();
     }, 3500);
+  } else {
+    alertForm.classList.add("alertFormError");
+    console.log(alertForm);
   }
+};
+
+export const removeAlertForm = () => {
+  let alertForm = document.querySelector(".alertForm");
+
+  alertForm.querySelector("span").textContent = "";
+  alertForm.querySelector("img").src = "";
+  alertForm.querySelector("p").textContent = "";
+  alertForm.style.display = "none";
+  alertForm.classList.remove("alertFormError");
+  alertForm.classList.remove("alertFormCorrect");
 };
 
 export const validations = (value) => {

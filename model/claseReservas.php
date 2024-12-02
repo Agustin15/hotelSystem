@@ -57,14 +57,14 @@ class reservas
         return $consulta->get_result();
     }
 
-    
+
 
     public function getAllReservasAnio($year)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where 
         YEAR(fechaLlegada) =?");
-        $consulta->bind_param("s",$year);
+        $consulta->bind_param("s", $year);
         $consulta->execute();
 
         return $consulta->get_result();
@@ -151,7 +151,25 @@ class reservas
         return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
-    
+
+
+
+
+    public function getBookingByClientMailAndDate($mail, $fechaLlegada, $fechaSalida)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion 
+        INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente where 
+        clientes.correo=? and reserva_habitacion.fechaLlegada=? and reserva_habitacion.fechaSalida=?");
+        $consulta->bind_param("sss", $mail, $fechaLlegada, $fechaSalida);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_array(MYSQLI_ASSOC);
+    }
+
+
     public function updateReserva()
     {
 

@@ -73,15 +73,15 @@ const fetchDelete = async (idClient) => {
     "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?idClient=" +
     idClient;
 
-  let data = null;
+  let data;
   try {
     const response = await fetch(url, {
       method: "DELETE",
     });
 
     const result = await response.json();
-
-    if (result) {
+    
+    if (result.response == true) {
       data = result;
     }
   } catch (error) {

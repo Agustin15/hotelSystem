@@ -4,7 +4,6 @@ import {
   printDateBookingInCart,
   createDataRoom,
   validateQuantityGuestsInputs,
-  addRoomToList,
   printRoomsCart,
   editTotalPriceRooms,
   comprobateQuantityRoomForAdd,
@@ -14,19 +13,25 @@ import {
   changeRooms,
 } from "./functionsCart.js";
 
+import { alerta } from "../alertas.js";
+
 import {
   eventsButtonsSlider,
   indexGetValue,
   displayIndexItemRoom,
 } from "./slider.js";
 
+export let quantityCategorysRooms;
+export let dateBooking = null;
+
 const formCheckIn = document.getElementById("checkIn");
 let llegada = document.getElementById("llegada");
 let salida = document.getElementById("salida");
-let modal = document.getElementById("modal");
+export let modal = document.getElementById("modal");
 let buttonNext = document.getElementById("buttonNext");
-export let quantityCategorysRooms;
-export let dateBooking = null;
+let alertEmptyDate = document.querySelector(".avisoCompleteDatos");
+
+export let guestsAlert = document.getElementById("alertGuests");
 
 document.addEventListener("DOMContentLoaded", async function () {
   let resultGetCategoryRooms = await submitGetCategoryHotelRooms();
@@ -45,12 +50,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (JSON.parse(localStorage.getItem("rooms")).length > 0) {
     dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
 
-    let startBooking = new Date(dateBooking.start);
-    let endBooking = new Date(dateBooking.end);
-
     dateBooking = {
-      start: startBooking,
-      end: endBooking,
+      start: dateBooking.start,
+      end: dateBooking.end,
     };
 
     submitDateBooking(dateBooking);
@@ -103,14 +105,16 @@ if (formCheckIn) {
   formCheckIn.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    alertEmptyDate.style.display = "none";
+
     if (llegada.value == "" || salida.value == "") {
       alerta("Ingresa una fecha válida");
     } else {
       cleanDateBooking();
       cleanQuantityAvailable();
 
-      let startBooking = new Date(llegada.value);
-      let endBooking = new Date(salida.value);
+      let startBooking =llegada.value;
+      let endBooking = salida.value;
 
       if (endBooking <= startBooking) {
         alerta("Ingresa una fecha válida");
@@ -222,59 +226,25 @@ const printHotelRooms = (rooms) => {
 function validateDateInputs() {
   [...document.querySelectorAll(".buttonAdd")].forEach((btn) => {
     btn.addEventListener("click", () => {
+      alertEmptyDate.style.display = "none";
+      guestsAlert.style.display = "none";
+
       if (!dateBooking) {
         alerta("Ingresa una fecha valida");
       } else {
-        if (
-          validateQuantityGuestsInputs(
-            btn.parentNode.parentNode.querySelector(".adult"),
-            btn.parentNode.parentNode.querySelector(".children")
-          ) != null
-        ) {
-          alertGuests(
-            validateQuantityGuestsInputs(
-              btn.parentNode.parentNode.querySelector(".adult"),
-              btn.parentNode.parentNode.querySelector(".children")
-            ),
-            document.getElementById("alertGuests"),
-            btn.parentNode.parentNode.parentNode
-          );
-        } else {
+        let errorGuests = validateQuantityGuestsInputs(
+          btn.parentNode.parentNode.querySelector(".adult"),
+          btn.parentNode.parentNode.querySelector(".children"),
+          btn.parentNode.parentNode.parentNode
+        );
+
+        if (!errorGuests) {
           let room = createDataRoom(btn);
-          let result = comprobateQuantityRoomForAdd(room);
-          switch (result) {
-            case "quantityAdded":
-              printRoomsCart();
-              break;
-            case null:
-              addRoomToList(room);
-              printRoomsCart();
-
-              break;
-            default:
-              alertModal("show");
-              window.scroll(0, 90);
-
-              break;
-          }
+          comprobateQuantityRoomForAdd(room);
         }
       }
     });
   });
 }
 
-const alertModal = (option) => {
-  if (option == "show") {
-    modal.style.display = "flex";
-  } else {
-    modal.style.display = "none";
-  }
-  buttonModalAlert();
-};
-
-function buttonModalAlert() {
-  modal.querySelector("button").addEventListener("click", function () {
-    alertModal("hide");
-  });
-}
 next(buttonNext);

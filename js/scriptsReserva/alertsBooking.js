@@ -1,30 +1,16 @@
-function alertClientFormBooking(msj) {
+export function alertClientFormBooking(msj) {
   let alertClientForm = document.querySelector("#alertClient");
-  let barProgress = alertClientForm.querySelector(".bar");
-
-  alertClientForm.classList.remove("alertClientDesactive");
-  alertClientForm.classList.add("alertClientActive");
+  alertClientForm.style.display = "flex";
   alertClientForm.querySelector("p").textContent = msj;
-
-  setTimeout(function () {
-    alertClientForm.querySelector(".contain").style.display = "block";
-    barProgress.classList.add("barActive");
-  }, 500);
-
   setTimeout(() => {
     removeAlertClientFormBooking();
-  }, 10000);
+  }, 4000);
 }
 
-function removeAlertClientFormBooking() {
+export function removeAlertClientFormBooking() {
   let alertClientForm = document.querySelector("#alertClient");
-  let barProgress = alertClientForm.querySelector(".bar");
-
   alertClientForm.querySelector("p").textContent = "";
-  alertClientForm.querySelector(".contain").style.display = "none";
-  alertClientForm.classList.add("alertClientDesactive");
-  alertClientForm.classList.remove("alertClientActive");
-  barProgress.classList.remove("barActive");
+  alertClientForm.style.display = "none";
 }
 
 async function confirmAlertBookingExist(msj, icon) {
@@ -79,5 +65,3 @@ function alertErrorBooking(msj, icon) {
     removeConfirmAlertBookingExist(modalBooking, alertBooking);
   });
 }
-
-export { alertClientFormBooking, confirmAlertBookingExist, alertErrorBooking };
