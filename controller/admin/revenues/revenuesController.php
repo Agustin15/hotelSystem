@@ -14,8 +14,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $response = array("response" => $resultPay);
 
-       echo json_encode($response);
+        echo json_encode($response);
         break;
+
+
+    case "PUT":
+        $dataBooking = json_decode(file_get_contents("php://input"), true);
+
+        $resultUpdatePay = $pay->updatePago($dataBooking['idBooking'], $dataBooking['newAmount']);
+        $response = array("response" => $resultUpdatePay);
+
+        echo json_encode($response);
+        break;
+
+
 
     case "GET":
         switch ($_GET['option']) {
@@ -63,6 +75,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 );
 
                 $response = $dataRevenuesActual;
+                break;
+            case "getRevenue":
+
+                $idBooking = json_decode($_GET['idBooking']);
+
+                $revenue =  $pay->getPago($idBooking);
+
+                if ($revenue) {
+
+                    $response = $revenue;
+                }
+
                 break;
         }
 

@@ -82,14 +82,7 @@ async function submitGetCategoryHotelRooms() {
   try {
     loading(true);
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/bookingClient/bookingRooms.php?option=roomsHotel",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel");
 
     const result = await response.json();
     displayErrorGetHotelRooms(false);
@@ -139,15 +132,8 @@ if (formCheckIn) {
 async function submitDateBooking(dateBooking) {
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/bookingClient/bookingRooms.php?option=roomsAvailable&dateBooking=" +
-        JSON.stringify(dateBooking),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsAvailable&dateBooking=" +
+        JSON.stringify(dateBooking));
 
     const result = await response.json();
 

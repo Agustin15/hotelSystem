@@ -182,6 +182,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         break;
 
+      case "getClientByMailAndName":
+        $client = json_decode($_GET['client'], true);
+
+        $peticion = $claseCliente->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+
+        break;
+
       case "ifExistClient":
         $client = json_decode($_GET['client'], true);
 

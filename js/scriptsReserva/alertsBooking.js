@@ -13,55 +13,92 @@ export function removeAlertClientFormBooking() {
   alertClientForm.style.display = "none";
 }
 
-async function confirmAlertBookingExist(msj, icon) {
-  return new Promise((resolve) => {
-    let modalBooking = document.querySelector(".modalBooking");
-    let alertBooking = document.querySelector(".alertBooking");
+export const alertBooking = (title, msj) => {
+  modalOption("flex");
+  let alert = document.querySelector(".alertBooking");
+  let msjParragraph = alert.querySelector("p");
+  let titleSpan = alert.querySelector("span");
+  let btnAccept = alert.querySelector(".btnAccept");
+  let btnCancel = alert.querySelector(".btnCancel");
 
-    alertBooking.querySelector("p").textContent = msj;
-    alertBooking.querySelector("img").src = icon;
-    alertBooking.style.display = "flex";
-    if (modalBooking.style.display != "flex") {
-      modalBooking.style.display = "flex";
-      console.log("kkkk");
-    }
+  alert.style.display = "flex";
 
-    modalBooking.querySelector(".btnOK").addEventListener("click", function () {
-      removeConfirmAlertBookingExist(modalBooking, alertBooking);
-      resolve(true);
+  if (title == "Error") {
+    btnCancel.style.display = "none";
+    btnAccept.textContent = "OK";
+    msjParragraph.textContent = msj;
+    titleSpan.textContent = "Ups, algo ha salido mal";
+    btnAccept.addEventListener("click", () => {
+      modalOption("none");
+      removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
     });
-
-    modalBooking
-      .querySelector(".btnCancel")
-      .addEventListener("click", function () {
-        removeConfirmAlertBookingExist(modalBooking, alertBooking);
-        resolve(false);
-      });
-  });
-}
-
-const removeConfirmAlertBookingExist = (modalBooking, alertBooking) => {
-  modalBooking.style.display = "none";
-  alertBooking.style.display = "none";
-  alertBooking.querySelector("img").src = "";
-  alertBooking.querySelector("p").textContent = "";
+  } else {
+    bodyConfirmAddRoomsToBookingPast(
+      alert,
+      msjParragraph,
+      msj,
+      titleSpan,
+      btnAccept,
+      btnCancel
+    );
+  }
 };
 
-function alertErrorBooking(msj, icon) {
-  let modalBooking = document.querySelector(".modalBooking");
-  let alertBooking = document.querySelector(".alertBooking");
+const removeAlertBooking = (
+  alert,
+  msjParragraph,
+  titleSpan,
+  btnAccept,
+  btnCancel
+) => {
+  alert.style.display = "none";
+  msjParragraph.textContent = "";
+  titleSpan.textContent = "";
+  btnAccept.textContent = "";
+  btnCancel.textContent = "";
+  btnCancel.style.display = "none";
+};
 
-  alertBooking.querySelector("p").textContent = msj;
-  alertBooking.querySelector("img").src = icon;
-  alertBooking.querySelector(".btnCancel").style.display = "none";
-  alertBooking.style.display = "flex";
+const bodyConfirmAddRoomsToBookingPast = async (
+  alert,
+  msjParragraph,
+  msj,
+  titleSpan,
+  btnAccept,
+  btnCancel
+) => {
+  btnCancel.style.display = "block";
+  btnAccept.textContent = "Si";
+  btnCancel.textContent = "No";
+  titleSpan.textContent = "Advertencia";
+  msjParragraph.textContent = msj;
+};
 
-  if (modalBooking.style.display != "flex") {
-    modalBooking.style.display = "flex";
-  }
+export const confirmUpdateBooking = async (alert) => {
+  let msjParragraph = alert.querySelector("p");
+  let titleSpan = alert.querySelector("span");
+  let btnAccept = alert.querySelector(".btnAccept");
+  let btnCancel = alert.querySelector(".btnCancel");
 
-  alertBooking.querySelector(".btnOK").addEventListener("click", function () {
-    alertBooking.querySelector(".btnCancel").style.display = "block";
-    removeConfirmAlertBookingExist(modalBooking, alertBooking);
+  let confirm = false;
+
+  return new Promise((resolve) => {
+    btnCancel.addEventListener("click", () => {
+      modalOption("none");
+      removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
+      resolve(confirm);
+    });
+
+    btnAccept.addEventListener("click", () => {
+      modalOption("none");
+      removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
+      confirm = true;
+      resolve(confirm);
+    });
   });
-}
+};
+
+export const modalOption = (state) => {
+  let modal = document.querySelector(".modalBooking");
+  modal.style.display = state;
+};

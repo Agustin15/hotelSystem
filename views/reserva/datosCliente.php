@@ -52,6 +52,17 @@
                 <img src="../../img/spinnerBooking.gif">
             </div>
 
+            <div class="alertBooking">
+
+                <img src="../../img/advertenciaDelete.png">
+                <span class="title"></span>
+                <p></p>
+                <div class="buttons">
+                    <button class="btnAccept"></button>
+                    <button class="btnCancel"></button>
+                </div>
+            </div>
+
         </div>
 
         <div class="barStageAdvance"></div>

@@ -1,38 +1,64 @@
 import { loadingBooking } from "../personalData.js";
-import { alertClientFormBooking } from "../alertsBooking.js";
+import { alertClientFormBooking, alertBooking } from "../alertsBooking.js";
 
 export const fetchPOSTClient = async (client) => {
-  let data = null;
   loadingBooking(true, "Procesando cliente");
 
-  setTimeout(async () => {
-    try {
-      const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(client),
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.advertencia) {
-        throw result.advertencia;
-      } else if (result.respuesta) {
-        data = result.respuesta;
-      } else {
-        throw "Ups, no se pudo agregar el cliente";
+  let data = null;
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(client),
       }
-    } catch (error) {
-      console.log(error);
-      loadingBooking(false);
-      alertClientFormBooking(error);
-    } finally {
-      return data;
+    );
+
+    const result = await response.json();
+    if (result.advertencia) {
+      throw result.advertencia;
+    } else if (result.respuesta) {
+      data = result.respuesta;
+    } else {
+      throw "Ups, no se pudo agregar el cliente";
     }
-  }, 2000);
+  } catch (error) {
+    console.log(error);
+
+    alertClientFormBooking(error);
+    loadingBooking(false);
+  } finally {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return data;
+  }
+};
+
+export const fetchGetClient = async (client) => {
+  loadingBooking(true, "Cargando");
+  let data = null;
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=getClientByMailAndName&&client=" +
+        JSON.stringify(client)
+    );
+
+    const result = await response.json();
+
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    loadingBooking(false);
+    alertBooking(
+      "Error",
+      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+    );
+  } finally {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return data;
+  }
 };

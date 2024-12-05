@@ -1,7 +1,26 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
 
-import { fetchPOSTClient } from "./scriptsFetchsBooking/scriptClient.js";
-import { getBookingByClientMailAndDate } from "./scriptsFetchsBooking/scriptBooking.js";
+import {
+  fetchPOSTClient,
+  fetchGetClient,
+} from "./scriptsFetchsBooking/scriptClient.js";
+import {
+  getBookingByClientMailAndDate,
+  fetchPOSTBooking,
+  fetchPUTBooking,
+} from "./scriptsFetchsBooking/scriptBooking.js";
+
+import {
+  fetchGETAvailableRoomsCategory,
+  fetchPOSTRooms,
+} from "./scriptsFetchsBooking/scriptRooms.js";
+
+import {
+  fetchPOSTPay,
+  fetchGETPay,
+} from "./scriptsFetchsBooking/scriptRevenues.js";
+
+import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
 
 let loadingSpinner = document.querySelector(".loading");
 let btnNextStage = document.querySelector(".btnNextStage");
@@ -208,6 +227,17 @@ const validationsInputs = (value) => {
   return validations;
 };
 
+const firstLetterUpper = (value) => {
+  let valueArray = [...value];
+  return valueArray
+    .map((char, index) => {
+      if (index == 0) {
+        return char.toUpperCase();
+      }
+      return char;
+    })
+    .join("");
+};
 function clientData() {
   const form = document.querySelector("form");
 
@@ -225,6 +255,9 @@ function clientData() {
     if (inputToAlert) {
       inputAlert(inputToAlert.key, inputToAlert.msj);
     } else {
+      if (k == "name" || k == "lastName") {
+        v = firstLetterUpper(v);
+      }
       inputsValidates.push({ key: k, value: v });
     }
   });
@@ -239,25 +272,203 @@ function clientData() {
   }
 }
 
-async function createBooking(client) {
+const createBooking = async (client) => {
   const clientBooking = {
     client: client,
     booking: booking,
   };
 
+  let clientExisted = await fetchGetClient(client);
+
+  if (clientExisted) {
+    addBooking(clientBooking, clientExisted);
+  } else {
+    addClient(clientBooking);
+  }
+};
+
+const addClient = async (clientBooking) => {
   let clientAdded = await fetchPOSTClient(clientBooking.client);
-
   if (clientAdded) {
-    let bookingFind = getBookingByClientMailAndDate(clientBooking);
-
-    if(bookingFind){
-
-    }else{
-
-      console.log("No hay reserva que coincida");
+    let clientFind = await fetchGetClient(clientBooking.client);
+    if (clientFind) {
+      addBooking(clientBooking, clientFind);
     }
   }
-}
+};
+
+const addBooking = async (clientBooking, clientFind) => {
+  let bookingFind = await getBookingByClientMailAndDate(clientBooking);
+  if (bookingFind) {
+    alertBooking(
+      "Advertencia",
+      "Ya tiene una reserva en esta fecha, ¿Desea agregar las nuevas habitaciones a dicha reserva?"
+    );
+
+    let confirm = await confirmUpdateBooking(
+      document.querySelector(".alertBooking")
+    );
+
+    if (confirm) {
+      updateBooking(bookingFind, clientBooking);
+    }
+  } else {
+    const dataAddBooking = {
+      client: clientFind.idCliente,
+      startBooking: clientBooking.booking.date.start,
+      endBooking: clientBooking.booking.date.end,
+      roomsQuantity: totalRoomsInBooking(clientBooking.booking.rooms),
+    };
+
+    let bookingAdded = await fetchPOSTBooking(dataAddBooking);
+
+    if (bookingAdded) {
+      addRoomsBookings(
+        clientBooking.booking,
+        clientFind.idCliente,
+        clientBooking
+      );
+    }
+  }
+};
+
+const addRoomsBookings = async (booking, idClient, clientBooking, option) => {
+  const dataConsult = {
+    startBooking: booking.date.start,
+    endBooking: booking.date.end,
+  };
+
+  let noRoomsAvailables = null;
+
+  let roomsAssign = await Promise.all(
+    booking.rooms.map(async (room) => {
+      let result = await assignRoom(dataConsult, room, rooms);
+      if (!result) {
+        noRoomsAvailables = `Ups, no quedan suficientes habitaciones ${room.category} disponibles`;
+      } else {
+        return result;
+      }
+    })
+  );
+  if (noRoomsAvailables) {
+    alertBooking("Error", noRoomsAvailables);
+  } else {
+    let getBookingAdded = await getBookingByClientMailAndDate(clientBooking);
+
+    const roomsToBooking = {
+      idBooking: getBookingAdded.idReserva,
+      client: idClient,
+      startBooking: dataConsult.startBooking,
+      endBooking: dataConsult.endBooking,
+      rooms: roomsAssign.flat(),
+    };
+
+    addRoomsAssigned(roomsToBooking, option);
+  }
+};
+
+const assignRoom = async (dataConsult, room, rooms) => {
+  dataConsult.category = room.category;
+
+  let roomsAvailablesCategory = await fetchGETAvailableRoomsCategory(
+    dataConsult
+  );
+  if (
+    roomsAvailablesCategory.length <
+    totalRoomsEqualCategoryInBooking(room.category, rooms)
+  ) {
+    return false;
+  } else {
+    let roomCategoryAssing = [];
+    for (let f = 0; f <= roomsAvailablesCategory.length; f++) {
+      if (roomCategoryAssing.length < room.quantity) {
+        roomCategoryAssing.push({
+          numRoom: roomsAvailablesCategory[f].numRoom,
+          adults: parseInt(room.guests.adult),
+          childs: parseInt(room.guests.childs) || 0,
+        });
+      } else {
+        return roomCategoryAssing;
+      }
+    }
+  }
+};
+const totalRoomsEqualCategoryInBooking = (category, rooms) => {
+  let total = rooms.reduce((ac, room) => {
+    if (room.category == category) {
+      ac += room.quantity;
+    }
+    return ac;
+  }, 0);
+  return total;
+};
+
+const totalRoomsInBooking = (rooms) => {
+  let total = rooms.reduce((ac, room) => {
+    return (ac += room.quantity);
+  }, 0);
+  return total;
+};
+
+const addRoomsAssigned = async (roomsToBooking, option) => {
+  let resultAddRooms = await fetchPOSTRooms(roomsToBooking);
+  if (resultAddRooms == true && option != "update") {
+    addPay(roomsToBooking);
+  } else if (resultAddRooms == true && option == "update") {
+    updatePay(roomsToBooking);
+  }
+};
+
+const addPay = async (roomsToBooking) => {
+  let resultAddPay = await fetchPOSTPay({
+    idBooking: roomsToBooking.idBooking,
+    client: roomsToBooking.client,
+    amount: booking.totalDeposit,
+  });
+
+  if (resultAddPay) {
+    // location.href =
+    //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+  }
+};
+
+const updateBooking = async (bookingFind, clientBooking) => {
+ 
+  const dataBookingToUpdate = {
+    idBooking: bookingFind.idReserva,
+    idClient: bookingFind.idClienteReserva,
+    startBooking: bookingFind.fechaLlegada,
+    endBooking: bookingFind.fechaSalida,
+    quantityRooms:
+      bookingFind.cantidadHabitaciones + totalRoomsInBooking(booking.rooms),
+  };
+
+
+  let resultUpdate = await fetchPUTBooking(dataBookingToUpdate);
+
+  if (resultUpdate) {
+    addRoomsBookings(
+      booking,
+      bookingFind.idClienteReserva,
+      clientBooking,
+      "update"
+    );
+  }
+};
+
+const updatePay = async (roomsToBooking) => {
+  let actualRevenue = await fetchGETPay(roomsToBooking.idBooking);
+  if (actualRevenue) {
+    let resultUpdatePay = await fetchPOSTPay({
+      idBooking: roomsToBooking.idBooking,
+      newAmount: booking.totalDeposit + actualRevenue.deposito,
+    });
+    if (resultUpdatePay) {
+      // location.href =
+      //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+    }
+  }
+};
 
 export function loadingBooking(loadingState, msj) {
   if (msj) {
@@ -301,63 +512,4 @@ function clickRemoveAlertInputs() {
         removeInputAlert(input);
       });
     });
-}
-
-async function updateBooking(clientBooking) {
-  loading(true, "Buscando habitaciones");
-
-  setTimeout(async () => {
-    try {
-      const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(clientBooking),
-        }
-      );
-      const result = await response.json();
-
-      if (typeof result.respuesta == "string") {
-        throw result.respuesta;
-      } else if (result.respuesta == true) {
-        loading(false);
-        location.href =
-          "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
-      }
-    } catch (error) {
-      loading(false);
-
-      alertErrorBooking(error, "../../img/advertencia.gif");
-    }
-  }, 2000);
-}
-
-async function realizeBooking(clientBooking) {
-  loading(true, "Buscando habitaciones");
-
-  setTimeout(async () => {
-    try {
-      const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/bookingClient/bookingController.php",
-        {
-          method: "POST",
-          body: JSON.stringify(clientBooking),
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const result = await response.json();
-
-      if (typeof result.respuesta == "string") {
-        throw response.respuesta;
-      } else {
-        loading(false);
-        location.href =
-          "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
-      }
-    } catch (error) {
-      loading(false);
-      alertErrorBooking(error, "../../img/advertencia.gif");
-    }
-  }, 2000);
 }

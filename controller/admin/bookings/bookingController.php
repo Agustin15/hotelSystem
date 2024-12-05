@@ -25,6 +25,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo json_encode($response);
         break;
 
+    case "PUT":
+
+        $dataToUpdateBooking = json_decode(file_get_contents("php://input"), true);
+
+        $booking->setIdReserva($dataToUpdateBooking['idBooking']);
+        $booking->setIdCliente($dataToUpdateBooking['idClient']);
+        $booking->setLlegada($dataToUpdateBooking['startBooking']);
+        $booking->setSalida($dataToUpdateBooking['endBooking']);
+        $booking->setCantidadHabitaciones($dataToUpdateBooking['quantityRooms']);
+
+        $resultBookingUpdate = $booking->updateReserva();
+
+        $response = $resultBookingUpdate;
+
+        echo json_encode($response);
+        break;
+
     case "GET":
 
         $option = $_GET['option'];
@@ -53,20 +70,21 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                 break;
 
-                case "bookingByClientMailAndDate":
-                    $dataBooking = json_decode($_GET['dataBooking'], true);
-    
-                    $bookingFind =  $booking->getBookingByClientMailAndDate(
-                        $dataBooking['mail'],
-                        $dataBooking['startBooking'],
-                        $dataBooking['endBooking']
-                    );
-    
-                    if ($bookingFind) {
-                        $response = $bookingFind;
-                    }
-    
-                    break;
+            case "bookingByClientMailAndDate":
+
+                $dataBooking = json_decode($_GET['dataBooking'], true);
+
+                $bookingFind =  $booking->getBookingByClientMailAndDate(
+                    $dataBooking['mail'],
+                    $dataBooking['startBooking'],
+                    $dataBooking['endBooking']
+                );
+
+                if ($bookingFind) {
+                    $response = $bookingFind;
+                }
+
+                break;
         }
 
         echo json_encode($response);
