@@ -19,12 +19,13 @@ export const fetchPOSTPay = async (booking) => {
 
     if (result.response == true) {
       data = result;
-    } else {
-      throw "No se pudo realizar la reserva, vuelve a intentarlo más tarde";
     }
   } catch (error) {
     console.log(error);
-    alertBooking("Error", error);
+    alertBooking(
+      "Error",
+      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     loadingBooking(false);
@@ -50,12 +51,13 @@ export const fetchPUTPay = async (booking) => {
 
     if (result.response == true) {
       data = result;
-    } else {
-      throw "No se pudo actualizar la reserva, vuelve a intentarlo más tarde";
     }
   } catch (error) {
     console.log(error);
-    alertBooking("Error", error);
+    alertBooking(
+      "Error",
+      "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
+    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     loadingBooking(false);

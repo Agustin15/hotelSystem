@@ -108,7 +108,28 @@ class reservas
 
 
 
+    public function getBookingsYearLimit($year)
+    {
 
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where fechaLlegada=? LIMIT 10");
+        $consulta->bind_param("i", $year);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getBookingsYearLimitAndIndex($year, $index)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where fechaLlegada=? LIMIT 10,$index");
+        $consulta->bind_param("i", $year);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function  deleteReserva($idReserva)
     {

@@ -18,10 +18,12 @@ if (empty($usuario)) {
 
     $adminUser = $admin->getAdminGenero($usuario);
 
-    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
+    if ($adminUser) {
+        $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
 
-    $genero = $datoAdminUser['genero'];
-    $_SESSION['genero'] = $genero;
+        $genero = $datoAdminUser['genero'];
+        $_SESSION['genero'] = $genero;
+    }
 }
 
 $actualYear = date("Y");
@@ -43,15 +45,14 @@ $actualYear = date("Y");
         import {
             actualOptionBooking,
             actualOption,
-            markActualOption
+            markActualOption,
+            optionAddLi
         } from "../../../js/scriptsReservas/scriptReserva.js";
 
         import {
             createEventsCalendar,
             optionsAddBooking
         } from "../../../js/scriptsReservas/scriptOptionsCalendar.js";
-
-        let optionAddLi = document.querySelector(".addLi");
 
         if (actualOption == "addBooking.html") {
             localStorage.setItem("actualOptionBooking", "addBooking.html");

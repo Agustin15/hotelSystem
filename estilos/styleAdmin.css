@@ -183,6 +183,10 @@ body {
   border: 2px solid red;
 }
 
+#loginAdmin form .inputAlert:hover {
+  border: 2px solid red;
+}
+
 #loginAdmin form .inputAlert::placeholder {
   color: red;
 }
@@ -205,7 +209,7 @@ body {
   width: auto;
   gap: 0.7rem;
   padding: 0.5rem;
-  background: linear-gradient(#2e888b, #065357);
+  background: linear-gradient(#c71515, #880a0a);
   border-radius: 3px;
   color: white;
   box-shadow: 2px 2px 2px gray;
@@ -225,6 +229,7 @@ body {
   width: 30px;
 }
 
+
 .iconoMenu {
   width: 36px;
   margin-top: 24px;
@@ -238,6 +243,7 @@ body {
   font-size: 17px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
+
 
 #navAdmin {
   margin-left: 0px;

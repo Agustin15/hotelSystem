@@ -43,13 +43,11 @@ export const fetchPOSTRooms = async (roomsToBooking) => {
     const result = await response.json();
     if (result.response == true) {
       data = result.response;
-    } else {
-      throw  "No se pudo realizar la reserva, vuelve a intentarlo más tarde";
-    }
+    } 
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking("Error", error);
+    alertBooking("Error","No se pudo realizar la reserva, vuelve a intentarlo más tarde");
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return data;

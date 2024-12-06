@@ -7,6 +7,11 @@ const alertLoginAdmin = (img, msj, title) => {
   alertLogin.style.display = "flex";
 };
 
+const removeAlertLoginAdmin=()=>{
+  let alertLogin = document.querySelector(".alertLogin");
+  alertLogin.style.display = "none";
+}
+
 function inputAlert(inputName) {
   let inputsName = [...document.getElementsByName(inputName)];
 
@@ -36,6 +41,8 @@ function passwordStatus(event) {
 
 function setUser(event) {
   event.preventDefault();
+
+  removeAlertLoginAdmin();
   const form = event.target;
 
   const formUser = new FormData(form);

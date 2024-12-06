@@ -19,13 +19,14 @@ export const fetchPOSTBooking = async (booking) => {
 
     if (result == true) {
       data = result;
-    } else {
-      throw "No se pudo realizar la reserva, vuelve a intentarlo más tarde";
     }
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking(error, "Error");
+    alertBooking(
+      "Error",
+      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return data;
@@ -49,7 +50,6 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
     const response = await fetch(url);
     const result = await response.json();
 
-    console.log(result);
     if (result) {
       data = result;
     }
@@ -84,13 +84,14 @@ export const fetchPUTBooking = async (dataBookingToUpdate) => {
 
     if (result == true) {
       data = result;
-    } else {
-      throw "No se pudo actualizar la reserva, vuelve a intentarlo más tarde";
     }
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking("Error",error);
+    alertBooking(
+      "Error",
+      "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
+    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return data;

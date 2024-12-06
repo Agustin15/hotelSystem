@@ -85,6 +85,34 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 }
 
                 break;
+
+            case "bookingsRowsYear":
+                $year = $_GET['year'];
+                $rowsBookingYear = $booking->getAllReservasAnio($year)->num_rows;
+
+                if ($rowsBookingYear) {
+                    $response = $rowsBookingYear;
+                }
+
+                break;
+
+            case "bookingsYearLimit":
+                $data = json_decode($_GET['data'], true);
+
+                $resultBookings;
+                if ($data['indexPage'] == 0) {
+                    $resultBookings = $booking->getBookingsYearLimit($data['year']);
+                } else {
+                    $resultBookings = $booking->getBookingsYearLimitAndIndex($data['year'], $data['indexPage']);
+                }
+
+                if ($resultBookings) {
+
+                    $response = $resultBookings;
+                }
+
+
+                break;
         }
 
         echo json_encode($response);

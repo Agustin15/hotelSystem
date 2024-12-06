@@ -18,6 +18,7 @@ import {
 import {
   fetchPOSTPay,
   fetchGETPay,
+  fetchPUTPay,
 } from "./scriptsFetchsBooking/scriptRevenues.js";
 
 import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
@@ -234,7 +235,7 @@ const firstLetterUpper = (value) => {
       if (index == 0) {
         return char.toUpperCase();
       }
-      return char;
+      return char.toLowerCase();
     })
     .join("");
 };
@@ -412,7 +413,7 @@ const totalRoomsInBooking = (rooms) => {
 
 const addRoomsAssigned = async (roomsToBooking, option) => {
   let resultAddRooms = await fetchPOSTRooms(roomsToBooking);
-  if (resultAddRooms == true && option != "update") {
+  if (resultAddRooms == true && option !== "update") {
     addPay(roomsToBooking);
   } else if (resultAddRooms == true && option == "update") {
     updatePay(roomsToBooking);
@@ -427,13 +428,12 @@ const addPay = async (roomsToBooking) => {
   });
 
   if (resultAddPay) {
-    // location.href =
-    //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+    location.href =
+      "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
   }
 };
 
 const updateBooking = async (bookingFind, clientBooking) => {
- 
   const dataBookingToUpdate = {
     idBooking: bookingFind.idReserva,
     idClient: bookingFind.idClienteReserva,
@@ -442,7 +442,6 @@ const updateBooking = async (bookingFind, clientBooking) => {
     quantityRooms:
       bookingFind.cantidadHabitaciones + totalRoomsInBooking(booking.rooms),
   };
-
 
   let resultUpdate = await fetchPUTBooking(dataBookingToUpdate);
 
@@ -459,13 +458,13 @@ const updateBooking = async (bookingFind, clientBooking) => {
 const updatePay = async (roomsToBooking) => {
   let actualRevenue = await fetchGETPay(roomsToBooking.idBooking);
   if (actualRevenue) {
-    let resultUpdatePay = await fetchPOSTPay({
+    let resultUpdatePay = await fetchPUTPay({
       idBooking: roomsToBooking.idBooking,
       newAmount: booking.totalDeposit + actualRevenue.deposito,
     });
     if (resultUpdatePay) {
-      // location.href =
-      //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+      location.href =
+        "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
     }
   }
 };
