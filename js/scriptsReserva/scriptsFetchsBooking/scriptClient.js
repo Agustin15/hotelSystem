@@ -7,7 +7,7 @@ export const fetchPOSTClient = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php",
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php",
       {
         method: "POST",
         headers: {
@@ -22,12 +22,11 @@ export const fetchPOSTClient = async (client) => {
       throw result.advertencia;
     } else if (result.respuesta) {
       data = result.respuesta;
-    } else {
+    }else{
       throw "Ups, no se pudo agregar el cliente";
     }
   } catch (error) {
     console.log(error);
-
     alertClientFormBooking(error);
     loadingBooking(false);
   } finally {
@@ -39,10 +38,11 @@ export const fetchPOSTClient = async (client) => {
 export const fetchGetClient = async (client) => {
   loadingBooking(true, "Cargando");
   let data = null;
+
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=getClientByMailAndName&&client=" +
-        JSON.stringify(client)
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+        JSON.stringify({ option: "getClientByMailAndName", client: client })
     );
 
     const result = await response.json();

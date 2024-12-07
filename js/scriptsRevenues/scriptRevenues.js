@@ -5,7 +5,7 @@ import {
 
 export const POSTPay = async (booking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php";
+    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
 
   let data;
   loadingForm(true);

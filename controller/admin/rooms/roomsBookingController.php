@@ -1,19 +1,28 @@
 <?php
 
-require_once("../../../conexion/conexion.php");
+require_once("../conexion/conexion.php");
 
-require("../../../model/claseHabitaciones.php");
+require("../model/claseHabitaciones.php");
 
-$claseHabitacion = new habitaciones();
-$response = null;
 
-switch ($_SERVER['REQUEST_METHOD']) {
 
-    case "POST":
+class roomsBookingController
+{
 
-        $dataBooking = json_decode(file_get_contents("php://input"), true);
+    private $rooms;
 
-        $roomsBooking = $dataBooking['rooms'];
+    public function __construct()
+    {
+
+        $this->rooms = new habitaciones();
+    }
+
+    public function POST($req)
+    {
+
+        $res = null;
+
+        $roomsBooking = $req['rooms'];
 
         $conexion = new conexion();
 
@@ -22,12 +31,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
             try {
                 $conexion->conectar()->begin_transaction();
 
-                $resultRoomAdded =  $claseHabitacion->setHabitacionReservada(
-                    $dataBooking['idBooking'],
-                    $dataBooking['client'],
+                $resultRoomAdded =  $this->rooms->setHabitacionReservada(
+                    $req['idBooking'],
+                    $req['client'],
                     $roomBooking['numRoom'],
-                    $dataBooking['startBooking'],
-                    $dataBooking['endBooking'],
+                    $req['startBooking'],
+                    $req['endBooking'],
                     $roomBooking['adults'],
                     $roomBooking['childs']
                 );
@@ -48,53 +57,58 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         if (!$resultError) {
 
-            $response = array("response" => true);
+            $res = array("response" => true);
         } else {
-            $response = array("response" => false);
+            $res = array("response" => false);
         }
 
-        echo json_encode($response);
+        return $res;
+    }
 
-        break;
+    public function PUT() {}
 
-    case "GET":
+    public function DELETE() {}
 
-        switch ($_GET['option']) {
+    public function GET($req)
+    {
+
+        $res = null;
+        switch ($req['option']) {
             case "dashboardGraphic":
 
-                $allRoomsReserved = $claseHabitacion->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
+                $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
-                $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved, $claseHabitacion) {
+                $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved) {
 
                     $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
-                    use ($categoryRoom, $claseHabitacion) {
+                    use ($categoryRoom) {
 
-                        $dataRoomReserved = $claseHabitacion->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
+                        $dataRoomReserved = $this->rooms->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
 
                         return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
                     });
 
                     return array('categoryRoom' => $categoryRoom['categoria'], 'quantityReserved' => count($categoryRoomsReserved));
-                }, $claseHabitacion->getAllCategoryRooms());
+                }, $this->rooms->getAllCategoryRooms());
 
 
-                $response = $quantityCategorysRoomsReserved;
+                $res = $quantityCategorysRoomsReserved;
 
                 break;
 
             case "itemDataDashboard":
 
-                $categoryRooms = $claseHabitacion->getAllCategoryRooms();
+                $categoryRooms = $this->rooms->getAllCategoryRooms();
 
-                $dataCategoryRooms = array_map(function ($categoryRoom) use ($claseHabitacion) {
-                    $totalRoomCategory = count($claseHabitacion->getAllHabitacionesCategoria($categoryRoom['categoria']));
+                $dataCategoryRooms = array_map(function ($categoryRoom) {
+                    $totalRoomCategory = count($this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']));
 
-                    $roomsCategory = $claseHabitacion->getAllHabitacionesCategoria($categoryRoom['categoria']);
+                    $roomsCategory = $this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']);
 
-                    $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) use ($claseHabitacion) {
+                    $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) {
 
                         $today = date("Y-m-d");
-                        $habitacionOcupada = $claseHabitacion->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
+                        $habitacionOcupada = $this->rooms->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
 
                         ($habitacionOcupada) ? $ac++ : $ac;
 
@@ -109,20 +123,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     );
                 }, $categoryRooms);
 
-                $response = $dataCategoryRooms;
+                $res = $dataCategoryRooms;
                 break;
 
             case "getDataRoomsBooking":
 
-                $idBooking = $_GET['idBooking'];
-                $roomsDetailsBooking = $claseHabitacion->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
-                $response = $roomsDetailsBooking;
+                $idBooking = $req['idBooking'];
+                $roomsDetailsBooking = $this->rooms->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
+                $res = $roomsDetailsBooking;
                 break;
 
             case "getDataRoomsBookingAndCategory":
 
-                $idBooking = $_GET['idBooking'];
-                $roomsDetailsBooking = $claseHabitacion->roomsBookingAndDetails($idBooking);
+                $idBooking = $req['idBooking'];
+                $roomsDetailsBooking = $this->rooms->roomsBookingAndDetails($idBooking);
 
                 if (count($roomsDetailsBooking) > 0) {
                     $roomsDetailsBookingFixed = array_map(function ($room) {
@@ -134,16 +148,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
                         );
                     }, $roomsDetailsBooking);
-                    $response = $roomsDetailsBookingFixed;
+                    $res = $roomsDetailsBookingFixed;
                 }
 
                 break;
 
             case "roomsFreeCategory":
 
-                $dataBooking = json_decode($_GET["dataBooking"], true);
-
-                $allRoomsCategory = $claseHabitacion->getAllRoomsHotelWithDetails($dataBooking["category"]);
+                $allRoomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req['dataBooking']["category"]);
 
                 $allRoomsCategory =  array_map(function ($room) {
 
@@ -156,14 +168,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     );
                 }, $allRoomsCategory);
 
-                $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($claseHabitacion, $dataBooking) {
+                $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($req) {
 
-                    $bookingsFreeRoom = $claseHabitacion->getHabitacionDisponible(
-                        $dataBooking["startBooking"],
-                        $dataBooking["endBooking"],
+                    $bookingsFreeRoom = $this->rooms->getHabitacionDisponible(
+                        $req['dataBooking']["startBooking"],
+                        $req['dataBooking']["endBooking"],
                         $roomCategory["numRoom"]
                     );
-                    $allBookingsRoom  = $claseHabitacion->habitacionesReservadas($roomCategory["numRoom"]);
+                    $allBookingsRoom  = $this->rooms->habitacionesReservadas($roomCategory["numRoom"]);
 
                     if (count($allBookingsRoom) == 0  || count($bookingsFreeRoom) == count($allBookingsRoom)) {
 
@@ -171,11 +183,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     }
                 });
 
-                $response = $roomsFreeCategory;
+                $res = $roomsFreeCategory;
 
                 break;
         }
 
-        echo json_encode(array_values($response));
-        break;
+
+        return array_values($res);
+    }
 }

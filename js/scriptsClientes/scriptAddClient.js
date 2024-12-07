@@ -76,7 +76,7 @@ const fetchPost = async (client) => {
   loading(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php",
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php",
       {
         method: "POST",
         headers: {

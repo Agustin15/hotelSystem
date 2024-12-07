@@ -1,36 +1,42 @@
 <?php
 
-require("../../../model/clasePago.php");
-$pay = new pago();
-$response = null;
+require("../model/clasePago.php");
 
-switch ($_SERVER['REQUEST_METHOD']) {
+class revenuesController
+{
+    private $pay;
 
-    case "POST":
-        $dataBooking = json_decode(file_get_contents("php://input"), true);
+    public function __construct()
+    {
 
-        $resultPay = $pay->setPago($dataBooking['idBooking'], $dataBooking['client'], $dataBooking['amount']);
+        $this->pay = new pago();
+    }
 
+    public function POST($req)
+    {
 
-        $response = array("response" => $resultPay);
-
-        echo json_encode($response);
-        break;
-
-
-    case "PUT":
-        $dataBooking = json_decode(file_get_contents("php://input"), true);
-
-        $resultUpdatePay = $pay->updatePago($dataBooking['idBooking'], $dataBooking['newAmount']);
-        $response = array("response" => $resultUpdatePay);
-
-        echo json_encode($response);
-        break;
+        $res = null;
+        $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
 
 
+        $res = array("response" => $resultPay);
 
-    case "GET":
-        switch ($_GET['option']) {
+        return $res;
+    }
+
+    public function PUT($req)
+    {
+        $res = null;
+        $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
+        $res = array("response" => $resultUpdatePay);
+
+        return $res;
+    }
+
+    public function GET($req)
+    {
+        $res = null;
+        switch ($req['option']) {
             case "dashboardGraphic":
 
                 $mesesConsulta = array(
@@ -50,47 +56,48 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
                 $gananciasPorMes = [];
-                $gananciasPorMes = array_map(function ($mes) use ($pay) {
+                $gananciasPorMes = array_map(function ($mes) {
 
 
-                    $totalIngresosMes = $pay->calculateTotalIngresosMes($mes, date("Y"));
+                    $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
 
                     $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
                     return $totalGananciasMes;
                 }, $mesesConsulta);
 
-                $response = $gananciasPorMes;
+                $res = $gananciasPorMes;
 
                 break;
 
             case "itemDataDashboard":
 
-                $totalRevenuesActualYear = $pay->calculateTotalIngresosAnio();
-                $totalRevenuesActualMonth = $pay->calculateTotalIngresosMes(date("m"), date("Y"));
+                $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
+                $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
 
                 $dataRevenuesActual =  array(
                     "totalRevenuesActualYear" => $totalRevenuesActualYear,
                     "totalRevenuesActualMonth" => $totalRevenuesActualMonth
                 );
 
-                $response = $dataRevenuesActual;
+                $res = $dataRevenuesActual;
                 break;
             case "getRevenue":
 
-                $idBooking = json_decode($_GET['idBooking']);
+                $idBooking = $req['idBooking'];
 
-                $revenue =  $pay->getPago($idBooking);
+                $revenue =  $this->pay->getPago($idBooking);
 
                 if ($revenue) {
 
-                    $response = $revenue;
+                    $res = $revenue;
                 }
 
                 break;
         }
 
-        echo json_encode($response);
+        return $res;
+    }
 
-        break;
+    public function DELETE(){}
 }

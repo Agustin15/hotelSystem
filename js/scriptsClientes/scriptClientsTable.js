@@ -11,7 +11,8 @@ const getRowsClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsRows";
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+JSON.stringify({option:"clientsRows"});
+
     const response = await fetch(url);
     const result = await response.json();
 
@@ -30,7 +31,8 @@ export const getAllClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=allClients";
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+JSON.stringify({option:"allClients"});
+      
     const response = await fetch(url);
     const result = await response.json();
 
@@ -51,8 +53,9 @@ const getDataLimitClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsTable&&index=" +
-      indexRegister;
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      JSON.stringify({ option: "clientsTable", index: indexRegister });
+
     const response = await fetch(url);
     const result = await response.json();
 

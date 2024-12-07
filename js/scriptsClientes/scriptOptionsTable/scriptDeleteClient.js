@@ -31,8 +31,10 @@ export const getDataClient = async (id) => {
   let data = null;
 
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=dataClient&&idClient=" +
-    id;
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    JSON.stringify({option:"dataClient",idClient:id});;
+
+   
 
   loading(true);
   try {
@@ -70,9 +72,8 @@ const eventsDelete = (idClient) => {
 
 const fetchDelete = async (idClient) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?idClient=" +
-    idClient;
-
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    JSON.stringify({ idClient: idClient });
   let data;
   try {
     const response = await fetch(url, {
@@ -80,7 +81,7 @@ const fetchDelete = async (idClient) => {
     });
 
     const result = await response.json();
-    
+
     if (result.response == true) {
       data = result;
     }

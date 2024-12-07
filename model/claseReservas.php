@@ -119,6 +119,16 @@ class reservas
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getAllYearsBookings(){
+
+        
+        $consulta = $this->conexion->conectar()->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion");
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+
+    }
 
     public function getBookingsYearLimitAndIndex($year, $index)
     {

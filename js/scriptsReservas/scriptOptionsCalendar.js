@@ -13,10 +13,12 @@ const getBookings = async () => {
   let data = null;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php?option=allBookings"
+      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+        JSON.stringify({ option: "allBookings" })
     );
-    const result = await response.json();
 
+    const result = await response.json();
+    
     if (result) {
       data = result;
     }

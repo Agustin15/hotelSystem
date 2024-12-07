@@ -2,8 +2,7 @@ import { loadingBooking } from "../personalData.js";
 import { alertBooking } from "../alertsBooking.js";
 
 export const fetchPOSTBooking = async (booking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php";
+  let url = "http://localhost/sistema%20Hotel/routes/bookingRoutes.php";
   let data;
 
   loadingBooking(true, "Reservando");
@@ -42,8 +41,11 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
 
   let data = null;
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php?option=bookingByClientMailAndDate&&dataBooking=" +
-    JSON.stringify(dataBooking);
+    "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+    JSON.stringify({
+      option: "bookingByClientMailAndDate",
+      dataBooking: dataBooking,
+    });
 
   loadingBooking(true, "Cargando");
   try {
@@ -67,8 +69,7 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
 };
 
 export const fetchPUTBooking = async (dataBookingToUpdate) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/bookings/bookingController.php";
+  let url = "http://localhost/sistema%20Hotel/routes/bookingRoutes.php";
   let data;
 
   loadingBooking(true, "Actualizando reserva");

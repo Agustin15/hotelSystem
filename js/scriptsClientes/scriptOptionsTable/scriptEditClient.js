@@ -8,7 +8,7 @@ import {
   alertForm,
   removeAlertForm,
   phoneConfig,
-  removeAllMsjErrors
+  removeAllMsjErrors,
 } from "../scriptAddClient.js";
 
 let dataClient;
@@ -67,7 +67,7 @@ const submitEditForm = () => {
       if (exist) {
         alertForm("../../../img/advertenciaLogin.png", exist.warning, "Error");
       } else {
-        let resultPOST = fetchPOST(clientUpdated);
+        let resultPOST = fetchPUT(clientUpdated);
         if (resultPOST) {
           alertForm(
             "../../../img/tickAdmin.png",
@@ -89,8 +89,8 @@ const submitEditForm = () => {
 
 const getIfExist = async (client) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=ifExistClient&&client=" +
-    JSON.stringify(client);
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    JSON.stringify({ option: "ifExistClient", client: client });
 
   let data = null;
 
@@ -98,7 +98,6 @@ const getIfExist = async (client) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-   
 
     if (result) {
       data = result;
@@ -111,9 +110,9 @@ const getIfExist = async (client) => {
   }
 };
 
-const fetchPOST = async (client) => {
+const fetchPUT = async (client) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php";
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php";
 
   let data = null;
 
@@ -140,7 +139,7 @@ const fetchPOST = async (client) => {
 };
 
 const noData = (containEdit) => {
-  let noData =containEdit.querySelector(".noData");
+  let noData = containEdit.querySelector(".noData");
   noData.innerHTML = `
   <img src="../../../img/sinDatos.png">
   <span>Ups, no se pudo encontrar al cliente</span>

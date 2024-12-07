@@ -1,95 +1,92 @@
 <?php
 
+require("../model/claseCliente.php");
+
+class clientController
+{
+
+  private $client;
+
+  public function __construct()
+  {
+
+    $this->client = new cliente();
+  }
+
+  public function POST($req)
+  {
 
 
-require("../../../model/claseCliente.php");
-$claseCliente = new cliente();
+    $res = null;
 
-
-switch ($_SERVER['REQUEST_METHOD']) {
-
-  case "POST":
-
-    $client = json_decode(file_get_contents("php://input"), true);
-
-    $dataClientMail = $claseCliente->getClienteCorreo($client['mail'])->fetch_array(MYSQLI_ASSOC);
+    $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
 
     if ($dataClientMail) {
 
-      $peticion = array("advertencia" => "El correo ingresado ya esta en uso");
+      $res = array("advertencia" => "El correo ingresado ya esta en uso");
     } else {
 
-      $dataClientPhone = $claseCliente->getClienteTelefono($client['phone'])->fetch_array(MYSQLI_ASSOC);
+      $dataClientPhone = $this->client->getClienteTelefono($req['phone'])->fetch_array(MYSQLI_ASSOC);
       if ($dataClientPhone) {
 
-        $peticion = array("advertencia" => "El telefono ingresado ya esta en uso");
+        $res = array("advertencia" => "El telefono ingresado ya esta en uso");
       } else {
 
-        $claseCliente->setCorreo($client['mail']);
-        $claseCliente->setNombre($client['name']);
-        $claseCliente->setApellido($client['lastName']);
-        $claseCliente->setTelefono($client['phone']);
+        $this->client->setCorreo($req['mail']);
+        $this->client->setNombre($req['name']);
+        $this->client->setApellido($req['lastName']);
+        $this->client->setTelefono($req['phone']);
 
-        $resultado = $claseCliente->setClienteBd();
+        $resultado =  $this->client->setClienteBd();
 
-        $peticion = array("respuesta" => $resultado);
+        $res = array("respuesta" => $resultado);
       }
     }
 
-    $peticionJson = json_encode($peticion);
+    return $res;
+  }
 
-    echo $peticionJson;
+  public function PUT($req)
+  {
 
-    break;
-  case "PUT":
-
-
-    $client = json_decode(file_get_contents("php://input"), true);
-
-    $resultado = $claseCliente->updateCliente(
-      $client['mail'],
-      $client['name'],
-      $client['lastName'],
-      $client['phone'],
-      $client['id']
+    $res = null;
+    $resultado = $this->client->updateCliente(
+      $req['mail'],
+      $req['name'],
+      $req['lastName'],
+      $req['phone'],
+      $req['id']
     );
-    $peticion = array("respuesta" => $resultado);
 
-    $peticionJson = json_encode($peticion);
+    $res = array("respuesta" => $resultado);
 
-    echo $peticionJson;
+    return $res;
+  }
 
-    break;
+  public function DELETE($req)
+  {
+    $res = null;
+    $resultDelete = $this->client->deleteCliente($req['idClient']);
 
+    $res = array("response" => $resultDelete);
+    return $res;
+  }
 
-  case "DELETE":
+  public function GET($req)
+  {
 
-
-    $idClient = json_decode($_GET['idClient']);
-
-    $resultDelete = $claseCliente->deleteCliente($idClient);
-
-    $peticion = array("response" => $resultDelete);
-    $peticionJson = json_encode($peticion);
-
-    echo $peticionJson;
-
-    break;
-
-  case "GET":
-
-    $option = $_GET['option'];
-    $peticion = null;
+    $option = $req['option'];
+    $res = null;
 
     switch ($option) {
 
 
       case "allClients":
 
-        $allClients = $claseCliente->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+        $allClients = $this->client->getAllClientes()->fetch_all(MYSQLI_ASSOC);
 
         if ($allClients) {
-          $peticion = $allClients;
+          $res = $allClients;
         }
 
         break;
@@ -97,7 +94,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
       case "AllYearsVisitClients":
 
-        $years = $claseCliente->getAllYearsVisitClients();
+        $years = $this->client->getAllYearsVisitClients();
 
         $ac = null;
         $yearsFilter = array_filter($years, function ($year) use (&$ac) {
@@ -108,11 +105,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         });
 
 
-        $peticion = $yearsFilter;
+        $res = $yearsFilter;
         break;
       case "clientsGraphic":
 
-        $year = $_GET['year'];
+        $year = $req['year'];
         $months = array(
           "1",
           "2",
@@ -128,9 +125,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
           "12"
         );
 
-        $clientsMonths = array_map(function ($month) use ($claseCliente, $year) {
+        $classClient = $this->client;
+        $clientsMonths = array_map(function ($month) use ($classClient, $year) {
 
-          $clientsMonth = $claseCliente->getClientesAnioMes($month, $year);
+          $clientsMonth = $classClient->getClientesAnioMes($month, $year);
 
           return array("month" => $month, "quantity" => $clientsMonth);
         }, $months);
@@ -139,10 +137,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
           return  $ac += $clientMonth['quantity'];
         }, 0);
 
-        if ($totalMonthQuantity == 0) {
-          $peticion = null;
-        } else {
-          $peticion = $clientsMonths;
+        if ($totalMonthQuantity != 0) {
+          $res = $clientsMonths;
         }
 
 
@@ -150,16 +146,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
       case "clientsTable":
 
-        $index = $_GET['index'];
+        $index = $req['index'];
 
         if ($index == 0) {
-          $clients = $claseCliente->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
-
-          $peticion = $clients;
+          $res = $this->client->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
         } else {
-          $clients = $claseCliente->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
-
-          $peticion = $clients;
+          $res = $this->client->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
         }
 
 
@@ -169,72 +161,69 @@ switch ($_SERVER['REQUEST_METHOD']) {
       case "clientsRows":
 
 
-        $clientsRows = $claseCliente->getAllClientsRows();
+        $clientsRows = $this->client->getAllClientsRows();
 
-        $peticion = $clientsRows;
+        $res = $clientsRows;
 
         break;
 
       case "dataClient":
-        $idClient = $_GET['idClient'];
+        $idClient = $req['idClient'];
 
-        $peticion = $claseCliente->getClientById($idClient);
+        $res = $this->client->getClientById($idClient);
 
         break;
 
       case "getClientByMailAndName":
-        $client = json_decode($_GET['client'], true);
+        $client = $req['client'];
 
-        $peticion = $claseCliente->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+        $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
 
         break;
 
       case "ifExistClient":
-        $client = json_decode($_GET['client'], true);
+        $client = $req['client'];
 
-        $existClientMail = $claseCliente->comprobateMailInUseById($client['id'], $client['mail']);
+        $existClientMail = $this->client->comprobateMailInUseById($client['id'], $client['mail']);
 
         if ($existClientMail) {
 
-          $peticion = array("warning" => "Ups,ya existe un cliente con este correo");
+          $res = array("warning" => "Ups,ya existe un cliente con este correo");
         } else {
 
-          $existClientPhone = $claseCliente->comprobatePhoneInUseById($client['id'], $client['phone']);
+          $existClientPhone = $this->client->comprobatePhoneInUseById($client['id'], $client['phone']);
 
           if ($existClientPhone) {
-            $peticion = array("warning" => "Ups,ya existe un cliente con este telefono");
+            $res = array("warning" => "Ups,ya existe un cliente con este telefono");
           }
         }
         break;
 
       case "rowsBookingsClient":
 
-        $idClient = $_GET['client'];
-        $numRows = $claseCliente->getRowsBookingsClient($idClient);
-        $peticion = $numRows;
+        $idClient = $req['client'];
+        $numRows = $this->client->getRowsBookingsClient($idClient);
+        $res = $numRows;
         break;
 
       case "bookingsClient":
 
-        $idClient = $_GET['client'];
-        $index = $_GET['index'];
+        $idClient = $req['client'];
+        $index = $req['index'];
 
         if ($index == 0) {
 
-          $bookingClient = $claseCliente->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
-          $peticion = $bookingClient;
+          $bookingClient = $this->client->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
+          $res = $bookingClient;
         } else {
-          $bookingClient = $claseCliente->getLimitAndIndexBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
-          $peticion = $bookingClient;
+          $bookingClient = $this->client->getLimitAndIndexBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
+          $res = $bookingClient;
         }
         break;
     }
 
 
 
-    echo json_encode($peticion);
-
-
-
-    break;
+    return $res;
+  }
 }

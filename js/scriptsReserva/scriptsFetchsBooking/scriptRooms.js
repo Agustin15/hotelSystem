@@ -2,8 +2,8 @@ import { loadingBooking } from "../personalData.js";
 import { alertBooking } from "../alertsBooking.js";
 export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=roomsFreeCategory&&dataBooking=" +
-    JSON.stringify(dataBooking);
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({option:"roomsFreeCategory",dataBooking:dataBooking});
   let data;
 
   loadingBooking(true, "Buscando habitaciones");
@@ -29,7 +29,8 @@ export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
 
 export const fetchPOSTRooms = async (roomsToBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php";
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
+    
   let data;
   loadingBooking(true, "Reservando habitaciones");
   try {

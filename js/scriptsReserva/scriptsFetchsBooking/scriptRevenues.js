@@ -2,8 +2,7 @@ import { loadingBooking } from "../personalData.js";
 import { alertBooking } from "../alertsBooking.js";
 
 export const fetchPOSTPay = async (booking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php";
+  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
 
   let data;
   loadingBooking(true, "Reservando habitaciones");
@@ -34,8 +33,7 @@ export const fetchPOSTPay = async (booking) => {
 };
 
 export const fetchPUTPay = async (booking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php";
+  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
 
   let data;
   loadingBooking(true, "Reservando habitaciones");
@@ -67,8 +65,8 @@ export const fetchPUTPay = async (booking) => {
 
 export const fetchGETPay = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php?option=getRevenue&&idBooking=" +
-    JSON.stringify(idBooking);
+    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+    JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data;
   loadingBooking(true, "Reservando habitaciones");

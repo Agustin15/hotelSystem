@@ -32,8 +32,9 @@ export const configDetailsClient = async () => {
 
 const getRowsBookingClients = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=rowsBookingsClient&&client=" +
-    id;
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    JSON.stringify({ option: "rowsBookingsClient", client: id });
+
   let data = null;
 
   loading(true);
@@ -61,10 +62,8 @@ const noBookingsClient = (msj) => {
 
 const getClientBookingLimit = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=bookingsClient&&client=" +
-    id +
-    "&&index=" +
-    indexBooking;
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+
+    JSON.stringify({option:"bookingsClient",client:id,index:indexBooking});
 
   let data = null;
 
@@ -177,7 +176,7 @@ const buttonsOptions = () => {
       configGuestsDetails
     );
   });
-  
+
   btnRooms.addEventListener("click", () => {
     let idBooking = btnRooms.parentNode.id;
     drawOptionDetail(

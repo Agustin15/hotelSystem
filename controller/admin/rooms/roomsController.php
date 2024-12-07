@@ -1,17 +1,32 @@
 <?php
-require("../../../model/claseHabitaciones.php");
-$rooms = new habitaciones();
-$response = null;
+require("../model/claseHabitaciones.php");
 
-switch ($_SERVER['REQUEST_METHOD']) {
+class roomsController
+{
 
-    case "GET":
+    private $rooms;
+    public function __construct()
+    {
 
-        $roomsCategorys = $rooms->getAllCategoryRooms();
+        $this->rooms = new habitaciones();
+    }
+
+    public function POST() {}
+
+    public function PUT() {}
+
+    public function DELETE() {}
+
+    public function GET($req)
+    {
+
+        $res = null;
+
+        $roomsCategorys = $this->rooms->getAllCategoryRooms();
 
         if ($roomsCategorys) {
 
-            $roomsCategorys = array_map(function($room) {
+            $roomsCategorys = array_map(function ($room) {
 
                 return array(
                     "category" => $room['categoria'],
@@ -19,10 +34,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 );
             }, $roomsCategorys);
 
-            $response=$roomsCategorys;
+            $res = $roomsCategorys;
         }
 
-        echo json_encode($response);
-
-        break;
+        return $res;
+    }
 }

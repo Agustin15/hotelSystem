@@ -2,7 +2,8 @@ import { getMes } from "./chart.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=itemDataDashboard";
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({ option: "itemDataDashboard" });
 
   try {
     const response = await fetch($url, {
@@ -21,7 +22,8 @@ const getCategoryRoomsData = async () => {
 
 const getRevenuesActualYear = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php?option=itemDataDashboard";
+    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+    JSON.stringify({ option: "itemDataDashboard" });
 
   try {
     const response = await fetch($url, {
@@ -47,13 +49,12 @@ const displayItemDataRevenuesActual = async () => {
   let actualMonthString = getMes(actualMonth);
 
   let details;
-  if(dataRevenues){
-
-    details=` <h5>Ganancias actuales</h5>
+  if (dataRevenues) {
+    details = ` <h5>Ganancias actuales</h5>
                <span><a>${actualMonthString}:</a>US$${dataRevenues.totalRevenuesActualMonth}</span>
                  <span><a>${actualYear}</a>: US$${dataRevenues.totalRevenuesActualMonth}</span>`;
-  }else{
-    details=`
+  } else {
+    details = `
       <div class="noData">
            <img src="../../img/sinDatos.png">
            <h3>No hay datos</h3>

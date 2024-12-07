@@ -1,20 +1,34 @@
 <?php
-require("../../../model/claseServicios.php");
-$service = new servicio();
+require("../model/claseServicios.php");
 
-$response = null;
 
-switch ($_SERVER['REQUEST_METHOD']) {
+class servicesController
+{
 
-    case "GET":
+    private $service;
+    public function __construct()
+    {
 
-        $option = $_GET['option'];
+        $this->service = new servicio();
+    }
+
+    public function POST() {}
+
+    public function PUT() {}
+
+    public function DELETE() {}
+
+    public function GET($req)
+    {
+
+        $res = null;
+        $option = $req['option'];
 
         switch ($option) {
             case "getServicesBooking":
 
-                $idBooking = $_GET['idBooking'];
-                $bookingServices = $service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
+                $idBooking = $req['idBooking'];
+                $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
 
                 if (count($bookingServices) > 0) {
                     $bookingServicesDetails = array_map(function ($service) {
@@ -27,11 +41,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
                         );
                     }, $bookingServices);
 
-                    $response = $bookingServicesDetails;
+                    $res = $bookingServicesDetails;
                 }
                 break;
         }
 
-        echo json_encode($response);
-        break;
+        return $res;
+    }
 }

@@ -47,8 +47,8 @@ async function getClientsByMonthActualYear(actualYear) {
   loading(true, "bookings");
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/client/clientController.php?option=clientsGraphic&year=" +
-        actualYear,
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+        JSON.stringify({ option: "clientsGraphic", year: actualYear }),
       {
         method: "GET",
         headers: {
@@ -130,7 +130,8 @@ async function getRevenueActualYear() {
 
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/revenues/revenuesController.php?option=dashboardGraphic",
+      "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+        JSON.stringify({ option: "dashboardGraphic" }),
       {
         method: "GET",
         headers: {
@@ -222,7 +223,8 @@ async function getCategoryRoomsMostReserved() {
   loading(true, "rooms");
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=dashboardGraphic",
+      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+        JSON.stringify({ option: "dashboardGraphic" }),
       {
         method: "GET",
         headers: {

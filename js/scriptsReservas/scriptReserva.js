@@ -11,11 +11,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 export const actualOptionBooking = async (optionActual) => {
+  let optionDocument = await getDocument(optionActual);
+  drawDocument(optionDocument);
+
   if (optionActual == "addBooking.html") {
     return true;
   }
-  let optionDocument = await getDocument(optionActual);
-  drawDocument(optionDocument);
+
 };
 
 optionListLi.addEventListener("click", async () => {

@@ -4,8 +4,7 @@ import {
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
 export const POSTRooms = async (booking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php";
+  let url = "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
   let data;
   loadingForm(true);
   try {
@@ -39,11 +38,12 @@ export const POSTRooms = async (booking) => {
 export const getRoomsCategoryHotel = async () => {
   let data;
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsController.php";
+    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php";
 
   try {
     const response = await fetch(url);
     const result = await response.json();
+
 
     if (result) {
       data = result;
@@ -57,8 +57,11 @@ export const getRoomsCategoryHotel = async () => {
 
 export const getDataBookingRoomsWithCategory = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=getDataRoomsBookingAndCategory&&idBooking=" +
-    idBooking;
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({
+      option: "getDataRoomsBookingAndCategory",
+      idBooking: idBooking,
+    });
 
   let data = null;
   try {
@@ -77,9 +80,11 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
 
 export const getDataBookingRoomsGuests = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=getDataRoomsBooking&&idBooking=" +
-    idBooking;
-
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({
+      option: "getDataRoomsBooking",
+      idBooking: idBooking,
+    });
   let data = null;
   try {
     const response = await fetch(url);
@@ -97,8 +102,8 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
 
 export const getRoomsFreeCategory = async (dataBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/rooms/roomsBookingController.php?option=roomsFreeCategory&&dataBooking=" +
-    JSON.stringify(dataBooking);
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
 
   let data = null;
   try {

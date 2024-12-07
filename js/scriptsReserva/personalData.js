@@ -290,6 +290,7 @@ const createBooking = async (client) => {
 
 const addClient = async (clientBooking) => {
   let clientAdded = await fetchPOSTClient(clientBooking.client);
+ 
   if (clientAdded) {
     let clientFind = await fetchGetClient(clientBooking.client);
     if (clientFind) {

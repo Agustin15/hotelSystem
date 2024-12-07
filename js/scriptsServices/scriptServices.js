@@ -1,7 +1,7 @@
 export const getDataServices = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/controller/admin/services/servicesController.php?option=getServicesBooking&&idBooking=" +
-    idBooking;
+    "http://localhost/sistema%20Hotel/routes/servicesRoutes.php?params=" +
+    JSON.stringify({ option: "getServicesBooking", idBooking: idBooking });
 
   let data = null;
 
