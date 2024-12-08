@@ -191,31 +191,49 @@ body {
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 13rem;
     width: 99%;
-    margin-left: 1.5rem;
 
-    input {
-      padding-left: 2rem;
-      border: 1px solid rgb(173, 173, 173);
-      width: 11rem;
-      height: 2rem;
-      font-size: 16px;
-      border-radius: 3px;
-      box-shadow: 1px 1px 1px rgb(230, 230, 230);
-      background-image: url("../img/buscarInfo.png");
-      background-size: 16px;
-      background-repeat: no-repeat;
-      background-position-x: 0.5rem;
-      background-position-y: 0.5rem;
-      outline: none;
+    .containSearch {
+      flex-grow: 1;
+      width: auto;
+      padding-left: 1rem;
+
+
+      input {
+        padding-left: 2rem;
+        border: 1px solid rgb(173, 173, 173);
+        width: 11rem;
+        height: 2rem;
+        font-size: 16px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px rgb(230, 230, 230);
+        background-image: url("../img/buscarInfo.png");
+        background-size: 16px;
+        background-repeat: no-repeat;
+        background-position-x: 0.5rem;
+        background-position-y: 0.5rem;
+        outline: none;
+      }
     }
   }
+}
 
+.titleTable {
+  flex-grow: 5;
+  display: flex;
+  justify-content: start;
+  padding-left: 6rem;
+  width: auto;
   h3 {
     color: rgb(167, 167, 167);
     font-size: 22px;
   }
+}
+
+.titleNoData {
+  width: auto;
+  padding-left:0;
+  justify-content: center;
 }
 
 .scroll {

@@ -97,14 +97,16 @@ class bookingController
 
                 break;
 
-            case "bookingsYearLimit":
+            case "bookingsYearlimit":
+
 
                 $resultBookings = null;
 
-                if ($req['indexPage'] == 0) {
-                    $resultBookings = $this->booking->getBookingsYearLimit($req['year']);
+                if ($req['data']['indexPage'] == 0) {
+                    $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
+                    
                 } else {
-                    $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['year'], $req['indexPage']);
+                    $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
                 }
 
                 if ($resultBookings) {

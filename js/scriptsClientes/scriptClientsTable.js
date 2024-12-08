@@ -11,7 +11,8 @@ const getRowsClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+JSON.stringify({option:"clientsRows"});
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      JSON.stringify({ option: "clientsRows" });
 
     const response = await fetch(url);
     const result = await response.json();
@@ -22,6 +23,9 @@ const getRowsClients = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    if (!data) {
+      noData();
+    }
     return data;
   }
 };
@@ -31,8 +35,9 @@ export const getAllClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+JSON.stringify({option:"allClients"});
-      
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      JSON.stringify({ option: "allClients" });
+
     const response = await fetch(url);
     const result = await response.json();
 
@@ -42,6 +47,9 @@ export const getAllClients = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    if (!data) {
+      noData();
+    }
     return data;
   }
 };
@@ -66,21 +74,26 @@ const getDataLimitClients = async () => {
     console.log(error);
   } finally {
     loading(false);
+    if (!data) {
+      noData();
+    }
     return data;
   }
 };
 
 const loading = (state) => {
   if (state) {
-    document.querySelector(".message").innerHTML = ` 
+    document.querySelector("tfoot").innerHTML = ` 
     
+       <td rowspan="6" colspan="6">
     <div class="loading">
       <span>Cargando datos</span>
       <img src="../../../img/spinnerMain.gif">
     </div>
+    </td>
     `;
   } else {
-    document.querySelector(".message").innerHTML = ``;
+    document.querySelector("tfoot").innerHTML = ``;
   }
 };
 
@@ -141,10 +154,8 @@ const displayTable = async () => {
     pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
 
     controls(next, prev);
-    search(table);
+    search();
     optionsClient();
-  } else {
-    noData(table);
   }
 };
 
@@ -166,54 +177,57 @@ const controls = (next, prev) => {
   });
 };
 
-const search = () => {
-  let inputSearch = document.querySelector(".inputSearch");
-  let rows = $("tbody").find("tr");
+export const search = () => {
+  let inputSerch = document.querySelector(".inputSearch");
+  let tfoot = document.querySelector("tfoot");
 
-  inputSearch.addEventListener("keydown", function () {
-    let value = this.value.trim();
+  let rows = document.querySelector("tbody").querySelectorAll("tr");
+  inputSerch.addEventListener("keydown", () => {
+    let value = inputSerch.value.trim();
 
-    rows.each(function () {
-      let rowText = $(this).text();
-
-      if (rowText.indexOf(value) == -1) {
-        $(this).hide();
+    rows.forEach((row) => {
+      if (row.innerText.indexOf(value) == -1) {
+        row.style.display = "none";
       } else {
-        $(this).show();
+        row.style.display = "table-row";
       }
     });
 
-    let rowsHide = rows.filter(":hidden");
-    if (rows.length == rowsHide.length) {
-      document.querySelector(".message").innerHTML = `
+    let totalRowsHide = [...rows].reduce((ac, row) => {
+      row.style.display == "none" ? ac++ : ac;
+      return ac;
+    }, 0);
 
-      <td rowspan="6" colspan="6">
-      <div class="noResults">
+    if (rows.length == totalRowsHide) {
+      tfoot.innerHTML = `
+   <td rowspan="6" colspan="6">
+  <div class="noResults">
       <img src="../../../img/noFind.png">
-      <span>Sin resultados</span>
-      </td>
+      <span>Sin Resultados</span>
   </div>
-
-   `;
+  </td>
+  
+  `;
     } else {
-      document.querySelector(".message").innerHTML = ``;
+      tfoot.innerHTML = ``;
     }
   });
 };
 
 const noData = () => {
-  document.querySelector(".message").innerHTML += `
+  document.querySelector("tfoot").innerHTML = `
       <td rowspan="6" colspan="6">
   <div class="noDataClients">
 
       <img src="../../../img/sinDatos.png">
-      <span>Sin clientes aún</span>
+      <span>No se encontraron clientes</span>
   </div>
   </td>
   `;
 
-  let containControls = document.querySelector(".controls");
-  containControls.style.display = "none";
+  document.querySelector(".controls").style.display = "none";
+  document.querySelector(".containSearch").style.display = "none";
+  document.querySelector(".titleTable").classList.add("titleNoData");
 };
 
 const getOptionClient = async (url) => {
