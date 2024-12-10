@@ -122,8 +122,8 @@ const formAddSubmit = () => {
     if (error) {
       inputAlert(error);
     } else {
-      let bookingFind = await getBookingByClientAndDate(booking);
-      if (bookingFind) {
+      let bookingExisted = await getBookingByClientAndDate(booking);
+      if (bookingExisted) {
         alertForm(
           "../../../img/advertenciaLogin.png",
           "Ups, este cliente ya tiene una reserva en esta fecha",
@@ -134,6 +134,7 @@ const formAddSubmit = () => {
         let resultBooking = await POSTBooking(booking);
         resultBookingAdd = resultBooking;
         if (resultBooking) {
+          let bookingFind = await getBookingByClientAndDate(booking);
           booking.rooms = roomsCart;
           booking.idBooking = bookingFind.idReserva;
           let resultRoomsBooking = await POSTRooms(booking);

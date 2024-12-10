@@ -81,7 +81,7 @@ const getDataLimitClients = async () => {
   }
 };
 
-const loading = (state) => {
+export const loading = (state) => {
   if (state) {
     document.querySelector("tfoot").innerHTML = ` 
     

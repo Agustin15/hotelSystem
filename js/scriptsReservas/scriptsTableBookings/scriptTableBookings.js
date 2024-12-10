@@ -1,4 +1,6 @@
-import { search } from "../../scriptsClientes/scriptClientsTable.js";
+import { search, loading } from "../../scriptsClientes/scriptClientsTable.js";
+import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
+import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 
 let pages;
 let limitByPage = 1;
@@ -14,7 +16,7 @@ export const displayTable = async () => {
   }
 };
 
-const drawTable = async () => {
+export const drawTable = async () => {
   let quantityRows = await getQuantityBookingsActualYear();
 
   if (quantityRows) {
@@ -33,7 +35,7 @@ const drawRowsTable = (bookingsYearlimit) => {
   let rowsTableBooking = bookingsYearlimit.map((booking, index) => {
     let classTr = "";
     let classBtnDisabled = "";
-    if (new Date(booking.fechaSalida)<new Date()) {
+    if (new Date(booking.fechaSalida) < new Date()) {
       classBtnDisabled = "btnDisabled";
     }
 
@@ -59,9 +61,10 @@ const drawRowsTable = (bookingsYearlimit) => {
 
            <div class="buttons" id=${booking.idReserva}>
 
-            <button class="btnDelete ${classBtnDisabled}"><img src="../../../img/borrar.png"></button>
+            <button data-option="delete" class="btnDelete ${classBtnDisabled}"><img src="../../../img/borrar.png"></button>
                 <button class="btnEdit ${classBtnDisabled}"><img src="../../../img/editar.png"></button>
-                    <button class="btnDetails"><img src="../../../img/detalles.png"></button>
+                    <button data-option="details"
+                     class="btnDetails"><img src="../../../img/detalles.png"></button>
             
            </div>
            </td>
@@ -72,10 +75,12 @@ const drawRowsTable = (bookingsYearlimit) => {
   tbody.innerHTML = rowsTableBooking.join("");
 
   search();
+  optionBooking(tbody);
 };
 
 const getQuantityBookingsActualYear = async () => {
   let data = null;
+  loading(true);
   try {
     let url =
       "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
@@ -96,6 +101,7 @@ const getQuantityBookingsActualYear = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    loading(false);
     if (!data) {
       noData("No se encontraron reservas en este año");
     }
@@ -145,6 +151,7 @@ const drawIndex = () => {
 
 const getBookingsYearLimit = async () => {
   let data = null;
+  loading(true);
   try {
     let url =
       "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
@@ -162,6 +169,7 @@ const getBookingsYearLimit = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    loading(false);
     if (!data) {
       noData("No se encontraron reservas en este año");
     }
@@ -175,6 +183,7 @@ const displaySelectYear = async () => {
     JSON.stringify({ option: "allYearsBooking" });
 
   let data = null;
+  loading(true);
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -185,6 +194,7 @@ const displaySelectYear = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    loading(false);
     if (!data) {
       noData("No se encontraron reservas en este año");
     }
@@ -208,4 +218,54 @@ const drawYearsSelect = (years) => {
     yearSelected = selectYears.value;
     drawTable();
   });
+};
+
+const optionsUrls = {
+  delete: "optionsTableBooking/delete.php?idBooking=",
+  details: "optionsTableBooking/details.php?idBooking=",
+};
+
+const optionBooking = (tbody) => {
+  let buttons = tbody.querySelectorAll("button");
+  let url, idBooking, option;
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      idBooking = button.parentElement.id;
+      option = button.dataset.option;
+      url = optionsUrls[option] + idBooking;
+      await displayOptionModal(url, option);
+    });
+  });
+};
+
+const displayOptionModal = async (url, option) => {
+  let modalMainBookings = document.querySelector(".modalMainBookings");
+  if (url) {
+    modalOption(true, modalMainBookings);
+    const response = await fetch(url);
+    const page = await response.text();
+
+    if (page) {
+      modalMainBookings.innerHTML = page;
+    }
+
+    switch (option) {
+      case "delete":
+        configDelete();
+        break;
+      case "details":
+        configDetails();
+        break;
+    }
+  }
+};
+
+export const modalOption = (state, modal) => {
+  if (state) {
+    modal.style.display = "flex";
+  } else {
+    modal.style.display = "none";
+    modal.innerHTML = ``;
+  }
 };

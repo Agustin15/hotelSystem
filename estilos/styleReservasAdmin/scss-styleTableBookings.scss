@@ -31,14 +31,14 @@
         font-size: 22px;
       }
     }
-    
+
     .titleTableNoData {
       display: flex;
       justify-content: center;
       padding-left: 0;
       margin-right: 1rem;
     }
-    
+
     .containSearch {
       display: flex;
       width: auto;
@@ -88,9 +88,7 @@
       outline: none;
     }
   }
-
 }
-
 
 .scroll {
   height: auto;
@@ -202,9 +200,8 @@
     .btnDisabled {
       img {
         filter: grayscale(33);
-        opacity:71%;
+        opacity: 71%;
       }
-  
     }
 
     .tdOptions {
@@ -257,5 +254,292 @@
   }
 }
 
+.containDelete {
+  gap: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 20rem;
+  margin-left: 5rem;
+  margin-top: -5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  text-align: center;
+
+  .loading {
+    display: none;
+    align-items: center;
+    opacity: 50%;
+    font-size: 17px;
+    gap: 1rem;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  img {
+    width: 50px;
+  }
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.7rem;
+  }
+
+  button {
+    padding: 0.4rem;
+    width: 8rem;
+    background-color: rgb(221, 1, 1);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+  }
+  button:hover {
+    background-color: rgb(189, 3, 3);
+    cursor: pointer;
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .error {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 15px;
+    color: rgb(155, 155, 155);
+
+    img {
+      width: 30px;
+    }
+  }
+}
+
+.containDetailsBooking {
+  width: 60rem;
+  height: 32rem;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-left: 6rem;
+  padding-bottom: 1rem;
+  align-items: center;
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 19px;
+    color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(146, 146, 146);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    background: linear-gradient(#055b5e, #04b8c2);
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -0.5rem;
+      gap: 1rem;
+      img {
+        width: 65px;
+      }
+    }
+
+    .closeDetails {
+      width: 100%;
+      display: flex;
+      align-items: start;
+      justify-content: flex-end;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top-right-radius: 3px;
+        color: #055b5e;
+        border: none;
+        background-color: white;
+        height: 1.6rem;
+        width: 1.6rem;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      button:hover {
+        background-color: rgb(231, 231, 231);
+      }
+    }
+  }
+
+  .bookingDetailsItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    height: auto;
+    margin-top: 3rem;
+
+    .headerItem {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(#055b5e, #04b8c2);
+      width: 15rem;
+      color: white;
+      padding: 0.5rem;
+      padding-top: 0.1rem;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      box-shadow: 2px 2px 2px gray;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+      p {
+        padding: 0.5rem;
+        width: 10rem;
+        font-size: 15px;
+      }
+    }
+
+    .footer {
+      background-color: white;
+      height: 2rem;
+      box-shadow: 2px 2px 2px gray;
+      color: gray;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 1rem;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+
+      img {
+        width: 20px;
+        height: 20px;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
 
 
+.containClientDetails {
+  width: 25rem;
+  height: 40rem;
+  border-radius: 3px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-left: 5rem;
+
+  .header {
+    background: linear-gradient(#055b5e, #04b8c2);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    padding-top: 0;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    img {
+      width: 40px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: -1rem;
+    }
+    .close {
+      width: 104%;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        border: none;
+        background-color: white;
+        color: rgb(0, 112, 107);
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        width: 1.2rem;
+        height: 1.2rem;
+        font-size: 17px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: rgb(231, 231, 231);
+      }
+    }
+  }
+
+  .body {
+    height: auto;
+    max-height: 27rem;
+    width: 104%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    .loading {
+      display: none;
+      align-items: center;
+      font-size: 19px;
+      gap: 1rem;
+      opacity: 60%;
+
+      img {
+        width: 50px;
+      }
+    }
+    .noData {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: 60%;
+      font-weight: bold;
+      color: rgb(170, 170, 170);
+
+      img {
+        width: 80px;
+      }
+    }
+  }
+}

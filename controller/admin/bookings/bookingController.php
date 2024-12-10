@@ -104,7 +104,6 @@ class bookingController
 
                 if ($req['data']['indexPage'] == 0) {
                     $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
-                    
                 } else {
                     $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
                 }
@@ -128,5 +127,15 @@ class bookingController
         return $res;
     }
 
-    public function DELETE($req) {}
+    public function DELETE($req)
+    {
+
+        $res = null;
+
+        $idBooking = $req['idBooking'];
+
+        $res = $this->booking->deleteReserva($idBooking);
+
+        return $res;
+    }
 }

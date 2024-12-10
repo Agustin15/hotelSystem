@@ -71,6 +71,7 @@ const getClientBookingLimit = async (id) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
+
     if (result) {
       data = result;
     }
@@ -128,13 +129,13 @@ const displayBookingClient = async (idClient) => {
     `;
 
     buttonsOptions();
-    controlsIndexBooking();
+    controlsIndexBooking(idClient);
   } else {
     noBookingsClient("Ups, no se pudo cargar la reserva");
   }
 };
 
-const controlsIndexBooking = () => {
+const controlsIndexBooking = (idClient) => {
   let containIndexBookings = document.querySelector(".indexBookings");
 
   containIndexBookings.innerHTML = ` 
@@ -151,7 +152,7 @@ const controlsIndexBooking = () => {
       indexPage--;
       indexBooking--;
 
-      displayBookingClient();
+      displayBookingClient(idClient);
     }
   });
 
@@ -159,7 +160,7 @@ const controlsIndexBooking = () => {
     if (indexPage < pages) {
       indexBooking++;
       indexPage++;
-      displayBookingClient();
+      displayBookingClient(idClient);
     }
   });
 };

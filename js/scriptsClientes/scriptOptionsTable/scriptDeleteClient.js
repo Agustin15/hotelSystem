@@ -9,7 +9,7 @@ const configDeleteClient = async () => {
 
   if (dataClient) {
     containDelete.querySelector(".body").innerHTML += `
-    <h3>¿Desea borrar al cliente ${dataClient.nombre} ${dataClient.apellido}?</h3>
+    <h3>¿Desea eliminar al cliente ${dataClient.nombre} ${dataClient.apellido}?</h3>
 
     <div class="buttons">
         <button class="btnAccept">Aceptar</button>
