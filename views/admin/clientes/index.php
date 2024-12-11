@@ -22,9 +22,12 @@ if (empty($usuario)) {
 
     $genero = $datoAdminUser['genero'];
     $_SESSION['genero'] = $genero;
+    $actualYear = date("Y");
 }
 
-$actualYear = date("Y");
+
+
+
 ?>
 
 <!DOCTYPE html>

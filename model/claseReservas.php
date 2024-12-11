@@ -107,6 +107,17 @@ class reservas
     }
 
 
+    public function getDataClientByIdBooking($idBooking)
+    {
+
+        $query = $this->conexion->conectar()->prepare("select idCliente,nombre,apellido,correo,telefono from
+         reserva_habitacion INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente 
+         where idReserva=?");
+        $query->bind_param("i", $idBooking);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
 
     public function getBookingsYearLimit($year)
     {
@@ -120,15 +131,15 @@ class reservas
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllYearsBookings(){
+    public function getAllYearsBookings()
+    {
 
-        
+
         $consulta = $this->conexion->conectar()->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion");
         $consulta->execute();
 
         $resultado = $consulta->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
-
     }
 
     public function getBookingsYearLimitAndIndex($year, $index)

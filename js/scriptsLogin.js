@@ -93,7 +93,6 @@ async function comprobateUser(user) {
       );
 
       const result = await response.json();
-
       if (result.advertencia) {
         throw result.advertencia;
       } else if (result.respuesta) {

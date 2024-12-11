@@ -14,7 +14,7 @@
         <button class="btnCloseWindow">x</button>
     </div>
     <div class="title">
-        <img src="../../../img/clientDetails.png">
+        <img src="../../../img/client.png">
         <span>Cliente</span>
     </div>
 </div>

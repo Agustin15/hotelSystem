@@ -291,6 +291,21 @@
   width: 30px;
 }
 
+.modalOptionsBookingDetails {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  background: rgba(44, 44, 44, 0.6);
+}
+
 .containDetailsBooking {
   width: 60rem;
   height: 32rem;
@@ -402,12 +417,12 @@
 
 .containClientDetails {
   width: 25rem;
-  height: 40rem;
+  height: 43rem;
   border-radius: 3px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 14rem;
   margin-left: 5rem;
 }
 .containClientDetails .header {
@@ -421,7 +436,7 @@
   gap: 1rem;
   font-weight: bold;
   font-size: 18px;
-  width: 100%;
+  width: 105%;
   border-radius: 3px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -457,6 +472,129 @@
 }
 .containClientDetails .body {
   height: auto;
+  max-height: 31rem;
+  width: 109%;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.containClientDetails .body .dataClient {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-top: 1rem;
+  gap: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: gray;
+  font-size: 20px;
+}
+.containClientDetails .body .dataClient li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.containClientDetails .body .dataClient li h4 {
+  color: black;
+}
+.containClientDetails .body .dataClient li a {
+  text-decoration: none;
+  color: gray;
+  cursor: pointer;
+}
+.containClientDetails .body .dataClient li a:hover {
+  text-decoration: underline;
+}
+.containClientDetails .body .dataClient li img {
+  width: 25px;
+}
+.containClientDetails .body .loadingDetails {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  gap: 1rem;
+  opacity: 60%;
+}
+.containClientDetails .body .loadingDetails img {
+  width: 50px;
+}
+.containClientDetails .body .noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 60%;
+  margin-top: 2rem;
+  font-weight: bold;
+  color: rgb(170, 170, 170);
+}
+.containClientDetails .body .noData img {
+  width: 80px;
+}
+
+.containGuestDetails {
+  width: 25rem;
+  height: 40rem;
+  border-radius: 3px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-left: 5rem;
+}
+.containGuestDetails .header {
+  background: linear-gradient(#055b5e, #04b8c2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  padding-top: 0;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.containGuestDetails .header img {
+  width: 40px;
+}
+.containGuestDetails .header .title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -1rem;
+}
+.containGuestDetails .header .close {
+  width: 104%;
+  display: flex;
+  justify-content: flex-end;
+}
+.containGuestDetails .header .close button {
+  border: none;
+  background-color: white;
+  color: rgb(0, 112, 107);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 17px;
+  cursor: pointer;
+}
+.containGuestDetails .header .close button:hover {
+  background-color: rgb(231, 231, 231);
+}
+.containGuestDetails .body {
+  height: auto;
   max-height: 27rem;
   width: 104%;
   background-color: white;
@@ -469,17 +607,17 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.containClientDetails .body .loading {
+.containGuestDetails .body .loadingDetails {
   display: none;
   align-items: center;
   font-size: 19px;
   gap: 1rem;
   opacity: 60%;
 }
-.containClientDetails .body .loading img {
+.containGuestDetails .body .loadingDetails img {
   width: 50px;
 }
-.containClientDetails .body .noData {
+.containGuestDetails .body .noData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -488,8 +626,98 @@
   font-weight: bold;
   color: rgb(170, 170, 170);
 }
-.containClientDetails .body .noData img {
+.containGuestDetails .body .noData img {
   width: 80px;
+}
+.containGuestDetails .body .totalGuests {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  font-size: 17px;
+  color: rgb(109, 109, 109);
+  opacity: 50%;
+}
+.containGuestDetails .body .totalGuests img {
+  width: 30px;
+  opacity: 70%;
+}
+.containGuestDetails .body .totalGuests .adults,
+.containGuestDetails .body .totalGuests .childs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.roomsGuests {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  max-height: 20rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 1rem;
+}
+.roomsGuests li {
+  padding: 0.5rem;
+  width: 70%;
+  background: white;
+  border-radius: 5px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  color: white;
+  background: #0ba8ad;
+}
+.roomsGuests li .roomNumb {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+.roomsGuests li .content {
+  display: flex;
+  align-items: center;
+}
+.roomsGuests li .content .icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 90%;
+  padding: 1rem;
+  background-color: #027f83;
+  border-radius: 5px;
+}
+.roomsGuests li .content .icon img {
+  width: 45px;
+}
+.roomsGuests li img {
+  width: 30px;
+}
+.roomsGuests li .guests {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #027f83;
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+.roomsGuests li .guests .adults,
+.roomsGuests li .guests .childs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.roomsGuests li .guests .adults .value,
+.roomsGuests li .guests .childs .value {
+  display: flex;
+  align-items: center;
 }
 
 /*# sourceMappingURL=styleTableBookings.css.map */

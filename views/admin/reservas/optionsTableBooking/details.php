@@ -13,7 +13,7 @@ $idBooking = $_GET['idBooking'];
 
 <body>
 
-    <div class="modalOptionsBookingDetails"> </div>
+    <div class="modalOptionsBookingDetails"></div>
 
     <div class="containDetailsBooking" id="<?php echo $idBooking ?>">
 

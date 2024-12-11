@@ -1,6 +1,7 @@
 import configDeleteClient from "./scriptOptionsTable/scriptDeleteClient.js";
 import { configEditClient } from "./scriptOptionsTable/scriptEditClient.js";
 import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js";
+import { drawRowsTable } from "./drawRowsTable.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -17,6 +18,28 @@ const getRowsClients = async () => {
     const response = await fetch(url);
     const result = await response.json();
 
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    if (!data) {
+      noData();
+    }
+    return data;
+  }
+};
+
+const getClientById = async (idClient) => {
+  let data = null;
+  try {
+    let url =
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      JSON.stringify({ option: "dataClient", idClient: idClient });
+
+    const response = await fetch(url);
+    const result = await response.json();
     if (result) {
       data = result;
     }
@@ -101,62 +124,33 @@ const displayTable = async () => {
   let table = document.querySelector(".tableClients");
   let next = document.querySelector(".next");
   let prev = document.querySelector(".prev");
-  let pagesText = document.querySelector(".pageIndex");
-  let clientsRows = await getRowsClients();
-  let clients = await getDataLimitClients();
+  const urlParams = new URLSearchParams(window.location.search);
 
-  if (clients) {
-    if (clientsRows <= 10) {
-      limitPage = 1;
-    } else {
-      limitPage = clientsRows / 10;
-    }
+  if (!urlParams.get("idClient")) {
+    let pagesText = document.querySelector(".pageIndex");
+    let clientsRows = await getRowsClients();
+    let clients = await getDataLimitClients();
 
-    let dataClients = clients.map((client, index) => {
-      let classRow;
-      if (index % 2 == 0) {
-        classRow = "trGray";
+    if (clients) {
+      if (clientsRows <= 10) {
+        limitPage = 1;
+      } else {
+        limitPage = clientsRows / 10;
       }
-
-      table.classList.remove("tableClientsNoData");
-
-      return `
-      
-      <tr class=${classRow}>
-       <td class="tdId">
-       <div class="idClient">
-       ${client.idCliente}
-              <img src="../../../img/usuarioTable.png">
-       </div>
-       </td>
-        <td>${client.nombre}</td>
-         <td>${client.apellido}</td>
-          <td>${client.telefono}</td>
-           <td>${client.correo}</td>
-           <td class="tdOptions">
-
-           <div class="buttons" id=${client.idCliente}>
-
-            <button class="btnDelete"><img src="../../../img/borrar.png"></button>
-                <button class="btnEdit"><img src="../../../img/editar.png"></button>
-                    <button class="btnDetails"><img src="../../../img/detalles.png"></button>
-            
-           </div>
-           </td>
-      </tr>
-     
-  
-      `;
-    });
-
-    table.querySelector("tbody").innerHTML = dataClients.join("");
-
-    pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
-
-    controls(next, prev);
-    search();
-    optionsClient();
+      pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
+      drawRowsTable(clients, table);
+      controls(next, prev);
+    }
+  } else {
+    prev.style.display = "none";
+    next.style.display = "none";
+    let clientFind = await getClientById(urlParams.get("idClient"));
+    let clientsFind = [clientFind];
+    drawRowsTable(clientsFind, table);
   }
+
+  search();
+  optionsClient();
 };
 
 const controls = (next, prev) => {

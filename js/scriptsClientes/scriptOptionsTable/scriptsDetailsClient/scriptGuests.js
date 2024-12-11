@@ -13,7 +13,7 @@ export const configGuestsDetails = async () => {
   closeWindow();
 
   if (dataBooking) {
-    let guestsTotal = totalGuests();
+    let guestsTotal = totalGuests(dataBooking);
     body.innerHTML += ` 
        
     <div class="totalGuests">
@@ -31,7 +31,7 @@ export const configGuestsDetails = async () => {
 
     <ul class="roomsGuests">
     
-    ${roomsGuests()}
+    ${roomsGuests(dataBooking)}
     </ul>
     
     `;
@@ -57,7 +57,7 @@ export const getBookingRoomsGuests = async (idBooking) => {
   }
 };
 
-const totalGuests = () => {
+export const totalGuests = (dataBooking) => {
   let adults = 0;
   let childs = 0;
   dataBooking.map((data) => {
@@ -68,8 +68,8 @@ const totalGuests = () => {
   return { adults: adults, childs: childs };
 };
 
-const roomsGuests = () => {
-  return dataBooking.map((data) => {
+export const roomsGuests = (dataBooking) => {
+  let dataRoomsGuests= dataBooking.map((data) => {
     return `
             
 <li>
@@ -108,6 +108,8 @@ const roomsGuests = () => {
         </li>
         `;
   });
+
+  return dataRoomsGuests.join("");
 };
 
 export const closeWindow = () => {

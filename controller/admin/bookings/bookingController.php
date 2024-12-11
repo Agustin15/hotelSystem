@@ -120,6 +120,13 @@ class bookingController
                 $res = $this->booking->getAllYearsBookings();
 
                 break;
+
+            case "getClientByIdBooking":
+
+                $idBooking = $req['idBooking'];
+                $res = $this->booking->getDataClientByIdBooking($idBooking);
+
+                break;
         }
 
 
