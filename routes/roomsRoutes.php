@@ -7,7 +7,7 @@ $roomsController = new roomsController();
 $method = $_SERVER['REQUEST_METHOD'];
 
 $response = null;
-$req=null;
+$req = null;
 
 if (isset($_GET['params'])) {
     $req = json_decode($_GET['params'], true);
@@ -34,6 +34,9 @@ $routes = [
 if (array_key_exists($method, $routes)) {
 
     $response = $routes[$method]();
+    if (isset($response["error"])) {
 
+        header("Content-Type: application/json", true, $response["status"]);
+    }
     echo json_encode($response);
 }

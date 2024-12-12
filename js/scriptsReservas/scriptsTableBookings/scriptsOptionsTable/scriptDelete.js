@@ -37,15 +37,18 @@ const deleteBooking = async (idBooking) => {
     );
 
     const bookingDeleted = await response.json();
-    if (bookingDeleted) {
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (bookingDeleted) {
       data = bookingDeleted;
-    } else {
-      throw "Ups, no se pudo eliminar la reserva";
     }
   } catch (error) {
     console.log(error);
-    errorDelete();
   } finally {
+    if (!data) {
+      errorDelete();
+    }
     return data;
   }
 };
@@ -54,6 +57,6 @@ const errorDelete = () => {
   document.querySelector(".error").innerHTML = `
 <div class="error">
  <img src="../../../img/advertenciaDelete.png">
-<span>Ups, no se pudo eliminar el cliente</span>
+<span>Ups, no se pudo eliminar la reserva</span>
 </div>`;
 };

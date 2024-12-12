@@ -14,135 +14,150 @@ class bookingController
     public function POST($req)
     {
 
-        $res = null;
-
-        $this->booking->setIdCliente($req['client']);
-        $this->booking->setLlegada($req['startBooking']);
-        $this->booking->setSalida($req['endBooking']);
-        $this->booking->setCantidadHabitaciones($req['roomsQuantity']);
-
-        $res =  $this->booking->addReservaBd();
-        return $res;
+        try {
+            $this->booking->setIdCliente($req['client']);
+            $this->booking->setLlegada($req['startBooking']);
+            $this->booking->setSalida($req['endBooking']);
+            $this->booking->setCantidadHabitaciones($req['roomsQuantity']);
+            $res =  $this->booking->addReservaBd();
+            return $res;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
     }
 
     public function PUT($req)
     {
 
-        $res = null;
-        $this->booking->setIdReserva($req['idBooking']);
-        $this->booking->setIdCliente($req['idClient']);
-        $this->booking->setLlegada($req['startBooking']);
-        $this->booking->setSalida($req['endBooking']);
-        $this->booking->setCantidadHabitaciones($req['quantityRooms']);
+        try {
 
-        $resultBookingUpdate = $this->booking->updateReserva();
+            $this->booking->setIdReserva($req['idBooking']);
+            $this->booking->setIdCliente($req['idClient']);
+            $this->booking->setLlegada($req['startBooking']);
+            $this->booking->setSalida($req['endBooking']);
+            $this->booking->setCantidadHabitaciones($req['quantityRooms']);
 
-        $res = $resultBookingUpdate;
+            $resultBookingUpdate = $this->booking->updateReserva();
 
-
-        return $res;
+            return $resultBookingUpdate;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
     }
 
     public function GET($req)
     {
 
-        $res = null;
         $option = $req['option'];
         switch ($option) {
 
             case "allBookings":
-                $bookings = $this->booking->getAllReservas()->fetch_all(MYSQLI_ASSOC);
+                try {
+                    $bookings = $this->booking->getAllReservas()->fetch_all(MYSQLI_ASSOC);
 
-                if ($bookings) {
-                    $res = $bookings;
+                    return $bookings;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
             case "bookingByClientAndDate":
 
+                try {
+                    $bookingFind =  $this->booking->getReservaPorIdClienteAndFecha(
+                        $req['dataBooking']['idClient'],
+                        $req['dataBooking']['startBooking'],
+                        $req['dataBooking']['endBooking']
+                    );
 
-                $bookingFind =  $this->booking->getReservaPorIdClienteAndFecha(
-                    $req['dataBooking']['idClient'],
-                    $req['dataBooking']['startBooking'],
-                    $req['dataBooking']['endBooking']
-                );
-
-                if ($bookingFind) {
-                    $res = $bookingFind;
+                    return $bookingFind;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
 
             case "bookingByClientMailAndDate":
 
-                $bookingFind =  $this->booking->getBookingByClientMailAndDate(
-                    $req['dataBooking']['mail'],
-                    $req['dataBooking']['startBooking'],
-                    $req['dataBooking']['endBooking']
-                );
+                try {
+                    $bookingFind =  $this->booking->getBookingByClientMailAndDate(
+                        $req['dataBooking']['mail'],
+                        $req['dataBooking']['startBooking'],
+                        $req['dataBooking']['endBooking']
+                    );
 
-                if ($bookingFind) {
-                    $res = $bookingFind;
+
+                    return $bookingFind;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
 
             case "bookingsRowsYear":
-                $year = $req['year'];
-                $rowsBookingYear = $this->booking->getAllReservasAnio($year)->num_rows;
 
-                if ($rowsBookingYear) {
-                    $res = $rowsBookingYear;
+                try {
+                    $year = $req['year'];
+                    $rowsBookingYear = $this->booking->getAllReservasAnio($year)->num_rows;
+
+
+                    return $rowsBookingYear;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
 
             case "bookingsYearlimit":
 
+                try {
+                    $resultBookings = null;
+                    if ($req['data']['indexPage'] == 0) {
+                        $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
+                    } else {
+                        $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
+                    }
 
-                $resultBookings = null;
-
-                if ($req['data']['indexPage'] == 0) {
-                    $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
-                } else {
-                    $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
-                }
-
-                if ($resultBookings) {
-
-                    $res = $resultBookings;
+                    return $resultBookings;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
 
             case "allYearsBooking":
 
-                $res = $this->booking->getAllYearsBookings();
-
+                try {
+                    $res = $this->booking->getAllYearsBookings();
+                    return $res;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
+                }
                 break;
 
             case "getClientByIdBooking":
 
-                $idBooking = $req['idBooking'];
-                $res = $this->booking->getDataClientByIdBooking($idBooking);
-
+                try {
+                    $idBooking = $req['idBooking'];
+                    $res = $this->booking->getDataClientByIdBooking($idBooking);
+                    return $res;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
+                }
                 break;
         }
-
-
-
-        return $res;
     }
 
     public function DELETE($req)
     {
 
-        $res = null;
+        try {
+            $idBooking = $req['idBooking'];
 
-        $idBooking = $req['idBooking'];
-
-        $res = $this->booking->deleteReserva($idBooking);
-
-        return $res;
+            $res = $this->booking->deleteReserva($idBooking);
+            return $res;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
     }
 }

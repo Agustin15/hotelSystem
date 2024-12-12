@@ -29,29 +29,32 @@ const paramToFindClient = (url) => {
 
 const getDataClientByIdBooking = async () => {
   let data = null;
-  loading(true,body);
+  loading(true, body);
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
         JSON.stringify({ option: "getClientByIdBooking", idBooking: idBooking })
     );
+
     const clientData = await response.json();
 
-    if (clientData) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (clientData) {
       data = clientData;
     }
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false,body);
+    loading(false, body);
     if (!data) {
-      noData("Ups, no se pudo encontrar al cliente",body);
+      noData("Ups, no se pudo encontrar al cliente", body);
     }
     return data;
   }
 };
 
-export const noData = (msj,body) => {
+export const noData = (msj, body) => {
   body.innerHTML = `
   
   <div class="noData">
@@ -62,7 +65,7 @@ export const noData = (msj,body) => {
   `;
 };
 
-export const loading = (state,body) => {
+export const loading = (state, body) => {
   if (state) {
     body.innerHTML = `
   

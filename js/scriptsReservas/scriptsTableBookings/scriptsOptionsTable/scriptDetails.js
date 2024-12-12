@@ -1,11 +1,48 @@
 import { modalOption } from "../scriptTableBookings.js";
 import { configClient } from "./scriptsDetailsOptions/scriptClient.js";
 import { configGuests } from "./scriptsDetailsOptions/scriptGuests.js";
+import { configRooms } from "./scriptsDetailsOptions/scriptRooms.js";
+import { configServices } from "./scriptsDetailsOptions/scriptServices.js";
+import { configBill } from "./scriptsDetailsOptions/scriptBill.js";
 
-const itemsUrl = {
-  client: "optionsTableBooking/optionsDetails/client.php?idBooking=",
-  guests: "optionsTableBooking/optionsDetails/guests.php?idBooking=",
-};
+const itemsUrl = [
+  {
+    option: "client",
+    url: "optionsTableBooking/optionsDetails/client.php?idBooking=",
+    method: () => {
+      configClient();
+    },
+  },
+  {
+    option: "guests",
+    url: "optionsTableBooking/optionsDetails/guests.php?idBooking=",
+    method: () => {
+      configGuests();
+    },
+  },
+  {
+    option: "rooms",
+    url: "optionsTableBooking/optionsDetails/rooms.php?idBooking=",
+    method: () => {
+      configRooms();
+    },
+  },
+  {
+    option: "services",
+    url: "optionsTableBooking/optionsDetails/services.php?idBooking=",
+    method: () => {
+      configServices();
+    },
+  },
+  {
+    option: "bill",
+    url: "optionsTableBooking/optionsDetails/redirectToBill.php?idBooking=",
+    method: () => {
+      configBill();
+    },
+  }
+  
+];
 
 export const configDetails = () => {
   let btnCloseDetails = document.querySelector(".btnCloseDetails");
@@ -20,28 +57,20 @@ export const configDetails = () => {
     itemView.addEventListener("click", () => {
       let idBooking = itemView.parentElement.dataset.id;
       let item = itemView.parentElement.dataset.item;
-      url = itemsUrl[item] + idBooking;
-      
-      drawItemData(url, item);
+      let itemUrlFind = itemsUrl.find((itemUrl) => itemUrl.option == item);
+      drawItemData(itemUrlFind, idBooking);
     });
   });
 };
 
-const drawItemData = async (url, item) => {
-  const response = await fetch(url);
+const drawItemData = async (itemUrlFind, idBooking) => {
+  const response = await fetch(itemUrlFind.url + idBooking);
   const pageData = await response.text();
 
   if (pageData) {
     modalOption(true, document.querySelector(".modalOptionsBookingDetails"));
     document.querySelector(".modalOptionsBookingDetails").innerHTML = pageData;
-  
-    switch (item) {
-      case "client":
-        await configClient();
-        break;
-        case "guests":
-          await configGuests();
-          break;
-    }
+
+    itemUrlFind.method();
   }
 };

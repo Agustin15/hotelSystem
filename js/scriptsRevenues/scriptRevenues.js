@@ -4,8 +4,7 @@ import {
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
 export const POSTPay = async (booking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
+  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
 
   let data;
   loadingForm(true);
@@ -34,6 +33,25 @@ export const POSTPay = async (booking) => {
     );
   } finally {
     loadingForm(false);
+    return data;
+  }
+};
+
+export const getPayById = async (idBooking) => {
+  let url =
+    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+    JSON.stringify({ option: "getRevenue",idBooking:idBooking});
+
+  let data=null;
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
     return data;
   }
 };

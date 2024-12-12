@@ -20,23 +20,26 @@ class roomsController
     public function GET($req)
     {
 
-        $res = null;
+        try {
+            $res = null;
+            $roomsCategorys = $this->rooms->getAllCategoryRooms();
 
-        $roomsCategorys = $this->rooms->getAllCategoryRooms();
+            if ($roomsCategorys) {
 
-        if ($roomsCategorys) {
+                $roomsCategorys = array_map(function ($room) {
 
-            $roomsCategorys = array_map(function ($room) {
+                    return array(
+                        "category" => $room['categoria'],
+                        "imageTwo" => base64_encode($room['imagenDos'])
+                    );
+                }, $roomsCategorys);
 
-                return array(
-                    "category" => $room['categoria'],
-                    "imageTwo" => base64_encode($room['imagenDos'])
-                );
-            }, $roomsCategorys);
+                $res = $roomsCategorys;
+            }
 
-            $res = $roomsCategorys;
+            return $res;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
         }
-
-        return $res;
     }
 }

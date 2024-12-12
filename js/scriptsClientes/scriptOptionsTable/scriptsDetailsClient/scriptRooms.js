@@ -16,7 +16,7 @@ export const configRoomsDetails = async () => {
 
       <ul class="rooms">
       
-      ${rooms()}
+      ${rooms(roomsBooking)}
       </ul>
       
       `;
@@ -42,7 +42,7 @@ export const getDataBookingRooms = async (idBooking) => {
   }
 };
 
-const rooms = () => {
+export const rooms = (roomsBooking) => {
   let liRoomsBooking = roomsBooking.map((room) => {
     return `
          <li>

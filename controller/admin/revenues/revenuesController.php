@@ -15,27 +15,27 @@ class revenuesController
     public function POST($req)
     {
 
-        $res = null;
-        $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
-
-
-        $res = array("response" => $resultPay);
-
-        return $res;
+        try {
+            $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
+            return array("response" => $resultPay);
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
     }
 
     public function PUT($req)
     {
-        $res = null;
-        $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
-        $res = array("response" => $resultUpdatePay);
-
-        return $res;
+        try {
+            $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
+            return array("response" => $resultUpdatePay);
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
     }
 
     public function GET($req)
     {
-        $res = null;
+  
         switch ($req['option']) {
             case "dashboardGraphic":
 
@@ -54,50 +54,58 @@ class revenuesController
                     "12"
                 );
 
+                try {
 
-                $gananciasPorMes = [];
-                $gananciasPorMes = array_map(function ($mes) {
+                    $gananciasPorMes = [];
+                    $gananciasPorMes = array_map(function ($mes) {
 
 
-                    $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
+                        $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
 
-                    $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
+                        $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
-                    return $totalGananciasMes;
-                }, $mesesConsulta);
+                        return $totalGananciasMes;
+                    }, $mesesConsulta);
 
-                $res = $gananciasPorMes;
+                    return $gananciasPorMes;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
+                }
+
 
                 break;
 
             case "itemDataDashboard":
 
-                $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
-                $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
+                try {
+                    $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
+                    $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
 
-                $dataRevenuesActual =  array(
-                    "totalRevenuesActualYear" => $totalRevenuesActualYear,
-                    "totalRevenuesActualMonth" => $totalRevenuesActualMonth
-                );
+                    $dataRevenuesActual =  array(
+                        "totalRevenuesActualYear" => $totalRevenuesActualYear,
+                        "totalRevenuesActualMonth" => $totalRevenuesActualMonth
+                    );
 
-                $res = $dataRevenuesActual;
-                break;
-            case "getRevenue":
-
-                $idBooking = $req['idBooking'];
-
-                $revenue =  $this->pay->getPago($idBooking);
-
-                if ($revenue) {
-
-                    $res = $revenue;
+                    return $dataRevenuesActual;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
 
                 break;
-        }
+            case "getRevenue":
 
-        return $res;
+                try {
+                    $idBooking = $req['idBooking'];
+
+                    $revenue =  $this->pay->getPago($idBooking);
+
+                    return $revenue;
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
+                }
+                break;
+        }
     }
 
-    public function DELETE(){}
+    public function DELETE() {}
 }

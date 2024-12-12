@@ -16,142 +16,151 @@ class clientController
   public function POST($req)
   {
 
+    try {
+      $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
 
-    $res = null;
+      if ($dataClientMail) {
 
-    $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
-
-    if ($dataClientMail) {
-
-      $res = array("advertencia" => "El correo ingresado ya esta en uso");
-    } else {
-
-      $dataClientPhone = $this->client->getClienteTelefono($req['phone'])->fetch_array(MYSQLI_ASSOC);
-      if ($dataClientPhone) {
-
-        $res = array("advertencia" => "El telefono ingresado ya esta en uso");
+        return array("advertencia" => "El correo ingresado ya esta en uso");
       } else {
 
-        $this->client->setCorreo($req['mail']);
-        $this->client->setNombre($req['name']);
-        $this->client->setApellido($req['lastName']);
-        $this->client->setTelefono($req['phone']);
+        $dataClientPhone = $this->client->getClienteTelefono($req['phone'])->fetch_array(MYSQLI_ASSOC);
+        if ($dataClientPhone) {
 
-        $resultado =  $this->client->setClienteBd();
+          return array("advertencia" => "El telefono ingresado ya esta en uso");
+        } else {
 
-        $res = array("respuesta" => $resultado);
+          $this->client->setCorreo($req['mail']);
+          $this->client->setNombre($req['name']);
+          $this->client->setApellido($req['lastName']);
+          $this->client->setTelefono($req['phone']);
+
+          $resultado =  $this->client->setClienteBd();
+
+          return array("respuesta" => $resultado);
+        }
       }
+    } catch (Throwable $th) {
+      return array("error" => $th->getMessage(), "status" => 502);
     }
-
-    return $res;
   }
 
   public function PUT($req)
   {
 
-    $res = null;
-    $resultado = $this->client->updateCliente(
-      $req['mail'],
-      $req['name'],
-      $req['lastName'],
-      $req['phone'],
-      $req['id']
-    );
+    try {
+      $resultado = $this->client->updateCliente(
+        $req['mail'],
+        $req['name'],
+        $req['lastName'],
+        $req['phone'],
+        $req['id']
+      );
 
-    $res = array("respuesta" => $resultado);
-
-    return $res;
+      return array("respuesta" => $resultado);
+    } catch (Throwable $th) {
+      return array("error" => $th->getMessage(), "status" => 404);
+    }
   }
 
   public function DELETE($req)
   {
-    $res = null;
-    $resultDelete = $this->client->deleteCliente($req['idClient']);
-
-    $res = array("response" => $resultDelete);
-    return $res;
+    try {
+      $resultDelete = $this->client->deleteCliente($req['idClient']);
+      return array("response" => $resultDelete);
+    } catch (Throwable $th) {
+      return array("error" => $th->getMessage(), "status" => 404);
+    }
   }
 
   public function GET($req)
   {
 
     $option = $req['option'];
-    $res = null;
+
 
     switch ($option) {
-
-
       case "allClients":
 
-        $allClients = $this->client->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+        try {
+          $allClients = $this->client->getAllClientes()->fetch_all(MYSQLI_ASSOC);
 
-        if ($allClients) {
-          $res = $allClients;
+          return $allClients;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
         }
-
         break;
 
 
       case "AllYearsVisitClients":
 
-        $years = $this->client->getAllYearsVisitClients();
-
-        $ac = null;
-        $yearsFilter = array_filter($years, function ($year) use (&$ac) {
-          if ($ac !== $year) {
-            $ac = $year;
-            return $year['YEAR(fechaLlegada)'];
-          }
-        });
-
-
-        $res = $yearsFilter;
+        try {
+          $years = $this->client->getAllYearsVisitClients();
+          $ac = null;
+          $yearsFilter = array_filter($years, function ($year) use (&$ac) {
+            if ($ac !== $year) {
+              $ac = $year;
+              return $year['YEAR(fechaLlegada)'];
+            }
+          });
+          return $yearsFilter;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
+        }
         break;
       case "clientsGraphic":
 
-        $year = $req['year'];
-        $months = array(
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-          "12"
-        );
+        try {
+          $year = $req['year'];
+          $months = array(
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          );
 
-        $classClient = $this->client;
-        $clientsMonths = array_map(function ($month) use ($classClient, $year) {
+          $classClient = $this->client;
+          $clientsMonths = array_map(function ($month) use ($classClient, $year) {
 
-          $clientsMonth = $classClient->getClientesAnioMes($month, $year);
+            $clientsMonth = $classClient->getClientesAnioMes($month, $year);
 
-          return array("month" => $month, "quantity" => $clientsMonth);
-        }, $months);
+            return array("month" => $month, "quantity" => $clientsMonth);
+          }, $months);
 
-        $totalMonthQuantity = array_reduce($clientsMonths, function ($ac, $clientMonth) {
-          return  $ac += $clientMonth['quantity'];
-        }, 0);
+          $totalMonthQuantity = array_reduce($clientsMonths, function ($ac, $clientMonth) {
+            return  $ac += $clientMonth['quantity'];
+          }, 0);
 
-        if ($totalMonthQuantity != 0) {
-          $res = $clientsMonths;
+          if ($totalMonthQuantity != 0) {
+            return $clientsMonths;
+          }
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
         }
-
 
         break;
 
       case "clientsTable":
 
-        $index = $req['index'];
-
-        if ($index == 0) {
-          $res = $this->client->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
-        } else {
-          $res = $this->client->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
+        try {
+          $res = null;
+          $index = $req['index'];
+          if ($index == 0) {
+            $res = $this->client->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
+          } else {
+            $res = $this->client->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
+          }
+          return $res;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
         }
 
 
@@ -161,69 +170,92 @@ class clientController
       case "clientsRows":
 
 
-        $clientsRows = $this->client->getAllClientsRows();
+        try {
+          $clientsRows = $this->client->getAllClientsRows();
 
-        $res = $clientsRows;
+          return $clientsRows;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
+        }
 
         break;
 
       case "dataClient":
-        $idClient = $req['idClient'];
 
-        $res = $this->client->getClientById($idClient);
-
+        try {
+          $idClient = $req['idClient'];
+          $res = $this->client->getClientById($idClient);
+          return $res;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
+        }
         break;
 
       case "getClientByMailAndName":
-        $client = $req['client'];
+        try {
+          $client = $req['client'];
 
-        $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+          $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+
+          return $res;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
+        }
 
         break;
 
       case "ifExistClient":
-        $client = $req['client'];
 
-        $existClientMail = $this->client->comprobateMailInUseById($client['id'], $client['mail']);
+        try {
+          $client = $req['client'];
 
-        if ($existClientMail) {
+          $existClientMail = $this->client->comprobateMailInUseById($client['id'], $client['mail']);
 
-          $res = array("warning" => "Ups,ya existe un cliente con este correo");
-        } else {
+          if ($existClientMail) {
 
-          $existClientPhone = $this->client->comprobatePhoneInUseById($client['id'], $client['phone']);
+            return array("warning" => "Ups,ya existe un cliente con este correo");
+          } else {
 
-          if ($existClientPhone) {
-            $res = array("warning" => "Ups,ya existe un cliente con este telefono");
+            $existClientPhone = $this->client->comprobatePhoneInUseById($client['id'], $client['phone']);
+
+            if ($existClientPhone) {
+              return array("warning" => "Ups,ya existe un cliente con este telefono");
+            }
           }
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
         }
         break;
 
       case "rowsBookingsClient":
 
-        $idClient = $req['client'];
-        $numRows = $this->client->getRowsBookingsClient($idClient);
-        $res = $numRows;
+        try {
+          $idClient = $req['client'];
+          $numRows = $this->client->getRowsBookingsClient($idClient);
+          return $numRows;
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
+        }
         break;
 
       case "bookingsClient":
 
-        $idClient = $req['client'];
-        $index = $req['index'];
+        try {
+          $idClient = $req['client'];
+          $index = $req['index'];
 
-        if ($index == 0) {
+          if ($index == 0) {
 
-          $bookingClient = $this->client->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
-          $res = $bookingClient;
-        } else {
-          $bookingClient = $this->client->getLimitAndIndexBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
-          $res = $bookingClient;
+            $bookingClient = $this->client->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
+            return $bookingClient;
+          } else {
+            $bookingClient = $this->client->getLimitAndIndexBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);
+            return $bookingClient;
+          }
+        } catch (Throwable $th) {
+          return array("error" => $th->getMessage(), "status" => 404);
         }
         break;
     }
-
-
-
-    return $res;
   }
 }

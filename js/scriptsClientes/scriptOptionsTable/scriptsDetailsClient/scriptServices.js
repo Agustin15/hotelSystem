@@ -19,7 +19,7 @@ export const configServicesDetails = async () => {
 
       <ul class="services">
       
-      ${services()}
+      ${services(servicesBooking)}
       </ul>
       
       `;
@@ -45,7 +45,7 @@ export const getServices = async (idBooking) => {
   }
 };
 
-const services = () => {
+export const services = (servicesBooking) => {
   let liServicesBooking = servicesBooking.map((service) => {
     let nameService;
     let title;

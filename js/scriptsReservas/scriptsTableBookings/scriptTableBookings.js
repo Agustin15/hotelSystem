@@ -89,7 +89,9 @@ const getQuantityBookingsActualYear = async () => {
     const response = await fetch(url);
     const result = await response.json();
 
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
 
       if (result <= 10) {
@@ -163,7 +165,9 @@ const getBookingsYearLimit = async () => {
     const response = await fetch(url);
     const result = await response.json();
 
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -187,12 +191,13 @@ const displaySelectYear = async () => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error message:", error);
   } finally {
     loading(false);
     if (!data) {

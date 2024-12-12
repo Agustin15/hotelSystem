@@ -21,31 +21,32 @@ class servicesController
     public function GET($req)
     {
 
-        $res = null;
         $option = $req['option'];
 
         switch ($option) {
             case "getServicesBooking":
 
-                $idBooking = $req['idBooking'];
-                $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
+                try {
+                    $idBooking = $req['idBooking'];
+                    $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
 
-                if (count($bookingServices) > 0) {
-                    $bookingServicesDetails = array_map(function ($service) {
+                    if (count($bookingServices) > 0) {
+                        $bookingServicesDetails = array_map(function ($service) {
 
-                        return array(
-                            "name" => $service['nombreServicio'],
-                            "description" => $service['descripcionServicio'],
-                            "icon" => base64_encode($service['imagen']),
-                            "room" => $service['numHabitacionServicio']
-                        );
-                    }, $bookingServices);
+                            return array(
+                                "name" => $service['nombreServicio'],
+                                "description" => $service['descripcionServicio'],
+                                "icon" => base64_encode($service['imagen']),
+                                "room" => $service['numHabitacionServicio']
+                            );
+                        }, $bookingServices);
 
-                    $res = $bookingServicesDetails;
+                        return $bookingServicesDetails;
+                    }
+                } catch (Throwable $th) {
+                    return array("error" => $th->getMessage(), "status" => 404);
                 }
                 break;
         }
-
-        return $res;
     }
 }
