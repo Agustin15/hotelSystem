@@ -529,6 +529,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  text-align: center;
   opacity: 60%;
   margin-top: 2rem;
   font-weight: bold;
@@ -608,7 +609,7 @@
   border-top-right-radius: 0;
 }
 .containGuestDetails .body .loadingDetails {
-  display: none;
+  display: flex;
   align-items: center;
   font-size: 19px;
   gap: 1rem;
@@ -621,6 +622,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 1rem;
   opacity: 60%;
   font-weight: bold;
@@ -718,6 +720,305 @@
 .roomsGuests li .guests .childs .value {
   display: flex;
   align-items: center;
+}
+
+.containRoomsDetails,
+.containServicesDetails {
+  width: 32rem;
+  height: 40rem;
+  border-radius: 3px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5rem;
+}
+.containRoomsDetails .noData,
+.containServicesDetails .noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  opacity: 60%;
+  font-weight: bold;
+  color: rgb(170, 170, 170);
+}
+.containRoomsDetails .noData img,
+.containServicesDetails .noData img {
+  width: 80px;
+}
+.containRoomsDetails .header,
+.containServicesDetails .header {
+  background: linear-gradient(#055b5e, #04b8c2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.containRoomsDetails .header img,
+.containServicesDetails .header img {
+  width: 40px;
+}
+.containRoomsDetails .header .title,
+.containServicesDetails .header .title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: -1rem;
+}
+.containRoomsDetails .header .close,
+.containServicesDetails .header .close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.containRoomsDetails .header .close button,
+.containServicesDetails .header .close button {
+  border: none;
+  background-color: white;
+  color: rgb(0, 112, 107);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 17px;
+  cursor: pointer;
+}
+.containRoomsDetails .body,
+.containServicesDetails .body {
+  height: auto;
+  max-height: 30rem;
+  width: 100%;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.containRoomsDetails .body .loadingDetails,
+.containServicesDetails .body .loadingDetails {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  gap: 1rem;
+  opacity: 60%;
+}
+.containRoomsDetails .body .loadingDetails img,
+.containServicesDetails .body .loadingDetails img {
+  width: 50px;
+}
+.containRoomsDetails .body .rooms,
+.containRoomsDetails .body .services,
+.containServicesDetails .body .rooms,
+.containServicesDetails .body .services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+  max-height: 25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.containRoomsDetails .body .rooms li,
+.containRoomsDetails .body .services li,
+.containServicesDetails .body .rooms li,
+.containServicesDetails .body .services li {
+  padding: 0.5rem;
+  width: 70%;
+  background: white;
+  border-radius: 5px;
+  border-bottom: 1px solid rgb(202, 202, 202);
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  color: white;
+  background: #0ba8ad;
+}
+.containRoomsDetails .body .rooms li .icon,
+.containRoomsDetails .body .services li .icon,
+.containServicesDetails .body .rooms li .icon,
+.containServicesDetails .body .services li .icon {
+  padding: 0.5rem;
+  background-color: #027f83;
+  border-radius: 3px;
+}
+.containRoomsDetails .body .rooms li .icon img,
+.containRoomsDetails .body .services li .icon img,
+.containServicesDetails .body .rooms li .icon img,
+.containServicesDetails .body .services li .icon img {
+  width: 120px;
+  height: 60px;
+}
+.containRoomsDetails .body .rooms li .info,
+.containRoomsDetails .body .services li .info,
+.containServicesDetails .body .rooms li .info,
+.containServicesDetails .body .services li .info {
+  padding: 0.5rem;
+  width: 15rem;
+  font-weight: bold;
+  height: 3.7rem;
+  background-color: #027f83;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.containServicesDetails {
+  align-items: center;
+}
+.containServicesDetails .services li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.containServicesDetails .services li .title {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-weight: bold;
+}
+.containServicesDetails .services li .details {
+  display: flex;
+  gap: 1rem;
+  margin-top: -0.5rem;
+}
+.containServicesDetails .services li .details .info {
+  width: 14rem;
+  background-color: #027074;
+}
+.containServicesDetails .services li .details .icon {
+  padding: 0.5rem;
+  background-color: #027074;
+  border-radius: 3px;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containServicesDetails .services li .details .icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.alertRedirect {
+  width: 29rem;
+  background-color: white;
+  height: 15rem;
+  border-radius: 4px;
+  margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.alertRedirect .close {
+  width: 100%;
+  display: none;
+  justify-content: flex-end;
+}
+.alertRedirect .close button {
+  border: none;
+  background-color: rgb(0, 126, 158);
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 17px;
+  cursor: pointer;
+}
+.alertRedirect .close button:hover {
+  background-color: rgb(0, 112, 139);
+}
+.alertRedirect .body {
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+.alertRedirect .body .title {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+.alertRedirect .body .title img {
+  width: 60px;
+}
+.alertRedirect .body .content {
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.alertRedirect .body .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+.alertRedirect .body .buttons button {
+  background-color: #06a093;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px gray;
+  width: 7rem;
+  height: 2rem;
+  border: none;
+  cursor: pointer;
+}
+.alertRedirect .body .buttons button:hover {
+  background-color: #059da5;
+}
+.alertRedirect .noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  opacity: 60%;
+  font-weight: bold;
+  color: rgb(170, 170, 170);
+  margin-top: 2rem;
+}
+.alertRedirect .noData img {
+  width: 80px;
+}
+.alertRedirect .loadingDetails {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  gap: 1rem;
+  margin-top: 2rem;
+  opacity: 60%;
+}
+.alertRedirect .loadingDetails img {
+  width: 50px;
 }
 
 /*# sourceMappingURL=styleTableBookings.css.map */
