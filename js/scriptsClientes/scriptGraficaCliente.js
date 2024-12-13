@@ -40,12 +40,14 @@ const loadYears = async () => {
   {
     try {
       let url =
-        "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+
+        "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
         JSON.stringify({ option: "AllYearsVisitClients" });
-        
+
       const response = await fetch(url);
       const results = await response.json();
-      if (results) {
+      if (!response.ok) {
+        throw results.error;
+      } else if (results) {
         selectYearChar(results);
       }
     } catch (error) {
@@ -157,11 +159,15 @@ async function getDataClientsTOGraphic(year) {
     loadingChart(true);
     const response = await fetch(
       "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
-        JSON.stringify({ option:"clientsGraphic",year: yearToConsult })
+        JSON.stringify({ option: "clientsGraphic", year: yearToConsult })
     );
 
     const result = await response.json();
-    data = result;
+    if (!response.ok) {
+      throw result.error;
+    } else {
+      data = result;
+    }
   } catch (error) {
     console.log(error);
   } finally {

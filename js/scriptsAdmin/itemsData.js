@@ -13,7 +13,11 @@ const getCategoryRoomsData = async () => {
       },
     });
     const data = await response.json();
-    return data;
+    if (!response.ok) {
+      throw data.error;
+    } else if (data) {
+      return data;
+    }
   } catch (error) {
     console.log(error);
     return null;
@@ -33,7 +37,11 @@ const getRevenuesActualYear = async () => {
       },
     });
     const data = await response.json();
-    return data;
+    if (!response.ok) {
+      throw data.error;
+    } else if (data) {
+      return data;
+    }
   } catch (error) {
     console.log(error);
     return null;

@@ -32,59 +32,66 @@ function createRoomData($categoriaHabitaciones)
 switch ($_SERVER['REQUEST_METHOD']) {
 
    case "GET":
-      $response;
-
+   
       if ($_GET['option'] == "roomsHotel") {
 
-         $categoriaHabitacionesHotel = $habitacion->getAllCategoryRooms();
+         try {
 
-         $datosCategoriaHabitaciones = array_map(function ($categoriaHabitacion) {
+            $categoriaHabitacionesHotel = $habitacion->getAllCategoryRooms();
 
-            return createRoomData($categoriaHabitacion);
-         }, $categoriaHabitacionesHotel);
+            $datosCategoriaHabitaciones = array_map(function ($categoriaHabitacion) {
 
-         $response = $datosCategoriaHabitaciones;
+               return createRoomData($categoriaHabitacion);
+            }, $categoriaHabitacionesHotel);
+
+            echo json_encode($datosCategoriaHabitaciones);
+         } catch (Throwable $th) {
+            http_response_code(404);
+            echo json_encode(array("error" => $th->getMessage()));
+         }
       } else {
 
+         try {
 
-         $dateBooking = json_decode($_GET['dateBooking'], true);
-
-
-         $habitacionesHotel = $habitacion->getAllHabitacionesHotel();
+            $dateBooking = json_decode($_GET['dateBooking'], true);
 
 
-         $habitacionesLibresEnFechaIngresada = array_filter($habitacionesHotel, function ($habitacionHotel) use ($habitacion, $dateBooking) {
-
-            $llegada = new DateTime($dateBooking['start']);
-            $salida = new DateTime($dateBooking['end']);
-
-            $reservasHabitacion = $habitacion->habitacionesReservadas($habitacionHotel['numHabitacion']);
-            $reservasLibresHabitacion =  $habitacion->getHabitacionDisponible(
-               $llegada->format("Y-m-d"),
-               $salida->format("Y-m-d"),
-               $habitacionHotel['numHabitacion']
-            );
+            $habitacionesHotel = $habitacion->getAllHabitacionesHotel();
 
 
-            if (empty($reservasHabitacion) || count($reservasHabitacion) == count($reservasLibresHabitacion)) {
+            $habitacionesLibresEnFechaIngresada = array_filter($habitacionesHotel, function ($habitacionHotel) use ($habitacion, $dateBooking) {
 
-               //esta disponible
+               $llegada = new DateTime($dateBooking['start']);
+               $salida = new DateTime($dateBooking['end']);
 
-               return $habitacionHotel;
-            }
-         });
-
-         $categoriasCantidad = array_map(function ($detallesCategoriaHabitacion) use ($habitacion, $habitacionesLibresEnFechaIngresada) {
-
-            return quantityCategoryRoom(array_values($habitacionesLibresEnFechaIngresada), $habitacion, $detallesCategoriaHabitacion['categoria']);
-         }, $habitacion->getAllCategoryRooms());
-
+               $reservasHabitacion = $habitacion->habitacionesReservadas($habitacionHotel['numHabitacion']);
+               $reservasLibresHabitacion =  $habitacion->getHabitacionDisponible(
+                  $llegada->format("Y-m-d"),
+                  $salida->format("Y-m-d"),
+                  $habitacionHotel['numHabitacion']
+               );
 
 
-         $response = $categoriasCantidad;
+               if (empty($reservasHabitacion) || count($reservasHabitacion) == count($reservasLibresHabitacion)) {
+
+                  //esta disponible
+
+                  return $habitacionHotel;
+               }
+            });
+
+            $categoriasCantidad = array_map(function ($detallesCategoriaHabitacion) use ($habitacion, $habitacionesLibresEnFechaIngresada) {
+
+               return quantityCategoryRoom(array_values($habitacionesLibresEnFechaIngresada), $habitacion, $detallesCategoriaHabitacion['categoria']);
+            }, $habitacion->getAllCategoryRooms());
+
+            echo json_encode($categoriasCantidad);
+         } catch (Throwable $th) {
+            http_response_code(404);
+            echo json_encode(array("error" => $th->getMessage()));
+         }
       }
 
 
-      echo json_encode($response);
       break;
 }

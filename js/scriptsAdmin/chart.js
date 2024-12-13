@@ -58,7 +58,11 @@ async function getClientsByMonthActualYear(actualYear) {
     );
 
     const result = await response.json();
-    dataPointsToGraphicClientsDashboard(result);
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      dataPointsToGraphicClientsDashboard(result);
+    }
   } catch (error) {
     console.log(error);
   } finally {
@@ -141,8 +145,11 @@ async function getRevenueActualYear() {
     );
 
     const result = await response.json();
-
-    dataPointsToGraphicRevenues(result);
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      dataPointsToGraphicRevenues(result);
+    }
   } catch (error) {
     console.log(error);
   } finally {
@@ -234,8 +241,11 @@ async function getCategoryRoomsMostReserved() {
     );
 
     const result = await response.json();
-
-    dataPointsToGraphicRooms(result);
+    if (!response.ok) {
+      throw result.error;
+    } else {
+      dataPointsToGraphicRooms(result);
+    }
   } catch (error) {
     console.log(error);
   } finally {

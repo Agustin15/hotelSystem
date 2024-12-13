@@ -3,34 +3,36 @@ import { alertBooking } from "../alertsBooking.js";
 export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
   let url =
     "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
-    JSON.stringify({option:"roomsFreeCategory",dataBooking:dataBooking});
+    JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
   let data;
 
   loadingBooking(true, "Buscando habitaciones");
   try {
     const response = await fetch(url);
-
     const result = await response.json();
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking(
-      "Error",
-      "Ups, no se pudo realizar la reserva, vuelve a intentarlo más tarde"
-    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!data) {
+      alertBooking(
+        "Error",
+        "Ups, no se pudo realizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };
 
 export const fetchPOSTRooms = async (roomsToBooking) => {
-  let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
-    
+  let url = "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
+
   let data;
   loadingBooking(true, "Reservando habitaciones");
   try {
@@ -42,15 +44,23 @@ export const fetchPOSTRooms = async (roomsToBooking) => {
       body: JSON.stringify(roomsToBooking),
     });
     const result = await response.json();
-    if (result.response == true) {
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.response == true) {
       data = result.response;
-    } 
+    }
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking("Error","No se pudo realizar la reserva, vuelve a intentarlo más tarde");
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!data) {
+      alertBooking(
+        "Error",
+        "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };

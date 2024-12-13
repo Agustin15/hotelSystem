@@ -63,144 +63,148 @@ class roomsBookingController
     public function GET($req)
     {
 
-        $res = null;
-        switch ($req['option']) {
-            case "dashboardGraphic":
+        if (empty($req['option'])) {
+            return array("error" => "Undefined variable option", "status" => 404);
+        } else {
+            $option = $req['option'];
+            switch ($option) {
+                case "dashboardGraphic":
 
-                try {
-                    $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
+                    try {
+                        $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
 
-                    $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved) {
+                        $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved) {
 
-                        $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
-                        use ($categoryRoom) {
+                            $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
+                            use ($categoryRoom) {
 
-                            $dataRoomReserved = $this->rooms->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
+                                $dataRoomReserved = $this->rooms->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
 
-                            return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
-                        });
+                                return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
+                            });
 
-                        return array('categoryRoom' => $categoryRoom['categoria'], 'quantityReserved' => count($categoryRoomsReserved));
-                    }, $this->rooms->getAllCategoryRooms());
+                            return array('categoryRoom' => $categoryRoom['categoria'], 'quantityReserved' => count($categoryRoomsReserved));
+                        }, $this->rooms->getAllCategoryRooms());
 
 
-                    return array_values($quantityCategorysRoomsReserved);
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
+                        return array_values($quantityCategorysRoomsReserved);
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
 
-                break;
+                    break;
 
-            case "itemDataDashboard":
+                case "itemDataDashboard":
 
-                try {
-                    $categoryRooms = $this->rooms->getAllCategoryRooms();
+                    try {
+                        $categoryRooms = $this->rooms->getAllCategoryRooms();
 
-                    $dataCategoryRooms = array_map(function ($categoryRoom) {
-                        $totalRoomCategory = count($this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']));
+                        $dataCategoryRooms = array_map(function ($categoryRoom) {
+                            $totalRoomCategory = count($this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']));
 
-                        $roomsCategory = $this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']);
+                            $roomsCategory = $this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']);
 
-                        $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) {
+                            $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) {
 
-                            $today = date("Y-m-d");
-                            $habitacionOcupada = $this->rooms->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
+                                $today = date("Y-m-d");
+                                $habitacionOcupada = $this->rooms->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
 
-                            ($habitacionOcupada) ? $ac++ : $ac;
+                                ($habitacionOcupada) ? $ac++ : $ac;
 
-                            return $ac;
-                        }, 0);
-
-                        return array(
-                            "category" => $categoryRoom['categoria'],
-                            "totalRoomCategory" => $totalRoomCategory,
-                            "totalRoomCategoryBusy" => $totalRoomCategoryBusy,
-                            "totalRoomCategoryFree" => $totalRoomCategory - $totalRoomCategoryBusy
-                        );
-                    }, $categoryRooms);
-
-                    return array_values($dataCategoryRooms);
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-
-                break;
-
-            case "getDataRoomsBooking":
-
-                try {
-                    $idBooking = $req['idBooking'];
-                    $roomsDetailsBooking = $this->rooms->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
-                    return  array_values($roomsDetailsBooking);
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-
-                break;
-
-            case "getDataRoomsBookingAndCategory":
-
-                try {
-                    $idBooking = $req['idBooking'];
-                    $roomsDetailsBooking = $this->rooms->roomsBookingAndDetails($idBooking);
-
-                    if (count($roomsDetailsBooking) > 0) {
-                        $roomsDetailsBookingFixed = array_map(function ($room) {
+                                return $ac;
+                            }, 0);
 
                             return array(
-                                "numRoom" => $room['numHabitacionReservada'],
-                                "category" => $room['categoria'],
-                                "image" => base64_encode($room['imagenDos'])
-
+                                "category" => $categoryRoom['categoria'],
+                                "totalRoomCategory" => $totalRoomCategory,
+                                "totalRoomCategoryBusy" => $totalRoomCategoryBusy,
+                                "totalRoomCategoryFree" => $totalRoomCategory - $totalRoomCategoryBusy
                             );
-                        }, $roomsDetailsBooking);
-                        return  array_values($roomsDetailsBookingFixed);
+                        }, $categoryRooms);
+
+                        return array_values($dataCategoryRooms);
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
                     }
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
 
+                    break;
 
-                break;
+                case "getDataRoomsBooking":
 
-            case "roomsFreeCategory":
+                    try {
+                        $idBooking = $req['idBooking'];
+                        $roomsDetailsBooking = $this->rooms->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
+                        return  array_values($roomsDetailsBooking);
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
 
-                try {
-                    $allRoomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req['dataBooking']["category"]);
+                    break;
 
-                    $allRoomsCategory =  array_map(function ($room) {
+                case "getDataRoomsBookingAndCategory":
 
-                        return array(
-                            "category" => $room["categoria"],
-                            "numRoom" => $room["numHabitacion"],
-                            "icon" => base64_encode($room["imagenDos"]),
-                            "price" => $room["precio"],
-                            "capacity" => $room["capacidad"]
-                        );
-                    }, $allRoomsCategory);
+                    try {
+                        $idBooking = $req['idBooking'];
+                        $roomsDetailsBooking = $this->rooms->roomsBookingAndDetails($idBooking);
 
-                    $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($req) {
+                        if (count($roomsDetailsBooking) > 0) {
+                            $roomsDetailsBookingFixed = array_map(function ($room) {
 
-                        $bookingsFreeRoom = $this->rooms->getHabitacionDisponible(
-                            $req['dataBooking']["startBooking"],
-                            $req['dataBooking']["endBooking"],
-                            $roomCategory["numRoom"]
-                        );
-                        $allBookingsRoom  = $this->rooms->habitacionesReservadas($roomCategory["numRoom"]);
+                                return array(
+                                    "numRoom" => $room['numHabitacionReservada'],
+                                    "category" => $room['categoria'],
+                                    "image" => base64_encode($room['imagenDos'])
 
-                        if (count($allBookingsRoom) == 0  || count($bookingsFreeRoom) == count($allBookingsRoom)) {
-
-                            return $roomCategory;
+                                );
+                            }, $roomsDetailsBooking);
+                            return  array_values($roomsDetailsBookingFixed);
                         }
-                    });
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
 
 
-                    return array_values($roomsFreeCategory);
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
+                    break;
 
-                break;
+                case "roomsFreeCategory":
+
+                    try {
+                        $allRoomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req['dataBooking']["category"]);
+
+                        $allRoomsCategory =  array_map(function ($room) {
+
+                            return array(
+                                "category" => $room["categoria"],
+                                "numRoom" => $room["numHabitacion"],
+                                "icon" => base64_encode($room["imagenDos"]),
+                                "price" => $room["precio"],
+                                "capacity" => $room["capacidad"]
+                            );
+                        }, $allRoomsCategory);
+
+                        $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($req) {
+
+                            $bookingsFreeRoom = $this->rooms->getHabitacionDisponible(
+                                $req['dataBooking']["startBooking"],
+                                $req['dataBooking']["endBooking"],
+                                $roomCategory["numRoom"]
+                            );
+                            $allBookingsRoom  = $this->rooms->habitacionesReservadas($roomCategory["numRoom"]);
+
+                            if (count($allBookingsRoom) == 0  || count($bookingsFreeRoom) == count($allBookingsRoom)) {
+
+                                return $roomCategory;
+                            }
+                        });
+
+
+                        return array_values($roomsFreeCategory);
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+
+                    break;
+            }
         }
     }
 }

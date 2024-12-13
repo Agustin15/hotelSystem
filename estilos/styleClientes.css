@@ -858,7 +858,7 @@ body #userAdmin:hover > .btnFlecha {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 6rem;
+  margin-left: 8rem;
   margin-top: 2rem;
   gap: 1rem;
   background-color: white;
@@ -1104,7 +1104,7 @@ body #userAdmin:hover > .btnFlecha {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  margin-left: 6rem;
+  margin-left: 11rem;
   padding-bottom: 1rem;
   align-items: center;
 }
@@ -1301,13 +1301,13 @@ body #userAdmin:hover > .btnFlecha {
 }
 .modalOptionsBookingClient .containGuestDetails {
   width: 25rem;
-  height: 40rem;
+  height: 42rem;
   border-radius: 3px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
-  margin-left: 5rem;
+  margin-top: 8rem;
+  margin-left: 7rem;
 }
 .modalOptionsBookingClient .containGuestDetails .header {
   background: linear-gradient(#055b5e, #04b8c2);
@@ -1356,7 +1356,7 @@ body #userAdmin:hover > .btnFlecha {
 }
 .modalOptionsBookingClient .containGuestDetails .body {
   height: auto;
-  max-height: 27rem;
+  max-height: 30rem;
   width: 104%;
   background-color: white;
   border-radius: 3px;
@@ -1414,6 +1414,7 @@ body #userAdmin:hover > .btnFlecha {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  gap: 1rem;
   max-height: 20rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -1487,7 +1488,7 @@ body #userAdmin:hover > .btnFlecha {
   align-items: center;
   justify-content: center;
   margin-top: 5rem;
-  margin-left: 5rem;
+  margin-left: 10rem;
 }
 .modalOptionsBookingClient .containRoomsDetails .header,
 .modalOptionsBookingClient .containServicesDetails .header {

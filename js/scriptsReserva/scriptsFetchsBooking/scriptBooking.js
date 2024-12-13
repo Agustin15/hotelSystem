@@ -15,8 +15,9 @@ export const fetchPOSTBooking = async (booking) => {
       body: JSON.stringify(booking),
     });
     const result = await response.json();
-
-    if (result == true) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result == true) {
       data = result;
     }
   } catch (error) {
@@ -52,7 +53,9 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
     const response = await fetch(url);
     const result = await response.json();
 
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -82,8 +85,9 @@ export const fetchPUTBooking = async (dataBookingToUpdate) => {
       body: JSON.stringify(dataBookingToUpdate),
     });
     const result = await response.json();
-
-    if (result == true) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result == true) {
       data = result;
     }
   } catch (error) {

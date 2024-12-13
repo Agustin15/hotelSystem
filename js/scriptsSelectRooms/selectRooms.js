@@ -82,12 +82,17 @@ async function submitGetCategoryHotelRooms() {
   try {
     loading(true);
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel");
-
+      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel"
+    );
     const result = await response.json();
-    displayErrorGetHotelRooms(false);
-    return result;
+    if (!response.ok) {
+      throw result.error;
+    } else {
+      displayErrorGetHotelRooms(false);
+      return result;
+    }
   } catch (error) {
+    console.log(error);
     displayErrorGetHotelRooms(true);
   } finally {
     loading(false);
@@ -106,7 +111,7 @@ if (formCheckIn) {
       cleanDateBooking();
       cleanQuantityAvailable();
 
-      let startBooking =llegada.value;
+      let startBooking = llegada.value;
       let endBooking = salida.value;
 
       if (endBooking <= startBooking) {
@@ -133,11 +138,13 @@ async function submitDateBooking(dateBooking) {
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsAvailable&dateBooking=" +
-        JSON.stringify(dateBooking));
+        JSON.stringify(dateBooking)
+    );
 
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       quantityCategorysRooms = result;
       printQuantAvailable(quantityCategorysRooms);
     }

@@ -18,7 +18,9 @@ const getRowsClients = async () => {
     const response = await fetch(url);
     const result = await response.json();
 
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -40,7 +42,9 @@ const getClientById = async (idClient) => {
 
     const response = await fetch(url);
     const result = await response.json();
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -63,8 +67,9 @@ export const getAllClients = async () => {
 
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -89,8 +94,9 @@ const getDataLimitClients = async () => {
 
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {

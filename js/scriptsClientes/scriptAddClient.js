@@ -74,6 +74,7 @@ const submitAddForm = () => {
 
 const fetchPost = async (client) => {
   loading(true);
+  let data = null;
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/routes/clientRoutes.php",
@@ -88,22 +89,29 @@ const fetchPost = async (client) => {
 
     const result = await response.json();
 
-    if (result.advertencia) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.advertencia) {
       throw result.advertencia;
     } else if (result.respuesta) {
+      data = result.respuesta;
       alertForm(
         "../../../img/tickAdmin.png",
         "¡Cliente agregado exitosamente! ",
         "Exito"
       );
-    } else {
-      throw "Ups, no se pudo agregar el cliente";
     }
   } catch (error) {
     console.log(error);
-    alertForm("../../../img/advertenciaLogin.png", error, "Error");
   } finally {
     loading(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, no se pudo agregar el cliente",
+        "Error"
+      );
+    }
   }
 };
 

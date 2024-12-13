@@ -8,8 +8,9 @@ export const getDataServices = async (idBooking) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {

@@ -18,19 +18,21 @@ export const fetchPOSTClient = async (client) => {
     );
 
     const result = await response.json();
-    if (result.advertencia) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.advertencia) {
       throw result.advertencia;
     } else if (result.respuesta) {
       data = result.respuesta;
-    }else{
-      throw "Ups, no se pudo agregar el cliente";
     }
   } catch (error) {
     console.log(error);
-    alertClientFormBooking(error);
     loadingBooking(false);
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!data) {
+      alertClientFormBooking("Ups, no se pudo agregar el cliente");
+    }
     return data;
   }
 };
@@ -46,19 +48,22 @@ export const fetchGetClient = async (client) => {
     );
 
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
     loadingBooking(false);
-    alertBooking(
-      "Error",
-      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
-    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    if (!data) {
+      alertBooking(
+        "Error",
+        "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };

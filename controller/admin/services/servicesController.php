@@ -21,32 +21,37 @@ class servicesController
     public function GET($req)
     {
 
-        $option = $req['option'];
 
-        switch ($option) {
-            case "getServicesBooking":
+        if (empty($req['option'])) {
+            return array("error" => "Undefined variable option", "status" => 404);
+        } else {
+            $option = $req['option'];
 
-                try {
-                    $idBooking = $req['idBooking'];
-                    $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
+            switch ($option) {
+                case "getServicesBooking":
 
-                    if (count($bookingServices) > 0) {
-                        $bookingServicesDetails = array_map(function ($service) {
+                    try {
+                        $idBooking = $req['idBooking'];
+                        $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
 
-                            return array(
-                                "name" => $service['nombreServicio'],
-                                "description" => $service['descripcionServicio'],
-                                "icon" => base64_encode($service['imagen']),
-                                "room" => $service['numHabitacionServicio']
-                            );
-                        }, $bookingServices);
+                        if (count($bookingServices) > 0) {
+                            $bookingServicesDetails = array_map(function ($service) {
 
-                        return $bookingServicesDetails;
+                                return array(
+                                    "name" => $service['nombreServicio'],
+                                    "description" => $service['descripcionServicio'],
+                                    "icon" => base64_encode($service['imagen']),
+                                    "room" => $service['numHabitacionServicio']
+                                );
+                            }, $bookingServices);
+
+                            return $bookingServicesDetails;
+                        }
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
                     }
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-                break;
+                    break;
+            }
         }
     }
 }

@@ -67,8 +67,8 @@ const submitEditForm = () => {
       if (exist) {
         alertForm("../../../img/advertenciaLogin.png", exist.warning, "Error");
       } else {
-        let resultPOST = fetchPUT(clientUpdated);
-        if (resultPOST) {
+        let resultPUT = fetchPUT(clientUpdated);
+        if (resultPUT) {
           alertForm(
             "../../../img/tickAdmin.png",
             "¡Cliente actualizado exitosamente!",
@@ -98,8 +98,9 @@ const getIfExist = async (client) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -111,8 +112,7 @@ const getIfExist = async (client) => {
 };
 
 const fetchPUT = async (client) => {
-  let url =
-    "http://localhost/sistema%20Hotel/routes/clientRoutes.php";
+  let url = "http://localhost/sistema%20Hotel/routes/clientRoutes.php";
 
   let data = null;
 
@@ -126,8 +126,9 @@ const fetchPUT = async (client) => {
       body: JSON.stringify(client),
     });
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {

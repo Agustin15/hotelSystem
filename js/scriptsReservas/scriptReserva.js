@@ -12,12 +12,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 export const actualOptionBooking = async (optionActual) => {
   let optionDocument = await getDocument(optionActual);
-  drawDocument(optionDocument);
+  if (optionDocument) {
+    drawDocument(optionDocument);
 
-  if (optionActual == "addBooking.html") {
-    return true;
+    if (optionActual == "addBooking.html") {
+      return true;
+    }
   }
-
 };
 
 optionListLi.addEventListener("click", async () => {
@@ -30,11 +31,22 @@ optionAddLi.addEventListener("click", async () => {
 });
 
 const getDocument = async (url) => {
-  const response = await fetch(url);
-
-  const result = await response.text();
-
-  return result;
+  let data = null;
+  loadingPage(true, option);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, option);
+    if (!data) {
+    }
+    return data;
+  }
 };
 
 const drawDocument = async (result) => {
@@ -57,4 +69,18 @@ export const markActualOption = (li) => {
   }
 
   li.classList.add("optionMarkActual");
+};
+
+const loadingPage = (state, option) => {
+  if (state) {
+    option.innerHTML = `
+       <div class="loadingPage">
+
+       <span>Cargando pagina</span>
+       <img src="../../../img/spinnerMain.gif">
+       </div>
+    `;
+  } else {
+    option.innerHTML = ``;
+  }
 };

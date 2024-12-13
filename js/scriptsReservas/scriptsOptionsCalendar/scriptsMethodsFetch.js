@@ -12,22 +12,24 @@ export const POSTBooking = async (booking) => {
       body: JSON.stringify(booking),
     });
     const result = await response.json();
-
-    if (result == true) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result == true) {
       data = result;
-    } else {
-      throw "Ups, error al agregar la reserva";
     }
   } catch (error) {
     console.log(error);
-    alertForm(
-      "../../../img/advertenciaLogin.png",
-      error,
-      "Error",
-      "alertFormError"
-    );
   } finally {
     loadingForm(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al agregar la reserva",
+        "Error",
+        "alertFormError"
+      );
+    }
+
     return data;
   }
 };
@@ -52,19 +54,23 @@ export const getBookingByClientAndDate = async (booking) => {
     const response = await fetch(url);
     const result = await response.json();
 
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    alertForm(
-      "../../../img/advertenciaLogin.png",
-      "Ups, error al agregar la reserva",
-      "Error",
-      "alertFormError"
-    );
   } finally {
     loadingForm(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al agregar la reserva",
+        "Error",
+        "alertFormError"
+      );
+    }
     return data;
   }
 };

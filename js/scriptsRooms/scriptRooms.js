@@ -16,36 +16,38 @@ export const POSTRooms = async (booking) => {
       body: JSON.stringify(booking),
     });
     const result = await response.json();
-    if (result.response == true) {
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.response == true) {
       data = result.response;
-    } else {
-      throw "Ups, error al agregar la reserva";
     }
   } catch (error) {
     console.log(error);
-    alertForm(
-      "../../../img/advertenciaLogin.png",
-      error,
-      "Error",
-      "alertFormError"
-    );
   } finally {
     loadingForm(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al agregar la reserva",
+        "Error",
+        "alertFormError"
+      );
+    }
     return data;
   }
 };
 
 export const getRoomsCategoryHotel = async () => {
   let data;
-  let url =
-    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php";
+  let url = "http://localhost/sistema%20Hotel/routes/roomsRoutes.php";
 
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -67,8 +69,9 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -89,8 +92,9 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -109,8 +113,9 @@ export const getRoomsFreeCategory = async (dataBooking) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {

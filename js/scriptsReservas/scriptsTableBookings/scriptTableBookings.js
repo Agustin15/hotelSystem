@@ -1,6 +1,7 @@
 import { search, loading } from "../../scriptsClientes/scriptClientsTable.js";
 import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
 import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
+import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
 
 let pages;
 let limitByPage = 1;
@@ -62,7 +63,7 @@ const drawRowsTable = (bookingsYearlimit) => {
            <div class="buttons" id=${booking.idReserva}>
 
             <button data-option="delete" class="btnDelete ${classBtnDisabled}"><img src="../../../img/borrar.png"></button>
-                <button class="btnEdit ${classBtnDisabled}"><img src="../../../img/editar.png"></button>
+                <button class="btnEdit ${classBtnDisabled}" data-option="edit"><img src="../../../img/editar.png"></button>
                     <button data-option="details"
                      class="btnDetails"><img src="../../../img/detalles.png"></button>
             
@@ -228,6 +229,7 @@ const drawYearsSelect = (years) => {
 const optionsUrls = {
   delete: "optionsTableBooking/delete.php?idBooking=",
   details: "optionsTableBooking/details.php?idBooking=",
+  edit: "optionsTableBooking/edit.php?idBooking=",
 };
 
 const optionBooking = (tbody) => {
@@ -238,6 +240,7 @@ const optionBooking = (tbody) => {
     button.addEventListener("click", async () => {
       idBooking = button.parentElement.id;
       option = button.dataset.option;
+    
       url = optionsUrls[option] + idBooking;
       await displayOptionModal(url, option);
     });
@@ -262,6 +265,9 @@ const displayOptionModal = async (url, option) => {
       case "details":
         configDetails();
         break;
+        case "edit":
+          configEdit();
+          break;
     }
   }
 };

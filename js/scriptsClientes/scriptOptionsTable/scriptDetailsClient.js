@@ -42,7 +42,10 @@ const getRowsBookingClients = async (id) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-    if (result) {
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
@@ -62,8 +65,12 @@ const noBookingsClient = (msj) => {
 
 const getClientBookingLimit = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params="+
-    JSON.stringify({option:"bookingsClient",client:id,index:indexBooking});
+    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    JSON.stringify({
+      option: "bookingsClient",
+      client: id,
+      index: indexBooking,
+    });
 
   let data = null;
 
@@ -71,8 +78,9 @@ const getClientBookingLimit = async (id) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {

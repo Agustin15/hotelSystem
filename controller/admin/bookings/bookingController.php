@@ -48,103 +48,118 @@ class bookingController
     public function GET($req)
     {
 
-        $option = $req['option'];
-        switch ($option) {
+        if (empty($req['option'])) {
+            return array("error" => "Undefined variable option", "status" => 404);
+        } else {
 
-            case "allBookings":
-                try {
-                    $bookings = $this->booking->getAllReservas()->fetch_all(MYSQLI_ASSOC);
+            $option = $req['option'];
+            switch ($option) {
 
-                    return $bookings;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
+                case "allBookings":
+                    try {
+                        $bookings = $this->booking->getAllReservas()->fetch_all(MYSQLI_ASSOC);
 
-                break;
-            case "bookingByClientAndDate":
-
-                try {
-                    $bookingFind =  $this->booking->getReservaPorIdClienteAndFecha(
-                        $req['dataBooking']['idClient'],
-                        $req['dataBooking']['startBooking'],
-                        $req['dataBooking']['endBooking']
-                    );
-
-                    return $bookingFind;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-
-                break;
-
-            case "bookingByClientMailAndDate":
-
-                try {
-                    $bookingFind =  $this->booking->getBookingByClientMailAndDate(
-                        $req['dataBooking']['mail'],
-                        $req['dataBooking']['startBooking'],
-                        $req['dataBooking']['endBooking']
-                    );
-
-
-                    return $bookingFind;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-
-                break;
-
-            case "bookingsRowsYear":
-
-                try {
-                    $year = $req['year'];
-                    $rowsBookingYear = $this->booking->getAllReservasAnio($year)->num_rows;
-
-
-                    return $rowsBookingYear;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-
-                break;
-
-            case "bookingsYearlimit":
-
-                try {
-                    $resultBookings = null;
-                    if ($req['data']['indexPage'] == 0) {
-                        $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
-                    } else {
-                        $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
+                        return $bookings;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
                     }
 
-                    return $resultBookings;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
+                    break;
+                case "bookingByClientAndDate":
 
-                break;
+                    try {
+                        $bookingFind =  $this->booking->getReservaPorIdClienteAndFecha(
+                            $req['dataBooking']['idClient'],
+                            $req['dataBooking']['startBooking'],
+                            $req['dataBooking']['endBooking']
+                        );
 
-            case "allYearsBooking":
+                        return $bookingFind;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
 
-                try {
-                    $res = $this->booking->getAllYearsBookings();
-                    return $res;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-                break;
+                    break;
 
-            case "getClientByIdBooking":
+                case "bookingByClientMailAndDate":
 
-                try {
-                    $idBooking = $req['idBooking'];
-                    $res = $this->booking->getDataClientByIdBooking($idBooking);
-                    return $res;
-                } catch (Throwable $th) {
-                    return array("error" => $th->getMessage(), "status" => 404);
-                }
-                break;
+                    try {
+                        $bookingFind =  $this->booking->getBookingByClientMailAndDate(
+                            $req['dataBooking']['mail'],
+                            $req['dataBooking']['startBooking'],
+                            $req['dataBooking']['endBooking']
+                        );
+
+
+                        return $bookingFind;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+
+                    break;
+
+                case "bookingsRowsYear":
+
+                    try {
+                        $year = $req['year'];
+                        $rowsBookingYear = $this->booking->getAllReservasAnio($year)->num_rows;
+
+
+                        return $rowsBookingYear;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+
+                    break;
+
+                case "bookingsYearlimit":
+
+                    try {
+                        $resultBookings = null;
+                        if ($req['data']['indexPage'] == 0) {
+                            $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
+                        } else {
+                            $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
+                        }
+
+                        return $resultBookings;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+
+                    break;
+
+                case "allYearsBooking":
+
+                    try {
+                        $res = $this->booking->getAllYearsBookings();
+                        return $res;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+                    break;
+
+                case "getClientByIdBooking":
+
+                    try {
+                        $idBooking = $req['idBooking'];
+                        $res = $this->booking->getDataClientByIdBooking($idBooking);
+                        return $res;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+                    break;
+                case "getBookingById":
+
+                    try {
+                        $idBooking = $req['idBooking'];
+                        $res = $this->booking->getReservaPoridReserva($idBooking);
+                        return $res;
+                    } catch (Throwable $th) {
+                        return array("error" => $th->getMessage(), "status" => 404);
+                    }
+                    break;
+            }
         }
     }
 

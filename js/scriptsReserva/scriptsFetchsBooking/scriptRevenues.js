@@ -15,19 +15,22 @@ export const fetchPOSTPay = async (booking) => {
       body: JSON.stringify(booking),
     });
     const result = await response.json();
-
-    if (result.response == true) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.response == true) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    alertBooking(
-      "Error",
-      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
-    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     loadingBooking(false);
+    if (!data) {
+      alertBooking(
+        "Error",
+        "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };
@@ -46,19 +49,22 @@ export const fetchPUTPay = async (booking) => {
       body: JSON.stringify(booking),
     });
     const result = await response.json();
-
-    if (result.response == true) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.response == true) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    alertBooking(
-      "Error",
-      "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
-    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     loadingBooking(false);
+    if (!data) {
+      alertBooking(
+        "Error",
+        "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };
@@ -73,19 +79,22 @@ export const fetchGETPay = async (idBooking) => {
   try {
     const response = await fetch(url);
     const result = await response.json();
-
-    if (result) {
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    alertBooking(
-      "Error",
-      "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
-    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     loadingBooking(false);
+    if (!data) {
+      alertBooking(
+        "Error",
+        "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
+      );
+    }
     return data;
   }
 };
