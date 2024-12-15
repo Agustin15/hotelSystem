@@ -2,6 +2,8 @@ import { search, loading } from "../../scriptsClientes/scriptClientsTable.js";
 import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
 import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
+import { loadingPage } from "../scriptReserva.js";
+import { pageNotFound } from "../scriptReserva.js";
 
 let pages;
 let limitByPage = 1;
@@ -240,7 +242,7 @@ const optionBooking = (tbody) => {
     button.addEventListener("click", async () => {
       idBooking = button.parentElement.id;
       option = button.dataset.option;
-    
+
       url = optionsUrls[option] + idBooking;
       await displayOptionModal(url, option);
     });
@@ -249,10 +251,25 @@ const optionBooking = (tbody) => {
 
 const displayOptionModal = async (url, option) => {
   let modalMainBookings = document.querySelector(".modalMainBookings");
+  let page;
   if (url) {
     modalOption(true, modalMainBookings);
-    const response = await fetch(url);
-    const page = await response.text();
+    loadingPage(true, modalMainBookings);
+    try {
+      const response = await fetch(url);
+      const result = await response.text();
+      if (response.ok && result) {
+        page = result;
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loadingPage(false, modalMainBookings);
+      if (!page) {
+        pageNotFound(modalMainBookings);
+        closePageNotFound(modalMainBookings);
+      }
+    }
 
     if (page) {
       modalMainBookings.innerHTML = page;
@@ -265,9 +282,9 @@ const displayOptionModal = async (url, option) => {
       case "details":
         configDetails();
         break;
-        case "edit":
-          configEdit();
-          break;
+      case "edit":
+        configEdit();
+        break;
     }
   }
 };
@@ -279,4 +296,10 @@ export const modalOption = (state, modal) => {
     modal.style.display = "none";
     modal.innerHTML = ``;
   }
+};
+
+const closePageNotFound = (modal) => {
+  document.querySelector(".btnClose").addEventListener("click", () => {
+    modalOption(false, modal);
+  });
 };

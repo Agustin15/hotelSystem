@@ -44,6 +44,7 @@ const getDocument = async (url) => {
   } finally {
     loadingPage(false, option);
     if (!data) {
+      pageNotFound(option);
     }
     return data;
   }
@@ -71,9 +72,9 @@ export const markActualOption = (li) => {
   li.classList.add("optionMarkActual");
 };
 
-const loadingPage = (state, option) => {
+export const loadingPage = (state, element) => {
   if (state) {
-    option.innerHTML = `
+    element.innerHTML = `
        <div class="loadingPage">
 
        <span>Cargando pagina</span>
@@ -81,6 +82,18 @@ const loadingPage = (state, option) => {
        </div>
     `;
   } else {
-    option.innerHTML = ``;
+    element.innerHTML = ``;
   }
+};
+
+export const pageNotFound = (element) => {
+  element.innerHTML = `
+  <div class="pageNotFound">
+  <div class="header">
+  <button class="btnClose">X</button>
+  </div>
+  <img src="../../../img/pageNotFound.png">
+  <h3>Ups, no se pudo cargar la página</h3>
+  </div>
+`;
 };
