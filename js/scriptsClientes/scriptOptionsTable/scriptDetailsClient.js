@@ -4,6 +4,8 @@ import { generateItemsInfo } from "./scriptsDetailsClient/scriptItemsBooking.js"
 import { configGuestsDetails } from "./scriptsDetailsClient/scriptGuests.js";
 import { configRoomsDetails } from "./scriptsDetailsClient/scriptRooms.js";
 import { configServicesDetails } from "./scriptsDetailsClient/scriptServices.js";
+import { pageNotFound, loadingPage } from "../scriptCliente.js";
+import { closePageNotFound } from "../scriptClientsTable.js";
 
 let pages;
 let indexPage = 1;
@@ -205,11 +207,29 @@ const buttonsOptions = () => {
 
 const drawOptionDetail = async (url, configOptionDetail) => {
   const modal = document.querySelector(".modalOptionsBookingClient");
-  const response = await fetch(url);
-  const result = await response.text();
-  modal.innerHTML = result;
+  let optionPage;
+
   optionModal(modal, "flex");
-  configOptionDetail();
+  loadingPage(true, modal);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      optionPage = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modal);
+    if (!optionPage) {
+      pageNotFound(modal);
+      closePageNotFound(modal);
+    } else {
+      modal.innerHTML = optionPage;
+      configOptionDetail();
+    }
+  }
+
 };
 
 export const optionModal = (modal, option) => {

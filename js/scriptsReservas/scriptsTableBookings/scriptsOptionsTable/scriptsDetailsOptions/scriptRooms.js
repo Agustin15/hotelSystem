@@ -1,5 +1,4 @@
 import { closeWindow, loading, noData } from "./scriptClient.js";
-import { rooms } from "../../../../scriptsClientes/scriptOptionsTable/scriptsDetailsClient/scriptRooms.js";
 import { getDataBookingRoomsWithCategory } from "../../../../scriptsRooms/scriptRooms.js";
 
 let body, roomsBooking, idBooking;
@@ -28,7 +27,9 @@ const dataBookingRoomsWithCategory = async () => {
   let data = null;
    loading(true,body);
   try {
+
     const roomsDataBooking = await getDataBookingRoomsWithCategory(idBooking);
+ 
     if (roomsDataBooking) {
       data = roomsDataBooking;
     }
@@ -41,4 +42,24 @@ const dataBookingRoomsWithCategory = async () => {
     }
     return data;
   }
+};
+
+
+const rooms = (roomsBooking) => {
+  let liRoomsBooking = roomsBooking.map((room) => {
+    return `
+         <li>
+<div class="icon">
+           <img src="data:image/png;base64,${room.image}">
+         </div>             
+         
+         <div class="info">
+            <span>Habitacion ${room.numRoom}</span>
+            <span>Categoria ${room.category}</span>
+         </div>
+     
+         </li>`;
+  });
+
+  return liRoomsBooking.join("");
 };

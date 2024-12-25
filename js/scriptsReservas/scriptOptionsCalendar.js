@@ -3,6 +3,8 @@ import {
   resultBookingAdd,
 } from "./scriptsOptionsCalendar/scriptFormAdd.js";
 import { configFreeRooms } from "./scriptsOptionsCalendar/scriptFreeRooms.js";
+import { pageNotFound, loadingPage } from "./scriptReserva.js";
+import { closePageNotFound } from "./scriptsTableBookings/scriptTableBookings.js";
 
 let startBookingLocal;
 let endBookingLocal;
@@ -62,10 +64,27 @@ export const createEventsCalendar = async () => {
 };
 
 const getOptionsAddBooking = async () => {
-  const response = await fetch("addBookingOptions/optionsAddBooking.html");
-  const result = await response.text();
+  let page;
+  loadingPage(true, modalMainBookings);
 
-  return result;
+  try {
+    const response = await fetch("addBookingOptions/optionsAddBooking.html");
+    const result = await response.text();
+
+    if (response.ok && result) {
+      page = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modalMainBookings);
+
+    if (!page) {
+      pageNotFound(modalMainBookings);
+      closePageNotFound(modalMainBookings);
+    }
+    return page;
+  }
 };
 
 const modal = (state) => {
@@ -82,10 +101,10 @@ export const optionsAddBooking = async (startBooking, endBooking) => {
   modalMainBookings = document.querySelector(".modalMainBookings");
   modal(true);
   let result = await getOptionsAddBooking();
-
-  modalMainBookings.innerHTML = result;
-
-  configOptionsAddBooking(startBooking, endBooking);
+  if (result) {
+    modalMainBookings.innerHTML = result;
+    configOptionsAddBooking(startBooking, endBooking);
+  }
 };
 
 const configOptionsAddBooking = async (startBooking, endBooking) => {
@@ -110,15 +129,31 @@ const configOptionsAddBooking = async (startBooking, endBooking) => {
 };
 
 const drawOption = async (optionAddBooking, url) => {
-  const response = await fetch(url);
-  const result = await response.text();
+  let optionPage;
+  loadingPage(true, optionAddBooking);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      optionPage = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, optionAddBooking);
+    if (!optionPage) {
+      pageNotFound(optionAddBooking);
+    }
+  }
 
-  optionAddBooking.innerHTML = result;
+  if (optionPage) {
+    optionAddBooking.innerHTML = optionPage;
 
-  if (optionAddBooking.querySelector("form")) {
-    configFormAddBooking(startBookingLocal, endBookingLocal);
-  } else if (optionAddBooking.querySelector(".containFreeRooms")) {
-    configFreeRooms(startBookingLocal, endBookingLocal);
+    if (optionAddBooking.querySelector("form")) {
+      configFormAddBooking(startBookingLocal, endBookingLocal);
+    } else if (optionAddBooking.querySelector(".containFreeRooms")) {
+      configFreeRooms(startBookingLocal, endBookingLocal);
+    }
   }
 };
 

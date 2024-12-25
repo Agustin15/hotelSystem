@@ -17,16 +17,14 @@ if (isset($_GET['idBooking'])) {
 
 <body>
 
-    <div class="containEditOption" id="<?php echo $idBooking ?>">
+    <div class="modalOptionEditBooking""></div>
+    
+    <div class=" containEditOption" id="<?php echo $idBooking ?>">
         <ul class="menu">
-            <li>Editar</li>
-            <li>Habitaciones</li>
+            <li id="itemEdit">Editar</li>
+            <li id="itemRooms">Habitaciones</li>
         </ul>
 
-        <div class="title">
-
-            <h3>Editar Reserva <?php echo $idBooking ?> </h3>
-        </div>
         <div class="body">
 
         </div>

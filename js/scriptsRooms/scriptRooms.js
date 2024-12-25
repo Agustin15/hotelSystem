@@ -81,6 +81,31 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
   }
 };
 
+export const getBookingRoomsDetails = async (idBooking) => {
+  let url =
+    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    JSON.stringify({
+      option: "getRoomsBookingAndDetails",
+      idBooking: idBooking,
+    });
+
+  let data = null;
+
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
 export const getDataBookingRoomsGuests = async (idBooking) => {
   let url =
     "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +

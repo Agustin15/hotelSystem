@@ -123,7 +123,8 @@ class reservas
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes on
-        clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=? LIMIT 10");
+        clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=?
+         ORDER BY reserva_habitacion.fechaLlegada DESC LIMIT 10");
         $consulta->bind_param("i", $year);
         $consulta->execute();
 
@@ -146,7 +147,8 @@ class reservas
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes on
-        clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=?LIMIT 10,$index");
+        clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=? ORDER BY 
+        reserva_habitacion.fechaLlegada LIMIT 10,$index");
         $consulta->bind_param("i", $year);
         $consulta->execute();
 

@@ -2,10 +2,12 @@ import configDeleteClient from "./scriptOptionsTable/scriptDeleteClient.js";
 import { configEditClient } from "./scriptOptionsTable/scriptEditClient.js";
 import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js";
 import { drawRowsTable } from "./drawRowsTable.js";
+import { loadingPage, pageNotFound } from "./scriptCliente.js";
 
 let indexRegister = 0;
 let page = 1;
 let limitPage;
+let modalMainClient;
 
 const getRowsClients = async () => {
   let data = null;
@@ -57,30 +59,7 @@ const getClientById = async (idClient) => {
   }
 };
 
-export const getAllClients = async () => {
-  let data = null;
 
-  try {
-    let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
-      JSON.stringify({ option: "allClients" });
-
-    const response = await fetch(url);
-    const result = await response.json();
-    if (!response.ok) {
-      throw result.error;
-    } else if (result) {
-      data = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    if (!data) {
-      noData();
-    }
-    return data;
-  }
-};
 
 const getDataLimitClients = async () => {
   let data = null;
@@ -110,7 +89,7 @@ const getDataLimitClients = async () => {
   }
 };
 
-export const loading = (state) => {
+const loading = (state) => {
   if (state) {
     document.querySelector("tfoot").innerHTML = ` 
     
@@ -177,7 +156,7 @@ const controls = (next, prev) => {
   });
 };
 
-export const search = () => {
+const search = () => {
   let inputSerch = document.querySelector(".inputSearch");
   let tfoot = document.querySelector("tfoot");
 
@@ -231,16 +210,33 @@ const noData = () => {
 };
 
 const getOptionClient = async (url) => {
-  const response = await fetch(url);
-  const result = await response.text();
-  return result;
+  let optionPage;
+  modalMainClient = document.querySelector(".modalMainClient");
+  modalMainClient.style.display = "flex";
+
+  loadingPage(true, modalMainClient);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      optionPage = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modalMainClient);
+    if (!optionPage) {
+      pageNotFound(modalMainClient);
+      closePageNotFound(modalMainClient);
+    }
+    return optionPage;
+  }
 };
 
 const optionsClient = () => {
   let btnsDelete = [...document.querySelectorAll(".btnDelete")];
   let btnsEdit = [...document.querySelectorAll(".btnEdit")];
   let btnsDetails = [...document.querySelectorAll(".btnDetails")];
-  let result;
 
   btnsDelete.forEach((btnDelete) => {
     btnDelete.addEventListener("click", async () => {
@@ -272,14 +268,22 @@ const optionsClient = () => {
 const drawOption = async (btn, url, configOption) => {
   let id = btn.parentElement.id;
   let result = await getOptionClient(url + id);
-  openModal(result);
-  configOption();
+  if (result) {
+    openModal(result);
+    configOption();
+  }
 };
 
 const openModal = (result) => {
-  let modalMainClient = document.querySelector(".modalMainClient");
   modalMainClient.style.display = "flex";
   modalMainClient.innerHTML = result;
+};
+
+export const closePageNotFound = (modal) => {
+  document.querySelector(".btnClose").addEventListener("click", () => {
+    modal.innerHTML = ``;
+    modal.style.display = "none";
+  });
 };
 
 export { displayTable };

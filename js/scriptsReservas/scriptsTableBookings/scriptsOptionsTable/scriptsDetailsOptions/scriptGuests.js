@@ -1,9 +1,5 @@
 import { getDataBookingRoomsGuests } from "../../../../scriptsRooms/scriptRooms.js";
-import { loading, closeWindow, noData } from "./scriptClient.js";
-import {
-  totalGuests,
-  roomsGuests,
-} from "../../../../scriptsClientes/scriptOptionsTable/scriptsDetailsClient/scriptGuests.js";
+import {closeWindow, noData,loading } from "./scriptClient.js";
 
 let body;
 let idBooking;
@@ -61,4 +57,60 @@ export const getBookingRoomsGuests = async (idBooking) => {
     }
     return data;
   }
+};
+
+
+const totalGuests = (dataBooking) => {
+  let adults = 0;
+  let childs = 0;
+  dataBooking.map((data) => {
+    adults += data.adultos;
+    childs += data.ninos;
+  });
+
+  return { adults: adults, childs: childs };
+};
+
+export const roomsGuests = (dataBooking) => {
+  let dataRoomsGuests= dataBooking.map((data) => {
+    return `
+            
+<li>
+
+         <div class="roomNumb">
+          <span>Habitacion ${data.numHabitacionReservada}</span>
+          </div>
+
+          <div class="content">
+          <div class="icon">
+              <img src="../../../img/family.png">
+          </div>
+          <div class="guests">
+
+          <div class="adults">
+   
+            <img src="../../../img/guestInfo.png">
+            <div class="value">
+             <span>Adultos:</span>
+             <span>${data.adultos}</span>
+             </div>
+             </div>
+
+              <div class="childs">
+
+            <img src="../../../img/kids.png">
+              <div class="value">
+             <span>Niños:</span>
+             <span>${data.ninos}</span>
+             </div>
+             </div>
+          </div>
+          </div>
+
+
+        </li>
+        `;
+  });
+
+  return dataRoomsGuests.join("");
 };

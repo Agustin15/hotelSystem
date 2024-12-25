@@ -1,62 +1,51 @@
-import { drawFormEdit } from "./scriptsEditBooking/scriptFormEdit.js";
+import { configEditForm } from "./scriptsEditBooking/scriptsFormEdit/scriptOptionEdit.js";
+import { configRoomsAvailables } from "./scriptsEditBooking/scriptsRoomsAvailables/scriptRoomsAvailables.js";
+import { pageNotFound, loadingPage } from "../../scriptReserva.js";
+
 let body, idBooking;
 
-export const configEdit = async () => {
-
+export const configEdit = () => {
   idBooking = document.querySelector(".containEditOption").id;
   body = document.querySelector(".body");
+  let menu = document.querySelector(".menu");
+  let menuItems = menu.querySelectorAll("li");
 
-  const booking = await getBookingById();
+  menuItems.forEach((item) => {
+    item.addEventListener("click", async () => {
+      if (item.id == "itemEdit") {
+        configEditForm(idBooking, body);
+      } else {
+        let document = await drawOptionRoomsAvailables();
+        if (document) {
+          body.innerHTML = document;
+          configRoomsAvailables();
+        }
+      }
+    });
+  });
 
-  if (booking) {
-    drawFormEdit(body, booking);
-  }
+  configEditForm(idBooking, body);
 };
 
-const getBookingById = async () => {
-  let data = null;
+const drawOptionRoomsAvailables = async () => {
+  let data;
 
-  loading(true);
+  loadingPage(true, body);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params= " +
-        JSON.stringify({ option: "getBookingById", idBooking: idBooking })
+      "optionsTableBooking/optionsEdit/roomsAvailables.php"
     );
-    const result = await response.json();
-    if (!response.ok) {
-      throw result.error;
-    } else if (result) {
-      data = result;
+    const document = await response.text();
+    if (response.ok && document) {
+      data = document;
     }
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loadingPage(false, body);
     if (!data) {
-      noData();
+      pageNotFound(body);
     }
     return data;
   }
-};
-
-const loading = () => {
-  body.innerHTML = ` 
-   
-    <div class="loadingEdit">
- 
-    <span>Cargando datos</span>
-    <img src="../../../img/spinnerMain.gif">
-    </div>
-   `;
-};
-
-const noData = () => {
-  body.innerHTML = ` 
-   
-    <div class="noDataFormEdit">
-
-    <img src="../../../img/sinDatos.png">
-       <h3>Ups, no se pudo encontrar la reserva</h3>
-    </div>
-   `;
 };

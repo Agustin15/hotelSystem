@@ -33,86 +33,75 @@ class revenuesController
         }
     }
 
-    public function GET($req)
+    public function getDashboardGraphic($req)
     {
+        $mesesConsulta = array(
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+        );
 
-        if (empty($req['option'])) {
-            return array("error" => "Undefined variable option", "status" => 404);
-        } else {
+        try {
 
-            $option = $req['option'];
-
-            switch ($option) {
-                case "dashboardGraphic":
-
-                    $mesesConsulta = array(
-                        "1",
-                        "2",
-                        "3",
-                        "4",
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11",
-                        "12"
-                    );
-
-                    try {
-
-                        $gananciasPorMes = [];
-                        $gananciasPorMes = array_map(function ($mes) {
+            $gananciasPorMes = [];
+            $gananciasPorMes = array_map(function ($mes) {
 
 
-                            $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
+                $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
 
-                            $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
+                $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
-                            return $totalGananciasMes;
-                        }, $mesesConsulta);
+                return $totalGananciasMes;
+            }, $mesesConsulta);
 
-                        return $gananciasPorMes;
-                    } catch (Throwable $th) {
-                        return array("error" => $th->getMessage(), "status" => 404);
-                    }
-
-
-                    break;
-
-                case "itemDataDashboard":
-
-                    try {
-                        $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
-                        $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
-
-                        $dataRevenuesActual =  array(
-                            "totalRevenuesActualYear" => $totalRevenuesActualYear,
-                            "totalRevenuesActualMonth" => $totalRevenuesActualMonth
-                        );
-
-                        return $dataRevenuesActual;
-                    } catch (Throwable $th) {
-                        return array("error" => $th->getMessage(), "status" => 404);
-                    }
-
-                    break;
-                case "getRevenue":
-
-                    try {
-                        $idBooking = $req['idBooking'];
-
-                        $revenue =  $this->pay->getPago($idBooking);
-
-                        return $revenue;
-                    } catch (Throwable $th) {
-                        return array("error" => $th->getMessage(), "status" => 404);
-                    }
-                    break;
-            }
+            return $gananciasPorMes;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+    public function getItemDataDashboard($req)
+    {
+
+        try {
+            $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
+            $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
+
+            $dataRevenuesActual =  array(
+                "totalRevenuesActualYear" => $totalRevenuesActualYear,
+                "totalRevenuesActualMonth" => $totalRevenuesActualMonth
+            );
+
+            return $dataRevenuesActual;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function getRevenueByIdBooking($req)
+    {
+        try {
+            $idBooking = $req['idBooking'];
+
+            $revenue =  $this->pay->getPago($idBooking);
+
+            return $revenue;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
 
     public function DELETE() {}
 }

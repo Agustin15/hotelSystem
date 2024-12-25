@@ -27,7 +27,22 @@ $routes = [
         return $clientController->DELETE($req);
     },
     "GET" => function () use ($clientController, $req) {
-        return $clientController->GET($req);
+
+        $optionGet = match ($req["option"]) {
+
+            "allClients" => $clientController->getAllClients($req),
+            "AllYearsVisitClients" => $clientController->getAllYearsVisitClients($req),
+            "clientsGraphic" => $clientController->getClientsGraphic($req),
+            "clientsTable" => $clientController->getClientsTable($req),
+            "clientsRows" => $clientController->getClientsRows($req),
+            "dataClient" => $clientController->getDataClient($req),
+            "getClientByMailAndName" => $clientController->getClientByMailAndName($req),
+            "ifExistClient" => $clientController->getIfExistClient($req),
+            "rowsBookingsClient" => $clientController->getRowsBookingsClient($req),
+            "bookingsClient" => $clientController->getBookingsClient($req)
+        };
+
+        return $optionGet;
     }
 ];
 
@@ -35,9 +50,9 @@ $routes = [
 if (array_key_exists($method, $routes)) {
 
     $response = $routes[$method]();
-    if (isset($response["error"])) {
 
-        header("Content-Type: application/json", true, $response["status"]);
+    if (isset($response["error"])) {
+        http_response_code($response["status"]);
     }
 
     echo json_encode($response);

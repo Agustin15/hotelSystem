@@ -4,6 +4,11 @@ export const optionsMenuAdmin = () => {
     "#liClientes",
     "actualOptionClient"
   );
+  routesOptions(
+    "http://localhost/sistema%20Hotel/views/admin/reservas/",
+    "#liReserva",
+    "actualOptionBooking"
+  );
 
   let logout = document.querySelector(".logout");
 

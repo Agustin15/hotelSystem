@@ -1,5 +1,3 @@
-import { inputAlert } from "../../scriptsClientes/scriptAddClient.js";
-import { getAllClients } from "../../scriptsClientes/scriptClientsTable.js";
 import {
   configCartRooms,
   calculateDifferenceNight,
@@ -33,7 +31,7 @@ export const configFormAddBooking = async (startBooking, endBooking) => {
   let containForm = document.querySelector(".containForm");
   let cartRooms = document.querySelector(".cartRooms");
 
-  clients = await getClients();
+  clients = await getAllClients();
   startBookingLocal = startBooking;
   endBookingLocal = endBooking;
 
@@ -48,7 +46,7 @@ const draw = (containForm, cartRooms) => {
   containForm.style.display = "flex";
   cartRooms.style.display = "flex";
   displayNights();
-  displayClients();
+  displayClients(form,clients);
   setInputsForm();
   formAddSubmit();
   configCartRooms();
@@ -65,7 +63,7 @@ const setInputsForm = async () => {
   quantityInput.value = roomsCart.length || null;
 };
 
-const displayClients = async () => {
+export const displayClients = async (form,clients) => {
   let select = form.querySelector("select");
 
   let clientsOptions = clients.map((client) => {
@@ -78,20 +76,29 @@ const displayClients = async () => {
   select.innerHTML = clientsOptions.join("");
 };
 
-const getClients = async () => {
-  loading(true);
+const getAllClients = async () => {
   let data = null;
+
+  loading(true);
   try {
-    const clients = await getAllClients();
-    if (clients) {
-      data = clients;
-    } else {
-      throw "Ups, no se pudieron cargar los clientes para la reserva";
+    let url =
+      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      JSON.stringify({ option: "allClients" });
+
+    const response = await fetch(url);
+    const result = await response.json();
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      data = result;
     }
   } catch (error) {
     console.log(error);
   } finally {
     loading(false);
+    if (!data) {
+      noData();
+    }
     return data;
   }
 };
@@ -192,4 +199,24 @@ const displayNights = () => {
   document
     .querySelector(".nights")
     .querySelector("h3").textContent = `${textNights}`;
+};
+
+export const inputAlert = (inputError) => {
+  let namesInputs = [...document.getElementsByName(inputError.key)];
+  let input = namesInputs[0];
+  input.classList.add("inputAlert");
+
+  let msjError = input.parentNode.querySelector(".msjError");
+  msjError.querySelector("span").textContent = inputError.msj;
+  msjError.classList.add("msjErrorShow");
+
+  removeAlertInputs();
+};
+
+const removeAlertInputs = () => {
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("click", () => {
+      input.classList.remove("inputAlert");
+    });
+  });
 };

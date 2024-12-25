@@ -4,6 +4,7 @@ export let optionAddLi = document.querySelector(".addLi");
 export let actualOption = localStorage.getItem("actualOptionBooking");
 import { displayTable } from "./scriptsTableBookings/scriptTableBookings.js";
 
+
 document.addEventListener("DOMContentLoaded", async () => {
   if (actualOption == "bookingsTable.html") {
     actualOptionBooking(localStorage.getItem("actualOptionBooking"));
@@ -23,6 +24,7 @@ export const actualOptionBooking = async (optionActual) => {
 
 optionListLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionBooking", "bookingsTable.html");
+
   actualOptionBooking(localStorage.getItem("actualOptionBooking"));
 });
 
@@ -97,3 +99,4 @@ export const pageNotFound = (element) => {
   </div>
 `;
 };
+

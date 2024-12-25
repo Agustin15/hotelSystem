@@ -167,13 +167,13 @@ $actualYear = date("Y");
 
                     <ul class="subMenu">
 
-                        <li>
+                        <li data-sub-url="bookingsTable.html">
 
                             <img src="../../../img/reservas.png">
                             <a>Lista</a>
 
                         </li>
-                        <li class="liCalendario">
+                        <li data-sub-url="addBooking.html" class="liCalendario">
 
                             <img src="../../../img/agregarReserva.png">
                             <a>Calendario</a>

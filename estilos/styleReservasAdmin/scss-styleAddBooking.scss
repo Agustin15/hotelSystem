@@ -77,6 +77,69 @@
   height: 100vh;
   background: rgba(44, 44, 44, 0.6);
 
+  .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    opacity: 100%;
+    color: rgb(187, 187, 187);
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-left: 7rem;
+    margin-top: 14rem;
+
+    img {
+      width: 40px;
+      opacity: 60%;
+    }
+  }
+
+  .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 18px;
+    align-items: center;
+    height: auto;
+    margin-left: 7rem;
+    margin-top: 14rem;
+    opacity: 100%;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+
+    img {
+      width: 95px;
+      opacity: 75%;
+    }
+
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      width: 110%;
+
+      button {
+        background-color: rgb(231, 0, 0);
+        padding: 0.2rem;
+        width: 2rem;
+        height: 1.5rem;
+        font-weight: bold;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: rgb(182, 4, 4);
+      }
+    }
+  }
   .alertGuests {
     display: flex;
     flex-direction: column;
@@ -172,6 +235,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    .loadingPage {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      opacity: 70%;
+      color: rgb(187, 187, 187);
+      border-radius: 5px;
+      padding: 1rem;
+      margin-right: 7rem;
+      margin-top: 11rem;
+
+      img {
+        width: 40px;
+        opacity: 70%;
+      }
+    }
+
+    .pageNotFound {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 18px;
+      align-items: center;
+      height: auto;
+      margin-top: 9rem;
+      opacity: 75%;
+      padding: 1rem;
+      margin-right: 7rem;
+      padding-top: 0;
+      padding-bottom: 1.5rem;
+      color: gray;
+      border-radius: 5px;
+      border-top-right-radius: 0;
+
+      img {
+        width: 95px;
+      }
+
+      .header {
+        display: none;
+        justify-content: flex-end;
+        width: 110%;
+      }
+    }
   }
 }
 

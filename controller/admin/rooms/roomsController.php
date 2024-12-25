@@ -17,7 +17,7 @@ class roomsController
 
     public function DELETE() {}
 
-    public function GET($req)
+    public function getAllCategoryRooms($req)
     {
 
         try {

@@ -27,7 +27,14 @@ $routes = [
         return $revenuesController->DELETE($req);
     },
     "GET" => function () use ($revenuesController, $req) {
-        return $revenuesController->GET($req);
+        $optionGet = match ($req["option"]) {
+
+            "dashboardGraphic" => $revenuesController->getDashboardGraphic($req),
+            "itemDataDashboard" => $revenuesController->getItemDataDashboard($req),
+            "getRevenue" => $revenuesController->getRevenueByIdBooking($req)
+        };
+
+        return $optionGet;
     }
 ];
 
@@ -35,9 +42,9 @@ $routes = [
 if (array_key_exists($method, $routes)) {
 
     $response = $routes[$method]();
-    if (isset($response["error"])) {
 
-        header("Content-Type: application/json", true, $response["status"]);
+    if (isset($response["error"])) {
+        http_response_code($response["status"]);
     }
 
     echo json_encode($response);

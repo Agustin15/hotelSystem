@@ -115,7 +115,7 @@
 
 .tableBookings {
   min-width: 60rem;
-  width: auto;
+  width:64rem;
   padding-top: 1rem;
 
   thead {
@@ -144,7 +144,11 @@
         align-items: center;
         width: 5rem;
         gap: 0.4rem;
+        margin-left: 0.5rem;
 
+        .iconStatus{
+          width: 16px;
+        }
         img {
           width: 24px;
         }
@@ -269,7 +273,7 @@
   margin-top: 14rem;
 
   img {
-    width: 60px;
+    width: 40px;
     opacity: 60%;
   }
 }
@@ -402,6 +406,8 @@
   width: 100%;
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
+
+
 }
 
 .containDetailsBooking {

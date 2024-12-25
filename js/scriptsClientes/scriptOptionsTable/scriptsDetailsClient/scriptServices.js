@@ -45,7 +45,7 @@ export const getServices = async (idBooking) => {
   }
 };
 
-export const services = (servicesBooking) => {
+const services = (servicesBooking) => {
   let liServicesBooking = servicesBooking.map((service) => {
     let nameService;
     let title;

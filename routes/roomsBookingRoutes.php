@@ -26,7 +26,17 @@ $routes = [
         return $roomsBookingController->DELETE($req);
     },
     "GET" => function () use ($roomsBookingController, $req) {
-        return $roomsBookingController->GET($req);
+        $optionGet = match ($req["option"]) {
+
+            "dashboardGraphic" => $roomsBookingController->getDashboardGraphic($req),
+            "itemDataDashboard" => $roomsBookingController->getItemDataDashboard($req),
+            "getDataRoomsBooking" => $roomsBookingController->getDataRoomsBooking($req),
+            "getDataRoomsBookingAndCategory" => $roomsBookingController->getDataRoomsBookingAndCategory($req),
+            "getRoomsBookingAndDetails" => $roomsBookingController->getRoomsBookingAndDetails($req),
+            "roomsFreeCategory" => $roomsBookingController->getRoomsFreeCategory($req)
+        };
+
+        return $optionGet;
     }
 ];
 
@@ -36,7 +46,7 @@ if (array_key_exists($method, $routes)) {
     $response = $routes[$method]();
     if (isset($response["error"])) {
 
-        header("Content-Type: application/json", true, $response["status"]);
+        http_response_code($response["status"]);
     }
 
     echo json_encode($response);

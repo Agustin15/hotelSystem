@@ -57,7 +57,7 @@ export const getBookingRoomsGuests = async (idBooking) => {
   }
 };
 
-export const totalGuests = (dataBooking) => {
+const totalGuests = (dataBooking) => {
   let adults = 0;
   let childs = 0;
   dataBooking.map((data) => {
@@ -68,7 +68,7 @@ export const totalGuests = (dataBooking) => {
   return { adults: adults, childs: childs };
 };
 
-export const roomsGuests = (dataBooking) => {
+const roomsGuests = (dataBooking) => {
   let dataRoomsGuests= dataBooking.map((data) => {
     return `
             

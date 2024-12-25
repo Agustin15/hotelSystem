@@ -1,9 +1,7 @@
-import { search, loading } from "../../scriptsClientes/scriptClientsTable.js";
 import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
 import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
-import { loadingPage } from "../scriptReserva.js";
-import { pageNotFound } from "../scriptReserva.js";
+import { loadingPage, pageNotFound } from "../scriptReserva.js";
 
 let pages;
 let limitByPage = 1;
@@ -38,8 +36,16 @@ const drawRowsTable = (bookingsYearlimit) => {
   let rowsTableBooking = bookingsYearlimit.map((booking, index) => {
     let classTr = "";
     let classBtnDisabled = "";
+    let iconStatusBooking = "../../../img/bookingPendingIcon.png";
+
     if (new Date(booking.fechaSalida) < new Date()) {
       classBtnDisabled = "btnDisabled";
+      iconStatusBooking = "../../../img/bookingEndIcon.png";
+    } else if (
+      new Date(booking.fechaLlegada) <= new Date() &&
+      new Date(booking.fechaSalida) >= new Date()
+    ) {
+      iconStatusBooking = "../../../img/bookingInCurse.gif";
     }
 
     if (index % 2 == 0) {
@@ -47,12 +53,15 @@ const drawRowsTable = (bookingsYearlimit) => {
     }
 
     return `
+
 <tr class=${classTr}>
 <td>
 
  <div class="idBooking">
        ${booking.idReserva}
               <img src="../../../img/reservas.png">
+                <img  class="iconStatus" src=${iconStatusBooking}> 
+
        </div>
 
 </td>
@@ -71,6 +80,7 @@ const drawRowsTable = (bookingsYearlimit) => {
             
            </div>
            </td>
+
            </tr>
 `;
   });
@@ -298,8 +308,61 @@ export const modalOption = (state, modal) => {
   }
 };
 
-const closePageNotFound = (modal) => {
+export const closePageNotFound = (modal) => {
   document.querySelector(".btnClose").addEventListener("click", () => {
     modalOption(false, modal);
   });
+};
+
+const search = () => {
+  let inputSerch = document.querySelector(".inputSearch");
+  let tfoot = document.querySelector("tfoot");
+
+  let rows = document.querySelector("tbody").querySelectorAll("tr");
+  inputSerch.addEventListener("keydown", () => {
+    let value = inputSerch.value.trim();
+
+    rows.forEach((row) => {
+      if (row.innerText.indexOf(value) == -1) {
+        row.style.display = "none";
+      } else {
+        row.style.display = "table-row";
+      }
+    });
+
+    let totalRowsHide = [...rows].reduce((ac, row) => {
+      row.style.display == "none" ? ac++ : ac;
+      return ac;
+    }, 0);
+
+    if (rows.length == totalRowsHide) {
+      tfoot.innerHTML = `
+   <td rowspan="6" colspan="6">
+  <div class="noResults">
+      <img src="../../../img/noFind.png">
+      <span>Sin Resultados</span>
+  </div>
+  </td>
+  
+  `;
+    } else {
+      tfoot.innerHTML = ``;
+    }
+  });
+};
+
+const loading = (state) => {
+  if (state) {
+    document.querySelector("tfoot").innerHTML = ` 
+    
+       <td rowspan="6" colspan="6">
+    <div class="loading">
+      <span>Cargando datos</span>
+      <img src="../../../img/spinnerMain.gif">
+    </div>
+    </td>
+    `;
+  } else {
+    document.querySelector("tfoot").innerHTML = ``;
+  }
 };

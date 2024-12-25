@@ -26,7 +26,7 @@ $routes = [
         return $roomsController->DELETE($req);
     },
     "GET" => function () use ($roomsController, $req) {
-        return $roomsController->GET($req);
+        return $roomsController->getAllCategoryRooms($req);
     }
 ];
 
@@ -34,9 +34,10 @@ $routes = [
 if (array_key_exists($method, $routes)) {
 
     $response = $routes[$method]();
-    if (isset($response["error"])) {
 
-        header("Content-Type: application/json", true, $response["status"]);
+    if (isset($response["error"])) {
+        http_response_code($response["status"]);
     }
+
     echo json_encode($response);
 }

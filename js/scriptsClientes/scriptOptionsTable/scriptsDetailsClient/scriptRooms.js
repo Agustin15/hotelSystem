@@ -42,7 +42,7 @@ export const getDataBookingRooms = async (idBooking) => {
   }
 };
 
-export const rooms = (roomsBooking) => {
+const rooms = (roomsBooking) => {
   let liRoomsBooking = roomsBooking.map((room) => {
     return `
          <li>

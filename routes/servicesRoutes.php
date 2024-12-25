@@ -26,7 +26,12 @@ $routes = [
         return $servicesController->DELETE($req);
     },
     "GET" => function () use ($servicesController, $req) {
-        return $servicesController->GET($req);
+
+        $optionGet = match ($req["option"]) {
+            "getServicesBooking" => $servicesController->getServicesBooking($req)
+        };
+
+        return $optionGet;
     }
 ];
 
@@ -36,8 +41,8 @@ if (array_key_exists($method, $routes)) {
     $response = $routes[$method]();
 
     if (isset($response["error"])) {
-
-        header("Content-Type: application/json", true, $response["status"]);
+        http_response_code($response["status"]);
     }
+
     echo json_encode($response);
 }

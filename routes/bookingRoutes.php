@@ -28,8 +28,21 @@ $routes = [
         return $bookingController->DELETE($req);
     },
     "GET" => function () use ($bookingController, $req) {
-        return $bookingController->GET($req);
+
+        $optionGet = match ($req["option"]) {
+            "allBookings" => $bookingController->getAllBookings($req),
+            "bookingByClientAndDate" => $bookingController->getBookingsByClientDate($req),
+            "bookingByClientMailAndDate" => $bookingController->getBookingByClientMailAndDate($req),
+            "bookingsRowsYear" => $bookingController->getBookingsRowsYear($req),
+            "bookingsYearlimit" => $bookingController->getBookingsYearLimit($req),
+            "allYearsBooking" => $bookingController->getAllYearsBooking($req),
+            "getClientByIdBooking" =>  $bookingController->getClientByIdBooking($req),
+            "getBookingById" => $bookingController->getBookingById($req)
+        };
+
+        return $optionGet;
     }
+
 ];
 
 

@@ -1,9 +1,11 @@
-import { modalOption } from "../scriptTableBookings.js";
+import { modalOption, closePageNotFound } from "../scriptTableBookings.js";
 import { configClient } from "./scriptsDetailsOptions/scriptClient.js";
 import { configGuests } from "./scriptsDetailsOptions/scriptGuests.js";
 import { configRooms } from "./scriptsDetailsOptions/scriptRooms.js";
 import { configServices } from "./scriptsDetailsOptions/scriptServices.js";
 import { configBill } from "./scriptsDetailsOptions/scriptBill.js";
+import { pageNotFound, loadingPage } from "../../scriptReserva.js";
+let modalOptionsBookingDetails;
 
 const itemsUrl = [
   {
@@ -40,14 +42,16 @@ const itemsUrl = [
     method: () => {
       configBill();
     },
-  }
-  
+  },
 ];
 
 export const configDetails = () => {
   let btnCloseDetails = document.querySelector(".btnCloseDetails");
   let itemsViews = document.querySelectorAll(".item");
-  let url;
+  
+  modalOptionsBookingDetails = document.querySelector(
+    ".modalOptionsBookingDetails"
+  );
 
   btnCloseDetails.addEventListener("click", () => {
     modalOption(false, document.querySelector(".modalMainBookings"));
@@ -64,12 +68,28 @@ export const configDetails = () => {
 };
 
 const drawItemData = async (itemUrlFind, idBooking) => {
-  const response = await fetch(itemUrlFind.url + idBooking);
-  const pageData = await response.text();
+  let pageData;
+  modalOption(true, modalOptionsBookingDetails);
+  loadingPage(true, modalOptionsBookingDetails);
+  try {
+    const response = await fetch(itemUrlFind.url + idBooking);
+    const result = await response.text();
+    if (response.ok && result) {
+      pageData = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modalOptionsBookingDetails);
+    if (!pageData) {
+      pageNotFound(modalOptionsBookingDetails);
+      closePageNotFound(modalOptionsBookingDetails);
+    }
+  }
 
   if (pageData) {
-    modalOption(true, document.querySelector(".modalOptionsBookingDetails"));
-    document.querySelector(".modalOptionsBookingDetails").innerHTML = pageData;
+    modalOption(true, modalOptionsBookingDetails);
+    modalOptionsBookingDetails.innerHTML = pageData;
 
     itemUrlFind.method();
   }
