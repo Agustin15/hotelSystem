@@ -4,23 +4,23 @@ import { configRoomsCart, drawRoomsInCart } from "./scriptCartRooms.js";
 let bookingGlobal;
 let allClients;
 
-let dateBookingStorage = JSON.parse(localStorage.getItem("dateBookingEdit"));
 export let nights;
-export let startBookingValue;
-export let endBookingValue;
-let dateBooking = {};
+export let startBookingSetting;
+export let endBookingSetting;
 
 export const drawFormEdit = (body, booking, clients) => {
   bookingGlobal = booking;
   allClients = clients;
 
-  if (dateBookingStorage) {
-    setFormatDateBooking(dateBookingStorage.start, dateBookingStorage.end);
-  } else {
-    setFormatDateBooking(booking.fechaLlegada, booking.fechaSalida);
-    dateBooking.start = new Date(booking.fechaLlegada);
-    dateBooking.end = new Date(booking.fechaSalida);
+  if (!startBookingSetting && !endBookingSetting) {
+    startBookingSetting = booking.fechaLlegada;
+    endBookingSetting = booking.fechaSalida;
   }
+
+  nights = calculateDifferenceNight(
+    new Date(startBookingSetting),
+    new Date(endBookingSetting)
+  );
 
   body.innerHTML = `
    <div class="containFormAndCart">
@@ -43,12 +43,12 @@ export const drawFormEdit = (body, booking, clients) => {
                     <div class="rowOne">
                         <div class="dateStart">
                             <label>Fecha de llegada</label>
-                            <input name="startBooking" value=${startBookingValue} type="date" id="startInput">
+                            <input name="startBooking" value=${startBookingSetting} type="date" id="startInput">
                         </div>
 
                         <div class="dateEnd">
                             <label>Fecha de Salida</label>
-                            <input name="endBooking" value=${endBookingValue}  type="date" id="endInput">
+                            <input name="endBooking" value=${endBookingSetting}  type="date" id="endInput">
                         </div>
                     <button type="button" class="btnCalculate">Calcular</button>
                     </div>
@@ -121,20 +121,6 @@ export const drawFormEdit = (body, booking, clients) => {
   calculateDate();
 };
 
-const setFormatDateBooking = (startDate, endDate) => {
-  startDate = new Date(startDate);
-  endDate = new Date(endDate);
-  nights = calculateDifferenceNight(new Date(startDate), new Date(endDate));
-
-  let firstDigitStartDay = startDate.getUTCDate() < 10 ? 0 : "";
-  let firstDigitEndDay = endDate.getUTCDate() < 10 ? 0 : "";
-  let firstDigitStartMonth = startDate.getMonth() < 10 ? 0 : "";
-  let firstDigitEndMonth = endDate.getMonth() < 10 ? 0 : "";
-
-  startBookingValue = `${startDate.getFullYear()}-${firstDigitStartMonth}${startDate.getMonth()}-${firstDigitStartDay}${startDate.getUTCDate()}`;
-  endBookingValue = `${endDate.getFullYear()}-${firstDigitEndMonth}${endDate.getMonth()}-${firstDigitEndDay}${endDate.getUTCDate()}`;
-};
-
 function calculateDifferenceNight(llegada, salida) {
   let differenceTime = salida.getTime() - llegada.getTime();
 
@@ -168,11 +154,8 @@ const calculateDate = () => {
     }
 
     titleNights.textContent = textNights;
-
-    dateBooking.start = new Date(inputStart.value);
-    dateBooking.end = new Date(inputEnd.value);
-
-    localStorage.setItem("dateBookingEdit", JSON.stringify(dateBooking));
     drawRoomsInCart(nights);
+    startBookingSetting = inputStart.value;
+    endBookingSetting = inputEnd.value;
   });
 };

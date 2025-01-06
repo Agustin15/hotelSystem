@@ -1,6 +1,8 @@
 import { getBookingRoomsDetails } from "../../../../../scriptsRooms/scriptRooms.js";
 import { alertGuests } from "../scriptsRoomsAvailables/scriptRoomsAvailables.js";
-export let roomsCart = [];
+import { nights } from "./scriptFormEdit.js";
+
+let roomsCart = [];
 
 let cartRooms, idBookingGlobal, roomsBooking, amount, divTotal;
 
@@ -15,7 +17,6 @@ export const configRoomsCart = async (idBooking, nights) => {
     drawRoomsInCart(nights);
   }
 };
-
 
 const getRoomsBooking = async () => {
   let data;
@@ -60,16 +61,20 @@ const loadingRoomsCart = (state) => {
 };
 
 export const drawRoomsInCart = (nights) => {
-  roomsCart = roomsBooking.map((room) => {
-    room.totalRoom = room.priceRoom * nights;
-    return room;
-  });
+  if (roomsCart.length == 0) {
+    roomsCart = roomsBooking.map((room) => {
+      room.totalRoom = room.priceRoom * nights;
+      return room;
+    });
+  }
 
   let liRoomsCart = roomsCart.map((room) => {
     let statusAddedClass = "statusAddedPreviously";
+    let iconDelete = "../../../img/deleteRoom.png";
 
     if (room.status != "Actual") {
       statusAddedClass = "statusAddedNew";
+      iconDelete = "../../../img/basura.png";
     }
     return `
      
@@ -78,7 +83,7 @@ export const drawRoomsInCart = (nights) => {
       <div class="header">
       <span>${room.category}</span>
          <span class=${statusAddedClass} >${room.status}</span>
-      <img class="delete" data-num-room=${room.numRoom}  src="../../../img/basura.png">
+      <img class="delete" data-num-room=${room.numRoom}  src="${iconDelete}">
       
       </div>
   
@@ -112,6 +117,11 @@ export const drawRoomsInCart = (nights) => {
 
   cartRooms.querySelector("ul").innerHTML = liRoomsCart.join("");
   calculateAmount();
+  valueInputQuantityRooms();
+};
+
+const valueInputQuantityRooms = () => {
+  document.querySelector("#roomsQuantityInput").value = roomsCart.length;
 };
 
 const calculateAmount = () => {
@@ -122,7 +132,6 @@ const calculateAmount = () => {
   divTotal.style.display = "flex";
   divTotal.querySelector("span").textContent = `Total: US$${amount}`;
 };
-
 
 export const createItemRoom = (room) => {
   let roomFind = roomsCart.find((roomCart) => roomCart.numRoom == room.numRoom);
@@ -135,4 +144,5 @@ export const createItemRoom = (room) => {
 
 const addRoom = (room) => {
   roomsCart.push(room);
+  drawRoomsInCart(nights);
 };

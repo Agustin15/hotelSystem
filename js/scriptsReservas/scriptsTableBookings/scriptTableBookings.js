@@ -136,8 +136,6 @@ const noData = (error) => {
 
   `;
 
-  document.querySelector(".controls").style.display = "none";
-  document.querySelector(".containSearch").style.display = "none";
   document.querySelector(".titleTable").classList.add("titleTableNoData");
 };
 
@@ -226,7 +224,9 @@ const drawYearsSelect = (years) => {
 
   let yearsOptions = years.map((year) => {
     return `
-  <option value=${year["YEAR(fechaLlegada)"]}>${year["YEAR(fechaLlegada)"]}</option>
+  <option selected=${year == new Date().getFullYear() ? true : false}value=${
+      year["YEAR(fechaLlegada)"]
+    }>${year["YEAR(fechaLlegada)"]}</option>
   `;
   });
 

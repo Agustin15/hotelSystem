@@ -232,7 +232,7 @@ $actualYear = date("Y");
 
             <div class="containGraphicRevenues">
 
-                <h3>Ganancias de este año (2024)</h3>
+                <h3>Ganancias de este año <?php echo $actualYear ?></h3>
                 <div class="loadingRevenues">
                     <img src="../../img/barCharSpinner.gif">
                     <span>Cargando datos</span>

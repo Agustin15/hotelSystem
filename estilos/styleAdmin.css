@@ -229,7 +229,6 @@ body {
   width: 30px;
 }
 
-
 .iconoMenu {
   width: 36px;
   margin-top: 24px;
@@ -243,7 +242,6 @@ body {
   font-size: 17px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-
 
 #navAdmin {
   margin-left: 0px;
@@ -688,10 +686,10 @@ body {
   font-size: 22px;
 }
 
-.containGraphicBookings .noData img,
-.containGraphicRevenues .noDataRevenues img,
-.containGraphicRooms .noDataRooms img {
-  width: 60px;
+.noDataRevenues img,
+.noDataRooms img,
+.noDataBookings img {
+  width: 80px;
 }
 
 #charBookings,

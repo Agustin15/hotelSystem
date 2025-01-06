@@ -45,6 +45,7 @@ const displayLoading = (status, element) => {
 
 async function getClientsByMonthActualYear(actualYear) {
   loading(true, "bookings");
+  let data;
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
@@ -61,12 +62,16 @@ async function getClientsByMonthActualYear(actualYear) {
     if (!response.ok) {
       throw result.error;
     } else if (result) {
+      data = result;
       dataPointsToGraphicClientsDashboard(result);
     }
   } catch (error) {
     console.log(error);
   } finally {
     loading(false, "bookings");
+    if (!data) {
+      document.querySelector(".noDataBookings").style.display = "flex";
+    }
   }
 }
 
@@ -92,8 +97,6 @@ function dataPointsToGraphicClientsDashboard(monthsClients) {
     if (totalMonthsClients > 0) {
       graphicClientsDashboard(dataPointsMonthsClients, "charBookings", "");
       $("#navAdmin").css("marginTop", "-22px");
-    } else {
-      document.querySelector(".noDataBookings").style.display = "flex";
     }
   } else {
     document.querySelector(".noDataBookings").style.display = "flex";

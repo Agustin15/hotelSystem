@@ -130,6 +130,7 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
 };
 
 export const getRoomsFreeCategory = async (dataBooking) => {
+  
   let url =
     "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
     JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });

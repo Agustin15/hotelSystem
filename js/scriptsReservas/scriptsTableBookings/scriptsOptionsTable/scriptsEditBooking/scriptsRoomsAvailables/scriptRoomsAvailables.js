@@ -3,8 +3,8 @@ import {
   getRoomsFreeCategory,
 } from "../../../../../scriptsRooms/scriptRooms.js";
 import {
-  startBookingValue,
-  endBookingValue,
+  startBookingSetting,
+  endBookingSetting,
   nights,
 } from "../scriptsFormEdit/scriptFormEdit.js";
 import { createItemRoom } from "../scriptsFormEdit/scriptCartRooms.js";
@@ -50,7 +50,7 @@ const drawMenuRoomsCategoryHotel = async (menuRooms) => {
 const drawTitle = () => {
   let title = document.querySelector(".title").querySelector("h3");
 
-  title.textContent = `Habitaciones disponibles entre la fecha ${startBookingValue} y ${endBookingValue}`;
+  title.textContent = `Habitaciones disponibles entre la fecha ${startBookingSetting} y ${endBookingSetting}`;
 };
 
 const loadFreeRooms = async (category) => {
@@ -63,8 +63,8 @@ const loadFreeRooms = async (category) => {
 const availablesRoomsCategory = async (category) => {
   const dataBooking = {
     category: category,
-    startBooking: startBookingValue,
-    endBooking: endBookingValue,
+    startBooking: startBookingSetting,
+    endBooking: endBookingSetting,
   };
 
   let data = null;
@@ -182,6 +182,7 @@ const addRoomToCart = () => {
           numRoom: dataRoom.numRoom,
           category: dataRoom.category,
           priceRoom: dataRoom.price,
+          status:"Nueva",
           icon: dataRoom.icon,
           adults: adultsQuantity,
           childs: childsQuantity,
