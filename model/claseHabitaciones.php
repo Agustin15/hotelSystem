@@ -73,6 +73,26 @@ class habitaciones
 
         return $resultados->fetch_all(MYSQLI_ASSOC);
     }
+    public function getAllRoomBookingAvailableDistinctIdBooking(
+        $fechaLlegadaNuevaReserva,
+        $fechaSalidaNuevaReserva,
+        $numHabitacion,
+        $idBooking
+    ) {
+
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+        (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? and idReservaHabitacion!=?");
+        $consulta->execute();
+
+        $consulta->bind_param("ssii", $fechaSalidaNuevaReserva, $fechaLlegadaNuevaReserva, $numHabitacion, $idBooking);
+
+        $consulta->execute();
+
+        $resultados = $consulta->get_result();
+
+        return $resultados->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function getReservasOcupadas($fechaLlegada)
     {
@@ -261,6 +281,22 @@ class habitaciones
         $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=?");
         $consulta->bind_param("i", $numHabitacion);
+        $consulta->execute();
+
+        $resultado = $consulta->get_result();
+
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+
+    public function allBookingsRoomDistinctIdBooking($numHabitacion, $idBooking)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from habitacion_reservada where 
+      numHabitacionReservada=? && idReservaHabitacion!=?");
+        $consulta->bind_param("ii", $numHabitacion, $idBooking);
         $consulta->execute();
 
         $resultado = $consulta->get_result();

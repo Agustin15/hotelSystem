@@ -1,8 +1,19 @@
 import { displayClients } from "../../../../scriptsOptionsCalendar/scriptFormAdd.js";
-import { configRoomsCart, drawRoomsInCart } from "./scriptCartRooms.js";
+import {
+  configRoomsCart,
+  drawRoomsInCart,
+  roomsCart,
+} from "./scriptCartRooms.js";
+import { inputAlert } from "../../../../scriptsOptionsCalendar/scriptFormAdd.js";
+import { verifyStateRoomsToBooking } from "../../../../../scriptsRooms/scriptRooms.js";
+import {
+  alertForm,
+  loadingForm,
+} from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
 let bookingGlobal;
 let allClients;
+let formEdit;
 
 export let nights;
 export let startBookingSetting;
@@ -39,7 +50,7 @@ export const drawFormEdit = (body, booking, clients) => {
                     <img src="../../../img/night.png">
                 </div>
 
-                <form>
+                <form id="formEdit">
                     <div class="rowOne">
                         <div class="dateStart">
                             <label>Fecha de llegada</label>
@@ -113,12 +124,13 @@ export const drawFormEdit = (body, booking, clients) => {
 </div>
     `;
 
-  let form = document.querySelector("form");
-  let selectClients = form.querySelector("select");
+  formEdit = document.querySelector("#formEdit");
+  let selectClients = formEdit.querySelector("select");
 
-  drawSelectClients(form, selectClients);
+  drawSelectClients(formEdit, selectClients);
   configRoomsCart(bookingGlobal.idReserva, nights);
   calculateDate();
+  sendFormEdit();
 };
 
 function calculateDifferenceNight(llegada, salida) {
@@ -158,4 +170,85 @@ const calculateDate = () => {
     startBookingSetting = inputStart.value;
     endBookingSetting = inputEnd.value;
   });
+};
+
+const sendFormEdit = () => {
+  formEdit.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const bookingToUpdate = {};
+    const formData = new FormData(formEdit);
+    let error;
+
+    formData.forEach((value, key) => {
+      if (key == "roomsQuantity" && value == 0) {
+        error = {
+          key: key,
+          msj: "Elija al menos una habitacion para la reserva",
+        };
+      } else {
+        bookingToUpdate[key] = value;
+      }
+    });
+
+    if (error) {
+      inputAlert(error);
+    } else {
+      updateBooking(bookingToUpdate);
+    }
+  });
+};
+
+const getVerifyStateRoomsToBooking = async (bookingToUpdate) => {
+  let roomsAvailables;
+
+  let numbersRoomsCart = roomsCart.map((room) => room.numRoom);
+
+  try {
+    const result = await verifyStateRoomsToBooking(
+      bookingToUpdate,
+      numbersRoomsCart,
+      bookingGlobal.idReserva
+    );
+
+    if (result) {
+      roomsAvailables = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return roomsAvailables;
+  }
+};
+const updateBooking = async (bookingToUpdate) => {
+  let roomsAvailables = await getVerifyStateRoomsToBooking(bookingToUpdate);
+
+  if (roomsAvailables) {
+    if (roomsAvailables.length == roomsCart.length) {
+    } else {
+      roomsToBookingNotAvailables(roomsAvailables);
+    }
+  }
+};
+
+const roomsToBookingNotAvailables = (roomsAvailables) => {
+  let roomsNotAvailables = roomsCart.filter(
+    (room) =>
+      !roomsAvailables.find((roomAvailable) => roomAvailable == room.numRoom)
+  );
+
+  let numbersRoomsBusy = roomsNotAvailables.map((room) => room.numRoom);
+
+  let phraseNumsRooms = `la habitacion ${numbersRoomsBusy.join("")} ya tiene`;
+  if (numbersRoomsBusy.length > 1) {
+    phraseNumsRooms = `las habitaciones ${numbersRoomsBusy.join(
+      ","
+    )} ya tienen`;
+  }
+  alertForm(
+    "../../../img/advertenciaLogin.png",
+    `Ups, ${phraseNumsRooms} reserva en esta fecha `,
+    "Error",
+    "alertFormError"
+  );
 };

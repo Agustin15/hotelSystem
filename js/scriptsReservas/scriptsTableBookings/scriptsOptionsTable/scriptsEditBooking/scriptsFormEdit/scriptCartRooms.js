@@ -2,7 +2,7 @@ import { getBookingRoomsDetails } from "../../../../../scriptsRooms/scriptRooms.
 import { alertGuests } from "../scriptsRoomsAvailables/scriptRoomsAvailables.js";
 import { nights } from "./scriptFormEdit.js";
 
-let roomsCart = [];
+export let roomsCart = [];
 
 let cartRooms, idBookingGlobal, roomsBooking, amount, divTotal;
 
@@ -14,7 +14,7 @@ export const configRoomsCart = async (idBooking, nights) => {
   roomsBooking = await getRoomsBooking();
 
   if (roomsBooking) {
-    drawRoomsInCart(nights);
+    drawRoomsInCart(nights, "initCart");
   }
 };
 
@@ -60,21 +60,27 @@ const loadingRoomsCart = (state) => {
   }
 };
 
-export const drawRoomsInCart = (nights) => {
+export const drawRoomsInCart = (nights, option) => {
   if (roomsCart.length == 0) {
-    roomsCart = roomsBooking.map((room) => {
-      room.totalRoom = room.priceRoom * nights;
-      return room;
-    });
+    if (option == "initCart") {
+      roomsCart = roomsBooking.map((room) => {
+        room.totalRoom = room.priceRoom * nights;
+        return room;
+      });
+    } else {
+      divTotal.style.display = "none";
+      divTotal.querySelector("span").textContent = ``;
+      noRoomsCart("Sin habitaciones seleccionadas aun");
+      valueInputQuantityRooms();
+
+      return;
+    }
   }
 
   let liRoomsCart = roomsCart.map((room) => {
     let statusAddedClass = "statusAddedPreviously";
-    let iconDelete = "../../../img/deleteRoom.png";
-
     if (room.status != "Actual") {
       statusAddedClass = "statusAddedNew";
-      iconDelete = "../../../img/basura.png";
     }
     return `
      
@@ -83,7 +89,7 @@ export const drawRoomsInCart = (nights) => {
       <div class="header">
       <span>${room.category}</span>
          <span class=${statusAddedClass} >${room.status}</span>
-      <img class="delete" data-num-room=${room.numRoom}  src="${iconDelete}">
+      <img class="delete" data-num-room=${room.numRoom}  src="../../../img/basura.png">
       
       </div>
   
@@ -116,8 +122,9 @@ export const drawRoomsInCart = (nights) => {
   });
 
   cartRooms.querySelector("ul").innerHTML = liRoomsCart.join("");
-  calculateAmount();
   valueInputQuantityRooms();
+  calculateAmount();
+  deleteRoom();
 };
 
 const valueInputQuantityRooms = () => {
@@ -145,4 +152,16 @@ export const createItemRoom = (room) => {
 const addRoom = (room) => {
   roomsCart.push(room);
   drawRoomsInCart(nights);
+};
+
+const deleteRoom = () => {
+  let btnsDelete = document.querySelectorAll(".delete");
+
+  btnsDelete.forEach((btnDelete) => {
+    btnDelete.addEventListener("click", () => {
+      let numRoom = btnDelete.dataset.numRoom;
+      roomsCart = roomsCart.filter((room) => room.numRoom != numRoom);
+      drawRoomsInCart(nights);
+    });
+  });
 };

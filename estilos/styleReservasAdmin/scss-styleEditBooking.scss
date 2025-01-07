@@ -359,7 +359,7 @@
       display: flex;
       gap: 1.5rem;
       justify-content: center;
-      align-items: center;
+      align-items: start;
     }
 
     label {
@@ -463,6 +463,7 @@
       align-items: center;
       padding: 0.3rem;
       gap: 0.5rem;
+      width: 15rem;
       border-radius: 3px;
       background-color: rgb(255, 77, 77);
       color: white;
@@ -493,7 +494,7 @@
   .rowOne .btnCalculate {
     height: 2.1rem;
     width: 5rem;
-    margin-top: 2rem;
+    margin-top: 2.6rem;
   }
   .containButton {
     display: flex;
@@ -507,11 +508,12 @@
     align-items: center;
     width: auto;
     gap: 0.7rem;
+    margin-left: 4.5rem;
     padding: 0.5rem;
+    margin-top: -1rem;
     border-radius: 3px;
     color: white;
     box-shadow: 2px 2px 2px gray;
-    background: linear-gradient(#dd0e0e, #a00404);
     font-size: 17px;
   }
   .alertForm span {

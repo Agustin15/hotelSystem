@@ -220,8 +220,38 @@ class roomsBookingController
                 }
             });
 
-
             return array_values($roomsFreeCategory);
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function verifyStateRoomsToBooking($req)
+    {
+        $dataBookingToUpdate = $req["dataBookingToUpdate"];
+
+        try {
+            $roomsToBooking = $dataBookingToUpdate["roomsToBooking"];
+
+            $roomsToBookingAvailables = array_filter($roomsToBooking, function ($roomToBooking) use ($dataBookingToUpdate) {
+
+                $allBookingsAvailableRoomDistinctIdBooking =   $this->rooms->getAllRoomBookingAvailableDistinctIdBooking(
+                    $dataBookingToUpdate["startBooking"],
+                    $dataBookingToUpdate["endBooking"],
+                    $roomToBooking,
+                    $dataBookingToUpdate["idBooking"]
+                );
+
+                $allBookingsRoomDistinctIdBooking =   $this->rooms->allBookingsRoomDistinctIdBooking(
+                    $roomToBooking,
+                    $dataBookingToUpdate["idBooking"]
+                );
+
+                if (count($allBookingsRoomDistinctIdBooking) == 0 || (count($allBookingsRoomDistinctIdBooking) == count($allBookingsAvailableRoomDistinctIdBooking))) {
+                    return $roomToBooking;
+                }
+            });
+            return $roomsToBookingAvailables;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

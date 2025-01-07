@@ -130,7 +130,6 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
 };
 
 export const getRoomsFreeCategory = async (dataBooking) => {
-  
   let url =
     "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
     JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
@@ -148,5 +147,52 @@ export const getRoomsFreeCategory = async (dataBooking) => {
     console.log(error);
   } finally {
     return data;
+  }
+};
+
+export const verifyStateRoomsToBooking = async (
+  bookingToUpdate,
+  roomsCart,
+  idBooking
+) => {
+  let dataBookingToUpdate = {
+    idBooking: idBooking,
+    startBooking: bookingToUpdate.startBooking,
+    endBooking: bookingToUpdate.endBooking,
+    roomsToBooking: roomsCart,
+  };
+
+  let roomsAvailables;
+
+  loadingForm(true);
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+        JSON.stringify({
+          option: "verifyStateRoomsToBooking",
+          dataBookingToUpdate: dataBookingToUpdate,
+        })
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw "Ups, error al actualizar la reserva";
+    }
+    if (result) {
+      roomsAvailables = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingForm(false);
+    if (!roomsAvailables) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al actualizar la reserva",
+        "Error",
+        "alertFormError"
+      );
+    }
+    return roomsAvailables;
   }
 };
