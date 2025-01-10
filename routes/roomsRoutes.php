@@ -26,7 +26,13 @@ $routes = [
         return $roomsController->DELETE($req);
     },
     "GET" => function () use ($roomsController, $req) {
-        return $roomsController->getAllCategoryRooms($req);
+
+        $optionGet = match ($req["option"]) {
+            "getAllCategoryRooms" => $roomsController->getAllCategoryRooms($req),
+            "getAllRoomsByCategory" => $roomsController->getAllRoomsByCategory($req),
+        };
+
+        return $optionGet;
     }
 ];
 

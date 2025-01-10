@@ -1,4 +1,5 @@
 import { configChartRooms } from "./scriptChartRooms.js";
+import { configListRooms } from "./scriptListRooms.js";
 
 let option = document.querySelector(".option");
 let optionChartLi = document.querySelector(".chartLi");
@@ -55,13 +56,14 @@ const drawDocument = (result) => {
   option.innerHTML = result;
 
   let containChart = document.querySelector(".containChart");
-  let containRooms = document.querySelector(".rooms");
+  let containRooms = document.querySelector(".containRooms");
 
   if (containChart) {
     markActualOption(optionChartLi);
     configChartRooms();
   } else if (containRooms) {
     markActualOption(optionListLi);
+    configListRooms();
   }
 };
 

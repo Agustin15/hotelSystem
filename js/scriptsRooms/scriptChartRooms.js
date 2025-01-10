@@ -2,17 +2,13 @@ let actualYear = new Date().getFullYear();
 let selectYear;
 
 export const configChartRooms = async () => {
+  selectYear = document.querySelector(".selectYear");
   const years = await getAllYearsToSelect();
   if (years) {
     drawYearsToSelect(years);
-    let roomsBookingCategorys = await getDataCategoryRoomsBookingByYear(
-      selectYear.value
-    );
-
-    if (roomsBookingCategorys) {
-      dataPointsRoomsToChart(roomsBookingCategorys);
-    }
+    getDataCategoryRoomsBookingByYear(selectYear.value);
   }
+  btnSearchByYear();
 };
 const getAllYearsToSelect = async () => {
   let data;
@@ -42,7 +38,6 @@ const getAllYearsToSelect = async () => {
 };
 
 const drawYearsToSelect = async (years) => {
-  selectYear = document.querySelector(".selectYear");
   let options = years.map((year) => {
     let selected = false;
 
@@ -60,6 +55,7 @@ const drawYearsToSelect = async (years) => {
 };
 
 const getDataCategoryRoomsBookingByYear = async (year) => {
+  drawTitle();
   if (!year) {
     year = actualYear;
   }
@@ -87,6 +83,8 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
     loading(false);
     if (!data) {
       noData();
+    } else {
+      dataPointsRoomsToChart(data);
     }
     return data;
   }
@@ -144,4 +142,16 @@ const loading = (state) => {
   } else {
     document.querySelector(".loading").style.display = "none";
   }
+};
+
+const btnSearchByYear = () => {
+  document.querySelector(".btnSearch").addEventListener("click", () => {
+    getDataCategoryRoomsBookingByYear(selectYear.value);
+  });
+};
+
+const drawTitle = () => {
+  document.querySelector(
+    ".titleChart"
+  ).textContent = `Grafica categorias mas reservadas ${selectYear.value}`;
 };

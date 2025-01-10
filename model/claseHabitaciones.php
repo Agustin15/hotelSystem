@@ -348,7 +348,7 @@ class habitaciones
 
         $resultado = $consulta->get_result();
 
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        return $resultado->fetch_array(MYSQLI_ASSOC);
     }
 
 

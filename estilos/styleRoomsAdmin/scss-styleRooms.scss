@@ -1,0 +1,181 @@
+.containRooms {
+  width: 85%;
+  height: 28rem;
+  border-radius: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border: 1px solid rgb(219, 219, 219);
+  box-shadow: 2px 2px 2px gray;
+  margin-left: 11rem;
+  margin-top: 1rem;
+
+  ul {
+    width: 98%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    border-bottom: 1px solid rgb(148, 148, 148);
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      padding-bottom: 0.2rem;
+      cursor: pointer;
+      color: rgb(100, 100, 100);
+
+      img {
+        border-radius: 3px;
+        width: 100px;
+        height: 50px;
+      }
+    }
+
+    li:hover {
+      border-bottom: 3px solid rgb(0, 165, 165);
+    }
+  }
+
+  .rooms {
+    margin-top: 0rem;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+
+    .itemsRooms {
+      display: flex;
+      width: 97%;
+      height: 94%;
+      align-items: center;
+      justify-content: start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      overflow-y: scroll;
+
+      li {
+        display: flex;
+        width: 20rem;
+        height: 6rem;
+        flex-direction: column;
+        align-items: start;
+        padding: 0.5rem;
+        background: linear-gradient(#19868a, #10bbc4);
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px rgb(192, 192, 192);
+        color: white;
+
+        .rowOne {
+          display: flex;
+          align-items: start;
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.4rem;
+          background-color: #037b80;
+          border-radius: 4px;
+          margin-top: 0.8rem;
+
+          img {
+            width: 100px;
+            height: 60px;
+          }
+        }
+
+        .details {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 0.4rem;
+          margin-top: 0.7rem;
+          width: 9.6rem;
+          height: 3.5rem;
+          padding: 1rem;
+          padding-top: 0.5rem;
+          border-radius: 5px;
+          background-color: #0a858a;
+
+          .number {
+            font-weight: bold;
+          }
+
+          .stateAvailable {
+            color: rgb(22, 201, 22);
+            font-weight: bold;
+          }
+
+          .stateBusy {
+            color: rgb(224, 36, 36);
+            font-weight: bold;
+          }
+
+          .containBookingHide {
+            display: none;
+          }
+          .containBookingShow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            span:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+      li:hover {
+        border-bottom: none;
+        cursor: auto;
+      }
+    }
+  }
+
+  .loading {
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: gray;
+    margin-top: 6rem;
+
+    img {
+      opacity: 70%;
+      width: 50px;
+    }
+  }
+}
+
+.noData {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: gray;
+  font-weight: bold;
+  margin-top: 7rem;
+
+  img {
+    opacity: 80%;
+    width: 120px;
+  }
+}

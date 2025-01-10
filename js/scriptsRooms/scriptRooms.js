@@ -40,8 +40,30 @@ export const POSTRooms = async (booking, option) => {
 
 export const getRoomsCategoryHotel = async () => {
   let data;
-  let url = "http://localhost/sistema%20Hotel/routes/roomsRoutes.php";
+  let url =
+    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php?params=" +
+    JSON.stringify({ option: "getAllCategoryRooms" });
 
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
+export const getAllRoomsByCategory = async (category) => {
+  let data;
+  let url =
+    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php?params=" +
+    JSON.stringify({ option: "getAllRoomsByCategory", category: category });
   try {
     const response = await fetch(url);
     const result = await response.json();
