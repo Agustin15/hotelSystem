@@ -3,9 +3,16 @@ import {
   configRoomsCart,
   drawRoomsInCart,
   roomsCart,
+  roomsBooking,
+  amount,
 } from "./scriptCartRooms.js";
 import { inputAlert } from "../../../../scriptsOptionsCalendar/scriptFormAdd.js";
-import { verifyStateRoomsToBooking } from "../../../../../scriptsRooms/scriptRooms.js";
+import {
+  verifyStateRoomsToBooking,
+  fetchDeleteRoom,
+  POSTRooms,
+} from "../../../../../scriptsRooms/scriptRooms.js";
+import { PUTPay } from "../../../../../scriptsRevenues/scriptRevenues.js";
 import {
   alertForm,
   loadingForm,
@@ -67,14 +74,14 @@ export const drawFormEdit = (body, booking, clients) => {
                     <div class="rowTwo">
                         <div class="client">
                             <label>Cliente</label>
-                            <select name="client" id="clientsSelect"></select>
+                            <select name="idClient" id="clientsSelect"></select>
                         </div>
 
 
                         <div class="quantityRooms">
 
                             <label>Cantidad de habitaciones</label>
-                            <input id="roomsQuantityInput" name="roomsQuantity" type="number" readonly
+                            <input id="roomsQuantityInput" name="quantityRooms" type="number" readonly
                                 placeholder="Habitaciones seleccionadas">
                             <div class="msjError">
                                 <div class="arrow"></div>
@@ -181,7 +188,7 @@ const sendFormEdit = () => {
     let error;
 
     formData.forEach((value, key) => {
-      if (key == "roomsQuantity" && value == 0) {
+      if (key == "quantityRooms" && value == 0) {
         error = {
           key: key,
           msj: "Elija al menos una habitacion para la reserva",
@@ -220,11 +227,53 @@ const getVerifyStateRoomsToBooking = async (bookingToUpdate) => {
     return roomsAvailables;
   }
 };
+
 const updateBooking = async (bookingToUpdate) => {
   let roomsAvailables = await getVerifyStateRoomsToBooking(bookingToUpdate);
 
   if (roomsAvailables) {
     if (roomsAvailables.length == roomsCart.length) {
+      let resultUpdateBooking = await fetchUpdateBooking(bookingToUpdate);
+
+      if (resultUpdateBooking) {
+        let roomsToDelete = verfiyRoomsToDelete();
+
+        if (roomsToDelete.length > 0) {
+          let resultDeleteRooms = await fetchDeleteRoom({
+            idBooking: bookingGlobal.idReserva,
+            rooms: roomsToDelete,
+          });
+
+          if (!resultDeleteRooms.response) return;
+        }
+
+        let roomsNewsToAdd = verfiyRoomsNewsToAdd();
+
+        if (roomsNewsToAdd.length > 0) {
+          bookingToUpdate.rooms = roomsCart;
+          bookingToUpdate.client = bookingToUpdate.idClient;
+          let resultUpdateRooms = await POSTRooms(
+            bookingToUpdate,
+            "actualizar las habitaciones"
+          );
+
+          if (!resultUpdateRooms.response) return;
+        }
+
+        let resultPayUpdated = await PUTPay({
+          idBooking: bookingGlobal.idReserva,
+          newAmount: amount,
+        });
+
+        if (resultPayUpdated.response) {
+          alertForm(
+            "../../../img/tickAdmin.png",
+            "¡Reserva actualizada exitosamente!",
+            "Exito",
+            "alertFormCorrect"
+          );
+        }
+      }
     } else {
       roomsToBookingNotAvailables(roomsAvailables);
     }
@@ -251,4 +300,72 @@ const roomsToBookingNotAvailables = (roomsAvailables) => {
     "Error",
     "alertFormError"
   );
+};
+
+const fetchUpdateBooking = async (bookingToUpdate) => {
+  let data;
+  bookingToUpdate.idBooking = bookingGlobal.idReserva;
+
+  loadingForm(true);
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingToUpdate),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw "Ups, error al actualizar la reserva";
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingForm(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al actualizar la reserva",
+        "Error",
+        "alertFormError"
+      );
+    }
+    return data;
+  }
+};
+
+const verfiyRoomsToDelete = () => {
+  let roomsToDelete = roomsBooking.filter((roomBooking) => {
+    if (
+      !roomsCart.find((roomCart) => roomCart.numRoom == roomBooking.numRoom)
+    ) {
+      return roomBooking.numRoom;
+    }
+  });
+
+  roomsToDelete = roomsToDelete.map((room) => room.numRoom);
+  return roomsToDelete;
+};
+
+const verfiyRoomsNewsToAdd = () => {
+  let roomsNewsToAdd = roomsCart.filter((roomCart) => {
+    if (
+      !roomsBooking.find(
+        (roomBooking) => roomBooking.numRoom == roomCart.numRoom
+      )
+    ) {
+      return roomCart;
+    }
+  });
+
+  return roomsNewsToAdd;
 };

@@ -18,14 +18,25 @@ export const displayTable = async () => {
 };
 
 export const drawTable = async () => {
-  let quantityRows = await getQuantityBookingsActualYear();
+  const urlParams = new URLSearchParams(window.location.search);
 
-  if (quantityRows) {
-    let bookingsYearlimit = await getBookingsYearLimit();
+  if (!urlParams.get("idBooking")) {
+    let quantityRows = await getQuantityBookingsActualYear();
 
-    if (bookingsYearlimit) {
-      drawIndex();
-      drawRowsTable(bookingsYearlimit);
+    if (quantityRows) {
+      let bookingsYearlimit = await getBookingsYearLimit();
+
+      if (bookingsYearlimit) {
+        drawIndex();
+        drawRowsTable(bookingsYearlimit);
+      }
+    }
+  } else {
+    let bookingFound = await getBookingById(urlParams.get("idBooking"));
+    if (bookingFound) {
+      let arrayBookingFound = [bookingFound];
+      drawRowsTable(arrayBookingFound);
+      document.querySelector(".controls").style.display="none";
     }
   }
 };
@@ -37,9 +48,11 @@ const drawRowsTable = (bookingsYearlimit) => {
     let classTr = "";
     let classBtnDisabled = "";
     let iconStatusBooking = "../../../img/bookingPendingIcon.png";
+    let disabled = false;
 
     if (new Date(booking.fechaSalida) < new Date()) {
       classBtnDisabled = "btnDisabled";
+      disabled = true;
       iconStatusBooking = "../../../img/bookingEndIcon.png";
     } else if (
       new Date(booking.fechaLlegada) <= new Date() &&
@@ -73,8 +86,8 @@ const drawRowsTable = (bookingsYearlimit) => {
 
            <div class="buttons" id=${booking.idReserva}>
 
-            <button data-option="delete" class="btnDelete ${classBtnDisabled}"><img src="../../../img/borrar.png"></button>
-                <button class="btnEdit ${classBtnDisabled}" data-option="edit"><img src="../../../img/editar.png"></button>
+            <button data-option="delete" class="btnDelete"><img src="../../../img/borrar.png"></button>
+                <button  disabled=${disabled}  class="btnEdit ${classBtnDisabled}" data-option="edit"><img src="../../../img/editar.png"></button>
                     <button data-option="details"
                      class="btnDetails"><img src="../../../img/detalles.png"></button>
             
@@ -119,6 +132,33 @@ const getQuantityBookingsActualYear = async () => {
     loading(false);
     if (!data) {
       noData("No se encontraron reservas en este año");
+    }
+    return data;
+  }
+};
+
+const getBookingById = async (idBooking) => {
+  let data = null;
+  loading(true);
+  try {
+    let url =
+      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+      JSON.stringify({ option: "getBookingById", idBooking: idBooking });
+
+    const response = await fetch(url);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!data) {
+      noData("Ups,No se pudo encontrar la reserva");
     }
     return data;
   }
@@ -315,12 +355,13 @@ export const closePageNotFound = (modal) => {
 };
 
 const search = () => {
-  let inputSerch = document.querySelector(".inputSearch");
+  let btnInputSearch = document.querySelector(".btnSearchInput");
+  let inputSearch = document.querySelector(".inputSearch");
   let tfoot = document.querySelector("tfoot");
 
   let rows = document.querySelector("tbody").querySelectorAll("tr");
-  inputSerch.addEventListener("keydown", () => {
-    let value = inputSerch.value.trim();
+  btnInputSearch.addEventListener("click", () => {
+    let value = inputSearch.value.trim();
 
     rows.forEach((row) => {
       if (row.innerText.indexOf(value) == -1) {

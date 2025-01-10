@@ -1,4 +1,4 @@
-import getDataClientsTOGraphic from "./scriptGraficaCliente.js";
+import { loadYears, getDataClientsTOGraphic } from "./scriptGraficaCliente.js";
 import { displayTable } from "./scriptClientsTable.js";
 import submitAddForm from "./scriptAddClient.js";
 
@@ -57,8 +57,6 @@ const getDocument = async (url) => {
     }
     return page;
   }
-
-
 };
 
 const drawDocument = (result) => {
@@ -70,6 +68,7 @@ const drawDocument = (result) => {
 
   if (containChart) {
     markActualOption(optionChartLi);
+    loadYears();
     getDataClientsTOGraphic();
   } else if (clientsTable) {
     markActualOption(optionListLi);

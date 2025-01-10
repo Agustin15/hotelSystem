@@ -46,7 +46,7 @@ const draw = (containForm, cartRooms) => {
   containForm.style.display = "flex";
   cartRooms.style.display = "flex";
   displayNights();
-  displayClients(form,clients);
+  displayClients(form, clients);
   setInputsForm();
   formAddSubmit();
   configCartRooms();
@@ -63,7 +63,7 @@ const setInputsForm = async () => {
   quantityInput.value = roomsCart.length || null;
 };
 
-export const displayClients = async (form,clients) => {
+export const displayClients = async (form, clients) => {
   let select = form.querySelector("select");
 
   let clientsOptions = clients.map((client) => {
@@ -144,7 +144,10 @@ const formAddSubmit = () => {
           let bookingFind = await getBookingByClientAndDate(booking);
           booking.rooms = roomsCart;
           booking.idBooking = bookingFind.idReserva;
-          let resultRoomsBooking = await POSTRooms(booking);
+          let resultRoomsBooking = await POSTRooms(
+            booking,
+            "agregar las habitaciones"
+          );
 
           if (resultRoomsBooking) {
             booking.amount = amount;

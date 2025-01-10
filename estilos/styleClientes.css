@@ -328,7 +328,27 @@ body #userAdmin:hover > .btnFlecha {
 }
 .option .containChart .header .search {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(196, 196, 196);
+  box-shadow: 2px 2px 2px gray;
+  border-radius: 3px;
+  gap: 0.4rem;
+  width: 10.4rem;
+  padding-bottom: 0.5rem;
+}
+.option .containChart .header .search .title {
+  background-color: rgb(236, 236, 236);
+  width: 10rem;
+  font-size: 16px;
+  padding: 0.2rem;
+  border-bottom: 1px solid rgb(196, 196, 196);
+}
+.option .containChart .header .search .containSearch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 .option .containChart .header .search select {
   width: 6rem;
@@ -339,7 +359,8 @@ body #userAdmin:hover > .btnFlecha {
   box-shadow: 1px 1px 1px rgb(179, 179, 179);
 }
 .option .containChart .header .search button {
-  width: 6rem;
+  width: 2.5rem;
+  height: 1.8rem;
   padding: 0.3rem;
   color: white;
   background-color: rgb(7, 169, 180);
@@ -347,6 +368,9 @@ body #userAdmin:hover > .btnFlecha {
   box-shadow: 1px 1px 1px gray;
   border: none;
   font-weight: bold;
+}
+.option .containChart .header .search button img {
+  width: 17px;
 }
 .option .containChart .header .search button:hover {
   background-color: rgb(8, 143, 153);
@@ -450,19 +474,38 @@ body #userAdmin:hover > .btnFlecha {
   padding-left: 1rem;
 }
 .containTable .header .containSearch input {
-  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-left: 1rem;
   border: 1px solid rgb(173, 173, 173);
   width: 11rem;
-  height: 2rem;
+  height: 2.2rem;
   font-size: 16px;
   border-radius: 3px;
   box-shadow: 1px 1px 1px rgb(230, 230, 230);
-  background-image: url("../img/buscarInfo.png");
   background-size: 16px;
   background-repeat: no-repeat;
   background-position-x: 0.5rem;
   background-position-y: 0.5rem;
   outline: none;
+}
+.containTable .header .containSearch button {
+  background-color: rgb(0, 189, 173);
+  box-shadow: none;
+  position: absolute;
+  left: 14rem;
+  border-radius: 2px;
+  color: white;
+  width: 55px;
+  height: 39px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.containTable .header .containSearch img {
+  width: 22px;
+}
+.containTable .header .containSearch button:hover {
+  background-color: rgb(3, 145, 133);
 }
 
 .titleTable {

@@ -3,7 +3,7 @@ import {
   loadingForm,
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
-export const POSTRooms = async (booking) => {
+export const POSTRooms = async (booking, option) => {
   let url = "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
   let data;
   loadingForm(true);
@@ -29,7 +29,7 @@ export const POSTRooms = async (booking) => {
     if (!data) {
       alertForm(
         "../../../img/advertenciaLogin.png",
-        "Ups, error al agregar la reserva",
+        `Ups, error al ${option}`,
         "Error",
         "alertFormError"
       );
@@ -183,8 +183,8 @@ export const verifyStateRoomsToBooking = async (
     }
   } catch (error) {
     console.log(error);
-  } finally {
     loadingForm(false);
+  } finally {
     if (!roomsAvailables) {
       alertForm(
         "../../../img/advertenciaLogin.png",
@@ -194,5 +194,42 @@ export const verifyStateRoomsToBooking = async (
       );
     }
     return roomsAvailables;
+  }
+};
+
+export const fetchDeleteRoom = async (dataToDelete) => {
+  let roomsDeleted;
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+        JSON.stringify(dataToDelete),
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw "Ups, error al eliminar las habitaciones";
+    }
+    if (result) {
+      roomsDeleted = result;
+    }
+  } catch (error) {
+    console.log(error);
+    loadingForm(false);
+  } finally {
+    if (!roomsDeleted) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al eliminar las habitaciones",
+        "Error",
+        "alertFormError"
+      );
+    }
+    return roomsDeleted;
   }
 };

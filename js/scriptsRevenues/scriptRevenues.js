@@ -30,7 +30,43 @@ export const POSTPay = async (booking) => {
     if (!data) {
       alertForm(
         "../../../img/advertenciaLogin.png",
-        "Ups, error al agregar la reserva",
+        "Ups, error al agregar el pago",
+        "Error",
+        "alertFormError"
+      );
+    }
+    return data;
+  }
+};
+
+export const PUTPay = async (booking) => {
+  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
+
+  let data;
+  loadingForm(true);
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    } else if (result.response == true) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingForm(false);
+    if (!data) {
+      alertForm(
+        "../../../img/advertenciaLogin.png",
+        "Ups, error al actualizar el pago",
         "Error",
         "alertFormError"
       );

@@ -454,7 +454,7 @@
   display: none;
   justify-content: start;
   align-items: center;
-  width: auto;
+  width: 25rem;
   gap: 0.7rem;
   margin-left: 4.5rem;
   padding: 0.5rem;
@@ -463,6 +463,7 @@
   color: white;
   box-shadow: 2px 2px 2px gray;
   font-size: 17px;
+  background-color: red;
 }
 .containForm .alertForm span {
   font-weight: bold;

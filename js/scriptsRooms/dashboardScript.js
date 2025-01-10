@@ -1,16 +1,20 @@
+import { configChartRooms } from "./scriptChartRooms.js";
+
 let option = document.querySelector(".option");
+let optionChartLi = document.querySelector(".chartLi");
 let optionListLi = document.querySelector(".listLi");
-export let optionAddLi = document.querySelector(".addLi");
-export let actualOption = localStorage.getItem("actualOptionBooking");
-import { displayTable } from "./scriptsTableBookings/scriptTableBookings.js";
+let actualOption = localStorage.getItem("actualOptionRooms");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  if (actualOption == "bookingsTable.html") {
-    actualOptionBooking(localStorage.getItem("actualOptionBooking"));
+  if (actualOption) {
+    actualOptionClient(localStorage.getItem("actualOptionRooms"));
+  } else {
+    localStorage.setItem("actualOptionRooms", "grafica.html");
+    actualOptionClient("grafica.html");
   }
 });
 
-export const actualOptionBooking = async (optionActual) => {
+export const actualOptionClient = async (optionActual) => {
   let optionDocument = await getDocument(optionActual);
   if (optionDocument) {
     drawDocument(optionDocument);
@@ -18,48 +22,50 @@ export const actualOptionBooking = async (optionActual) => {
 };
 
 optionListLi.addEventListener("click", async () => {
-  localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-
-  actualOptionBooking(localStorage.getItem("actualOptionBooking"));
+  localStorage.setItem("actualOptionRooms", "rooms.html");
+  actualOptionClient(localStorage.getItem("actualOptionRooms"));
 });
 
-optionAddLi.addEventListener("click", async () => {
-  localStorage.setItem("actualOptionBooking", "addBooking.html");
-  location.reload();
+optionChartLi.addEventListener("click", async () => {
+  localStorage.setItem("actualOptionRooms", "grafica.html");
+  actualOptionClient(localStorage.getItem("actualOptionRooms"));
 });
 
 const getDocument = async (url) => {
-  let data = null;
+  let page;
   loadingPage(true, option);
   try {
     const response = await fetch(url);
     const result = await response.text();
     if (response.ok && result) {
-      data = result;
+      page = result;
     }
   } catch (error) {
     console.log(error);
   } finally {
     loadingPage(false, option);
-    if (!data) {
+    if (!page) {
       pageNotFound(option);
     }
-    return data;
+    return page;
   }
 };
 
-const drawDocument = async (result) => {
+const drawDocument = (result) => {
   option.innerHTML = result;
 
-  let bookingsTable = document.querySelector(".tableBookings");
+  let containChart = document.querySelector(".containChart");
+  let containRooms = document.querySelector(".rooms");
 
-  if (bookingsTable) {
+  if (containChart) {
+    markActualOption(optionChartLi);
+    configChartRooms();
+  } else if (containRooms) {
     markActualOption(optionListLi);
-    displayTable();
   }
 };
 
-export const markActualOption = (li) => {
+const markActualOption = (li) => {
   let itemsPrev = [...document.getElementsByClassName("optionMarkActual")];
   if (itemsPrev.length > 0) {
     itemsPrev.forEach((itemPrev) => {

@@ -45,6 +45,7 @@ const loadYears = async () => {
 
       const response = await fetch(url);
       const results = await response.json();
+
       if (!response.ok) {
         throw results.error;
       } else if (results) {
@@ -61,10 +62,15 @@ const selectYearChar = (results) => {
   let yearSelected;
 
   let options = results.map((result) => {
+    let selected = false;
+    if (Object.values(result) == actualYear) {
+      selected = true;
+    }
+
     return `
-          <option value=${Object.values(result)}>${Object.values(
+          <option selected=$${selected} value=${Object.values(
       result
-    )}</option>
+    )}>${Object.values(result)}</option>
         `;
   });
 
@@ -116,8 +122,6 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     ],
   });
   chart.render();
-
-  loadYears();
 }
 
 function dataPointsToGraphicClients(monthsClients) {
@@ -153,7 +157,9 @@ async function getDataClientsTOGraphic(year) {
 
   document
     .querySelector(".header")
-    .querySelector("h3").innerHTML += ` ${yearToConsult}`;
+    .querySelector(
+      "h3"
+    ).innerHTML = `Grafica cantidad de clientes por mes  ${yearToConsult}`;
 
   try {
     loadingChart(true);
@@ -180,4 +186,4 @@ async function getDataClientsTOGraphic(year) {
   }
 }
 
-export default getDataClientsTOGraphic;
+export { getDataClientsTOGraphic, loadYears };

@@ -601,13 +601,12 @@
   display: none;
   justify-content: start;
   align-items: center;
-  width: auto;
+  width: 25rem;
   gap: 0.7rem;
   padding: 0.5rem;
   border-radius: 3px;
   color: white;
   box-shadow: 2px 2px 2px gray;
-  background: linear-gradient(#dd0e0e, #a00404);
   font-size: 17px;
 }
 .containForm .alertForm span {

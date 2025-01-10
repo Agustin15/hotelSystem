@@ -61,16 +61,14 @@ export const getBookingByClientAndDate = async (booking) => {
     }
   } catch (error) {
     console.log(error);
+    alertForm(
+      "../../../img/advertenciaLogin.png",
+      "Ups, error al agregar la reserva",
+      "Error",
+      "alertFormError"
+    );
   } finally {
     loadingForm(false);
-    if (!data) {
-      alertForm(
-        "../../../img/advertenciaLogin.png",
-        "Ups, error al agregar la reserva",
-        "Error",
-        "alertFormError"
-      );
-    }
     return data;
   }
 };

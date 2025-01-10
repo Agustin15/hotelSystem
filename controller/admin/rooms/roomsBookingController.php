@@ -44,6 +44,7 @@ class roomsBookingController
                 }
             } catch (Throwable $th) {
                 $error = $th;
+                $conexion->conectar()->rollback();
                 return array("error" => $th->getMessage(), "status" => 502);
             } finally {
                 $conexion->cerrarConexion();
@@ -58,13 +59,40 @@ class roomsBookingController
 
     public function PUT() {}
 
-    public function DELETE() {}
+    public function DELETE($req)
+    {
+
+        $roomsToDelete = $req['rooms'];
+        $idBooking = $req['idBooking'];
+        $errorDeleteQuery = null;
+
+        $conexion = new conexion();
+        foreach ($roomsToDelete as $roomToDelete) {
+
+            try {
+                $conexion->conectar()->begin_transaction();
+                $this->rooms->deleteHabitacionReserva($idBooking, $roomToDelete);
+                $conexion->conectar()->commit();
+            } catch (Throwable $th) {
+                $errorDeleteQuery = $th;
+                $conexion->conectar()->rollback();
+                return array("error" => $th->getMessage(), "status" => 404);
+            } finally {
+
+                $conexion->cerrarConexion();
+            }
+        }
+
+        if (!$errorDeleteQuery) {
+            return array("response" => true);
+        }
+    }
 
     public function getDashboardGraphic($req)
     {
 
         try {
-            $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear(date("Y"))->fetch_all(MYSQLI_ASSOC);
+            $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear($req['year'])->fetch_all(MYSQLI_ASSOC);
 
             $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved) {
 
@@ -256,4 +284,16 @@ class roomsBookingController
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+    public function getAllYearsWithRoomsBooking($req)
+    {
+
+        try {
+            $years = $this->rooms->getAllYearsWithRoomsBooking();
+            return $years;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
 }

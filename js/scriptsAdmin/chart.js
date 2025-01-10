@@ -230,11 +230,13 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
 };
 
 async function getCategoryRoomsMostReserved() {
+  let actualYear = new Date().getFullYear();
+
   loading(true, "rooms");
   try {
     const response = await fetch(
       "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
-        JSON.stringify({ option: "dashboardGraphic" }),
+        JSON.stringify({ option: "dashboardGraphic", year: actualYear }),
       {
         method: "GET",
         headers: {

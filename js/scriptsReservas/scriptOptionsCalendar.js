@@ -52,6 +52,7 @@ export const createEventsCalendar = async () => {
 
       return {
         title: `Reserva ${booking.idReserva}`,
+        idBooking: booking.idReserva,
         start: booking.fechaLlegada,
         end: booking.fechaSalida,
         backgroundColor: eventColor,

@@ -145,8 +145,8 @@ class cliente
         return $resultado;
     }
 
-    
-    public function getLimitAndIndexBookingsClient($id,$index)
+
+    public function getLimitAndIndexBookingsClient($id, $index)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from clientes INNER JOIN reserva_habitacion
@@ -161,7 +161,7 @@ class cliente
     public function getAllYearsVisitClients()
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select YEAR(fechaLlegada) from reserva_habitacion INNER JOIN clientes 
+        $consulta = $this->conexion->conectar()->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion INNER JOIN clientes 
         ON clientes.idCliente=reserva_habitacion.idClienteReserva");
         $consulta->execute();
         $resultados = $consulta->get_result();

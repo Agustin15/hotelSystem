@@ -59,8 +59,6 @@ const getClientById = async (idClient) => {
   }
 };
 
-
-
 const getDataLimitClients = async () => {
   let data = null;
 
@@ -157,12 +155,13 @@ const controls = (next, prev) => {
 };
 
 const search = () => {
-  let inputSerch = document.querySelector(".inputSearch");
+  let btnInputSearch = document.querySelector(".btnSearchInput");
+  let inputSearch = document.querySelector(".inputSearch");
   let tfoot = document.querySelector("tfoot");
 
   let rows = document.querySelector("tbody").querySelectorAll("tr");
-  inputSerch.addEventListener("keydown", () => {
-    let value = inputSerch.value.trim();
+  btnInputSearch.addEventListener("click", () => {
+    let value = inputSearch.value.trim();
 
     rows.forEach((row) => {
       if (row.innerText.indexOf(value) == -1) {

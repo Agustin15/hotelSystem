@@ -3,8 +3,9 @@ import { alertGuests } from "../scriptsRoomsAvailables/scriptRoomsAvailables.js"
 import { nights } from "./scriptFormEdit.js";
 
 export let roomsCart = [];
-
-let cartRooms, idBookingGlobal, roomsBooking, amount, divTotal;
+export let roomsBooking;
+export let amount;
+let cartRooms, idBookingGlobal, divTotal;
 
 export const configRoomsCart = async (idBooking, nights) => {
   cartRooms = document.querySelector(".cartRooms");

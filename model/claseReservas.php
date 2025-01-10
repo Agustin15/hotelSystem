@@ -98,7 +98,8 @@ class reservas
     public function getReservaPoridReserva($idReserva)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion where idReserva=?");
+        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes ON 
+        clientes.idCliente=reserva_habitacion.idClienteReserva where idReserva=?");
         $consulta->bind_param("i", $idReserva);
         $consulta->execute();
 

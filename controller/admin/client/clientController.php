@@ -89,14 +89,7 @@ class clientController
   {
     try {
       $years = $this->client->getAllYearsVisitClients();
-      $ac = null;
-      $yearsFilter = array_filter($years, function ($year) use (&$ac) {
-        if ($ac !== $year) {
-          $ac = $year;
-          return $year['YEAR(fechaLlegada)'];
-        }
-      });
-      return $yearsFilter;
+      return $years;
     } catch (Throwable $th) {
       return array("error" => $th->getMessage(), "status" => 404);
     }

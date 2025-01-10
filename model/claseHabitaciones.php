@@ -553,4 +553,12 @@ class habitaciones
         $consulta->bind_param("ii", $idReserva, $numHabitacion);
         return $consulta->execute();
     }
+
+    public function getAllYearsWithRoomsBooking()
+    {
+        $query = $this->conexion->conectar()->prepare("select DISTINCT YEAR(fechaLlegadaHabitacion) from habitacion_reservada");
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
 }

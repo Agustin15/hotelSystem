@@ -18,15 +18,16 @@ if (empty($usuario)) {
 
     $adminUser = $admin->getAdminGenero($usuario);
 
-    if ($adminUser) {
-        $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
+    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
 
-        $genero = $datoAdminUser['genero'];
-        $_SESSION['genero'] = $genero;
-    }
+    $genero = $datoAdminUser['genero'];
+    $_SESSION['genero'] = $genero;
+    $actualYear = date("Y");
 }
 
-$actualYear = date("Y");
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,86 +36,20 @@ $actualYear = date("Y");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMain.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
-    <script type="module" src="../../../js/scriptsReservas/scriptReserva.js" defer> </script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-
-    <script defer type="module">
-        import {
-            actualOptionBooking,
-            actualOption,
-            markActualOption,
-            optionAddLi
-        } from "../../../js/scriptsReservas/scriptReserva.js";
-
-        import {
-            createEventsCalendar,
-            optionsAddBooking
-        } from "../../../js/scriptsReservas/scriptOptionsCalendar.js";
-
-        if (actualOption == "addBooking.html") {
-            localStorage.setItem("actualOptionBooking", "addBooking.html");
-            await actualOptionBooking(actualOption);
-            let mainCalendar = document.querySelector("#mainCalendar");
-            markActualOption(optionAddLi);
-
-            let eventsBooking = await createEventsCalendar();
-            let calendar = new FullCalendar.Calendar(mainCalendar, {
-                initialView: 'dayGridMonth',
-                selectable: true,
-                events: eventsBooking || [],
-                customButtons: {
-                    buttonViewMonths: {
-                        text: 'Vista meses',
-                        click: function() {
-                            calendar.changeView('multiMonthYear');
-                        }
-                    },
-                    buttonViewOneMonth: {
-                        text: "Vista mes",
-                        click: () => {
-                            calendar.changeView("dayGridMonth");
-                        }
-                    },
-                    buttonToday: {
-                        text: "Hoy",
-                        click: () => {
-                            calendar.today();
-                        },
-
-                    },
-
-                },
-
-                headerToolbar: {
-                    left: 'title',
-                    right: 'buttonViewMonths buttonViewOneMonth buttonToday prev,next',
-                },
-                select: (info) => {
-                    optionsAddBooking(info.startStr, info.endStr);
-                },
-                eventClick: function(info) {
-                    let idBooking = info.event.extendedProps.idBooking;
-
-                    localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-                    location.href = `http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=${idBooking}`;
-                }
-
-            });
+    <script type="module" src="../../../js/scriptsRooms/dashboardScript.js" defer> </script>
 
 
-            calendar.setOption('locale', 'uy');
-            calendar.render();
-        }
-    </script>
-    <title>Reservas</title>
-</head>
+
+
+    <title>Habitaciones</title>
 
 <body>
 
-    <div class="modalMainBookings">
+    <div class="modalMainRooms">
     </div>
 
 
@@ -250,24 +185,25 @@ $actualYear = date("Y");
     </header>
 
 
-    <div class="bodyBookings">
+    <div class="bodyRooms">
 
 
         <div class="menuBar">
             <div class="title">
-                <h3>Reservas</h3>
-                <img src="../../../img/reservaId.png">
+                <h3>Habitaciones</h3>
+                <img src="../../../img/keyCardTitle.png">
             </div>
             <nav>
                 <ul>
+                    <li class="chartLi">
+                        <img src="../../../img/grafica.png">
+                        <a>Grafica</a>
+                    </li>
                     <li class="listLi">
-                        <img src="../../../img/reservas.png">
+                        <img src="../../../img/key-card.png">
                         <a>Lista</a>
                     </li>
-                    <li class="addLi">
-                        <img src="../../../img/agregarReserva.png">
-                        <a>Agregar</a>
-                    </li>
+
                 </ul>
             </nav>
 
