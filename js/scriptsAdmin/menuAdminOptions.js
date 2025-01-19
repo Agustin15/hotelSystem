@@ -9,6 +9,11 @@ export const optionsMenuAdmin = () => {
     "#liReserva",
     "actualOptionBooking"
   );
+  routesOptions(
+    "http://localhost/sistema%20Hotel/views/admin/habitaciones/",
+    "#liHabitaciones",
+    "actualOptionRooms"
+  );
 
   let logout = document.querySelector(".logout");
 
@@ -24,8 +29,8 @@ const routesOptions = (url, liOption, itemLocal) => {
 
   allOptionsSubMenu.forEach((option) => {
     option.addEventListener("click", () => {
-      location.href = url;
       localStorage.setItem(itemLocal, option.dataset.subUrl);
+      location.href = url;
     });
   });
 };

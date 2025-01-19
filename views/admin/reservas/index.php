@@ -194,14 +194,14 @@ $actualYear = date("Y");
 
                     <ul class="subMenu">
 
-                        <li class="liGrafica">
+                        <li class="liGrafica" data-sub-url="grafica.html">
 
                             <img src="../../../img/grafica.png">
                             <a>Grafica</a>
 
                         </li>
 
-                        <li class="liHabitacion">
+                        <li class="liHabitacion" data-sub-url="rooms.html">
 
                             <img src="../../../img/key-card.png">
                             <a>Lista</a>

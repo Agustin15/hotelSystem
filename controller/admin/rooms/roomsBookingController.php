@@ -296,4 +296,28 @@ class roomsBookingController
         }
     }
 
+    public function getAllBookingsByRoomAndYearLimit($req)
+    {
+        try {
+            if ($req["index"] == 0) {
+                $bookingsRoom = $this->rooms->getFirstsBookingsByRoomAndYear($req["numRoom"], $req["year"]);
+            } else {
+                $bookingsRoom = $this->rooms->getAllBookingsByRoomAndYearLimit($req["numRoom"], $req["year"], $req["index"]);
+            }
+            return $bookingsRoom;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getAllBookingsByRoomAndYear($req)
+    {
+        try {
+
+            $bookingsRoom = $this->rooms->getAllBookingsByRoomAndYear($req["numRoom"], $req["year"]);
+            return $bookingsRoom;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 }

@@ -1,10 +1,15 @@
 import { getRoomsCategoryHotel, getAllRoomsByCategory } from "./scriptRooms.js";
+import { pageNotFound, loadingPage } from "./dashboardScript.js";
+import { configRecordRoom } from "./optionsRoom/scriptRecordRoom.js";
 
 let ulRooms, menuRooms, category;
+export let modalMainRooms;
 
 export const configListRooms = async () => {
+  modalMainRooms = document.querySelector(".modalMainRooms");
   ulRooms = document.querySelector(".itemsRooms");
   menuRooms = document.querySelector(".categorysRooms");
+
   let roomsCategorys = await roomsCategoryHotel();
   if (roomsCategorys) {
     drawMenuRooms(roomsCategorys);
@@ -38,7 +43,7 @@ const roomsCategoryHotel = async () => {
 
 const drawMenuRooms = (roomsCategorys) => {
   let itemsRooms = roomsCategorys.map((room) => {
-    return `<li>
+    return `<li class="itemRoom" data-category=${room.category}>
     <img src="data:image/png;base64,${room.imageTwo}">
     <span>${room.category}</span>
    </li> `;
@@ -46,6 +51,16 @@ const drawMenuRooms = (roomsCategorys) => {
 
   menuRooms.innerHTML = itemsRooms.join("");
   category = roomsCategorys[0].category;
+
+  document.querySelectorAll(".itemRoom").forEach((item) => {
+    item.addEventListener("click", async () => {
+      category = item.dataset.category;
+      let rooms = await roomsByCategory();
+      if (rooms) {
+        drawRooms(rooms);
+      }
+    });
+  });
 };
 
 const drawLoading = (state) => {
@@ -64,7 +79,7 @@ const drawLoading = (state) => {
 };
 
 const drawNoData = () => {
-  ul.innerHTML = `
+  ulRooms.innerHTML = `
       
       <div class="noData">
       <img src="../../../img/sinDatos.png">
@@ -98,6 +113,25 @@ const drawRooms = (rooms) => {
   let roomsItems = rooms.map((room) => {
     return ` 
       <li>
+      <div class="containIconMenu">
+       <img class="iconMenu" src="../../../img/menuRoom.png">       
+      </div>
+      <ul id=${room.numRoom} style="display:none" class="menuOptions">
+      <li class="optionMenu" data-url="optionsMenu/record.php?numRoom=${
+        room.numRoom
+      }">
+      <img src="../../../img/historyBookings.png">
+      Historial reservas
+      </li>
+      <li class="optionMenu">
+      <img src="../../../img/nextBookings.png">
+      Proximas reservas
+      </li>
+      <li class="optionMenu">
+      <img src="../../../img/services.png">
+      Servicios
+      </li>
+      </ul>
       <div class="rowOne">
       <div class="icon">
        <img src="data:image/png;base64,${room.imageTwo}">
@@ -122,14 +156,95 @@ const drawRooms = (rooms) => {
       </li>
      `;
   });
+
   ulRooms.innerHTML = roomsItems.join("");
 
   let spanBooking = document.querySelector(".idBooking");
-  spanBooking.addEventListener("click", () => {
-    localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-    window.open(
-      "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
-        spanBooking.id
-    );
+  if (spanBooking) {
+    spanBooking.addEventListener("click", () => {
+      localStorage.setItem("actualOptionBooking", "bookingsTable.html");
+      window.open(
+        "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
+          spanBooking.id
+      );
+    });
+  }
+
+  openOptionsRoom();
+  optionMenuRoom();
+};
+
+const openOptionsRoom = () => {
+  let iconsMenu = document.querySelectorAll(".iconMenu");
+  iconsMenu.forEach((iconMenu) => {
+    iconMenu.addEventListener("click", () => {
+      let menuOptions =
+        iconMenu.parentElement.parentElement.querySelector(".menuOptions");
+
+      if (menuOptions.style.display == "none") {
+        menuOptions.style.display = "flex";
+      } else {
+        menuOptions.style.display = "none";
+      }
+      checkShowMenu(menuOptions);
+    });
   });
+};
+
+const optionMenuRoom = () => {
+  let optionsMenuRoom = [...document.querySelectorAll(".optionMenu")];
+  optionsMenuRoom.forEach((option) => {
+    option.addEventListener("click", () => {
+      let url = option.dataset.url;
+      getOptionRoomPage(url);
+    });
+  });
+};
+
+const getOptionRoomPage = async (url) => {
+  let data;
+  modalMainRooms.style.display = "flex";
+  loadingPage(true, modalMainRooms);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modalMainRooms);
+    if (data) {
+      drawDocument(data, url);
+    } else {
+      pageNotFound(modalMainRooms);
+    }
+  }
+};
+
+const drawDocument = (document, url) => {
+  modalMainRooms.innerHTML = document;
+
+  const functionsOptions = [
+    {
+      page: "record.php",
+      function: configRecordRoom,
+    },
+  ];
+
+  let functionOption = functionsOptions.find(
+    (option) => url.indexOf(option.page) > -1
+  );
+  functionOption.function();
+};
+
+const checkShowMenu = (menuCurrent) => {
+  let menusRoom = [...document.querySelectorAll(".menuOptions")];
+  let menuRoomShow = menusRoom.find(
+    (menu) => menu.id != menuCurrent.id && menu.style.display == "flex"
+  );
+  if (menuRoomShow) {
+    menuRoomShow.style.display = "none";
+  }
 };

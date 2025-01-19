@@ -561,4 +561,39 @@ class habitaciones
         $results = $query->get_result();
         return $results->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getAllBookingsByRoomAndYearLimit($numRoom, $year, $index)
+    {
+        $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
+        reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
+         YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10,$index");
+        $query->bind_param("is", $numRoom, $year);
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getFirstsBookingsByRoomAndYear($numRoom, $year)
+    {
+        $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
+        reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
+         YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10");
+        $query->bind_param("is", $numRoom, $year);
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
+    public function getAllBookingsByRoomAndYear($numRoom, $year)
+    {
+        $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
+        reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
+         YEAR(reserva_habitacion.fechaLlegada)=?");
+        $query->bind_param("is", $numRoom, $year);
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
 }

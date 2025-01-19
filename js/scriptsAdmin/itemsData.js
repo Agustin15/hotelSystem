@@ -54,7 +54,7 @@ const displayItemDataRevenuesActual = async () => {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
   let actualMonth = actualDate.getMonth();
-  let actualMonthString = getMes(actualMonth);
+  let actualMonthString = getMes(actualMonth + 1);
 
   let details;
   if (dataRevenues) {

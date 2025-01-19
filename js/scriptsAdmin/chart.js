@@ -16,7 +16,7 @@ function getMes(numMes) {
 
   let mesElegido = null;
 
-  mesElegido = meses.find((elemento) => meses.indexOf(elemento) + 1 == numMes);
+  mesElegido = meses.find((mes, index) => index + 1 == numMes);
 
   return mesElegido;
 }

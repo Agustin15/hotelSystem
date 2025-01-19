@@ -255,3 +255,72 @@ export const fetchDeleteRoom = async (dataToDelete) => {
     return roomsDeleted;
   }
 };
+
+export const getAllBookingsByRoomAndYearLimit = async (
+  index,
+  year,
+  numRoom
+) => {
+  let data;
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+        JSON.stringify({
+          option: "getAllBookingsByRoomAndYearLimit",
+          numRoom: numRoom,
+          year: year,
+          index: index,
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw "Ups, error al buscar las reservas";
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
+export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
+  let data;
+  try {
+    const response = await fetch(
+      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+        JSON.stringify({
+          option: "getAllBookingsByRoomAndYear",
+          numRoom: numRoom,
+          year: year,
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw "Ups, error al buscar las reservas";
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
