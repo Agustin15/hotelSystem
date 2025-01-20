@@ -2,9 +2,10 @@ import {
   loadingForm,
   alertForm,
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 export const POSTPay = async (booking) => {
-  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php`;
 
   let data;
   loadingForm(true);
@@ -40,7 +41,7 @@ export const POSTPay = async (booking) => {
 };
 
 export const PUTPay = async (booking) => {
-  let url = "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php";
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php `;
 
   let data;
   loadingForm(true);
@@ -77,7 +78,7 @@ export const PUTPay = async (booking) => {
 
 export const getPayById = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data = null;

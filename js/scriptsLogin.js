@@ -7,10 +7,10 @@ const alertLoginAdmin = (img, msj, title) => {
   alertLogin.style.display = "flex";
 };
 
-const removeAlertLoginAdmin=()=>{
+const removeAlertLoginAdmin = () => {
   let alertLogin = document.querySelector(".alertLogin");
   alertLogin.style.display = "none";
-}
+};
 
 function inputAlert(inputName) {
   let inputsName = [...document.getElementsByName(inputName)];
@@ -47,7 +47,7 @@ function setUser(event) {
 
   const formUser = new FormData(form);
   let validate = null;
-  const user = {};
+  const userData = {};
 
   formUser.forEach((v, k) => {
     if (v.trim() == "") {
@@ -55,14 +55,14 @@ function setUser(event) {
       inputAlert(k);
       return;
     } else {
-      user[k] = v;
+      userData[k] = v;
     }
   });
 
   if (validate) {
     alertLoginAdmin("../../img/advertenciaLogin.png", validate, "Advertencia");
   } else {
-    comprobateUser(user);
+    login(userData);
   }
 }
 
@@ -74,34 +74,32 @@ function loading(status) {
   }
 }
 
-async function comprobateUser(user) {
+async function login(userData) {
   loading(true);
-
-  let userJson = JSON.stringify(user);
 
   setTimeout(async () => {
     try {
       const response = await fetch(
-        "http://localhost/sistema%20Hotel/controller/admin/autenticacionLogin.php?user=" +
-          userJson,
+        "http://localhost/sistema%20Hotel/routes/loginRoutes.php",
         {
-          method: "GET",
+          method: "POST",
           headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify({ userData: userData }),
         }
       );
 
       const result = await response.json();
-      if (result.advertencia) {
-        throw result.advertencia;
-      } else if (result.respuesta) {
+
+      if (!response.ok) {
+        throw result.error;
+      } else if (result.user) {
         location.href =
           "http://localhost/sistema%20Hotel/views/admin/index.php";
-      } else {
-        throw "Ups,no se pudo iniciar sesion";
       }
     } catch (error) {
+      console.log(error);
       alertLoginAdmin("../../img/advertenciaLogin.png", error, "Error");
     } finally {
       loading(false);

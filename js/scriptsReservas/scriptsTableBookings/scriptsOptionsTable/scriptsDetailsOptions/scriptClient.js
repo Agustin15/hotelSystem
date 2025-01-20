@@ -1,4 +1,5 @@
 import { modalOption } from "../../scriptTableBookings.js";
+import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
 let body;
 let idBooking;
 
@@ -32,7 +33,7 @@ const getDataClientByIdBooking = async () => {
   loading(true, body);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
         JSON.stringify({ option: "getClientByIdBooking", idBooking: idBooking })
     );
 

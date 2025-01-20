@@ -1,5 +1,7 @@
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+
 export const POSTBooking = async (booking) => {
-  let url = "http://localhost/sistema%20Hotel/routes/bookingRoutes.php";
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`;
   let data;
 
   loadingForm(true);
@@ -43,7 +45,7 @@ export const getBookingByClientAndDate = async (booking) => {
 
   let data;
   let url =
-    "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingByClientAndDate",
       dataBooking: dataBooking,

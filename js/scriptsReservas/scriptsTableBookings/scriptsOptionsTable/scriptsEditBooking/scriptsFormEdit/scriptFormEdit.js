@@ -18,6 +18,8 @@ import {
   loadingForm,
 } from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
+import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
+
 let bookingGlobal;
 let allClients;
 let formEdit;
@@ -309,7 +311,7 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
   loadingForm(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php",
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`,
       {
         method: "PUT",
         headers: {

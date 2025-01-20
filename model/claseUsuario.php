@@ -3,7 +3,7 @@
 
 require_once(__DIR__ . "/../conexion/conexion.php");
 
-class usuario
+class Usuario
 {
 
     private $conexion;
@@ -31,7 +31,7 @@ class usuario
     }
 
 
-    public function selectUser($user)
+    public function getUserByUser($user)
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from usuarios where usuario=?");

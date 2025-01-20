@@ -6,6 +6,7 @@ import { configRoomsDetails } from "./scriptsDetailsClient/scriptRooms.js";
 import { configServicesDetails } from "./scriptsDetailsClient/scriptServices.js";
 import { pageNotFound, loadingPage } from "../scriptCliente.js";
 import { closePageNotFound } from "../scriptClientsTable.js";
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 let pages;
 let indexPage = 1;
@@ -34,7 +35,7 @@ export const configDetailsClient = async () => {
 
 const getRowsBookingClients = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
     JSON.stringify({ option: "rowsBookingsClient", client: id });
 
   let data = null;
@@ -67,7 +68,7 @@ const noBookingsClient = (msj) => {
 
 const getClientBookingLimit = async (id) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=  ` +
     JSON.stringify({
       option: "bookingsClient",
       client: id,
@@ -229,7 +230,6 @@ const drawOptionDetail = async (url, configOptionDetail) => {
       configOptionDetail();
     }
   }
-
 };
 
 export const optionModal = (modal, option) => {

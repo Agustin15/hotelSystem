@@ -1,4 +1,5 @@
 import { drawFormEdit } from "./scriptFormEdit.js";
+import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
 
 let body;
 
@@ -20,7 +21,7 @@ const getBookingById = async (idBooking) => {
   loading(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params= " +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
         JSON.stringify({ option: "getBookingById", idBooking: idBooking })
     );
     const result = await response.json();

@@ -975,7 +975,7 @@ body #userAdmin:hover > .btnFlecha {
 }
 .modalMainClient .containDelete .noData {
   font-size: 20px;
-  color: rgb(155, 155, 155);
+  color: rgb(126, 126, 126);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1211,12 +1211,12 @@ body #userAdmin:hover > .btnFlecha {
   align-items: center;
   gap: 1rem;
   margin-top: -4rem;
-  opacity: 70%;
-  color: rgb(153, 153, 153);
+  color: rgb(126, 126, 126);
   font-size: 17px;
   font-weight: bold;
 }
 .modalMainClient .containFormEdit .noData img {
+  opacity: 70%;
   width: 60px;
 }
 .modalMainClient .containFormEdit .close {
@@ -1581,12 +1581,12 @@ body #userAdmin:hover > .btnFlecha {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  opacity: 60%;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(126, 126, 126);
 }
 .modalOptionsBookingClient .containGuestDetails .body .noData img {
   width: 80px;
+  opacity: 60%;
 }
 .modalOptionsBookingClient .containGuestDetails .body .totalGuests {
   display: flex;
@@ -1595,7 +1595,6 @@ body #userAdmin:hover > .btnFlecha {
   align-items: center;
   font-size: 17px;
   color: rgb(109, 109, 109);
-  opacity: 50%;
 }
 .modalOptionsBookingClient .containGuestDetails .body .totalGuests img {
   width: 30px;
@@ -1767,13 +1766,13 @@ body #userAdmin:hover > .btnFlecha {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  opacity: 60%;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(126, 126, 126);
 }
 .modalOptionsBookingClient .containRoomsDetails .body .noData img,
 .modalOptionsBookingClient .containServicesDetails .body .noData img {
   width: 80px;
+  opacity: 60%;
 }
 .modalOptionsBookingClient .containRoomsDetails .body .rooms,
 .modalOptionsBookingClient .containRoomsDetails .body .services,

@@ -1,6 +1,8 @@
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+
 export const getDataServices = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/servicesRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/servicesRoutes.php?params=` +
     JSON.stringify({ option: "getServicesBooking", idBooking: idBooking });
 
   let data = null;

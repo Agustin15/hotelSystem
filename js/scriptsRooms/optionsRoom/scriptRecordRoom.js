@@ -2,7 +2,7 @@ import {
   getAllBookingsByRoomAndYear,
   getAllBookingsByRoomAndYearLimit,
 } from "../scriptRooms.js";
-
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 import { modalMainRooms } from "../scriptListRooms.js";
 
 let numRoom, containData, selectYear, limitPages;
@@ -27,7 +27,7 @@ export const configRecordRoom = async () => {
 
 const getYears = async () => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
     JSON.stringify({ option: "getAllYearsWithRoomsBooking" });
 
   let data = null;

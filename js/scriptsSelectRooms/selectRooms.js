@@ -1,4 +1,5 @@
 import { drawHotelRooms } from "./drawHotelRooms.js";
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 import {
   printDateBookingInCart,
@@ -82,7 +83,7 @@ async function submitGetCategoryHotelRooms() {
   try {
     loading(true);
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel"
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel`
     );
     const result = await response.json();
     if (!response.ok) {
@@ -137,7 +138,7 @@ if (formCheckIn) {
 async function submitDateBooking(dateBooking) {
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsAvailable&dateBooking=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsAvailable&dateBooking=` +
         JSON.stringify(dateBooking)
     );
 

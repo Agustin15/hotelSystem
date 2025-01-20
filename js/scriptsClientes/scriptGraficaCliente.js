@@ -1,3 +1,4 @@
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 let today = new Date();
 let actualYear = today.getFullYear();
 
@@ -40,7 +41,7 @@ const loadYears = async () => {
   {
     try {
       let url =
-        "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+          `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
         JSON.stringify({ option: "AllYearsVisitClients" });
 
       const response = await fetch(url);
@@ -164,7 +165,7 @@ async function getDataClientsTOGraphic(year) {
   try {
     loadingChart(true);
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
         JSON.stringify({ option: "clientsGraphic", year: yearToConsult })
     );
 

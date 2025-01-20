@@ -3,8 +3,10 @@ import {
   loadingForm,
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+
 export const POSTRooms = async (booking, option) => {
-  let url = "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php";
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php`;
   let data;
   loadingForm(true);
   try {
@@ -41,7 +43,7 @@ export const POSTRooms = async (booking, option) => {
 export const getRoomsCategoryHotel = async () => {
   let data;
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsRoutes.php?params=` +
     JSON.stringify({ option: "getAllCategoryRooms" });
 
   try {
@@ -62,7 +64,7 @@ export const getRoomsCategoryHotel = async () => {
 export const getAllRoomsByCategory = async (category) => {
   let data;
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsRoutes.php?params= ` +
     JSON.stringify({ option: "getAllRoomsByCategory", category: category });
   try {
     const response = await fetch(url);
@@ -81,7 +83,7 @@ export const getAllRoomsByCategory = async (category) => {
 
 export const getDataBookingRoomsWithCategory = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getDataRoomsBookingAndCategory",
       idBooking: idBooking,
@@ -105,7 +107,7 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
 
 export const getBookingRoomsDetails = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getRoomsBookingAndDetails",
       idBooking: idBooking,
@@ -130,7 +132,7 @@ export const getBookingRoomsDetails = async (idBooking) => {
 
 export const getDataBookingRoomsGuests = async (idBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getDataRoomsBooking",
       idBooking: idBooking,
@@ -153,7 +155,7 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
 
 export const getRoomsFreeCategory = async (dataBooking) => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
     JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
 
   let data = null;
@@ -189,7 +191,7 @@ export const verifyStateRoomsToBooking = async (
   loadingForm(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "verifyStateRoomsToBooking",
           dataBookingToUpdate: dataBookingToUpdate,
@@ -223,7 +225,7 @@ export const fetchDeleteRoom = async (dataToDelete) => {
   let roomsDeleted;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify(dataToDelete),
       {
         method: "DELETE",
@@ -264,7 +266,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
   let data;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "getAllBookingsByRoomAndYearLimit",
           numRoom: numRoom,
@@ -297,7 +299,7 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
   let data;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params= ` +
         JSON.stringify({
           option: "getAllBookingsByRoomAndYear",
           numRoom: numRoom,

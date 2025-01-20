@@ -1,3 +1,5 @@
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+
 function getMes(numMes) {
   let meses = [
     "Enero",
@@ -48,7 +50,7 @@ async function getClientsByMonthActualYear(actualYear) {
   let data;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
         JSON.stringify({ option: "clientsGraphic", year: actualYear }),
       {
         method: "GET",
@@ -137,7 +139,7 @@ async function getRevenueActualYear() {
 
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
         JSON.stringify({ option: "dashboardGraphic" }),
       {
         method: "GET",
@@ -235,7 +237,7 @@ async function getCategoryRoomsMostReserved() {
   loading(true, "rooms");
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "dashboardGraphic", year: actualYear }),
       {
         method: "GET",

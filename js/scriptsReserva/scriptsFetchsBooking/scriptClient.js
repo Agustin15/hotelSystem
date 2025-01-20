@@ -1,5 +1,6 @@
 import { loadingBooking } from "../personalData.js";
 import { alertClientFormBooking, alertBooking } from "../alertsBooking.js";
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export const fetchPOSTClient = async (client) => {
   loadingBooking(true, "Procesando cliente");
@@ -7,7 +8,7 @@ export const fetchPOSTClient = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php",
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php`,
       {
         method: "POST",
         headers: {
@@ -43,7 +44,7 @@ export const fetchGetClient = async (client) => {
 
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
         JSON.stringify({ option: "getClientByMailAndName", client: client })
     );
 

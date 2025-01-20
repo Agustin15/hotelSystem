@@ -1,3 +1,4 @@
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 let actualYear = new Date().getFullYear();
 let selectYear;
 
@@ -15,7 +16,7 @@ const getAllYearsToSelect = async () => {
   loading(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "getAllYearsWithRoomsBooking" })
     );
     const years = await response.json();
@@ -63,7 +64,7 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   loading(true);
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "dashboardGraphic",
           year: year,

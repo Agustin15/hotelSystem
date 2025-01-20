@@ -1,8 +1,9 @@
 import { getMes } from "./chart.js";
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/routes/roomsBookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params= ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {
@@ -26,7 +27,7 @@ const getCategoryRoomsData = async () => {
 
 const getRevenuesActualYear = async () => {
   let $url =
-    "http://localhost/sistema%20Hotel/routes/revenuesRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=  ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {

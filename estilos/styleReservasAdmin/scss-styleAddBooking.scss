@@ -197,17 +197,19 @@
     justify-content: flex-end;
 
     button {
-      background-color: rgb(3, 145, 121);
+      background-color: rgb(211, 9, 9);
       padding: 0.5rem;
       padding-top: 0.4rem;
       height: 1.6rem;
+      width: 1.6rem;
       border: none;
       color: white;
       cursor: pointer;
+      font-weight: bold;
     }
 
     button:hover {
-      background-color: rgb(6, 129, 109);
+      background-color: rgb(180, 14, 14);
     }
   }
 

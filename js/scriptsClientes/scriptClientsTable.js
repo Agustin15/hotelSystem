@@ -3,6 +3,7 @@ import { configEditClient } from "./scriptOptionsTable/scriptEditClient.js";
 import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js";
 import { drawRowsTable } from "./drawRowsTable.js";
 import { loadingPage, pageNotFound } from "./scriptCliente.js";
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -14,7 +15,7 @@ const getRowsClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
       JSON.stringify({ option: "clientsRows" });
 
     const response = await fetch(url);
@@ -39,7 +40,7 @@ const getClientById = async (idClient) => {
   let data = null;
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "dataClient", idClient: idClient });
 
     const response = await fetch(url);
@@ -66,7 +67,7 @@ const getDataLimitClients = async () => {
 
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "clientsTable", index: indexRegister });
 
     const response = await fetch(url);

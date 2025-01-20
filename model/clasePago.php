@@ -71,17 +71,6 @@ class pago
 
 
 
-    public function getAllIngresos()
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from pago");
-        $consulta->execute();
-        $resultado = $consulta->get_result();
-
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    }
-
-
     public function getAllIngresosAnio($year)
     {
 

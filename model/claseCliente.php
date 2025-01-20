@@ -70,7 +70,7 @@ class cliente
     public function getAllClientesLimitAndIndex($index)
     {
 
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 10,$index");
+        $consulta = $this->conexion->conectar()->prepare("select * from clientes LIMIT 10 OFFSET $index");
         $consulta->execute();
 
         $resultados = $consulta->get_result();
@@ -109,18 +109,6 @@ class cliente
     }
 
 
-    public function getClientesAnio($anio)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from reserva_habitacion INNER JOIN clientes 
-        ON clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(reserva_habitacion.fechaLlegada)=?");
-        $consulta->bind_param("s", $anio);
-        $consulta->execute();
-        $resultados = $consulta->get_result();
-
-        return $resultados->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function getRowsBookingsClient($id)
     {
 
@@ -150,7 +138,7 @@ class cliente
     {
 
         $consulta = $this->conexion->conectar()->prepare("select * from clientes INNER JOIN reserva_habitacion
-        ON clientes.idCliente=reserva_habitacion.idClienteReserva where clientes.idCliente=? LIMIT 1, $index");
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where clientes.idCliente=? LIMIT 1 OFFSET $index");
         $consulta->bind_param("i", $id);
         $consulta->execute();
         $resultado = $consulta->get_result();
@@ -253,30 +241,6 @@ class cliente
         $resultado = $consulta->get_result();
 
         return $resultado->fetch_array(MYSQLI_ASSOC);
-    }
-
-    public function comprobateCorreoEnUso($correo, $nombre, $apellido)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes where correo=? and (nombre!=? or 
-        apellido!=?)");
-        $consulta->bind_param("sss", $correo, $nombre, $apellido);
-        $consulta->execute();
-        $resultado = $consulta->get_result();
-
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function comprobateTelefonoEnUso($telefono, $nombre, $apellido)
-    {
-
-        $consulta = $this->conexion->conectar()->prepare("select * from clientes where telefono=? and (nombre!=? or 
-        apellido!=?)");
-        $consulta->bind_param("sss", $telefono, $nombre, $apellido);
-        $consulta->execute();
-        $resultado = $consulta->get_result();
-
-        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
 

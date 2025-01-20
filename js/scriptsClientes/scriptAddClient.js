@@ -1,3 +1,5 @@
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+
 export const inputAlert = (inputError) => {
   let namesInputs = [...document.getElementsByName(inputError.key)];
   let input = namesInputs[0];
@@ -77,7 +79,7 @@ const fetchPost = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php",
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php`,
       {
         method: "POST",
         headers: {

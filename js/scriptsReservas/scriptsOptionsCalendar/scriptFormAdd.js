@@ -15,6 +15,7 @@ import {
 
 import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
 import { POSTPay } from "../../scriptsRevenues/scriptRevenues.js";
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export let nights;
 export let resultBookingAdd;
@@ -82,7 +83,7 @@ const getAllClients = async () => {
   loading(true);
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/clientRoutes.php?params=" +
+     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "allClients" });
 
     const response = await fetch(url);

@@ -2,6 +2,7 @@ import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
 import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
 import { loadingPage, pageNotFound } from "../scriptReserva.js";
+import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 let pages;
 let limitByPage = 1;
@@ -36,7 +37,7 @@ export const drawTable = async () => {
     if (bookingFound) {
       let arrayBookingFound = [bookingFound];
       drawRowsTable(arrayBookingFound);
-      document.querySelector(".controls").style.display="none";
+      document.querySelector(".controls").style.display = "none";
     }
   }
 };
@@ -109,7 +110,7 @@ const getQuantityBookingsActualYear = async () => {
   loading(true);
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
       JSON.stringify({ option: "bookingsRowsYear", year: yearSelected });
 
     const response = await fetch(url);
@@ -142,7 +143,7 @@ const getBookingById = async (idBooking) => {
   loading(true);
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
       JSON.stringify({ option: "getBookingById", idBooking: idBooking });
 
     const response = await fetch(url);
@@ -207,7 +208,7 @@ const getBookingsYearLimit = async () => {
   loading(true);
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
         data: { year: yearSelected, indexPage: indexPage },
@@ -234,7 +235,7 @@ const getBookingsYearLimit = async () => {
 
 const displaySelectYear = async () => {
   let url =
-    "http://localhost/sistema%20Hotel/routes/bookingRoutes.php?params=" +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
     JSON.stringify({ option: "allYearsBooking" });
 
   let data = null;
