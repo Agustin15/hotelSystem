@@ -1,15 +1,17 @@
 <?php
 require("../model/claseServicios.php");
+require("./../authToken.php");
 
 
 class servicesController
 {
 
-    private $service;
+    private $service, $authToken;
     public function __construct()
     {
 
         $this->service = new servicio();
+        $this->authToken = new authToken();
     }
 
     public function POST() {}
@@ -23,6 +25,11 @@ class servicesController
 
         try {
             $idBooking = $req['idBooking'];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
 
             if (count($bookingServices) > 0) {

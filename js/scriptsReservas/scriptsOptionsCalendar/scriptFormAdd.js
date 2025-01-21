@@ -83,10 +83,16 @@ const getAllClients = async () => {
   loading(true);
   try {
     let url =
-     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "allClients" });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;

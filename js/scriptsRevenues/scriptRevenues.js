@@ -14,6 +14,7 @@ export const POSTPay = async (booking) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
       body: JSON.stringify(booking),
     });
@@ -50,6 +51,7 @@ export const PUTPay = async (booking) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
       body: JSON.stringify(booking),
     });
@@ -83,7 +85,13 @@ export const getPayById = async (idBooking) => {
 
   let data = null;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {

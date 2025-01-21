@@ -1,14 +1,16 @@
 <?php
 require("../model/claseHabitaciones.php");
+require(__DIR__ . "./../authToken.php");
 
 class roomsController
 {
 
-    private $rooms;
+    private $rooms, $authToken;
     public function __construct()
     {
 
         $this->rooms = new habitaciones();
+        $this->authToken = new authToken();
     }
 
     public function POST() {}
@@ -22,6 +24,11 @@ class roomsController
 
         try {
             $res = null;
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $roomsCategorys = $this->rooms->getAllCategoryRooms();
 
             if ($roomsCategorys) {
@@ -47,6 +54,11 @@ class roomsController
     {
 
         try {
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $roomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req["category"]);
             $roomsCategory = array_map(function ($room) {
 

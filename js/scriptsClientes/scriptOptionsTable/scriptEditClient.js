@@ -90,14 +90,20 @@ const submitEditForm = () => {
 
 const getIfExist = async (client) => {
   let url =
-     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
     JSON.stringify({ option: "ifExistClient", client: client });
 
   let data = null;
 
   loadingForm(true);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -123,6 +129,7 @@ const fetchPUT = async (client) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
       body: JSON.stringify(client),
     });

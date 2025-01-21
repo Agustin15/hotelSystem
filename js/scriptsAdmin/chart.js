@@ -56,6 +56,7 @@ async function getClientsByMonthActualYear(actualYear) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
       }
     );
@@ -136,7 +137,7 @@ function graphicClientsDashboard(dataPoints, grafica, titulo) {
 
 async function getRevenueActualYear() {
   loading(true, "revenues");
-
+  let data;
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
@@ -145,6 +146,7 @@ async function getRevenueActualYear() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          credentials: "same-origin",
         },
       }
     );
@@ -153,12 +155,17 @@ async function getRevenueActualYear() {
     if (!response.ok) {
       throw result.error;
     } else if (result) {
-      dataPointsToGraphicRevenues(result);
+      data = result;
     }
   } catch (error) {
     console.log(error);
   } finally {
     loading(false, "revenues");
+    if (data) {
+      dataPointsToGraphicRevenues(data);
+    } else {
+      document.querySelector(".noDataRevenues").style.display = "flex";
+    }
   }
 }
 
@@ -233,6 +240,7 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
 
 async function getCategoryRoomsMostReserved() {
   let actualYear = new Date().getFullYear();
+  let data;
 
   loading(true, "rooms");
   try {
@@ -243,6 +251,7 @@ async function getCategoryRoomsMostReserved() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
+          credentials: "same-origin",
         },
       }
     );
@@ -251,12 +260,17 @@ async function getCategoryRoomsMostReserved() {
     if (!response.ok) {
       throw result.error;
     } else {
-      dataPointsToGraphicRooms(result);
+      data = result;
     }
   } catch (error) {
     console.log(error);
   } finally {
     loading(false, "rooms");
+    if (data) {
+      dataPointsToGraphicRooms(data);
+    } else {
+      document.querySelector(".noDataRooms").style.display = "flex";
+    }
   }
 }
 

@@ -17,7 +17,14 @@ const getAllYearsToSelect = async () => {
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
-        JSON.stringify({ option: "getAllYearsWithRoomsBooking" })
+        JSON.stringify({ option: "getAllYearsWithRoomsBooking" }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
     );
     const years = await response.json();
     if (!response.ok) {
@@ -68,7 +75,14 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
         JSON.stringify({
           option: "dashboardGraphic",
           year: year,
-        })
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
     );
     const roomsBookingCategorys = await response.json();
     if (!response.ok) {

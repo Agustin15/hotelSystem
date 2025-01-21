@@ -1,32 +1,6 @@
 <?php
 
-session_id("login");
-session_start();
-$usuario = $_SESSION['usuario'];
-
-if (empty($usuario)) {
-
-    header("location:../../loginAdmin");
-} else {
-
-    require("../../../model/claseUsuario.php");
-    require("../../../model/claseCliente.php");
-    $admin = new usuario();
-    $claseCliente = new cliente();
-
-
-
-    $adminUser = $admin->getAdminGenero($usuario);
-
-    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
-
-    $genero = $datoAdminUser['genero'];
-    $_SESSION['genero'] = $genero;
-    $actualYear = date("Y");
-}
-
-
-
+$actualYear = date("Y");
 
 ?>
 
@@ -171,7 +145,7 @@ if (empty($usuario)) {
 
                     </li>
 
-                    <a href="../../../controller/admin/cerrarSesion.php">
+                    <a href="../../../controller/admin/logout.php">
                         <li>
 
                             <img src="../../../img/apagar.png">

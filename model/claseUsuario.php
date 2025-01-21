@@ -42,7 +42,4 @@ class Usuario
 
         return $resultados->fetch_array(MYSQLI_ASSOC);
     }
-
-   
 }
-

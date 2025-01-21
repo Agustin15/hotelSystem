@@ -33,7 +33,13 @@ const getYears = async () => {
   let data = null;
   loading(true, containData);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;

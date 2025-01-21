@@ -1,22 +1,30 @@
 <?php
-
 require("../model/claseCliente.php");
+require(__DIR__ . "./../authToken.php");
 
 class clientController
 {
 
-  private $client;
+  private $client, $authToken;
+
 
   public function __construct()
   {
 
     $this->client = new cliente();
+    $this->authToken = new authToken();
   }
 
   public function POST($req)
   {
 
     try {
+
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
+
       $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
 
       if ($dataClientMail) {
@@ -49,6 +57,12 @@ class clientController
   {
 
     try {
+
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
+
       $resultado = $this->client->updateCliente(
         $req['mail'],
         $req['name'],
@@ -66,6 +80,11 @@ class clientController
   public function DELETE($req)
   {
     try {
+      $tokenVerify = $this->authToken->verifyToken();
+      if (empty($tokenVerify["error"])) {
+        throw new Error("Autenticacion fallida,Token no valido");
+      }
+
       $resultDelete = $this->client->deleteCliente($req['idClient']);
       return array("response" => $resultDelete);
     } catch (Throwable $th) {
@@ -76,6 +95,10 @@ class clientController
   public function getAllClients($req)
   {
     try {
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $allClients = $this->client->getAllClientes()->fetch_all(MYSQLI_ASSOC);
 
       return $allClients;
@@ -88,6 +111,10 @@ class clientController
   public function getAllYearsVisitClients($req)
   {
     try {
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $years = $this->client->getAllYearsVisitClients();
       return $years;
     } catch (Throwable $th) {
@@ -98,7 +125,9 @@ class clientController
 
   public function getClientsGraphic($req)
   {
+
     try {
+
       $year = $req['year'];
       $months = array(
         "1",
@@ -114,6 +143,11 @@ class clientController
         "11",
         "12"
       );
+
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
 
       $classClient = $this->client;
       $clientsMonths = array_map(function ($month) use ($classClient, $year) {
@@ -140,6 +174,11 @@ class clientController
     try {
       $res = null;
       $index = $req['index'];
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
+
       if ($index == 0) {
         $res = $this->client->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
       } else {
@@ -155,6 +194,10 @@ class clientController
   public function getClientsRows($req)
   {
     try {
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $clientsRows = $this->client->getAllClientsRows();
 
       return $clientsRows;
@@ -167,6 +210,10 @@ class clientController
   {
     try {
       $idClient = $req['idClient'];
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $res = $this->client->getClientById($idClient);
       return $res;
     } catch (Throwable $th) {
@@ -179,6 +226,10 @@ class clientController
 
     try {
       $client = $req['client'];
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
 
       $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
 
@@ -192,7 +243,10 @@ class clientController
   {
     try {
       $client = $req['client'];
-
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $existClientMail = $this->client->comprobateMailInUseById($client['id'], $client['mail']);
 
       if ($existClientMail) {
@@ -215,6 +269,10 @@ class clientController
   {
     try {
       $idClient = $req['client'];
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       $numRows = $this->client->getRowsBookingsClient($idClient);
       return $numRows;
     } catch (Throwable $th) {
@@ -228,6 +286,10 @@ class clientController
       $idClient = $req['client'];
       $index = $req['index'];
 
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        throw new Error($tokenVerify["error"]);
+      }
       if ($index == 0) {
 
         $bookingClient = $this->client->getLimitBookingsClient($idClient, $index)->fetch_array(MYSQLI_ASSOC);

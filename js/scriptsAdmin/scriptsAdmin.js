@@ -7,6 +7,7 @@ import {
   displayItemsDataCategoryRooms,
   displayItemDataRevenuesActual,
 } from "./itemsData.js";
+import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
 
@@ -49,7 +50,7 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
         } else {
           itemNext = item.nextElementSibling;
 
-          if (itemNext.id == "liGanancias"  || itemNext.id == "liHabitaciones") {
+          if (itemNext.id == "liGanancias" || itemNext.id == "liHabitaciones") {
             itemNext.style.marginTop = "110px";
           } else {
             itemNext.style.marginTop = "145px";
@@ -69,6 +70,27 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
     });
   });
 }
+
+const getDataToken = async () => {
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/controller/admin/authToken.php?params=` +
+        JSON.stringify({ option: "getDataToken" }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
+    );
+
+    const token = await response.json();
+    console.log(token);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const iconMenuAvatar = () => {
   let iconAdmin = document.querySelector(".iconoAdmin");
@@ -102,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displayItemDataRevenuesActual();
   }
 
+  getDataToken();
   iconMenuAvatar();
   optionsMenuAdmin();
 

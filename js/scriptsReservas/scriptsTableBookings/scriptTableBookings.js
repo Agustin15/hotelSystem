@@ -113,7 +113,13 @@ const getQuantityBookingsActualYear = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
       JSON.stringify({ option: "bookingsRowsYear", year: yearSelected });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -146,7 +152,13 @@ const getBookingById = async (idBooking) => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
       JSON.stringify({ option: "getBookingById", idBooking: idBooking });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -214,7 +226,13 @@ const getBookingsYearLimit = async () => {
         data: { year: yearSelected, indexPage: indexPage },
       });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -241,7 +259,13 @@ const displaySelectYear = async () => {
   let data = null;
   loading(true);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;

@@ -33,6 +33,7 @@ const deleteBooking = async (idBooking) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
       }
     );

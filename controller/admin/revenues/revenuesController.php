@@ -1,21 +1,26 @@
 <?php
 
 require("../model/clasePago.php");
-
+require(__DIR__ . "./../authToken.php");
 class revenuesController
 {
-    private $pay;
+    private $pay, $authToken;
 
     public function __construct()
     {
 
         $this->pay = new pago();
+        $this->authToken = new authToken();
     }
 
     public function POST($req)
     {
 
         try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
             return array("response" => $resultPay);
         } catch (Throwable $th) {
@@ -26,6 +31,10 @@ class revenuesController
     public function PUT($req)
     {
         try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
             return array("response" => $resultUpdatePay);
         } catch (Throwable $th) {
@@ -51,7 +60,10 @@ class revenuesController
         );
 
         try {
-
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $gananciasPorMes = [];
             $gananciasPorMes = array_map(function ($mes) {
 
@@ -73,6 +85,10 @@ class revenuesController
     {
 
         try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
             $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
             $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
 
@@ -93,6 +109,10 @@ class revenuesController
     {
         try {
             $idBooking = $req['idBooking'];
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
 
             $revenue =  $this->pay->getPago($idBooking);
 

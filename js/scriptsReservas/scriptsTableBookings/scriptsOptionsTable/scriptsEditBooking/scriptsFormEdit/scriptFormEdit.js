@@ -316,6 +316,7 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
         body: JSON.stringify(bookingToUpdate),
       }

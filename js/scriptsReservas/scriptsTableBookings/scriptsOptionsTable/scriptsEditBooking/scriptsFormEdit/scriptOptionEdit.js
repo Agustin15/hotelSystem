@@ -22,7 +22,14 @@ const getBookingById = async (idBooking) => {
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
-        JSON.stringify({ option: "getBookingById", idBooking: idBooking })
+        JSON.stringify({ option: "getBookingById", idBooking: idBooking }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
     );
     const result = await response.json();
     if (!response.ok) {

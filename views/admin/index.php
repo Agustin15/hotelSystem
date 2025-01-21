@@ -1,37 +1,7 @@
 <?php
 
-session_id("login");
-session_start();
-$usuario = $_SESSION['usuario'];
-
-if (empty($usuario)) {
-
-    header("location:../loginAdmin");
-} else {
-
-    require("../../model/claseUsuario.php");
-    require("../../model/claseHabitaciones.php");
-    require("../../model/clasePago.php");
-    require("../../model/claseReservas.php");
-    require("../../model/claseCliente.php");
-
-    $admin = new usuario();
-    $claseHabitaciones = new habitaciones;
-    $clasePago = new pago();
-    $claseReservas = new reservas();
-    $claseCliente = new cliente();
-
-
-
-    $adminUser = $admin->getAdminGenero($usuario);
-
-    $datoAdminUser = $adminUser->fetch_array(MYSQLI_ASSOC);
-
-    $genero = $datoAdminUser['genero'];
-    $_SESSION['genero'] = $genero;
-}
-
 $actualYear = date("Y");
+
 ?>
 
 <!DOCTYPE html>
@@ -155,8 +125,8 @@ $actualYear = date("Y");
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
-                <label><?php echo $usuario ?></label>
+                <img class="iconoAdmin" data-genre="<?php echo "M" ?>">
+                <label><?php echo "Agustin" ?></label>
                 <img class="btnFlecha" src="../../img/btnFlecha.png">
 
                 <ul class="subMenuAdmin">
@@ -168,7 +138,7 @@ $actualYear = date("Y");
 
                     </li>
 
-                    <a href="../../controller/admin/cerrarSesion.php">
+                    <a href="../../controller/admin/logout.php">
                         <li>
 
                             <img src="../../img/apagar.png">

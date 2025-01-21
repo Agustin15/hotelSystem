@@ -14,6 +14,7 @@ export const POSTRooms = async (booking, option) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
       body: JSON.stringify(booking),
     });
@@ -47,7 +48,13 @@ export const getRoomsCategoryHotel = async () => {
     JSON.stringify({ option: "getAllCategoryRooms" });
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -67,7 +74,13 @@ export const getAllRoomsByCategory = async (category) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsRoutes.php?params= ` +
     JSON.stringify({ option: "getAllRoomsByCategory", category: category });
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -91,7 +104,13 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
 
   let data = null;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -116,7 +135,13 @@ export const getBookingRoomsDetails = async (idBooking) => {
   let data = null;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -139,7 +164,13 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
     });
   let data = null;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -160,7 +191,13 @@ export const getRoomsFreeCategory = async (dataBooking) => {
 
   let data = null;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -195,7 +232,14 @@ export const verifyStateRoomsToBooking = async (
         JSON.stringify({
           option: "verifyStateRoomsToBooking",
           dataBookingToUpdate: dataBookingToUpdate,
-        })
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
     );
 
     const result = await response.json();
@@ -231,6 +275,7 @@ export const fetchDeleteRoom = async (dataToDelete) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
       }
     );
@@ -277,6 +322,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
       }
     );
@@ -309,6 +355,7 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          credentials: "same-origin",
         },
       }
     );

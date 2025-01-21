@@ -43,7 +43,13 @@ const getRowsBookingClients = async (id) => {
   loading(true);
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -79,7 +85,13 @@ const getClientBookingLimit = async (id) => {
 
   loading(true);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;

@@ -11,6 +11,7 @@ const getCategoryRoomsData = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
     });
     const data = await response.json();
@@ -35,6 +36,7 @@ const getRevenuesActualYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        credentials: "same-origin",
       },
     });
     const data = await response.json();
@@ -89,23 +91,24 @@ const displayItemsDataCategoryRooms = async () => {
   const data = await getCategoryRoomsData();
   let details;
 
-  let items = data.map((dataRoom) => {
-    if (data) {
-      details = `  <h5>Habitacion ${dataRoom.category}</h5>
+  if (data) {
+    let items = data.map((dataRoom) => {
+      if (data) {
+        details = `  <h5>Habitacion ${dataRoom.category}</h5>
                     <span><a>Total:</a>${dataRoom.totalRoomCategory}</span>
                     <div class="data">
                     <span><a>Libres:</a>${dataRoom.totalRoomCategoryFree}</span>
                     <span><a>Ocupadas:</a>${dataRoom.totalRoomCategoryBusy}</span>
                     </div>`;
-    } else {
-      details = ` 
+      } else {
+        details = ` 
            <div class="noData">
            <img src="../../img/sinDatos.png">
            <h3>No hay datos</h3>
            </div>
            `;
-    }
-    return `  <li>
+      }
+      return `  <li>
     <div class="icon">
        <img src="../../img/roomInfo.png">
        </div>
@@ -113,8 +116,9 @@ const displayItemsDataCategoryRooms = async () => {
             ${details}
              </div>
        </li>`;
-  });
-  document.querySelector(".itemsData").innerHTML += items.join("");
+    });
+    document.querySelector(".itemsData").innerHTML += items.join("");
+  }
 };
 
 export { displayItemsDataCategoryRooms, displayItemDataRevenuesActual };

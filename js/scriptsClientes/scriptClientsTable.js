@@ -18,7 +18,13 @@ const getRowsClients = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
       JSON.stringify({ option: "clientsRows" });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -43,7 +49,13 @@ const getClientById = async (idClient) => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "dataClient", idClient: idClient });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
@@ -70,7 +82,13 @@ const getDataLimitClients = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
       JSON.stringify({ option: "clientsTable", index: indexRegister });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin",
+      },
+    });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;

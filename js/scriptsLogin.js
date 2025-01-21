@@ -91,10 +91,9 @@ async function login(userData) {
       );
 
       const result = await response.json();
-
       if (!response.ok) {
         throw result.error;
-      } else if (result.user) {
+      } else if (result.userLogin) {
         location.href =
           "http://localhost/sistema%20Hotel/views/admin/index.php";
       }
