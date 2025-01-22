@@ -1,4 +1,5 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 let today = new Date();
 let actualYear = today.getFullYear();
 
@@ -41,7 +42,7 @@ const loadYears = async () => {
   {
     try {
       let url =
-        `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+        `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
         JSON.stringify({ option: "AllYearsVisitClients" });
 
       const response = await fetch(url, {
@@ -60,6 +61,9 @@ const loadYears = async () => {
       }
     } catch (error) {
       console.log(error);
+      if (error.indexOf("Autenticacion") > -1) {
+        invalidAuthentication();
+      }
     }
   }
 };
@@ -171,7 +175,7 @@ async function getDataClientsTOGraphic(year) {
   try {
     loadingChart(true);
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
         JSON.stringify(
           { option: "clientsGraphic", year: yearToConsult },
           {
@@ -192,6 +196,9 @@ async function getDataClientsTOGraphic(year) {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingChart(false);
     if (data) {

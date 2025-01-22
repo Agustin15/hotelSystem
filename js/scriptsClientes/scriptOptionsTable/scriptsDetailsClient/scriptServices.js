@@ -1,6 +1,7 @@
 import { closeWindow } from "./scriptGuests.js";
 import { loading } from "../../scriptAddClient.js";
 import { getDataServices } from "../../../scriptsServices/scriptServices.js";
+import { invalidAuthentication } from "../../../scriptsAdmin/scriptsAdmin.js";
 
 let servicesBooking;
 

@@ -7,6 +7,7 @@ import { configServicesDetails } from "./scriptsDetailsClient/scriptServices.js"
 import { pageNotFound, loadingPage } from "../scriptCliente.js";
 import { closePageNotFound } from "../scriptClientsTable.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 let pages;
 let indexPage = 1;
@@ -35,7 +36,7 @@ export const configDetailsClient = async () => {
 
 const getRowsBookingClients = async (id) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
     JSON.stringify({ option: "rowsBookingsClient", client: id });
 
   let data = null;
@@ -59,6 +60,9 @@ const getRowsBookingClients = async (id) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     return data;
@@ -74,7 +78,7 @@ const noBookingsClient = (msj) => {
 
 const getClientBookingLimit = async (id) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=  ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=  ` +
     JSON.stringify({
       option: "bookingsClient",
       client: id,
@@ -100,6 +104,9 @@ const getClientBookingLimit = async (id) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     return data;
@@ -232,6 +239,7 @@ const drawOptionDetail = async (url, configOptionDetail) => {
     }
   } catch (error) {
     console.log(error);
+   
   } finally {
     loadingPage(false, modal);
     if (!optionPage) {

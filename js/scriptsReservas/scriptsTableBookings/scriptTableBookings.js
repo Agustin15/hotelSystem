@@ -3,6 +3,7 @@ import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
 import { loadingPage, pageNotFound } from "../scriptReserva.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 let pages;
 let limitByPage = 1;
@@ -110,7 +111,7 @@ const getQuantityBookingsActualYear = async () => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
       JSON.stringify({ option: "bookingsRowsYear", year: yearSelected });
 
     const response = await fetch(url, {
@@ -135,6 +136,9 @@ const getQuantityBookingsActualYear = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {
@@ -149,7 +153,7 @@ const getBookingById = async (idBooking) => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({ option: "getBookingById", idBooking: idBooking });
 
     const response = await fetch(url, {
@@ -168,6 +172,9 @@ const getBookingById = async (idBooking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {
@@ -220,7 +227,7 @@ const getBookingsYearLimit = async () => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
         data: { year: yearSelected, indexPage: indexPage },
@@ -242,6 +249,9 @@ const getBookingsYearLimit = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {
@@ -253,7 +263,7 @@ const getBookingsYearLimit = async () => {
 
 const displaySelectYear = async () => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
     JSON.stringify({ option: "allYearsBooking" });
 
   let data = null;
@@ -274,6 +284,9 @@ const displaySelectYear = async () => {
     }
   } catch (error) {
     console.log("Error message:", error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {

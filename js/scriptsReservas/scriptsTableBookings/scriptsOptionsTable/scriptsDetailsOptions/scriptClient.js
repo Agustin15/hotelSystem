@@ -1,5 +1,6 @@
 import { modalOption } from "../../scriptTableBookings.js";
 import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
+import { invalidAuthentication } from "../../../../scriptsAdmin/scriptsAdmin.js";
 let body;
 let idBooking;
 
@@ -33,7 +34,7 @@ const getDataClientByIdBooking = async () => {
   loading(true, body);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
         JSON.stringify({
           option: "getClientByIdBooking",
           idBooking: idBooking,
@@ -56,6 +57,9 @@ const getDataClientByIdBooking = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false, body);
     if (!data) {

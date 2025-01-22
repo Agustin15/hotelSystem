@@ -4,6 +4,7 @@ import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js
 import { drawRowsTable } from "./drawRowsTable.js";
 import { loadingPage, pageNotFound } from "./scriptCliente.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -15,7 +16,7 @@ const getRowsClients = async () => {
 
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
       JSON.stringify({ option: "clientsRows" });
 
     const response = await fetch(url, {
@@ -34,6 +35,9 @@ const getRowsClients = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     if (!data) {
       noData();
@@ -46,7 +50,7 @@ const getClientById = async (idClient) => {
   let data = null;
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
       JSON.stringify({ option: "dataClient", idClient: idClient });
 
     const response = await fetch(url, {
@@ -64,6 +68,9 @@ const getClientById = async (idClient) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     if (!data) {
       noData();
@@ -79,7 +86,7 @@ const getDataLimitClients = async () => {
 
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
       JSON.stringify({ option: "clientsTable", index: indexRegister });
 
     const response = await fetch(url, {
@@ -97,6 +104,9 @@ const getDataLimitClients = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {

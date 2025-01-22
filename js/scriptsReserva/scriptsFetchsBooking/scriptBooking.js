@@ -3,7 +3,7 @@ import { alertBooking } from "../alertsBooking.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export const fetchPOSTBooking = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
   let data;
 
   loadingBooking(true, "Reservando");
@@ -43,7 +43,7 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
 
   let data = null;
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingByClientMailAndDate",
       dataBooking: dataBooking,
@@ -73,7 +73,7 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
 };
 
 export const fetchPUTBooking = async (dataBookingToUpdate) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
   let data;
 
   loadingBooking(true, "Actualizando reserva");

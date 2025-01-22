@@ -1,6 +1,6 @@
 <?php
 
-require("../controller/admin/bookings/bookingController.php");
+require("../../controller/admin/bookings/bookingController.php");
 
 
 $bookingController = new bookingController();

@@ -1,6 +1,6 @@
 <?php
 
-require("../controller/admin/revenues/revenuesController.php");
+require("../../controller/bookingClient/revenues/revenuesController.php");
 
 $revenuesController = new revenuesController();
 
@@ -23,14 +23,8 @@ $routes = [
     "PUT" => function () use ($revenuesController, $req) {
         return $revenuesController->PUT($req);
     },
-    "DELETE" => function () use ($revenuesController, $req) {
-        return $revenuesController->DELETE($req);
-    },
     "GET" => function () use ($revenuesController, $req) {
         $optionGet = match ($req["option"]) {
-
-            "dashboardGraphic" => $revenuesController->getDashboardGraphic($req),
-            "itemDataDashboard" => $revenuesController->getItemDataDashboard($req),
             "getRevenue" => $revenuesController->getRevenueByIdBooking($req)
         };
 

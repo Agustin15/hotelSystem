@@ -1,5 +1,5 @@
 <?php
-require("../model/claseServicios.php");
+require("../../model/claseServicios.php");
 require("./../authToken.php");
 
 

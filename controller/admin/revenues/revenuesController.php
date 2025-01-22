@@ -1,6 +1,6 @@
 <?php
 
-require("../model/clasePago.php");
+require("../../model/clasePago.php");
 require(__DIR__ . "./../authToken.php");
 class revenuesController
 {

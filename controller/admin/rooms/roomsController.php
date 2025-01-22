@@ -1,5 +1,5 @@
 <?php
-require("../model/claseHabitaciones.php");
+require("../../model/claseHabitaciones.php");
 require(__DIR__ . "./../authToken.php");
 
 class roomsController

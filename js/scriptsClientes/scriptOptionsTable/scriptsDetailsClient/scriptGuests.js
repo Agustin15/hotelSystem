@@ -1,6 +1,7 @@
 import { loading } from "../../scriptAddClient.js";
 import { optionModal } from "../scriptDetailsClient.js";
 import { getDataBookingRoomsGuests } from "../../../scriptsRooms/scriptRooms.js";
+import { invalidAuthentication } from "../../../scriptsAdmin/scriptsAdmin.js";
 
 let dataBooking;
 
@@ -44,7 +45,7 @@ export const getBookingRoomsGuests = async (idBooking) => {
   let data = null;
   loading(true);
   try {
-    const result= await getDataBookingRoomsGuests(idBooking);
+    const result = await getDataBookingRoomsGuests(idBooking);
 
     if (result) {
       data = result;
@@ -69,7 +70,7 @@ const totalGuests = (dataBooking) => {
 };
 
 const roomsGuests = (dataBooking) => {
-  let dataRoomsGuests= dataBooking.map((data) => {
+  let dataRoomsGuests = dataBooking.map((data) => {
     return `
             
 <li>

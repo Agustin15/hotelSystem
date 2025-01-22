@@ -1,5 +1,4 @@
 <?php
-
 $actualYear = date("Y");
 
 ?>
@@ -132,8 +131,8 @@ $actualYear = date("Y");
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
-                <label><?php echo $usuario ?></label>
+                <img class="iconoAdmin">
+                <label></label>
                 <img class="btnFlecha" src="../../../img/btnFlecha.png">
 
                 <ul class="subMenuAdmin">
@@ -145,8 +144,8 @@ $actualYear = date("Y");
 
                     </li>
 
-                    <a href="../../../controller/admin/logout.php">
-                        <li>
+                    <a>
+                        <li class="logoutOption">
 
                             <img src="../../../img/apagar.png">
                             <a class="logout">Log out</a>

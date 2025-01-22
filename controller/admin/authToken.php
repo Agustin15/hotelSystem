@@ -1,10 +1,10 @@
 <?php
-require("./../vendor/autoload.php");
+require(__DIR__ . "../../../vendor/autoload.php");
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../../');
 $dotenv->load();
 
 class authToken

@@ -77,6 +77,7 @@ const availablesRoomsCategory = async (category) => {
     }
   } catch (error) {
     console.log(error);
+    
   } finally {
     loadingRooms(false);
     if (!data) {

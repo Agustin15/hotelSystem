@@ -16,6 +16,7 @@ import {
 import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
 import { POSTPay } from "../../scriptsRevenues/scriptRevenues.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 export let nights;
 export let resultBookingAdd;
@@ -101,6 +102,9 @@ const getAllClients = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {

@@ -2,6 +2,7 @@ import { closeModal, getDataClient } from "./scriptDeleteClient.js";
 import { drawForm } from "./scriptsEditClient/drawForm.js";
 import { displayTable } from "../scriptClientsTable.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 import {
   inputAlert,
@@ -90,7 +91,7 @@ const submitEditForm = () => {
 
 const getIfExist = async (client) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
     JSON.stringify({ option: "ifExistClient", client: client });
 
   let data = null;
@@ -112,6 +113,9 @@ const getIfExist = async (client) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     return data;
@@ -119,7 +123,7 @@ const getIfExist = async (client) => {
 };
 
 const fetchPUT = async (client) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php`;
 
   let data = null;
 
@@ -141,6 +145,9 @@ const fetchPUT = async (client) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     return data;

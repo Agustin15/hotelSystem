@@ -1,8 +1,9 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 
 export const getDataServices = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({ option: "getServicesBooking", idBooking: idBooking });
 
   let data = null;
@@ -17,6 +18,9 @@ export const getDataServices = async (idBooking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     return data;
   }

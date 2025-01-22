@@ -8,7 +8,7 @@ export const fetchPOSTClient = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php`,
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/clientRoutes.php`,
       {
         method: "POST",
         headers: {
@@ -44,7 +44,7 @@ export const fetchGetClient = async (client) => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/clientRoutes.php?params=` +
         JSON.stringify({ option: "getClientByMailAndName", client: client })
     );
 

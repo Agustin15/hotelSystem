@@ -1,11 +1,11 @@
 <?php
-require("../model/claseUsuario.php");
-require("../vendor/autoload.php");
+require("../../model/claseUsuario.php");
+require("../../vendor/autoload.php");
 require(__DIR__ . "./../authToken.php");
 
 use Firebase\JWT\JWT;
 
-$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv = Dotenv\Dotenv::createImmutable('../../');
 $dotenv->load();
 
 

@@ -1,6 +1,6 @@
 <?php
 
-require("../controller/admin/services/servicesController.php");
+require("../../controller/admin/services/servicesController.php");
 
 $servicesController = new servicesController();
 

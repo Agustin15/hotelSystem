@@ -1,9 +1,10 @@
 import { getMes } from "./chart.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication} from "./scriptsAdmin.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params= ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {
@@ -22,13 +23,16 @@ const getCategoryRoomsData = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
     return null;
   }
 };
 
 const getRevenuesActualYear = async () => {
   let $url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=  ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=  ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {
@@ -47,6 +51,9 @@ const getRevenuesActualYear = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
     return null;
   }
 };

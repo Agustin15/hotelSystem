@@ -211,8 +211,8 @@ $actualYear = date("Y");
 
                     </li>
 
-                    <a href="../../../controller/admin/logout.php">
-                        <li>
+                    <a>
+                        <li class="logoutOption">
 
                             <img src="../../../img/apagar.png">
                             <a class="logout">Log out</a>

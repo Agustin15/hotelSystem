@@ -1,4 +1,5 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 let actualYear = new Date().getFullYear();
 let selectYear;
 
@@ -16,7 +17,7 @@ const getAllYearsToSelect = async () => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "getAllYearsWithRoomsBooking" }),
       {
         method: "GET",
@@ -36,6 +37,9 @@ const getAllYearsToSelect = async () => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {
@@ -71,7 +75,7 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "dashboardGraphic",
           year: year,
@@ -94,6 +98,9 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {

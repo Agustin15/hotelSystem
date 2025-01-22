@@ -1,5 +1,5 @@
 <?php
-require("../model/claseCliente.php");
+require("../../model/claseCliente.php");
 require(__DIR__ . "./../authToken.php");
 
 class clientController

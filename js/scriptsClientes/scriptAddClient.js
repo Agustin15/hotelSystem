@@ -1,5 +1,5 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 export const inputAlert = (inputError) => {
   let namesInputs = [...document.getElementsByName(inputError.key)];
   let input = namesInputs[0];
@@ -79,7 +79,7 @@ const fetchPost = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php`,
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php`,
       {
         method: "POST",
         headers: {
@@ -106,6 +106,9 @@ const fetchPost = async (client) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     if (!data) {

@@ -1,6 +1,7 @@
 import { displayTable } from "../scriptClientsTable.js";
 import { loading } from "../scriptAddClient.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 const configDeleteClient = async () => {
   let containDelete = document.querySelector(".containDelete");
@@ -32,7 +33,7 @@ export const getDataClient = async (id) => {
   let data = null;
 
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
     JSON.stringify({ option: "dataClient", idClient: id });
 
   loading(true);
@@ -52,6 +53,9 @@ export const getDataClient = async (id) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false);
     return data;
@@ -79,7 +83,7 @@ const eventsDelete = (idClient) => {
 
 const fetchDelete = async (idClient) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
     JSON.stringify({ idClient: idClient });
   let data;
   try {
@@ -99,6 +103,9 @@ const fetchDelete = async (idClient) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     return data;
   }

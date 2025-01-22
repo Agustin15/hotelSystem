@@ -1,8 +1,8 @@
 <?php
 
-require("../controller/admin/users/userController.php");
+require("../../controller/admin/logout.php");
 
-$userController = new userController();
+$logout = new logout();
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -15,10 +15,11 @@ if (isset($_GET['params'])) {
     $req = json_decode(file_get_contents("php://input"), true);
 }
 
-$routes = [
-    "POST" => function () use ($userController, $req) {
 
-        return $userController->login($req);
+$routes = [
+    "GET" => function () use ($logout) {
+
+        return $logout->expireCookie();
     }
 ];
 

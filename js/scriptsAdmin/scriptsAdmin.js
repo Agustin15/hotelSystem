@@ -11,6 +11,8 @@ import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
 
+export let userData;
+
 function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
 
@@ -71,10 +73,25 @@ function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
   });
 }
 
+const logout = async () => {
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/logoutRoutes.php`
+    );
+    const result = await response.json();
+
+    if (result.expired) {
+      location.href = "http://localhost/sistema%20Hotel/views/loginAdmin/";
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getDataToken = async () => {
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/controller/admin/authToken.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
         JSON.stringify({ option: "getDataToken" }),
       {
         method: "GET",
@@ -85,20 +102,31 @@ const getDataToken = async () => {
       }
     );
 
-    const token = await response.json();
-    console.log(token);
+    const tokenUserData = await response.json();
+
+    if (!response.ok) {
+      throw tokenUserData.error;
+    } else {
+      return tokenUserData.resultVerify;
+    }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   }
 };
 
-const iconMenuAvatar = () => {
+export const invalidAuthentication = async () => {
+  localStorage.setItem("alertInvalidToken", true);
+  logout();
+};
+
+const setIconMenuAvatar = () => {
   let iconAdmin = document.querySelector(".iconoAdmin");
 
   if (iconAdmin) {
-    let genreData = iconAdmin.dataset.genre;
-
-    if ((genreData = "M")) {
+    if (userData.genre == "M") {
       $(".iconoAdmin").attr(
         "src",
         "http://localhost/sistema%20Hotel/img/perfilM.png"
@@ -112,9 +140,14 @@ const iconMenuAvatar = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const setUserMenu = () => {
+  let lblUser = document.querySelector("#userAdmin").querySelector("label");
+  lblUser.textContent = userData.user;
+};
+document.addEventListener("DOMContentLoaded", async () => {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
+  let logoutOption = document.querySelector(".logoutOption");
 
   if (document.getElementById("dashboard")) {
     getClientsByMonthActualYear(actualYear);
@@ -124,12 +157,19 @@ document.addEventListener("DOMContentLoaded", () => {
     displayItemDataRevenuesActual();
   }
 
-  getDataToken();
-  iconMenuAvatar();
+  userData = await getDataToken();
+  if (userData) {
+    setIconMenuAvatar();
+    setUserMenu();
+  }
   optionsMenuAdmin();
 
   openSubMenu(
     "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
     "http://localhost/sistema%20Hotel/img/btnFlecha.png"
   );
+
+  logoutOption.addEventListener("click", () => {
+    logout();
+  });
 });

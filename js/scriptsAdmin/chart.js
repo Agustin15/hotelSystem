@@ -1,4 +1,5 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "./scriptsAdmin.js";
 
 function getMes(numMes) {
   let meses = [
@@ -50,7 +51,7 @@ async function getClientsByMonthActualYear(actualYear) {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
         JSON.stringify({ option: "clientsGraphic", year: actualYear }),
       {
         method: "GET",
@@ -69,7 +70,9 @@ async function getClientsByMonthActualYear(actualYear) {
       dataPointsToGraphicClientsDashboard(result);
     }
   } catch (error) {
-    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false, "bookings");
     if (!data) {
@@ -140,7 +143,7 @@ async function getRevenueActualYear() {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
         JSON.stringify({ option: "dashboardGraphic" }),
       {
         method: "GET",
@@ -159,6 +162,9 @@ async function getRevenueActualYear() {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false, "revenues");
     if (data) {
@@ -245,7 +251,7 @@ async function getCategoryRoomsMostReserved() {
   loading(true, "rooms");
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "dashboardGraphic", year: actualYear }),
       {
         method: "GET",
@@ -264,6 +270,9 @@ async function getCategoryRoomsMostReserved() {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loading(false, "rooms");
     if (data) {

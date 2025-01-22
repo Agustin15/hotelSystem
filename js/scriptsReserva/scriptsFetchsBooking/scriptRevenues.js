@@ -3,7 +3,7 @@ import { alertBooking } from "../alertsBooking.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export const fetchPOSTPay = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/revenuesRoutes.php`;
 
   let data;
   loadingBooking(true, "Reservando habitaciones");
@@ -37,7 +37,7 @@ export const fetchPOSTPay = async (booking) => {
 };
 
 export const fetchPUTPay = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/revenuesRoutes.php`;
 
   let data;
   loadingBooking(true, "Reservando habitaciones");
@@ -72,7 +72,7 @@ export const fetchPUTPay = async (booking) => {
 
 export const fetchGETPay = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data;

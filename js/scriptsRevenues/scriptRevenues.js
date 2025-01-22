@@ -3,9 +3,10 @@ import {
   alertForm,
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 
 export const POSTPay = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php`;
 
   let data;
   loadingForm(true);
@@ -27,6 +28,9 @@ export const POSTPay = async (booking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -42,7 +46,7 @@ export const POSTPay = async (booking) => {
 };
 
 export const PUTPay = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php `;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php `;
 
   let data;
   loadingForm(true);
@@ -64,6 +68,9 @@ export const PUTPay = async (booking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -80,7 +87,7 @@ export const PUTPay = async (booking) => {
 
 export const getPayById = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data = null;
@@ -101,6 +108,9 @@ export const getPayById = async (idBooking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     return data;
   }

@@ -4,7 +4,7 @@ import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/roomsBookingRoutes.php?params=` +
     JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
   let data;
 
@@ -33,7 +33,7 @@ export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
 };
 
 export const fetchPOSTRooms = async (roomsToBooking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/roomsBookingRoutes.php`;
 
   let data;
   loadingBooking(true, "Reservando habitaciones");

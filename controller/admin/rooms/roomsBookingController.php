@@ -1,7 +1,7 @@
 <?php
 
-require_once("../conexion/conexion.php");
-require("../model/claseHabitaciones.php");
+require_once("../../conexion/conexion.php");
+require("../../model/claseHabitaciones.php");
 require(__DIR__ . "./../authToken.php");
 
 

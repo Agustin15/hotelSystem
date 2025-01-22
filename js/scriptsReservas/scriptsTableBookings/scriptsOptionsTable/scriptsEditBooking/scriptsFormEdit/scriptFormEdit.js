@@ -19,6 +19,7 @@ import {
 } from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
 
 import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
+import { invalidAuthentication } from "../../../../../scriptsAdmin/scriptsAdmin.js";
 
 let bookingGlobal;
 let allClients;
@@ -311,7 +312,7 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
   loadingForm(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`,
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php`,
       {
         method: "PUT",
         headers: {
@@ -332,6 +333,9 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     if (!data) {

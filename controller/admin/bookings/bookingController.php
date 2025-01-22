@@ -1,6 +1,6 @@
 <?php
 
-require("../model/claseReservas.php");
+require("../../model/claseReservas.php");
 require(__DIR__ . "./../authToken.php");
 
 class bookingController

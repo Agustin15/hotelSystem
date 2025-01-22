@@ -1,6 +1,6 @@
 <?php
 
-require("../controller/admin/client/clientController.php");
+require("../../controller/admin/client/clientController.php");
 
 $clientController = new clientController();
 

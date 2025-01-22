@@ -1,4 +1,5 @@
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
 
 export const POSTBooking = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php`;
@@ -22,6 +23,9 @@ export const POSTBooking = async (booking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -70,6 +74,9 @@ export const getBookingByClientAndDate = async (booking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
     alertForm(
       "../../../img/advertenciaLogin.png",
       "Ups, error al agregar la reserva",

@@ -1,8 +1,8 @@
 <?php
 
-require("../controller/admin/users/userController.php");
+require("../../controller/bookingClient/client/clientController.php");
 
-$userController = new userController();
+$clientController = new clientController();
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -15,14 +15,18 @@ if (isset($_GET['params'])) {
     $req = json_decode(file_get_contents("php://input"), true);
 }
 
-$routes = [
-    "GET" => function () use ($userController, $req) {
 
-        $optionGET = match ($req["option"]) {
-            "getDataToken" => $userController->getDataToken()
+$routes = [
+    "POST" => function () use ($clientController, $req) {
+        return $clientController->POST($req);
+    },
+    "GET" => function () use ($clientController, $req) {
+
+        $optionGet = match ($req["option"]) {
+            "getClientByMailAndName" => $clientController->getClientByMailAndName($req),
         };
 
-        return $optionGET;
+        return $optionGet;
     }
 ];
 

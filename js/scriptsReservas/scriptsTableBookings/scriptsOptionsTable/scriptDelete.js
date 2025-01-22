@@ -1,6 +1,6 @@
 import { modalOption, drawTable } from "../scriptTableBookings.js";
 import BACK_URL_LOCALHOST from "../../../urlLocalhost.js";
-
+import { invalidAuthentication } from "../../../scriptsAdmin/scriptsAdmin.js";
 let body;
 
 export const configDelete = () => {
@@ -27,7 +27,7 @@ const deleteBooking = async (idBooking) => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
         JSON.stringify({ idBooking: idBooking }),
       {
         method: "DELETE",
@@ -47,6 +47,9 @@ const deleteBooking = async (idBooking) => {
     }
   } catch (error) {
     console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
   } finally {
     if (!data) {
       errorDelete();
