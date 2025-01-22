@@ -17,14 +17,19 @@ if (isset($_GET['idBooking'])) {
 
 <body>
 
-    <div class="modalOptionEditBooking""></div>
-    
-    <div class=" containEditOption" id="<?php echo $idBooking ?>">
-        <ul class="menu">
-            <li id="itemEdit">Editar</li>
-            <li id="itemRooms">Habitaciones</li>
-        </ul>
+    <div class="modalOptionEditBooking"></div>
 
+    <div class="containEditOption" id="<?php echo $idBooking ?>">
+
+        <div class="header">
+            <ul class="menu">
+                <li id="itemEdit">Editar</li>
+                <li id="itemRooms">Habitaciones</li>
+            </ul>
+            <div class="containClose">
+                <button class="btnClose">X</button>
+            </div>
+        </div>
         <div class="body">
 
         </div>

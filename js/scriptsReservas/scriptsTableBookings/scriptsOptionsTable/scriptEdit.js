@@ -9,6 +9,7 @@ export const configEdit = () => {
   body = document.querySelector(".body");
   let menu = document.querySelector(".menu");
   let menuItems = menu.querySelectorAll("li");
+  eventCloseWindow();
 
   menuItems.forEach((item) => {
     item.addEventListener("click", async () => {
@@ -48,4 +49,12 @@ const drawOptionRoomsAvailables = async () => {
     }
     return data;
   }
+};
+
+const eventCloseWindow = () => {
+  let modalEditBooking = document.querySelector(".modalMainBookings");
+  document.querySelector(".btnClose").addEventListener("click", () => {
+    modalEditBooking.innerHTML = ``;
+    modalEditBooking.style.display = "none";
+  });
 };

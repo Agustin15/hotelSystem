@@ -372,4 +372,15 @@ class roomsBookingController
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+    public function getNextBookingsRoom($req)
+    {
+
+        try {
+            $nextBookingsRoom =  $this->rooms->getNextBookingsRoom($req["numRoom"]);
+            return $nextBookingsRoom;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 }

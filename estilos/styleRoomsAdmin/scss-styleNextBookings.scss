@@ -1,0 +1,153 @@
+.containNextBookings {
+  background-color: white;
+  border-radius: 3px;
+  width: 40rem;
+  height: 27rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 9rem;
+  margin-top: 5rem;
+  position: relative;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 17px;
+    color: gray;
+    margin-top: 1rem;
+
+    img {
+      width: 50px;
+    }
+  }
+
+  .bodyContainNextBookings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+    width: 100%;
+    margin-top: 2rem;
+
+    .tableNextBookings {
+      width: 90%;
+      height: auto;
+      max-height: 12rem;
+      overflow-y: scroll;
+      border: 1px solid gray;
+      border-radius: 3px;
+
+      thead {
+        background: linear-gradient(rgb(0, 148, 153), rgb(7, 179, 185));
+        color: white;
+        font-size: 17px;
+
+        th {
+          padding: 0.5rem;
+        }
+      }
+
+      tbody {
+        font-size: 17px;
+        td {
+          padding: 0.5rem;
+          text-align: center;
+
+          .containViewCalendar {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            button {
+              cursor: pointer;
+              width: 10rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.5rem;
+              height: 2rem;
+              border-radius: 3px;
+              background: linear-gradient(rgb(0, 148, 153), rgb(7, 179, 185));
+              color: white;
+              font-weight: bold;
+              border: none;
+              box-shadow: 2px 2px 2px gray;
+
+              img {
+                width: 20px;
+              }
+            }
+
+            button:hover {
+              background: linear-gradient(rgb(0, 148, 153), rgb(11, 143, 148));
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .trGray {
+    background-color: rgb(238, 238, 238);
+  }
+
+  .trWhite {
+    background-color: rgb(255, 255, 255);
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 20px;
+    color: gray;
+    height: 100%;
+
+    img {
+      width: 40px;
+      opacity: 50%;
+    }
+  }
+
+  .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    height: 100%;
+    width: 20rem;
+    font-size: 18px;
+    color: gray;
+
+    img {
+      width: 80px;
+      opacity: 70%;
+    }
+  }
+}
+
+.containBtnClose {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  font-size: 19px;
+
+  button {
+    background-color: rgb(233, 3, 3);
+    color: white;
+    font-weight: bold;
+    height: 2rem;
+    width: 2rem;
+    border: none;
+  }
+
+  button:hover {
+    background-color: rgb(212, 4, 4);
+    cursor: pointer;
+  }
+}

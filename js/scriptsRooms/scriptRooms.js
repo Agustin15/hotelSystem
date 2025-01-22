@@ -6,7 +6,7 @@ import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 
 export const POSTRooms = async (booking, option) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/roomsBookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php`;
   let data;
   loadingForm(true);
   try {
@@ -406,3 +406,4 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
     return data;
   }
 };
+

@@ -84,7 +84,7 @@ const getAllClients = async () => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/clientRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
       JSON.stringify({ option: "allClients" });
 
     const response = await fetch(url, {

@@ -24,6 +24,31 @@
   margin-top: 3rem;
   margin-left: 11rem;
 }
+.containEditOption .header {
+  display: flex;
+  width: 98.5%;
+  justify-content: space-between;
+  align-items: start;
+  padding-left: 1rem;
+}
+.containEditOption .header .containClose {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.containEditOption .header .containClose button {
+  background-color: rgb(223, 0, 0);
+  color: white;
+  font-weight: bold;
+  width: 2rem;
+  height: 2rem;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.containEditOption .header .containClose button:hover {
+  background-color: rgb(192, 2, 2);
+}
 .containEditOption .menu {
   display: flex;
   align-items: center;

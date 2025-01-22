@@ -1,6 +1,7 @@
 import { getRoomsCategoryHotel, getAllRoomsByCategory } from "./scriptRooms.js";
 import { pageNotFound, loadingPage } from "./dashboardScript.js";
 import { configRecordRoom } from "./optionsRoom/scriptRecordRoom.js";
+import { configNextBookings } from "./optionsRoom/scriptNextBooking.js";
 
 let ulRooms, menuRooms, category;
 export let modalMainRooms;
@@ -123,7 +124,9 @@ const drawRooms = (rooms) => {
       <img src="../../../img/historyBookings.png">
       Historial reservas
       </li>
-      <li class="optionMenu">
+      <li class="optionMenu" data-url="optionsMenu/nextBookings.php?numRoom=${
+        room.numRoom
+      }">
       <img src="../../../img/nextBookings.png">
       Proximas reservas
       </li>
@@ -230,6 +233,10 @@ const drawDocument = (document, url) => {
     {
       page: "record.php",
       function: configRecordRoom,
+    },
+    {
+      page: "nextBookings.php",
+      function: configNextBookings,
     },
   ];
 

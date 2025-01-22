@@ -289,7 +289,7 @@ class habitaciones
         $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
-         YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10 OFFSET $index");
+         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE() LIMIT 10 OFFSET $index");
         $query->bind_param("is", $numRoom, $year);
         $query->execute();
         $results = $query->get_result();
@@ -301,7 +301,7 @@ class habitaciones
         $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
-         YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10");
+         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE() LIMIT 10");
         $query->bind_param("is", $numRoom, $year);
         $query->execute();
         $results = $query->get_result();
@@ -312,8 +312,19 @@ class habitaciones
         $query = $this->conexion->conectar()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
-         YEAR(reserva_habitacion.fechaLlegada)=?");
+         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE()");
         $query->bind_param("is", $numRoom, $year);
+        $query->execute();
+        $results = $query->get_result();
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNextBookingsRoom($numRoom)
+    {
+        $query = $this->conexion->conectar()->prepare("select * from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva where habitacion_reservada.numHabitacionReservada=? and 
+        reserva_habitacion.fechaLlegada>CURDATE() ORDER BY DATEDIFF(reserva_habitacion.fechaLlegada,CURDATE()) ASC LIMIT 4 ;");
+        $query->bind_param("i", $numRoom);
         $query->execute();
         $results = $query->get_result();
         return $results->fetch_all(MYSQLI_ASSOC);

@@ -342,7 +342,7 @@ const redirectToTableClients = () => {
   });
 };
 
-const close = () => {
+export const close = () => {
   let btnClose = document
     .querySelector(".containBtnClose")
     .querySelector("button");

@@ -102,4 +102,12 @@ export const pageNotFound = (element) => {
   <h3>Ups, no se pudo cargar la página</h3>
   </div>
 `;
+
+  let btnClose = document.querySelector(".btnClose");
+  if (btnClose) {
+    btnClose.addEventListener("click", () => {
+      element.innerHTML = ``;
+      element.style.display = "none";
+    });
+  }
 };

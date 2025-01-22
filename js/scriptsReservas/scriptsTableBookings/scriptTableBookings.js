@@ -50,11 +50,9 @@ const drawRowsTable = (bookingsYearlimit) => {
     let classTr = "";
     let classBtnDisabled = "";
     let iconStatusBooking = "../../../img/bookingPendingIcon.png";
-    let disabled = false;
 
     if (new Date(booking.fechaSalida) < new Date()) {
       classBtnDisabled = "btnDisabled";
-      disabled = true;
       iconStatusBooking = "../../../img/bookingEndIcon.png";
     } else if (
       new Date(booking.fechaLlegada) <= new Date() &&
@@ -66,7 +64,6 @@ const drawRowsTable = (bookingsYearlimit) => {
     if (index % 2 == 0) {
       classTr = "trGray";
     }
-
     return `
 
 <tr class=${classTr}>
@@ -89,7 +86,9 @@ const drawRowsTable = (bookingsYearlimit) => {
            <div class="buttons" id=${booking.idReserva}>
 
             <button data-option="delete" class="btnDelete"><img src="../../../img/borrar.png"></button>
-                <button  disabled=${disabled}  class="btnEdit ${classBtnDisabled}" data-option="edit"><img src="../../../img/editar.png"></button>
+                <button ${
+                  new Date(booking.fechaSalida) < new Date() ? "disabled" : ""
+                } class="btnEdit ${classBtnDisabled}" data-option="edit"><img src="../../../img/editar.png"></button>
                     <button data-option="details"
                      class="btnDetails"><img src="../../../img/detalles.png"></button>
             

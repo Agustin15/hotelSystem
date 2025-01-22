@@ -24,6 +24,35 @@
   margin-top: 3rem;
   margin-left: 11rem;
 
+  .header {
+    display: flex;
+    width: 98.5%;
+    justify-content: space-between;
+    align-items: start;
+    padding-left: 1rem;
+
+    .containClose {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+
+      button {
+        background-color: rgb(223, 0, 0);
+        color: white;
+        font-weight: bold;
+        width: 2rem;
+        height: 2rem;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgb(192, 2, 2);
+      }
+    }
+  }
+
   .menu {
     display: flex;
     align-items: center;
