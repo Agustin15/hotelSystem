@@ -168,7 +168,7 @@
   font-size: 14px;
 }
 .tableBookings thead tr {
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
 }
 .tableBookings tbody td {
@@ -444,7 +444,7 @@
   border-bottom: 2px solid rgb(146, 146, 146);
   width: 100%;
   padding-bottom: 0.5rem;
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 .containDetailsBooking .header .title {
   display: flex;
@@ -463,20 +463,20 @@
   justify-content: flex-end;
 }
 .containDetailsBooking .header .closeDetails button {
+  border: none;
+  background-color: rgb(223, 3, 3);
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-right-radius: 3px;
-  color: #055b5e;
-  border: none;
-  background-color: white;
-  height: 1.6rem;
-  width: 1.6rem;
+  font-weight: bold;
+  width: 2rem;
+  height: 2rem;
+  font-size: 19px;
   cursor: pointer;
-  font-size: 20px;
 }
 .containDetailsBooking .header .closeDetails button:hover {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(199, 3, 3);
 }
 .containDetailsBooking .bookingDetailsItem {
   display: flex;
@@ -492,7 +492,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 15rem;
   color: white;
   padding: 0.5rem;
@@ -540,7 +540,7 @@
   margin-left: 7rem;
 }
 .containClientDetails .header {
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
   display: flex;
   flex-direction: column;
@@ -571,18 +571,19 @@
 }
 .containClientDetails .header .close button {
   border: none;
-  background-color: white;
-  color: rgb(0, 112, 107);
+  background-color: rgb(223, 3, 3);
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
-  align-items: start;
-  width: 1.2rem;
-  height: 1.2rem;
-  font-size: 17px;
+  align-items: center;
+  font-weight: bold;
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 19px;
   cursor: pointer;
 }
 .containClientDetails .header .close button:hover {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(199, 3, 3);
 }
 .containClientDetails .body {
   height: auto;
@@ -647,7 +648,7 @@
   opacity: 60%;
   margin-top: 2rem;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(104, 104, 104);
 }
 .containClientDetails .body .noData img {
   width: 80px;
@@ -664,7 +665,7 @@
   margin-left: 7rem;
 }
 .containGuestDetails .header {
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
   display: flex;
   flex-direction: column;
@@ -695,18 +696,19 @@
 }
 .containGuestDetails .header .close button {
   border: none;
-  background-color: white;
-  color: rgb(0, 112, 107);
+  background-color: rgb(223, 3, 3);
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
-  align-items: start;
-  width: 1.2rem;
-  height: 1.2rem;
-  font-size: 17px;
+  align-items: center;
+  font-weight: bold;
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 19px;
   cursor: pointer;
 }
 .containGuestDetails .header .close button:hover {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(199, 3, 3);
 }
 .containGuestDetails .body {
   height: auto;
@@ -738,12 +740,12 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  opacity: 60%;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(128, 128, 128);
 }
 .containGuestDetails .body .noData img {
   width: 80px;
+  opacity: 70%;
 }
 .containGuestDetails .body .totalGuests {
   display: flex;
@@ -752,7 +754,7 @@
   align-items: center;
   font-size: 17px;
   color: rgb(109, 109, 109);
-  opacity: 50%;
+  opacity: 90%;
 }
 .containGuestDetails .body .totalGuests img {
   width: 30px;
@@ -787,7 +789,7 @@
   align-items: start;
   gap: 1rem;
   color: white;
-  background: #0ba8ad;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 .roomsGuests li .roomNumb {
   width: 100%;
@@ -803,7 +805,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  opacity: 90%;
+  opacity: 100%;
   padding: 1rem;
   background-color: #027f83;
   border-radius: 5px;
@@ -854,17 +856,17 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  opacity: 60%;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(124, 124, 124);
 }
 .containRoomsDetails .noData img,
 .containServicesDetails .noData img {
   width: 80px;
+  opacity: 80%;
 }
 .containRoomsDetails .header,
 .containServicesDetails .header {
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
   display: flex;
   flex-direction: column;
@@ -898,15 +900,20 @@
 .containRoomsDetails .header .close button,
 .containServicesDetails .header .close button {
   border: none;
-  background-color: white;
-  color: rgb(0, 112, 107);
+  background-color: rgb(223, 3, 3);
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
-  align-items: start;
-  width: 1.2rem;
-  height: 1.2rem;
-  font-size: 17px;
+  align-items: center;
+  font-weight: bold;
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 19px;
   cursor: pointer;
+}
+.containRoomsDetails .header .close button:hover,
+.containServicesDetails .header .close button:hover {
+  background-color: rgb(199, 3, 3);
 }
 .containRoomsDetails .body,
 .containServicesDetails .body {
@@ -920,8 +927,6 @@
   align-items: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 .containRoomsDetails .body .loadingDetails,
 .containServicesDetails .body .loadingDetails {
@@ -929,11 +934,12 @@
   align-items: center;
   font-size: 19px;
   gap: 1rem;
-  opacity: 60%;
+  color: rgb(156, 156, 156);
 }
 .containRoomsDetails .body .loadingDetails img,
 .containServicesDetails .body .loadingDetails img {
   width: 50px;
+  opacity: 50%;
 }
 .containRoomsDetails .body .rooms,
 .containRoomsDetails .body .services,
@@ -963,7 +969,7 @@
   align-items: start;
   gap: 1rem;
   color: white;
-  background: #0ba8ad;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 .containRoomsDetails .body .rooms li .icon,
 .containRoomsDetails .body .services li .icon,
@@ -1002,6 +1008,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 .containServicesDetails .services li .title {
   display: flex;
@@ -1059,7 +1066,7 @@
   align-items: start;
   width: 1.2rem;
   height: 1.2rem;
-  font-size: 17px;
+  font-size: 19px;
   cursor: pointer;
 }
 .alertRedirect .close button:hover {
@@ -1118,13 +1125,13 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  opacity: 60%;
   font-weight: bold;
-  color: rgb(170, 170, 170);
+  color: rgb(116, 116, 116);
   margin-top: 2rem;
 }
 .alertRedirect .noData img {
   width: 80px;
+  opacity: 70%;
 }
 .alertRedirect .loadingDetails {
   display: flex;

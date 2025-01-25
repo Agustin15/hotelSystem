@@ -181,7 +181,7 @@
       font-size: 14px;
     }
     tr {
-      background: linear-gradient(#055b5e, #04b8c2);
+      background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
       color: white;
     }
   }
@@ -488,7 +488,7 @@
     border-bottom: 2px solid rgb(146, 146, 146);
     width: 100%;
     padding-bottom: 0.5rem;
-    background: linear-gradient(#055b5e, #04b8c2);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 
     .title {
       display: flex;
@@ -508,20 +508,20 @@
       justify-content: flex-end;
 
       button {
+        border: none;
+        background-color: rgb(223, 3, 3);
+        color: rgb(255, 255, 255);
         display: flex;
         justify-content: center;
         align-items: center;
-        border-top-right-radius: 3px;
-        color: #055b5e;
-        border: none;
-        background-color: white;
-        height: 1.6rem;
-        width: 1.6rem;
+        font-weight: bold;
+        width: 2rem;
+        height: 2rem;
+        font-size: 19px;
         cursor: pointer;
-        font-size: 20px;
       }
       button:hover {
-        background-color: rgb(231, 231, 231);
+        background-color: rgb(199, 3, 3);
       }
     }
   }
@@ -540,7 +540,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: linear-gradient(#055b5e, #04b8c2);
+      background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
       width: 15rem;
       color: white;
       padding: 0.5rem;
@@ -593,7 +593,7 @@
   margin-left: 7rem;
 
   .header {
-    background: linear-gradient(#055b5e, #04b8c2);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
     color: white;
     display: flex;
     flex-direction: column;
@@ -622,21 +622,21 @@
       width: 104%;
       display: flex;
       justify-content: flex-end;
-
       button {
         border: none;
-        background-color: white;
-        color: rgb(0, 112, 107);
+        background-color: rgb(223, 3, 3);
+        color: rgb(255, 255, 255);
         display: flex;
         justify-content: center;
-        align-items: start;
-        width: 1.2rem;
-        height: 1.2rem;
-        font-size: 17px;
+        align-items: center;
+        font-weight: bold;
+        width: 1.7rem;
+        height: 1.7rem;
+        font-size: 19px;
         cursor: pointer;
       }
       button:hover {
-        background-color: rgb(231, 231, 231);
+        background-color: rgb(199, 3, 3);
       }
     }
   }
@@ -710,7 +710,7 @@
       opacity: 60%;
       margin-top: 2rem;
       font-weight: bold;
-      color: rgb(170, 170, 170);
+      color: rgb(104, 104, 104);
 
       img {
         width: 80px;
@@ -730,7 +730,7 @@
   margin-left: 7rem;
 
   .header {
-    background: linear-gradient(#055b5e, #04b8c2);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
     color: white;
     display: flex;
     flex-direction: column;
@@ -762,18 +762,19 @@
 
       button {
         border: none;
-        background-color: white;
-        color: rgb(0, 112, 107);
+        background-color: rgb(223, 3, 3);
+        color: rgb(255, 255, 255);
         display: flex;
         justify-content: center;
-        align-items: start;
-        width: 1.2rem;
-        height: 1.2rem;
-        font-size: 17px;
+        align-items: center;
+        font-weight: bold;
+        width: 1.7rem;
+        height: 1.7rem;
+        font-size: 19px;
         cursor: pointer;
       }
       button:hover {
-        background-color: rgb(231, 231, 231);
+        background-color: rgb(199, 3, 3);
       }
     }
   }
@@ -809,12 +810,12 @@
       align-items: center;
       text-align: center;
       gap: 1rem;
-      opacity: 60%;
       font-weight: bold;
-      color: rgb(170, 170, 170);
+      color: rgb(128, 128, 128);
 
       img {
         width: 80px;
+        opacity: 70%;
       }
     }
     .totalGuests {
@@ -824,7 +825,7 @@
       align-items: center;
       font-size: 17px;
       color: rgb(109, 109, 109);
-      opacity: 50%;
+      opacity: 90%;
 
       img {
         width: 30px;
@@ -862,7 +863,7 @@
     align-items: start;
     gap: 1rem;
     color: white;
-    background: #0ba8ad;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 
     .roomNumb {
       width: 100%;
@@ -878,7 +879,7 @@
         height: 100%;
         display: flex;
         align-items: center;
-        opacity: 90%;
+        opacity: 100%;
         padding: 1rem;
         background-color: #027f83;
         border-radius: 5px;
@@ -935,17 +936,17 @@
     align-items: center;
     text-align: center;
     gap: 1rem;
-    opacity: 60%;
     font-weight: bold;
-    color: rgb(170, 170, 170);
+    color: rgb(124, 124, 124);
 
     img {
       width: 80px;
+      opacity: 80%;
     }
   }
 
   .header {
-    background: linear-gradient(#055b5e, #04b8c2);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
     color: white;
     display: flex;
     flex-direction: column;
@@ -973,18 +974,21 @@
       width: 100%;
       display: flex;
       justify-content: flex-end;
-
       button {
         border: none;
-        background-color: white;
-        color: rgb(0, 112, 107);
+        background-color: rgb(223, 3, 3);
+        color: rgb(255, 255, 255);
         display: flex;
         justify-content: center;
-        align-items: start;
-        width: 1.2rem;
-        height: 1.2rem;
-        font-size: 17px;
+        align-items: center;
+        font-weight: bold;
+        width: 1.7rem;
+        height: 1.7rem;
+        font-size: 19px;
         cursor: pointer;
+      }
+      button:hover {
+        background-color: rgb(199, 3, 3);
       }
     }
   }
@@ -1000,18 +1004,17 @@
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
 
     .loadingDetails {
       display: flex;
       align-items: center;
       font-size: 19px;
       gap: 1rem;
-      opacity: 60%;
+      color: rgb(156, 156, 156);
 
       img {
         width: 50px;
+        opacity: 50%;
       }
     }
 
@@ -1038,7 +1041,7 @@
         align-items: start;
         gap: 1rem;
         color: white;
-        background: #0ba8ad;
+        background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 
         .icon {
           padding: 0.5rem;
@@ -1072,6 +1075,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 
     .title {
       display: flex;
@@ -1132,7 +1136,7 @@
       align-items: start;
       width: 1.2rem;
       height: 1.2rem;
-      font-size: 17px;
+      font-size: 19px;
       cursor: pointer;
     }
     button:hover {
@@ -1198,13 +1202,13 @@
     align-items: center;
     text-align: center;
     gap: 1rem;
-    opacity: 60%;
     font-weight: bold;
-    color: rgb(170, 170, 170);
+    color: rgb(116, 116, 116);
     margin-top: 2rem;
 
     img {
       width: 80px;
+      opacity: 70%;
     }
   }
   .loadingDetails {

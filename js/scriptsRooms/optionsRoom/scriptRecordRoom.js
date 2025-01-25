@@ -343,9 +343,7 @@ const redirectToTableClients = () => {
 };
 
 export const close = () => {
-  let btnClose = document
-    .querySelector(".containBtnClose")
-    .querySelector("button");
+  let btnClose = document.querySelector(".btnClose");
 
   btnClose.addEventListener("click", () => {
     modalMainRooms.innerHTML = ``;

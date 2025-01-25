@@ -28,7 +28,7 @@ body #navAdmin {
   margin-left: 0px;
   margin-top: -5px;
   position: fixed;
-  background: linear-gradient(#055b5e, #04b8c2);
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: rgb(255, 255, 255);
   text-align: center;
   width: 180px;

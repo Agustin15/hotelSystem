@@ -17,13 +17,15 @@ if (isset($_GET["numRoom"])) {
 <body>
 
     <div id=<?php echo $numRoom ?> class="mainContain">
-        <div class="containBtnClose">
-            <button>X</button>
+        <div class="headerWindow">
+            <div class="title">
+                <h3>Historial habitacion <?php echo $numRoom ?></h3>
+                <img src="../../../img/historyBookings.png">
+            </div>
+            <button class="btnClose">X</button>
+
         </div>
-        <div class="title">
-            <h3>Historial habitacion <?php echo $numRoom ?></h3>
-            <img src="../../../img/historyBookings.png">
-        </div>
+
 
         <div class="containData"></div>
     </div>

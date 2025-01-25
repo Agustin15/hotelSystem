@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   width: auto;
   background-color: white;
   padding: 1rem;
@@ -11,7 +11,6 @@
   border-radius: 3px;
   margin-left: 17rem;
   border-top: 3px solid rgb(0, 192, 199);
-  padding-bottom: 2rem;
 }
 .containCalendar .referencesBookingStatus {
   display: flex;
@@ -44,7 +43,7 @@
 
 #mainCalendar {
   width: 60rem;
-  height: 30rem;
+  height: 20.5rem;
 }
 #mainCalendar h2 {
   color: rgb(189, 189, 189);
@@ -167,55 +166,69 @@
   background-color: #920606;
 }
 
+.headerWindow {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  color: white;
+  font-weight: bold;
+  height: 3rem;
+  padding-bottom: 0.5rem;
+  box-shadow: 2px 2px 2px gray;
+}
+.headerWindow button {
+  background-color: rgb(233, 3, 3);
+  color: white;
+  font-weight: bold;
+  height: 2rem;
+  width: 2rem;
+  border: none;
+}
+.headerWindow button:hover {
+  background-color: rgb(212, 4, 4);
+  cursor: pointer;
+}
+.headerWindow ul {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.4rem;
+  padding-left: 2rem;
+  height: 100%;
+  color: white;
+}
+.headerWindow ul li {
+  font-size: 15px;
+  list-style: none;
+  cursor: pointer;
+  padding-bottom: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.headerWindow ul li img {
+  width: 20px;
+}
+.headerWindow ul li:hover {
+  border-bottom: 2px solid rgb(236, 236, 236);
+}
+
 .containOptions {
   width: 60rem;
-  height: 36rem;
+  height: 37rem;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   margin-left: 11rem;
   margin-top: 2rem;
 }
-.containOptions .close {
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-}
-.containOptions .close button {
-  background-color: rgb(211, 9, 9);
-  padding: 0.5rem;
-  padding-top: 0.4rem;
-  height: 1.6rem;
-  width: 1.6rem;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-.containOptions .close button:hover {
-  background-color: rgb(180, 14, 14);
-}
-.containOptions ul {
-  display: flex;
-  width: 100%;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 1rem;
-  margin-top: -2rem;
-}
-.containOptions ul li {
-  list-style: none;
-  color: rgb(110, 110, 110);
-  cursor: pointer;
-  padding-bottom: 0.5rem;
-}
-.containOptions ul li:hover {
-  border-bottom: 2px solid rgb(0, 179, 179);
-}
 .containOptions .optionAddBooking {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 .containOptions .optionAddBooking .loadingPage {
   display: flex;
@@ -315,7 +328,7 @@
   padding: 1rem;
   border: 1px solid rgb(202, 202, 202);
   box-shadow: 2px 2px 2px gray;
-  background: linear-gradient(rgb(0, 138, 115), rgb(1, 155, 160));
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
 }
 .cartRooms ul {

@@ -29,13 +29,27 @@ $actualYear = date("Y");
             optionsAddBooking
         } from "../../../js/scriptsReservas/scriptOptionsCalendar.js";
 
+
         if (actualOption == "addBooking.html") {
             localStorage.setItem("actualOptionBooking", "addBooking.html");
             await actualOptionBooking(actualOption);
             let mainCalendar = document.querySelector("#mainCalendar");
             markActualOption(optionAddLi);
-
             let eventsBooking = await createEventsCalendar();
+
+            let searchParamsUrl = new URLSearchParams(window.location.search);
+            let bookingData;
+            if (searchParamsUrl.get("booking")) {
+                bookingData = JSON.parse(searchParamsUrl.get("booking"));
+
+                eventsBooking = eventsBooking.map(event => {
+                    if (event.idBooking == bookingData.idBooking) {
+                        event.title = `Reserva ${event.idBooking} seleccionada`;
+                    }
+                    return event;
+                });
+            }
+
             let calendar = new FullCalendar.Calendar(mainCalendar, {
                 initialView: 'dayGridMonth',
                 selectable: true,
@@ -68,7 +82,10 @@ $actualYear = date("Y");
                     right: 'buttonViewMonths buttonViewOneMonth buttonToday prev,next',
                 },
                 select: (info) => {
-                    optionsAddBooking(info.startStr, info.endStr);
+                    if (new Date(info.startStr) >= new Date()) {
+                        optionsAddBooking(info.startStr, info.endStr);
+
+                    }
                 },
                 eventClick: function(info) {
                     let idBooking = info.event.extendedProps.idBooking;
@@ -79,9 +96,14 @@ $actualYear = date("Y");
 
             });
 
-
             calendar.setOption('locale', 'uy');
             calendar.render();
+
+            if (bookingData) {
+                calendar.gotoDate(bookingData.startBooking);
+            }
+
+
         }
     </script>
     <title>Reservas</title>

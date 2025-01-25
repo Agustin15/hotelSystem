@@ -19,13 +19,13 @@ export const actualOptionBooking = async (optionActual) => {
 
 optionListLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-
+  deleteParamsUrl();
   actualOptionBooking(localStorage.getItem("actualOptionBooking"));
 });
 
 optionAddLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionBooking", "addBooking.html");
-  location.reload();
+  deleteParamsUrl("calendar");
 });
 
 const getDocument = async (url) => {
@@ -94,4 +94,16 @@ export const pageNotFound = (element) => {
   <h3>Ups, no se pudo cargar la página</h3>
   </div>
 `;
+};
+
+const deleteParamsUrl = (optionPage) => {
+  let searchParamsUrl = new URLSearchParams(window.location.search);
+  if (
+    searchParamsUrl.get("booking") ||
+    searchParamsUrl.get("idBooking") ||
+    optionPage == "calendar"
+  ) {
+    location.href =
+      "http://localhost/sistema%20Hotel/views/admin/reservas/index.php";
+  }
 };

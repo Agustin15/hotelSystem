@@ -30,9 +30,8 @@ const getNextBookingsRoom = async () => {
 
     if (!response.ok) {
       throw result.error;
-    } else if (result.length>0) {
+    } else if (result.length > 0) {
       data = result;
-      console.log(data);
     }
   } catch (error) {
     console.log(error);
@@ -77,7 +76,9 @@ const drawTable = (nextBookingsRoom) => {
       <td>${bookingNext.fechaSalida}</td>
        <td>
        <div class="containViewCalendar">
-       <button>Ver calendario
+       <button data-booking=${JSON.stringify(
+         bookingNext
+       )} class="viewCalendar">Ver calendario
         <img src="../../../img/reservaId.png">
        </button>
        </div>
@@ -87,6 +88,8 @@ const drawTable = (nextBookingsRoom) => {
   });
 
   tableNextBookings.querySelector("tbody").innerHTML = rows;
+
+  redirectToCalendarBooking();
 };
 const loading = (state) => {
   if (state) {
@@ -107,4 +110,24 @@ const noData = () => {
        <span>Ups, no se encontraron reservas cercanas</span>
        </div>
     `;
+};
+
+const redirectToCalendarBooking = () => {
+  let btnsViewCalendar = document.querySelectorAll(".viewCalendar");
+  btnsViewCalendar.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      localStorage.setItem("actualOptionBooking", "addBooking.html");
+      let booking = JSON.parse(btn.dataset.booking);
+      let bookingToCalendar = {
+        startBooking: booking.fechaLlegada,
+        endBooking: booking.fechaSalida,
+        idBooking: booking.idReserva,
+      };
+      window.open(
+        `http://localhost/sistema%20Hotel/views/admin/reservas/index.php?booking=${JSON.stringify(
+          bookingToCalendar
+        )}`
+      );
+    });
+  });
 };

@@ -14,11 +14,8 @@ $actualYear = date("Y");
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
     <script type="module" src="../../../js/scriptsRooms/dashboardScript.js" defer> </script>
-
-
-
-
     <title>Habitaciones</title>
+
 
 <body>
 

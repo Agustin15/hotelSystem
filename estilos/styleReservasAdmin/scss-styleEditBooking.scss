@@ -18,61 +18,70 @@
   flex-direction: column;
   align-items: center;
   width: 65rem;
-  height: 36rem;
+  height: 37rem;
   border-radius: 4px;
   background-color: white;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-left: 11rem;
 
-  .header {
+  .headerWindow {
     display: flex;
-    width: 98.5%;
-    justify-content: space-between;
     align-items: start;
-    padding-left: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    box-shadow: 2px 2px 2px gray;
 
-    .containClose {
-      display: flex;
-      align-items: center;
-      justify-content: end;
-
-      button {
-        background-color: rgb(223, 0, 0);
-        color: white;
-        font-weight: bold;
-        width: 2rem;
-        height: 2rem;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: rgb(192, 2, 2);
-      }
+    button {
+      background-color: rgb(233, 3, 3);
+      color: white;
+      font-weight: bold;
+      height: 2rem;
+      width: 2rem;
+      border: none;
     }
-  }
 
-  .menu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 95%;
-    padding-left: 0.5rem;
-    padding-top: 1rem;
-    gap: 1rem;
-    color: gray;
-
-    li {
-      list-style: none;
-      padding-bottom: 0.5rem;
+    button:hover {
+      background-color: rgb(212, 4, 4);
       cursor: pointer;
     }
 
-    li:hover {
-      border-bottom: 2px solid rgb(0, 179, 179);
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: 2.4rem;
+      padding-left: 2rem;
+      margin-top: 0.9rem;
+      gap: 1rem;
+      color: rgb(255, 255, 255);
+
+      li {
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        padding-bottom: 0.5rem;
+        cursor: pointer;
+
+        img {
+          width: 20px;
+        }
+      }
+
+      li:hover {
+        border-bottom: 2px solid rgb(248, 248, 248);
+      }
     }
   }
+
   .loadingPage {
     display: flex;
     gap: 0.5rem;
@@ -190,7 +199,7 @@
   padding: 1rem;
   border: 1px solid rgb(202, 202, 202);
   box-shadow: 2px 2px 2px gray;
-  background: linear-gradient(rgb(0, 138, 115), rgb(1, 155, 160));
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
 
   ul {
@@ -744,7 +753,7 @@
       display: flex;
       flex-direction: column;
       align-items: start;
-      background: #0ba8ad;
+      background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
       list-style: none;
       border-radius: 5px;
       color: white;
@@ -792,7 +801,7 @@
 
       .icon,
       .info {
-        background: #097d81;
+        background: #1f888b;
         border-radius: 5px;
       }
 

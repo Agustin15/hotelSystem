@@ -27,16 +27,19 @@ export const actualOptionClient = async (optionActual) => {
 optionListLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionClient", "clientsTable.html");
   actualOptionClient(localStorage.getItem("actualOptionClient"));
+  deleteParamsUrl();
 });
 
 optionChartLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionClient", "grafica.html");
   actualOptionClient(localStorage.getItem("actualOptionClient"));
+  deleteParamsUrl();
 });
 
 optionAddLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionClient", "addClient.html");
   actualOptionClient(localStorage.getItem("actualOptionClient"));
+  deleteParamsUrl();
 });
 
 const getDocument = async (url) => {
@@ -114,4 +117,12 @@ export const pageNotFound = (element) => {
   <h3>Ups, no se pudo cargar la página</h3>
   </div>
 `;
+};
+
+const deleteParamsUrl = () => {
+  let searchParamsUrl = new URLSearchParams(window.location.search);
+  if (searchParamsUrl.get("idClient")) {
+    location.href =
+      "http://localhost/sistema%20Hotel/views/admin/clientes/index.php";
+  }
 };

@@ -21,15 +21,20 @@ if (isset($_GET['idBooking'])) {
 
     <div class="containEditOption" id="<?php echo $idBooking ?>">
 
-        <div class="header">
+        <div class="headerWindow">
             <ul class="menu">
-                <li id="itemEdit">Editar</li>
-                <li id="itemRooms">Habitaciones</li>
+                <li class="optionBooking">
+                    <img src="../../../img/updateBooking.png">
+                    Reserva
+                </li>
+                <li class="optionFreeRooms">
+                    <img src="../../../img/key-card.png">
+                    Habitaciones
+                </li>
             </ul>
-            <div class="containClose">
-                <button class="btnClose">X</button>
-            </div>
+            <button class="btnClose">X</button>
         </div>
+
         <div class="body">
 
         </div>

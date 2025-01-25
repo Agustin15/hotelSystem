@@ -171,7 +171,7 @@ const drawOption = async (optionAddBooking, url) => {
 };
 
 const closeWindowAddBooking = () => {
-  let close = document.querySelector(".close").querySelector("button");
+  let close = document.querySelector(".headerWindow").querySelector("button");
 
   close.addEventListener("click", () => {
     modalMainBookings.innerHTML = ``;

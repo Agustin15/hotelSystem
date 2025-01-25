@@ -17,14 +17,15 @@ if (isset($_GET["numRoom"])) {
 
 <body>
 
+    <div class="modalNextBookings"></div>
     <div class="containNextBookings" id=<?php echo $numRoom ?>>
 
-        <div class="containBtnClose">
-            <button>X</button>
-        </div>
-        <div class="title">
-            <h3>Reservas mas cercanas habitacion <?php echo $numRoom ?></h3>
-            <img src="../../../img/nextBookings.png">
+        <div class="headerWindow">
+            <div class="title">
+                <h3>Reservas mas cercanas habitacion <?php echo $numRoom ?></h3>
+                <img src="../../../img/nextBookings.png">
+            </div>
+            <button class="btnClose">X</button>
         </div>
         <div class="bodyContainNextBookings"></div>
     </div>
