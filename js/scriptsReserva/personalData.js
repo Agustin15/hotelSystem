@@ -35,6 +35,8 @@ let containClientAndBooking = document.querySelector(
   ".containClientAndBooking"
 );
 
+console.log(booking);
+
 document.addEventListener("DOMContentLoaded", function () {
   if (containClientAndBooking) {
     if (!localStorage.getItem("booking")) {
@@ -387,7 +389,7 @@ const assignRoom = async (dataConsult, room, rooms) => {
         roomCategoryAssing.push({
           numRoom: roomsAvailablesCategory[f].numRoom,
           adults: parseInt(room.guests.adult),
-          childs: parseInt(room.guests.childs) || 0,
+          childs: parseInt(room.guests.children) || 0,
         });
       } else {
         return roomCategoryAssing;
@@ -429,8 +431,8 @@ const addPay = async (roomsToBooking) => {
   });
 
   if (resultAddPay) {
-    location.href =
-      "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+    // location.href =
+    //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
   }
 };
 
@@ -464,15 +466,15 @@ const updatePay = async (roomsToBooking) => {
       newAmount: booking.totalDeposit + actualRevenue.deposito,
     });
     if (resultUpdatePay) {
-      location.href =
-        "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+      // location.href =
+      //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
     }
   }
 };
 
 export function loadingBooking(loadingState, msj) {
   if (msj) {
-    loadingSpinner.querySelector("spanLoading").textContent = msj;
+    loadingSpinner.querySelector(".spanLoading").textContent = msj;
   }
 
   if (loadingState) {

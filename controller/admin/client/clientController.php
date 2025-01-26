@@ -81,7 +81,7 @@ class clientController
   {
     try {
       $tokenVerify = $this->authToken->verifyToken();
-      if (empty($tokenVerify["error"])) {
+      if (isset($tokenVerify["error"])) {
         throw new Error("Autenticacion fallida,Token no valido");
       }
 

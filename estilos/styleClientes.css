@@ -530,8 +530,8 @@ body #userAdmin:hover > .btnFlecha {
 .scroll {
   height: auto;
   min-width: 60rem;
-  width: auto;
-  max-height: 30rem;
+  max-width: 65rem;
+  max-height: 17rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -551,7 +551,8 @@ body #userAdmin:hover > .btnFlecha {
 
 .tableClients {
   min-width: 60rem;
-  width: auto;
+  width: 60rem;
+  height: 10rem;
   padding-top: 1rem;
 }
 .tableClients thead th {

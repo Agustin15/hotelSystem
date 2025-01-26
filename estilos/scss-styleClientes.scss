@@ -328,8 +328,8 @@ body {
 .scroll {
   height: auto;
   min-width: 60rem;
-  width: auto;
-  max-height: 30rem;
+  max-width: 65rem;
+  max-height: 17rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -350,7 +350,8 @@ body {
 
 .tableClients {
   min-width: 60rem;
-  width: auto;
+  width: 60rem;
+  height: 10rem;
   padding-top: 1rem;
 
   thead {
@@ -1423,7 +1424,7 @@ body {
 
     .header {
       background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
-      box-shadow:2px 2px 2px gray;
+      box-shadow: 2px 2px 2px gray;
       color: white;
       display: flex;
       flex-direction: column;
@@ -1661,7 +1662,7 @@ body {
           font-size: 19px;
           cursor: pointer;
         }
-        button:hover{
+        button:hover {
           background-color: rgb(196, 2, 2);
         }
       }

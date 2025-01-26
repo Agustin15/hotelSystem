@@ -57,14 +57,12 @@ export const fetchGetClient = async (client) => {
   } catch (error) {
     console.log(error);
     loadingBooking(false);
+    alertBooking(
+      "Error",
+      "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
+    );
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    if (!data) {
-      alertBooking(
-        "Error",
-        "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
-      );
-    }
     return data;
   }
 };

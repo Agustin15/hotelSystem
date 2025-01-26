@@ -147,8 +147,9 @@
 .scroll {
   height: auto;
   min-width: 60rem;
+  max-width: 65rem;
   width: auto;
-  max-height: 30rem;
+  max-height: 15rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
