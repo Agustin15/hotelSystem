@@ -162,7 +162,7 @@ header li img {
 .progressStage {
   width: 0%;
   height: 100%;
-  background: linear-gradient(#126b91, #0498a0);
+  background: linear-gradient(#2c7594, #0498a0);
   animation-name: progressStage;
   animation-duration: 1s;
   animation-fill-mode: forwards;
@@ -180,7 +180,7 @@ header li img {
   width: 104%;
   color: white;
   padding: 0.5rem;
-  background: linear-gradient(#126b91, #0498a0);
+  background: linear-gradient(#287494, #0498a0);
   margin-top: 1rem;
   display: flex;
   justify-content: center;
@@ -253,12 +253,12 @@ header li img {
   font-size: 20px;
 }
 .client .iconTitle img {
-  width: 40px;
+  width: 47px;
 }
 .client form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   padding-top: 0.4rem;
 }
 .client form input {
@@ -292,6 +292,7 @@ header li img {
   gap: 0.5rem;
   justify-content: start;
   align-items: start;
+  position: relative;
 }
 .client form .name input,
 .client form .lastName input,
@@ -345,7 +346,8 @@ header li img {
 }
 .bookingData .title {
   width: 101%;
-  background: linear-gradient(#126b91, #0498a0);
+  background: linear-gradient(#257394, #0498a0);
+  box-shadow: 2px 2px 2px gray;
   color: white;
   padding: 0.7rem;
   font-weight: bold;
@@ -354,9 +356,11 @@ header li img {
 .bookingData .bookingRooms {
   width: 105%;
   height: 210px;
+  border-radius: 0px;
   display: flex;
   gap: 1.8rem;
   align-items: center;
+  border: 1px solid rgb(190, 190, 190);
   justify-content: center;
   color: black;
   box-shadow: 2px 2px 2px gray;
@@ -404,12 +408,13 @@ header li img {
   padding-top: 0.5rem;
 }
 .bookingData .controls {
-  width: 102%;
+  width: 102.5%;
   padding: 0.5rem;
   display: flex;
+  box-shadow: 2px 2px 2px gray;
   justify-content: center;
   gap: 1.5rem;
-  background: linear-gradient(#126b91, #0498a0);
+  background: linear-gradient(#1a779e, #0498a0);
   border-radius: 3px;
 }
 .bookingData .controls img {
@@ -436,41 +441,114 @@ header li img {
 }
 
 .alertErrorInput {
+  position: absolute;
+  top: 4.7rem;
+  width: 100%;
   display: none;
+  align-items: center;
+  justify-content: start;
   color: red;
   font-size: 14px;
+  gap: 0.4rem;
+}
+.alertErrorInput img {
+  width: 26px;
 }
 
 .alertErrorInputShow {
-  display: block;
+  display: flex;
 }
 
 .modalBooking {
   position: absolute;
+  z-index: 2;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 110%;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 .modalBooking .loading {
-  display: none;
-  align-items: start;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 17rem;
+  width: 30rem;
+  border-radius: 3px;
+  gap: 0.2rem;
+  background-color: white;
+}
+.modalBooking .loading .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+.modalBooking .loading .title img {
+  width: 60px;
+  height: 60px;
+}
+.modalBooking .loading .loader {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  height: auto;
+  gap: 1rem;
+}
+.modalBooking .loading .clientDevice .hotel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
 }
 .modalBooking .loading span {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: bold;
-  font-size: 22px;
+  font-size: 15px;
 }
 .modalBooking .loading img {
-  width: 30px;
-  height: 30px;
+  width: 80px;
+  height: 80px;
+}
+.modalBooking .loading .containBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 2rem;
+}
+.modalBooking .loading .containBar .bar {
+  width: 12rem;
+  border-radius: 20px;
+  border: 1px solid rgb(158, 158, 158);
+  height: 0.5rem;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+.modalBooking .loading .containBar .contentBar {
+  border-radius: 20px;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(#1eb9b9, #0498a0);
+  opacity: 90%;
+  animation-name: bar;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+@keyframes bar {
+  from {
+    margin-left: 0;
+  }
+  to {
+    margin-left: 13rem;
+  }
 }
 .modalBooking .alertBooking {
   position: absolute;

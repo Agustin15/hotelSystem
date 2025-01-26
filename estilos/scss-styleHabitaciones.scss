@@ -697,10 +697,11 @@ body {
           }
 
           img {
-            width: 12px;
-            height: 11px;
-            opacity: 70%;
+            width: 17px;
+            height: 17px;
+            opacity: 100%;
             margin-right: 0.3rem;
+            cursor: pointer;
           }
 
           img:hover {
@@ -732,6 +733,7 @@ body {
         img {
           width: 17px;
           height: 17px;
+          cursor: pointer;
         }
 
         img:hover {

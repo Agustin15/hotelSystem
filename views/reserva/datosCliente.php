@@ -48,8 +48,26 @@
 
             <div class="loading">
 
-                <span></span>
-                <img src="../../img/spinnerBooking.gif">
+                <div class="title">
+                    <img src="../../img/iconBookingClient.png">
+                    <h4>Reserva</h4>
+                </div>
+                <div class="loader">
+                    <div class="clientDevice">
+                        <img src="../../img/multiplataform.png">
+                        <span>Cliente</span>
+                    </div>
+                    <div class="containBar">
+                        <div class="bar">
+                            <div class="contentBar"></div>
+                        </div>
+                        <span class="spanLoading"></span>
+                    </div>
+                    <div class="hotel">
+                        <img src="../../img/revision2.png">
+                        <span>Hotel</span>
+                    </div>
+                </div>
             </div>
 
             <div class="alertBooking">
@@ -108,8 +126,10 @@
                                     <label for="name">Nombre</label>
                                 </div>
                                 <input type="text" id="name" placeholder="Ingrese nombre" name="name" autocomplete="off">
-
-                                <span class="alertErrorInput"></span>
+                                <div class="alertErrorInput">
+                                    <img src="../../img/warningInput.png">
+                                    <span></span>
+                                </div>
                             </div>
 
 
@@ -120,7 +140,10 @@
                                     <label for="lastName">Apellido</label>
                                 </div>
                                 <input type="text" id="lastName" placeholder="Ingrese apellido" name="lastName" autocomplete="off">
-                                <span class="alertErrorInput"></span>
+                                <div class="alertErrorInput">
+                                    <img src="../../img/warningInput.png">
+                                    <span></span>
+                                </div>
 
                             </div>
                         </div>
@@ -137,9 +160,10 @@
                                     id="phone" placeholder="Ingrese telefono" onpaste="return false"
 
                                     name="phone" autocomplete="off">
-                                <span class="alertErrorInput"></span>
-
-
+                                <div class="alertErrorInput">
+                                    <img src="../../img/warningInput.png">
+                                    <span></span>
+                                </div>
                             </div>
 
                             <div class="mail">
@@ -150,7 +174,10 @@
                                 </div>
                                 <input type="mail" placeholder="Ingrese correo" name="mail" autocomplete="off">
 
-                                <span class="alertErrorInput"></span>
+                                <div class="alertErrorInput">
+                                    <img src="../../img/warningInput.png">
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
 

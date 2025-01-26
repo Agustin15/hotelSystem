@@ -186,14 +186,14 @@ function printBooking() {
 }
 
 function inputAlert(key, msjAlertInput) {
-  let input = [...document.getElementsByName(key)];
+  let inputs = [...document.getElementsByName(key)];
+  let input = inputs[0];
+  input.classList.add("inputAlert");
 
-  input[0].classList.add("inputAlert");
-
-  let spanError = input[0].parentNode.querySelector("span");
-
-  spanError.classList.add("alertErrorInputShow");
+  let containAlertError = input.parentNode.querySelector(".alertErrorInput");
+  let spanError = containAlertError.querySelector("span");
   spanError.textContent = msjAlertInput;
+  spanError.style.display = "flex";
 }
 
 function removeInputAlert(input) {
@@ -207,22 +207,22 @@ const validationsInputs = (value) => {
     {
       key: "name",
       validation: value !== "",
-      msj: "*Ingrese un nombre",
+      msj: "Ingrese un nombre",
     },
     {
       key: "lastName",
       validation: value !== "",
-      msj: "*Ingrese un apellido",
+      msj: "Ingrese un apellido",
     },
     {
       key: "mail",
       validation: value.match(validRegex),
-      msj: "*Ingrese un correo válido",
+      msj: "Ingrese un correo válido",
     },
     {
       key: "phone",
       validation: value.length == 9,
-      msj: "*Ingrese un telefono válido",
+      msj: "Ingrese un telefono válido",
     },
   ];
   return validations;
@@ -290,7 +290,7 @@ const createBooking = async (client) => {
 
 const addClient = async (clientBooking) => {
   let clientAdded = await fetchPOSTClient(clientBooking.client);
- 
+
   if (clientAdded) {
     let clientFind = await fetchGetClient(clientBooking.client);
     if (clientFind) {
@@ -472,7 +472,7 @@ const updatePay = async (roomsToBooking) => {
 
 export function loadingBooking(loadingState, msj) {
   if (msj) {
-    loadingSpinner.querySelector("span").textContent = msj;
+    loadingSpinner.querySelector("spanLoading").textContent = msj;
   }
 
   if (loadingState) {

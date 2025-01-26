@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("alertInvalidToken");
     }, 4000);
   }
-  desactivateInputAlert();
 });
 
 const alertLoginAdmin = (img, msj, title) => {
@@ -31,10 +30,14 @@ const removeAlertLoginAdmin = () => {
   alertLogin.style.display = "none";
 };
 
-function inputAlert(inputName) {
+function inputAlert(inputName, msjError) {
   let inputsName = [...document.getElementsByName(inputName)];
-
-  inputsName[0].classList.add("inputAlert");
+  let input = inputsName[0];
+  input.classList.add("inputAlert");
+  let containErrorInput =
+    input.parentElement.parentElement.querySelector(".errorInput");
+  containErrorInput.querySelector("p").textContent = msjError;
+  containErrorInput.style.display = "flex";
 }
 
 function desactivateInputAlert() {
@@ -42,6 +45,11 @@ function desactivateInputAlert() {
     input.addEventListener("click", function () {
       input.classList.remove("inputAlert");
     });
+  });
+
+  [...document.querySelectorAll(".errorInput")].forEach((error) => {
+    error.style.display = "none";
+    error.querySelector("p").textContent = "";
   });
 }
 
@@ -61,28 +69,31 @@ function passwordStatus(event) {
 function setUser(event) {
   event.preventDefault();
   removeAlertLoginAdmin();
+  desactivateInputAlert();
+  
   if (alertInvalidToken) {
     localStorage.removeItem("alertInvalidToken");
   }
   const form = event.target;
 
   const formUser = new FormData(form);
-  let validate = null;
+  let error = null;
   const userData = {};
 
   formUser.forEach((v, k) => {
-    if (v.trim() == "") {
-      validate = "Complete todos los campos";
-      inputAlert(k);
-      return;
+    if (k == "user" && v.trim().length == 0) {
+      error = "Ingrese usuario";
+      inputAlert(k, error);
+    }
+    if (k == "password" && v.trim().length == 0) {
+      error = "Ingrese contraseña";
+      inputAlert(k, error);
     } else {
       userData[k] = v;
     }
   });
 
-  if (validate) {
-    alertLoginAdmin("../../img/advertenciaLogin.png", validate, "Advertencia");
-  } else {
+  if (!error) {
     login(userData);
   }
 }

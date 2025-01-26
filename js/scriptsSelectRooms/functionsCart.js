@@ -94,7 +94,7 @@ export const addRoomToList = (room) => {
 };
 
 function quantityGuestRoomCart(roomGuest, typeGuest) {
-  let span = "";
+  let span;
 
   if (roomGuest > 1) {
     span = roomGuest + " " + typeGuest;
@@ -126,12 +126,14 @@ export const printRoomsCart = () => {
   
   <div class="header">
   <span class="category">Habitacion ${room.category}</span>
-  <img data-id=${room.id} class="buttonDelete" src="../../img/borrar.png">
+  <img data-id=${
+    room.id
+  } title="Eliminar" class="buttonDelete" src="../../img/deleteRoomCartClient.png">
   </div>
   
   <div class="guests">
   <span class="adults">${spanAdults}</span>
-  <span class="childrens">${spanChildrens}</span>
+  ${spanChildrens ? `<span class="childrens">${spanChildrens}</span>` : ""} 
   </div>
   
   <div class="changeQuantity">

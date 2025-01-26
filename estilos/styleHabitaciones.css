@@ -751,10 +751,11 @@ body {
   margin-left: 1rem;
 }
 .containCart #roomsBooking li .dataRoom .header img {
-  width: 12px;
-  height: 11px;
-  opacity: 70%;
+  width: 17px;
+  height: 17px;
+  opacity: 100%;
   margin-right: 0.3rem;
+  cursor: pointer;
 }
 .containCart #roomsBooking li .dataRoom .header img:hover {
   opacity: 100%;
@@ -780,6 +781,7 @@ body {
 .containCart #roomsBooking li .changeQuantity img {
   width: 17px;
   height: 17px;
+  cursor: pointer;
 }
 .containCart #roomsBooking li .changeQuantity img:hover {
   transform: scale(1.1);

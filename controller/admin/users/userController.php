@@ -32,7 +32,7 @@ class userController
 
             $userFound = $this->user->getUserByUser($user);
             if (!$userFound) {
-                throw new Exception("Usuario no encontrado");
+                throw new Exception("Autenticacion fallida,usuario no encontrado");
             }
             $payload = [
                 "user" => $user,
@@ -46,7 +46,7 @@ class userController
                 setcookie("userToken", $tokenJWT, time() + 3600, "", "", false, true);
                 return array("userLogin" => true);
             } else {
-                throw new Exception("Contraseña incorrecta");
+                throw new Exception("Autenticacion fallida,contraseña incorrecta");
             }
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
