@@ -1,7 +1,6 @@
 <?php
 require("../../model/claseServicios.php");
-require("./../authToken.php");
-
+require(__DIR__ . "./../authToken.php");
 
 class servicesController
 {
@@ -45,6 +44,44 @@ class servicesController
 
                 return $bookingServicesDetails;
             }
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getHistoryServicesByCurrentBookingRoom($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $servicesCurrentRoomBooking = $this->service->getHistoryServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
+            return $servicesCurrentRoomBooking;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+    public function getAllServicesHotel($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $servicesHotel = $this->service->getAllServicesHotel();
+
+            if (count($servicesHotel) > 0) {
+                $servicesHotel = array_map(function ($service) {
+                    $service["imagen"] = base64_encode($service["imagen"]);
+                    return $service;
+                }, $servicesHotel);
+            }
+            return $servicesHotel;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

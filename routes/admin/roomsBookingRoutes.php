@@ -38,7 +38,8 @@ $routes = [
             "getAllYearsWithRoomsBooking" => $roomsBookingController->getAllYearsWithRoomsBooking($req),
             "getAllBookingsByRoomAndYearLimit" => $roomsBookingController->getAllBookingsByRoomAndYearLimit($req),
             "getAllBookingsByRoomAndYear" => $roomsBookingController->getAllBookingsByRoomAndYear($req),
-            "getNextBookingsRoom" => $roomsBookingController->getNextBookingsRoom($req)
+            "getNextBookingsRoom" => $roomsBookingController->getNextBookingsRoom($req),
+            "getBookingByRoomReserved" => $roomsBookingController->getBookingByRoomReserved($req),
         };
 
         return $optionGet;

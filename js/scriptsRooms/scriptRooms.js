@@ -407,3 +407,37 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
   }
 };
 
+export const getBookingByRoomReserved = async (numRoom) => {
+  let data;
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params= ` +
+        JSON.stringify({
+          option: "getBookingByRoomReserved",
+          numRoom: numRoom,
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin",
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw "Ups, no se encontro la reserva";
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};

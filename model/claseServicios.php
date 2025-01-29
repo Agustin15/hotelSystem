@@ -24,14 +24,31 @@ class servicio
         $consulta->bind_param("i", $idReserva);
         $consulta->execute();
         $resultado = $consulta->get_result();
-        
+
         return $resultado;
     }
 
 
- 
+
+    public function getHistoryServicesByCurrentBookingRoom($numRoom, $idBooking)
+    {
+
+        $consulta = $this->conexion->conectar()->prepare("select * from serviciosextra_habitacion where 
+        idReservaHabitacionServicio=? && numHabitacionServicio=?");
+        $consulta->bind_param("ii", $idBooking, $numRoom);
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
 
 
-     
+    public function getAllServicesHotel()
+    {
 
+        $consulta = $this->conexion->conectar()->prepare("select nombreServicio,descripcionServicio,imagen from servicio 
+        group by nombreServicio");
+        $consulta->execute();
+        $resultado = $consulta->get_result();
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
 }

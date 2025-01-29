@@ -167,7 +167,20 @@ class roomsBookingController
         }
     }
 
+    public function getBookingByRoomReserved($req)
+    {
+        try {
 
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $bookingRoomBusy = $this->rooms->reservasHabitacionOcupada($req["numRoom"], date("Y-m-d"));
+            return $bookingRoomBusy;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 
     public function getDataRoomsBooking($req)
     {

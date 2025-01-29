@@ -1,0 +1,51 @@
+.containTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: rgb(145, 145, 145);
+  margin-top: 2rem;
+}
+.containTitle img {
+  width: 41px;
+}
+
+.containHistory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.containHistory .noData {
+  width: 100%;
+  height: 65%;
+  font-size: 19px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.containHistory .noData img {
+  width: 90px;
+  opacity: 70%;
+}
+.containHistory .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  gap: 0.5rem;
+  font-size: 16px;
+  color: gray;
+}
+.containHistory .loading img {
+  width: 40px;
+  opacity: 70%;
+}
+
+/*# sourceMappingURL=styleHistoryServices.css.map */

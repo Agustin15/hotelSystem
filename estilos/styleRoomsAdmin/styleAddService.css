@@ -1,0 +1,51 @@
+.containTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: rgb(145, 145, 145);
+  margin-top: 2rem;
+}
+.containTitle img {
+  width: 41px;
+}
+
+.containAddService {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.containAddService .noData {
+  width: 100%;
+  height: 65%;
+  font-size: 19px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.containAddService .noData img {
+  width: 90px;
+  opacity: 70%;
+}
+.containAddService .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  gap: 0.5rem;
+  font-size: 16px;
+  color: gray;
+}
+.containAddService .loading img {
+  width: 40px;
+  opacity: 70%;
+}
+
+/*# sourceMappingURL=styleAddService.css.map */

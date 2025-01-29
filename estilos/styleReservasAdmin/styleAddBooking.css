@@ -191,11 +191,10 @@
 }
 .headerWindow ul {
   display: flex;
-  gap: 1rem;
+  gap: 0.4rem;
   justify-content: center;
   align-items: center;
   margin-top: 0.4rem;
-  padding-left: 2rem;
   height: 100%;
   color: white;
 }
@@ -203,7 +202,7 @@
   font-size: 15px;
   list-style: none;
   cursor: pointer;
-  padding-bottom: 0.3rem;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -213,16 +212,16 @@
   width: 20px;
 }
 .headerWindow ul li:hover {
-  border-bottom: 2px solid rgb(236, 236, 236);
+  background: linear-gradient(rgb(57, 170, 161), rgb(4, 127, 131));
 }
 
 .containOptions {
   width: 60rem;
-  height: 37rem;
+  height: 37.5rem;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   margin-left: 11rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .containOptions .optionAddBooking {
   display: flex;
