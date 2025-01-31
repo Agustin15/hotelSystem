@@ -16,6 +16,8 @@ export const displayTable = async () => {
   if (yearsAllBookings) {
     drawYearsSelect(yearsAllBookings);
     drawTable();
+  } else {
+    noDataFilterSelect();
   }
 };
 
@@ -47,33 +49,32 @@ const drawRowsTable = (bookingsYearlimit) => {
   let tbody = document.querySelector("tbody");
 
   let rowsTableBooking = bookingsYearlimit.map((booking, index) => {
-    let classTr = "";
     let classBtnDisabled = "";
-    let iconStatusBooking = "../../../img/bookingPendingIcon.png";
+    let iconStatusBooking, titleIconState;
 
     if (new Date(booking.fechaSalida) < new Date()) {
       classBtnDisabled = "btnDisabled";
       iconStatusBooking = "../../../img/bookingEndIcon.png";
-    } else if (
-      new Date(booking.fechaLlegada) <= new Date() &&
-      new Date(booking.fechaSalida) >= new Date()
-    ) {
-      iconStatusBooking = "../../../img/bookingInCurse.gif";
-    }
-
-    if (index % 2 == 0) {
-      classTr = "trGray";
+      titleIconState = "Finalizada";
+    } else if (new Date(booking.fechaLlegada) > new Date()) {
+      iconStatusBooking = "../../../img/bookingPendingIcon.png";
+      titleIconState = "Pendiente";
     }
     return `
 
-<tr class=${classTr}>
+<tr class=${index % 2 == 0 ? "trGray" : ""}>
 <td>
 
  <div class="idBooking">
        ${booking.idReserva}
               <img src="../../../img/reservas.png">
-                <img  class="iconStatus" src=${iconStatusBooking}> 
-
+                 ${
+                   iconStatusBooking
+                     ? `<img title=${titleIconState} class="iconStatus" src=${iconStatusBooking}></img>`
+                     : `<div title="En curso" class="bar">
+                       <div class="contentBar"></div>
+                     </div>`
+                 }  
        </div>
 
 </td>
@@ -126,7 +127,6 @@ const getQuantityBookingsActualYear = async () => {
       throw result.error;
     } else if (result) {
       data = result;
-
       if (result <= 10) {
         pages = 1;
       } else {
@@ -194,8 +194,12 @@ const noData = (error) => {
   </td>
 
   `;
+};
 
-  document.querySelector(".titleTable").classList.add("titleTableNoData");
+const noDataFilterSelect = () => {
+  document.querySelector(".containSelect").style.display = "none";
+  document.querySelector(".containInput").style.display = "none";
+  document.querySelector(".titleTable ").classList.add("titleTableNoData");
 };
 
 const drawIndex = () => {
@@ -289,6 +293,7 @@ const displaySelectYear = async () => {
   } finally {
     loading(false);
     if (!data) {
+      noDataFilterSelect();
       noData("No se encontraron reservas en este año");
     }
     return data;

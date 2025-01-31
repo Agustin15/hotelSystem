@@ -117,12 +117,10 @@ $actualYear = date("Y");
 
     <header>
         <nav id="navAdmin">
-            <br>
-
-            <img class="iconoMenu" src="../../../img/revision.png">
-            <label class="lblTituloMenu">Sistema hotel</label>
-
-            <br><br>
+            <div class="titleNav">
+                <img class="iconoMenu" src="../../../img/revision.png">
+                <label class="lblTituloMenu">Sistema hotel</label>
+            </div>
 
             <ul>
                 <li id="liInicio">
@@ -220,9 +218,7 @@ $actualYear = date("Y");
 
             <div id="userAdmin">
 
-                <img class="iconoAdmin" data-genre="<?php echo $genero ?>">
-                <label><?php echo $usuario ?></label>
-                <img class="btnFlecha" src="../../../img/btnFlecha.png">
+                <div class="profile"></div>
 
                 <ul class="subMenuAdmin">
 
@@ -235,7 +231,6 @@ $actualYear = date("Y");
 
                     <a>
                         <li class="logoutOption">
-
                             <img src="../../../img/apagar.png">
                             <a class="logout">Log out</a>
                         </li>

@@ -14,13 +14,8 @@ export const optionsMenuAdmin = () => {
     "#liHabitaciones",
     "actualOptionRooms"
   );
-
-  let logout = document.querySelector(".logout");
-
-  logout.addEventListener("click", () => {
-    localStorage.clear();
-  });
 };
+
 
 const routesOptions = (url, liOption, itemLocal) => {
   let allOptionsSubMenu = document

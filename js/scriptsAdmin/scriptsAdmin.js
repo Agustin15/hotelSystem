@@ -12,66 +12,98 @@ import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
 
 export let userData;
+let profileOption;
 
-function openSubMenu(linkBtnFlechaAbajo, linkBtnFlecha) {
-  var buttonsOpenSubMenu = document.querySelectorAll(".btnFlecha");
+document.addEventListener("DOMContentLoaded", async () => {
+  let actualDate = new Date();
+  let actualYear = actualDate.getFullYear();
+  let logoutOption = document.querySelector(".logoutOption");
 
-  var menu, item, subMenu, itemNext;
+  if (document.getElementById("dashboard")) {
+    getClientsByMonthActualYear(actualYear);
+    getCategoryRoomsMostReserved();
+    getRevenueActualYear();
+    displayItemsDataCategoryRooms();
+    displayItemDataRevenuesActual();
+  }
+
+  userData = await getDataToken();
+  if (userData) {
+    displayOptionProfile();
+  }
+  optionsMenuAdmin();
+  openSubMenu();
+  showOpenMenu();
+  openSubMenuProfile();
+
+  logoutOption.addEventListener("click", () => {
+    localStorage.clear();
+    logout();
+  });
+});
+
+function openSubMenu() {
+  let buttonsOpenSubMenu = document.querySelectorAll(".btnDisplaySubMenu");
 
   buttonsOpenSubMenu.forEach(function (buttonOpen) {
-    buttonOpen.addEventListener("click", function () {
-      if (this.src === linkBtnFlecha) {
-        //verifica si existe un submenu desplegado
-        menu = document.getElementById("navAdmin");
-        var subMenus = menu.querySelectorAll(".subMenu");
+    buttonOpen.addEventListener("click", () => {
+      let subMenu =
+        buttonOpen.parentElement.parentElement.querySelector(".subMenu");
 
-        subMenus = Array.from(subMenus);
-
-        var subMenusToNone = subMenus.filter(
-          (sub) => sub.style.display == "block"
-        );
-
-        if (subMenusToNone.length > 0) {
-          subMenusToNone.forEach(function (subMenuToNone) {
-            var item = subMenuToNone.parentNode;
-            item.querySelector(".btnFlecha").src = linkBtnFlecha;
-            subMenuToNone.style.display = "none";
-            var itemNext = item.nextElementSibling;
-            itemNext.style.marginTop = "11px";
-          });
-        }
-
-        //abrir submenu
-        this.src = linkBtnFlechaAbajo;
-        item = this.parentNode;
-        subMenu = item.querySelector("ul");
-        subMenu.style.display = "block";
-
-        if (item.id == "userAdmin") {
-          item.style.marginTop = "-86px";
-        } else {
-          itemNext = item.nextElementSibling;
-
-          if (itemNext.id == "liGanancias" || itemNext.id == "liHabitaciones") {
-            itemNext.style.marginTop = "110px";
-          } else {
-            itemNext.style.marginTop = "145px";
-          }
-        }
+      if (
+        buttonOpen.src == "http://localhost/sistema%20Hotel/img/btnFlecha.png"
+      ) {
+        checkSubMenuOpen(subMenu);
+        buttonOpen.src =
+          "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png";
+        subMenu.style.display = "flex";
       } else {
-        //cerrar submenu
-        this.src = linkBtnFlecha;
+        buttonOpen.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
         subMenu.style.display = "none";
-
-        if (item.id == "userAdmin") {
-          item.style.marginTop = "0px";
-        } else {
-          itemNext.style.marginTop = "11px";
-        }
       }
     });
   });
 }
+
+const showOpenMenu = () => {
+  let options = document.querySelector(".menu").querySelectorAll(".option");
+
+  options.forEach((option) => {
+    option.addEventListener("mouseover", () => {
+      option.querySelector(".btnDisplaySubMenu").style.display = "flex";
+    });
+
+    option.addEventListener("mouseout", () => {
+      option.querySelector(".btnDisplaySubMenu").style.display = "none";
+    });
+  });
+};
+
+const openSubMenuProfile = () => {
+  let btnDisplayMenu = document.querySelector(".btnDisplayMenu");
+  let subMenuProfile = document.querySelector(".subMenuProfile");
+  let containProfile = document.querySelector("#userAdmin");
+
+  containProfile.addEventListener("mouseover", () => {
+    btnDisplayMenu.style.visibility = "visible";
+  });
+  containProfile.addEventListener("mouseout", () => {
+    btnDisplayMenu.style.visibility = "hidden";
+  });
+
+  btnDisplayMenu.addEventListener("click", () => {
+    if (
+      btnDisplayMenu.src == "http://localhost/sistema%20Hotel/img/btnFlecha.png"
+    ) {
+      btnDisplayMenu.src =
+        "http://localhost/sistema%20Hotel/img/btnFlechaArriba.png";
+      subMenuProfile.style.display = "flex";
+    } else {
+      btnDisplayMenu.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
+      subMenuProfile.style.display = "none";
+    }
+  });
+};
 
 const logout = async () => {
   try {
@@ -89,6 +121,7 @@ const logout = async () => {
 };
 
 const getDataToken = async () => {
+  loadingUser(true);
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
@@ -103,7 +136,6 @@ const getDataToken = async () => {
     );
 
     const tokenUserData = await response.json();
-
     if (!response.ok) {
       throw tokenUserData.error;
     } else {
@@ -114,6 +146,22 @@ const getDataToken = async () => {
     if (error.indexOf("Autenticacion") > -1) {
       invalidAuthentication();
     }
+  } finally {
+    loadingUser(false);
+  }
+};
+
+const loadingUser = (state) => {
+  profileOption = document.querySelector(".profile");
+  if (state) {
+    profileOption.innerHTML = `
+      <div class="loadingUser">
+      <span>Cargando usuario</span>
+      <img src="http://localhost/sistema%20Hotel/img/spinnerBooking.gif">
+      </div>
+    `;
+  } else {
+    profileOption.innerHTML = ``;
   }
 };
 
@@ -122,54 +170,35 @@ export const invalidAuthentication = async () => {
   logout();
 };
 
-const setIconMenuAvatar = () => {
-  let iconAdmin = document.querySelector(".iconoAdmin");
-
-  if (iconAdmin) {
-    if (userData.genre == "M") {
-      $(".iconoAdmin").attr(
-        "src",
-        "http://localhost/sistema%20Hotel/img/perfilM.png"
-      );
-    } else {
-      $(".iconoAdmin").attr(
-        "src",
-        "http://localhost/sistema%20Hotel/img/perfilF.png"
-      );
-    }
-  }
+const displayOptionProfile = () => {
+  profileOption.innerHTML = `<img src=${
+    userData.genre == "M"
+      ? "http://localhost/sistema%20Hotel/img/perfilM.png"
+      : "http://localhost/sistema%20Hotel/img/perfilF.png"
+  }>
+  <span>${userData.user}</span>
+  <img class="btnDisplayMenu" src="http://localhost/sistema%20Hotel/img/btnFlecha.png">`;
 };
 
-const setUserMenu = () => {
-  let lblUser = document.querySelector("#userAdmin").querySelector("label");
-  lblUser.textContent = userData.user;
-};
-document.addEventListener("DOMContentLoaded", async () => {
-  let actualDate = new Date();
-  let actualYear = actualDate.getFullYear();
-  let logoutOption = document.querySelector(".logoutOption");
-
-  if (document.getElementById("dashboard")) {
-    getClientsByMonthActualYear(actualYear);
-    getCategoryRoomsMostReserved();
-    getRevenueActualYear();
-    displayItemsDataCategoryRooms();
-    displayItemDataRevenuesActual();
-  }
-
-  userData = await getDataToken();
-  if (userData) {
-    setIconMenuAvatar();
-    setUserMenu();
-  }
-  optionsMenuAdmin();
-
-  openSubMenu(
-    "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png",
-    "http://localhost/sistema%20Hotel/img/btnFlecha.png"
+const checkSubMenuOpen = (id) => {
+  let subMenuProfile = document.querySelector(".subMenuProfile");
+  let subMenus = [...document.querySelectorAll(".subMenu")];
+  let subMenuFind = subMenus.find(
+    (subMenu) => subMenu.style.display == "flex" && subMenu.id != id
   );
 
-  logoutOption.addEventListener("click", () => {
-    logout();
-  });
-});
+  if (subMenuProfile.style.display == "flex") {
+    subMenuProfile.style.display = "none";
+    retunToOriginBtnDisplaySubMenu(subMenuProfile, ".btnDisplayMenu");
+  }
+
+  if (subMenuFind) {
+    subMenuFind.style.display = "none";
+    retunToOriginBtnDisplaySubMenu(subMenuFind, ".btnDisplaySubMenu");
+  }
+};
+
+const retunToOriginBtnDisplaySubMenu = (subMenu, element) => {
+  let iconOpenSubMenu = subMenu.parentElement.querySelector(element);
+  iconOpenSubMenu.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
+};

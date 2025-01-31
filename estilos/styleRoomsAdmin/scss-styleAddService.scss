@@ -1,55 +1,110 @@
 .containTitle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 20px;
-    color: rgb(145, 145, 145);
-    margin-top: 2rem;
-  
-    img {
-      width: 41px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: rgb(145, 145, 145);
+  margin-top: 2rem;
+
+  img {
+    width: 41px;
   }
-  
-  .containAddService {
+}
+
+.containAddService {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .noData {
+    width: 100%;
+    height: 65%;
+    font-size: 19px;
+    color: gray;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    img {
+      width: 90px;
+      opacity: 70%;
+    }
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 100%;
-  
-    .noData {
-      width: 100%;
-      height: 65%;
-      font-size: 19px;
-      color: gray;
+    height: 60%;
+    gap: 0.5rem;
+    font-size: 16px;
+    color: gray;
+
+    img {
+      width: 40px;
+      opacity: 70%;
+    }
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 35rem;
+    margin-top: 2rem;
+    gap: 2rem;
+    height: auto;
+
+    li {
+      list-style: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-  
-      img {
-        width: 90px;
-        opacity: 70%;
+
+      .headerService {
+        font-size: 15px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
+        width: 12rem;
+        height: 6rem;
+        background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        box-shadow: 2px 2px 2px gray;
+
+        img {
+          width: 35px;
+        }
       }
-    }
-  
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 60%;
-      gap: 0.5rem;
-      font-size: 16px;
-      color: gray;
-  
-      img {
-        width: 40px;
-        opacity: 70%;
+
+      .footerService {
+        display: flex;
+        width: 13rem;
+        height: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid rgb(161, 161, 161);
+        padding: 0.5rem;
+        box-shadow: 1px 1px 1px gray;
+        color: rgb(99, 99, 99);
+        background-color: #fdfdfd;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        img {
+          width: 20px;
+        }
       }
     }
   }
-  
+}

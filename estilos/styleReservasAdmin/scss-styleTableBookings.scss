@@ -33,9 +33,10 @@
 
     .titleTableNoData {
       display: flex;
+      align-items: center;
       justify-content: center;
-      padding-left: 0;
-      margin-right: 1rem;
+      width: 100%;
+      margin-right: 11rem;
     }
 
     .containSearch {
@@ -195,17 +196,48 @@
 
       .idBooking {
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         width: 5rem;
         gap: 0.4rem;
         margin-left: 0.5rem;
 
+        .bar {
+          width: 3rem;
+          height: 0.2rem;
+          border: 1px solid gray;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          position: relative;
+          cursor: pointer;
+          justify-content: start;
+
+          .contentBar {
+            width: 40%;
+            background-color: #00e257;
+            height: 100%;
+            border-radius: 20px;
+            animation-name: inCurse;
+            animation-duration: 0.8s;
+            animation-iteration-count: infinite;
+          }
+
+          @keyframes inCurse {
+            from {
+              margin-left: 0;
+            }
+            to {
+              margin-left: 2rem;
+            }
+          }
+        }
         .iconStatus {
           width: 16px;
         }
         img {
           width: 24px;
+          cursor: pointer;
         }
       }
       .buttons {
@@ -302,14 +334,15 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  opacity: 50%;
   width: auto;
   font-weight: bold;
   font-size: 18px;
-  margin-top: 5rem;
+  color: grey;
+  margin-top: 2rem;
 
   img {
-    width: 70px;
+    width: 80px;
+    opacity: 70%;
   }
 }
 

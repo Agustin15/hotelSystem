@@ -99,7 +99,7 @@ const getDataLimitClients = async () => {
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
-    } else if (result) {
+    } else if (result.length>0) {
       data = result;
     }
   } catch (error) {

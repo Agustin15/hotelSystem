@@ -3,11 +3,11 @@
   flex-direction: column;
   align-items: center;
   width: 50rem;
-  height: 32rem;
+  height: 37rem;
   background-color: white;
   border-radius: 4px;
-  margin-top: 5rem;
-  margin-left: 5rem;
+  margin-top: 1.5rem;
+  margin-left: 8rem;
 }
 .containServices .headerWindow {
   display: flex;
@@ -68,12 +68,14 @@
   font-size: 18px;
   color: gray;
   display: flex;
+  height: 80%;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 .containServices .noData img {
-  width: 50px;
+  width: 90px;
   opacity: 70%;
 }
 .containServices .loading {
@@ -81,6 +83,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 2rem;
   gap: 0.5rem;
   font-size: 16px;
   color: gray;

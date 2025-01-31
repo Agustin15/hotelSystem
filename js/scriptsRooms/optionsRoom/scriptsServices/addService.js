@@ -56,24 +56,30 @@ const loading = (state) => {
 
 const displayServices = (services) => {
   let servicesItems = services.map((service) => {
-    let icon;
+    let icon, description;
     switch (service.nombreServicio) {
       case "Minibar":
         icon = "../../../img/minibar.png";
+        description =
+          "Agrege los gastos de los productos del minibar consumidos por el cliente a la habitacion";
         break;
       case "Cantina":
         icon = "../../../img/bar-counter.png";
+        description =
+          "Agrege los gastos productos de la cantina consumidos por el cliente a la habitacion";
         break;
     }
     return `
         <li>        
-        <div>
+        <div class="headerService">
              <img src=${
                icon ? icon : "data:image/png;base64," + service.imagen
              }>   
-              <p>${service.descripcionServicio}</p>    
+              <p>${
+                description ? description : service.descripcionServicio
+              }</p>    
         </div>
-        <div>
+        <div class="footerService">
         <span>${service.nombreServicio}</span>
         <img src="../../../img/ver.png">
         </div>
@@ -81,5 +87,7 @@ const displayServices = (services) => {
        `;
   });
 
-  containAddService.innerHTML = servicesItems.join("");
+  containAddService.innerHTML = "<ul></ul>";
+  let ul = containAddService.querySelector("ul");
+  ul.innerHTML = servicesItems.join("");
 };

@@ -335,12 +335,13 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  width: 99%;
+  width: 110%;
   height: auto;
   max-height: 50%;
   overflow-y: scroll;
   overflow-x: hidden;
   margin-top: 1rem;
+  padding-bottom: 1rem;
 }
 .cartRooms .noRoomsCart {
   display: flex;
@@ -366,7 +367,7 @@
   list-style: none;
   border-radius: 5px;
   color: white;
-  width: 99%;
+  width: 90%;
   box-shadow: 2px 2px 2px rgb(114, 114, 114);
 }
 .cartRooms li .row {
