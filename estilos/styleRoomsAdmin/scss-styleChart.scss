@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  width: 70%;
+  gap: 0.5rem;
+  width: 80%;
   background-color: white;
   border-radius: 4px;
   box-shadow: 2px 2px 2px rgb(167, 167, 167);
   height: 25rem;
-  margin-left: 8rem;
   padding-top: 1rem;
   margin-top: 2rem;
   border-radius: 10px;
@@ -84,7 +83,7 @@
 
   #chartRooms {
     width: 90%;
-    min-height: 70%;
+    min-height: 75%;
   }
 
   .loading {
@@ -148,7 +147,7 @@
     width: 120px;
   }
 
-  .header {
+  .headerPageNotFound {
     display: none;
     width: 97%;
     justify-content: flex-end;

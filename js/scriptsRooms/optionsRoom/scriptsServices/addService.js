@@ -1,12 +1,19 @@
 import { getAllServicesHotel } from "../../../scriptsServices/scriptServices.js";
-let containAddService;
+import { configMassageService } from "./servicesToAdd/massages.js";
+import { configTelephoneService } from "./servicesToAdd/telephone.js";
+import { pageNotFound, loadingPage } from "../../dashboardScript.js";
+
+let containAddService, idBookingService, numRoomService, modalAddService;
 
 export const configAddService = async (numRoom, idBooking) => {
+  idBookingService = idBooking;
+  numRoomService = numRoom;
   let titleAddService = document.querySelector(".titleAddService");
+  modalAddService = document.querySelector(".modalAddService");
+
   titleAddService.innerHTML = `Agregar servicios a habitacion ${numRoom}`;
   containAddService = document.querySelector(".containAddService");
   let servicesHotel = await allServicesHotel();
-
   if (servicesHotel) {
     displayServices(servicesHotel);
   }
@@ -70,7 +77,7 @@ const displayServices = (services) => {
         break;
     }
     return `
-        <li>        
+        <li id=${service.nombreServicio}>        
         <div class="headerService">
              <img src=${
                icon ? icon : "data:image/png;base64," + service.imagen
@@ -81,7 +88,7 @@ const displayServices = (services) => {
         </div>
         <div class="footerService">
         <span>${service.nombreServicio}</span>
-        <img src="../../../img/ver.png">
+        <img class="openService" src="../../../img/ver.png">
         </div>
         </li>
        `;
@@ -90,4 +97,68 @@ const displayServices = (services) => {
   containAddService.innerHTML = "<ul></ul>";
   let ul = containAddService.querySelector("ul");
   ul.innerHTML = servicesItems.join("");
+
+  switchOption();
+};
+
+const switchOption = () => {
+  let opensServices = document.querySelectorAll(".openService");
+  opensServices.forEach((openService) => {
+    openService.addEventListener("click", async () => {
+      let nameService = openService.parentElement.parentElement.id;
+
+      let serviceSwitched = optionsAddService.find(
+        (optionAddService) => optionAddService.name == nameService
+      );
+      if (serviceSwitched) {
+        const page = await getDocument(serviceSwitched.url);
+        if (page) {
+          displayDocument(page);
+          serviceSwitched.function(
+            nameService,
+            idBookingService,
+            numRoomService
+          );
+        }
+      }
+    });
+  });
+};
+
+const optionsAddService = [
+  {
+    name: "Masajes",
+    url: "optionsMenu/optionServices/optionsAddService/massage.html",
+    function: configMassageService,
+  },
+  {
+    name: "Telefono",
+    url: "optionsMenu/optionServices/optionsAddService/telephone.html",
+    function: configTelephoneService,
+  },
+];
+
+const getDocument = async (url) => {
+  let data;
+  modalAddService.style.display = "flex";
+  loadingPage(true, modalAddService);
+  try {
+    const response = await fetch(url);
+    const result = await response.text();
+    if (response.ok && result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingPage(false, modalAddService);
+    if (!data) {
+      pageNotFound(modalAddService);
+    }
+    return data;
+  }
+};
+
+const displayDocument = (page) => {
+  modalAddService.innerHTML = page;
 };

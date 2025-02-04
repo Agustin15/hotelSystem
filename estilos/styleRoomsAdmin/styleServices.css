@@ -83,13 +83,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 80%;
   margin-top: 2rem;
   gap: 0.5rem;
-  font-size: 16px;
+  font-size: 20px;
   color: gray;
 }
 .containServices .loading img {
-  width: 30px;
+  width: 40px;
   opacity: 70%;
 }
 
@@ -133,12 +134,12 @@
   width: 100px;
   opacity: 75%;
 }
-.optionService .pageNotFound .header {
+.optionService .pageNotFound .headerPageNotFound {
   display: none;
   justify-content: flex-end;
   width: 110%;
 }
-.optionService .pageNotFound .header button {
+.optionService .pageNotFound .headerPageNotFound button {
   display: none;
   background-color: rgb(231, 0, 0);
   padding: 0.2rem;
@@ -149,7 +150,7 @@
   border: none;
   cursor: pointer;
 }
-.optionService .pageNotFound .header button:hover {
+.optionService .pageNotFound .headerPageNotFound button:hover {
   background-color: rgb(182, 4, 4);
 }
 

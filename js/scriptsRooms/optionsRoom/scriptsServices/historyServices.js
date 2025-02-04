@@ -7,7 +7,10 @@ export const configHistory = async (numRoom, idBooking) => {
   titleHistory.innerHTML = `Historial servicios habitacion ${numRoom}`;
   containHistory = document.querySelector(".containHistory");
   let services = await historyServicesByCurrentBookingRoom(idBooking, numRoom);
- 
+
+  if (services) {
+    drawServices(services);
+  }
 };
 
 const historyServicesByCurrentBookingRoom = async (idBooking, numRoom) => {
@@ -53,4 +56,27 @@ const loading = (state) => {
   } else {
     containHistory.innerHTML = ``;
   }
+};
+
+const drawServices = (services) => {
+  containHistory.innerHTML = `<ul></ul>`;
+
+  let itemServices = services.map((service) => {
+    return `
+      <li>
+        <div class="headerItem">
+        <img src="data:image/png;base64,${service.imagen}">
+        <span>Servicio ${service.nombreServicio}</span>
+        <div class="footerItem">
+         <span>Detalles</span>
+         </div>
+        </div>
+
+      </li>
+    `;
+  });
+
+  let listServices = containHistory.querySelector("ul");
+
+  listServices.innerHTML = itemServices;
 };

@@ -9,6 +9,7 @@
 
 <body>
 
+<div class="modalAddService"></div>
     <div class="containTitle">
         <h3 class="titleAddService"></h3>
         <img src="../../../img/addService.png">

@@ -2,15 +2,23 @@
 
 body {
   @include body;
-  display: flex;
-  width: 100%;
+  gap: 0;
+
+  #navAdmin {
+    height: 100vh;
+  }
+
+  #navAdmin .titleNav {
+    margin-top: 1.8rem;
+  }
 }
 
 .bodyClient {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 100%;
+  align-items: start;
+  width: 86.9%;
+  height: 97vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,8 +27,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: 100%;
   background-color: white;
-  margin-left: 8rem;
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 
@@ -80,13 +88,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
-    width: 70%;
+    gap: 2rem;
+    width: 81%;
     background-color: white;
     border-radius: 4px;
     box-shadow: 2px 2px 2px rgb(167, 167, 167);
-    height: 30rem;
-    margin-left: 8rem;
+    height: 26rem;
     padding-top: 1rem;
     margin-top: 2rem;
     border-radius: 10px;
@@ -161,7 +168,7 @@ body {
 
     #graficaClientes {
       width: 90%;
-      min-height: 70%;
+      min-height: 67%;
     }
 
     .loading {
@@ -248,7 +255,6 @@ body {
   padding-bottom: 1.5rem;
   padding-top: 1rem;
   margin-top: 3rem;
-  margin-left: 10rem;
   border-radius: 6px;
   font-size: 18px;
   box-shadow: 2px 2px 2px gray;
@@ -477,7 +483,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 6rem;
   margin-top: 2rem;
   gap: 1rem;
 
@@ -706,7 +711,6 @@ body {
     background-color: white;
     border-radius: 5px;
     padding: 1rem;
-    margin-left: 7rem;
     margin-top: 2rem;
 
     img {
@@ -722,7 +726,6 @@ body {
     font-size: 18px;
     align-items: center;
     height: auto;
-    margin-left: 7rem;
     margin-top: 2rem;
     opacity: 100%;
     background-color: white;
@@ -1360,7 +1363,6 @@ body {
     background-color: white;
     border-radius: 5px;
     padding: 1rem;
-    margin-left: 9rem;
     margin-top: 2rem;
 
     img {

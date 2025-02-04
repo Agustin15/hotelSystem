@@ -95,7 +95,7 @@ export const loadingPage = (state, element) => {
 export const pageNotFound = (element) => {
   element.innerHTML = `
   <div class="pageNotFound">
-  <div class="header">
+  <div class="headerPageNotFound">
   <button class="btnClose">X</button>
   </div>
   <img src="../../../img/pageNotFound.png">
@@ -103,7 +103,7 @@ export const pageNotFound = (element) => {
   </div>
 `;
 
-  let btnClose = document.querySelector(".btnClose");
+  let btnClose = element.querySelector(".btnClose");
   if (btnClose) {
     btnClose.addEventListener("click", () => {
       element.innerHTML = ``;

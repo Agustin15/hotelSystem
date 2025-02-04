@@ -25,30 +25,37 @@ $actualYear = date("Y");
 
     <header>
         <nav id="navAdmin">
-            <br>
+            <div class="titleNav">
+                <img class="iconoMenu" src="../../../img/revision.png">
+                <span>Sistema hotel</span>
+            </div>
 
-            <img class="iconoMenu" src="../../../img/revision.png">
-            <label class="lblTituloMenu">Sistema hotel</label>
-
-            <br><br>
-
-            <ul>
+            <ul class="menu">
                 <li id="liInicio">
-                    <img src="../../../img/inicio.png">
-                    <a href="../index.php">Inicio</a>
+                    <div class="item">
+                        <div class="nameOption nameOptionHome">
+                            <img src="../../../img/inicio.png">
+                            <a>Inicio</a>
+                        </div>
+                    </div>
                 </li>
 
-                <li id="liClientes">
-                    <img src="../../../img/clientes.png">
-                    <a>Clientes</a>
-                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+                <li id="liClientes" class="optionMenu">
+                    <div class="item">
+                        <div class="nameOption">
+                            <img src="../../../img/clientes.png">
+                            <a>Clientes</a>
+                        </div>
+                        <img class="btnDisplaySubMenu" src="../../../img/btnFlecha.png">
+                    </div>
 
-                    <ul class="subMenu">
+                    <ul class="subMenu" id="subMenuClients" style="display: none;">
 
                         <li data-sub-url="grafica.html">
 
-                            <img src="../../../img/grafica.png">
-                            <a>Grafica</a>
+                            <div>
+                                <img src="../../../img/grafica.png">
+                                <a>Grafica</a>
 
                         </li>
                         <li data-sub-url="clientsTable.html">
@@ -65,14 +72,18 @@ $actualYear = date("Y");
 
                     </ul>
                 </li>
-                <li id="liReserva">
+                <li id="liReserva" class="optionMenu">
 
-                    <img src="../../../img/reserva.png">
-                    <a>Reservas</a>
-                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+                    <div class="item">
+                        <div class="nameOption">
+                            <img src="../../../img/reserva.png">
+                            <a>Reservas</a>
+                        </div>
+                        <img class="btnDisplaySubMenu" src="../../../img/btnFlecha.png">
+                    </div>
 
 
-                    <ul class="subMenu">
+                    <ul class="subMenu" id="subMenuBookings" style="display: none;">
 
                         <li data-sub-url="bookingsTable.html">
 
@@ -91,13 +102,17 @@ $actualYear = date("Y");
 
                 </li>
 
-                <li id="liHabitaciones">
+                <li id="liHabitaciones" class="optionMenu">
 
-                    <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
-                    <a id="textHabitaciones">Habitaciones</a>
-                    <img class="btnFlecha" src="../../../img/btnFlecha.png">
+                    <div class="item">
+                        <div class="nameOption">
+                            <img id="iconoHabitaciones" src="../../../img/habitaciones.png">
+                            <a id="textHabitaciones">Habitaciones</a>
+                        </div>
+                        <img class="btnDisplaySubMenu" src="../../../img/btnFlecha.png">
+                    </div>
 
-                    <ul class="subMenu">
+                    <ul class="subMenu" id="subMenuRooms" style="display: none;">
 
                         <li class="liGrafica" data-sub-url="grafica.html">
 
@@ -117,38 +132,29 @@ $actualYear = date("Y");
                     </ul>
                 </li>
 
-
-
-                <li id="liGanancias" class="optionGanancias">
-                    <img src="../../../img/ganancias.png">
-                    <a>Ganancias</a>
+                <li id="liGanancias" class="optionGanancias" class="optionMenu">
+                    <div class="item">
+                        <div class="nameOption">
+                            <img src="../../../img/ganancias.png">
+                            <a>Ganancias</a>
+                        </div>
+                    </div>
 
                 </li>
             </ul>
 
             <div id="userAdmin">
-
-                <img class="iconoAdmin">
-                <label></label>
-                <img class="btnFlecha" src="../../../img/btnFlecha.png">
-
-                <ul class="subMenuAdmin">
-
-
+                <ul class="subMenuProfile">
                     <li>
                         <img src="../../../img/configuracion.png">
-                        <a>Editar</a>
-
+                        <span>Editar</span>
                     </li>
-
-                    <a>
-                        <li class="logoutOption">
-
-                            <img src="../../../img/apagar.png">
-                            <a class="logout">Log out</a>
-                        </li>
-                    </a>
+                    <li class="logoutOption">
+                        <img src="../../../img/apagar.png">
+                        <span>Salir</span>
+                    </li>
                 </ul>
+                <li class="profile"></li>
             </div>
         </nav>
 

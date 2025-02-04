@@ -2,7 +2,6 @@
 
 $actualYear = date("Y");
 
-
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ $actualYear = date("Y");
                     </div>
                 </li>
 
-                <li id="liClientes" class="option">
+                <li id="liClientes" class="optionMenu">
                     <div class="item">
                         <div class="nameOption">
                             <img src="../../img/clientes.png">
@@ -70,7 +69,7 @@ $actualYear = date("Y");
 
                     </ul>
                 </li>
-                <li id="liReserva" class="option">
+                <li id="liReserva" class="optionMenu">
 
                     <div class="item">
                         <div class="nameOption">
@@ -100,7 +99,7 @@ $actualYear = date("Y");
 
                 </li>
 
-                <li id="liHabitaciones" class="option">
+                <li id="liHabitaciones" class="optionMenu">
 
                     <div class="item">
                         <div class="nameOption">
@@ -130,7 +129,7 @@ $actualYear = date("Y");
                     </ul>
                 </li>
 
-                <li id="liGanancias" class="optionGanancias" class="option">
+                <li id="liGanancias" class="optionGanancias" class="optionMenu">
                     <div class="item">
                         <div class="nameOption">
                             <img src="../../img/ganancias.png">
@@ -142,7 +141,7 @@ $actualYear = date("Y");
             </ul>
 
             <div id="userAdmin">
-                <ul class="subMenuProfile" >
+                <ul class="subMenuProfile">
                     <li>
                         <img src="../../img/configuracion.png">
                         <span>Editar</span>

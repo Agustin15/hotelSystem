@@ -13,9 +13,43 @@ class servicesController
         $this->authToken = new authToken();
     }
 
-    public function POST() {}
+    public function POST($req)
+    {
 
-    public function PUT() {}
+        try {
+            $idService = $req["idService"];
+            $quantity = $req["quantity"];
+            $idBooking = $req["idBooking"];
+            $numRoom = $req["numRoom"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+
+            $serviceAdded =  $this->service->addServiceBooking($idService, $quantity, $idBooking, $numRoom);
+            return $serviceAdded;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 500);
+        }
+    }
+
+    public function PUT($req)
+    {
+
+        try {
+            $idServiceRoom = $req["idServiceRoom"];
+            $quantity = $req["newQuantity"];
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $serviceUpdated =  $this->service->updateServiceBooking($quantity, $idServiceRoom);
+            return $serviceUpdated;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 500);
+        }
+    }
 
     public function DELETE() {}
 
@@ -58,6 +92,11 @@ class servicesController
                 throw new Error($tokenVerify["error"]);
             }
             $servicesCurrentRoomBooking = $this->service->getHistoryServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
+            $servicesCurrentRoomBooking = array_map(function ($service) {
+                $service["imagen"] = base64_encode($service["imagen"]);
+                return $service;
+            }, $servicesCurrentRoomBooking);
+
             return $servicesCurrentRoomBooking;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -82,6 +121,44 @@ class servicesController
                 }, $servicesHotel);
             }
             return $servicesHotel;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+    public function getServiceByName($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $serviceFind = $this->service->getServiceByName($req["nameService"]);
+            if ($serviceFind) {
+                $serviceFind["imagen"] = base64_encode($serviceFind["imagen"]);
+                return $serviceFind;
+            } else {
+                throw new Error("Ups,no se encontro el servicio");
+            }
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getServiceByIdAndNumRoomAndBooking($req)
+    {
+        try {
+
+            $idService = $req["serviceToAdd"]["idService"];
+            $idBooking = $req["serviceToAdd"]["idBooking"];
+            $numRoom = $req["serviceToAdd"]["numRoom"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
+            return $serviceFind;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

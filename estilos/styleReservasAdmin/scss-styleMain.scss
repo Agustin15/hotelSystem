@@ -2,15 +2,25 @@
 
 body {
   @include body;
-  display: flex;
-  width: 100%;
+  gap: 0;
+
+  #navAdmin {
+    height: 100vh;
+  }
+
+  #navAdmin .titleNav {
+    margin-top: 1.8rem;
+  }
 }
 
 .bodyBookings {
   display: flex;
   flex-direction: column;
+  align-items: start;
   margin: auto;
-  width: 100%;
+  margin-top: -0.1rem;
+  width: 86.9%;
+  height: 97vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,8 +29,8 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: 100%;
   background-color: white;
-  margin-left: 8rem;
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 
@@ -91,4 +101,3 @@ body {
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-

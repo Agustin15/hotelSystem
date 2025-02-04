@@ -3,243 +3,236 @@
   padding: 0px;
 }
 
-body {
-  font-family: Arial;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: rgb(243, 243, 243);
-  display: flex;
-  width: 100%;
-}
-body .iconoMenu {
-  width: 36px;
-  margin-top: 6px;
-  margin-left: -110px;
-}
-body .lblTituloMenu {
-  margin-top: 20px;
-  margin-left: 10px;
-  position: absolute;
-  font-size: 17px;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-body #navAdmin {
-  margin-left: 0px;
-  margin-top: -5px;
-  position: fixed;
+#navAdmin {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
-  color: rgb(255, 255, 255);
-  text-align: center;
-  width: 180px;
-  height: 800px;
-  font-family: Arial;
-}
-body #navAdmin ul {
-  padding-top: 0px;
-}
-body #navAdmin li {
-  margin-top: 11px;
-  padding-top: 17px;
-  height: 30px;
-  cursor: pointer;
-}
-body #navAdmin li a {
-  font-size: 17px;
-  margin-left: 8px;
-  color: white;
-  text-decoration: none;
-}
-body #navAdmin li:hover {
-  background-color: rgb(25, 135, 143);
-  cursor: pointer;
-}
-body #navAdmin li .subMenu li:hover {
-  background-color: rgb(65, 65, 65);
-  cursor: pointer;
-}
-body #navAdmin ul img {
-  width: 25px;
+  width: 11rem;
+  height: 103.2vh;
   display: flex;
-  position: absolute;
-  margin-top: -5px;
-  padding-left: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
-body #liInicio a {
-  padding-left: 10px;
-}
-body #liClientes a {
-  padding-left: 16px;
-}
-body #liClientes .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liClientes:hover > .btnFlecha {
-  display: block;
-}
-body .subMenu {
-  background-color: rgb(46, 46, 46);
-  margin-top: 10px;
-  padding-top: 0px;
-  display: none;
-}
-body #navAdmin #liClientes .subMenu li img {
-  width: 22px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liClientes .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liClientes .subMenu li a {
-  font-size: 14px;
-  margin-left: 1px;
-}
-body #liReserva a {
-  padding-left: 26px;
-}
-body #liReserva .btnFlecha {
-  width: 14px;
-  margin-left: 69%;
-  margin-top: -18px;
-  display: none;
-}
-body #liReserva:hover > .btnFlecha {
-  display: block;
-}
-body #navAdmin #liReserva .subMenu li img {
-  width: 25px;
-  margin-top: -5px;
-  padding-left: 45px;
-}
-body #navAdmin #liReserva .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liReserva .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liReserva .subMenu .liHabitacion a,
-body #navAdmin #liReserva .subMenu .liCalendario a {
-  margin-left: 30px;
-}
-body #liHabitaciones #textHabitaciones {
-  padding-left: 33px;
-}
-body #liHabitaciones .btnFlecha {
-  width: 14px;
-  margin-left: 70%;
-  margin-top: -18px;
-  display: none;
-}
-body #liHabitaciones:hover > .btnFlecha {
-  display: block;
-}
-body #liHabitaciones:hover > #iconoHabitaciones {
-  margin-left: -10px;
-}
-body #liHabitaciones:hover #textHabitaciones {
-  padding-left: 10px;
-}
-body #navAdmin #liHabitaciones .subMenu li img {
-  width: 20px;
-  margin-top: -2px;
-  padding-left: 45px;
-}
-body #navAdmin #liHabitaciones .subMenu li {
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-}
-body #navAdmin #liHabitaciones .subMenu li a {
-  font-size: 14px;
-  margin-left: 0px;
-}
-body #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
-  margin-left: 20px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion img {
-  padding-left: 47px;
-}
-body #navAdmin #liHabitaciones .subMenu .liHabitacion a {
-  margin-left: 17px;
-}
-body #liGanancias a {
-  padding-left: 27px;
-}
-body #userAdmin {
-  width: 180px;
-  height: 55px;
-  position: absolute;
-  top: 74%;
-  left: 0px;
-  background: linear-gradient(#30aaa0, #0498a0);
-}
-body #userAdmin img {
-  width: 33px;
-  padding-top: 10px;
-  padding-right: 85px;
-}
-body #userAdmin label {
-  padding-top: 20px;
-  margin-left: -66px;
-  position: absolute;
-}
-body #userAdmin .subMenuAdmin {
-  height: 91px;
-  background-color: rgb(46, 46, 46);
+
+#navAdmin .titleNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 0.5rem;
   color: white;
-  margin-top: 20px;
-  display: none;
-  padding-top: 0px;
+  font-weight: bold;
 }
-body #userAdmin .subMenuAdmin li {
+
+#navAdmin .titleNav span {
+  margin-top: 0.8rem;
+}
+
+#navAdmin .titleNav img {
+  width: 40px;
+}
+
+#navAdmin .menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0rem;
+  height: 70%;
   color: white;
   list-style: none;
-  padding-top: 10px;
-  margin-top: 0px;
-  border-bottom: 1px solid rgba(114, 114, 114, 0.5);
 }
-body #userAdmin .subMenuAdmin li img {
-  width: 20px;
-  margin-top: -12px;
-  padding-left: 50px;
-}
-body #userAdmin .subMenuAdmin li a {
-  font-size: 14px;
-  margin-left: 18px;
-  color: white;
-  text-decoration: none;
-}
-body #userAdmin .subMenuAdmin li .logout {
-  margin-left: 10px;
-}
-body #userAdmin .subMenuAdmin li:hover {
-  background-color: rgb(65, 65, 65);
-}
-body #userAdmin .btnFlecha {
-  width: 14px;
-  margin-left: 83%;
-  margin-top: -35px;
+
+#navAdmin .menu li {
   display: flex;
-  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 11rem;
+  height: auto;
+  min-height: 2.2rem;
+  padding-top: 0.6rem;
+  justify-content: space-between;
 }
-body #userAdmin:hover > .btnFlecha {
-  display: block;
+
+#navAdmin .menu li:hover {
+  cursor: pointer;
+  background-color: rgb(5, 141, 146);
+}
+
+#navAdmin .menu li .item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  margin-left: 3rem;
+}
+
+#navAdmin .menu li .nameOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding-right: 1rem;
+}
+
+.nameOptionHome a {
+  margin-top: 0.3rem;
+}
+
+#navAdmin .menu li .btnDisplaySubMenu {
+  width: 14px;
+  left: 8.4rem;
+  position: absolute;
+  display: none;
+  cursor: pointer;
+}
+
+#navAdmin .menu li .btnDisplaySubMenu:hover {
+  transform: scale(1.1);
+}
+
+#navAdmin .menu li img {
+  width: 25px;
+}
+
+#navAdmin .loadingUser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  gap: 0.5rem;
+}
+
+#navAdmin .loadingUser img {
+  width: 30px;
+  margin-top: 0.2rem;
+}
+
+#navAdmin .subMenu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0rem;
+  margin-top: 0.5rem;
+}
+
+#navAdmin .subMenu li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  border-bottom: 1px solid rgb(165, 165, 165);
+  width: 11rem;
+  background-color: rgb(49, 49, 49);
+  font-size: 15px;
+  gap: 0.5rem;
+}
+
+#navAdmin .subMenu li img {
+  width: 20px;
+  margin-left: 3rem;
+}
+
+#navAdmin .subMenu li:hover {
+  background-color: rgb(37, 37, 37);
+}
+
+#navAdmin .subMenu li:hover {
+  background-color: rgb(37, 37, 37);
+}
+
+#userAdmin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(7, 145, 150);
+  width: 100%;
+  height: 3rem;
+  color: white;
+  list-style: none;
+}
+
+#userAdmin li {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 0.5rem;
+  gap: 1rem;
+  color: white;
+  font-size: 17px;
+}
+
+#userAdmin li .btnDisplayMenu {
+  width: 14px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#userAdmin li .btnDisplayMenu:hover {
+  transform: scale(1.1);
+}
+
+#userAdmin li img {
+  width: 30px;
+}
+
+#userAdmin .subMenuProfile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  margin-top: -5rem;
+}
+
+#userAdmin .subMenuProfile li {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  width: 11rem;
+  height: auto;
+  border-bottom: 1px solid gray;
+  gap: 0.4rem;
+  font-size: 15px;
+  cursor: pointer;
+  justify-content: start;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  background-color: rgb(49, 49, 49);
+}
+
+#userAdmin .subMenuProfile li img {
+  width: 20px;
+  margin-left: 3rem;
+}
+
+#userAdmin .subMenuProfile li:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+body {
+  background-color: rgb(243, 243, 243);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: start;
+  gap: 2rem;
+  height: 100vh;
+  gap: 0;
+}
+body #navAdmin {
+  height: 100vh;
+}
+body #navAdmin .titleNav {
+  margin-top: 1.8rem;
 }
 
 .bodyClient {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  width: 100%;
+  align-items: start;
+  width: 86.9%;
+  height: 97vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -248,8 +241,8 @@ body #userAdmin:hover > .btnFlecha {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: 100%;
   background-color: white;
-  margin-left: 8rem;
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 }
@@ -303,13 +296,12 @@ body #userAdmin:hover > .btnFlecha {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4rem;
-  width: 70%;
+  gap: 2rem;
+  width: 81%;
   background-color: white;
   border-radius: 4px;
   box-shadow: 2px 2px 2px rgb(167, 167, 167);
-  height: 30rem;
-  margin-left: 8rem;
+  height: 26rem;
   padding-top: 1rem;
   margin-top: 2rem;
   border-radius: 10px;
@@ -378,7 +370,7 @@ body #userAdmin:hover > .btnFlecha {
 }
 .option .containChart #graficaClientes {
   width: 90%;
-  min-height: 70%;
+  min-height: 67%;
 }
 .option .containChart .loading {
   display: none;
@@ -455,7 +447,6 @@ body #userAdmin:hover > .btnFlecha {
   padding-bottom: 1.5rem;
   padding-top: 1rem;
   margin-top: 3rem;
-  margin-left: 10rem;
   border-radius: 6px;
   font-size: 18px;
   box-shadow: 2px 2px 2px gray;
@@ -661,7 +652,6 @@ body #userAdmin:hover > .btnFlecha {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 6rem;
   margin-top: 2rem;
   gap: 1rem;
 }
@@ -866,7 +856,6 @@ body #userAdmin:hover > .btnFlecha {
   background-color: white;
   border-radius: 5px;
   padding: 1rem;
-  margin-left: 7rem;
   margin-top: 2rem;
 }
 .modalMainClient .loadingPage img {
@@ -880,7 +869,6 @@ body #userAdmin:hover > .btnFlecha {
   font-size: 18px;
   align-items: center;
   height: auto;
-  margin-left: 7rem;
   margin-top: 2rem;
   opacity: 100%;
   background-color: white;
@@ -1453,7 +1441,6 @@ body #userAdmin:hover > .btnFlecha {
   background-color: white;
   border-radius: 5px;
   padding: 1rem;
-  margin-left: 9rem;
   margin-top: 2rem;
 }
 .modalOptionsBookingClient .loadingPage img {

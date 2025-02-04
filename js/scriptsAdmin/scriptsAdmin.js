@@ -66,7 +66,7 @@ function openSubMenu() {
 }
 
 const showOpenMenu = () => {
-  let options = document.querySelector(".menu").querySelectorAll(".option");
+  let options = document.querySelector(".menu").querySelectorAll(".optionMenu");
 
   options.forEach((option) => {
     option.addEventListener("mouseover", () => {

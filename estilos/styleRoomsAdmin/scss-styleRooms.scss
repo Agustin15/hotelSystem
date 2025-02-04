@@ -1,5 +1,5 @@
 .containRooms {
-  width: 85%;
+  width: 95%;
   height: 28rem;
   border-radius: 5px;
   background-color: white;
@@ -8,7 +8,6 @@
   align-items: start;
   border: 1px solid rgb(219, 219, 219);
   box-shadow: 2px 2px 2px gray;
-  margin-left: 11rem;
   margin-top: 1rem;
 
   ul {
@@ -282,7 +281,7 @@
     opacity: 75%;
   }
 
-  .header {
+  .headerPageNotFound {
     display: flex;
     justify-content: flex-end;
     width: 110%;

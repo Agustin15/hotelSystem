@@ -3,284 +3,224 @@
   padding: 0px;
 }
 
-// styles generals for admin
+// style sideMenu
 @mixin body {
-  font-family: Arial;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
   background-color: rgb(243, 243, 243);
-
-  .iconoMenu {
-    width: 36px;
-    margin-top: 6px;
-    margin-left: -110px;
-  }
-
-  .lblTituloMenu {
-    margin-top: 20px;
-    margin-left: 10px;
-    position: absolute;
-    font-size: 17px;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  }
-
-  #navAdmin {
-    margin-left: 0px;
-    margin-top: -5px;
-    position: fixed;
-    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
-    color: rgb(255, 255, 255);
-    text-align: center;
-    width: 180px;
-    height: 800px;
-    font-family: Arial;
-  }
-
-  #navAdmin ul {
-    padding-top: 0px;
-  }
-
-  #navAdmin li {
-    margin-top: 11px;
-    padding-top: 17px;
-    height: 30px;
-    cursor: pointer;
-  }
-
-  #navAdmin li a {
-    font-size: 17px;
-    margin-left: 8px;
-    color: white;
-    text-decoration: none;
-  }
-
-  #navAdmin li:hover {
-    background-color: rgb(25, 135, 143);
-    cursor: pointer;
-  }
-
-  #navAdmin li .subMenu li:hover {
-    background-color: rgb(65, 65, 65);
-    cursor: pointer;
-  }
-
-  #navAdmin ul img {
-    width: 25px;
-    display: flex;
-    position: absolute;
-    margin-top: -5px;
-    padding-left: 30px;
-  }
-
-  #liInicio a {
-    padding-left: 10px;
-  }
-
-  #liClientes a {
-    padding-left: 16px;
-  }
-
-  #liClientes .btnFlecha {
-    width: 14px;
-    margin-left: 69%;
-    margin-top: -18px;
-    display: none;
-  }
-
-  #liClientes:hover > .btnFlecha {
-    display: block;
-  }
-
-  .subMenu {
-    background-color: rgb(46, 46, 46);
-    margin-top: 10px;
-    padding-top: 0px;
-    display: none;
-  }
-
-  #navAdmin #liClientes .subMenu li img {
-    width: 22px;
-    margin-top: -2px;
-    padding-left: 45px;
-  }
-
-  #navAdmin #liClientes .subMenu li {
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-  }
-
-  #navAdmin #liClientes .subMenu li a {
-    font-size: 14px;
-    margin-left: 1px;
-  }
-
-  #liReserva a {
-    padding-left: 26px;
-  }
-
-  #liReserva .btnFlecha {
-    width: 14px;
-    margin-left: 69%;
-    margin-top: -18px;
-    display: none;
-  }
-
-  #liReserva:hover > .btnFlecha {
-    display: block;
-  }
-
-  #navAdmin #liReserva .subMenu li img {
-    width: 25px;
-    margin-top: -5px;
-    padding-left: 45px;
-  }
-
-  #navAdmin #liReserva .subMenu li {
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-  }
-
-  #navAdmin #liReserva .subMenu li a {
-    font-size: 14px;
-    margin-left: 0px;
-  }
-
-  #navAdmin #liReserva .subMenu .liHabitacion img {
-    padding-left: 47px;
-  }
-
-  #navAdmin #liReserva .subMenu .liHabitacion a,
-  #navAdmin #liReserva .subMenu .liCalendario a {
-    margin-left: 30px;
-  }
-
-  #liHabitaciones #textHabitaciones {
-    padding-left: 33px;
-  }
-
-  #liHabitaciones .btnFlecha {
-    width: 14px;
-    margin-left: 70%;
-    margin-top: -18px;
-    display: none;
-  }
-
-  #liHabitaciones:hover > .btnFlecha {
-    display: block;
-  }
-
-  #liHabitaciones:hover > #iconoHabitaciones {
-    margin-left: -10px;
-  }
-
-  #liHabitaciones:hover #textHabitaciones {
-    padding-left: 10px;
-  }
-
-  #navAdmin #liHabitaciones .subMenu li img {
-    width: 20px;
-    margin-top: -2px;
-    padding-left: 45px;
-  }
-
-  #navAdmin #liHabitaciones .subMenu li {
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-  }
-
-  #navAdmin #liHabitaciones .subMenu li a {
-    font-size: 14px;
-    margin-left: 0px;
-  }
-
-  #navAdmin #liHabitaciones .subMenu .liGraficaPie a {
-    margin-left: 20px;
-  }
-
-  #navAdmin #liHabitaciones .subMenu .liHabitacion img {
-    padding-left: 47px;
-  }
-
-  #navAdmin #liHabitaciones .subMenu .liHabitacion a {
-    margin-left: 17px;
-  }
-
-  #liGanancias a {
-    padding-left: 27px;
-  }
-
-  #userAdmin {
-    width: 180px;
-    height: 55px;
-    position: absolute;
-    top: 74%;
-    left: 0px;
-    background: linear-gradient(#30aaa0, #0498a0);
-  }
-
-  #userAdmin img {
-    width: 33px;
-    padding-top: 10px;
-    padding-right: 85px;
-  }
-
-  #userAdmin label {
-    padding-top: 20px;
-    margin-left: -66px;
-    position: absolute;
-  }
-
-  #userAdmin .subMenuAdmin {
-    height: 91px;
-    background-color: rgb(46, 46, 46);
-    color: white;
-    margin-top: 20px;
-    display: none;
-    padding-top: 0px;
-  }
-
-  #userAdmin .subMenuAdmin li {
-    color: white;
-    list-style: none;
-    padding-top: 10px;
-    margin-top: 0px;
-    border-bottom: 1px solid rgba(114, 114, 114, 0.5);
-  }
-
-  #userAdmin .subMenuAdmin li img {
-    width: 20px;
-    margin-top: -12px;
-    padding-left: 50px;
-  }
-
-  #userAdmin .subMenuAdmin li a {
-    font-size: 14px;
-    margin-left: 18px;
-    color: white;
-    text-decoration: none;
-  }
-
-  #userAdmin .subMenuAdmin li .logout {
-    margin-left: 10px;
-  }
-
-  #userAdmin .subMenuAdmin li:hover {
-    background-color: rgb(65, 65, 65);
-  }
-
-  #userAdmin .btnFlecha {
-    width: 14px;
-    margin-left: 83%;
-    margin-top: -35px;
-    display: flex;
-    display: none;
-  }
-
-  #userAdmin:hover > .btnFlecha {
-    display: block;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: start;
+  gap: 2rem;
+  height: 100vh;
 }
+
+#navAdmin {
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  width: 11rem;
+  height: 103.2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#navAdmin .titleNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 0.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+#navAdmin .titleNav span {
+  margin-top: 0.8rem;
+}
+
+#navAdmin .titleNav img {
+  width: 40px;
+}
+
+#navAdmin .menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0rem;
+  height: 70%;
+  color: white;
+  list-style: none;
+}
+
+#navAdmin .menu li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 11rem;
+  height: auto;
+  min-height: 2.2rem;
+  padding-top: 0.6rem;
+  justify-content: space-between;
+
+}
+
+#navAdmin .menu li:hover {
+  cursor: pointer;
+  background-color: rgb(5, 141, 146);
+}
+
+#navAdmin .menu li .item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  margin-left: 3rem;
+}
+
+#navAdmin .menu li .nameOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding-right: 1rem;
+}
+
+.nameOptionHome a {
+  margin-top: 0.3rem;
+}
+
+#navAdmin .menu li .btnDisplaySubMenu {
+  width: 14px;
+  left: 8.4rem;
+  position: absolute;
+  display: none;
+  cursor: pointer;
+}
+
+#navAdmin .menu li .btnDisplaySubMenu:hover {
+  transform: scale(1.1);
+}
+
+#navAdmin .menu li img {
+  width: 25px;
+}
+
+#navAdmin .loadingUser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  gap: 0.5rem;
+}
+
+#navAdmin .loadingUser img {
+  width: 30px;
+  margin-top: 0.2rem;
+}
+
+#navAdmin .subMenu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0rem;
+  margin-top: 0.5rem;
+}
+
+#navAdmin .subMenu li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  border-bottom: 1px solid rgb(165, 165, 165);
+  width: 11rem;
+  background-color: rgb(49, 49, 49);
+  font-size: 15px;
+  gap: 0.5rem;
+}
+
+#navAdmin .subMenu li img {
+  width: 20px;
+  margin-left: 3rem;
+}
+
+#navAdmin .subMenu li:hover {
+  background-color: rgb(37, 37, 37);
+}
+
+#navAdmin .subMenu li:hover {
+  background-color: rgb(37, 37, 37);
+}
+
+#userAdmin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(7, 145, 150);
+  width: 100%;
+  height: 3rem;
+  color: white;
+  list-style: none;
+}
+
+#userAdmin li {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 0.5rem;
+  gap: 1rem;
+  color: white;
+  font-size: 17px;
+}
+#userAdmin li .btnDisplayMenu {
+  width: 14px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#userAdmin li .btnDisplayMenu:hover {
+  transform: scale(1.1);
+}
+
+#userAdmin li img {
+  width: 30px;
+}
+#userAdmin .subMenuProfile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  margin-top: -5rem;
+}
+
+#userAdmin .subMenuProfile li {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  width: 11rem;
+  height: auto;
+  border-bottom: 1px solid gray;
+  gap: 0.4rem;
+  font-size: 15px;
+  cursor: pointer;
+  justify-content: start;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  background-color: rgb(49, 49, 49);
+}
+
+#userAdmin .subMenuProfile li img {
+  width: 20px;
+  margin-left: 3rem;
+}
+
+#userAdmin .subMenuProfile li:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+
 
 //menus de las opciones de panel admin
 

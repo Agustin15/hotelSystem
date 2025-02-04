@@ -18,6 +18,50 @@
   width: 100%;
   height: 100%;
 }
+.containHistory ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 99%;
+  height: 70%;
+  gap: 2rem;
+}
+.containHistory ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background: linear-gradient(rgb(57, 170, 161), rgb(12, 122, 126));
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px gray;
+  width: 15rem;
+  height: auto;
+  list-style: none;
+}
+.containHistory ul li .headerItem {
+  font-size: 18px;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  color: white;
+}
+.containHistory ul li img {
+  width: 44px;
+}
+.containHistory ul li .footerItem {
+  padding: 0.5rem;
+  color: rgb(87, 87, 87);
+  width: 14rem;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid rgb(167, 167, 167);
+}
+.containHistory ul li .footerItem span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .containHistory .noData {
   width: 100%;
   height: 65%;
