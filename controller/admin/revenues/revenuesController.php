@@ -1,6 +1,6 @@
 <?php
 
-require("../../model/clasePago.php");
+require("../../model/revenue.php");
 require(__DIR__ . "./../authToken.php");
 class revenuesController
 {
@@ -9,7 +9,7 @@ class revenuesController
     public function __construct()
     {
 
-        $this->pay = new pago();
+        $this->pay = new Revenue();
         $this->authToken = new authToken();
     }
 
@@ -21,7 +21,7 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
+            $resultPay = $this->pay->addRevenue($req['idBooking'], $req['client'], $req['amount']);
             return array("response" => $resultPay);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
@@ -35,7 +35,7 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
+            $resultUpdatePay = $this->pay->updateRevenueById($req['idBooking'], $req['newAmount']);
             return array("response" => $resultUpdatePay);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -68,7 +68,7 @@ class revenuesController
             $gananciasPorMes = array_map(function ($mes) {
 
 
-                $totalIngresosMes = $this->pay->calculateTotalIngresosMes($mes, date("Y"));
+                $totalIngresosMes = $this->pay->calculateTotalMonthRevenues($mes, date("Y"));
 
                 $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
 
@@ -89,8 +89,8 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $totalRevenuesActualYear = $this->pay->calculateTotalIngresosAnio();
-            $totalRevenuesActualMonth = $this->pay->calculateTotalIngresosMes(date("m"), date("Y"));
+            $totalRevenuesActualYear = $this->pay->calculateTotalYearRevenues();
+            $totalRevenuesActualMonth = $this->pay->calculateTotalMonthRevenues(date("m"), date("Y"));
 
             $dataRevenuesActual =  array(
                 "totalRevenuesActualYear" => $totalRevenuesActualYear,
@@ -114,7 +114,7 @@ class revenuesController
                 throw new Error($tokenVerify["error"]);
             }
 
-            $revenue =  $this->pay->getPago($idBooking);
+            $revenue =  $this->pay->getRevenueById($idBooking);
 
             return $revenue;
         } catch (Throwable $th) {

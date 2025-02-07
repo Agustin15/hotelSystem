@@ -67,9 +67,9 @@ const drawServices = (services) => {
         <div class="headerItem">
         <img src="data:image/png;base64,${service.imagen}">
         <span>Servicio ${service.nombreServicio}</span>
+         </div>
         <div class="footerItem">
          <span>Detalles</span>
-         </div>
         </div>
 
       </li>
@@ -78,5 +78,5 @@ const drawServices = (services) => {
 
   let listServices = containHistory.querySelector("ul");
 
-  listServices.innerHTML = itemServices;
+  listServices.innerHTML = itemServices.join("");
 };

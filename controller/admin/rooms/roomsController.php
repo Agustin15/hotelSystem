@@ -1,5 +1,5 @@
 <?php
-require("../../model/claseHabitaciones.php");
+require("../../model/room.php");
 require(__DIR__ . "./../authToken.php");
 
 class roomsController
@@ -9,7 +9,7 @@ class roomsController
     public function __construct()
     {
 
-        $this->rooms = new habitaciones();
+        $this->rooms = new Room();
         $this->authToken = new authToken();
     }
 
@@ -62,7 +62,7 @@ class roomsController
             $roomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req["category"]);
             $roomsCategory = array_map(function ($room) {
 
-                $bookingRoomBusy = $this->rooms->reservasHabitacionOcupada($room["numHabitacion"], date("Y-m-d"));
+                $bookingRoomBusy = $this->rooms->getStateRoomByNumRoomAndDate($room["numHabitacion"], date("Y-m-d"));
 
                 return array(
                     "category" => $room["tipoHabitacion"],

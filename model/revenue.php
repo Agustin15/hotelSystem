@@ -1,0 +1,131 @@
+<?php
+
+require_once(__DIR__ . "/../config/connection.php");
+
+class Revenue
+{
+
+    private $connection;
+
+    public function __construct()
+    {
+
+        $this->connection = new Connection();
+    }
+
+
+
+    public function updateRevenueById($idBooking, $newAmount)
+    {
+
+
+        $query = $this->connection->connect()->prepare("update pago set
+        deposito=? where idReservaPago=?");
+        $query->bind_param("di", $newAmount, $idBooking);
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+    public function getRevenueById($idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from pago where idReservaPago=?");
+        $query->bind_param("i", $idBooking);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+
+
+
+
+    public function addRevenue($idBooking, $idClient, $amount)
+    {
+
+
+        $query = $this->connection->connect()->prepare("insert into pago
+        (idReservaPago,idClientePago,deposito) values (?,?,?)");
+        $query->bind_param("iid", $idBooking, $idClient, $amount);
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    public function deleteRevenue($idBooking)
+    {
+
+
+        $query = $this->connection->connect()->prepare("delete from pago
+        where idReservaPago=?");
+        $query->bind_param("i", $idBooking);
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+
+    public function getAllRevenuesByYear($year)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
+         where YEAR(reserva_habitacion.fechaSalida)=?");
+        $query->bind_param("i", $year);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+    public function getAllMonthRevenues($month, $year)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
+         where MONTH(reserva_habitacion.fechaSalida)=? and YEAR(reserva_habitacion.fechaSalida)=? ");
+        $query->bind_param("ii", $month, $year);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function calculateTotalYearRevenues()
+    {
+
+        $revenues = $this->getAllRevenuesByYear(date("Y"));
+
+        $totalRevenues = array_reduce($revenues, function ($ac, $revenue) {
+
+            return $ac += $revenue['deposito'];
+        }, 0);
+
+        return $totalRevenues;
+    }
+
+
+
+    public function calculateTotalMonthRevenues($month, $year)
+    {
+
+        $revenuesMonth = $this->getAllMonthRevenues($month, $year);
+
+        $totalMonthRevenues = array_reduce($revenuesMonth, function ($ac, $revenue) {
+
+            return $ac += $revenue['deposito'];
+        }, 0);
+
+        return $totalMonthRevenues;
+    }
+}

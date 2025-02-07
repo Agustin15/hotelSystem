@@ -1,6 +1,6 @@
 <?php
 
-require("../../model/claseReservas.php");
+require("../../model/booking.php");
 require(__DIR__ . "./../authToken.php");
 
 class bookingController
@@ -9,7 +9,7 @@ class bookingController
     private $booking, $authToken;
     public function __construct()
     {
-        $this->booking = new reservas();
+        $this->booking = new Booking();
         $this->authToken = new authToken();
     }
 
@@ -21,11 +21,11 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $this->booking->setIdCliente($req['client']);
-            $this->booking->setLlegada($req['startBooking']);
-            $this->booking->setSalida($req['endBooking']);
-            $this->booking->setCantidadHabitaciones($req['roomsQuantity']);
-            $res =  $this->booking->addReservaBd();
+            $this->booking->setIdClient($req['client']);
+            $this->booking->setDateStart($req['startBooking']);
+            $this->booking->setDateEnd($req['endBooking']);
+            $this->booking->setQuantityRooms($req['roomsQuantity']);
+            $res =  $this->booking->addBooking();
             return $res;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
@@ -40,13 +40,13 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $this->booking->setIdReserva($req['idBooking']);
-            $this->booking->setIdCliente($req['idClient']);
-            $this->booking->setLlegada($req['startBooking']);
-            $this->booking->setSalida($req['endBooking']);
-            $this->booking->setCantidadHabitaciones($req['quantityRooms']);
+            $this->booking->setIdBooking($req['idBooking']);
+            $this->booking->setIdClient($req['idClient']);
+            $this->booking->setDateStart($req['startBooking']);
+            $this->booking->setDateEnd($req['endBooking']);
+            $this->booking->setQuantityRooms($req['quantityRooms']);
 
-            $resultBookingUpdate = $this->booking->updateReserva();
+            $resultBookingUpdate = $this->booking->updateBookingById();
 
             return $resultBookingUpdate;
         } catch (Throwable $th) {
@@ -63,7 +63,7 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $bookings = $this->booking->getAllReservas()->fetch_all(MYSQLI_ASSOC);
+            $bookings = $this->booking->getAllBookings()->fetch_all(MYSQLI_ASSOC);
 
             return $bookings;
         } catch (Throwable $th) {
@@ -80,7 +80,7 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $bookingFind =  $this->booking->getReservaPorIdClienteAndFecha(
+            $bookingFind =  $this->booking->getBookingByIdClientAndDate(
                 $req['dataBooking']['idClient'],
                 $req['dataBooking']['startBooking'],
                 $req['dataBooking']['endBooking']
@@ -120,7 +120,7 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $rowsBookingYear = $this->booking->getAllReservasAnio($year)->num_rows;
+            $rowsBookingYear = $this->booking->getAllBookingsYear($year)->num_rows;
 
 
             return $rowsBookingYear;
@@ -190,7 +190,7 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $res = $this->booking->getReservaPoridReserva($idBooking);
+            $res = $this->booking->getBookingById($idBooking);
             return $res;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -209,7 +209,7 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $res = $this->booking->deleteReserva($idBooking);
+            $res = $this->booking->deleteBookingById($idBooking);
             return $res;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);

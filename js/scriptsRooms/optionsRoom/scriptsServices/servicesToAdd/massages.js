@@ -22,7 +22,7 @@ export const configMassageService = async (
 
   modalAddService = document.querySelector(".modalAddService");
   contentMassage = document.querySelector(".contentMassage");
-  closeWindow(modalAddService);
+  closeWindow(modalAddService, ".btnCloseMassage");
 
   service = await serviceByName(nameService);
   if (service) {
@@ -101,7 +101,7 @@ const serviceByName = async (nameService) => {
     if (!data) {
       noData("Ups,no se pudo cargar el servicio");
     }
-    return data;
+    return data[0];
   }
 };
 
@@ -127,8 +127,8 @@ const loading = (state) => {
   }
 };
 
-export const closeWindow = (modal) => {
-  document.querySelector(".btnCloseMassage").addEventListener("click", () => {
+export const closeWindow = (modal, btnToClose) => {
+  document.querySelector(btnToClose).addEventListener("click", () => {
     modal.innerHTML = ``;
     modal.style.display = "none";
   });

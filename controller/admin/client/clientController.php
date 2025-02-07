@@ -1,5 +1,5 @@
 <?php
-require("../../model/claseCliente.php");
+require("../../model/client.php");
 require(__DIR__ . "./../authToken.php");
 
 class clientController
@@ -11,7 +11,7 @@ class clientController
   public function __construct()
   {
 
-    $this->client = new cliente();
+    $this->client = new Client();
     $this->authToken = new authToken();
   }
 
@@ -25,25 +25,25 @@ class clientController
         throw new Error($tokenVerify["error"]);
       }
 
-      $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
+      $dataClientMail = $this->client->getClientByMail($req['mail'])->fetch_array(MYSQLI_ASSOC);
 
       if ($dataClientMail) {
 
         return array("advertencia" => "El correo ingresado ya esta en uso");
       } else {
 
-        $dataClientPhone = $this->client->getClienteTelefono($req['phone'])->fetch_array(MYSQLI_ASSOC);
+        $dataClientPhone = $this->client->getClientByPhone($req['phone'])->fetch_array(MYSQLI_ASSOC);
         if ($dataClientPhone) {
 
           return array("advertencia" => "El telefono ingresado ya esta en uso");
         } else {
 
-          $this->client->setCorreo($req['mail']);
-          $this->client->setNombre($req['name']);
-          $this->client->setApellido($req['lastName']);
-          $this->client->setTelefono($req['phone']);
+          $this->client->setMail($req['mail']);
+          $this->client->setName($req['name']);
+          $this->client->setLastname($req['lastName']);
+          $this->client->setPhone($req['phone']);
 
-          $resultado =  $this->client->setClienteBd();
+          $resultado =  $this->client->addClient();
 
           return array("respuesta" => $resultado);
         }
@@ -63,7 +63,7 @@ class clientController
         throw new Error($tokenVerify["error"]);
       }
 
-      $resultado = $this->client->updateCliente(
+      $resultado = $this->client->updateClientById(
         $req['mail'],
         $req['name'],
         $req['lastName'],
@@ -85,7 +85,7 @@ class clientController
         throw new Error("Autenticacion fallida,Token no valido");
       }
 
-      $resultDelete = $this->client->deleteCliente($req['idClient']);
+      $resultDelete = $this->client->deleteClientById($req['idClient']);
       return array("response" => $resultDelete);
     } catch (Throwable $th) {
       return array("error" => $th->getMessage(), "status" => 404);
@@ -99,7 +99,7 @@ class clientController
       if (isset($tokenVerify["error"])) {
         throw new Error($tokenVerify["error"]);
       }
-      $allClients = $this->client->getAllClientes()->fetch_all(MYSQLI_ASSOC);
+      $allClients = $this->client->getAllClients()->fetch_all(MYSQLI_ASSOC);
 
       return $allClients;
     } catch (Throwable $th) {
@@ -152,7 +152,7 @@ class clientController
       $classClient = $this->client;
       $clientsMonths = array_map(function ($month) use ($classClient, $year) {
 
-        $clientsMonth = $classClient->getClientesAnioMes($month, $year);
+        $clientsMonth = $classClient->getClientsByMonthAndYear($month, $year);
 
         return array("month" => $month, "quantity" => $clientsMonth);
       }, $months);
@@ -180,9 +180,9 @@ class clientController
       }
 
       if ($index == 0) {
-        $res = $this->client->getAllClientesLimit()->fetch_all(MYSQLI_ASSOC);
+        $res = $this->client->getAllClientsLimit()->fetch_all(MYSQLI_ASSOC);
       } else {
-        $res = $this->client->getAllClientesLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
+        $res = $this->client->getAllClientsLimitAndIndex($index)->fetch_all(MYSQLI_ASSOC);
       }
       return $res;
     } catch (Throwable $th) {
@@ -231,7 +231,7 @@ class clientController
         throw new Error($tokenVerify["error"]);
       }
 
-      $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+      $res = $this->client->getClientExisted($client['name'], $client['lastName'], $client['mail']);
 
       return $res;
     } catch (Throwable $th) {

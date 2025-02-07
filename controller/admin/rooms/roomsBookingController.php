@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../conexion/conexion.php");
-require("../../model/claseHabitaciones.php");
+require_once("../../config/connection.php");
+require("../../model/room.php");
 require(__DIR__ . "./../authToken.php");
 
 
@@ -13,7 +13,7 @@ class roomsBookingController
     public function __construct()
     {
 
-        $this->rooms = new habitaciones();
+        $this->rooms = new Room();
         $this->authToken = new authToken();
     }
 
@@ -21,7 +21,7 @@ class roomsBookingController
     {
 
         $roomsBooking = $req['rooms'];
-        $conexion = new conexion();
+        $connection = new Connection();
 
         $error = null;
         foreach ($roomsBooking as $roomBooking) {
@@ -30,9 +30,9 @@ class roomsBookingController
                 if (isset($tokenVerify["error"])) {
                     throw new Error($tokenVerify["error"]);
                 }
-                $conexion->conectar()->begin_transaction();
+                $connection->connect()->begin_transaction();
 
-                $resultRoomAdded =  $this->rooms->setHabitacionReservada(
+                $resultRoomAdded =  $this->rooms->addRoomBooking(
                     $req['idBooking'],
                     $req['client'],
                     $roomBooking['numRoom'],
@@ -43,14 +43,14 @@ class roomsBookingController
                 );
 
                 if ($resultRoomAdded) {
-                    $conexion->conectar()->commit();
+                    $connection->connect()->commit();
                 }
             } catch (Throwable $th) {
                 $error = $th;
-                $conexion->conectar()->rollback();
+                $connection->connect()->rollback();
                 return array("error" => $th->getMessage(), "status" => 502);
             } finally {
-                $conexion->cerrarConexion();
+                $connection->closeConnection();
             }
         }
 
@@ -68,7 +68,7 @@ class roomsBookingController
         $roomsToDelete = $req['rooms'];
         $idBooking = $req['idBooking'];
         $errorDeleteQuery = null;
-        $conexion = new conexion();
+        $connection = new Connection();
         foreach ($roomsToDelete as $roomToDelete) {
 
             try {
@@ -77,16 +77,15 @@ class roomsBookingController
                 if (isset($tokenVerify["error"])) {
                     throw new Error($tokenVerify["error"]);
                 }
-                $conexion->conectar()->begin_transaction();
-                $this->rooms->deleteHabitacionReserva($idBooking, $roomToDelete);
-                $conexion->conectar()->commit();
+                $connection->connect()->begin_transaction();
+                $this->rooms->deleteRoomByIdBookingAndNumRoom($idBooking, $roomToDelete);
+                $connection->connect()->commit();
             } catch (Throwable $th) {
                 $errorDeleteQuery = $th;
-                $conexion->conectar()->rollback();
+                $connection->connect()->rollback();
                 return array("error" => $th->getMessage(), "status" => 404);
             } finally {
-
-                $conexion->cerrarConexion();
+                $connection->closeConnection();
             }
         }
 
@@ -104,14 +103,14 @@ class roomsBookingController
                 throw new Error($tokenVerify["error"]);
             }
 
-            $allRoomsReserved = $this->rooms->getAllHabitacionesReservadasYear($req['year'])->fetch_all(MYSQLI_ASSOC);
+            $allRoomsReserved = $this->rooms->getAllRoomsBookingByYear($req['year'])->fetch_all(MYSQLI_ASSOC);
 
             $quantityCategorysRoomsReserved = array_map(function ($categoryRoom) use ($allRoomsReserved) {
 
                 $categoryRoomsReserved = array_filter($allRoomsReserved, function ($roomReserved)
                 use ($categoryRoom) {
 
-                    $dataRoomReserved = $this->rooms->buscarCategoriaPorNumero($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
+                    $dataRoomReserved = $this->rooms->getCategoryByNumRoom($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
 
                     return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
                 });
@@ -139,14 +138,14 @@ class roomsBookingController
             $categoryRooms = $this->rooms->getAllCategoryRooms();
 
             $dataCategoryRooms = array_map(function ($categoryRoom) {
-                $totalRoomCategory = count($this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']));
+                $totalRoomCategory = count($this->rooms->getRoomsByCategory($categoryRoom['categoria']));
 
-                $roomsCategory = $this->rooms->getAllHabitacionesCategoria($categoryRoom['categoria']);
+                $roomsCategory = $this->rooms->getRoomsByCategory($categoryRoom['categoria']);
 
                 $totalRoomCategoryBusy = array_reduce($roomsCategory, function ($ac, $roomCategory) {
 
                     $today = date("Y-m-d");
-                    $habitacionOcupada = $this->rooms->reservasHabitacionOcupada($roomCategory['numHabitacion'], $today);
+                    $habitacionOcupada = $this->rooms->getStateRoomByNumRoomAndDate($roomCategory['numHabitacion'], $today);
 
                     ($habitacionOcupada) ? $ac++ : $ac;
 
@@ -175,7 +174,7 @@ class roomsBookingController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $bookingRoomBusy = $this->rooms->reservasHabitacionOcupada($req["numRoom"], date("Y-m-d"));
+            $bookingRoomBusy = $this->rooms->getStateRoomByNumRoomAndDate($req["numRoom"], date("Y-m-d"));
             return $bookingRoomBusy;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -192,7 +191,7 @@ class roomsBookingController
                 throw new Error($tokenVerify["error"]);
             }
 
-            $roomsDetailsBooking = $this->rooms->getHabitaciones($idBooking)->fetch_all(MYSQLI_ASSOC);
+            $roomsDetailsBooking = $this->rooms->getAllRoomsByIdBooking($idBooking)->fetch_all(MYSQLI_ASSOC);
             return  array_values($roomsDetailsBooking);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -283,12 +282,12 @@ class roomsBookingController
 
             $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($req) {
 
-                $bookingsFreeRoom = $this->rooms->getHabitacionDisponible(
+                $bookingsFreeRoom = $this->rooms->getAllRoomsAvailablesByDateAndNumRoom(
                     $req['dataBooking']["startBooking"],
                     $req['dataBooking']["endBooking"],
                     $roomCategory["numRoom"]
                 );
-                $allBookingsRoom  = $this->rooms->habitacionesReservadas($roomCategory["numRoom"]);
+                $allBookingsRoom  = $this->rooms->roomsBookingByNumRoom($roomCategory["numRoom"]);
 
                 if (count($allBookingsRoom) == 0  || count($bookingsFreeRoom) == count($allBookingsRoom)) {
 
@@ -317,7 +316,7 @@ class roomsBookingController
 
             $roomsToBookingAvailables = array_filter($roomsToBooking, function ($roomToBooking) use ($dataBookingToUpdate) {
 
-                $allBookingsAvailableRoomDistinctIdBooking =   $this->rooms->getAllRoomBookingAvailableDistinctIdBooking(
+                $allBookingsAvailableRoomDistinctIdBooking =   $this->rooms->getAllBookingRoomAvailableDistinctIdBooking(
                     $dataBookingToUpdate["startBooking"],
                     $dataBookingToUpdate["endBooking"],
                     $roomToBooking,

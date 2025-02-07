@@ -1,5 +1,5 @@
 <?php
-require("../../model/claseServicios.php");
+require("../../model/service.php");
 require(__DIR__ . "./../authToken.php");
 
 class servicesController
@@ -9,7 +9,7 @@ class servicesController
     public function __construct()
     {
 
-        $this->service = new servicio();
+        $this->service = new Service();
         $this->authToken = new authToken();
     }
 
@@ -135,7 +135,10 @@ class servicesController
             }
             $serviceFind = $this->service->getServiceByName($req["nameService"]);
             if ($serviceFind) {
-                $serviceFind["imagen"] = base64_encode($serviceFind["imagen"]);
+                $serviceFind = array_map(function ($service) {
+                    $service["imagen"] = base64_encode($service["imagen"]);
+                    return $service;
+                }, $serviceFind);
                 return $serviceFind;
             } else {
                 throw new Error("Ups,no se encontro el servicio");

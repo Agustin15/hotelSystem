@@ -27,7 +27,7 @@ export const configTelephoneService = async (
   numRoom = numRoomService;
   modalAddService = document.querySelector(".modalAddService");
   contentTelephone = document.querySelector(".contentTelephone");
-  closeWindow(modalAddService);
+  closeWindow(modalAddService,".btnCloseTelephone");
   service = await serviceByName(nameService);
   if (service) {
     displayTelephoneService();
@@ -95,7 +95,7 @@ const serviceByName = async (nameService) => {
     if (!data) {
       noData("Ups,no se pudo cargar el servicio");
     }
-    return data;
+    return data[0];
   }
 };
 

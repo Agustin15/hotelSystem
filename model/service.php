@@ -1,0 +1,94 @@
+<?php
+
+
+require_once(__DIR__ . "/../config/connection.php");
+
+class Service
+{
+
+    private $connection;
+
+    public function __construct()
+    {
+        $this->connection = new Connection();
+    }
+
+
+    public function addServiceBooking($idService, $quantity, $idBooking, $numRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("insert into serviciosExtra_habitacion 
+          (idServicio,cantidad,idReservaHabitacionServicio,numHabitacionServicio) values (?,?,?,?) ");
+        $query->bind_param("iiii", $idService, $quantity, $idBooking, $numRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+
+    public function updateServiceBooking($quantity, $idServiceRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("update serviciosExtra_habitacion set cantidad=?
+        where idServicioHabitacion=?");
+        $query->bind_param("ii", $quantity, $idServiceRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+    public function getServicesByIdBookingWithDetails($idReserva)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from serviciosExtra_habitacion 
+        INNER JOIN servicio ON serviciosExtra_habitacion.idServicioHabitacion=servicio.idServicio where
+        idReservaHabitacionServicio=?");
+        $query->bind_param("i", $idReserva);
+        $query->execute();
+        $result =  $query->get_result();
+
+        return $result;
+    }
+
+
+
+    public function getHistoryServicesByCurrentBookingRoom($numRoom, $idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from serviciosextra_habitacion INNER JOIN 
+        servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio where serviciosextra_habitacion.idReservaHabitacionServicio=? 
+        && serviciosextra_habitacion.numHabitacionServicio=?");
+        $query->bind_param("ii", $idBooking, $numRoom);
+        $query->execute();
+        $result =  $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getAllServicesHotel()
+    {
+
+        $query = $this->connection->connect()->prepare("select nombreServicio,descripcionServicio,imagen 
+        from servicio group by nombreServicio");
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    public function getServiceByName($nameService)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from servicio where nombreServicio=?");
+        $query->bind_param("s", $nameService);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom)
+    {
+        $query = $this->connection->connect()->prepare("select * from serviciosextra_habitacion 
+        where idServicio=? && idReservaHabitacionServicio=? && numHabitacionServicio=?");
+        $query->bind_param("iii", $idService, $idBooking, $numRoom);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+}

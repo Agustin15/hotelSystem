@@ -1,6 +1,7 @@
 import { getAllServicesHotel } from "../../../scriptsServices/scriptServices.js";
 import { configMassageService } from "./servicesToAdd/massages.js";
 import { configTelephoneService } from "./servicesToAdd/telephone.js";
+import { configMinibarService } from "./servicesToAdd/minibar.js";
 import { pageNotFound, loadingPage } from "../../dashboardScript.js";
 
 let containAddService, idBookingService, numRoomService, modalAddService;
@@ -135,6 +136,11 @@ const optionsAddService = [
     name: "Telefono",
     url: "optionsMenu/optionServices/optionsAddService/telephone.html",
     function: configTelephoneService,
+  },
+  {
+    name: "Minibar",
+    url: "optionsMenu/optionServices/optionsAddService/minibar.html",
+    function: configMinibarService,
   },
 ];
 

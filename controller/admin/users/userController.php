@@ -1,5 +1,5 @@
 <?php
-require("../../model/claseUsuario.php");
+require("../../model/user.php");
 require("../../vendor/autoload.php");
 require(__DIR__ . "./../authToken.php");
 
@@ -17,7 +17,7 @@ class userController
     public function __construct()
     {
 
-        $this->user = new Usuario();
+        $this->user = new User();
         $this->authToken = new authToken();
     }
 
