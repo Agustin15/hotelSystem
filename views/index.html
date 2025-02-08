@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="../estilos/style.css">
-     
-  
+    <script src="../js/queryClient/submitForm.js" type="module" defer></script>
+
     <title>Hotel-Inicio</title>
 </head>
 
@@ -73,8 +72,6 @@
 
     <div id="reservar">
         <a href="reserva/consultaHabitaciones.php"><button>Reservar</button></a>
-
-
     </div>
 
     <div id="sobreNosotros">
@@ -124,62 +121,67 @@
 
 <footer>
 
- 
-<div id="backgroundFooter">
+    <div id="contacto" class="containContact">
+        <div class="background">
+            <img src="../img/footerBack.jpg">
+        </div>
+        <div class="contactForm">
 
-    <br> 
-<div id="containerForm">
+            <div class="infoContact">
+                <div class="phone">
+                    <img src="../img/llamada.png">
+                    <span>+(598) 93 647 321</span>
+                </div>
+                <div class="mail">
+                    <img src="../img/correo.png">
+                    <span>systemFiveHotel@gmail.com</span>
+                </div>
+            </div>
+            <form class="formQuery">
+                <h3>CONTACTO</h3>
+
+                <div class="inputs">
+                    <div class="containName">
+                        <label id="name">Nombre</label>
+                        <input id="name" class="nameInput" autocomplete="off" name="name"
+                            placeholder="Ingrese su nombre">
+                        <div class="inputError">
+                            <img src="../img/warningInput.png">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div class="containEmail">
+                        <label id="mail">Correo</label>
+                        <input id="mail" autocomplete="off" name="mail" class="mailInput"
+                            placeholder="Ingrese su correo">
+                        <div class="inputError">
+                            <img src="../img/warningInput.png">
+                            <label></label>
+                        </div>
+                    </div>
+                    <div class="query">
+                        <label>Consulta</label>
+                        <textarea  name="query"></textarea>
+                        <div class="inputError" id="inputErrorQuery">
+                            <img src="../img/warningInput.png">
+                            <label></label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    Enviar
+                    <img class="loader" src="../img/spinnerBooking.gif">
+                </button>
+                <div class="alertFormQuery">
+                    <img src="">
+                    <p></p>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
- <div class="datosContacto">
-
-<ul>
-
-<li><img src="../img/llamada.png"></li>
-<br>
-<label>+(598) 93 647 321</label>
-<br>
-<li><img src="../img/correo.png"></li>
-<label>contacto@hotel.com</label>
-
-</ul> 
-
- </div>   
-<form>
-
-    <a name="contacto"></a>
-    <h2>CONTACTO</h2>
-
-    <br><br>
-    <label>Nombre</label>
-    <br>
-    <input type="text" >
-    <br>
-    <br>
-    <label>Correo</label>
-    <br>
-    <input type="text" >
-
-    <br>
-    <br>
-    <label>Télefono</label>
-    <br>
-    <input type="text" >
-   
-    <br><br>
-    <label>Consulta</label>
-    <br>
-    <textarea></textarea>
-    <br><br>
-
-    <input type="submit" value="ENVIAR" >
-
-
-
-</form>
-
-</div>
-
-</div>
 </footer>
+
 </html>

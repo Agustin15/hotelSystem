@@ -119,19 +119,19 @@ const drawRooms = (rooms) => {
        <img class="iconMenu" src="../../../img/menuRoom.png">       
       </div>
       <ul id=${room.numRoom} style="display:none" class="menuOptions">
-      <li class="optionMenu" data-url="optionsMenu/record.php?numRoom=${
+      <li class="optionMenuRoom" data-url="optionsMenu/record.php?numRoom=${
         room.numRoom
       }">
       <img src="../../../img/historyBookings.png">
       Historial reservas
       </li>
-      <li class="optionMenu" data-url="optionsMenu/nextBookings.php?numRoom=${
+      <li class="optionMenuRoom" data-url="optionsMenu/nextBookings.php?numRoom=${
         room.numRoom
       }">
       <img src="../../../img/nextBookings.png">
       Proximas reservas
       </li>
-      <li class="optionMenu" data-url="optionsMenu/services.php?numRoom=${
+      <li class="optionMenuRoom" data-url="optionsMenu/services.php?numRoom=${
         room.numRoom
       }">
       <img src="../../../img/services.png">
@@ -198,7 +198,7 @@ const openOptionsRoom = () => {
 };
 
 const optionMenuRoom = () => {
-  let optionsMenuRoom = [...document.querySelectorAll(".optionMenu")];
+  let optionsMenuRoom = [...document.querySelectorAll(".optionMenuRoom")];
   optionsMenuRoom.forEach((option) => {
     option.addEventListener("click", () => {
       let url = option.dataset.url;

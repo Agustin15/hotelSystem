@@ -1,5 +1,5 @@
 <?php
-require "../../model/rooms.php";
+require "../../model/room.php";
 $room = new Room();
 
 
@@ -78,9 +78,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
                }
             });
 
-            $categoryQuantity= array_map(function ($detallesCategoriaHabitacion) use ($room, $roomsAvailablesByDate) {
+            $categoryQuantity= array_map(function ($detailsCategoyRoom) use ($room, $roomsAvailablesByDate) {
 
-               return quantityCategoryRoom(array_values($roomsAvailablesByDate), $room, $detallesCategoriaHabitacion['categoria']);
+               return quantityCategoryRoom(array_values($roomsAvailablesByDate), $room, $detailsCategoyRoom['categoria']);
             }, $room->getAllCategoryRooms());
 
             echo json_encode($categoryQuantity);

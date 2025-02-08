@@ -1,5 +1,5 @@
 <?php
-require("../../model/claseCliente.php");
+require("../../model/client.php");
 
 class clientController
 {
@@ -10,7 +10,7 @@ class clientController
   public function __construct()
   {
 
-    $this->client = new cliente();
+    $this->client = new Client();
   }
 
   public function POST($req)
@@ -18,25 +18,25 @@ class clientController
 
     try {
 
-      $dataClientMail = $this->client->getClienteCorreo($req['mail'])->fetch_array(MYSQLI_ASSOC);
+      $dataClientMail = $this->client->getClientByMail($req['mail'])->fetch_array(MYSQLI_ASSOC);
 
       if ($dataClientMail) {
 
         return array("advertencia" => "El correo ingresado ya esta en uso");
       } else {
 
-        $dataClientPhone = $this->client->getClienteTelefono($req['phone'])->fetch_array(MYSQLI_ASSOC);
+        $dataClientPhone = $this->client->getClientByMail($req['phone'])->fetch_array(MYSQLI_ASSOC);
         if ($dataClientPhone) {
 
           return array("advertencia" => "El telefono ingresado ya esta en uso");
         } else {
 
-          $this->client->setCorreo($req['mail']);
-          $this->client->setNombre($req['name']);
-          $this->client->setApellido($req['lastName']);
-          $this->client->setTelefono($req['phone']);
+          $this->client->setMail($req['mail']);
+          $this->client->setName($req['name']);
+          $this->client->setLastname($req['lastName']);
+          $this->client->setPhone($req['phone']);
 
-          $resultado =  $this->client->setClienteBd();
+          $resultado =  $this->client->addClient();
 
           return array("respuesta" => $resultado);
         }
@@ -52,7 +52,7 @@ class clientController
     try {
       $client = $req['client'];
 
-      $res = $this->client->getClienteExistente($client['name'], $client['lastName'], $client['mail']);
+      $res = $this->client->getClientExisted($client['name'], $client['lastName'], $client['mail']);
 
       return $res;
     } catch (Throwable $th) {

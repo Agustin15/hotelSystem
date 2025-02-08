@@ -48,7 +48,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  if (JSON.parse(localStorage.getItem("rooms")).length > 0) {
+  if (
+    JSON.parse(localStorage.getItem("rooms")) &&
+    JSON.parse(localStorage.getItem("rooms")).length > 0
+  ) {
     dateBooking = JSON.parse(localStorage.getItem("dateBooking"));
 
     dateBooking = {

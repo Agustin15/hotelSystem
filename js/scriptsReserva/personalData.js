@@ -208,12 +208,12 @@ const validationsInputs = (value) => {
   const validations = [
     {
       key: "name",
-      validation: value !== "",
+      validation: value.length > 0,
       msj: "Ingrese un nombre",
     },
     {
       key: "lastName",
-      validation: value !== "",
+      validation: value.length > 0,
       msj: "Ingrese un apellido",
     },
     {
@@ -223,7 +223,7 @@ const validationsInputs = (value) => {
     },
     {
       key: "phone",
-      validation: value.length == 9,
+      validation: value.length == 8 || value.length == 9,
       msj: "Ingrese un telefono válido",
     },
   ];

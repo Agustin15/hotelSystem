@@ -1,7 +1,7 @@
 <?php
 
-require_once("../../conexion/conexion.php");
-require("../../model/claseHabitaciones.php");
+require_once("../../config/connection.php");
+require("../../model/room.php");
 
 
 class roomsBookingController
@@ -12,22 +12,22 @@ class roomsBookingController
     public function __construct()
     {
 
-        $this->rooms = new habitaciones();
+        $this->rooms = new Room();
     }
 
     public function POST($req)
     {
 
         $roomsBooking = $req['rooms'];
-        $conexion = new conexion();
+        $connection = new Connection();
 
         $error = null;
         foreach ($roomsBooking as $roomBooking) {
             try {
 
-                $conexion->conectar()->begin_transaction();
+                $connection->connect()->begin_transaction();
 
-                $resultRoomAdded =  $this->rooms->setHabitacionReservada(
+                $resultRoomAdded =  $this->rooms->addRoomBooking(
                     $req['idBooking'],
                     $req['client'],
                     $roomBooking['numRoom'],
@@ -38,14 +38,14 @@ class roomsBookingController
                 );
 
                 if ($resultRoomAdded) {
-                    $conexion->conectar()->commit();
+                    $connection->connect()->commit();
                 }
             } catch (Throwable $th) {
                 $error = $th;
-                $conexion->conectar()->rollback();
+                $connection->connect()->rollback();
                 return array("error" => $th->getMessage(), "status" => 502);
             } finally {
-                $conexion->cerrarConexion();
+                $connection->closeConnection();
             }
         }
 
@@ -76,12 +76,12 @@ class roomsBookingController
 
             $roomsFreeCategory  = array_filter($allRoomsCategory, function ($roomCategory) use ($req) {
 
-                $bookingsFreeRoom = $this->rooms->getHabitacionDisponible(
+                $bookingsFreeRoom = $this->rooms->getAllRoomsAvailablesByDateAndNumRoom(
                     $req['dataBooking']["startBooking"],
                     $req['dataBooking']["endBooking"],
                     $roomCategory["numRoom"]
                 );
-                $allBookingsRoom  = $this->rooms->habitacionesReservadas($roomCategory["numRoom"]);
+                $allBookingsRoom  = $this->rooms->roomsBookingByNumRoom($roomCategory["numRoom"]);
 
                 if (count($allBookingsRoom) == 0  || count($bookingsFreeRoom) == count($allBookingsRoom)) {
 

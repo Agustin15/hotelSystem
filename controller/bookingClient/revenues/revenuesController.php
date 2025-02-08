@@ -1,6 +1,6 @@
 <?php
 
-require("../../model/clasePago.php");
+require("../../model/revenue.php");
 
 class revenuesController
 {
@@ -9,7 +9,7 @@ class revenuesController
     public function __construct()
     {
 
-        $this->pay = new pago();
+        $this->pay = new Revenue();
     }
 
     public function POST($req)
@@ -17,7 +17,7 @@ class revenuesController
 
         try {
 
-            $resultPay = $this->pay->setPago($req['idBooking'], $req['client'], $req['amount']);
+            $resultPay = $this->pay->addRevenue($req['idBooking'], $req['client'], $req['amount']);
             return array("response" => $resultPay);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
@@ -28,7 +28,7 @@ class revenuesController
     {
         try {
 
-            $resultUpdatePay = $this->pay->updatePago($req['idBooking'], $req['newAmount']);
+            $resultUpdatePay = $this->pay->updateRevenueById($req['idBooking'], $req['newAmount']);
             return array("response" => $resultUpdatePay);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -41,7 +41,7 @@ class revenuesController
         try {
             $idBooking = $req['idBooking'];
 
-            $revenue =  $this->pay->getPago($idBooking);
+            $revenue =  $this->pay->getRevenueById($idBooking);
 
             return $revenue;
         } catch (Throwable $th) {

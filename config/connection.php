@@ -7,7 +7,7 @@ $dotenv->load();
 
 class Connection
 {
-    private $conexion;
+    private $connection;
 
     public function connect()
     {
@@ -17,14 +17,14 @@ class Connection
         $password = $_ENV['DB_PASSWORD'];
         $db = $_ENV['DATABASE'];
 
-        $this->conexion = new mysqli($localhost, $user, $password, $db);
+        $this->connection = new mysqli($localhost, $user, $password, $db);
 
-        return $this->conexion;
+        return $this->connection;
     }
 
     public function closeConnection()
     {
 
-        mysqli_close($this->conexion);
+        mysqli_close($this->connection);
     }
 }

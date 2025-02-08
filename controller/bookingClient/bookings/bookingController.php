@@ -1,6 +1,6 @@
 <?php
 
-require("../../model/claseReservas.php");
+require("../../model/booking.php");
 
 class bookingController
 {
@@ -8,7 +8,7 @@ class bookingController
     private $booking;
     public function __construct()
     {
-        $this->booking = new reservas();
+        $this->booking = new Booking();
     }
 
     public function POST($req)
@@ -16,11 +16,11 @@ class bookingController
 
         try {
 
-            $this->booking->setIdCliente($req['client']);
-            $this->booking->setLlegada($req['startBooking']);
-            $this->booking->setSalida($req['endBooking']);
-            $this->booking->setCantidadHabitaciones($req['roomsQuantity']);
-            $res =  $this->booking->addReservaBd();
+            $this->booking->setIdClient($req['client']);
+            $this->booking->setDateStart($req['startBooking']);
+            $this->booking->setDateEnd($req['endBooking']);
+            $this->booking->setQuantityRooms($req['roomsQuantity']);
+            $res =  $this->booking->addBooking();
             return $res;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
@@ -32,13 +32,13 @@ class bookingController
 
         try {
 
-            $this->booking->setIdReserva($req['idBooking']);
-            $this->booking->setIdCliente($req['idClient']);
-            $this->booking->setLlegada($req['startBooking']);
-            $this->booking->setSalida($req['endBooking']);
-            $this->booking->setCantidadHabitaciones($req['quantityRooms']);
+            $this->booking->setIdBooking($req['idBooking']);
+            $this->booking->setIdClient($req['idClient']);
+            $this->booking->setDateStart($req['startBooking']);
+            $this->booking->setDateEnd($req['endBooking']);
+            $this->booking->setQuantityRooms($req['quantityRooms']);
 
-            $resultBookingUpdate = $this->booking->updateReserva();
+            $resultBookingUpdate = $this->booking->updateBookingById();
 
             return $resultBookingUpdate;
         } catch (Throwable $th) {
