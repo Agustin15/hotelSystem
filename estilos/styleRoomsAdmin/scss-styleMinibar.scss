@@ -38,7 +38,7 @@
 .contentMinibar {
   display: flex;
   align-items: start;
-  flex-direction: column;
+  justify-content: start;
   width: 100%;
   height: 100%;
   padding-top: 2rem;
@@ -80,31 +80,46 @@
 
 .products {
   width: 65%;
-  height: 85%;
+  height: 82%;
   overflow-y: scroll;
   display: flex;
   align-items: center;
   gap: 1.5rem;
   padding-left: 1.5rem;
+  padding-bottom: 1rem;
   justify-content: start;
   flex-wrap: wrap;
   list-style: none;
 
   li {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.2rem;
     border-radius: 5px;
     color: white;
-    gap: 0.5rem;
     width: 15rem;
-    height: 6rem;
+    height: 9rem;
     background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
     border: 1px solid rgb(1, 155, 160);
     box-shadow: 2px 2px 2px gray;
     font-size: 17px;
     padding: 0.5rem;
 
+    .name {
+      text-overflow: ellipsis;
+      width: 14rem;
+      font-size: 15px;
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .rowProduct {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
     .columnOne,
     .columnTwo {
       display: flex;
@@ -113,15 +128,16 @@
       gap: 0.3rem;
       border-radius: 3px;
       width: 3rem;
-      height: 3rem;
+      height: 6rem;
       padding: 1rem;
       background: rgb(2, 112, 116);
     }
 
     .columnOne {
-      height: 3.6rem;
+      height: 5.4rem;
       img {
         width: 80px;
+        margin-top: -0.1rem;
         height: 80px;
       }
     }
@@ -129,19 +145,17 @@
       font-size: 14px;
       width: 7rem;
       gap: 0.5rem;
-      height: 4rem;
       padding-top: 0.5rem;
 
       a {
         font-weight: bold;
       }
-      .quantity {
+      .containQuantity {
         display: flex;
         align-items: center;
         gap: 1rem;
         justify-content: center;
         font-weight: bold;
-
         button {
           font-size: 20px;
           border: none;
@@ -151,16 +165,241 @@
           height: 1.2rem;
           display: flex;
           justify-content: center;
-          color: rgb(2, 112, 116);
+          color: white;
+          align-items: center;
+          background: rgb(255, 255, 255);
+          box-shadow: 2px 2px 2px rgb(0, 0, 0);
+        }
+
+        button:hover {
+          transform: scale(1.1);
+        }
+        .btnMinus {
+          background-color: rgb(194, 9, 9);
+        }
+
+        .btnPlus {
+          background-color: rgb(12, 179, 12);
+        }
+      }
+
+      .btnAdd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 6rem;
+        height: 4.4rem;
+        border: none;
+        box-shadow: 2px 2px 2px rgb(0, 0, 0);
+        background-color: white;
+        color: rgb(0, 0, 0);
+        border-radius: 4px;
+        cursor: pointer;
+        img {
+          width: 15px;
+        }
+      }
+      .btnAdd:hover {
+        background-color: rgb(218, 218, 218);
+      }
+    }
+  }
+}
+
+.containCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  height: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 23%;
+  border-radius: 4px;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  box-shadow: 2px 2px 2px rgb(112, 112, 112);
+
+  .titleCart {
+    display: flex;
+    padding: 1rem;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: white;
+    box-shadow: 1px 1px 1px rgb(92, 92, 92);
+    border: 1px solid rgb(221, 221, 221);
+    color: rgb(150, 150, 150);
+    width: 100%;
+    height: 1.5rem;
+
+    img {
+      width: 35px;
+    }
+  }
+  .items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 115%;
+    height: 17rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+    list-style: none;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.2rem 0.9rem 0.6rem 0.9rem;
+      background-color: white;
+      width: 11rem;
+      height: 6.4rem;
+      gap: 0.4rem;
+      border-radius: 3px;
+      box-shadow: 2px 2px 2px gray;
+      color: black;
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 111%;
+
+        img {
+          width: 15px;
+          cursor: pointer;
+        }
+      }
+      .itemName {
+        text-overflow: ellipsis;
+        width: 14rem;
+        font-weight: bold;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 14px;
+        margin-left: 0.6rem;
+      }
+
+      .icon {
+        display: flex;
+        justify-content: start;
+        align-items: start;
+
+        img {
+          width: 51px;
+        }
+      }
+
+      .rowItem {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .columnOneItem,
+      .columnTwoItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+        border-radius: 3px;
+        width: 4rem;
+        height: 3rem;
+        padding: 1rem;
+        background-color: rgb(233, 233, 233);
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .columnOneItem {
+        width: 2rem;
+      }
+
+      .columnTwoItem {
+        gap: 0.5rem;
+      }
+      .containQuantityItem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: bold;
+
+        button {
+          font-size: 18px;
+          border: none;
+          border-radius: 100%;
+          cursor: pointer;
+          width: 1.1rem;
+          height: 1.1rem;
+          display: flex;
+          justify-content: center;
+          color: white;
           align-items: center;
           background: rgb(255, 255, 255);
           box-shadow: 1px 1px 1px rgb(0, 0, 0);
         }
-        
-        button:hover{
-            transform: scale(1.1);
+
+        button:hover {
+          transform: scaleX(1.1);
+        }
+        .btnMinusItem {
+          background-color: rgb(194, 9, 9);
+        }
+
+        .btnPlusItem {
+          background-color: rgb(12, 179, 12);
         }
       }
     }
+  }
+
+  .totalCart {
+    display: none;
+    font-weight: bold;
+    justify-content: start;
+    align-items: center;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    background-color: white;
+    padding: 0.5rem;
+    width: 107%;
+    border: 1px solid gray;
+    color: gray;
+    box-shadow: 1px 1px 1px rgb(70, 70, 70);
+    border-radius: 3px;
+
+    img {
+      width: 25px;
+    }
+  }
+}
+
+.noItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: rgb(255, 255, 255);
+  width: 12rem;
+  font-weight: bold;
+  height: 70%;
+  opacity: 87%;
+  margin-top: 1rem;
+
+  img {
+    width: 60px;
   }
 }

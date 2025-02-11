@@ -77,7 +77,6 @@ const availablesRoomsCategory = async (category) => {
     }
   } catch (error) {
     console.log(error);
-    
   } finally {
     loadingRooms(false);
     if (!data) {
@@ -121,8 +120,15 @@ const drawRoomsFreeCategory = async (roomsAvailableCategory) => {
     return `
        <li>
        <div class="row">
-<div class="icon">
+        <div class="icon">
            <img src="data:image/png;base64,${room.icon}">
+         <div class="containAdd" data-room=${JSON.stringify(room)}>
+         <button class="btnAddRoom">
+         Agregar
+         <img src="../../../img/addService.png">
+         </button>
+         </div>
+           
          </div>             
          
          <div class="info">
@@ -145,10 +151,6 @@ const drawRoomsFreeCategory = async (roomsAvailableCategory) => {
              </div>
          </div>
          </div>
-         <div class="containAdd" data-room=${JSON.stringify(room)}>
-         <button class="btnAddRoom">Agregar</button>
-         </div>
-     
          </li>`;
   });
 
@@ -164,10 +166,12 @@ const addRoomToCart = () => {
       let dataRoom = JSON.parse(btn.parentElement.dataset.room);
 
       let adultsQuantity = parseInt(
-        btn.parentElement.parentElement.querySelector(".adults").value
+        btn.parentElement.parentElement.parentElement.querySelector(".adults")
+          .value
       );
       let childsQuantity = parseInt(
-        btn.parentElement.parentElement.querySelector(".childs").value
+        btn.parentElement.parentElement.parentElement.querySelector(".childs")
+          .value
       );
 
       let errorGuests = validationGuests(
@@ -183,7 +187,7 @@ const addRoomToCart = () => {
           numRoom: dataRoom.numRoom,
           category: dataRoom.category,
           priceRoom: dataRoom.price,
-          status:"Nueva",
+          status: "Nueva",
           icon: dataRoom.icon,
           adults: adultsQuantity,
           childs: childsQuantity,

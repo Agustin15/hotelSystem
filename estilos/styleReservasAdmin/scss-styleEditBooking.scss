@@ -191,15 +191,37 @@
   align-items: center;
   text-align: center;
   gap: 1rem;
-  height: auto;
-  max-height: 25rem;
+  height: 30rem;
   width: 16rem;
   border-radius: 4px;
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
   border: 1px solid rgb(202, 202, 202);
   box-shadow: 2px 2px 2px gray;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
+
+  .titleCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background-color: white;
+    width: 107%;
+    height: 2rem;
+    border: 1px solid rgb(189, 189, 189);
+    padding: 0.5rem;
+    box-shadow: 1px 1px 1px rgb(114, 114, 114);
+    border-radius: 3px;
+
+    h3 {
+      color: rgb(104, 104, 104);
+      font-weight: bold;
+    }
+    img {
+      width: 28px;
+      margin-top: -0.3rem;
+    }
+  }
 
   ul {
     display: flex;
@@ -207,8 +229,7 @@
     gap: 1rem;
     align-items: center;
     width: 111%;
-    height: auto;
-    max-height: 50%;
+    height: 21rem;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-top: 1rem;
@@ -241,7 +262,7 @@
     border-radius: 5px;
     color: white;
     width: 88%;
-    box-shadow: 2px 2px 2px rgb(114, 114, 114);
+    box-shadow: 2px 2px 2px rgb(68, 68, 68);
 
     .row {
       display: flex;
@@ -328,15 +349,22 @@
   .total {
     display: none;
     color: black;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    width: 60%;
+    width: 101%;
     height: 1rem;
+    margin-top: 2rem;
+    gap: 0.6rem;
+    border: 1px solid gray;
     font-weight: bold;
     font-size: 17px;
     padding: 1rem;
     background-color: white;
     border-radius: 4px;
+
+    img {
+      width: 25px;
+    }
   }
 }
 .containForm {
@@ -583,26 +611,14 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 20px;
-  opacity: 80%;
-
-  img {
-    width: 44px;
-  }
-}
-
-.noDataRoomsCart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   font-size: 15px;
   opacity: 80%;
+  margin-top: 5rem;
   font-weight: bold;
   color: white;
 
   img {
-    width: 44px;
+    width: 61px;
   }
 }
 
@@ -652,7 +668,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 25rem;
+    height: 28rem;
     box-shadow: 2px 2px 2px gray;
     border-radius: 4px;
     padding: 1rem;
@@ -661,9 +677,10 @@
 
     .menuRooms {
       display: flex;
-      width: 100%;
+      width: 101%;
       height: 3rem;
       padding-bottom: 1.5rem;
+      padding-left: 1.5rem;
       gap: 1rem;
       margin-top: 0.5rem;
       justify-content: flex-start;
@@ -703,8 +720,8 @@
   padding-top: 1rem;
 
   h3 {
-    font-size: 20px;
-    color: rgb(189, 189, 189);
+    font-size: 24px;
+    color: rgb(129, 129, 129);
   }
 
   .noDataFreeRooms {
@@ -759,21 +776,28 @@
       box-shadow: 2px 2px 2px rgb(114, 114, 114);
 
       .containAdd {
-        width: 99%;
-        display: flex;
-        justify-content: flex-end;
         margin-top: 0.5rem;
 
         button {
           padding: 0.3rem;
           background: white;
           border: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap:0.5rem;
           border-radius: 3px;
           font-weight: bold;
+          cursor: pointer;
           color: black;
           width: 6rem;
           font-size: 13px;
           box-shadow: 2px 2px 2px rgb(7, 7, 7);
+
+          img{
+            width: 16px;
+            height: 16px;
+          }
         }
 
         button:hover {
@@ -790,8 +814,8 @@
       .icon {
         padding: 0.5rem;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
         img {
           width: 130px;
           height: 80px;

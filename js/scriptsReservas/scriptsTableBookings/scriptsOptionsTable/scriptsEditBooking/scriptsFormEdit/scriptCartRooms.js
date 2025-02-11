@@ -42,7 +42,7 @@ const getRoomsBooking = async () => {
 const noRoomsCart = (error) => {
   cartRooms.querySelector("ul").innerHTML = `
     <div class="noDataRoomsCart">
-     <img src="../../../img/emptyData.png">
+     <img src="../../../img/emptyCart.png">
   <span>${error}</span>
     </div>
     `;
@@ -138,7 +138,7 @@ const calculateAmount = () => {
   }, 0);
 
   divTotal.style.display = "flex";
-  divTotal.querySelector("span").textContent = `Total: US$${amount}`;
+  divTotal.querySelector("span").textContent = `Total: US$ ${amount}`;
 };
 
 export const createItemRoom = (room) => {

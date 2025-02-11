@@ -13,7 +13,7 @@ export const configEdit = () => {
 
   menuItems.forEach((item) => {
     item.addEventListener("click", async () => {
-      if (item.id == "itemEdit") {
+      if (item.id == "form") {
         configEditForm(idBooking, body);
       } else {
         let document = await drawOptionRoomsAvailables();

@@ -71,10 +71,15 @@ const drawRoomsFreeCategory = async (result) => {
     return `
        <li>
        <div class="row">
-<div class="icon">
+         <div class="icon">
            <img src="data:image/png;base64,${room.icon}">
+              <div class="containAdd" data-room=${JSON.stringify(room)}>
+         <button class="btnAddRoom">
+         Agregar
+         <img src="../../../img/addService.png">
+         </button>
+         </div>
          </div>             
-         
          <div class="info">
             <h5>Habitacion ${room.numRoom}</h5>
 
@@ -95,10 +100,6 @@ const drawRoomsFreeCategory = async (result) => {
              </div>
          </div>
          </div>
-         <div class="containAdd" data-room=${JSON.stringify(room)}>
-         <button class="btnAddRoom">Agregar</button>
-         </div>
-     
          </li>`;
   });
 
@@ -134,12 +135,14 @@ const addRoomToCart = () => {
   btnsAddRoom.forEach((btn) => {
     btn.addEventListener("click", () => {
       let dataRoom = JSON.parse(btn.parentElement.dataset.room);
-      
+
       let adultsQuantity = parseInt(
-        btn.parentElement.parentElement.querySelector(".adults").value
+        btn.parentElement.parentElement.parentElement.querySelector(".adults")
+          .value
       );
       let childsQuantity = parseInt(
-        btn.parentElement.parentElement.querySelector(".childs").value
+        btn.parentElement.parentElement.parentElement.querySelector(".childs")
+          .value
       );
 
       let errorGuests = validationGuests(

@@ -117,14 +117,15 @@ export const drawFormEdit = (body, booking, clients) => {
             </div>
 
             <div class="cartRooms">
-
-                <h3>Habitaciones seleccionadas</h3>
-
+                <div class="titleCart">
+                <h3>Habitaciones</h3>
+                  <img src="../../../img/roomCart.png">
+                </div>
                 <ul></ul>
 
                 <div class="total">
-
-                    <span>Total</span>
+                  <img src="../../../img/amountService.png">
+                    <span>Total:</span>
 
                 </div>
             </div>

@@ -23,11 +23,11 @@ if (isset($_GET['idBooking'])) {
 
         <div class="headerWindow">
             <ul class="menu">
-                <li class="optionBooking">
+                <li class="optionBooking" id="form">
                     <img src="../../../img/updateBooking.png">
                     Reserva
                 </li>
-                <li class="optionFreeRooms">
+                <li class="optionFreeRooms" id="rooms">
                     <img src="../../../img/key-card.png">
                     Habitaciones
                 </li>

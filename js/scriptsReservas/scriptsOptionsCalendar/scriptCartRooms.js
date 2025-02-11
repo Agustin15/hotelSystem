@@ -75,7 +75,7 @@ const noRoomsCart = () => {
   
   <div class="noRoomsCart">
 
-  <img src="../../../img/emptyData.png">
+  <img src="../../../img/emptyCart.png">
   <span>Sin habitaciones elegidas aun</span>
   </div>
   `;
@@ -89,7 +89,7 @@ const calculateAmount = () => {
   }, 0);
 
   divTotal.style.display = "flex";
-  divTotal.querySelector("span").textContent = `Total: US$${amount}`;
+  divTotal.querySelector("span").textContent = `Total: US$ ${amount}`;
 };
 
 const deleteRoomToCart = (numberRoom) => {
