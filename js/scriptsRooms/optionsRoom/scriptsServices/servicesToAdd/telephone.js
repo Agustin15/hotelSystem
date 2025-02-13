@@ -27,7 +27,7 @@ export const configTelephoneService = async (
   numRoom = numRoomService;
   modalAddService = document.querySelector(".modalAddService");
   contentTelephone = document.querySelector(".contentTelephone");
-  closeWindow(modalAddService,".btnCloseTelephone");
+  closeWindow(modalAddService, ".btnCloseTelephone");
   service = await serviceByName(nameService);
   if (service) {
     displayTelephoneService();
@@ -150,6 +150,7 @@ const calculateTotal = () => {
 const serviceFind = async (quantityMinutes) => {
   const serviceToAdd = {
     idService: service.idServicio,
+    option: "telephone",
     quantity: parseInt(quantityMinutes),
     idBooking: parseInt(idBooking),
     numRoom: parseInt(numRoom),
@@ -203,6 +204,7 @@ const addServiceToRoom = async (serviceToAdd) => {
 const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
   const serviceToUpdate = {
     idServiceRoom: serviceFinded.idServicioHabitacion,
+    option: "telephone",
     newQuantity: serviceToAdd.quantity + serviceFinded.cantidad,
   };
 

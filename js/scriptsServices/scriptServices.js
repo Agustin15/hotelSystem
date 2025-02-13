@@ -3,7 +3,7 @@ import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
 
 export const getDataServices = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({ option: "getServicesBooking", idBooking: idBooking });
 
   let data = null;
@@ -13,8 +13,8 @@ export const getDataServices = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -37,11 +37,11 @@ export const getHistoryServicesByCurrentBookingRoom = async (
   idBooking
 ) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getHistoryServicesByCurrentBookingRoom",
       numRoom: numRoom,
-      idBooking: idBooking,
+      idBooking: idBooking
     });
 
   let data = null;
@@ -51,11 +51,11 @@ export const getHistoryServicesByCurrentBookingRoom = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
-  
+
     if (!response.ok) {
       throw result.error;
     } else if (result.length > 0) {
@@ -75,7 +75,7 @@ export const getAllServicesHotel = async () => {
   let url =
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({
-      option: "getAllServicesHotel",
+      option: "getAllServicesHotel"
     });
 
   let data = null;
@@ -85,8 +85,8 @@ export const getAllServicesHotel = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -109,7 +109,7 @@ export const getServiceByName = async (nameService) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({
       option: "getServiceByName",
-      nameService: nameService,
+      nameService: nameService
     });
 
   let data = null;
@@ -119,8 +119,8 @@ export const getServiceByName = async (nameService) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -139,10 +139,10 @@ export const getServiceByName = async (nameService) => {
 };
 
 export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=
   ${JSON.stringify({
     option: "getServiceByIdAndNumRoomAndBooking",
-    serviceToAdd: serviceToAdd,
+    serviceToAdd: serviceToAdd
   })}`;
   let data = null;
 
@@ -151,8 +151,8 @@ export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
@@ -173,7 +173,7 @@ export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
 };
 
 export const POSTService = async (serviceToAdd) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php`;
   let data = null;
 
   try {
@@ -181,9 +181,9 @@ export const POSTService = async (serviceToAdd) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(serviceToAdd),
+      body: JSON.stringify(serviceToAdd)
     });
     const result = await response.json();
     if (!response.ok) {
@@ -202,6 +202,78 @@ export const POSTService = async (serviceToAdd) => {
 };
 
 export const PUTService = async (serviceToUpdate) => {
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php`;
+  let data = null;
+
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      },
+      body: JSON.stringify(serviceToUpdate)
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      throw result.error;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};
+
+export const getStatesOfProductsServices = async (cart,idBooking,numRoom) => {
+  let productsState;
+
+  let cartToVerify = cart.map((product) => {
+    delete product.icon;
+    return product;
+  });
+
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
+    JSON.stringify({
+      option: "returnStatesOfProductsServices",
+      numRoom: parseInt(numRoom),
+      idBooking: idBooking,
+      products: cartToVerify
+    });
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    }
+    if (result) {
+      productsState = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return productsState;
+  }
+};
+
+export const PUTServiceHotel= async (serviceToUpdate) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php`;
   let data = null;
 
@@ -210,9 +282,9 @@ export const PUTService = async (serviceToUpdate) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(serviceToUpdate),
+      body: JSON.stringify(serviceToUpdate)
     });
     const result = await response.json();
     if (!response.ok) {

@@ -111,11 +111,15 @@ export const printRoomsCart = () => {
   let roomsBooking = document.getElementById("roomsBooking");
   cleanRoomCart(roomsBooking);
 
-  let roomsToPrint = rooms.map((room) => {
-    let spanAdults = quantityGuestRoomCart(room.guests.adult, "Adultos");
-    let spanChildrens = quantityGuestRoomCart(room.guests.children, "Niños");
+  if (rooms.length == 0) {
+    cleanDeposit(divDeposit);
+    emptyCartRooms(roomsBooking);
+  } else {
+    let roomsToPrint = rooms.map((room) => {
+      let spanAdults = quantityGuestRoomCart(room.guests.adult, "Adultos");
+      let spanChildrens = quantityGuestRoomCart(room.guests.children, "Niños");
 
-    return `
+      return `
   
   <li class="roomSelected">
   
@@ -151,34 +155,30 @@ export const printRoomsCart = () => {
   </li>
   <hr>
      `;
-  });
-
-  roomsBooking.innerHTML = roomsToPrint.join("");
-
-  document.querySelectorAll(".buttonDelete").forEach((buttonDelete) => {
-    buttonDelete.addEventListener("click", function () {
-      deleteRoomToList(this.dataset.id);
     });
-  });
 
-  document.querySelectorAll(".buttonSubtract").forEach((buttonSubtract) => {
-    buttonSubtract.addEventListener("click", function () {
-      subtractRoom(JSON.parse(this.dataset.room));
+    roomsBooking.innerHTML = roomsToPrint.join("");
+
+    document.querySelectorAll(".buttonDelete").forEach((buttonDelete) => {
+      buttonDelete.addEventListener("click", function () {
+        deleteRoomToList(this.dataset.id);
+      });
     });
-  });
 
-  document.querySelectorAll(".buttonPlus").forEach((buttonPlus) => {
-    buttonPlus.addEventListener("click", function () {
-      plusRoom(JSON.parse(this.dataset.room));
+    document.querySelectorAll(".buttonSubtract").forEach((buttonSubtract) => {
+      buttonSubtract.addEventListener("click", function () {
+        subtractRoom(JSON.parse(this.dataset.room));
+      });
     });
-  });
 
-  totalPriceBooking();
+    document.querySelectorAll(".buttonPlus").forEach((buttonPlus) => {
+      buttonPlus.addEventListener("click", function () {
+        plusRoom(JSON.parse(this.dataset.room));
+      });
+    });
 
-  if (rooms.length > 0) {
+    totalPriceBooking();
     printDeposit(divDeposit);
-  } else {
-    cleanDeposit(divDeposit);
   }
 };
 
@@ -346,4 +346,15 @@ export const next = (buttonNext) => {
     localStorage.setItem("booking", JSON.stringify(booking));
     location.href = "datosCliente.php";
   });
+};
+
+const emptyCartRooms = (roomsBooking) => {
+  roomsBooking.innerHTML = `
+
+  <div class="emptyCartRooms">
+  <img src="../../img/emptyCart.png">
+  <span>Carrito vacio</span>
+  </div>
+  
+  `;
 };

@@ -420,6 +420,7 @@ body {
   flex-direction: column;
   justify-content: start;
   gap: 2rem;
+  border-radius: 3px;
   padding-left: 2rem;
   padding-bottom: 1rem;
 }
@@ -648,7 +649,9 @@ body {
   margin-top: 3rem;
   margin-right: 1rem;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 5px;
+  border: 1px solid rgb(218, 218, 218);
+  background: white;
   box-shadow: 2px 2px 2px rgb(175, 175, 175);
   padding-top: 1rem;
   padding-bottom: 0.7rem;
@@ -694,7 +697,7 @@ body {
 }
 .containCart #roomsBooking {
   height: auto;
-  max-height: 700px;
+  max-height: 43rem;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -704,6 +707,20 @@ body {
   margin-top: 1rem;
   padding-top: 1rem;
   padding-left: 0;
+}
+.containCart #roomsBooking .emptyCartRooms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  color: rgb(153, 153, 153);
+  height: 60%;
+  font-weight: bold;
+}
+.containCart #roomsBooking .emptyCartRooms img {
+  width: 80px;
+  opacity: 80%;
 }
 .containCart #roomsBooking li {
   width: 100%;
@@ -754,6 +771,7 @@ body {
   width: 17px;
   height: 17px;
   opacity: 100%;
+  filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
   margin-right: 0.3rem;
   cursor: pointer;
 }
@@ -780,7 +798,7 @@ body {
 }
 .containCart #roomsBooking li .changeQuantity img {
   width: 17px;
-  height: 17px;
+  filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
   cursor: pointer;
 }
 .containCart #roomsBooking li .changeQuantity img:hover {

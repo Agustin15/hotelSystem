@@ -1,8 +1,8 @@
 import { getServiceByName } from "../../../../scriptsServices/scriptServices.js";
 import { closeWindow } from "./massages.js";
 import { displayContentMinibar } from "./minibarScripts/displayProducts.js";
-let modalAddService, idBooking, numRoom, productsMinibar;
-export let contentMinibar;
+let modalAddService, productsMinibar;
+export let contentMinibar, idBooking, numRoom;
 
 export const configMinibarService = async (
   nameService,

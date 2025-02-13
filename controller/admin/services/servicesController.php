@@ -1,50 +1,73 @@
 <?php
 require("../../model/service.php");
+require_once("../../config/connection.php");
 require(__DIR__ . "./../authToken.php");
 
 class servicesController
 {
 
-    private $service, $authToken;
+    private $service, $authToken, $connection;
     public function __construct()
     {
 
         $this->service = new Service();
+        $this->connection = new Connection();
         $this->authToken = new authToken();
     }
 
-    public function POST($req)
-    {
-
-        try {
-            $idService = $req["idService"];
-            $quantity = $req["quantity"];
-            $idBooking = $req["idBooking"];
-            $numRoom = $req["numRoom"];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
-            }
-
-            $serviceAdded =  $this->service->addServiceBooking($idService, $quantity, $idBooking, $numRoom);
-            return $serviceAdded;
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 500);
-        }
-    }
+    public function POST() {}
 
     public function PUT($req)
     {
 
+        $option = $req["option"];
+        $serviceUpdated = null;
+        $error = false;
+
         try {
-            $idServiceRoom = $req["idServiceRoom"];
-            $quantity = $req["newQuantity"];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $serviceUpdated =  $this->service->updateServiceBooking($quantity, $idServiceRoom);
+
+            if ($option == "updateStockProductByServiceToRoom") {
+
+                $productsToUpdateStock =  $req["products"];
+
+                foreach ($productsToUpdateStock as $product) {
+
+                    try {
+
+                        $this->connection->connect()->begin_transaction();
+                        $serviceFinded =  $this->service->getServiceHotelByIdService($product["idService"]);
+                        if ($serviceFinded) {
+
+                            $newMaxStock = $serviceFinded["maxStock"] -  $product["quantity"];
+
+                            $resultServiceUpdated = $this->service->updateMaxStockServiceHotel(
+                                $newMaxStock,
+                                $product["idService"]
+                            );
+                            if ($resultServiceUpdated) {
+                                $this->connection->connect()->commit();
+                            } else {
+                                $error = true;
+                                throw new Error("No se pudo actualizar el servicio");
+                            }
+                        } else {
+                            $error = true;
+                            throw new Error("No se pudo encontrar el servicio");
+                        }
+                    } catch (Throwable $th) {
+                        throw $th;
+                        $this->connection->connect()->rollback();
+                    }
+                }
+                if (!$error) {
+                    $serviceUpdated = true;
+                }
+            }
+
             return $serviceUpdated;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 500);
@@ -52,57 +75,6 @@ class servicesController
     }
 
     public function DELETE() {}
-
-    public function getServicesBooking($req)
-    {
-
-        try {
-            $idBooking = $req['idBooking'];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
-            }
-            $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
-
-            if (count($bookingServices) > 0) {
-                $bookingServicesDetails = array_map(function ($service) {
-
-                    return array(
-                        "name" => $service['nombreServicio'],
-                        "description" => $service['descripcionServicio'],
-                        "icon" => base64_encode($service['imagen']),
-                        "room" => $service['numHabitacionServicio']
-                    );
-                }, $bookingServices);
-
-                return $bookingServicesDetails;
-            }
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
-        }
-    }
-
-    public function getHistoryServicesByCurrentBookingRoom($req)
-    {
-
-        try {
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
-            }
-            $servicesCurrentRoomBooking = $this->service->getHistoryServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
-            $servicesCurrentRoomBooking = array_map(function ($service) {
-                $service["imagen"] = base64_encode($service["imagen"]);
-                return $service;
-            }, $servicesCurrentRoomBooking);
-
-            return $servicesCurrentRoomBooking;
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
-        }
-    }
-
 
     public function getAllServicesHotel($req)
     {
@@ -143,25 +115,6 @@ class servicesController
             } else {
                 throw new Error("Ups,no se encontro el servicio");
             }
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
-        }
-    }
-
-    public function getServiceByIdAndNumRoomAndBooking($req)
-    {
-        try {
-
-            $idService = $req["serviceToAdd"]["idService"];
-            $idBooking = $req["serviceToAdd"]["idBooking"];
-            $numRoom = $req["serviceToAdd"]["numRoom"];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
-            }
-            $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
-            return $serviceFind;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

@@ -163,6 +163,7 @@ const calculateTotal = () => {
 const serviceFind = async (quantitySessions) => {
   const serviceToAdd = {
     idService: service.idServicio,
+    option: "massages",
     quantity: parseInt(quantitySessions),
     idBooking: parseInt(idBooking),
     numRoom: parseInt(numRoom),
@@ -216,6 +217,7 @@ const addServiceToRoom = async (serviceToAdd) => {
 const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
   const serviceToUpdate = {
     idServiceRoom: serviceFinded.idServicioHabitacion,
+    option: "massages",
     newQuantity: serviceToAdd.quantity + serviceFinded.cantidad,
   };
 

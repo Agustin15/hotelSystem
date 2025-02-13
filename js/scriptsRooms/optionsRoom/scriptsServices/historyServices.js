@@ -60,12 +60,23 @@ const loading = (state) => {
 
 const drawServices = (services) => {
   containHistory.innerHTML = `<ul></ul>`;
+  let iconItem = "../../../img/minibar.png";
 
   let itemServices = services.map((service) => {
+    
+    if (service.nombreServicio == "Cantina") {
+      iconItem = "../../../img/bar-counter.png";
+    }
+
     return `
       <li>
         <div class="headerItem">
-        <img src="data:image/png;base64,${service.imagen}">
+        <img src=${
+          service.nombreServicio == "Telefono" ||
+          service.nombreServicio == "Masajes"
+            ? `data:image/png;base64,${service.imagen}`
+            : iconItem
+        }>
         <span>Servicio ${service.nombreServicio}</span>
          </div>
         <div class="footerItem">
