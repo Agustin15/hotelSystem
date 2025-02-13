@@ -125,7 +125,16 @@
             background-color: rgb(243, 243, 243);
             cursor: pointer;
           }
+          .optionMenuRoomDisabled {
+            filter: grayscale(100%);
+          }
+
+          .optionMenuRoomDisabled:hover {
+            cursor: auto;
+            background-color: white;
+          }
         }
+
         .rowOne {
           display: flex;
           align-items: start;

@@ -16,16 +16,16 @@ export const configMinibarService = async (
   contentMinibar = document.querySelector(".contentMinibar");
   closeWindow(modalAddService, ".btnCloseMinibar");
 
-  productsMinibar = await serviceByName(nameService);
+  productsMinibar = await serviceByName(nameService, contentMinibar);
 
   if (productsMinibar) {
     displayContentMinibar(productsMinibar);
   }
 };
 
-const serviceByName = async (nameService) => {
+export const serviceByName = async (nameService, contentMinibar) => {
   let data;
-  loading(true);
+  loading(true, contentMinibar);
   try {
     const result = await getServiceByName(nameService);
     if (result) {
@@ -34,15 +34,15 @@ const serviceByName = async (nameService) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loading(false, contentMinibar);
     if (!data) {
-      noData("Ups,no se pudo cargar el servicio");
+      noData("Ups,no se pudo cargar el servicio", contentMinibar);
     }
     return data;
   }
 };
 
-const noData = (msj) => {
+const noData = (msj, contentMinibar) => {
   contentMinibar.innerHTML = `
              <div class="noData">
              <img src="../../../img/sinDatos.png">
@@ -51,7 +51,7 @@ const noData = (msj) => {
           `;
 };
 
-const loading = (state) => {
+const loading = (state, contentMinibar) => {
   if (state) {
     contentMinibar.innerHTML = `
                <div class="loading">

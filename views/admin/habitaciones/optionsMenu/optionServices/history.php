@@ -9,6 +9,7 @@
 
 <body>
 
+    <div class="modalMainHistory"></div>
     <div class="containTitle">
         <h3 class="titleHistory"></h3>
         <img src="../../../img/historyServices.png">

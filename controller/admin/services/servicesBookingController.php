@@ -34,8 +34,8 @@ class servicesBookingController
                 $products = $req["products"];
                 foreach ($products as $product) {
                     try {
-
                         $this->connection->connect()->begin_transaction();
+
                         $resultServiceAdded =  $this->service->addServiceBooking(
                             $product["idService"],
                             $product["quantity"],
@@ -85,19 +85,33 @@ class servicesBookingController
 
             if ($option == "minibar" || $option == "cantina") {
                 $products = $req["products"];
+                $numRoom = $req["numRoom"];
+                $idBooking = $req["idBooking"];
+
                 foreach ($products as $product) {
                     try {
-
                         $this->connection->connect()->begin_transaction();
-                        $resultServiceUpdated =  $this->service->updateQuantityServiceBooking(
-                            $product["newQuantity"],
-                            $product["idServiceRoom"],
+
+                        $serviceFound = $this->service->getServiceByIdAndNumRoomAndBooking(
+                            $product["idService"],
+                            $idBooking,
+                            $numRoom
                         );
 
-                        if ($resultServiceUpdated) {
-                            $this->connection->connect()->commit();
+                        if ($serviceFound) {
+                            $newAmount =  $product["quantity"] + $serviceFound["cantidad"];
+                            $resultServiceUpdated =  $this->service->updateQuantityServiceBooking(
+                                $newAmount,
+                                $serviceFound["idServicioHabitacion"],
+                            );
+
+                            if ($resultServiceUpdated) {
+                                $this->connection->connect()->commit();
+                            } else {
+                                throw new Error("No se pudo actualizar el servicio a la habitacion");
+                            }
                         } else {
-                            throw new Error("No se pudo actualizar el servicio a la habitacion");
+                            throw new Error("No se pudo encontrar el servicio a actualizar");
                         }
                     } catch (Throwable $th) {
                         $error = true;

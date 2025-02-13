@@ -1,4 +1,4 @@
-.modalMainClient {
+.modalMainMinibar {
   position: absolute;
   z-index: 3;
   display: none;
@@ -12,20 +12,24 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 
-  .alertError {
+  .alert {
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: white;
     gap: 1rem;
-    align-items: center;
     width: 20rem;
     padding: 1rem;
     border-radius: 5px;
-    margin-left: 12rem;
-    margin-top: 16rem;
-    color: rgb(153, 153, 153);
+    margin-left: 8rem;
+    color: rgb(0, 0, 0);
 
-  
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
     p {
       font-weight: bold;
       font-size: 18px;
@@ -44,10 +48,24 @@
       box-shadow: 2px 2px 2px black;
       border: none;
       border-radius: 3px;
-      font-size: 18px;
+      font-size: 16px;
       margin-top: 1rem;
       cursor: pointer;
     }
+  }
+
+  .alertError button {
+    background-color: red;
+  }
+
+  .alertError button:hover {
+    background-color: rgb(214, 4, 4);
+  }
+  .alertCorrect button {
+    background-color: rgb(21, 162, 180);
+  }
+  .alertCorrect button:hover {
+    background-color: rgb(23, 142, 158);
   }
 }
 
@@ -56,7 +74,7 @@
   height: 33rem;
   background-color: white;
   border-radius: 3px;
-  margin-top: 5rem;
+  margin-top: 3rem;
   margin-left: 9rem;
   display: flex;
   align-items: center;
@@ -162,6 +180,7 @@
     .noStock {
       filter: grayscale(75%);
     }
+
     .stockAvailable {
       filter: none;
     }
@@ -234,12 +253,18 @@
         button:hover {
           transform: scale(1.1);
         }
+
         .btnMinus {
           background-color: rgb(194, 9, 9);
         }
 
         .btnPlus {
           background-color: rgb(12, 179, 12);
+        }
+        .noStock button:hover {
+          transform: none;
+          cursor: auto;
+          background: none;
         }
       }
 

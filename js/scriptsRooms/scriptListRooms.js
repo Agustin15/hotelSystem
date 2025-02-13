@@ -131,9 +131,12 @@ const drawRooms = (rooms) => {
       <img src="../../../img/nextBookings.png">
       Proximas reservas
       </li>
-      <li class="optionMenuRoom" data-url="optionsMenu/services.php?numRoom=${
-        room.numRoom
-      }">
+      <li class="optionMenuRoom ${
+        room.state == "available" ? "optionMenuRoomDisabled" : ""
+      }" data-state=${room.state} data-url="optionsMenu/services.php?numRoom=${
+      room.numRoom
+    }">
+
       <img src="../../../img/services.png">
       Servicios
       </li>
@@ -202,7 +205,9 @@ const optionMenuRoom = () => {
   optionsMenuRoom.forEach((option) => {
     option.addEventListener("click", () => {
       let url = option.dataset.url;
-      getOptionRoomPage(url);
+      if (!option.dataset.state || option.dataset.state == "busy") {
+        getOptionRoomPage(url);
+      }
     });
   });
 };
@@ -235,16 +240,16 @@ const drawDocument = (document, url) => {
   const functionsOptions = [
     {
       page: "record.php",
-      function: configRecordRoom,
+      function: configRecordRoom
     },
     {
       page: "nextBookings.php",
-      function: configNextBookings,
+      function: configNextBookings
     },
     {
       page: "services.php",
-      function: configServices,
-    },
+      function: configServices
+    }
   ];
 
   let functionOption = functionsOptions.find(

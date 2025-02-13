@@ -1,5 +1,6 @@
-import { contentMinibar } from "../minibar.js";
+import { contentMinibar, numRoom } from "../minibar.js";
 import { displayCart, addService } from "./displayCart.js";
+import { displayAlert } from "./displayAlert.js";
 export let cart = [];
 export let amount = 0;
 export let productsMinibar;
@@ -99,16 +100,20 @@ const displayProducts = () => {
       let elementQuantity = itemProduct.querySelector(".quantity");
       let quantity = elementQuantity.textContent;
 
-      const productToCart = {
-        id: cart.length + 1,
-        idService: productFinded.idServicio,
-        name: productFinded.descripcionServicio,
-        icon: productFinded.imagen,
-        quantity: parseInt(quantity),
-        price: productFinded.precio,
-        total: productFinded.precio * quantity
-      };
-      addToCart(productToCart);
+      if (parseInt(quantity) == 0) {
+        displayAlert(false, numRoom, "Ingresa una cantidad valida");
+      } else {
+        const productToCart = {
+          id: cart.length + 1,
+          idService: productFinded.idServicio,
+          name: productFinded.descripcionServicio,
+          icon: productFinded.imagen,
+          quantity: parseInt(quantity),
+          price: productFinded.precio,
+          total: productFinded.precio * quantity
+        };
+        addToCart(productToCart);
+      }
     });
   });
 

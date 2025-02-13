@@ -1,9 +1,13 @@
 import { getHistoryServicesByCurrentBookingRoom } from "../../../scriptsServices/scriptServices.js";
-
+import { detailsService } from "./optionsHistoryService.js/details.js";
 let containHistory;
+export let numRoom, idBooking;
 
-export const configHistory = async (numRoom, idBooking) => {
+export const configHistory = async (numRoomService, idBookingService) => {
   let titleHistory = document.querySelector(".titleHistory");
+  numRoom = numRoomService;
+  idBooking = idBookingService;
+
   titleHistory.innerHTML = `Historial servicios habitacion ${numRoom}`;
   containHistory = document.querySelector(".containHistory");
   let services = await historyServicesByCurrentBookingRoom(idBooking, numRoom);
@@ -63,13 +67,15 @@ const drawServices = (services) => {
   let iconItem = "../../../img/minibar.png";
 
   let itemServices = services.map((service) => {
-    
     if (service.nombreServicio == "Cantina") {
       iconItem = "../../../img/bar-counter.png";
     }
 
     return `
-      <li>
+      <li data-service=${JSON.stringify({
+        idService: service.idServicio,
+        nameService: service.nombreServicio
+      })}>
         <div class="headerItem">
         <img src=${
           service.nombreServicio == "Telefono" ||
@@ -80,7 +86,7 @@ const drawServices = (services) => {
         <span>Servicio ${service.nombreServicio}</span>
          </div>
         <div class="footerItem">
-         <span>Detalles</span>
+         <span class="detailsOption">Detalles</span>
         </div>
 
       </li>
@@ -90,4 +96,17 @@ const drawServices = (services) => {
   let listServices = containHistory.querySelector("ul");
 
   listServices.innerHTML = itemServices.join("");
+
+  openDetails();
+};
+
+const openDetails = () => {
+  document.querySelectorAll(".detailsOption").forEach((option) => {
+    option.addEventListener("click", () => {
+      let service =JSON.parse(option.parentElement.parentElement.dataset.service);
+      if (service) {
+        detailsService(service.idService, service.nameService);
+      }
+    });
+  });
 };

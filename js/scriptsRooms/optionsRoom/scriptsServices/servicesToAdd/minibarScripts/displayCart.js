@@ -5,6 +5,7 @@ import {
   addQuantityCart,
   calculateTotalAmount,
   cleanCart,
+  displayContentMinibar,
   amount
 } from "./displayProducts.js";
 
@@ -17,7 +18,7 @@ import {
   PUTService
 } from "../../../../../scriptsServices/scriptServices.js";
 import { getPayById } from "../../../../../scriptsRevenues/scriptRevenues.js";
-import { idBooking, numRoom } from "../minibar.js";
+import { idBooking, numRoom, serviceByName } from "../minibar.js";
 import { displayAlert } from "./displayAlert.js";
 
 let ulCart;
@@ -97,24 +98,48 @@ const noItems = () => {
     `;
 };
 
+const filterProductsToAddByState = (productsState, criterion) => {
+  let productsFilter = productsState.filter(
+    (productsState) => productsState.state == criterion
+  );
+
+  return productsFilter;
+};
 export const addService = async () => {
   let productsState = await statesOfProductsServices();
 
   if (productsState) {
-    let productsToAdd = productsState.filter(
-      (productsState) => productsState.state == "toAdd"
+    let productsToAdd = filterProductsToAddByState(productsState, "toAdd");
+    let productsToUpdate = filterProductsToAddByState(
+      productsState,
+      "toUpdate"
     );
 
+    let resultService = false;
     if (productsToAdd.length > 0) {
       let serviceAdded = postService(productsToAdd);
       if (serviceAdded) {
-        let resultUpdatePay = putPay();
-        if (resultUpdatePay) {
-          let resultUpdateService = putHotelService();
+        resultService = true;
+      } else {
+        return;
+      }
+    }
+    if (productsToUpdate.length > 0) {
+      let serviceUpdated = putServiceRoom(productsToUpdate);
+      if (serviceUpdated) {
+        resultService = true;
+      } else {
+        return;
+      }
+    }
 
-          if (resultUpdateService) {
-            cleanCart();
-          }
+    if (resultService) {
+      let resultUpdatePay = putPay(amount);
+      if (resultUpdatePay) {
+        let resultUpdateService = putHotelService();
+        if (resultUpdateService) {
+          cleanCart();
+          displayAlert(true, numRoom);
         }
       }
     }
@@ -144,7 +169,7 @@ const statesOfProductsServices = async () => {
   } finally {
     loading(false);
     if (!data) {
-      displayAlert(false);
+      displayAlert(false, numRoom);
     }
     return data;
   }
@@ -170,19 +195,19 @@ const postService = async (productsToAdd) => {
     loading(false);
   } finally {
     if (!resultPOST) {
-      displayAlert(false);
+      displayAlert(false, numRoom);
     }
     return resultPOST;
   }
 };
 
-const putPay = async () => {
+const putPay = async (amount) => {
   let revenueById = await getPayById(idBooking);
 
   if (revenueById) {
     let newAmount = revenueById.deposito + amount;
-    let resultPUTRevenue;
 
+    let resultPUTRevenue;
     loading(true);
     try {
       const response = await fetch(
@@ -208,10 +233,36 @@ const putPay = async () => {
       }
     } finally {
       if (!resultPUTRevenue) {
-        displayAlert(false);
+        displayAlert(false, numRoom);
       }
       return resultPUTRevenue;
     }
+  }
+};
+
+const putServiceRoom = async (productsToUpdate) => {
+  const serviceToUpdate = {
+    products: productsToUpdate,
+    option: "minibar",
+    idBooking: idBooking,
+    numRoom: numRoom
+  };
+
+  let resultPUT;
+  loading(true);
+  try {
+    const result = await PUTService(serviceToUpdate);
+    if (result) {
+      resultPUT = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!resultPUT) {
+      displayAlert(false, numRoom);
+    }
+    return resultPUT;
   }
 };
 
@@ -233,8 +284,15 @@ const putHotelService = async () => {
   } finally {
     loading(false);
     if (!resultPUT) {
-      displayAlert(false);
+      displayAlert(false, numRoom);
     }
     return resultPUT;
   }
+};
+
+export const refreshMinibar = async () => {
+  let contentMinibar = document.querySelector(".contentMinibar");
+  let products = await serviceByName("Minibar", contentMinibar);
+
+  displayContentMinibar(products);
 };

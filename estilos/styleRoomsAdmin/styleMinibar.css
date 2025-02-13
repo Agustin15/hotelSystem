@@ -1,4 +1,4 @@
-.modalMainClient {
+.modalMainMinibar {
   position: absolute;
   z-index: 3;
   display: none;
@@ -12,28 +12,33 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalMainClient .alertError {
+.modalMainMinibar .alert {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: white;
   gap: 1rem;
-  align-items: center;
   width: 20rem;
   padding: 1rem;
   border-radius: 5px;
-  margin-left: 12rem;
-  margin-top: 16rem;
-  color: rgb(153, 153, 153);
+  margin-left: 8rem;
+  color: rgb(0, 0, 0);
 }
-.modalMainClient .alertError p {
+.modalMainMinibar .alert .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.modalMainMinibar .alert p {
   font-weight: bold;
   font-size: 18px;
   text-align: center;
 }
-.modalMainClient .alertError img {
+.modalMainMinibar .alert img {
   width: 72px;
 }
-.modalMainClient .alertError button {
+.modalMainMinibar .alert button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -41,9 +46,21 @@
   box-shadow: 2px 2px 2px black;
   border: none;
   border-radius: 3px;
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 1rem;
   cursor: pointer;
+}
+.modalMainMinibar .alertError button {
+  background-color: red;
+}
+.modalMainMinibar .alertError button:hover {
+  background-color: rgb(214, 4, 4);
+}
+.modalMainMinibar .alertCorrect button {
+  background-color: rgb(21, 162, 180);
+}
+.modalMainMinibar .alertCorrect button:hover {
+  background-color: rgb(23, 142, 158);
 }
 
 .containMinibar {
@@ -51,7 +68,7 @@
   height: 33rem;
   background-color: white;
   border-radius: 3px;
-  margin-top: 5rem;
+  margin-top: 3rem;
   margin-left: 9rem;
   display: flex;
   align-items: center;
@@ -225,6 +242,11 @@
 }
 .products li .columnTwo .containQuantity .btnPlus {
   background-color: rgb(12, 179, 12);
+}
+.products li .columnTwo .containQuantity .noStock button:hover {
+  transform: none;
+  cursor: auto;
+  background: none;
 }
 .products li .columnTwo .btnAdd {
   display: flex;

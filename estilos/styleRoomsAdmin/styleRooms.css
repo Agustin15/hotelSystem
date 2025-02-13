@@ -117,6 +117,13 @@
   background-color: rgb(243, 243, 243);
   cursor: pointer;
 }
+.containRooms .rooms .itemsRooms li .menuOptions .optionMenuRoomDisabled {
+  filter: grayscale(100%);
+}
+.containRooms .rooms .itemsRooms li .menuOptions .optionMenuRoomDisabled:hover {
+  cursor: auto;
+  background-color: white;
+}
 .containRooms .rooms .itemsRooms li .rowOne {
   display: flex;
   align-items: start;
@@ -254,12 +261,12 @@
   width: 120px;
   opacity: 75%;
 }
-.pageNotFound .header {
+.pageNotFound .headerPageNotFound {
   display: flex;
   justify-content: flex-end;
   width: 110%;
 }
-.pageNotFound .header button {
+.pageNotFound .headerPageNotFound button {
   background-color: rgb(231, 0, 0);
   padding: 0.2rem;
   width: 2rem;
@@ -269,7 +276,7 @@
   border: none;
   cursor: pointer;
 }
-.pageNotFound .header button:hover {
+.pageNotFound .headerPageNotFound button:hover {
   background-color: rgb(182, 4, 4);
 }
 
