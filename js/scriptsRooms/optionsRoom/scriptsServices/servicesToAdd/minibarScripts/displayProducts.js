@@ -1,13 +1,22 @@
 import { contentMinibar, numRoom } from "../minibar.js";
+import { contentBar} from "../bar.js";
 import { displayCart, addService } from "./displayCart.js";
 import { displayAlert } from "./displayAlert.js";
 export let cart = [];
 export let amount = 0;
-export let productsMinibar;
+export let productsShop, content, optionServiceProduct;
 
-export const displayContentMinibar = (products) => {
-  productsMinibar = products;
-  contentMinibar.innerHTML = `
+export const displayContentShop = (products, option) => {
+  optionServiceProduct = option;
+
+  if (optionServiceProduct == "minibar") {
+    content = contentMinibar;
+  } else {
+    content = contentBar;
+  }
+
+  productsShop = products;
+  content.innerHTML = `
   <ul class="products">
   </ul>
   <div class="containCart">
@@ -38,7 +47,7 @@ export const displayContentMinibar = (products) => {
 };
 
 const displayProducts = () => {
-  let items = productsMinibar.map((product) => {
+  let items = productsShop.map((product) => {
     if (!product.quantity) {
       product.quantity = 0;
     }
@@ -96,7 +105,7 @@ const displayProducts = () => {
     btn.addEventListener("click", () => {
       let itemProduct = btn.parentElement.parentElement;
       let productId = itemProduct.id;
-      let productFinded = findProductOfMinibar(productId);
+      let productFinded = findProductOfShop(productId);
       let elementQuantity = itemProduct.querySelector(".quantity");
       let quantity = elementQuantity.textContent;
 
@@ -123,7 +132,7 @@ const displayProducts = () => {
 const changeQuantity = (option, btn) => {
   let itemProduct = btn.parentElement.parentElement.parentElement;
   let productId = itemProduct.id;
-  let productFinded = findProductOfMinibar(productId);
+  let productFinded = findProductOfShop(productId);
 
   if (option == "subtract") {
     if (productFinded.quantity > 0) {
@@ -138,8 +147,8 @@ const changeQuantity = (option, btn) => {
   }
 };
 
-const findProductOfMinibar = (id) => {
-  return productsMinibar.find((product) => product.idServicio == id);
+const findProductOfShop = (id) => {
+  return productsShop.find((product) => product.idServicio == id);
 };
 
 const findProductInCartByName = (nameService) => {
@@ -152,7 +161,7 @@ const findProductInCartById = (idItem) => {
 
 const addToCart = (productToCart) => {
   let productInCart = findProductInCartByName(productToCart.name);
-  let productFound = findProductOfMinibar(productToCart.idService);
+  let productFound = findProductOfShop(productToCart.idService);
 
   if (productInCart) {
     if (
@@ -170,7 +179,7 @@ const addToCart = (productToCart) => {
 };
 
 const itemAddedToCart = (productToCart) => {
-  let productFound = findProductOfMinibar(productToCart.idService);
+  let productFound = findProductOfShop(productToCart.idService);
   productFound.maxStock -= productToCart.quantity;
   productFound.quantity = 0;
   displayProducts();
@@ -178,7 +187,7 @@ const itemAddedToCart = (productToCart) => {
 
 export const deleteToCart = (idItem) => {
   let itemCartFound = findProductInCartById(idItem);
-  let productFound = findProductOfMinibar(itemCartFound.idService);
+  let productFound = findProductOfShop(itemCartFound.idService);
   productFound.maxStock += itemCartFound.quantity;
   cart = cart.filter((item) => item.id != idItem);
   displayProducts();
@@ -186,7 +195,7 @@ export const deleteToCart = (idItem) => {
 
 export const subtractQuantityCart = (idItem) => {
   let itemInCart = findProductInCartById(idItem);
-  let productFound = findProductOfMinibar(itemInCart.idService);
+  let productFound = findProductOfShop(itemInCart.idService);
 
   if (itemInCart.quantity > 0) {
     itemInCart.quantity = itemInCart.quantity - 1;
@@ -198,7 +207,7 @@ export const subtractQuantityCart = (idItem) => {
 
 export const addQuantityCart = (idItem) => {
   let itemInCart = findProductInCartById(idItem);
-  let productFound = findProductOfMinibar(itemInCart.idService);
+  let productFound = findProductOfShop(itemInCart.idService);
   if (itemInCart.quantity < productFound.maxStock + itemInCart.quantity) {
     itemInCart.quantity = itemInCart.quantity + 1;
     itemInCart.total = itemInCart.price * itemInCart.quantity;

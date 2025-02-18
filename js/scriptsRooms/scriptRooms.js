@@ -155,6 +155,8 @@ export const getBookingRoomsDetails = async (idBooking) => {
       },
     });
     const result = await response.json();
+    
+
     if (!response.ok) {
       throw result.error;
     } else if (result) {

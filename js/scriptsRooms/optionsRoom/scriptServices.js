@@ -2,6 +2,7 @@ import { close } from "./scriptRecordRoom.js";
 import { getBookingByRoomReserved } from "../scriptRooms.js";
 import { configHistory } from "./scriptsServices/historyServices.js";
 import { configAddService } from "./scriptsServices/addService.js";
+import { configDeleteService } from "./scriptsServices/deleteService.js";
 import { pageNotFound, loadingPage } from "../dashboardScript.js";
 
 let numRoom;
@@ -59,6 +60,10 @@ const optionServicePage = [
     page: "addService.php",
     function: configAddService,
   },
+  {
+    page: "deleteService.php",
+    function: configDeleteService,
+  },
 ];
 
 const bookingByRoomReserved = async () => {
@@ -103,7 +108,7 @@ const loading = (state) => {
 };
 
 const optionMenu = () => {
-  let options = document.querySelector(".headerWindow").querySelectorAll("li");
+  let options = document.querySelector(".headerWindowContainServices").querySelectorAll("li");
 
   options.forEach((option) => {
     option.addEventListener("click", async () => {

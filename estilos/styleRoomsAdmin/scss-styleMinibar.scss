@@ -1,10 +1,10 @@
-.modalMainMinibar {
+.modalMainMinibar,.modalMainBar {
   position: absolute;
   z-index: 3;
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   margin: auto;
   top: 0;
   left: 0;
@@ -20,6 +20,7 @@
     gap: 1rem;
     width: 20rem;
     padding: 1rem;
+    margin-top: 12rem;
     border-radius: 5px;
     margin-left: 8rem;
     color: rgb(0, 0, 0);
@@ -69,7 +70,7 @@
   }
 }
 
-.containMinibar {
+.containMinibar,.containBar {
   width: 55rem;
   height: 33rem;
   background-color: white;
@@ -103,10 +104,25 @@
         width: 35px;
       }
     }
+
+    button {
+      width: 1.7rem;
+      height: 1.7rem;
+      background-color: rgb(204, 1, 1);
+      border: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: rgb(233, 8, 8);
+    }
   }
 }
 
-.contentMinibar {
+
+
+.contentMinibar,.contentBar {
   display: flex;
   align-items: start;
   justify-content: start;

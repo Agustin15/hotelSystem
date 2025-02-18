@@ -42,6 +42,7 @@
 .containHistory ul li .headerItem {
   font-size: 18px;
   display: flex;
+  font-weight: bold;
   padding: 1rem;
   align-items: center;
   justify-content: start;
@@ -86,11 +87,11 @@
   width: 100%;
   height: 60%;
   gap: 0.5rem;
-  font-size: 16px;
+  font-size: 20px;
   color: gray;
 }
 .containHistory .loading img {
-  width: 40px;
+  width: 50px;
   opacity: 70%;
 }
 
@@ -116,36 +117,52 @@
   width: 25rem;
   margin-top: 6rem;
   margin-left: 6rem;
-  height: 15rem;
-  max-height: 21rem;
+  background-color: white;
+  height: auto;
+  max-height: 28rem;
   border-radius: 4px;
 }
-
-.headerWindow {
+.containDetails .headerWindow {
   display: flex;
   color: rgb(255, 255, 255);
   width: 25rem;
   height: 3rem;
+  padding-bottom: 0.5rem;
   align-items: start;
   justify-content: space-between;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
-.headerWindow h3 {
+.containDetails .headerWindow h3 {
   font-weight: bold;
   font-size: 18px;
   margin-top: 1rem;
-  margin-left: 8.3rem;
+  margin-left: 7rem;
 }
-.headerWindow button {
+.containDetails .headerWindow button {
   height: 1.7rem;
   width: 1.7rem;
   font-weight: bold;
-  background-color: rgb(189, 0, 0);
+  border: none;
+  color: white;
+  background-color: rgb(240, 19, 19);
 }
-.headerWindow .noData {
+.containDetails .headerWindow button:hover {
+  cursor: pointer;
+  background-color: rgb(216, 15, 15);
+}
+
+.contentDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.contentDetails .noData {
   width: 100%;
   height: 65%;
-  font-size: 19px;
+  font-size: 16px;
   color: gray;
   display: flex;
   flex-direction: column;
@@ -153,23 +170,93 @@
   justify-content: center;
   gap: 0.5rem;
 }
-.headerWindow .noData img {
-  width: 90px;
+.contentDetails .noData img {
+  width: 80px;
   opacity: 70%;
 }
-.headerWindow .loading {
+.contentDetails .loading {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 60%;
   gap: 0.5rem;
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
 }
-.headerWindow .loading img {
+.contentDetails .loading img {
   width: 40px;
   opacity: 70%;
+}
+
+.ulItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 97%;
+  margin-top: 1rem;
+  overflow-y: scroll;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+.ulItems .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.2rem;
+  border-radius: 5px;
+  color: white;
+  width: 15rem;
+  height: 7rem;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  border: 1px solid rgb(1, 155, 160);
+  box-shadow: 2px 2px 2px gray;
+  font-size: 17px;
+  padding: 0.5rem;
+}
+.ulItems .item .name {
+  text-overflow: ellipsis;
+  width: 14rem;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ulItems .item .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.ulItems .item .columnOne,
+.ulItems .item .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 3px;
+  width: 3rem;
+  height: 4rem;
+  padding: 1rem;
+  background: rgb(2, 112, 116);
+}
+.ulItems .item .columnOne {
+  height: 3.5rem;
+}
+.ulItems .item .columnOne img {
+  width: 50px;
+  height: 50px;
+}
+.ulItems .item .columnTwo {
+  font-size: 14px;
+  width: 7rem;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+.ulItems .item .columnTwo a {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=styleHistoryServices.css.map */

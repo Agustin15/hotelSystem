@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       removeAlertLoginAdmin();
       localStorage.removeItem("alertInvalidToken");
-    }, 4000);
+    }, 7000);
   }
 });
 

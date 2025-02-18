@@ -2,7 +2,7 @@ import {
   getServiceByName,
   POSTService,
   getServiceByIdAndNumRoomAndBooking,
-  PUTService,
+  PUTService
 } from "../../../../scriptsServices/scriptServices.js";
 
 import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
@@ -10,7 +10,7 @@ import { getPayById } from "../../../../scriptsRevenues/scriptRevenues.js";
 
 let modalAddService, contentMassage, idBooking, numRoom, service;
 let total = 0;
-let btnAdd, sessionsInput, alertService;
+let btnAdd, sessionsInput, alertService, textTotal;
 
 export const configMassageService = async (
   nameService,
@@ -67,6 +67,8 @@ const displayMassageService = () => {
 
   sessionsInput = document.querySelector("#sessions");
   btnAdd = document.querySelector(".addServiceBtn");
+  alertService = document.querySelector(".alertService");
+
   sessionsInput.addEventListener("change", () => {
     if (!sessionsInput.value.trim()) {
       changeStateBtnAdd(false, btnAdd);
@@ -98,6 +100,7 @@ const serviceByName = async (nameService) => {
     console.log(error);
   } finally {
     loading(false, btnAdd);
+
     if (!data) {
       noData("Ups,no se pudo cargar el servicio");
     }
@@ -137,7 +140,7 @@ export const closeWindow = (modal, btnToClose) => {
 const calculateTotal = () => {
   let btnCalculate = document.querySelector(".btnCalculate");
   let errorInput = document.querySelector(".errorInput");
-  let textTotal = document.querySelector(".containTotal").querySelector("span");
+  textTotal = document.querySelector(".containTotal").querySelector("span");
   let priceMassage = service.precio;
 
   btnCalculate.addEventListener("click", () => {
@@ -166,7 +169,7 @@ const serviceFind = async (quantitySessions) => {
     option: "massages",
     quantity: parseInt(quantitySessions),
     idBooking: parseInt(idBooking),
-    numRoom: parseInt(numRoom),
+    numRoom: parseInt(numRoom)
   };
 
   loadingForm(true, btnAdd);
@@ -186,6 +189,7 @@ const serviceFind = async (quantitySessions) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups, no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -204,6 +208,7 @@ const addServiceToRoom = async (serviceToAdd) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -218,7 +223,7 @@ const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
   const serviceToUpdate = {
     idServiceRoom: serviceFinded.idServicioHabitacion,
     option: "massages",
-    newQuantity: serviceToAdd.quantity + serviceFinded.cantidad,
+    newQuantity: serviceToAdd.quantity + serviceFinded.cantidad
   };
 
   let data;
@@ -232,6 +237,7 @@ const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -253,6 +259,7 @@ const payByIdBooking = async () => {
   } finally {
     if (!data) {
       setAlertService(
+        alertService,
         false,
         `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
       );
@@ -269,7 +276,7 @@ const updatePay = async () => {
     let data;
     const bookingToUpdate = {
       idBooking: idBooking,
-      newAmount: payBookingFinded.deposito + total,
+      newAmount: payBookingFinded.deposito + total
     };
 
     loadingForm(true, btnAdd);
@@ -278,9 +285,9 @@ const updatePay = async () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
+          credentials: "same-origin"
         },
-        body: JSON.stringify(bookingToUpdate),
+        body: JSON.stringify(bookingToUpdate)
       });
       const result = await response.json();
 
@@ -298,15 +305,17 @@ const updatePay = async () => {
       loadingForm(false, btnAdd);
       if (!data) {
         setAlertService(
+          alertService,
           false,
           `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
         );
       } else {
+        defaultValues();
         setAlertService(
+          alertService,
           true,
           `¡Servicio agregado exitosamente a la habitacion ${numRoom}!`
         );
-        defaultValues();
       }
     }
   }
@@ -321,17 +330,21 @@ export const loadingForm = (state, button) => {
   }
 };
 
-export const setAlertService = (state, msj) => {
-  alertService = document.querySelector(".alertService");
+export const setAlertService = (element, state, msj) => {
   if (state) {
     setComponentsAlert(
+      element,
       "../../../img/tickAdmin.png",
       "Exito",
       "alertServiceCorrect",
       msj
     );
+    setTimeout(() => {
+      element.style.display = "none";
+    }, 3000);
   } else {
     setComponentsAlert(
+      element,
       "../../../img/advertenciaLogin.png",
       "Error",
       "alertServiceError",
@@ -340,20 +353,21 @@ export const setAlertService = (state, msj) => {
   }
 };
 
-const setComponentsAlert = (icon, title, classStyle, msj) => {
-  let iconAlert = alertService.querySelector("img");
-  let msjAlert = alertService.querySelector("p");
-  let titleAlert = alertService.querySelector("span");
+const setComponentsAlert = (element, icon, title, classStyle, msj) => {
+  let iconAlert = element.querySelector("img");
+  let msjAlert = element.querySelector("p");
+  let titleAlert = element.querySelector("span");
 
   iconAlert.src = icon;
   titleAlert.textContent = title;
-  alertService.classList.add(classStyle);
+  element.classList.add(classStyle);
   msjAlert.textContent = msj;
-  alertService.style.display = "flex";
+  element.style.display = "flex";
 };
 
 const defaultValues = () => {
   total = 0;
+  textTotal.textContent = "Total:";
   sessionsInput.value = "";
   changeStateBtnAdd(false, btnAdd);
 };

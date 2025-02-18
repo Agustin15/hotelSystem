@@ -3,14 +3,14 @@ import {
   calculateDifferenceNight,
   roomsCart,
   amount,
-  cleanRoomCart,
+  cleanRoomCart
 } from "./scriptCartRooms.js";
 
 import {
   POSTBooking,
   getBookingByClientAndDate,
   alertForm,
-  removeAlertForm,
+  removeAlertForm
 } from "./scriptsMethodsFetch.js";
 
 import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
@@ -91,8 +91,8 @@ const getAllClients = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -127,7 +127,7 @@ const formAddSubmit = () => {
       if (key == "roomsQuantity" && value.length == 0) {
         return (error = {
           key: key,
-          msj: "Elija al menos una habitacion para la reserva",
+          msj: "Elija al menos una habitacion para la reserva"
         });
       } else {
         booking[key] = value;

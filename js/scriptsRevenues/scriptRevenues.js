@@ -1,6 +1,6 @@
 import {
   loadingForm,
-  alertForm,
+  alertForm
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
@@ -15,9 +15,9 @@ export const POSTPay = async (booking) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(booking),
+      body: JSON.stringify(booking)
     });
     const result = await response.json();
 
@@ -48,6 +48,7 @@ export const POSTPay = async (booking) => {
 export const PUTPay = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php `;
 
+  console.log(booking);
   let data;
   loadingForm(true);
   try {
@@ -55,12 +56,13 @@ export const PUTPay = async (booking) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(booking),
+      body: JSON.stringify(booking)
     });
     const result = await response.json();
 
+    console.log(result);
     if (!response.ok) {
       throw result.error;
     } else if (result.response == true) {
@@ -96,14 +98,15 @@ export const getPayById = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
     if (!response.ok) {
       throw result.error;
-    } else if (result) {
+    }
+    if (result) {
       data = result;
     }
   } catch (error) {

@@ -1,5 +1,9 @@
 export const optionsMenuAdmin = () => {
   routesOptions(
+    "http://localhost/sistema%20Hotel/views/admin/index.php",
+    "#liInicio"
+  );
+  routesOptions(
     "http://localhost/sistema%20Hotel/views/admin/clientes/",
     "#liClientes",
     "actualOptionClient"
@@ -16,16 +20,21 @@ export const optionsMenuAdmin = () => {
   );
 };
 
-
 const routesOptions = (url, liOption, itemLocal) => {
-  let allOptionsSubMenu = document
-    .querySelector(liOption)
-    .querySelectorAll("li");
 
-  allOptionsSubMenu.forEach((option) => {
-    option.addEventListener("click", () => {
-      localStorage.setItem(itemLocal, option.dataset.subUrl);
-      location.href = url;
+  if (liOption == "#liInicio") {
+    document
+      .querySelector(liOption)
+      .addEventListener("click", () => (location.href = url));
+  } else {
+    let allOptionsSubMenu = document
+      .querySelector(liOption)
+      .querySelectorAll("li");
+    allOptionsSubMenu.forEach((option) => {
+      option.addEventListener("click", () => {
+        localStorage.setItem(itemLocal, option.dataset.subUrl);
+        location.href = url;
+      });
     });
-  });
+  }
 };

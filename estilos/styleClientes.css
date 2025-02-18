@@ -7,6 +7,7 @@
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
   height: 103.2vh;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -231,8 +232,8 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 86.9%;
-  height: 97vh;
+  width: 100%;
+  height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -248,21 +249,23 @@ body #navAdmin .titleNav {
 }
 .menuBar .title {
   font-size: 20px;
-  color: rgb(168, 168, 168);
+  color: rgb(141, 141, 141);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-left: 7rem;
 }
 .menuBar .title img {
   width: 50px;
 }
 .menuBar ul {
   display: flex;
+  margin-left: 7rem;
   gap: 3rem;
   list-style: none;
   font-size: 18px;
-  color: rgb(177, 177, 177);
+  color: rgb(141, 141, 141);
   font-weight: bold;
 }
 .menuBar ul li {
@@ -297,12 +300,13 @@ body #navAdmin .titleNav {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  width: 81%;
+  width: 67%;
   background-color: white;
   border-radius: 4px;
   box-shadow: 2px 2px 2px rgb(167, 167, 167);
   height: 26rem;
   padding-top: 1rem;
+  margin-left: 11rem;
   margin-top: 2rem;
   border-radius: 10px;
 }
@@ -311,12 +315,23 @@ body #navAdmin .titleNav {
   justify-content: flex-start;
   align-items: center;
   gap: 4rem;
-  width: 99%;
-  margin-left: 3rem;
+  width: 96.6%;
+  border-bottom: 1px solid rgb(197, 197, 197);
+  padding-bottom: 1rem;
+  padding-left: 2rem;
 }
-.option .containChart .header h3 {
-  color: rgb(173, 173, 173);
-  font-size: 22px;
+.option .containChart .header .titleChart {
+  color: rgb(141, 141, 141);
+  font-size: 19px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1.3rem;
+}
+.option .containChart .header .titleChart img {
+  width: 45px;
+  opacity: 100%;
 }
 .option .containChart .header .search {
   display: flex;
@@ -363,6 +378,7 @@ body #navAdmin .titleNav {
 }
 .option .containChart .header .search button img {
   width: 17px;
+  opacity: 100%;
 }
 .option .containChart .header .search button:hover {
   background-color: rgb(8, 143, 153);
@@ -407,6 +423,7 @@ body #navAdmin .titleNav {
   font-size: 23px;
   opacity: 60%;
   margin-left: 7rem;
+  color: rgb(158, 158, 158);
   margin-top: 12rem;
 }
 .loadingPage img {
@@ -447,6 +464,7 @@ body #navAdmin .titleNav {
   padding-bottom: 1.5rem;
   padding-top: 1rem;
   margin-top: 3rem;
+  margin-left: 10rem;
   border-radius: 6px;
   font-size: 18px;
   box-shadow: 2px 2px 2px gray;
@@ -508,7 +526,7 @@ body #navAdmin .titleNav {
   width: auto;
 }
 .titleTable h3 {
-  color: rgb(167, 167, 167);
+  color: rgb(141, 141, 141);
   font-size: 22px;
 }
 
@@ -652,6 +670,7 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 9rem;
   margin-top: 2rem;
   gap: 1rem;
 }
@@ -679,7 +698,7 @@ body #navAdmin .titleNav {
   width: 60px;
 }
 .containFormAdd form .title h3 {
-  color: rgb(160, 160, 160);
+  color: rgb(141, 141, 141);
 }
 .containFormAdd form label {
   background-color: white;
@@ -1636,7 +1655,7 @@ body #navAdmin .titleNav {
   align-items: center;
   opacity: 100%;
   padding: 1rem;
-  background: rgb(20, 135, 139);
+  background-color: #037b80;
   border-radius: 5px;
 }
 .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .content .icon img {
@@ -1650,7 +1669,7 @@ body #navAdmin .titleNav {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: rgb(20, 135, 139);
+  background-color: #037b80;
   border-radius: 5px;
   margin-left: 1rem;
 }
@@ -1828,40 +1847,209 @@ body #navAdmin .titleNav {
   gap: 1rem;
 }
 .modalOptionsBookingClient .containServicesDetails {
+  width: 29rem;
+  height: 38rem;
+  border-radius: 3px;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  margin-left: 10rem;
 }
-.modalOptionsBookingClient .containServicesDetails .services li {
+.modalOptionsBookingClient .containServicesDetails .roomServices {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.5rem;
 }
-.modalOptionsBookingClient .containServicesDetails .services li .title {
+.modalOptionsBookingClient .containServicesDetails .roomServices li {
   display: flex;
-  width: 100%;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 12.3rem;
+  gap: 0;
+}
+.modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  padding: 0.4rem;
+  gap: 0.5rem;
+  color: white;
   font-weight: bold;
-}
-.modalOptionsBookingClient .containServicesDetails .services li .details {
-  display: flex;
-  gap: 1rem;
-  margin-top: -0.5rem;
-}
-.modalOptionsBookingClient .containServicesDetails .services li .details .info {
-  width: 14rem;
-  background: rgb(20, 135, 139);
-}
-.modalOptionsBookingClient .containServicesDetails .services li .details .icon {
-  padding: 0.5rem;
-  background: rgb(20, 135, 139);
+  width: 100%;
+  box-shadow: 2px 2px 2px gray;
   border-radius: 3px;
-  width: 4rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+}
+.modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem .row img {
+  width: 35px;
+}
+.modalOptionsBookingClient .containServicesDetails .roomServices li .footerItem {
+  height: 1rem;
+  padding: 0.4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: gray;
+  background-color: white;
+  box-shadow: 2px 2px 2px gray;
+  justify-content: start;
+  border: 1px solid rgb(216, 216, 216);
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.modalOptionsBookingClient .containServicesDetails .roomServices li .footerItem img {
+  width: 20px;
+  cursor: pointer;
+}
+
+.modalServicesRoom {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.modalServicesRoom .containServicesRoom {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin-left: 10rem;
+  width: 31rem;
+  margin-top: 4rem;
+  align-items: center;
+}
+.modalServicesRoom .containServicesRoom .headerServicesRoom {
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modalServicesRoom .containServicesRoom .headerServicesRoom h3 {
+  margin-left: 8rem;
+  margin-top: 0.5rem;
+}
+.modalServicesRoom .containServicesRoom .headerServicesRoom button {
+  border: none;
+  background-color: rgb(233, 3, 3);
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 16px;
+  cursor: pointer;
 }
-.modalOptionsBookingClient .containServicesDetails .services li .details .icon img {
-  width: 40px;
-  height: 40px;
+.modalServicesRoom .containServicesRoom .headerServicesRoom button:hover {
+  background-color: rgb(196, 2, 2);
+}
+.modalServicesRoom .bodyServicesRoom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  background-color: white;
+  max-height: 31rem;
+  width: 100%;
+  gap: 1rem;
+}
+.modalServicesRoom ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+}
+.modalServicesRoom ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.2rem;
+  border-radius: 5px;
+  color: white;
+  width: 15rem;
+  height: 7rem;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  border: 1px solid rgb(1, 155, 160);
+  box-shadow: 2px 2px 2px gray;
+  font-size: 17px;
+  padding: 0.5rem;
+}
+.modalServicesRoom ul li .name {
+  text-overflow: ellipsis;
+  width: 14rem;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.modalServicesRoom ul li .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.modalServicesRoom ul li .columnOne,
+.modalServicesRoom ul li .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 3px;
+  width: 3rem;
+  height: 4rem;
+  padding: 1rem;
+  background: rgb(2, 112, 116);
+}
+.modalServicesRoom ul li .columnOne {
+  height: 3.5rem;
+}
+.modalServicesRoom ul li .columnOne img {
+  width: 50px;
+  height: 50px;
+}
+.modalServicesRoom ul li .columnTwo {
+  font-size: 14px;
+  width: 7rem;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+.modalServicesRoom ul li .columnTwo a {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=styleClientes.css.map */

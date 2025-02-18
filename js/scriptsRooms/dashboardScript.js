@@ -44,7 +44,8 @@ const getDocument = async (url) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loadingPage(false, option);
+    
+    loadingPage(true, option);
     if (!page) {
       pageNotFound(option);
     }

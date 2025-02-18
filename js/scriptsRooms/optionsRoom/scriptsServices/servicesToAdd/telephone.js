@@ -2,7 +2,7 @@ import {
   getServiceByName,
   POSTService,
   getServiceByIdAndNumRoomAndBooking,
-  PUTService,
+  PUTService
 } from "../../../../scriptsServices/scriptServices.js";
 
 import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
@@ -11,12 +11,12 @@ import {
   setAlertService,
   loadingForm,
   changeStateBtnAdd,
-  closeWindow,
+  closeWindow
 } from "./massages.js";
 
 let modalAddService, contentTelephone, idBooking, numRoom, service;
 let total = 0;
-let btnAdd, minutesInput, alertService;
+let btnAdd, minutesInput, alertService, textTotal;
 
 export const configTelephoneService = async (
   nameService,
@@ -69,6 +69,7 @@ const displayTelephoneService = () => {
         <div>
       `;
 
+  alertService = document.querySelector(".alertService");
   minutesInput = document.querySelector("#minutes");
   btnAdd = document.querySelector(".addServiceBtn");
   minutesInput.addEventListener("change", () => {
@@ -92,6 +93,7 @@ const serviceByName = async (nameService) => {
     console.log(error);
   } finally {
     loading(false);
+    data = null;
     if (!data) {
       noData("Ups,no se pudo cargar el servicio");
     }
@@ -124,7 +126,7 @@ const loading = (state) => {
 const calculateTotal = () => {
   let btnCalculate = document.querySelector(".btnCalculate");
   let errorInput = document.querySelector(".errorInput");
-  let textTotal = document.querySelector(".containTotal").querySelector("span");
+  textTotal = document.querySelector(".containTotal").querySelector("span");
   let priceTelephone = service.precio;
 
   btnCalculate.addEventListener("click", () => {
@@ -153,7 +155,7 @@ const serviceFind = async (quantityMinutes) => {
     option: "telephone",
     quantity: parseInt(quantityMinutes),
     idBooking: parseInt(idBooking),
-    numRoom: parseInt(numRoom),
+    numRoom: parseInt(numRoom)
   };
 
   loadingForm(true, btnAdd);
@@ -173,6 +175,7 @@ const serviceFind = async (quantityMinutes) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups, no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -191,6 +194,7 @@ const addServiceToRoom = async (serviceToAdd) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -205,7 +209,7 @@ const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
   const serviceToUpdate = {
     idServiceRoom: serviceFinded.idServicioHabitacion,
     option: "telephone",
-    newQuantity: serviceToAdd.quantity + serviceFinded.cantidad,
+    newQuantity: serviceToAdd.quantity + serviceFinded.cantidad
   };
 
   let data;
@@ -219,6 +223,7 @@ const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
     console.log(error);
     loadingForm(false, btnAdd);
     setAlertService(
+      alertService,
       false,
       `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
     );
@@ -240,6 +245,7 @@ const payByIdBooking = async () => {
   } finally {
     if (!data) {
       setAlertService(
+        alertService,
         false,
         `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
       );
@@ -256,7 +262,7 @@ const updatePay = async () => {
     let data;
     const bookingToUpdate = {
       idBooking: idBooking,
-      newAmount: payBookingFinded.deposito + total,
+      newAmount: payBookingFinded.deposito + total
     };
 
     loadingForm(true, btnAdd);
@@ -265,9 +271,9 @@ const updatePay = async () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
+          credentials: "same-origin"
         },
-        body: JSON.stringify(bookingToUpdate),
+        body: JSON.stringify(bookingToUpdate)
       });
       const result = await response.json();
 
@@ -285,15 +291,17 @@ const updatePay = async () => {
       loadingForm(false, btnAdd);
       if (!data) {
         setAlertService(
+          alertService,
           false,
           `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
         );
       } else {
+        defaultValues();
         setAlertService(
+          alertService,
           true,
           `¡Servicio agregado exitosamente a la habitacion ${numRoom}!`
         );
-        defaultValues();
       }
     }
   }
@@ -301,6 +309,7 @@ const updatePay = async () => {
 
 const defaultValues = () => {
   total = 0;
+  textTotal.innerHTML = `Total:`;
   minutesInput.value = "";
   changeStateBtnAdd(false, btnAdd);
 };

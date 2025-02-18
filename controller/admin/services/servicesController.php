@@ -30,42 +30,54 @@ class servicesController
                 throw new Error($tokenVerify["error"]);
             }
 
-            if ($option == "updateStockProductByServiceToRoom") {
+            switch ($option) {
 
-                $productsToUpdateStock =  $req["products"];
+                case "updateStockProductByServiceToRoom":
 
-                foreach ($productsToUpdateStock as $product) {
+                    $productsToUpdateStock =  $req["products"];
 
-                    try {
+                    foreach ($productsToUpdateStock as $product) {
 
-                        $this->connection->connect()->begin_transaction();
-                        $serviceFinded =  $this->service->getServiceHotelByIdService($product["idService"]);
-                        if ($serviceFinded) {
+                        try {
 
-                            $newMaxStock = $serviceFinded["maxStock"] -  $product["quantity"];
+                            $this->connection->connect()->begin_transaction();
+                            $serviceFinded =  $this->service->getServiceHotelByIdService($product["idService"]);
+                            if ($serviceFinded) {
 
-                            $resultServiceUpdated = $this->service->updateMaxStockServiceHotel(
-                                $newMaxStock,
-                                $product["idService"]
-                            );
-                            if ($resultServiceUpdated) {
-                                $this->connection->connect()->commit();
+                                $newMaxStock = $serviceFinded["maxStock"] -  $product["quantity"];
+
+                                $resultServiceUpdated = $this->service->updateMaxStockServiceHotel(
+                                    $newMaxStock,
+                                    $product["idService"]
+                                );
+                                if ($resultServiceUpdated) {
+                                    $this->connection->connect()->commit();
+                                } else {
+                                    $error = true;
+                                    throw new Error("No se pudo actualizar el servicio");
+                                }
                             } else {
                                 $error = true;
-                                throw new Error("No se pudo actualizar el servicio");
+                                throw new Error("No se pudo encontrar el servicio");
                             }
-                        } else {
-                            $error = true;
-                            throw new Error("No se pudo encontrar el servicio");
+                        } catch (Throwable $th) {
+                            throw $th;
+                            $this->connection->connect()->rollback();
                         }
-                    } catch (Throwable $th) {
-                        throw $th;
-                        $this->connection->connect()->rollback();
                     }
-                }
-                if (!$error) {
-                    $serviceUpdated = true;
-                }
+                    if (!$error) {
+                        $serviceUpdated = true;
+                    }
+
+                    break;
+
+                case "updateStockOneService":
+
+                    $serviceUpdated = $this->service->updateMaxStockServiceHotel(
+                        $req["newMaxStock"],
+                        $req["idService"]
+                    );
+                    break;
             }
 
             return $serviceUpdated;
@@ -73,6 +85,7 @@ class servicesController
             return array("error" => $th->getMessage(), "status" => 500);
         }
     }
+
 
     public function DELETE() {}
 

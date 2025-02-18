@@ -1,83 +1,118 @@
-import { closeWindow, loading, noData } from "./scriptClient.js";
+import { closeWindow } from "./scriptClient.js";
 import { getDataServices } from "../../../../scriptsServices/scriptServices.js";
+import { displayServicesDetailsRoom } from "./displayServicesRoom/displayServicesRoom.js";
 
-let body, servicesBooking, idBooking;
+let servicesBooking, body;
 
 export const configServices = async () => {
-  body = document.querySelector(".body");
-  idBooking = document.querySelector(".containServicesDetails").id;
+  let containServicesDetails = document.querySelector(
+    ".containServicesDetails"
+  );
 
   closeWindow();
 
-  let roomsBooking = await dataServicesRoomsBooking();
+  let idBooking = containServicesDetails.id;
+  body = containServicesDetails.querySelector(".body");
+  servicesBooking = await getServices(idBooking);
 
-  if (roomsBooking) {
-    body.innerHTML = ` 
-
-    <ul class="rooms">
-    
-    ${services(servicesBooking)}
-    </ul>
-    
-    `;
+  if (servicesBooking) {
+    displayServicesRoom();
   }
 };
 
-const dataServicesRoomsBooking = async () => {
+const displayServicesRoom = () => {
+  body.innerHTML = `
+  <div class="modalServicesRoom"></div>
+  <ul class="roomServices"></ul>`;
+
+  let numRooms = servicesBooking.map(
+    (service) => service.numHabitacionServicio
+  );
+
+  let numRoomsNoDuplicate = [];
+
+  numRoomsNoDuplicate.push(
+    numRooms.reduce((ac, current) => {
+      if (current != ac) {
+        ac = current;
+        return current;
+      }
+    }, 0)
+  );
+
+  let items = numRoomsNoDuplicate.map((numberRoom) => {
+    return `
+  
+    <li id=${numberRoom}>
+      <div class="headerItem">
+      <div class="row">
+      <img src="../../../img/roomInfoIcon.png">
+      <p>Acceda a los servicios de la habitacion ${numberRoom}</p>
+     </div>
+      </div> 
+      <div class="footerItem">
+      <img class="displayServices" src="../../../img/ver.png">
+           <span>Ver servicios</span>
+      </div>  
+    </li>
+   
+     `;
+  });
+
+  body.querySelector("ul").innerHTML = items;
+
+  document.querySelectorAll(".displayServices").forEach((display) => {
+    display.addEventListener("click", () => {
+      let roomNumber = display.parentElement.parentElement.id;
+      let servicesRoom = servicesBooking.filter(
+        (service) => service.numHabitacionServicio == roomNumber
+      );
+
+      displayServicesDetailsRoom(roomNumber, servicesRoom);
+    });
+  });
+};
+
+export const getServices = async (idBooking) => {
   let data = null;
-  loading(true, body);
+
+  loading(true);
   try {
-    const roomsServicesBooking = await getDataServices(idBooking);
-    if (roomsServicesBooking) {
-      data = roomsServicesBooking;
+    const result = await getDataServices(idBooking);
+    if (result.length > 0) {
+      data = result;
     }
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false, body);
+    loading(false);
     if (!data) {
-      noData(
-        "Ups, no se pudieron cargar los servicios ordenados a las habitaciones",
-        body
-      );
+      noData();
     }
     return data;
   }
 };
 
+const noData = () => {
+  body.innerHTML = `
+      <div class="noData">
+           <img src="../../../img/sinDatos.png">
+           <span>Ups,esta reserva no tiene servicios</span>
+          
+      </div>
+       `;
+};
 
-export const services = (servicesBooking) => {
-  let liServicesBooking = servicesBooking.map((service) => {
-    let nameService;
-    let title;
-    if (service.name == "Telefono" || service.name == "Masajes") {
-      nameService = service.name;
-      if (service.name == "Telefono") {
-        title = "Llamadas";
-      } else {
-        title = "Masajistas";
-      }
-    } else {
-      nameService = service.description;
-      title = service.name;
-    }
-    return `
-         <li>
-         <div class="title">
-           <span>Servicio ${title}</span>
-         </div>
-         <div class="details">
-<div class="icon">
-           <img src="data:image/png;base64,${service.icon}">
-         </div>             
-         
-         <div class="info">
-            <span>${nameService}</span>
-             <span>Servicio a la habitacion ${service.room}</span>
-         </div>
-         <div>
-         </li>`;
-  });
-
-  return liServicesBooking.join("");
+const loading = (state) => {
+  if (state) {
+    body.innerHTML = `
+      <div class="loading">
+           <span>Cargando datos</span>
+            <img src="../../../img/spinnerMain.gif">
+          
+      </div>
+       `;
+  } else {
+    body.innerHTML = ``;
+  }
 };

@@ -25,6 +25,7 @@ const getRoomsBooking = async () => {
 
   try {
     const roomsBookingData = await getBookingRoomsDetails(idBookingGlobal);
+
     if (roomsBookingData) {
       data = roomsBookingData;
     }
@@ -76,12 +77,20 @@ export const drawRoomsInCart = (nights, option) => {
 
       return;
     }
+  } else {
+    roomsCart = roomsCart.map((room) => {
+      room.totalRoom = room.priceRoom * nights;
+      return room;
+    });
   }
 
   let liRoomsCart = roomsCart.map((room) => {
     let statusAddedClass = "statusAddedPreviously";
     if (room.status != "Actual") {
       statusAddedClass = "statusAddedNew";
+    }
+    if (room.amountServiceRoom) {
+      room.totalRoom += room.amountServiceRoom;
     }
     return `
      
@@ -90,7 +99,9 @@ export const drawRoomsInCart = (nights, option) => {
       <div class="header">
       <span>${room.category}</span>
          <span class=${statusAddedClass} >${room.status}</span>
-      <img class="delete" data-num-room=${room.numRoom}  src="../../../img/basura.png">
+      <img class="delete" data-num-room=${
+        room.numRoom
+      }  src="../../../img/basura.png">
       
       </div>
   
@@ -115,8 +126,17 @@ export const drawRoomsInCart = (nights, option) => {
       
       </div>
      
-      <div class="price">
-      <span>US$${room.totalRoom}</span>
+      <div class="price" style=${
+        room.amountServiceRoom
+          ? `"justify-content:space-between"`
+          : "justify-content:flex-end"
+      }>
+      ${
+        room.amountServiceRoom
+          ? `<span>Servicios:US$${room.amountServiceRoom}</span>`
+          : ""
+      }
+      <span>Total:US$${room.totalRoom}</span>
       </div>
       </li>
       `;

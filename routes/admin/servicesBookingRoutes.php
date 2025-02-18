@@ -30,8 +30,10 @@ $routes = [
         $optionGet = match ($req["option"]) {
             "getServicesBooking" => $servicesBookingController->getServicesBooking($req),
             "getHistoryServicesByCurrentBookingRoom" => $servicesBookingController->getHistoryServicesByCurrentBookingRoom($req),
+            "getDetailsServicesByCurrentBookingRoom" => $servicesBookingController->getDetailsServicesByCurrentBookingRoom($req),
             "getServiceByIdAndNumRoomAndBooking" => $servicesBookingController->getServiceByIdAndNumRoomAndBooking($req),
-            "returnStatesOfProductsServices" => $servicesBookingController->returnStatesOfProductsServices($req)
+            "returnStatesOfProductsServices" => $servicesBookingController->returnStatesOfProductsServices($req),
+            "getServiceRoomDetailsByNumRoomAndBooking" => $servicesBookingController->getServiceRoomDetailsByNumRoomAndBooking($req)
         };
 
         return $optionGet;

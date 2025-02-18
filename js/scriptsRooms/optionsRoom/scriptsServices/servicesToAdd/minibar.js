@@ -1,6 +1,6 @@
 import { getServiceByName } from "../../../../scriptsServices/scriptServices.js";
 import { closeWindow } from "./massages.js";
-import { displayContentMinibar } from "./minibarScripts/displayProducts.js";
+import { displayContentShop } from "./minibarScripts/displayProducts.js";
 let modalAddService, productsMinibar;
 export let contentMinibar, idBooking, numRoom;
 
@@ -19,7 +19,7 @@ export const configMinibarService = async (
   productsMinibar = await serviceByName(nameService, contentMinibar);
 
   if (productsMinibar) {
-    displayContentMinibar(productsMinibar);
+    displayContentShop(productsMinibar, "minibar");
   }
 };
 

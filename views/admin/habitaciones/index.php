@@ -116,7 +116,7 @@ $actualYear = date("Y");
 
                         <li class="liGrafica" data-sub-url="grafica.html">
 
-                            <img src="../../../img/grafica.png">
+                            <img src="../../../img/pieChart.png">
                             <a>Grafica</a>
 
                         </li>
@@ -172,7 +172,7 @@ $actualYear = date("Y");
             <nav>
                 <ul>
                     <li class="chartLi">
-                        <img src="../../../img/grafica.png">
+                        <img src="../../../img/pieChart.png">
                         <a>Grafica</a>
                     </li>
                     <li class="listLi">

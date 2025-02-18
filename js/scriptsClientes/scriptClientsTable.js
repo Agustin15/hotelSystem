@@ -23,14 +23,14 @@ const getRowsClients = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
     if (!response.ok) {
       throw result.error;
-    } else if (result) {
+    } else if (result.length > 0) {
       data = result;
     }
   } catch (error) {
@@ -57,8 +57,8 @@ const getClientById = async (idClient) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -93,13 +93,13 @@ const getDataLimitClients = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
-    } else if (result.length>0) {
+    } else if (result.length > 0) {
       data = result;
     }
   } catch (error) {
@@ -222,6 +222,7 @@ const search = () => {
 };
 
 const noData = () => {
+  document.querySelector("tbody").innerHTML = ``;
   document.querySelector("tfoot").innerHTML = `
       <td rowspan="6" colspan="6">
   <div class="noDataClients">

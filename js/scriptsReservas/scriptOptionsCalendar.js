@@ -1,6 +1,6 @@
 import {
   configFormAddBooking,
-  resultBookingAdd,
+  resultBookingAdd
 } from "./scriptsOptionsCalendar/scriptFormAdd.js";
 import { configFreeRooms } from "./scriptsOptionsCalendar/scriptFreeRooms.js";
 import { pageNotFound, loadingPage } from "./scriptReserva.js";
@@ -23,8 +23,8 @@ const getBookings = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
@@ -62,13 +62,20 @@ export const createEventsCalendar = async () => {
         eventColor = "#0ba8ad";
       }
 
+      let day = new Date(booking.fechaSalida).getDate() + 2;
+      let month = new Date(booking.fechaSalida).getMonth() + 1;
+      let year = new Date(booking.fechaSalida).getFullYear();
+      let bookingEnd = `${year}-${month < 10 ? "0" + month : month}-${
+        day < 10 ? "0" + day : day
+      }`;
+
       return {
         title: `Reserva ${booking.idReserva}`,
         idBooking: booking.idReserva,
         start: booking.fechaLlegada,
-        end: booking.fechaSalida,
+        end: bookingEnd,
         backgroundColor: eventColor,
-        borderColor: eventColor,
+        borderColor: eventColor
       };
     });
   }
@@ -116,6 +123,16 @@ export const optionsAddBooking = async (startBooking, endBooking) => {
   let result = await getOptionsAddBooking();
   if (result) {
     modalMainBookings.innerHTML = result;
+    endBooking = new Date(endBooking);
+
+    let endBookingDay = endBooking.getDate();
+    let endBookingMonth = endBooking.getMonth() + 1;
+    let endBookingYear = endBooking.getFullYear();
+
+    endBooking = `${endBookingYear}-${
+      endBookingMonth < 10 ? `0${endBookingMonth}` : `${endBookingMonth}`
+    }-${endBookingDay < 10 ? `0${endBookingDay}` : `${endBookingDay}`}`;
+
     configOptionsAddBooking(startBooking, endBooking);
   }
 };

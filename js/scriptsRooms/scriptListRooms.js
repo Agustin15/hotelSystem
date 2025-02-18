@@ -57,6 +57,7 @@ const drawMenuRooms = (roomsCategorys) => {
   document.querySelectorAll(".itemRoom").forEach((item) => {
     item.addEventListener("click", async () => {
       category = item.dataset.category;
+      roomOptionSelected(item);
       let rooms = await roomsByCategory();
       if (rooms) {
         drawRooms(rooms);
@@ -89,6 +90,15 @@ const drawNoData = () => {
       </div>
   
       `;
+};
+
+const roomOptionSelected = (item) => {
+  let itemsSelected = [...document.getElementsByClassName("selected")];
+
+  if (itemsSelected.length > 0) {
+    itemsSelected[0].classList.remove("selected");
+  }
+  item.classList.add("selected");
 };
 
 const roomsByCategory = async () => {

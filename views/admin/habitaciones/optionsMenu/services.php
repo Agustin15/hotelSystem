@@ -20,7 +20,7 @@ if (isset($_GET["numRoom"])) {
 
 
     <div class="containServices" id=<?php echo $numRoom ?>>
-        <div class="headerWindow">
+        <div class="headerWindowContainServices">
             <ul>
                 <li data-url="optionsMenu/optionServices/history.php">
                     <img src="../../../img/historyServices.png">
@@ -30,7 +30,7 @@ if (isset($_GET["numRoom"])) {
                     <img src="../../../img/addService.png">
                     Agregar
                 </li>
-                <li>
+                <li data-url="optionsMenu/optionServices/deleteService.php">
                     <img src="../../../img/deleteService.png">
                     Eliminar
                 </li>

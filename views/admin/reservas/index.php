@@ -82,10 +82,17 @@ $actualYear = date("Y");
                     right: 'buttonViewMonths buttonViewOneMonth buttonToday prev,next',
                 },
                 select: (info) => {
-                    if (new Date(info.startStr) >= new Date()) {
+
+                    let statDate = new Date(info.startStr).getDate() + 1;
+                    let monthDate = new Date(info.startStr).getMonth();
+                    let yearDate = new Date(info.startStr).getFullYear();
+
+                    if (statDate >= new Date().getDate() && monthDate + 1 >= new Date().getMonth() + 1 &&
+                        yearDate >= new Date().getFullYear()) {
                         optionsAddBooking(info.startStr, info.endStr);
 
                     }
+
                 },
                 eventClick: function(info) {
                     let idBooking = info.event.extendedProps.idBooking;
@@ -208,7 +215,7 @@ $actualYear = date("Y");
 
                         <li class="liGrafica" data-sub-url="grafica.html">
 
-                            <img src="../../../img/grafica.png">
+                            <img src="../../../img/pieChart.png">
                             <a>Grafica</a>
 
                         </li>

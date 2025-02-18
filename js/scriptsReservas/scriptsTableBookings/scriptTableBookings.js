@@ -45,6 +45,20 @@ export const drawTable = async () => {
   }
 };
 
+const formatDate = (date) => {
+  let dateFormat;
+
+  let day = date.getDate() + 1;
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  dateFormat = `${day < 10 ? "0" + day : day}-${
+    month < 10 ? "0" + month : month
+  }-${year < 10 ? 0 + year : year}`;
+
+  return dateFormat;
+};
+
 const drawRowsTable = (bookingsYearlimit) => {
   let tbody = document.querySelector("tbody");
 
@@ -60,6 +74,10 @@ const drawRowsTable = (bookingsYearlimit) => {
       iconStatusBooking = "../../../img/bookingPendingIcon.png";
       titleIconState = "Pendiente";
     }
+
+    let bookingStartFormat = formatDate(new Date(booking.fechaLlegada));
+    let bookingEndFormat = formatDate(new Date(booking.fechaSalida));
+
     return `
 
 <tr class=${index % 2 == 0 ? "trGray" : ""}>
@@ -79,8 +97,8 @@ const drawRowsTable = (bookingsYearlimit) => {
 
 </td>
 <td>${booking.correo}</td>
-<td class="tdStartDate">${booking.fechaLlegada}</td>
-<td class="tdEndDate">${booking.fechaSalida}</td>
+<td class="tdStartDate">${bookingStartFormat}</td>
+<td class="tdEndDate">${bookingEndFormat}</td>
 <td>${booking.cantidadHabitaciones}</td>
   <td class="tdOptions">
 
@@ -118,8 +136,8 @@ const getQuantityBookingsActualYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
@@ -159,8 +177,8 @@ const getBookingById = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
@@ -177,14 +195,17 @@ const getBookingById = async (idBooking) => {
   } finally {
     loading(false);
     if (!data) {
-      noData("Ups,No se pudo encontrar la reserva");
+      noData("Ups,no se pudo encontrar la reserva");
     }
     return data;
   }
 };
 
 const noData = (error) => {
+  let tbody = document.querySelector("tbody");
   let tfoot = document.querySelector("tfoot");
+  tbody.innerHTML = ``;
+
   tfoot.innerHTML = `
    <td rowspan="6" colspan="6">
   <div class="noDataBookings">
@@ -233,15 +254,15 @@ const getBookingsYearLimit = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
-        data: { year: yearSelected, indexPage: indexPage },
+        data: { year: yearSelected, indexPage: indexPage }
       });
 
     const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
@@ -276,13 +297,13 @@ const displaySelectYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
       throw result.error;
-    } else if (result) {
+    } else if (result.length) {
       data = result;
     }
   } catch (error) {
@@ -323,7 +344,7 @@ const drawYearsSelect = (years) => {
 const optionsUrls = {
   delete: "optionsTableBooking/delete.php?idBooking=",
   details: "optionsTableBooking/details.php?idBooking=",
-  edit: "optionsTableBooking/edit.php?idBooking=",
+  edit: "optionsTableBooking/edit.php?idBooking="
 };
 
 const optionBooking = (tbody) => {

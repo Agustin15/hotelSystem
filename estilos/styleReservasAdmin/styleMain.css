@@ -7,6 +7,7 @@
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
   height: 103.2vh;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -230,11 +231,11 @@ body #navAdmin .titleNav {
 .bodyBookings {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   margin: auto;
   margin-top: -0.1rem;
-  width: 86.9%;
-  height: 97vh;
+  width: 100%;
+  height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -250,21 +251,23 @@ body #navAdmin .titleNav {
 }
 .menuBar .title {
   font-size: 20px;
-  color: rgb(168, 168, 168);
+  color: rgb(141, 141, 141);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-left: 7rem;
 }
 .menuBar .title img {
   width: 50px;
 }
 .menuBar ul {
   display: flex;
+  margin-left: 7rem;
   gap: 3rem;
   list-style: none;
   font-size: 18px;
-  color: rgb(177, 177, 177);
+  color: rgb(141, 141, 141);
   font-weight: bold;
 }
 .menuBar ul li {
@@ -306,7 +309,7 @@ body #navAdmin .titleNav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 118%;
   background: rgba(44, 44, 44, 0.6);
 }
 

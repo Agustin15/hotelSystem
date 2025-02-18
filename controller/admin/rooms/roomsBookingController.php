@@ -2,18 +2,20 @@
 
 require_once("../../config/connection.php");
 require("../../model/room.php");
+require("../../model/service.php");
 require(__DIR__ . "./../authToken.php");
 
 
 class roomsBookingController
 {
 
-    private $rooms, $authToken;
+    private $rooms, $service, $authToken;
 
     public function __construct()
     {
 
         $this->rooms = new Room();
+        $this->service = new Service();
         $this->authToken = new authToken();
     }
 
@@ -208,9 +210,9 @@ class roomsBookingController
                 throw new Error($tokenVerify["error"]);
             }
             $roomsBookingDetails = $this->rooms->roomsBookingAndDetails($idBooking);
-            $roomsDetailsBooking =  array_map(function ($room) {
+            $roomsDetailsBooking =  array_map(function ($room) use ($idBooking) {
 
-                return array(
+                $dataBookingRoom = array(
                     "category" => $room["categoria"],
                     "numRoom" => $room["numHabitacion"],
                     "icon" => base64_encode($room["imagenDos"]),
@@ -219,8 +221,19 @@ class roomsBookingController
                     "adults" => $room["adultos"],
                     "childs" => $room["ninos"],
 
-
                 );
+
+                $serviceRoomFound = $this->service->getDetailsServicesByCurrentBookingRoom($room["numHabitacion"], $idBooking);
+
+                if (count($serviceRoomFound) > 0) {
+
+                    $amountService = array_reduce($serviceRoomFound, function ($ac, $service) {
+                        return $ac += $service["cantidad"] * $service["precio"];
+                    }, 0);
+
+                    if ($amountService > 0) $dataBookingRoom["amountServiceRoom"] = $amountService;
+                }
+                return $dataBookingRoom;
             }, $roomsBookingDetails);
             return  array_values($roomsDetailsBooking);
         } catch (Throwable $th) {

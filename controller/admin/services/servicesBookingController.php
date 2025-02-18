@@ -139,7 +139,22 @@ class servicesBookingController
         }
     }
 
-    public function DELETE() {}
+    public function DELETE($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+
+            $resultDelete = $this->service->deleteServiceBooking($req["idServiceRoom"]);
+
+            return $resultDelete;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 
     public function getServicesBooking($req)
     {
@@ -152,20 +167,13 @@ class servicesBookingController
                 throw new Error($tokenVerify["error"]);
             }
             $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
+            $bookingServicesDetails = array_map(function ($service) {
 
-            if (count($bookingServices) > 0) {
-                $bookingServicesDetails = array_map(function ($service) {
+                $service["imagen"] = base64_encode($service["imagen"]);
+                return $service;
+            }, $bookingServices);
 
-                    return array(
-                        "name" => $service['nombreServicio'],
-                        "description" => $service['descripcionServicio'],
-                        "icon" => base64_encode($service['imagen']),
-                        "room" => $service['numHabitacionServicio']
-                    );
-                }, $bookingServices);
-
-                return $bookingServicesDetails;
-            }
+            return $bookingServicesDetails;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -192,6 +200,26 @@ class servicesBookingController
     }
 
 
+    public function  getDetailsServicesByCurrentBookingRoom($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $servicesCurrentRoomBooking = $this->service->getDetailsServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
+            $servicesCurrentRoomBooking = array_map(function ($service) {
+                $service["imagen"] = base64_encode($service["imagen"]);
+                return $service;
+            }, $servicesCurrentRoomBooking);
+
+            return $servicesCurrentRoomBooking;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
     public function getServiceByIdAndNumRoomAndBooking($req)
     {
         try {
@@ -206,6 +234,37 @@ class servicesBookingController
             }
             $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
             return $serviceFind;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function getServiceRoomDetailsByNumRoomAndBooking($req)
+    {
+        try {
+
+            $nameService = $req["serviceToFind"]["nameService"];
+            $idBooking = $req["serviceToFind"]["idBooking"];
+            $numRoom = $req["serviceToFind"]["numRoom"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $serviceDetailsRoomFound = $this->service->getServiceRoomDetailsByNumRoomAndBooking(
+                $nameService,
+                $idBooking,
+                $numRoom
+            );
+
+            $serviceDetailsRoomFound = array_map(function ($service) {
+                $service["imagen"] = base64_encode($service["imagen"]);
+                return $service;
+            }, $serviceDetailsRoomFound);
+
+            return $serviceDetailsRoomFound;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

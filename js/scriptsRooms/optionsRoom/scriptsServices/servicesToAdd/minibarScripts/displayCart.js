@@ -5,8 +5,9 @@ import {
   addQuantityCart,
   calculateTotalAmount,
   cleanCart,
-  displayContentMinibar,
-  amount
+  displayContentShop,
+  amount,
+  optionServiceProduct
 } from "./displayProducts.js";
 
 import { invalidAuthentication } from "../../../../../scriptsAdmin/scriptsAdmin.js";
@@ -117,7 +118,8 @@ export const addService = async () => {
 
     let resultService = false;
     if (productsToAdd.length > 0) {
-      let serviceAdded = postService(productsToAdd);
+      let serviceAdded = await postService(productsToAdd);
+     
       if (serviceAdded) {
         resultService = true;
       } else {
@@ -125,7 +127,7 @@ export const addService = async () => {
       }
     }
     if (productsToUpdate.length > 0) {
-      let serviceUpdated = putServiceRoom(productsToUpdate);
+      let serviceUpdated = await putServiceRoom(productsToUpdate);
       if (serviceUpdated) {
         resultService = true;
       } else {
@@ -134,9 +136,9 @@ export const addService = async () => {
     }
 
     if (resultService) {
-      let resultUpdatePay = putPay(amount);
+      let resultUpdatePay = await putPay(amount);
       if (resultUpdatePay) {
-        let resultUpdateService = putHotelService();
+        let resultUpdateService = await putHotelService();
         if (resultUpdateService) {
           cleanCart();
           displayAlert(true, numRoom);
@@ -179,7 +181,7 @@ const postService = async (productsToAdd) => {
   const serviceToAdd = {
     idBooking: idBooking,
     numRoom: numRoom,
-    option: "minibar",
+    option: optionServiceProduct,
     products: productsToAdd
   };
 
@@ -243,7 +245,7 @@ const putPay = async (amount) => {
 const putServiceRoom = async (productsToUpdate) => {
   const serviceToUpdate = {
     products: productsToUpdate,
-    option: "minibar",
+    option: optionServiceProduct,
     idBooking: idBooking,
     numRoom: numRoom
   };
@@ -290,9 +292,10 @@ const putHotelService = async () => {
   }
 };
 
-export const refreshMinibar = async () => {
-  let contentMinibar = document.querySelector(".contentMinibar");
-  let products = await serviceByName("Minibar", contentMinibar);
+export const refreshShop = async () => {
+  let products = await serviceByName(
+    optionServiceProduct == "minibar" ? "Minibar" : "Cantina"
+  );
 
-  displayContentMinibar(products);
+  if (products) displayContentShop(products, optionServiceProduct);
 };

@@ -9,16 +9,16 @@
   margin-top: 1.5rem;
   margin-left: 8rem;
 }
-.containServices .headerWindow {
+.containServices .headerWindowContainServices {
   display: flex;
   align-items: start;
   justify-content: space-between;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   box-shadow: 2px 2px 2px gray;
   width: 100%;
-  height: 3.5rem;
+  height: 3.3rem;
 }
-.containServices .headerWindow ul {
+.containServices .headerWindowContainServices ul {
   display: flex;
   list-style: none;
   font-size: 14px;
@@ -30,7 +30,7 @@
   margin-left: 0rem;
   margin-top: 0.2rem;
 }
-.containServices .headerWindow ul li {
+.containServices .headerWindowContainServices ul li {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,13 +38,13 @@
   padding: 0.3rem;
   cursor: pointer;
 }
-.containServices .headerWindow ul li img {
+.containServices .headerWindowContainServices ul li img {
   width: 18px;
 }
-.containServices .headerWindow ul li:hover {
+.containServices .headerWindowContainServices ul li:hover {
   background: linear-gradient(rgb(57, 170, 161), rgb(4, 127, 131));
 }
-.containServices .headerWindow button {
+.containServices .headerWindowContainServices button {
   background-color: rgb(219, 1, 1);
   color: white;
   font-weight: bold;
@@ -53,7 +53,7 @@
   cursor: pointer;
   border: none;
 }
-.containServices .headerWindow button:hover {
+.containServices .headerWindowContainServices button:hover {
   background-color: rgb(187, 3, 3);
 }
 .containServices .optionService {

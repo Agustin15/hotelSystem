@@ -4,19 +4,20 @@ import {
   drawRoomsInCart,
   roomsCart,
   roomsBooking,
-  amount,
+  amount
 } from "./scriptCartRooms.js";
 import { inputAlert } from "../../../../scriptsOptionsCalendar/scriptFormAdd.js";
 import {
   verifyStateRoomsToBooking,
   fetchDeleteRoom,
-  POSTRooms,
+  POSTRooms
 } from "../../../../../scriptsRooms/scriptRooms.js";
 import { PUTPay } from "../../../../../scriptsRevenues/scriptRevenues.js";
 import {
   alertForm,
-  loadingForm,
+  loadingForm
 } from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
+import { drawTable } from "../../../scriptTableBookings.js";
 
 import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../../scriptsAdmin/scriptsAdmin.js";
@@ -195,7 +196,7 @@ const sendFormEdit = () => {
       if (key == "quantityRooms" && value == 0) {
         error = {
           key: key,
-          msj: "Elija al menos una habitacion para la reserva",
+          msj: "Elija al menos una habitacion para la reserva"
         };
       } else {
         bookingToUpdate[key] = value;
@@ -245,7 +246,7 @@ const updateBooking = async (bookingToUpdate) => {
         if (roomsToDelete.length > 0) {
           let resultDeleteRooms = await fetchDeleteRoom({
             idBooking: bookingGlobal.idReserva,
-            rooms: roomsToDelete,
+            rooms: roomsToDelete
           });
 
           if (!resultDeleteRooms.response) return;
@@ -261,12 +262,12 @@ const updateBooking = async (bookingToUpdate) => {
             "actualizar las habitaciones"
           );
 
-          if (!resultUpdateRooms.response) return;
+          if (!resultUpdateRooms) return;
         }
-
+        
         let resultPayUpdated = await PUTPay({
           idBooking: bookingGlobal.idReserva,
-          newAmount: amount,
+          newAmount: amount
         });
 
         if (resultPayUpdated.response) {
@@ -276,6 +277,8 @@ const updateBooking = async (bookingToUpdate) => {
             "Exito",
             "alertFormCorrect"
           );
+
+          drawTable();
         }
       }
     } else {
@@ -318,9 +321,9 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
+          credentials: "same-origin"
         },
-        body: JSON.stringify(bookingToUpdate),
+        body: JSON.stringify(bookingToUpdate)
       }
     );
 

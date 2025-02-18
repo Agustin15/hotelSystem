@@ -64,11 +64,13 @@ const loading = (state) => {
 
 const drawServices = (services) => {
   containHistory.innerHTML = `<ul></ul>`;
-  let iconItem = "../../../img/minibar.png";
 
+  let iconItem;
   let itemServices = services.map((service) => {
     if (service.nombreServicio == "Cantina") {
       iconItem = "../../../img/bar-counter.png";
+    } else {
+      iconItem = "../../../img/minibar.png";
     }
 
     return `
@@ -103,9 +105,11 @@ const drawServices = (services) => {
 const openDetails = () => {
   document.querySelectorAll(".detailsOption").forEach((option) => {
     option.addEventListener("click", () => {
-      let service =JSON.parse(option.parentElement.parentElement.dataset.service);
+      let service = JSON.parse(
+        option.parentElement.parentElement.dataset.service
+      );
       if (service) {
-        detailsService(service.idService, service.nameService);
+        detailsService(service.nameService);
       }
     });
   });

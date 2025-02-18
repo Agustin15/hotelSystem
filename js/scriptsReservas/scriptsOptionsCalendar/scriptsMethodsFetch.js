@@ -5,6 +5,7 @@ export const POSTBooking = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php`;
   let data;
 
+  console.log(booking);
   loadingForm(true);
   try {
     const response = await fetch(url, {

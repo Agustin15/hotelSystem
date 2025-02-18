@@ -1,7 +1,10 @@
-import { refreshMinibar } from "./displayCart.js";
+import { refreshShop } from "./displayCart.js";
+import { optionServiceProduct } from "./displayProducts.js";
 
 const drawAlert = (icon, title, msj, classToAdd, state) => {
-  let modal = document.querySelector(".modalMainMinibar");
+  let modal = document.querySelector(
+    optionServiceProduct == "minibar" ? ".modalMainMinibar" : ".modalMainBar"
+  );
 
   modal.innerHTML = `
        <div class="alert">
@@ -55,7 +58,7 @@ const closeAlert = (modal) => {
     modal.innerHTML = ``;
     modal.style.display = "none";
     if (state == false) {
-      refreshMinibar();
+      refreshShop();
     }
   });
 };

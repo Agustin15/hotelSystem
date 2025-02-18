@@ -170,7 +170,7 @@ async function getDataClientsTOGraphic(year) {
     .querySelector(".header")
     .querySelector(
       "h3"
-    ).innerHTML = `Grafica cantidad de clientes por mes  ${yearToConsult}`;
+    ).innerHTML = `Cantidad de clientes por mes  ${yearToConsult}`;
 
   try {
     loadingChart(true);

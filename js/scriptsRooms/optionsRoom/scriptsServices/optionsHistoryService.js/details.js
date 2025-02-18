@@ -1,10 +1,9 @@
 import { numRoom, idBooking } from "../historyServices.js";
-import { getServiceByIdAndNumRoomAndBooking } from "../../../../scriptsServices/scriptServices.js";
+import { getServiceRoomDetailsByNumRoomAndBooking } from "../../../../scriptsServices/scriptServices.js";
 
-let serviceId, contentDetails;
+let contentDetails;
 
-export const detailsService = (idService, nameService) => {
-  serviceId = idService;
+export const detailsService = (nameService) => {
   drawWindow(nameService);
 };
 
@@ -17,7 +16,7 @@ const drawWindow = async (nameService) => {
     <div class="containDetails">
       <div class="headerWindow">
       <h3>Detalles ${nameService} </h3>
-      <button>X</button>
+      <button class="btnCloseDetails">X</button>
       </div>
 
       <div class="contentDetails"></div>
@@ -26,21 +25,25 @@ const drawWindow = async (nameService) => {
    `;
 
   contentDetails = document.querySelector(".contentDetails");
-  let servicesDetails = await serviceRoomDetails();
+  closeWindow(modal);
+  let servicesDetails = await serviceRoomDetails(nameService);
 
+  if (servicesDetails) {
+    displayDetails(servicesDetails);
+  }
 };
 
-const serviceRoomDetails = async () => {
+const serviceRoomDetails = async (nameService) => {
   const serviceToFind = {
-    idService: serviceId,
+    nameService: nameService,
     idBooking: idBooking,
-    numRoom: numRoom
+    numRoom: parseInt(numRoom)
   };
 
   let servicesDetails;
   loading(true);
   try {
-    let result = await getServiceByIdAndNumRoomAndBooking(serviceToFind);
+    let result = await getServiceRoomDetailsByNumRoomAndBooking(serviceToFind);
     if (result) {
       servicesDetails = result;
     }
@@ -75,4 +78,43 @@ const loading = (state) => {
   } else {
     contentDetails.innerHTML = ``;
   }
+};
+
+const displayDetails = (serviceDetails) => {
+  contentDetails.innerHTML = `<ul class="ulItems"></ul>`;
+
+  let items = serviceDetails.map((service) => {
+    return `
+   
+ <li class="item">
+    <span title="${service.descripcionServicio}" class="name">${
+      service.nombreServicio == "Masajes" ||
+      service.nombreServicio == "Telefono"
+        ? "Servico " + service.nombreServicio
+        : service.descripcionServicio
+    }</span>
+    <div class="row">
+        <div class="columnOne">
+            <div class="icon">
+                <img src="data:image/png;base64,${service.imagen}">
+            </div>
+        </div>
+        <div class="columnTwo">
+            <span><a>Cantidad:</a>${service.cantidad}</span>
+            <span><a>Precio:</a>U$S ${service.precio}</span>
+             <span><a>Total:</a>U$S ${service.cantidad * service.precio}</span>
+        </div>
+    </div>
+</li>
+  `;
+  });
+
+  contentDetails.querySelector("ul").innerHTML = items.join("");
+};
+
+const closeWindow = (modal) => {
+  document.querySelector(".btnCloseDetails").addEventListener("click", () => {
+    modal.style.display = "none";
+    modal.innerHTML = ``;
+  });
 };

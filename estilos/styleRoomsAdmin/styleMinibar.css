@@ -1,10 +1,10 @@
-.modalMainMinibar {
+.modalMainMinibar, .modalMainBar {
   position: absolute;
   z-index: 3;
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   margin: auto;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalMainMinibar .alert {
+.modalMainMinibar .alert, .modalMainBar .alert {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,25 +20,26 @@
   gap: 1rem;
   width: 20rem;
   padding: 1rem;
+  margin-top: 12rem;
   border-radius: 5px;
   margin-left: 8rem;
   color: rgb(0, 0, 0);
 }
-.modalMainMinibar .alert .title {
+.modalMainMinibar .alert .title, .modalMainBar .alert .title {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-.modalMainMinibar .alert p {
+.modalMainMinibar .alert p, .modalMainBar .alert p {
   font-weight: bold;
   font-size: 18px;
   text-align: center;
 }
-.modalMainMinibar .alert img {
+.modalMainMinibar .alert img, .modalMainBar .alert img {
   width: 72px;
 }
-.modalMainMinibar .alert button {
+.modalMainMinibar .alert button, .modalMainBar .alert button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -50,20 +51,20 @@
   margin-top: 1rem;
   cursor: pointer;
 }
-.modalMainMinibar .alertError button {
+.modalMainMinibar .alertError button, .modalMainBar .alertError button {
   background-color: red;
 }
-.modalMainMinibar .alertError button:hover {
+.modalMainMinibar .alertError button:hover, .modalMainBar .alertError button:hover {
   background-color: rgb(214, 4, 4);
 }
-.modalMainMinibar .alertCorrect button {
+.modalMainMinibar .alertCorrect button, .modalMainBar .alertCorrect button {
   background-color: rgb(21, 162, 180);
 }
-.modalMainMinibar .alertCorrect button:hover {
+.modalMainMinibar .alertCorrect button:hover, .modalMainBar .alertCorrect button:hover {
   background-color: rgb(23, 142, 158);
 }
 
-.containMinibar {
+.containMinibar, .containBar {
   width: 55rem;
   height: 33rem;
   background-color: white;
@@ -74,7 +75,7 @@
   align-items: center;
   flex-direction: column;
 }
-.containMinibar .headerWindow {
+.containMinibar .headerWindow, .containBar .headerWindow {
   display: flex;
   color: rgb(255, 255, 255);
   width: 55rem;
@@ -83,21 +84,32 @@
   justify-content: space-between;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
-.containMinibar .headerWindow .title {
+.containMinibar .headerWindow .title, .containBar .headerWindow .title {
   display: flex;
   gap: 1rem;
   padding-top: 0.5rem;
   align-items: center;
   justify-content: center;
 }
-.containMinibar .headerWindow .title h3 {
+.containMinibar .headerWindow .title h3, .containBar .headerWindow .title h3 {
   margin-left: 21rem;
 }
-.containMinibar .headerWindow .title img {
+.containMinibar .headerWindow .title img, .containBar .headerWindow .title img {
   width: 35px;
 }
+.containMinibar .headerWindow button, .containBar .headerWindow button {
+  width: 1.7rem;
+  height: 1.7rem;
+  background-color: rgb(204, 1, 1);
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+.containMinibar .headerWindow button:hover, .containBar .headerWindow button:hover {
+  background-color: rgb(233, 8, 8);
+}
 
-.contentMinibar {
+.contentMinibar, .contentBar {
   display: flex;
   align-items: start;
   justify-content: start;
@@ -106,7 +118,7 @@
   padding-top: 2rem;
   gap: 2rem;
 }
-.contentMinibar .loading {
+.contentMinibar .loading, .contentBar .loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,11 +127,11 @@
   color: gray;
   height: 100%;
 }
-.contentMinibar .loading img {
+.contentMinibar .loading img, .contentBar .loading img {
   width: 40px;
   opacity: 50%;
 }
-.contentMinibar .noData {
+.contentMinibar .noData, .contentBar .noData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,7 +143,7 @@
   font-size: 18px;
   color: gray;
 }
-.contentMinibar .noData img {
+.contentMinibar .noData img, .contentBar .noData img {
   width: 80px;
   opacity: 70%;
 }

@@ -2,6 +2,7 @@ import { getAllServicesHotel } from "../../../scriptsServices/scriptServices.js"
 import { configMassageService } from "./servicesToAdd/massages.js";
 import { configTelephoneService } from "./servicesToAdd/telephone.js";
 import { configMinibarService } from "./servicesToAdd/minibar.js";
+import { configBarService } from "./servicesToAdd/bar.js";
 import { pageNotFound, loadingPage } from "../../dashboardScript.js";
 
 let containAddService, idBookingService, numRoomService, modalAddService;
@@ -130,18 +131,23 @@ const optionsAddService = [
   {
     name: "Masajes",
     url: "optionsMenu/optionServices/optionsAddService/massage.html",
-    function: configMassageService,
+    function: configMassageService
   },
   {
     name: "Telefono",
     url: "optionsMenu/optionServices/optionsAddService/telephone.html",
-    function: configTelephoneService,
+    function: configTelephoneService
   },
   {
     name: "Minibar",
     url: "optionsMenu/optionServices/optionsAddService/minibar.html",
-    function: configMinibarService,
+    function: configMinibarService
   },
+  {
+    name: "Cantina",
+    url: "optionsMenu/optionServices/optionsAddService/bar.html",
+    function: configBarService
+  }
 ];
 
 const getDocument = async (url) => {

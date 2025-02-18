@@ -17,6 +17,7 @@
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
   height: 103.2vh;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,7 +63,6 @@
   min-height: 2.2rem;
   padding-top: 0.6rem;
   justify-content: space-between;
-
 }
 
 #navAdmin .menu li:hover {
@@ -219,8 +219,6 @@
 #userAdmin .subMenuProfile li:hover {
   background-color: rgb(36, 36, 36);
 }
-
-
 
 //menus de las opciones de panel admin
 

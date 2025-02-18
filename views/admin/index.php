@@ -113,7 +113,7 @@ $actualYear = date("Y");
 
                         <li class="liGrafica" data-sub-url="grafica.html">
 
-                            <img src="../../img/grafica.png">
+                            <img src="../../img/pieChart.png">
                             <a>Grafica</a>
 
                         </li>

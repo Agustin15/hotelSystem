@@ -76,13 +76,24 @@ class Service
         return $result;
     }
 
-    public function getServicesByIdBookingWithDetails($idReserva)
+
+    public function deleteServiceBooking($idServiceRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("delete from serviciosExtra_habitacion where 
+        idServicioHabitacion=?");
+        $query->bind_param("i", $idServiceRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+    public function getServicesByIdBookingWithDetails($idBooking)
     {
 
         $query = $this->connection->connect()->prepare("select * from serviciosExtra_habitacion 
         INNER JOIN servicio ON serviciosExtra_habitacion.idServicioHabitacion=servicio.idServicio where
         idReservaHabitacionServicio=?");
-        $query->bind_param("i", $idReserva);
+        $query->bind_param("i", $idBooking);
         $query->execute();
         $result =  $query->get_result();
 
@@ -103,6 +114,18 @@ class Service
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getDetailsServicesByCurrentBookingRoom($numRoom, $idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from serviciosextra_habitacion INNER JOIN 
+        servicio ON servicio.idServicio=serviciosextra_habitacion.idServicio where serviciosextra_habitacion.idReservaHabitacionServicio=? 
+        && serviciosextra_habitacion.numHabitacionServicio=?");
+        $query->bind_param("ii", $idBooking, $numRoom);
+        $query->execute();
+        $result =  $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 
     public function getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom)
     {
@@ -112,5 +135,16 @@ class Service
         $query->execute();
         $result = $query->get_result();
         return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+    public function getServiceRoomDetailsByNumRoomAndBooking($nameService, $idBooking, $numRoom)
+    {
+        $query = $this->connection->connect()->prepare("select * from serviciosextra_habitacion INNER JOIN servicio 
+        ON serviciosextra_habitacion.idServicio=servicio.idServicio where servicio.nombreServicio=? && serviciosextra_habitacion.idReservaHabitacionServicio=? && 
+        serviciosextra_habitacion.numHabitacionServicio=?");
+        $query->bind_param("sii", $nameService, $idBooking, $numRoom);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

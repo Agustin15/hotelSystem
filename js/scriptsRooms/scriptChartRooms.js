@@ -175,5 +175,5 @@ const btnSearchByYear = () => {
 const drawTitle = () => {
   document.querySelector(
     ".titleChart"
-  ).textContent = `Grafica categorias mas reservadas ${selectYear.value}`;
+  ).textContent = `Categorias mas reservadas ${selectYear.value}`;
 };
