@@ -1,6 +1,6 @@
-import { getMes } from "./chart.js";
+import { month } from "./chart.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication} from "./scriptsAdmin.js";
+import { invalidAuthentication, userData } from "./scriptsAdmin.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
@@ -12,8 +12,8 @@ const getCategoryRoomsData = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const data = await response.json();
     if (!response.ok) {
@@ -40,8 +40,8 @@ const getRevenuesActualYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const data = await response.json();
     if (!response.ok) {
@@ -64,7 +64,7 @@ const displayItemDataRevenuesActual = async () => {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
   let actualMonth = actualDate.getMonth();
-  let actualMonthString = getMes(actualMonth + 1);
+  let actualMonthString = month(actualMonth + 1);
 
   let details;
   if (dataRevenues) {
@@ -127,5 +127,17 @@ const displayItemsDataCategoryRooms = async () => {
     document.querySelector(".itemsData").innerHTML += items.join("");
   }
 };
+const displayWelcome = async () => {
+  let title = document.querySelector(".titleWelcome");
+  if (userData) {
+    title.textContent = `¡Bienvenido ${userData.user}!`;
+  } else {
+    title.textContent = `Ups, no se pudo cargar el usuario`;
+  }
+};
 
-export { displayItemsDataCategoryRooms, displayItemDataRevenuesActual };
+export {
+  displayItemsDataCategoryRooms,
+  displayItemDataRevenuesActual,
+  displayWelcome
+};

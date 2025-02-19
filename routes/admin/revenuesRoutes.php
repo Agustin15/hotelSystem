@@ -27,11 +27,13 @@ $routes = [
         return $revenuesController->DELETE($req);
     },
     "GET" => function () use ($revenuesController, $req) {
-        $optionGet = match ($req["option"]) {
 
+        $optionGet = match ($req["option"]) {
             "dashboardGraphic" => $revenuesController->getDashboardGraphic($req),
             "itemDataDashboard" => $revenuesController->getItemDataDashboard($req),
-            "getRevenue" => $revenuesController->getRevenueByIdBooking($req)
+            "getRevenue" => $revenuesController->getRevenueByIdBooking($req),
+            "getAllYearsRevenues" => $revenuesController->getAllYearsRevenues($req),
+            "getAllRevenuesByYearLimitIndex" => $revenuesController->getAllRevenuesByYearLimitIndex($req)
         };
 
         return $optionGet;

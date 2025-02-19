@@ -17,28 +17,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 3.5rem;
+    gap: 4rem;
     padding-left: 2rem;
     padding-bottom: 0.6rem;
     width: 96.5%;
     border-bottom: 1px solid rgb(197, 197, 197);
-
-    .chartTitle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-left:0;
-
-      img  {
-        width: 45px;
-      }
-      
-      h3 {
-        color: rgb(141, 141, 141);
-        font-size: 22px;
-      }
-    }
 
     .search {
       display: flex;
@@ -93,9 +76,26 @@
         cursor: pointer;
       }
     }
+
+    .chartTitle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-left: 2rem;
+
+      img {
+        width: 49px;
+      }
+
+      h3 {
+        color: rgb(141, 141, 141);
+        font-size: 22px;
+      }
+    }
   }
 
-  #chartRooms {
+  #chartRevenues {
     width: 90%;
     min-height: 68%;
     margin-top: 1rem;
@@ -106,12 +106,13 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    opacity: 50%;
     font-size: 20px;
+    color: rgb(131, 131, 131);
     margin-top: 4rem;
 
     img {
-      width: 100px;
+      width: 90px;
+      opacity: 50%;
     }
   }
 
@@ -120,56 +121,14 @@
     flex-direction: column;
     gap: 1rem;
     align-items: center;
-    opacity: 60%;
     font-weight: bold;
+    color: gray;
     font-size: 22px;
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
 
   img {
-    width: 100px;
-  }
-}
-
-.loadingPage {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 23px;
-  opacity: 60%;
-  margin-left: 7rem;
-  margin-top: 12rem;
-
-  img {
-    width: 50px;
-  }
-}
-
-.pageNotFound {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  opacity: 70%;
-  font-size: 20px;
-  align-items: center;
-  height: 100%;
-  margin-left: 7rem;
-  margin-top: 8rem;
-  color: gray;
-
-  img {
-    width: 120px;
-  }
-
-  .headerPageNotFound {
-    display: none;
-    width: 97%;
-    justify-content: flex-end;
-
-    span {
-      opacity: 80%;
-      margin-top: 0.5rem;
-    }
+    width: 80px;
+    opacity: 80%;
   }
 }

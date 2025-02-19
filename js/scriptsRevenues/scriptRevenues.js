@@ -118,3 +118,104 @@ export const getPayById = async (idBooking) => {
     return data;
   }
 };
+
+export const getAllYearsRevenues = async () => {
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    JSON.stringify({ option: "getAllYearsRevenues" });
+
+  let data = null;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};
+
+export const getRevenuesByYear = async (year) => {
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    JSON.stringify({ option: "dashboardGraphic", year: year });
+
+  let data = null;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    }
+    if (result.length > 0) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};
+
+export const getAllRevenuesByYearLimitIndex = async (year, index) => {
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    JSON.stringify({
+      option: "getAllRevenuesByYearLimitIndex",
+      
+      year: year,
+      index: index
+    });
+
+  let data = null;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    }
+    if (result.length > 0) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};

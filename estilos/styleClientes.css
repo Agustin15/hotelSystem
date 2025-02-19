@@ -314,7 +314,7 @@ body #navAdmin .titleNav {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 4rem;
+  gap: 3.5rem;
   width: 96.6%;
   border-bottom: 1px solid rgb(197, 197, 197);
   padding-bottom: 1rem;
@@ -327,7 +327,7 @@ body #navAdmin .titleNav {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  margin-left: 1.3rem;
+  margin-left: 0;
 }
 .option .containChart .header .titleChart img {
   width: 45px;
@@ -384,7 +384,7 @@ body #navAdmin .titleNav {
   background-color: rgb(8, 143, 153);
   cursor: pointer;
 }
-.option .containChart #graficaClientes {
+.option .containChart #chartClients {
   width: 90%;
   min-height: 67%;
 }

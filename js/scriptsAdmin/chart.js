@@ -1,8 +1,8 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "./scriptsAdmin.js";
 
-function getMes(numMes) {
-  let meses = [
+function month(numMonth) {
+  let month = [
     "Enero",
     "Febrero",
     "Marzo",
@@ -14,14 +14,14 @@ function getMes(numMes) {
     "Septiembre",
     "Octubre",
     "Noviembre",
-    "Diciembre",
+    "Diciembre"
   ];
 
-  let mesElegido = null;
+  let monthSwitched = null;
 
-  mesElegido = meses.find((mes, index) => index + 1 == numMes);
+  monthSwitched = month.find((month, index) => index + 1 == numMonth);
 
-  return mesElegido;
+  return monthSwitched;
 }
 
 const loading = (status, char) => {
@@ -57,17 +57,18 @@ async function getClientsByMonthActualYear(actualYear) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
+
     if (!response.ok) {
       throw result.error;
-    } else if (result) {
+    }
+    if (result) {
       data = result;
-      dataPointsToGraphicClientsDashboard(result);
     }
   } catch (error) {
     if (error.indexOf("Autenticacion") > -1) {
@@ -77,20 +78,22 @@ async function getClientsByMonthActualYear(actualYear) {
     loading(false, "bookings");
     if (!data) {
       document.querySelector(".noDataBookings").style.display = "flex";
+    } else {
+      dataPointsToChartClientsDashboard(data);
     }
   }
 }
 
-function dataPointsToGraphicClientsDashboard(monthsClients) {
+function dataPointsToChartClientsDashboard(monthsClients) {
   let dataPointsMonthsClients = [];
 
   if (monthsClients) {
     dataPointsMonthsClients = monthsClients.map((monthClients) => {
-      let monthString = getMes(monthClients.month);
+      let monthString = month(monthClients.month);
 
       const dataPoint = {
         label: monthString,
-        y: monthClients.quantity,
+        y: monthClients.quantity
       };
 
       return dataPoint;
@@ -101,56 +104,60 @@ function dataPointsToGraphicClientsDashboard(monthsClients) {
     }, 0);
 
     if (totalMonthsClients > 0) {
-      graphicClientsDashboard(dataPointsMonthsClients, "charBookings", "");
+      graphicClientsDashboard(dataPointsMonthsClients, "chartBookings", "");
       $("#navAdmin").css("marginTop", "-22px");
     }
   } else {
     document.querySelector(".noDataBookings").style.display = "flex";
   }
 }
-function graphicClientsDashboard(dataPoints, grafica, titulo) {
+function graphicClientsDashboard(dataPoints, chartClientsBooking, titulo) {
   CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
-  var chart = new CanvasJS.Chart(grafica, {
+  var chart = new CanvasJS.Chart(chartClientsBooking, {
     animationEnabled: true,
     colorSet: "greenShades",
     title: {
-      text: titulo,
+      text: titulo
     },
     axisY: {
       title: "Reservas",
       titleFontColor: "grey",
       titleFontSize: 17,
-      gridColor: "white",
+      gridColor: "white"
     },
     axisX: {
       title: "Meses",
       titleFontColor: "grey",
-      titleFontSize: 17,
+      titleFontSize: 17
     },
 
     data: [
       {
         type: "column",
-        dataPoints: dataPoints,
-      },
-    ],
+        dataPoints: dataPoints
+      }
+    ]
   });
   chart.render();
 }
 
 async function getRevenueActualYear() {
+  let currentYear = new Date().getFullYear();
   loading(true, "revenues");
   let data;
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
-        JSON.stringify({ option: "dashboardGraphic" }),
+        JSON.stringify({
+          option: "dashboardGraphic",
+          year: currentYear
+        }),
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
@@ -168,14 +175,14 @@ async function getRevenueActualYear() {
   } finally {
     loading(false, "revenues");
     if (data) {
-      dataPointsToGraphicRevenues(data);
+      dataPointsToRevenues(data);
     } else {
       document.querySelector(".noDataRevenues").style.display = "flex";
     }
   }
 }
 
-function dataPointsToGraphicRevenues(revenuesByMonth) {
+function dataPointsToRevenues(revenuesByMonth) {
   let dataPointsRevenues = [];
 
   let totalRevenues = revenuesByMonth.reduce(
@@ -187,25 +194,23 @@ function dataPointsToGraphicRevenues(revenuesByMonth) {
     dataPointsRevenues = revenuesByMonth.map((ganancia) => {
       const dataPointRevenue = {
         x: new Date(ganancia.month),
-        y: ganancia.revenues,
+        y: ganancia.revenues
       };
 
       return dataPointRevenue;
     });
+
+    graphicRevenues(dataPointsRevenues, "chartRevenues", "");
   } else {
     document.querySelector(".noDataRevenues").style.display = "flex";
   }
-
-  if (dataPointsRevenues.length > 0) {
-    graficarGananciasPorMes(dataPointsRevenues, "charRevenues", "");
-  }
 }
 
-const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
-  var chart = new CanvasJS.Chart(graficaGanancias, {
+const graphicRevenues = (dataPoints, chartRevenues, title) => {
+  var chart = new CanvasJS.Chart(chartRevenues, {
     animationEnabled: true,
     title: {
-      text: title,
+      text: title
     },
     axisX: {
       title: "Meses",
@@ -214,8 +219,8 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
       titleFontSize: 14,
       crosshair: {
         enabled: true,
-        snapToDataPoint: true,
-      },
+        snapToDataPoint: true
+      }
     },
     axisY: {
       title: "Precios ($USD)",
@@ -228,8 +233,8 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
         snapToDataPoint: true,
         labelFormatter: function (e) {
           return "$" + CanvasJS.formatNumber(e.value, "##0.00");
-        },
-      },
+        }
+      }
     },
     data: [
       {
@@ -237,9 +242,9 @@ const graficarGananciasPorMes = (dataPoints, graficaGanancias, title) => {
         color: "#06c9d0",
         xValueFormatString: "MMM",
         yValueFormatString: "$##0.00",
-        dataPoints: dataPoints,
-      },
-    ],
+        dataPoints: dataPoints
+      }
+    ]
   });
   chart.render();
 };
@@ -257,8 +262,8 @@ async function getCategoryRoomsMostReserved() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
@@ -301,7 +306,7 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
 
         const roomCategoryQuantityReserved = {
           y: percentageCategory,
-          label: roomCategory.categoryRoom,
+          label: roomCategory.categoryRoom
         };
 
         return roomCategoryQuantityReserved;
@@ -312,21 +317,17 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
   }
 
   if (dataPointsRoomsReserved.length > 0) {
-    graficarHabitaciones(dataPointsRoomsReserved, "charRooms", "");
+    graphicRooms(dataPointsRoomsReserved, "chartRooms", "");
   }
 }
 
-function graficarHabitaciones(
-  dataPointsHabitacionesReservadas,
-  graficaHabitaciones,
-  title
-) {
+function graphicRooms(dataPointsRoomsBooking, chartRooms, title) {
   CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
-  var chart = new CanvasJS.Chart(graficaHabitaciones, {
+  var chart = new CanvasJS.Chart(chartRooms, {
     animationEnabled: true,
     colorSet: "greenShades",
     title: {
-      text: title,
+      text: title
     },
 
     data: [
@@ -338,9 +339,9 @@ function graficarHabitaciones(
         legendText: "{label}",
         indexLabelFontSize: 14,
         indexLabel: "{label} - {y}%",
-        dataPoints: dataPointsHabitacionesReservadas,
-      },
-    ],
+        dataPoints: dataPointsRoomsBooking
+      }
+    ]
   });
   chart.render();
 }
@@ -349,5 +350,5 @@ export {
   getClientsByMonthActualYear,
   getRevenueActualYear,
   getCategoryRoomsMostReserved,
-  getMes,
+  month
 };

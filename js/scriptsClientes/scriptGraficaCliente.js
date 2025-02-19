@@ -26,7 +26,7 @@ function getMes(numMes) {
     "Septiembre",
     "Octubre",
     "Noviembre",
-    "Diciembre",
+    "Diciembre"
   ];
 
   let mesElegido = null;
@@ -49,8 +49,8 @@ const loadYears = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       });
       const results = await response.json();
 
@@ -58,6 +58,9 @@ const loadYears = async () => {
         throw results.error;
       } else if (results) {
         selectYearChar(results);
+        document.querySelector(".noData").style.display = "none";
+      } else {
+        document.querySelector(".noData").style.display = "flex";
       }
     } catch (error) {
       console.log(error);
@@ -107,7 +110,7 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     colorSet: "greenShades",
     animationEnabled: true,
     title: {
-      text: titulo,
+      text: titulo
     },
 
     axisY: {
@@ -115,22 +118,22 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
       titleFontSize: 25,
       margin: 0,
       labelFontSize: 18,
-      gridColor: "white",
+      gridColor: "white"
     },
 
     axisX: {
       title: "Meses",
       titleFontSize: 25,
       margin: 0,
-      labelFontSize: 18,
+      labelFontSize: 18
     },
 
     data: [
       {
         type: "column",
-        dataPoints: dataPoints,
-      },
-    ],
+        dataPoints: dataPoints
+      }
+    ]
   });
   chart.render();
 }
@@ -141,7 +144,7 @@ function dataPointsToGraphicClients(monthsClients) {
 
     const dataPoint = {
       label: monthString,
-      y: monthClients.quantity,
+      y: monthClients.quantity
     };
 
     return dataPoint;
@@ -152,7 +155,7 @@ function dataPointsToGraphicClients(monthsClients) {
   }, 0);
 
   if (totalMonthsClients > 0) {
-    graphicClients(dataPoints, "graficaClientes", "");
+    graphicClients(dataPoints, "chartClients", "");
   }
 }
 
@@ -182,8 +185,8 @@ async function getDataClientsTOGraphic(year) {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              credentials: "same-origin",
-            },
+              credentials: "same-origin"
+            }
           }
         )
     );
@@ -203,6 +206,7 @@ async function getDataClientsTOGraphic(year) {
     loadingChart(false);
     if (data) {
       dataPointsToGraphicClients(data);
+      document.querySelector(".noData").style.display = "none";
     } else {
       document.querySelector(".noData").style.display = "flex";
     }

@@ -23,8 +23,8 @@ const getAllYearsToSelect = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
     const years = await response.json();
@@ -43,7 +43,9 @@ const getAllYearsToSelect = async () => {
   } finally {
     loading(false);
     if (!data) {
-      noData();
+      noData(true);
+    } else {
+      noData(false);
     }
     return data;
   }
@@ -78,14 +80,14 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "dashboardGraphic",
-          year: year,
+          year: year
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
     const roomsBookingCategorys = await response.json();
@@ -104,17 +106,23 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   } finally {
     loading(false);
     if (!data) {
-      noData();
+      noData(true);
     } else {
+      noData(false);
       dataPointsRoomsToChart(data);
     }
     return data;
   }
 };
 
-const noData = () => {
+const noData = (state) => {
   let noData = document.querySelector(".noData");
-  noData.style.display = "flex";
+
+  if (state) {
+    noData.style.display = "flex";
+  } else {
+    noData.style.display = "none";
+  }
 };
 
 const dataPointsRoomsToChart = (roomsBookingCategorys) => {
@@ -126,7 +134,7 @@ const dataPointsRoomsToChart = (roomsBookingCategorys) => {
     let percentageCategory = (room.quantityReserved * 100) / totalRoomsBooking;
     return {
       y: percentageCategory,
-      label: room.categoryRoom,
+      label: room.categoryRoom
     };
   });
 
@@ -140,7 +148,7 @@ const chartRooms = (dataPoints) => {
     animationEnabled: true,
     colorSet: "greenShades",
     legend: {
-      fontSize: 15,
+      fontSize: 15
     },
     data: [
       {
@@ -151,9 +159,9 @@ const chartRooms = (dataPoints) => {
         legendText: "{label}",
         indexLabelFontSize: 17,
         indexLabel: "{label} - {y}%",
-        dataPoints: dataPoints,
-      },
-    ],
+        dataPoints: dataPoints
+      }
+    ]
   });
   chart.render();
 };

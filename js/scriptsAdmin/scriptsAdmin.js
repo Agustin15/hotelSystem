@@ -1,11 +1,12 @@
 import {
   getClientsByMonthActualYear,
   getRevenueActualYear,
-  getCategoryRoomsMostReserved,
+  getCategoryRoomsMostReserved
 } from "./chart.js";
 import {
   displayItemsDataCategoryRooms,
   displayItemDataRevenuesActual,
+  displayWelcome
 } from "./itemsData.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
@@ -18,8 +19,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
   let logoutOption = document.querySelector(".logoutOption");
+  let dashboard = document.getElementById("dashboard");
 
-  if (document.getElementById("dashboard")) {
+  if (dashboard) {
     getClientsByMonthActualYear(actualYear);
     getCategoryRoomsMostReserved();
     getRevenueActualYear();
@@ -30,6 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   userData = await getDataToken();
   if (userData) {
     displayOptionProfile();
+
+    if (dashboard) {
+      displayWelcome();
+    }
   }
   optionsMenuAdmin();
   openSubMenu();
@@ -130,8 +136,8 @@ const getDataToken = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 

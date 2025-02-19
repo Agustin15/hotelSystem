@@ -44,7 +44,7 @@ class revenuesController
 
     public function getDashboardGraphic($req)
     {
-        $mesesConsulta = array(
+        $months = array(
             "1",
             "2",
             "3",
@@ -59,23 +59,23 @@ class revenuesController
             "12"
         );
 
+        $year = $req["year"];
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $gananciasPorMes = [];
-            $gananciasPorMes = array_map(function ($mes) {
+            $revenuesByMonth = [];
+            $revenuesByMonth = array_map(function ($month) use ($year) {
 
+                $amountByMonth = $this->pay->calculateTotalMonthRevenues($month, $year);
 
-                $totalIngresosMes = $this->pay->calculateTotalMonthRevenues($mes, date("Y"));
+                $amountRevenuesByMonth = array("month" => $month, "revenues" => $amountByMonth);
 
-                $totalGananciasMes = array("month" => $mes, "revenues" => $totalIngresosMes);
+                return $amountRevenuesByMonth;
+            }, $months);
 
-                return $totalGananciasMes;
-            }, $mesesConsulta);
-
-            return $gananciasPorMes;
+            return $revenuesByMonth;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -119,6 +119,41 @@ class revenuesController
             return $revenue;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getAllYearsRevenues($req)
+    {
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+
+            $yearsRevenues = $this->pay->getAllYearsRevenues();
+            return $yearsRevenues;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);;
+        }
+    }
+
+    public function getAllRevenuesByYearLimitIndex($req)
+    {
+
+        $year = $req["year"];
+        $index = $req["index"];
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+
+            $revenues = $this->pay->getAllRevenuesByYearLimitIndex($year, $index);
+            return $revenues;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);;
         }
     }
 

@@ -87,6 +87,34 @@ class Revenue
 
 
 
+    public function getAllRevenuesByYearLimitIndex($year, $index)
+    {
+
+        $query = $this->connection->connect()->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,clientes.correo from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva INNER JOIN clientes
+         ON pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaSalida)=?
+         LIMIT 10 OFFSET $index");
+        $query->bind_param("i", $year);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getAllYearsRevenues()
+    {
+
+        $query = $this->connection->connect()->prepare("select DISTINCT YEAR(reserva_habitacion.fechaSalida) from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva;");
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
     public function getAllMonthRevenues($month, $year)
     {
 

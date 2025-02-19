@@ -3,15 +3,6 @@
   padding: 0px;
 }
 
-body {
-  background-color: rgb(255, 253, 253);
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  align-items: start;
-  gap: 1.5rem;
-  height: 100vh;
-}
-
 #navAdmin {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
@@ -173,6 +164,7 @@ body {
   color: white;
   font-size: 17px;
 }
+
 #userAdmin li .btnDisplayMenu {
   width: 14px;
   visibility: hidden;
@@ -186,6 +178,7 @@ body {
 #userAdmin li img {
   width: 30px;
 }
+
 #userAdmin .subMenuProfile {
   display: none;
   flex-direction: column;
@@ -219,241 +212,162 @@ body {
   background-color: rgb(36, 36, 36);
 }
 
-#dashboard {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  margin-left: 11rem;
-  margin-top: 1.5rem;
-}
-
-.welcome {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  width: 21rem;
-  box-shadow: 2px 2px 2px gray;
-  border: 1px solid rgb(228, 228, 228);
-  height: 3.8rem;
-  border-radius: 3px;
-  background: white;
-}
-
-.welcome .row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-.curve {
-  background: radial-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
-  position: absolute;
-  margin-top: 0.9rem;
-  margin-left: 0;
-  width: 21.1rem;
-  height: 3rem;
-  clip-path: polygon(100% 58%, 0 100%, 100% 100%);
-}
-
-.welcome .containIcon {
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 1.6rem;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  width: 2rem;
-}
-
-.welcome img {
-  width: 45px;
-}
-.rowOne {
+body {
+  background-color: rgb(243, 243, 243);
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   align-items: start;
-  gap: 1rem;
-}
-
-.containItemsData {
-  display: flex;
   gap: 2rem;
+  height: 100vh;
+  gap: 0;
+}
+body #navAdmin {
+  height: 100vh;
+}
+body #navAdmin .titleNav {
+  margin-top: 1.8rem;
 }
 
-.itemsData {
+.bodyRevenues {
   display: flex;
-  gap: 1rem;
-  list-style: none;
-  flex-wrap: wrap;
-  width: 38rem;
-}
-
-.itemsData li {
-  display: flex;
-  gap: 0.5rem;
-  background-color: white;
-  border-radius: 4px;
-  border: 1px solid rgb(228, 228, 228);
-  padding-right: 1rem;
-  box-shadow: 2px 2px 2px gray;
-  height: 6rem;
-  width: 17rem;
-}
-
-.itemsData li a {
-  font-weight: bold;
-}
-.itemsData li .dataRevenues {
-  display: flex;
-  padding-top: 0.5rem;
   flex-direction: column;
-  gap: 0.7rem;
+  align-items: start;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.containGraphicRooms {
+.menuBar {
   display: flex;
-  padding-top: 0.5rem;
-  width: 31rem;
-  height: 13rem;
   flex-direction: column;
   align-items: center;
-  border-radius: 7px;
+  gap: 1rem;
+  width: 100%;
   background-color: white;
-  border: 1px solid rgb(228, 228, 228);
-  box-shadow: 2px 2px 2px gray;
+  padding-top: 0.5rem;
+  box-shadow: 2px 2px 2px rgb(172, 172, 172);
 }
-
-.containGraphicRooms h4 {
-  font-size: 15px;
-}
-
-.itemsData li .icon {
+.menuBar .title {
+  font-size: 20px;
+  color: rgb(141, 141, 141);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  width: 6rem;
-  height: 6.1rem;
-  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  gap: 1rem;
+  margin-left: 8rem;
 }
-
-.itemsData li .icon img {
+.menuBar .title img {
   width: 50px;
 }
-
-.itemsData li .category {
+.menuBar ul {
+  display: flex;
+  gap: 3rem;
+  margin-left: 7rem;
+  list-style: none;
+  font-size: 18px;
+  color: rgb(141, 141, 141);
+  font-weight: bold;
+}
+.menuBar ul li {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-top: 0.5rem;
-}
-
-.itemsData li .category .data {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.itemsData li .noData {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding: 1rem;
+  padding-bottom: 0.4rem;
+  cursor: pointer;
+}
+.menuBar ul li img {
+  width: 30px;
+}
+.menuBar ul li:hover {
+  border-bottom: 2px solid rgb(1, 187, 147);
+}
+
+.optionMarkActual {
+  border-bottom: 3px solid rgb(1, 187, 147);
+}
+
+.option {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalMainRevenues {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background: rgba(44, 44, 44, 0.6);
+}
+
+.loadingPage {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  opacity: 100%;
+  color: rgb(158, 158, 158);
+  background: none;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-left: 7rem;
+  margin-top: 12rem;
+}
+.loadingPage img {
+  width: 50px;
   opacity: 60%;
-  gap: 0.5rem;
-  height: 10rem;
-  width: 10rem;
-}
-.itemsData li .noData h3 {
-  font-size: 15px;
 }
 
-.itemsData li .noData img {
-  width: 40px;
-}
-
-.itemsData li h5 {
-  font-size: 16px;
-}
-
-.itemsData li span {
-  font-size: 15px;
-}
-
-.rowTwo {
-  display: flex;
-  gap: 2rem;
-}
-
-.containGraphicBookings,
-.containGraphicRevenues {
+.pageNotFound {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  width: 34rem;
-  height: 20rem;
-  padding-top: 1rem;
-  background-color: white;
-  box-shadow: 2px 2px 2px gray;
-  border: 1px solid rgb(228, 228, 228);
-  border-radius: 7px;
-  position: relative;
-}
-.containGraphicRevenues {
-  width: 35rem;
-}
-
-.containGraphicBookings .loadingBookings,
-.containGraphicRevenues .loadingRevenues,
-.containGraphicRooms .loadingRooms {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  margin-top: 2.3rem;
-  gap: 0.3rem;
-  opacity: 40%;
+  gap: 1rem;
   font-size: 20px;
-}
-
-.containGraphicBookings .loadingRevenues img,
-.containGraphicRevenues .loadingBookings img,
-.containGraphicRooms .loadingRooms img {
-  width: 40px;
-}
-
-.containGraphicBookings .noDataBookings,
-.containGraphicRevenues .noDataRevenues,
-.containGraphicRooms .noDataRooms {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: auto;
-  margin-top: 2.3rem;
-  gap: 0.5rem;
-  opacity: 50%;
-  font-size: 22px;
+  height: auto;
+  margin-left: 7rem;
+  margin-top: 9rem;
+  opacity: 100%;
+  background: none;
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  color: gray;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+}
+.pageNotFound img {
+  width: 120px;
+  opacity: 75%;
+}
+.pageNotFound .headerPageNotFound {
+  display: none;
+  justify-content: flex-end;
+  width: 110%;
+}
+.pageNotFound .headerPageNotFound button {
+  background-color: rgb(231, 0, 0);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.pageNotFound .headerPageNotFound button:hover {
+  background-color: rgb(182, 4, 4);
 }
 
-.noDataRevenues img,
-.noDataRooms img,
-.noDataBookings img {
-  width: 80px;
-}
-
-#chartBookings,
-#chartRevenues,
-#chartRooms {
-  width: 99%;
-  min-height: 78%;
-  color: black;
-}
-
-#chartRooms {
-  width: 90%;
-}
+/*# sourceMappingURL=styleMain.css.map */

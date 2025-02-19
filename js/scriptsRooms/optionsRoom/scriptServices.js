@@ -53,15 +53,15 @@ const drawDocument = (page) => {
 
 const optionServicePage = [
   {
-    page: "history.php",
+    page: "history.html",
     function: configHistory,
   },
   {
-    page: "addService.php",
+    page: "addService.html",
     function: configAddService,
   },
   {
-    page: "deleteService.php",
+    page: "deleteService.html",
     function: configDeleteService,
   },
 ];
