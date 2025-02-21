@@ -288,6 +288,8 @@
   align-items: center;
   font-size: 22px;
   opacity: 60%;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
 }
 .tableBookings .loading img {
   width: 40px;
@@ -304,6 +306,7 @@
   font-size: 18px;
   color: grey;
   margin-top: 2rem;
+  padding-bottom: 2rem;
 }
 .noDataBookings img,
 .noResults img {

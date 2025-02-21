@@ -18,10 +18,15 @@ export const optionsMenuAdmin = () => {
     "#liHabitaciones",
     "actualOptionRooms"
   );
+
+  routesOptions(
+    "http://localhost/sistema%20Hotel/views/admin/ganancias/",
+    "#liGanancias",
+    "actualOptionRevenues"
+  );
 };
 
 const routesOptions = (url, liOption, itemLocal) => {
-
   if (liOption == "#liInicio") {
     document
       .querySelector(liOption)

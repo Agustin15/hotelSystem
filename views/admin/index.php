@@ -129,15 +129,37 @@ $actualYear = date("Y");
                     </ul>
                 </li>
 
-                <li id="liGanancias" class="optionGanancias" class="optionMenu">
+                <li id="liGanancias" class="optionMenu">
                     <div class="item">
                         <div class="nameOption">
                             <img src="../../img/ganancias.png">
                             <a>Ganancias</a>
                         </div>
+                        <img class="btnDisplaySubMenu" src="../../img/btnFlecha.png">
                     </div>
 
+                    <ul class="subMenu" id="subMenuRevenues" style="display: none;">
+
+                        <li class="liGrafica" data-sub-url="chart.html">
+
+                            <img src="../../img/areaChart.png">
+                            <a>Grafica</a>
+
+                        </li>
+
+                        <li class="liFacturas" data-sub-url="tableBills.html">
+
+                            <img src="../../img/electronicBill.png">
+                            <a>Facturas</a>
+
+                        </li>
+
+
+                    </ul>
+
                 </li>
+
+
             </ul>
 
             <div id="userAdmin">

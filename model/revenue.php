@@ -13,6 +13,18 @@ class Revenue
         $this->connection = new Connection();
     }
 
+    public function addRevenue($idBooking, $idClient, $amount)
+    {
+
+
+        $query = $this->connection->connect()->prepare("insert into pago
+        (idReservaPago,idClientePago,deposito) values (?,?,?)");
+        $query->bind_param("iid", $idBooking, $idClient, $amount);
+
+        $result = $query->execute();
+
+        return $result;
+    }
 
 
     public function updateRevenueById($idBooking, $newAmount)
@@ -22,35 +34,6 @@ class Revenue
         $query = $this->connection->connect()->prepare("update pago set
         deposito=? where idReservaPago=?");
         $query->bind_param("di", $newAmount, $idBooking);
-
-        $result = $query->execute();
-
-        return $result;
-    }
-
-
-    public function getRevenueById($idBooking)
-    {
-
-        $query = $this->connection->connect()->prepare("select * from pago where idReservaPago=?");
-        $query->bind_param("i", $idBooking);
-        $query->execute();
-        $result = $query->get_result();
-
-        return $result->fetch_array(MYSQLI_ASSOC);
-    }
-
-
-
-
-
-    public function addRevenue($idBooking, $idClient, $amount)
-    {
-
-
-        $query = $this->connection->connect()->prepare("insert into pago
-        (idReservaPago,idClientePago,deposito) values (?,?,?)");
-        $query->bind_param("iid", $idBooking, $idClient, $amount);
 
         $result = $query->execute();
 
@@ -72,6 +55,18 @@ class Revenue
 
 
 
+
+    public function getRevenueById($idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from pago where idReservaPago=?");
+        $query->bind_param("i", $idBooking);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
     public function getAllRevenuesByYear($year)
     {
 
@@ -90,10 +85,11 @@ class Revenue
     public function getAllRevenuesByYearLimitIndex($year, $index)
     {
 
-        $query = $this->connection->connect()->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,clientes.correo from pago INNER JOIN
-         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva INNER JOIN clientes
-         ON pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaSalida)=?
-         LIMIT 10 OFFSET $index");
+        $query = $this->connection->connect()->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,
+        clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
+        reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
+        ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
+        pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaSalida)=? LIMIT 10 OFFSET $index");
         $query->bind_param("i", $year);
         $query->execute();
         $result = $query->get_result();

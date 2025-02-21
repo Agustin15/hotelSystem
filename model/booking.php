@@ -48,6 +48,59 @@ class Booking
     }
 
 
+    public function  deleteBookingById($idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("delete from reserva_habitacion where idReserva=?");
+        $query->bind_param("i", $idBooking);
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+    public function updateBookingById()
+    {
+
+        $query = $this->connection->connect()->prepare("update reserva_habitacion set idClienteReserva=? 
+        ,fechaLlegada=?,fechaSalida=?,cantidadHabitaciones=? where idReserva=?");
+        $query->bind_param(
+            "issii",
+            $this->idClient,
+            $this->dateStart,
+            $this->dateEnd,
+            $this->quantityRooms,
+            $this->idBooking
+        );
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+    public function addBooking()
+    {
+
+
+        $query = $this->connection->connect()->prepare("insert into reserva_habitacion
+    (idClienteReserva,fechaLlegada,fechaSalida,cantidadHabitaciones) values(?,?,?,?) ");
+
+        $query->bind_param(
+            "issi",
+            $this->idClient,
+            $this->dateStart,
+            $this->dateEnd,
+            $this->quantityRooms
+        );
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+
     public function getAllBookings()
     {
 
@@ -132,17 +185,6 @@ class Booking
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function  deleteBookingById($idBooking)
-    {
-
-        $query = $this->connection->connect()->prepare("delete from reserva_habitacion where idReserva=?");
-        $query->bind_param("i", $idBooking);
-        $result = $query->execute();
-
-        return $result;
-    }
-
-
 
     public function getBookingByIdClientAndDate($idClient, $startDate, $endDate)
     {
@@ -175,44 +217,4 @@ class Booking
         return $result->fetch_array(MYSQLI_ASSOC);
     }
 
-
-    public function updateBookingById()
-    {
-
-        $query = $this->connection->connect()->prepare("update reserva_habitacion set idClienteReserva=? 
-        ,fechaLlegada=?,fechaSalida=?,cantidadHabitaciones=? where idReserva=?");
-        $query->bind_param(
-            "issii",
-            $this->idClient,
-            $this->dateStart,
-            $this->dateEnd,
-            $this->quantityRooms,
-            $this->idBooking
-        );
-
-        $result = $query->execute();
-
-        return $result;
-    }
-
-
-    public function addBooking()
-    {
-
-
-        $query = $this->connection->connect()->prepare("insert into reserva_habitacion
-    (idClienteReserva,fechaLlegada,fechaSalida,cantidadHabitaciones) values(?,?,?,?) ");
-
-        $query->bind_param(
-            "issi",
-            $this->idClient,
-            $this->dateStart,
-            $this->dateEnd,
-            $this->quantityRooms
-        );
-
-        $result = $query->execute();
-
-        return $result;
-    }
 }

@@ -18,7 +18,7 @@ export const configServices = async () => {
     booking = await bookingByRoomReserved();
     if (booking) {
       optionMenu();
-      let page = await getDocument("optionsMenu/optionServices/history.php");
+      let page = await getDocument("optionsMenu/optionServices/history.html");
       if (page) {
         drawDocument(page);
         configHistory(numRoom, booking.idReservaHabitacion);

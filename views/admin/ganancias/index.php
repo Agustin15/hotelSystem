@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleMain.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+        integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
     <script type="module" src="../../../js/scriptsRevenues/dashboardScript.js" defer> </script>
 
     <title>Ganancias</title>
 
 <body>
+
 
     <div class="modalMainRevenues">
     </div>
@@ -127,14 +134,33 @@
                     </ul>
                 </li>
 
-                <li id="liGanancias" class="optionGanancias" class="optionMenu">
+                <li id="liGanancias" class="optionMenu">
                     <div class="item">
                         <div class="nameOption">
                             <img src="../../../img/ganancias.png">
                             <a>Ganancias</a>
                         </div>
+                        <img class="btnDisplaySubMenu" src="../../../img/btnFlecha.png">
                     </div>
 
+                    <ul class="subMenu" id="subMenuRevenues" style="display: none;">
+
+                        <li class="liGrafica" data-sub-url="chart.html">
+
+                            <img src="../../../img/areaChart.png">
+                            <a>Grafica</a>
+
+                        </li>
+
+                        <li class="liFacturas" data-sub-url="tableBills.html">
+
+                            <img src="../../../img/electronicBill.png">
+                            <a>Facturas</a>
+
+                        </li>
+
+
+                    </ul>
                 </li>
             </ul>
 

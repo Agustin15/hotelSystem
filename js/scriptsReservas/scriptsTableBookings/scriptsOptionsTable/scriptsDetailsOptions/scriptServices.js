@@ -14,7 +14,6 @@ export const configServices = async () => {
   let idBooking = containServicesDetails.id;
   body = containServicesDetails.querySelector(".body");
   servicesBooking = await getServices(idBooking);
-
   if (servicesBooking) {
     displayServicesRoom();
   }
@@ -28,17 +27,14 @@ const displayServicesRoom = () => {
   let numRooms = servicesBooking.map(
     (service) => service.numHabitacionServicio
   );
-
   let numRoomsNoDuplicate = [];
 
-  numRoomsNoDuplicate.push(
-    numRooms.reduce((ac, current) => {
-      if (current != ac) {
-        ac = current;
-        return current;
-      }
-    }, 0)
-  );
+  numRooms.reduce((ac, current) => {
+    if (current != ac) {
+      ac = current;
+      numRoomsNoDuplicate.push(current);
+    }
+  }, 0);
 
   let items = numRoomsNoDuplicate.map((numberRoom) => {
     return `

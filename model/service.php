@@ -91,7 +91,7 @@ class Service
     {
 
         $query = $this->connection->connect()->prepare("select * from serviciosExtra_habitacion 
-        INNER JOIN servicio ON serviciosExtra_habitacion.idServicioHabitacion=servicio.idServicio where
+        INNER JOIN servicio ON serviciosExtra_habitacion.idServicio=servicio.idServicio where
         idReservaHabitacionServicio=?");
         $query->bind_param("i", $idBooking);
         $query->execute();

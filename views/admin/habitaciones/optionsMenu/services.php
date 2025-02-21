@@ -22,15 +22,15 @@ if (isset($_GET["numRoom"])) {
     <div class="containServices" id=<?php echo $numRoom ?>>
         <div class="headerWindowContainServices">
             <ul>
-                <li data-url="optionsMenu/optionServices/history.php">
+                <li data-url="optionsMenu/optionServices/history.html">
                     <img src="../../../img/historyServices.png">
                     Historial
                 </li>
-                <li data-url="optionsMenu/optionServices/addService.php">
+                <li data-url="optionsMenu/optionServices/addService.html">
                     <img src="../../../img/addService.png">
                     Agregar
                 </li>
-                <li data-url="optionsMenu/optionServices/deleteService.php">
+                <li data-url="optionsMenu/optionServices/deleteService.html">
                     <img src="../../../img/deleteService.png">
                     Eliminar
                 </li>

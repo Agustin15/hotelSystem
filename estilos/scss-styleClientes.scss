@@ -182,7 +182,7 @@ body {
       }
     }
 
-    #chartClients{
+    #chartClients {
       width: 90%;
       min-height: 67%;
     }
@@ -472,6 +472,8 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 22px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
     opacity: 60%;
 
     img {
@@ -490,6 +492,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   margin-top: 5rem;
+  padding-bottom: 2rem;
 
   img {
     width: 70px;

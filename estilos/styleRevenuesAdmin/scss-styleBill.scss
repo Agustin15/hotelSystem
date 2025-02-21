@@ -1,0 +1,241 @@
+.containBill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  margin-top: 1rem;
+  width: auto;
+  margin-left: 12rem;
+
+  .header {
+    display: flex;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 3rem;
+    align-items: start;
+    justify-content: start;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+
+    .btnPrint {
+      width: 3rem;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: none;
+      font-weight: bold;
+      border-radius: 3px;
+      height: 2.6rem;
+      cursor: pointer;
+      margin-left: 1rem;
+      margin-top: 0.2rem;
+
+      img {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .btnPrint:hover {
+      background-color: gainsboro;
+    }
+    .title {
+      display: flex;
+      gap: 1rem;
+      padding-top: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      width: 85%;
+
+      img {
+        width: 35px;
+      }
+    }
+
+    .btnCloseWindow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.8rem;
+      height: 1.8rem;
+      border: none;
+      background-color: rgb(233, 3, 3);
+      color: white;
+      font-weight: bold;
+      margin-left: 5rem;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btnCloseWindow:hover {
+      background-color: rgb(209, 3, 3);
+    }
+  }
+  .contentBill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 35rem;
+    width: 60rem;
+    position: relative;
+  }
+
+  .billDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    .title {
+      display: flex;
+      justify-content: start;
+      gap: 20rem;
+      align-items: end;
+      width: 100%;
+      margin-top: 1rem;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+        margin-left: 4rem;
+
+        img {
+          width: 55px;
+        }
+      }
+
+      h3 {
+        font-size: 28px;
+        font-family: cursive;
+        color: rgb(0, 0, 0);
+      }
+
+      h4 {
+        font-size: 23px;
+        margin-right: 4rem;
+      }
+    }
+    .row {
+      display: flex;
+      align-items: start;
+      margin-top: 1rem;
+      gap: 1.5rem;
+      justify-content: start;
+      width: 100%;
+
+      .infoBooking {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 4rem;
+
+        li {
+          list-style: none;
+          display: flex;
+          padding-top: 0.5rem;
+          flex-direction: column;
+          text-align: start;
+          gap: 0.1rem;
+          width: 11rem;
+          height: 4rem;
+          border-top: 1px solid rgb(78, 78, 78);
+
+          .blackFont {
+            font-weight: bold;
+          }
+        }
+
+        .liIdBooking {
+          border-top: 2px solid black;
+        }
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 1.3rem;
+    }
+
+    .senderDataAndClientData {
+      display: flex;
+      align-items: start;
+      gap: 2rem;
+      justify-content: center;
+
+      li {
+        display: flex;
+        border-top: 2px solid black;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding-top: 0.5rem;
+        text-align: start;
+        list-style: none;
+        width: 17.5rem;
+
+        p {
+          width: 12rem;
+        }
+        span,
+        p {
+          font-size: 15px;
+        }
+        .nameCompany {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.scrollTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  max-height: 13rem;
+  overflow-y: scroll;
+}
+
+.tableDetailsBill {
+  width: 41rem;
+  height: auto;
+  background-color: white;
+  border-top: 2px solid black;
+
+  thead {
+    th {
+      border-bottom: 2px solid black;
+      padding: 0.5rem;
+    }
+    tr {
+      background: none;
+    }
+  }
+
+  tbody {
+    .description {
+      width: 14rem;
+    }
+
+    td {
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+    }
+  }
+}
+
+.totalAmount {
+  width: 96%;
+  border-top: 2px solid black;
+  padding: 0.5rem;
+  font-size: 17px;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}

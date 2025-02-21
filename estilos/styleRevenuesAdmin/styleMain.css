@@ -228,6 +228,78 @@ body #navAdmin .titleNav {
   margin-top: 1.8rem;
 }
 
+.modalMainRevenues {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+}
+.modalMainRevenues .loadingPage {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin-top: 17rem;
+  margin-left: 4rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 3px;
+  color: gray;
+}
+.modalMainRevenues .loadingPage img {
+  width: 40px;
+  opacity: 70%;
+}
+.modalMainRevenues .pageNotFound {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 18px;
+  align-items: center;
+  height: auto;
+  margin-left: 4rem;
+  margin-top: 14rem;
+  opacity: 100%;
+  background-color: white;
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  color: gray;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+}
+.modalMainRevenues .pageNotFound img {
+  width: 95px;
+  opacity: 75%;
+}
+.modalMainRevenues .pageNotFound .headerPageNotFound {
+  display: flex;
+  justify-content: flex-end;
+  width: 110%;
+}
+.modalMainRevenues .pageNotFound .headerPageNotFound button {
+  background-color: rgb(231, 0, 0);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 2rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.modalMainRevenues .pageNotFound .headerPageNotFound button:hover {
+  background-color: rgb(182, 4, 4);
+}
+
 .bodyRevenues {
   display: flex;
   flex-direction: column;
@@ -293,21 +365,6 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.modalMainRevenues {
-  position: absolute;
-  z-index: 2;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  margin: auto;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  background: rgba(44, 44, 44, 0.6);
 }
 
 .loadingPage {

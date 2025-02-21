@@ -32,14 +32,12 @@ const displayServicesRoom = () => {
 
   let numRoomsNoDuplicate = [];
 
-  numRoomsNoDuplicate.push(
-    numRooms.reduce((ac, current) => {
-      if (current != ac) {
-        ac = current;
-        return current;
-      }
-    }, 0)
-  );
+  numRooms.reduce((ac, current) => {
+    if (current != ac) {
+      ac = current;
+      numRoomsNoDuplicate.push(current);
+    }
+  }, 0);
 
   let items = numRoomsNoDuplicate.map((numberRoom) => {
     return `
@@ -69,7 +67,7 @@ const displayServicesRoom = () => {
         (service) => service.numHabitacionServicio == roomNumber
       );
 
-      displayServicesDetailsRoom(roomNumber,servicesRoom);
+      displayServicesDetailsRoom(roomNumber, servicesRoom);
     });
   });
 };
@@ -80,7 +78,7 @@ export const getServices = async (idBooking) => {
   loading(true);
   try {
     const result = await getDataServices(idBooking);
-    if (result.length>0) {
+    if (result.length > 0) {
       data = result;
     }
   } catch (error) {

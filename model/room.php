@@ -60,7 +60,7 @@ class Room
 
 
         $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
-        (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? ");
+        (fechaLlegadaHabitacion >=? or fechaSalidaHabitacion<=?) and numHabitacionReservada=? ");
         $query->execute();
 
         $query->bind_param("ssi", $dateEndNewBooking, $dateStartNewBooking, $numRoom);
@@ -229,7 +229,7 @@ class Room
     {
 
         $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
-      numHabitacionReservada=? and fechaLlegadaHabitacion <=? and fechaSalidaHabitacion>=?");
+      numHabitacionReservada=? and fechaLlegadaHabitacion <=? and fechaSalidaHabitacion>?");
         $query->bind_param("iss", $numRoom, $today, $today);
         $query->execute();
 

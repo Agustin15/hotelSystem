@@ -40,6 +40,48 @@ class Client
     }
 
 
+    public function addClient()
+    {
+
+        $query = $this->connection->connect()->prepare("insert into clientes (correo,nombre,apellido,telefono)
+        values (?,?,?,?)");
+        $query->bind_param("ssss", $this->mail, $this->name, $this->lastname, $this->phone);
+        $result = $query->execute();
+
+        return $result;
+    }
+
+
+    
+    public function updateClientById($mail, $name, $lastname, $phone, $idClient)
+    {
+
+        $query = $this->connection->connect()->prepare("update clientes set correo=?,
+        nombre=?,apellido=?,telefono=? where idCliente=?");
+        $query->bind_param("ssssi", $mail, $name, $lastname, $phone, $idClient);
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    
+    public function deleteClientById($idClient)
+    {
+
+
+        $query = $this->connection->connect()->prepare("delete from clientes where idCliente=?");
+        $query->bind_param("i", $idClient);
+
+        $query->execute();
+
+        if ($query->execute() == false) {
+
+            return $query->error;
+        } else {
+
+            return $query->execute();
+        }
+    }
 
     public function getAllClients()
     {
@@ -158,27 +200,6 @@ class Client
     }
 
 
-
-
-    public function deleteClientById($idClient)
-    {
-
-
-        $query = $this->connection->connect()->prepare("delete from clientes where idCliente=?");
-        $query->bind_param("i", $idClient);
-
-        $query->execute();
-
-        if ($query->execute() == false) {
-
-            return $query->error;
-        } else {
-
-            return $query->execute();
-        }
-    }
-
-
     public function getClientById($idClient)
     {
 
@@ -190,17 +211,6 @@ class Client
         $result = $query->get_result();
 
         return $result->fetch_array(MYSQLI_ASSOC);
-    }
-
-    public function updateClientById($mail, $name, $lastname, $phone, $idClient)
-    {
-
-        $query = $this->connection->connect()->prepare("update clientes set correo=?,
-        nombre=?,apellido=?,telefono=? where idCliente=?");
-        $query->bind_param("ssssi", $mail, $name, $lastname, $phone, $idClient);
-        $result = $query->execute();
-
-        return $result;
     }
 
 
@@ -267,14 +277,5 @@ class Client
     }
 
 
-    public function addClient()
-    {
-
-        $query = $this->connection->connect()->prepare("insert into clientes (correo,nombre,apellido,telefono)
-        values (?,?,?,?)");
-        $query->bind_param("ssss", $this->mail, $this->name, $this->lastname, $this->phone);
-        $result = $query->execute();
-
-        return $result;
-    }
+ 
 }

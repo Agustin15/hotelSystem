@@ -643,6 +643,8 @@ body #navAdmin .titleNav {
   justify-content: center;
   align-items: center;
   font-size: 22px;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
   opacity: 60%;
 }
 .tableClients .loading img {
@@ -659,6 +661,7 @@ body #navAdmin .titleNav {
   font-weight: bold;
   font-size: 18px;
   margin-top: 5rem;
+  padding-bottom: 2rem;
 }
 .noDataClients img,
 .noResults img {

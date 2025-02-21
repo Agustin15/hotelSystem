@@ -55,6 +55,23 @@ class bookingController
     }
 
 
+    public function DELETE($req)
+    {
+
+        try {
+            $idBooking = $req['idBooking'];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $res = $this->booking->deleteBookingById($idBooking);
+            return $res;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
     public function getAllBookings($req)
     {
 
@@ -198,21 +215,4 @@ class bookingController
     }
 
 
-
-    public function DELETE($req)
-    {
-
-        try {
-            $idBooking = $req['idBooking'];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
-            }
-            $res = $this->booking->deleteBookingById($idBooking);
-            return $res;
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
-        }
-    }
 }

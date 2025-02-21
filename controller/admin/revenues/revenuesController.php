@@ -122,6 +122,22 @@ class revenuesController
         }
     }
 
+    public function getRevenueDetailsById($req)
+    {
+        try {
+            $idBooking = $req['idBooking'];
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                throw new Error($tokenVerify["error"]);
+            }
+            $revenueBookingDetails =  $this->pay->getRevenueById($idBooking);
+
+            return $revenueBookingDetails;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
     public function getAllYearsRevenues($req)
     {
 

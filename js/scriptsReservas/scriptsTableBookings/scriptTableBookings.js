@@ -16,9 +16,7 @@ export const displayTable = async () => {
   if (yearsAllBookings) {
     drawYearsSelect(yearsAllBookings);
     drawTable();
-  } else {
-    noDataFilterSelect();
-  }
+  } 
 };
 
 export const drawTable = async () => {
@@ -217,11 +215,6 @@ const noData = (error) => {
   `;
 };
 
-const noDataFilterSelect = () => {
-  document.querySelector(".containSelect").style.display = "none";
-  document.querySelector(".containInput").style.display = "none";
-  document.querySelector(".titleTable ").classList.add("titleTableNoData");
-};
 
 const drawIndex = () => {
   let controlsIndex = document.querySelector(".controls");
@@ -314,7 +307,7 @@ const displaySelectYear = async () => {
   } finally {
     loading(false);
     if (!data) {
-      noDataFilterSelect();
+    
       noData("No se encontraron reservas en este año");
     }
     return data;
@@ -456,6 +449,9 @@ const search = () => {
 };
 
 const loading = (state) => {
+  let tbody = document.querySelector("tbody");
+  tbody.innerHTML = ``;
+
   if (state) {
     document.querySelector("tfoot").innerHTML = ` 
     

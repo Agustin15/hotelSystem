@@ -75,6 +75,7 @@ const showOpenMenu = () => {
   let options = document.querySelector(".menu").querySelectorAll(".optionMenu");
 
   options.forEach((option) => {
+
     option.addEventListener("mouseover", () => {
       option.querySelector(".btnDisplaySubMenu").style.display = "flex";
     });

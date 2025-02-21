@@ -117,6 +117,9 @@ const getDataLimitClients = async () => {
 };
 
 const loading = (state) => {
+  let tbody = document.querySelector("tbody");
+  tbody.innerHTML = ``;
+
   if (state) {
     document.querySelector("tfoot").innerHTML = ` 
     
