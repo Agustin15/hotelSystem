@@ -35,9 +35,8 @@ class userController
                 throw new Exception("Autenticacion fallida,usuario no encontrado");
             }
             $payload = [
-                "user" => $user,
+                "user" => $userFound["usuario"],
                 "rol" => $userFound["rol"],
-                "genre" => $userFound["genero"],
                 "exp" => time() + 3600
             ];
             if ($userFound["contrasenia"] == $password) {
@@ -61,6 +60,21 @@ class userController
                 throw new Error($tokenVerified["error"]);
             }
             return $tokenVerified;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 500);
+        }
+    }
+
+    public function getDataUserByUsername($req)
+    {
+        try {
+            $tokenVerified = $this->authToken->verifyToken();
+            if (isset($tokenVerified["error"])) {
+                throw new Error($tokenVerified["error"]);
+            }
+            $dataUser = $this->user->getUserByUser($req["username"]);
+            $dataUser["imagen"] = base64_encode($dataUser["imagen"]);
+            return $dataUser;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 500);
         }

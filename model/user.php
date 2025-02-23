@@ -17,18 +17,6 @@ class User
     }
 
 
-    public function getAdminGenero($usuario)
-    {
-
-        $query = $this->connection->connect()->prepare("select * from usuarios where usuario=?");
-        $query->bind_param("s", $usuario);
-        $query->execute();
-        $result = $query->get_result();
-
-        return $result;
-    }
-
-
     public function getUserByUser($user)
     {
 

@@ -1,7 +1,7 @@
 import { displayTable } from "../scriptClientsTable.js";
 import { loading } from "../scriptAddClient.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 const configDeleteClient = async () => {
   let containDelete = document.querySelector(".containDelete");

@@ -84,7 +84,7 @@ export const getServices = async (idBooking) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loading(true);
     if (!data) {
       noData();
     }

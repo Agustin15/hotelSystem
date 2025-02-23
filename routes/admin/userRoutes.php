@@ -19,7 +19,8 @@ $routes = [
     "GET" => function () use ($userController, $req) {
 
         $optionGET = match ($req["option"]) {
-            "getDataToken" => $userController->getDataToken()
+            "getDataToken" => $userController->getDataToken(),
+            "getUserByUsername" => $userController->getDataUserByUsername($req)
         };
 
         return $optionGET;

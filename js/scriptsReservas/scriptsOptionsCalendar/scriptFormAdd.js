@@ -16,7 +16,7 @@ import {
 import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
 import { POSTPay } from "../../scriptsRevenues/scriptRevenues.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 export let nights;
 export let resultBookingAdd;

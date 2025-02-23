@@ -1,6 +1,6 @@
 import { modalOption } from "../../scriptTableBookings.js";
 import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
-import { invalidAuthentication } from "../../../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../../../scriptsAdmin/userData.js";
 let body;
 let idBooking;
 

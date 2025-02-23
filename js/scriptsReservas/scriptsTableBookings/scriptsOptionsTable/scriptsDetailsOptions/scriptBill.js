@@ -19,7 +19,10 @@ export const configBill = async () => {
     modalOption(false, document.querySelector(".modalOptionsBookingDetails"));
 
     if (confirm) {
-      console.log("Redireccion");
+      localStorage.setItem("actualOptionRevenues", "tableBills.html");
+      location.href =
+        "http://localhost/sistema%20Hotel/views/admin/ganancias/index.php?idBooking=" +
+        idBooking;
     }
   }
 };

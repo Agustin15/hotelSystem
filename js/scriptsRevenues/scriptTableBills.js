@@ -1,7 +1,8 @@
 import {
   getAllYearsRevenues,
   getRevenuesByYear,
-  getAllRevenuesByYearLimitIndex
+  getAllRevenuesByYearLimitIndex,
+  getRevenuDetailsById
 } from "./scriptRevenues.js";
 
 import { loadingPage, pageNotFound } from "./dashboardScript.js";
@@ -17,16 +18,47 @@ export const configTable = async () => {
   controls = document.querySelector(".controls");
   tableBills = document.querySelector(".tableBills");
 
-  let yearsRevenues = await allYearsRevenues();
-  if (yearsRevenues) {
-    displaySelectYears(yearsRevenues);
-    revenuesByYear(selectYear.value);
+  const urlParams = new URLSearchParams(window.location.search);
 
-    let btnSearchByYear = document.querySelector(".btnSearch");
-    btnSearchByYear.addEventListener("click", async () => {
-      controls.style.display = "flex";
+  if (!urlParams.get("idBooking")) {
+    let yearsRevenues = await allYearsRevenues();
+    if (yearsRevenues) {
+      displaySelectYears(yearsRevenues);
       revenuesByYear(selectYear.value);
-    });
+
+      let btnSearchByYear = document.querySelector(".btnSearch");
+      btnSearchByYear.addEventListener("click", async () => {
+        controls.style.display = "flex";
+        revenuesByYear(selectYear.value);
+      });
+    }
+  } else {
+    controls.style.display = "none";
+    let revenueBooking = await revenueByIdBooking(urlParams.get("idBooking"));
+    if (revenueBooking) {
+      displayTable([revenueBooking]);
+    }
+  }
+};
+
+const revenueByIdBooking = async (idBooking) => {
+  let revenueBooking;
+
+  loading(true);
+  try {
+    let result = await getRevenuDetailsById(idBooking);
+    if (result) {
+      revenueBooking = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+
+    if (!revenueBooking) {
+      noData();
+    }
+    return revenueBooking;
   }
 };
 
@@ -78,9 +110,9 @@ const revenuesByYear = async (year) => {
   } finally {
     loading(false);
     if (revenues) {
-      displayControlsIndex(revenues);
       let revenuesLimit = await allRevenuesByYearLimitIndex(year);
       if (revenuesLimit) {
+        displayControlsIndex(revenues.length, revenuesLimit);
         displayTable(revenuesLimit);
       }
     } else {
@@ -171,13 +203,25 @@ const displayTable = (revenuesLimit) => {
   });
 };
 
-const displayControlsIndex = (revenues) => {
+const displayControlsIndex = (revenuesRows, revenuesLimit) => {
   let pageIndexElement = document.querySelector(".pageIndex");
-  revenues.length < 10
-    ? (pages = 1)
-    : (pages = (revenues.length / 10).toFixed(0));
+  revenuesRows < 10 ? (pages = 1) : (pages = (revenuesRows / 10).toFixed(0));
 
   pageIndexElement.textContent = `${index + 1}/${pages}`;
+
+  controls.querySelector(".prev").addEventListener("click", () => {
+    if (index + 1 > 0) {
+      index--;
+      displayTable(revenuesLimit);
+    }
+  });
+
+  controls.querySelector(".next").addEventListener("click", () => {
+    if (index + 1 < pages) {
+      index++;
+      displayTable(revenuesLimit);
+    }
+  });
 };
 
 const allRevenuesByYearLimitIndex = async (year) => {
@@ -290,7 +334,7 @@ const getPageBill = async () => {
   }
 };
 
-const drawPageBill = (page, idBooking) => {
+const drawPageBill = (page, dataBooking) => {
   modal.innerHTML = page;
-  configBill(idBooking);
+  configBill(dataBooking, modal);
 };

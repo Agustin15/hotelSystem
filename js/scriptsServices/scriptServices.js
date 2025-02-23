@@ -1,5 +1,5 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 export const getDataServices = async (idBooking) => {
   let url =
@@ -144,6 +144,8 @@ export const getAllServicesHotel = async () => {
 };
 
 export const getServiceByName = async (nameService) => {
+
+  console.log(nameService);
   let url =
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({

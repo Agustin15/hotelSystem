@@ -6,7 +6,7 @@ import { configFreeRooms } from "./scriptsOptionsCalendar/scriptFreeRooms.js";
 import { pageNotFound, loadingPage } from "./scriptReserva.js";
 import { closePageNotFound } from "./scriptsTableBookings/scriptTableBookings.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 let startBookingLocal;
 let endBookingLocal;

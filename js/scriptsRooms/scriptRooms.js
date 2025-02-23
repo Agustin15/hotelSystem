@@ -3,7 +3,7 @@ import {
   loadingForm,
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 export const POSTRooms = async (booking, option) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php`;

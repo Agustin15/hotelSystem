@@ -25,6 +25,7 @@ export const actualOptionRevenues = async (optionActual) => {
 optionBillLi.addEventListener("click", async () => {
   localStorage.setItem("actualOptionRevenues", "tableBills.html");
   actualOptionRevenues(localStorage.getItem("actualOptionRevenues"));
+  deleteParamsUrl();
 });
 
 optionChartLi.addEventListener("click", async () => {
@@ -109,5 +110,14 @@ export const pageNotFound = (element) => {
       element.innerHTML = ``;
       element.style.display = "none";
     });
+  }
+};
+
+const deleteParamsUrl = () => {
+  let searchParamsUrl = new URLSearchParams(window.location.search);
+
+  if (searchParamsUrl.get("idBooking")) {
+    location.href =
+      "http://localhost/sistema%20Hotel/views/admin/ganancias/index.php";
   }
 };

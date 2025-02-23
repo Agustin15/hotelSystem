@@ -4,7 +4,7 @@ import { configDetailsClient } from "./scriptOptionsTable/scriptDetailsClient.js
 import { drawRowsTable } from "./drawRowsTable.js";
 import { loadingPage, pageNotFound } from "./scriptCliente.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 let indexRegister = 0;
 let page = 1;
@@ -39,6 +39,7 @@ const getRowsClients = async () => {
       invalidAuthentication();
     }
   } finally {
+    
     if (!data) {
       noData();
     }
@@ -72,6 +73,7 @@ const getClientById = async (idClient) => {
       invalidAuthentication();
     }
   } finally {
+   
     if (!data) {
       noData();
     }
@@ -109,6 +111,7 @@ const getDataLimitClients = async () => {
     }
   } finally {
     loading(false);
+   
     if (!data) {
       noData();
     }
@@ -209,6 +212,7 @@ const search = () => {
     }, 0);
 
     if (rows.length == totalRowsHide) {
+      document.querySelector(".controls").style.display = "none";
       tfoot.innerHTML = `
    <td rowspan="6" colspan="6">
   <div class="noResults">
@@ -220,6 +224,7 @@ const search = () => {
   `;
     } else {
       tfoot.innerHTML = ``;
+      document.querySelector(".controls").style.display = "flex";
     }
   });
 };
@@ -236,9 +241,7 @@ const noData = () => {
   </td>
   `;
 
-  document.querySelector(".controls").style.display = "none";
-  document.querySelector(".containSearch").style.display = "none";
-  document.querySelector(".titleTable").classList.add("titleNoData");
+ 
 };
 
 const getOptionClient = async (url) => {

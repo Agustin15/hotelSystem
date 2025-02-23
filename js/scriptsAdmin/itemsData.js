@@ -1,6 +1,7 @@
 import { month } from "./chart.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication, userData } from "./scriptsAdmin.js";
+import { invalidAuthentication} from "./userData.js";
+import { userData } from "./scriptsAdmin.js";
 
 const getCategoryRoomsData = async () => {
   let $url =
@@ -130,7 +131,7 @@ const displayItemsDataCategoryRooms = async () => {
 const displayWelcome = async () => {
   let title = document.querySelector(".titleWelcome");
   if (userData) {
-    title.textContent = `¡Bienvenido ${userData.user}!`;
+    title.textContent = `¡Bienvenido ${userData.usuario}!`;
   } else {
     title.textContent = `Ups, no se pudo cargar el usuario`;
   }

@@ -173,6 +173,18 @@ body {
   color: white;
   font-size: 17px;
 }
+
+
+#userAdmin .profile  {
+
+  gap: 0.5rem;
+}
+#userAdmin .profile span  {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 7rem;
+}
 #userAdmin li .btnDisplayMenu {
   width: 14px;
   visibility: hidden;

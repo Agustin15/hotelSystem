@@ -1,7 +1,7 @@
 import { loading } from "../../scriptAddClient.js";
 import { optionModal } from "../scriptDetailsClient.js";
 import { getDataBookingRoomsGuests } from "../../../scriptsRooms/scriptRooms.js";
-import { invalidAuthentication } from "../../../scriptsAdmin/scriptsAdmin.js";
+
 
 let dataBooking;
 

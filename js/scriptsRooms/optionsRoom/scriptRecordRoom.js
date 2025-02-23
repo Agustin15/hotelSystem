@@ -1,12 +1,12 @@
 import {
   getAllBookingsByRoomAndYear,
-  getAllBookingsByRoomAndYearLimit,
+  getAllBookingsByRoomAndYearLimit
 } from "../scriptRooms.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 import { modalMainRooms } from "../scriptListRooms.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
-let numRoom, containData, selectYear, limitPages;
+let numRoom, containData, selectYear, limitPages, tbody, tfoot;
 let index = 0;
 let actualYear = new Date().getFullYear();
 
@@ -32,14 +32,14 @@ const getYears = async () => {
     JSON.stringify({ option: "getAllYearsWithRoomsBooking" });
 
   let data = null;
-  loading(true, containData);
+  loading(true);
   try {
     const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
@@ -70,16 +70,16 @@ const noData = (msj) => {
   `;
 };
 
-const loading = (state, element) => {
+const loading = (state) => {
   if (state) {
-    element.innerHTML = `
+    containData.innerHTML = `
       <div class="loading">
         <span>Cargando datos</span>
          <img src="../../../img/spinnerMain.gif">
       </div>
     `;
   } else {
-    element.innerHTML = ``;
+    containData.innerHTML = ``;
   }
 };
 
@@ -128,6 +128,8 @@ const drawContainTable = (years) => {
 
 `;
 
+  tfoot = document.querySelector(".containTable").querySelector("tfoot");
+  tbody = document.querySelector(".containTable").querySelector("tbody");
   drawOptionsYear(years);
 };
 
@@ -148,14 +150,14 @@ const drawOptionsYear = (years) => {
 
 const allBookingsByRoomAndYear = async () => {
   let data;
-  loading(true, document.querySelector("tfoot"));
+  loadingTable(true);
   try {
     const result = await getAllBookingsByRoomAndYear(selectYear.value, numRoom);
     data = result;
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false, document.querySelector("tfoot"));
+    loadingTable(false);
     if (!data || data.length == 0) {
       noDataTable();
     }
@@ -165,7 +167,7 @@ const allBookingsByRoomAndYear = async () => {
 
 const allBookingsByRoomAndYearLimit = async () => {
   let data;
-  loading(true, document.querySelector("tfoot"));
+  loadingTable(true);
   try {
     const result = await getAllBookingsByRoomAndYearLimit(
       index,
@@ -176,7 +178,8 @@ const allBookingsByRoomAndYearLimit = async () => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false, document.querySelector("tfoot"));
+    loadingTable(false);
+
     if (!data || data.length == 0) {
       noDataTable();
     }
@@ -194,7 +197,9 @@ const displayTable = async () => {
       limitPages = 1;
     }
     let allBookingsRoomLimit = await allBookingsByRoomAndYearLimit();
-    drawTable(allBookingsRoomLimit);
+    if (allBookingsRoomLimit) {
+      drawTable(allBookingsRoomLimit);
+    }
   }
 };
 
@@ -217,7 +222,7 @@ const drawTable = (allBookingsRoomLimit) => {
    `;
   });
 
-  document.querySelector("tbody").innerHTML = rowsTable.join("");
+  tbody.innerHTML = rowsTable.join("");
 
   document.querySelector(".controls").innerHTML = `
   <span class="prev">Anterior</span>
@@ -263,7 +268,7 @@ const searchBooking = () => {
   let btnSearch = document.querySelector(".btnSearch");
 
   btnSearch.addEventListener("click", () => {
-    let rows = document.querySelector("tbody").querySelectorAll("tr");
+    let rows = tbody.querySelectorAll("tr");
 
     rows.forEach((row) => {
       if (row.innerText.indexOf(input.value.trim()) > -1) {
@@ -283,9 +288,8 @@ const searchBooking = () => {
 };
 
 const noFound = (state) => {
-  let tFoot = document.querySelector(".containTable").querySelector("tfoot");
   if (state) {
-    tFoot.innerHTML = `
+    tfoot.innerHTML = `
   <td rowspan="4" colspan="4">
   <div class="containNoFound">
 <img src="../../../img/noFind.png">
@@ -295,14 +299,13 @@ const noFound = (state) => {
   </td>
 `;
   } else {
-    tFoot.innerHTML = ``;
+    tfoot.innerHTML = ``;
   }
-  console.log(tFoot);
 };
 
 const noDataTable = () => {
-  let tFoot = document.querySelector(".containTable").querySelector("tfoot");
-  tFoot.innerHTML = `
+  tbody.innerHTML = ``;
+  tfoot.innerHTML = `
   <td rowspan="4" colspan="4">
   <div class="containNoFound">
 <img src="../../../img/sinDatos.png">
@@ -310,6 +313,23 @@ const noDataTable = () => {
 </div>
 </td>
 `;
+};
+
+const loadingTable = (state) => {
+  tbody.innerHTML = ``;
+
+  if (state) {
+    tfoot.innerHTML = `
+  <td rowspan="4" colspan="4">
+  <div class="loading">
+        <span>Cargando datos</span>
+         <img src="../../../img/spinnerMain.gif">
+      </div>
+</td>
+`;
+  } else {
+    tfoot.innerHTML = ``;
+  }
 };
 
 const redirectToTableBookings = () => {

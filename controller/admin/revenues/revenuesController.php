@@ -130,7 +130,7 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 throw new Error($tokenVerify["error"]);
             }
-            $revenueBookingDetails =  $this->pay->getRevenueById($idBooking);
+            $revenueBookingDetails =  $this->pay->getRevenueDetailsById($idBooking);
 
             return $revenueBookingDetails;
         } catch (Throwable $th) {

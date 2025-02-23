@@ -3,7 +3,7 @@ import {
   alertForm
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 export const POSTPay = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php`;
@@ -119,6 +119,38 @@ export const getPayById = async (idBooking) => {
   }
 };
 
+export const getRevenuDetailsById = async (idBooking) => {
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    JSON.stringify({ option: "getRevenueDetailsById", idBooking: idBooking });
+
+  let data = null;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw result.error;
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.indexOf("Autenticacion") > -1) {
+      invalidAuthentication();
+    }
+  } finally {
+    return data;
+  }
+};
+
 export const getAllYearsRevenues = async () => {
   let url =
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
@@ -188,7 +220,7 @@ export const getAllRevenuesByYearLimitIndex = async (year, index) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({
       option: "getAllRevenuesByYearLimitIndex",
-      
+
       year: year,
       index: index
     });
@@ -219,5 +251,3 @@ export const getAllRevenuesByYearLimitIndex = async (year, index) => {
     return data;
   }
 };
-
-

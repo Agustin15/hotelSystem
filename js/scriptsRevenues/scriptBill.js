@@ -1,14 +1,15 @@
 import { formatDate } from "./scriptTableBills.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
-let contentBill, doc;
+let contentBill;
 
-export const configBill = async (revenueBooking) => {
-  doc = new jsPDF();
-  
+export const configBill = async (revenueBooking, modal) => {
   let title = document.querySelector(".title").querySelector("h3");
   title.textContent = `Factura reserva ${revenueBooking.idReservaPago}`;
   contentBill = document.querySelector(".contentBill");
+
+  closeWindow(modal);
+
   let billBookingDetails = await getBillBookingDetailsById(
     revenueBooking.idReservaPago
   );
@@ -16,7 +17,7 @@ export const configBill = async (revenueBooking) => {
 
   if (billBookingDetails) {
     drawBill(billBookingDetails, revenueBooking);
-    generatePDF();
+    generatePDF(revenueBooking.idReservaPago);
   }
 };
 
@@ -28,6 +29,8 @@ export const getBillBookingDetailsById = async (idBooking) => {
     });
 
   let data = null;
+
+  loading(true);
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -49,6 +52,10 @@ export const getBillBookingDetailsById = async (idBooking) => {
       invalidAuthentication();
     }
   } finally {
+    loading(false);
+    if (!data) {
+      noData();
+    }
     return data;
   }
 };
@@ -110,8 +117,6 @@ const drawBill = (billBookingDetails, revenueBooking) => {
    <span>${revenueBooking.telefono}</span>
    </li>
    </div>
-
-   <div class="scrollTable">
    <table class="tableDetailsBill">
    <thead>
    <th>Descripcion</th>
@@ -121,7 +126,6 @@ const drawBill = (billBookingDetails, revenueBooking) => {
    </thead>
    <tbody></tbody>
    </table>
-   </div>
    <div class="totalAmount">
    <span>Total:US$ ${revenueBooking.deposito}</span>
    </div>
@@ -154,14 +158,53 @@ const displayTable = (billBookingDetails) => {
   tableBills.querySelector("tbody").innerHTML = rows.join("");
 };
 
-const generatePDF = () => {
-  let btnPrint = document.querySelector(".btnPrint");
+const generatePDF = (idBooking) => {
+  let download = document.querySelector(".download");
+  download.addEventListener("click", () => {
+    html2canvas(contentBill).then(function (canvas) {
+      let imageURLCanva = canvas.toDataURL();
 
-  btnPrint.addEventListener("click", () => {
-    doc.html(contentBill, {
-      callback: function (doc) {
-        doc.save();
-      }
+      let doc = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+        putOnlyUsedFonts: true
+      });
+      doc.addImage(imageURLCanva, "png", 15, 15);
+      doc.save("Factura reserva numero " + idBooking);
     });
+  });
+};
+
+const noData = () => {
+  contentBill.innerHTML = `
+  <div class="noDataBill">
+ <img src="../../../img/sinDatos.png">
+  <span>Ups,no se pudo cargar la factura</span>
+</div>
+
+`;
+};
+
+const loading = (state) => {
+  if (state) {
+    contentBill.innerHTML = `
+  <div class="loadingBill">
+  <span>Cargando factura</span>
+   <img src="../../../img/spinnerMain.gif">
+</div>
+
+`;
+  } else {
+    contentBill.innerHTML = ``;
+  }
+};
+
+const closeWindow = (modal) => {
+  let btnCloseWindow = document.querySelector(".btnCloseWindow");
+
+  btnCloseWindow.addEventListener("click", () => {
+    modal.innerHTML = ``;
+    modal.style.display = "none";
   });
 };

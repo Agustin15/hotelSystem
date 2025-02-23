@@ -3,7 +3,7 @@ import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
 import { loadingPage, pageNotFound } from "../scriptReserva.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 let pages;
 let limitByPage = 1;
@@ -11,34 +11,34 @@ let indexPage = 0;
 let yearSelected = new Date().getFullYear();
 
 export const displayTable = async () => {
-  let yearsAllBookings = await displaySelectYear();
-
-  if (yearsAllBookings) {
-    drawYearsSelect(yearsAllBookings);
-    drawTable();
-  } 
-};
-
-export const drawTable = async () => {
   const urlParams = new URLSearchParams(window.location.search);
 
   if (!urlParams.get("idBooking")) {
-    let quantityRows = await getQuantityBookingsActualYear();
+    let yearsAllBookings = await displaySelectYear();
 
-    if (quantityRows) {
-      let bookingsYearlimit = await getBookingsYearLimit();
-
-      if (bookingsYearlimit) {
-        drawIndex();
-        drawRowsTable(bookingsYearlimit);
-      }
+    if (yearsAllBookings) {
+      drawYearsSelect(yearsAllBookings);
+      drawTable();
     }
   } else {
     let bookingFound = await getBookingById(urlParams.get("idBooking"));
     if (bookingFound) {
+      document.querySelector(".controls").style.display = "none";
       let arrayBookingFound = [bookingFound];
       drawRowsTable(arrayBookingFound);
-      document.querySelector(".controls").style.display = "none";
+    }
+  }
+};
+
+export const drawTable = async () => {
+  let quantityRows = await getQuantityBookingsActualYear();
+
+  if (quantityRows) {
+    let bookingsYearlimit = await getBookingsYearLimit();
+
+    if (bookingsYearlimit) {
+      drawIndex();
+      drawRowsTable(bookingsYearlimit);
     }
   }
 };
@@ -215,7 +215,6 @@ const noData = (error) => {
   `;
 };
 
-
 const drawIndex = () => {
   let controlsIndex = document.querySelector(".controls");
   let indexText = controlsIndex.querySelector(".pageIndex");
@@ -307,7 +306,6 @@ const displaySelectYear = async () => {
   } finally {
     loading(false);
     if (!data) {
-    
       noData("No se encontraron reservas en este año");
     }
     return data;
@@ -433,6 +431,7 @@ const search = () => {
     }, 0);
 
     if (rows.length == totalRowsHide) {
+      document.querySelector(".controls").style.display = "none";
       tfoot.innerHTML = `
    <td rowspan="6" colspan="6">
   <div class="noResults">
@@ -443,6 +442,7 @@ const search = () => {
   
   `;
     } else {
+      document.querySelector(".controls").style.display = "flex";
       tfoot.innerHTML = ``;
     }
   });

@@ -1,7 +1,6 @@
 import { closeWindow } from "./scriptGuests.js";
 import { loading } from "../../scriptAddClient.js";
 import { getDataBookingRoomsWithCategory } from "../../../scriptsRooms/scriptRooms.js";
-import { invalidAuthentication } from "../../../scriptsAdmin/scriptsAdmin.js";
 
 let roomsBooking;
 

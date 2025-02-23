@@ -2,7 +2,7 @@ import { closeModal, getDataClient } from "./scriptDeleteClient.js";
 import { drawForm } from "./scriptsEditClient/drawForm.js";
 import { displayTable } from "../scriptClientsTable.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 import {
   inputAlert,

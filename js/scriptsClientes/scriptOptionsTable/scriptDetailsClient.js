@@ -7,7 +7,7 @@ import { configServicesDetails } from "./scriptsDetailsClient/scriptServices.js"
 import { pageNotFound, loadingPage } from "../scriptCliente.js";
 import { closePageNotFound } from "../scriptClientsTable.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
-import { invalidAuthentication } from "../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 let pages;
 let indexPage = 1;

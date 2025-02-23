@@ -67,6 +67,25 @@ class Revenue
         return $result->fetch_array(MYSQLI_ASSOC);
     }
 
+
+
+    public function getRevenueDetailsById($idBooking)
+    {
+
+        $query = $this->connection->connect()->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,
+        clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
+        reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
+        ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
+        pago.idClientePago=clientes.idCliente where pago.idReservaPago=?");
+        $query->bind_param("i", $idBooking);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+
+
     public function getAllRevenuesByYear($year)
     {
 

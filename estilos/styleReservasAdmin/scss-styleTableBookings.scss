@@ -422,7 +422,7 @@
   font-size: 18px;
   font-weight: bold;
   width: 20rem;
-  margin-left: 5rem;
+  margin-left: 9rem;
   margin-top: 14rem;
   display: flex;
   flex-direction: column;
@@ -510,7 +510,7 @@
   flex-direction: column;
   gap: 0.6rem;
   margin-left: 10rem;
-  margin-top: 5rem;
+  margin-top: 4rem;
   padding-bottom: 1rem;
   align-items: center;
 
@@ -622,12 +622,12 @@
 
 .containClientDetails {
   width: 25rem;
-  height: 43rem;
+  height: 15rem;
   border-radius: 3px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 14rem;
+  margin-top: 11rem;
   margin-left: 7rem;
 
   .header {
@@ -680,8 +680,7 @@
   }
 
   .body {
-    height: auto;
-    max-height: 31rem;
+    height: 15rem;
     width: 109%;
     background-color: white;
     border-radius: 3px;
@@ -730,28 +729,32 @@
 
     .loadingDetails {
       display: flex;
+      height: 92%;
+      justify-content: center;
       align-items: center;
       font-size: 19px;
       gap: 1rem;
-      opacity: 60%;
+      color: gray;
 
       img {
-        width: 50px;
+        width: 45px;
+        opacity: 60%;
       }
     }
     .noData {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 1rem;
       text-align: center;
-      opacity: 60%;
-      margin-top: 2rem;
+      height: 94%;
       font-weight: bold;
-      color: rgb(104, 104, 104);
+      color: gray;
 
       img {
         width: 80px;
+        opacity: 60%;
       }
     }
   }
@@ -817,9 +820,38 @@
     }
   }
 
+  .loadingDetails {
+    display: flex;
+    height: 92%;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    color: gray;
+
+    img {
+      width: 45px;
+      opacity: 60%;
+    }
+  }
+  .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    height: 85%;
+    font-weight: bold;
+    color: gray;
+
+    img {
+      width: 80px;
+      opacity: 60%;
+    }
+  }
   .body {
-    height: auto;
-    max-height: 27rem;
+    height: 21rem;
     width: 104%;
     background-color: white;
     border-radius: 3px;
@@ -831,17 +863,6 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
-    .loadingDetails {
-      display: flex;
-      align-items: center;
-      font-size: 19px;
-      gap: 1rem;
-      opacity: 60%;
-
-      img {
-        width: 50px;
-      }
-    }
     .noData {
       display: flex;
       flex-direction: column;
@@ -914,7 +935,7 @@
       align-items: center;
 
       .icon {
-        height: 100%;
+        height: 61%;
         display: flex;
         align-items: center;
         opacity: 100%;
@@ -966,12 +987,14 @@
   align-items: center;
   justify-content: center;
   margin-top: 8rem;
-  margin-left: 7rem;
+  margin-left: 9rem;
 
   .noData {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 68%;
     text-align: center;
     gap: 1rem;
     font-weight: bold;
@@ -1032,8 +1055,7 @@
   }
 
   .body {
-    height: auto;
-    max-height: 22rem;
+    height: 21rem;
     width: 100%;
     background-color: white;
     border-radius: 3px;
@@ -1046,13 +1068,15 @@
     .loadingDetails {
       display: flex;
       align-items: center;
-      font-size: 19px;
+      justify-content: center;
+      height: 90%;
+      font-size: 20px;
       gap: 1rem;
       color: rgb(156, 156, 156);
 
       img {
         width: 50px;
-        opacity: 50%;
+        opacity: 60%;
       }
     }
 
@@ -1063,7 +1087,7 @@
       align-items: center;
       width: 100%;
       gap: 1.5rem;
-      max-height: 25rem;
+      height: 100%;
       overflow-y: scroll;
       overflow-x: hidden;
       padding-top: 1rem;
@@ -1107,18 +1131,21 @@
 }
 
 .containServicesDetails {
-  width: 29rem;
-  height: 38rem;
+  width: 30rem;
+  height: 22rem;
   border-radius: 3px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
-  margin-left: 10rem;
+  margin-top: 8rem;
+  margin-left: 8rem;
 
   .roomServices {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
     align-items: center;
     gap: 0.7rem;
   }
@@ -1128,11 +1155,12 @@
     align-items: center;
     font-size: 19px;
     gap: 1rem;
-    margin-top: 2rem;
-    opacity: 60%;
+    height: 90%;
+    color: gray;
 
     img {
       width: 50px;
+      opacity: 60%;
     }
   }
 
@@ -1228,10 +1256,10 @@
   .containServicesRoom {
     display: flex;
     flex-direction: column;
-    height: auto;
-    margin-left: 10rem;
-    width: 31rem;
-    margin-top: 4rem;
+    margin-top: 8rem;
+    margin-left: 8rem;
+    height: 29rem;
+    width: 30rem;
     align-items: center;
 
     .headerServicesRoom {
@@ -1276,9 +1304,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: auto;
+    height: 25rem;
     background-color: white;
-    max-height: 31rem;
     width: 100%;
     gap: 1rem;
   }

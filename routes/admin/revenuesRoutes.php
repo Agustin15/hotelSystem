@@ -32,6 +32,7 @@ $routes = [
             "dashboardGraphic" => $revenuesController->getDashboardGraphic($req),
             "itemDataDashboard" => $revenuesController->getItemDataDashboard($req),
             "getRevenue" => $revenuesController->getRevenueByIdBooking($req),
+            "getRevenueDetailsById" => $revenuesController->getRevenueDetailsById($req),
             "getAllYearsRevenues" => $revenuesController->getAllYearsRevenues($req),
             "getAllRevenuesByYearLimitIndex" => $revenuesController->getAllRevenuesByYearLimitIndex($req)
         };

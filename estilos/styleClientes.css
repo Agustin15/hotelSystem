@@ -931,7 +931,7 @@ body #navAdmin .titleNav {
   font-size: 18px;
   font-weight: bold;
   width: 20rem;
-  margin-left: 5rem;
+  margin-left: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1516,8 +1516,8 @@ body #navAdmin .titleNav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
-  margin-left: 7rem;
+  margin-top: 9rem;
+  margin-left: 9rem;
 }
 .modalOptionsBookingClient .containGuestDetails .header {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
@@ -1565,8 +1565,7 @@ body #navAdmin .titleNav {
   background-color: rgb(206, 0, 0);
 }
 .modalOptionsBookingClient .containGuestDetails .body {
-  height: auto;
-  max-height: 35rem;
+  height: 21rem;
   width: 104%;
   background-color: white;
   border-radius: 3px;
@@ -1580,6 +1579,8 @@ body #navAdmin .titleNav {
 }
 .modalOptionsBookingClient .containGuestDetails .body .loading {
   display: none;
+  justify-content: center;
+  height: 85%;
   align-items: center;
   font-size: 19px;
   gap: 1rem;
@@ -1592,6 +1593,8 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 85%;
   gap: 1rem;
   font-weight: bold;
   color: rgb(126, 126, 126);
@@ -1624,7 +1627,7 @@ body #navAdmin .titleNav {
   align-items: center;
   width: 100%;
   gap: 1rem;
-  max-height: 20rem;
+  height: 100rem;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 1rem;
@@ -1653,7 +1656,7 @@ body #navAdmin .titleNav {
   align-items: center;
 }
 .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .content .icon {
-  height: 100%;
+  height: 65%;
   display: flex;
   align-items: center;
   opacity: 100%;
@@ -1696,7 +1699,7 @@ body #navAdmin .titleNav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 9rem;
   margin-left: 10rem;
 }
 .modalOptionsBookingClient .containRoomsDetails .header,
@@ -1751,8 +1754,7 @@ body #navAdmin .titleNav {
 }
 .modalOptionsBookingClient .containRoomsDetails .body,
 .modalOptionsBookingClient .containServicesDetails .body {
-  height: auto;
-  max-height: 26rem;
+  height: 22rem;
   width: 100%;
   background-color: white;
   border-radius: 3px;
@@ -1769,6 +1771,8 @@ body #navAdmin .titleNav {
   display: none;
   align-items: center;
   font-size: 19px;
+  justify-content: center;
+  height: 92%;
   gap: 1rem;
   opacity: 60%;
 }
@@ -1781,6 +1785,8 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 82%;
   gap: 1rem;
   font-weight: bold;
   color: rgb(126, 126, 126);
@@ -1799,7 +1805,7 @@ body #navAdmin .titleNav {
   align-items: center;
   width: 100%;
   gap: 1.5rem;
-  max-height: 25rem;
+  height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 1rem;
@@ -1856,13 +1862,16 @@ body #navAdmin .titleNav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 9rem;
   margin-left: 10rem;
 }
 .modalOptionsBookingClient .containServicesDetails .roomServices {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
   gap: 0.5rem;
 }
 .modalOptionsBookingClient .containServicesDetails .roomServices li {
@@ -1938,7 +1947,7 @@ body #navAdmin .titleNav {
   height: auto;
   margin-left: 10rem;
   width: 31rem;
-  margin-top: 4rem;
+  margin-top: 8.5rem;
   align-items: center;
 }
 .modalServicesRoom .containServicesRoom .headerServicesRoom {
@@ -1980,9 +1989,8 @@ body #navAdmin .titleNav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: auto;
   background-color: white;
-  max-height: 31rem;
+  height: 27rem;
   width: 100%;
   gap: 1rem;
 }

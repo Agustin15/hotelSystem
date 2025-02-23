@@ -1,5 +1,6 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication } from "../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
+
 export const inputAlert = (inputError) => {
   let namesInputs = [...document.getElementsByName(inputError.key)];
   let input = namesInputs[0];

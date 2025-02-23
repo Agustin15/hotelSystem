@@ -115,11 +115,11 @@
   flex-direction: column;
   align-items: center;
   width: 25rem;
-  margin-top: 6rem;
-  margin-left: 6rem;
+  margin-top: 9rem;
+  margin-left: 12rem;
   background-color: white;
   height: auto;
-  max-height: 28rem;
+  height: 26rem;
   border-radius: 4px;
 }
 .containDetails .headerWindow {

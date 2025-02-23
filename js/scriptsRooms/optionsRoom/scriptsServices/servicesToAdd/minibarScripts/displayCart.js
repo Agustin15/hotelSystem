@@ -10,7 +10,7 @@ import {
   optionServiceProduct
 } from "./displayProducts.js";
 
-import { invalidAuthentication } from "../../../../../scriptsAdmin/scriptsAdmin.js";
+import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
 import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
 import {
   POSTService,

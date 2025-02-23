@@ -93,7 +93,7 @@ const serviceByName = async (nameService) => {
     console.log(error);
   } finally {
     loading(false);
-    data = null;
+
     if (!data) {
       noData("Ups,no se pudo cargar el servicio");
     }

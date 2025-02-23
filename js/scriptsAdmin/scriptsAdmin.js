@@ -8,19 +8,28 @@ import {
   displayItemDataRevenuesActual,
   displayWelcome
 } from "./itemsData.js";
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-
+import { getDataUserByToken, logout } from "./userData.js";
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
 
-export let userData;
 let profileOption;
+export let userData;
 
 document.addEventListener("DOMContentLoaded", async () => {
   let actualDate = new Date();
   let actualYear = actualDate.getFullYear();
   let logoutOption = document.querySelector(".logoutOption");
   let dashboard = document.getElementById("dashboard");
+  profileOption = document.querySelector(".profile");
 
+  userData = await getDataUser(profileOption);
+
+  if (userData) {
+    displayOptionProfile();
+
+    if (dashboard) {
+      displayWelcome();
+    }
+  }
   if (dashboard) {
     getClientsByMonthActualYear(actualYear);
     getCategoryRoomsMostReserved();
@@ -29,14 +38,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     displayItemDataRevenuesActual();
   }
 
-  userData = await getDataToken();
-  if (userData) {
-    displayOptionProfile();
-
-    if (dashboard) {
-      displayWelcome();
-    }
-  }
   optionsMenuAdmin();
   openSubMenu();
   showOpenMenu();
@@ -47,6 +48,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     logout();
   });
 });
+
+const getDataUser = async () => {
+  let data;
+  loadingUser(true);
+  try {
+    const result = await getDataUserByToken();
+
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingUser(false);
+    return data;
+  }
+};
+
+const loadingUser = (state) => {
+  if (state) {
+    profileOption.innerHTML = `
+      <div class="loadingUser">
+      <span>Cargando usuario</span>
+      <img src="http://localhost/sistema%20Hotel/img/spinnerBooking.gif">
+      </div>
+    `;
+  } else {
+    profileOption.innerHTML = ``;
+  }
+};
 
 function openSubMenu() {
   let buttonsOpenSubMenu = document.querySelectorAll(".btnDisplaySubMenu");
@@ -75,7 +106,6 @@ const showOpenMenu = () => {
   let options = document.querySelector(".menu").querySelectorAll(".optionMenu");
 
   options.forEach((option) => {
-
     option.addEventListener("mouseover", () => {
       option.querySelector(".btnDisplaySubMenu").style.display = "flex";
     });
@@ -112,78 +142,9 @@ const openSubMenuProfile = () => {
   });
 };
 
-const logout = async () => {
-  try {
-    const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/logoutRoutes.php`
-    );
-    const result = await response.json();
-
-    if (result.expired) {
-      location.href = "http://localhost/sistema%20Hotel/views/loginAdmin/";
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getDataToken = async () => {
-  loadingUser(true);
-  try {
-    const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
-        JSON.stringify({ option: "getDataToken" }),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "same-origin"
-        }
-      }
-    );
-
-    const tokenUserData = await response.json();
-    if (!response.ok) {
-      throw tokenUserData.error;
-    } else {
-      return tokenUserData.resultVerify;
-    }
-  } catch (error) {
-    console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
-  } finally {
-    loadingUser(false);
-  }
-};
-
-const loadingUser = (state) => {
-  profileOption = document.querySelector(".profile");
-  if (state) {
-    profileOption.innerHTML = `
-      <div class="loadingUser">
-      <span>Cargando usuario</span>
-      <img src="http://localhost/sistema%20Hotel/img/spinnerBooking.gif">
-      </div>
-    `;
-  } else {
-    profileOption.innerHTML = ``;
-  }
-};
-
-export const invalidAuthentication = async () => {
-  localStorage.setItem("alertInvalidToken", true);
-  logout();
-};
-
 const displayOptionProfile = () => {
-  profileOption.innerHTML = `<img src=${
-    userData.genre == "M"
-      ? "http://localhost/sistema%20Hotel/img/perfilM.png"
-      : "http://localhost/sistema%20Hotel/img/perfilF.png"
-  }>
-  <span>${userData.user}</span>
+  profileOption.innerHTML = `<img src="data:image/png;base64,${userData.imagen}">
+  <span>${userData.usuario}</span>
   <img class="btnDisplayMenu" src="http://localhost/sistema%20Hotel/img/btnFlecha.png">`;
 };
 

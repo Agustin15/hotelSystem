@@ -25,25 +25,23 @@ export const configRooms = async () => {
 
 const dataBookingRoomsWithCategory = async () => {
   let data = null;
-   loading(true,body);
+  loading(true, body);
   try {
-
     const roomsDataBooking = await getDataBookingRoomsWithCategory(idBooking);
- 
+
     if (roomsDataBooking) {
       data = roomsDataBooking;
     }
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false,body);
+    loading(false, body);
     if (!data) {
-      noData("Ups, no se pudieron cargar las habitaciones reservadas", body);
+      noData("Ups, no hay habitaciones reservadas", body);
     }
     return data;
   }
 };
-
 
 const rooms = (roomsBooking) => {
   let liRoomsBooking = roomsBooking.map((room) => {
