@@ -165,7 +165,7 @@ $actualYear = date("Y");
 
             <div id="userAdmin">
                 <ul class="subMenuProfile">
-                    <li>
+                    <li class="editProfile">
                         <img src="../../../img/configuracion.png">
                         <span>Editar</span>
                     </li>

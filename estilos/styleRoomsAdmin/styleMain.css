@@ -165,6 +165,17 @@
   font-size: 17px;
 }
 
+#userAdmin .profile {
+  gap: 0.5rem;
+}
+
+#userAdmin .profile span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 7rem;
+}
+
 #userAdmin li .btnDisplayMenu {
   width: 14px;
   visibility: hidden;
@@ -177,6 +188,12 @@
 
 #userAdmin li img {
   width: 30px;
+}
+
+#userAdmin li .iconProfile {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
 }
 
 #userAdmin .subMenuProfile {

@@ -1,4 +1,12 @@
 export const optionsMenuAdmin = () => {
+  let optionEditProfile = document.querySelector(".editProfile");
+  if (optionEditProfile) {
+    optionEditProfile.addEventListener("click", () => {
+      location.href =
+        "http://localhost/sistema%20Hotel/views/admin/editarPerfil";
+    });
+  }
+
   routesOptions(
     "http://localhost/sistema%20Hotel/views/admin/index.php",
     "#liInicio"

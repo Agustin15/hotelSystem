@@ -2,10 +2,14 @@ CREATE DATABASE HOTEL;
 use HOTEL;
 
 CREATE TABLE usuarios(
-usuario VARCHAR(50) primary key,
-genero CHAR,
-rol VARCHAR(11),
-contrasenia VARCHAR(200)
+idUsuario INT NOT NULL primary key auto_increment,
+usuario VARCHAR(50),
+nombre VARCHAR(50) NOT NULL,
+apellido VARCHAR(50) NOT NULL, 
+correo VARCHAR(50) NOT NULL,
+imagen LONGBLOB NOT NULL,
+rol VARCHAR(50),
+contrasenia VARCHAR(60)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

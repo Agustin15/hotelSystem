@@ -16,6 +16,18 @@ if (isset($_GET['params'])) {
 }
 
 $routes = [
+
+    "PATCH" => function () use ($userController, $req) {
+
+        if ($req["option"] == "updateImageUser") {
+            return $userController->PatchUserImage($req);
+        } else {
+            return $userController->PatchUserPassword($req);
+        }
+    },
+    "PUT" => function () use ($userController, $req) {
+        return $userController->PUT($req);
+    },
     "GET" => function () use ($userController, $req) {
 
         $optionGET = match ($req["option"]) {
@@ -32,7 +44,7 @@ if (array_key_exists($method, $routes)) {
 
     $response = $routes[$method]();
 
-    if (isset($response["error"])) {
+    if (isset($response["error"]) || isset($response["errorMessage"])) {
         http_response_code($response["status"]);
     }
 

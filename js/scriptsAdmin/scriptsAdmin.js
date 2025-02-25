@@ -143,7 +143,7 @@ const openSubMenuProfile = () => {
 };
 
 const displayOptionProfile = () => {
-  profileOption.innerHTML = `<img src="data:image/png;base64,${userData.imagen}">
+  profileOption.innerHTML = `<img class="iconProfile" src="data:image/png;base64,${userData.imagen}">
   <span>${userData.usuario}</span>
   <img class="btnDisplayMenu" src="http://localhost/sistema%20Hotel/img/btnFlecha.png">`;
 };
