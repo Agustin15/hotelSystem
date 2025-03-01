@@ -18,15 +18,14 @@ export const getDataUserByToken = async () => {
 
     const tokenUserData = await response.json();
     if (!response.ok) {
-      throw tokenUserData.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (tokenUserData.resultVerify) {
       data = tokenUserData.resultVerify;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     if (data) {
       data = await getUserByUsername(data);
@@ -74,15 +73,14 @@ const getUserByUsername = async (userToken) => {
 
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       return result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   }
 };

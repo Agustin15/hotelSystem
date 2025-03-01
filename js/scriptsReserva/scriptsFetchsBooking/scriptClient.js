@@ -3,8 +3,7 @@ import { alertClientFormBooking, alertBooking } from "../alertsBooking.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
 export const fetchPOSTClient = async (client) => {
-  loadingBooking(true, "Procesando cliente");
-
+  
   let data = null;
   try {
     const response = await fetch(
@@ -30,7 +29,7 @@ export const fetchPOSTClient = async (client) => {
     console.log(error);
     loadingBooking(false);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!data) {
       alertClientFormBooking("Ups, no se pudo agregar el cliente");
     }
@@ -39,7 +38,7 @@ export const fetchPOSTClient = async (client) => {
 };
 
 export const fetchGetClient = async (client) => {
-  loadingBooking(true, "Cargando");
+  loadingBooking(true, "Reservando");
   let data = null;
 
   try {
@@ -62,7 +61,7 @@ export const fetchGetClient = async (client) => {
       "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
     );
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
   }
 };

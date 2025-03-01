@@ -29,17 +29,15 @@ const getRowsClients = async () => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.length > 0) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
-    
     if (!data) {
       noData();
     }
@@ -63,17 +61,15 @@ const getClientById = async (idClient) => {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
-   
     if (!data) {
       noData();
     }
@@ -100,18 +96,17 @@ const getDataLimitClients = async () => {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.length > 0) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
-   
+
     if (!data) {
       noData();
     }
@@ -240,8 +235,6 @@ const noData = () => {
   </div>
   </td>
   `;
-
- 
 };
 
 const getOptionClient = async (url) => {

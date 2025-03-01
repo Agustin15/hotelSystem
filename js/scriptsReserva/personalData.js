@@ -2,23 +2,23 @@ import displayBarStagesAdvance from "./barStageAdvance.js";
 
 import {
   fetchPOSTClient,
-  fetchGetClient,
+  fetchGetClient
 } from "./scriptsFetchsBooking/scriptClient.js";
 import {
   getBookingByClientMailAndDate,
   fetchPOSTBooking,
-  fetchPUTBooking,
+  fetchPUTBooking
 } from "./scriptsFetchsBooking/scriptBooking.js";
 
 import {
   fetchGETAvailableRoomsCategory,
-  fetchPOSTRooms,
+  fetchPOSTRooms
 } from "./scriptsFetchsBooking/scriptRooms.js";
 
 import {
   fetchPOSTPay,
   fetchGETPay,
-  fetchPUTPay,
+  fetchPUTPay
 } from "./scriptsFetchsBooking/scriptRevenues.js";
 
 import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
@@ -27,6 +27,7 @@ let loadingSpinner = document.querySelector(".loading");
 let btnNextStage = document.querySelector(".btnNextStage");
 let booking = JSON.parse(localStorage.getItem("booking"));
 let rooms;
+let clientBooking = {};
 let indexRoom = 0;
 let btnNext = document.querySelector(".btnNext");
 let btnPrev = document.querySelector(".btnPrev");
@@ -34,8 +35,6 @@ let roomsBooking = document.querySelector(".bookingRooms");
 let containClientAndBooking = document.querySelector(
   ".containClientAndBooking"
 );
-
-console.log(booking);
 
 document.addEventListener("DOMContentLoaded", function () {
   if (containClientAndBooking) {
@@ -86,7 +85,7 @@ const removeMsjAlertInputs = () => [
     .querySelectorAll(".alertErrorInput")
     .forEach((alertMsj) => {
       alertMsj.textContent = "";
-    }),
+    })
 ];
 
 function displayIndexRoom() {
@@ -163,18 +162,26 @@ function printBooking() {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   };
 
   let startBooking = new Date(booking.date.start);
   let endBooking = new Date(booking.date.end);
 
+  startBooking.setMinutes(
+    startBooking.getMinutes() + startBooking.getTimezoneOffset()
+  );
+  endBooking.setMinutes(
+    endBooking.getMinutes() + endBooking.getTimezoneOffset()
+  );
+  
+
   document.querySelector(
     ".startBooking"
-  ).textContent = `${startBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  ).textContent = `${startBooking.toLocaleDateString("es-UY", optionsFormat)}`;
   document.querySelector(
     ".endBooking"
-  ).textContent = `${endBooking.toLocaleDateString("es-ar", optionsFormat)}`;
+  ).textContent = `${endBooking.toLocaleDateString("es-UY", optionsFormat)}`;
 
   if (booking.nights > 1) {
     document.querySelector(".nights").textContent = `${booking.nights} Noches`;
@@ -193,9 +200,9 @@ function inputAlert(key, msjAlertInput) {
   input.classList.add("inputAlert");
 
   let containAlertError = input.parentNode.querySelector(".alertErrorInput");
+  containAlertError.classList.add("alertErrorInputShow");
   let spanError = containAlertError.querySelector("span");
   spanError.textContent = msjAlertInput;
-  spanError.style.display = "flex";
 }
 
 function removeInputAlert(input) {
@@ -209,23 +216,23 @@ const validationsInputs = (value) => {
     {
       key: "name",
       validation: value.length > 0,
-      msj: "Ingrese un nombre",
+      msj: "Ingrese un nombre"
     },
     {
       key: "lastName",
       validation: value.length > 0,
-      msj: "Ingrese un apellido",
+      msj: "Ingrese un apellido"
     },
     {
       key: "mail",
       validation: value.match(validRegex),
-      msj: "Ingrese un correo válido",
+      msj: "Ingrese un correo válido"
     },
     {
       key: "phone",
       validation: value.length == 8 || value.length == 9,
-      msj: "Ingrese un telefono válido",
-    },
+      msj: "Ingrese un telefono válido"
+    }
   ];
   return validations;
 };
@@ -276,9 +283,9 @@ function clientData() {
 }
 
 const createBooking = async (client) => {
-  const clientBooking = {
+  clientBooking = {
     client: client,
-    booking: booking,
+    booking: booking
   };
 
   let clientExisted = await fetchGetClient(client);
@@ -321,7 +328,7 @@ const addBooking = async (clientBooking, clientFind) => {
       client: clientFind.idCliente,
       startBooking: clientBooking.booking.date.start,
       endBooking: clientBooking.booking.date.end,
-      roomsQuantity: totalRoomsInBooking(clientBooking.booking.rooms),
+      roomsQuantity: totalRoomsInBooking(clientBooking.booking.rooms)
     };
 
     let bookingAdded = await fetchPOSTBooking(dataAddBooking);
@@ -339,7 +346,7 @@ const addBooking = async (clientBooking, clientFind) => {
 const addRoomsBookings = async (booking, idClient, clientBooking, option) => {
   const dataConsult = {
     startBooking: booking.date.start,
-    endBooking: booking.date.end,
+    endBooking: booking.date.end
   };
 
   let noRoomsAvailables = null;
@@ -364,7 +371,7 @@ const addRoomsBookings = async (booking, idClient, clientBooking, option) => {
       client: idClient,
       startBooking: dataConsult.startBooking,
       endBooking: dataConsult.endBooking,
-      rooms: roomsAssign.flat(),
+      rooms: roomsAssign.flat()
     };
 
     addRoomsAssigned(roomsToBooking, option);
@@ -389,7 +396,7 @@ const assignRoom = async (dataConsult, room, rooms) => {
         roomCategoryAssing.push({
           numRoom: roomsAvailablesCategory[f].numRoom,
           adults: parseInt(room.guests.adult),
-          childs: parseInt(room.guests.children) || 0,
+          childs: parseInt(room.guests.children) || 0
         });
       } else {
         return roomCategoryAssing;
@@ -427,12 +434,19 @@ const addPay = async (roomsToBooking) => {
   let resultAddPay = await fetchPOSTPay({
     idBooking: roomsToBooking.idBooking,
     client: roomsToBooking.client,
-    amount: booking.totalDeposit,
+    amount: booking.totalDeposit
   });
 
   if (resultAddPay) {
-    // location.href =
-    //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+    const dataToGetBooking = {
+      email: clientBooking.client.mail,
+      startDate: clientBooking.booking.date.start,
+      endDate: clientBooking.booking.date.end,
+      option: "added"
+    };
+
+    localStorage.clear();
+    location.href = "detalles.html?details=" + encodeURI(JSON.stringify(dataToGetBooking));
   }
 };
 
@@ -443,7 +457,7 @@ const updateBooking = async (bookingFind, clientBooking) => {
     startBooking: bookingFind.fechaLlegada,
     endBooking: bookingFind.fechaSalida,
     quantityRooms:
-      bookingFind.cantidadHabitaciones + totalRoomsInBooking(booking.rooms),
+      bookingFind.cantidadHabitaciones + totalRoomsInBooking(booking.rooms)
   };
 
   let resultUpdate = await fetchPUTBooking(dataBookingToUpdate);
@@ -463,11 +477,20 @@ const updatePay = async (roomsToBooking) => {
   if (actualRevenue) {
     let resultUpdatePay = await fetchPUTPay({
       idBooking: roomsToBooking.idBooking,
-      newAmount: booking.totalDeposit + actualRevenue.deposito,
+      newAmount: booking.totalDeposit + actualRevenue.deposito
     });
+
     if (resultUpdatePay) {
-      // location.href =
-      //   "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html";
+      const dataToGetBookingUpdated = {
+        email: clientBooking.client.mail,
+        startDate: clientBooking.booking.date.start,
+        endDate: clientBooking.booking.date.end,
+        option: "updated"
+      };
+
+      localStorage.clear();
+      location.href =
+        "detalles.html?details=" + encodeURI(JSON.stringify(dataToGetBookingUpdated));
     }
   }
 };

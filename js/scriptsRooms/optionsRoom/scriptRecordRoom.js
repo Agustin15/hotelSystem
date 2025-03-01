@@ -43,15 +43,14 @@ const getYears = async () => {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false, containData);
     if (!data) {

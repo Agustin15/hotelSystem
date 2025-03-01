@@ -19,7 +19,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $resultPay = $this->pay->addRevenue($req['idBooking'], $req['client'], $req['amount']);
             return array("response" => $resultPay);
@@ -33,7 +33,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $resultUpdatePay = $this->pay->updateRevenueById($req['idBooking'], $req['newAmount']);
             return array("response" => $resultUpdatePay);
@@ -63,7 +63,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $revenuesByMonth = [];
             $revenuesByMonth = array_map(function ($month) use ($year) {
@@ -87,7 +87,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $totalRevenuesActualYear = $this->pay->calculateTotalYearRevenues();
             $totalRevenuesActualMonth = $this->pay->calculateTotalMonthRevenues(date("m"), date("Y"));
@@ -111,7 +111,7 @@ class revenuesController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $revenue =  $this->pay->getRevenueById($idBooking);
@@ -128,7 +128,7 @@ class revenuesController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $revenueBookingDetails =  $this->pay->getRevenueDetailsById($idBooking);
 
@@ -144,7 +144,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $yearsRevenues = $this->pay->getAllYearsRevenues();
@@ -163,7 +163,7 @@ class revenuesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $revenues = $this->pay->getAllRevenuesByYearLimitIndex($year, $index);

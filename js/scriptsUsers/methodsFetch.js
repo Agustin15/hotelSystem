@@ -17,15 +17,14 @@ export const PUTuser = async (userToUpdate) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result;
     }
     if (result) {
       return result;
     }
   } catch (error) {
-    if (error.errorMessage.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     return error;
   }
 };
@@ -50,16 +49,15 @@ export const PATCHUserImage = async (userToUpdate) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -85,16 +83,15 @@ export const PATCHUserPassword = async (userPasswordToUpdate) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result;
     }
     if (result) {
       return result;
     }
   } catch (error) {
     console.log(error.errorMessage);
-    if (error.errorMessage.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     return error;
   }
 };

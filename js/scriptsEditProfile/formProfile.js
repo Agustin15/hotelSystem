@@ -15,6 +15,9 @@ export const submitForm = async (form, avatarFormProfile, dataUser) => {
       inputAlert(key, validationInput.msj);
       errorForm = true;
     } else {
+      if (key == "name" || key == "lastname") {
+        value = firstLetterUpper(value);
+      }
       user[key] = value;
     }
   });
@@ -142,4 +145,16 @@ const alert = (title, icon, msj, state) => {
       displayForm();
     }
   }, 3000);
+};
+
+const firstLetterUpper = (value) => {
+  let valueArray = [...value];
+  return valueArray
+    .map((char, index) => {
+      if (index == 0) {
+        return char.toUpperCase();
+      }
+      return char.toLowerCase();
+    })
+    .join("");
 };

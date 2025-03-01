@@ -9,12 +9,13 @@ require(__DIR__ . "./../authToken.php");
 
 class billController
 {
-    private $bill, $room, $service;
+    private $bill, $room, $service, $authToken;
     public function __construct()
     {
         $this->bill = new Bill();
         $this->service = new Service();
         $this->room = new Room();
+        $this->authToken = new authToken();
     }
 
     public function detailsBill($req)
@@ -22,6 +23,10 @@ class billController
 
         try {
 
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
             $idBooking = $req["idBooking"];
             $roomsBooking = $this->room->roomsBookingAndDetails($idBooking);
 

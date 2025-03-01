@@ -83,12 +83,14 @@ $actualYear = date("Y");
                 },
                 select: (info) => {
 
-                    let statDate = new Date(info.startStr).getDate() + 1;
+                    let startDate = new Date(info.startStr).getDate() + 1;
                     let monthDate = new Date(info.startStr).getMonth();
                     let yearDate = new Date(info.startStr).getFullYear();
 
-                    if (statDate >= new Date().getDate() && monthDate + 1 >= new Date().getMonth() + 1 &&
-                        yearDate >= new Date().getFullYear()) {
+
+                    if (yearDate >= new Date().getFullYear() &&
+                        ((startDate >= new Date().getDate() && monthDate + 1 >= new Date().getMonth() + 1) ||
+                            (startDate < new Date().getDate() && monthDate + 1 > new Date().getMonth() + 1))) {
                         optionsAddBooking(info.startStr, info.endStr);
 
                     }

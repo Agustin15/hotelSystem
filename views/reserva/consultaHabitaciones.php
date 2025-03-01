@@ -65,33 +65,21 @@
 
     <form id="checkIn">
 
-        <br>
 
-
-        <h1>Check-in</h1>
-
-
-        <div class="containerInputs">
-
-            <div class="lblLlegada">
-                <label>Llegada</label>
+            <div class="checkIn">
+                <h3>Check In</h3>
+                <input id="llegada" min="<?php echo date("Y-m-d") ?>" type="date" name="llegada">
             </div>
 
-            <div class="lblHuespedes">
-                <label>Salida</label>
+            <div class="checkOut">
+                <h3>Check Out</h3>
+                <input id="salida" min="<?php echo date("Y-m-d") ?>" type="date" name="salida">
             </div>
-
-
-            <input id="llegada" min="<?php echo date("Y-m-d") ?>" type="date" name="llegada">
-
-
-            <input id="salida" min="<?php echo date("Y-m-d") ?>" type="date" name="salida">
-
-
-            <input type="submit" value="Buscar">
-
-
-        </div>
+    
+        <button class="btnSearch" type="submit">
+            Buscar
+            <img src="../../img/search.png">
+        </button>
     </form>
 
 
@@ -103,7 +91,7 @@
             </div>
             <div class="title">
 
-                <p>Excede el limite de habitaciones disponibles</p>
+                <p></p>
 
             </div>
             <div>
@@ -114,13 +102,13 @@
 
     <div class="loading">
 
-        <span>Cargando habitaciones</span>
+        <span></span>
         <img src="../../img/spinnerMain.gif">
     </div>
 
     <div class="errorHotelRooms">
 
-        <img src="../../img/sinDatos.png">
+        <img src="../../img/noData.png">
         <span>¡Ups!, estamos teniendo problemas en estos momentos,
             inténtalo más tarde</span>
     </div>

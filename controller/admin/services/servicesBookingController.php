@@ -27,7 +27,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             if ($option == "minibar" || $option == "cantina") {
@@ -80,7 +80,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             if ($option == "minibar" || $option == "cantina") {
@@ -145,7 +145,7 @@ class servicesBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $resultDelete = $this->service->deleteServiceBooking($req["idServiceRoom"]);
@@ -164,7 +164,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookingServices = $this->service->getServicesByIdBookingWithDetails($idBooking)->fetch_all(MYSQLI_ASSOC);
             $bookingServicesDetails = array_map(function ($service) {
@@ -185,7 +185,7 @@ class servicesBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $servicesCurrentRoomBooking = $this->service->getHistoryServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
             $servicesCurrentRoomBooking = array_map(function ($service) {
@@ -206,7 +206,7 @@ class servicesBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $servicesCurrentRoomBooking = $this->service->getDetailsServicesByCurrentBookingRoom($req["numRoom"], $req["idBooking"]);
             $servicesCurrentRoomBooking = array_map(function ($service) {
@@ -230,7 +230,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
             return $serviceFind;
@@ -251,7 +251,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $serviceDetailsRoomFound = $this->service->getServiceRoomDetailsByNumRoomAndBooking(
                 $nameService,
@@ -280,7 +280,7 @@ class servicesBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $productsState = array_map(function ($product) use ($idBooking, $numRoom) {

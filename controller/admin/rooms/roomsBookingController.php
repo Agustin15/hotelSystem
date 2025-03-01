@@ -30,7 +30,7 @@ class roomsBookingController
             try {
                 $tokenVerify = $this->authToken->verifyToken();
                 if (isset($tokenVerify["error"])) {
-                    throw new Error($tokenVerify["error"]);
+                    return array("error" => $tokenVerify["error"], "status" => 401);
                 }
                 $connection->connect()->begin_transaction();
 
@@ -77,7 +77,7 @@ class roomsBookingController
 
                 $tokenVerify = $this->authToken->verifyToken();
                 if (isset($tokenVerify["error"])) {
-                    throw new Error($tokenVerify["error"]);
+                    return array("error" => $tokenVerify["error"], "status" => 401);
                 }
                 $connection->connect()->begin_transaction();
                 $this->rooms->deleteRoomByIdBookingAndNumRoom($idBooking, $roomToDelete);
@@ -102,7 +102,7 @@ class roomsBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $allRoomsReserved = $this->rooms->getAllRoomsBookingByYear($req['year'])->fetch_all(MYSQLI_ASSOC);
@@ -135,7 +135,7 @@ class roomsBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $categoryRooms = $this->rooms->getAllCategoryRooms();
 
@@ -174,7 +174,7 @@ class roomsBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookingRoomBusy = $this->rooms->getStateRoomByNumRoomAndDate($req["numRoom"], date("Y-m-d"));
             return $bookingRoomBusy;
@@ -190,7 +190,7 @@ class roomsBookingController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             $roomsDetailsBooking = $this->rooms->getAllRoomsByIdBooking($idBooking)->fetch_all(MYSQLI_ASSOC);
@@ -207,7 +207,7 @@ class roomsBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $roomsBookingDetails = $this->rooms->roomsBookingAndDetails($idBooking);
             $roomsDetailsBooking =  array_map(function ($room) use ($idBooking) {
@@ -251,7 +251,7 @@ class roomsBookingController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $roomsDetailsBooking = $this->rooms->roomsBookingAndDetails($idBooking);
 
@@ -278,7 +278,7 @@ class roomsBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $allRoomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req['dataBooking']["category"]);
 
@@ -323,7 +323,7 @@ class roomsBookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
 
@@ -357,7 +357,7 @@ class roomsBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $years = $this->rooms->getAllYearsWithRoomsBooking();
             return $years;
@@ -371,7 +371,7 @@ class roomsBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             if ($req["index"] == 0) {
                 $bookingsRoom = $this->rooms->getFirstsBookingsByRoomAndYear($req["numRoom"], $req["year"]);
@@ -389,7 +389,7 @@ class roomsBookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookingsRoom = $this->rooms->getAllBookingsByRoomAndYear($req["numRoom"], $req["year"]);
             return $bookingsRoom;
@@ -400,8 +400,12 @@ class roomsBookingController
 
     public function getNextBookingsRoom($req)
     {
-
         try {
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
             $nextBookingsRoom =  $this->rooms->getNextBookingsRoom($req["numRoom"]);
             return $nextBookingsRoom;
         } catch (Throwable $th) {

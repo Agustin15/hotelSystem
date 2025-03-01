@@ -1,6 +1,6 @@
 import {
   alertForm,
-  loadingForm,
+  loadingForm
 } from "../scriptsReservas/scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
@@ -14,22 +14,21 @@ export const POSTRooms = async (booking, option) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(booking),
+      body: JSON.stringify(booking)
     });
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.response == true) {
       data = result.response;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -55,20 +54,19 @@ export const getRoomsCategoryHotel = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -84,20 +82,19 @@ export const getAllRoomsByCategory = async (category) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -108,7 +105,7 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getDataRoomsBookingAndCategory",
-      idBooking: idBooking,
+      idBooking: idBooking
     });
 
   let data = null;
@@ -117,20 +114,19 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -141,7 +137,7 @@ export const getBookingRoomsDetails = async (idBooking) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getRoomsBookingAndDetails",
-      idBooking: idBooking,
+      idBooking: idBooking
     });
 
   let data = null;
@@ -151,22 +147,20 @@ export const getBookingRoomsDetails = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
-    
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -177,7 +171,7 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getDataRoomsBooking",
-      idBooking: idBooking,
+      idBooking: idBooking
     });
   let data = null;
   try {
@@ -185,20 +179,19 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -215,20 +208,19 @@ export const getRoomsFreeCategory = async (dataBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -243,7 +235,7 @@ export const verifyStateRoomsToBooking = async (
     idBooking: idBooking,
     startBooking: bookingToUpdate.startBooking,
     endBooking: bookingToUpdate.endBooking,
-    roomsToBooking: roomsCart,
+    roomsToBooking: roomsCart
   };
 
   let roomsAvailables;
@@ -254,29 +246,28 @@ export const verifyStateRoomsToBooking = async (
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "verifyStateRoomsToBooking",
-          dataBookingToUpdate: dataBookingToUpdate,
+          dataBookingToUpdate: dataBookingToUpdate
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
     if (!response.ok) {
-      throw "Ups, error al actualizar la reserva";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, error al actualizar la reserva";
     }
     if (result) {
       roomsAvailables = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     loadingForm(false);
   } finally {
     if (!roomsAvailables) {
@@ -301,23 +292,22 @@ export const fetchDeleteRoom = async (dataToDelete) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
     if (!response.ok) {
-      throw "Ups, error al eliminar las habitaciones";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, error al eliminar las habitaciones";
     }
     if (result) {
       roomsDeleted = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     loadingForm(false);
   } finally {
     if (!roomsDeleted) {
@@ -345,29 +335,28 @@ export const getAllBookingsByRoomAndYearLimit = async (
           option: "getAllBookingsByRoomAndYearLimit",
           numRoom: numRoom,
           year: year,
-          index: index,
+          index: index
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
     if (!response.ok) {
-      throw "Ups, error al buscar las reservas";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, error al buscar las reservas";
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -381,29 +370,28 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
         JSON.stringify({
           option: "getAllBookingsByRoomAndYear",
           numRoom: numRoom,
-          year: year,
+          year: year
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
     if (!response.ok) {
-      throw "Ups, error al buscar las reservas";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, error al buscar las reservas";
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -416,29 +404,28 @@ export const getBookingByRoomReserved = async (numRoom) => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params= ` +
         JSON.stringify({
           option: "getBookingByRoomReserved",
-          numRoom: numRoom,
+          numRoom: numRoom
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const result = await response.json();
     if (!response.ok) {
-      throw "Ups, no se encontro la reserva";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, no se encontro la reserva";
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }

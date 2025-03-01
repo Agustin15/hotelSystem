@@ -8,7 +8,7 @@ export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
     JSON.stringify({ option: "roomsFreeCategory", dataBooking: dataBooking });
   let data;
 
-  loadingBooking(true, "Buscando habitaciones");
+
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -21,7 +21,7 @@ export const fetchGETAvailableRoomsCategory = async (dataBooking) => {
     console.log(error);
     loadingBooking(false);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!data) {
       alertBooking(
         "Error",
@@ -36,7 +36,7 @@ export const fetchPOSTRooms = async (roomsToBooking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/roomsBookingRoutes.php`;
 
   let data;
-  loadingBooking(true, "Reservando habitaciones");
+ 
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -56,7 +56,7 @@ export const fetchPOSTRooms = async (roomsToBooking) => {
     console.log(error);
     loadingBooking(false);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     if (!data) {
       alertBooking(
         "Error",

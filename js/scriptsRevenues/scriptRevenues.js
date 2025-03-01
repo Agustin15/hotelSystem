@@ -22,15 +22,14 @@ export const POSTPay = async (booking) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.response == true) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -64,15 +63,14 @@ export const PUTPay = async (booking) => {
 
     console.log(result);
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.response == true) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -104,16 +102,15 @@ export const getPayById = async (idBooking) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -136,16 +133,15 @@ export const getRevenuDetailsById = async (idBooking) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -168,16 +164,15 @@ export const getAllYearsRevenues = async () => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -200,16 +195,15 @@ export const getRevenuesByYear = async (year) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result.length > 0) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }
@@ -237,16 +231,15 @@ export const getAllRevenuesByYearLimitIndex = async (year, index) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result.length > 0) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     return data;
   }

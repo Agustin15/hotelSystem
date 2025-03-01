@@ -41,16 +41,15 @@ export const getBillBookingDetailsById = async (idBooking) => {
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     if (!data) {

@@ -6,7 +6,6 @@ export const fetchPOSTPay = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/revenuesRoutes.php`;
 
   let data;
-  loadingBooking(true, "Reservando habitaciones");
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -24,7 +23,7 @@ export const fetchPOSTPay = async (booking) => {
   } catch (error) {
     console.log(error);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     loadingBooking(false);
     if (!data) {
       alertBooking(
@@ -40,7 +39,6 @@ export const fetchPUTPay = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/revenuesRoutes.php`;
 
   let data;
-  loadingBooking(true, "Reservando habitaciones");
   try {
     const response = await fetch(url, {
       method: "PUT",
@@ -58,7 +56,7 @@ export const fetchPUTPay = async (booking) => {
   } catch (error) {
     console.log(error);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     loadingBooking(false);
     if (!data) {
       alertBooking(
@@ -76,7 +74,7 @@ export const fetchGETPay = async (idBooking) => {
     JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data;
-  loadingBooking(true, "Reservando habitaciones");
+
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -88,7 +86,7 @@ export const fetchGETPay = async (idBooking) => {
   } catch (error) {
     console.log(error);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     loadingBooking(false);
     if (!data) {
       alertBooking(

@@ -10,7 +10,7 @@ import {
   alertForm,
   removeAlertForm,
   phoneConfig,
-  removeAllMsjErrors,
+  removeAllMsjErrors
 } from "../scriptAddClient.js";
 
 let dataClient;
@@ -102,20 +102,19 @@ const getIfExist = async (client) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     return data;
@@ -133,21 +132,20 @@ const fetchPUT = async (client) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(client),
+      body: JSON.stringify(client)
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     return data;

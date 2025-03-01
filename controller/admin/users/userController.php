@@ -71,7 +71,7 @@ class userController
         try {
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                throw new Error($tokenVerified["error"]);
+                return array("error" => $tokenVerified["error"], "status" => 401);
             }
             $resultUpdated =  $this->user->updateUserImageById($userToUpdate["image"], $userToUpdate["idUser"]);
             return $resultUpdated;
@@ -91,7 +91,7 @@ class userController
 
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                throw new Error($tokenVerified["error"]);
+                return array("error" => $tokenVerified["error"], "status" => 401);
             }
 
             $userFound = $this->findUserById($idUser);
@@ -135,7 +135,7 @@ class userController
 
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                throw new Error($tokenVerified["error"]);
+                return array("error" => $tokenVerified["error"], "status" => 401);
             }
 
             $userFound = $this->findUserByUsernameAndDistinctId($idUser, $username);
@@ -209,7 +209,7 @@ class userController
         try {
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                throw new Error($tokenVerified["error"]);
+                return array("error" => $tokenVerified["error"], "status" => 401);
             }
             return $tokenVerified;
         } catch (Throwable $th) {
@@ -224,7 +224,7 @@ class userController
         try {
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                throw new Error($tokenVerified["error"]);
+                return array("error" => $tokenVerified["error"], "status" => 401);
             }
             $dataUser = $this->user->getUserByUser($req["username"]);
             $dataUser["imagen"] = base64_encode($dataUser["imagen"]);

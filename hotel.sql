@@ -31,9 +31,9 @@ tipoHabitacion VARCHAR(50) NOT NULL
 
 CREATE TABLE tipo_habitacion(
 categoria VARCHAR(50) NOT NULL PRIMARY KEY,
-imagenUno BLOB NOT NULL,
-imagenDos BLOB NOT NULL,
-imagenTres BLOB NOT NULL,
+imagenUno LONGBLOB NOT NULL,
+imagenDos LONGBLOB NOT NULL,
+imagenTres LONGBLOB NOT NULL,
 camas INT NOT NULL,
 capacidad INT NOT NULL,
 terraza INT,
@@ -73,12 +73,24 @@ REFERENCES clientes(idCliente)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE correo_reserva_confirmada(
+idCorreo INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+idReserva INT NOT NULL,
+stateConfirm TINYINT NOT NULL,
+stateUpdate TINYINT NOT NULL,
+
+CONSTRAINT fk_idReservaCorreo FOREIGN KEY(idReserva)
+REFERENCES reserva_habitacion(idReserva)
+);
+
+
 CREATE TABLE servicio(
 idServicio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nombreServicio VARCHAR(50) NOT NULL,
 descripcionServicio VARCHAR(80) NOT NULL,
 precio DOUBLE NOT NULL,
-imagen BLOB,
+imagen LONGBLOB,
 maxStock INT
 );
 
@@ -161,9 +173,9 @@ load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1Deluxe_2.jpg"),
 load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2Deluxe_2.jpg"),
 load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3Deluxe_2.jpg"),4,5,1,160);
 INSERT INTO tipo_habitacion (categoria,imagenUno,imagenDos,imagenTres,camas,capacidad,terraza,precio) VALUES ("Estandar",
-load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1_2.jpg"),
 load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab2_2.jpg"),
-load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3_2.jpg"),3,4,1,80);
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab3_2.jpg"),
+load_file("C:/xampp/htdocs/Sistema hotel/img/bannerHab1_2.jpg"),3,4,1,80);
 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Telefono","telefono de la habitacion, tarifa 0.5 dolar por minuto",0.5,load_file('C:/xampp/htdocs/Sistema hotel/img/telephone.png'),null);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Masajes","servicio de masajes a la habitacion, 10 dolares por sesion",10,load_file('C:/xampp/htdocs/Sistema hotel/img/massage.png'),null);
@@ -203,7 +215,11 @@ INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de frutilla",2,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/iceCreamStrawBerry.png'),50);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de vainilla",2,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/iceCreamVanila.png'),50);
 
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("agusMiranda","Agustin","Miranda","agus20m05@gmail.com",
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),"Administrador","Dudu22558899");
 
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),"Empleado","andre123456");
 
 
 

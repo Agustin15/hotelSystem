@@ -123,69 +123,60 @@ body {
 
 #checkIn {
   width: 100%;
-  height: 150px;
+  height: 9.5rem;
   box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   margin: auto;
-  margin-top: 0;
-  text-align: center;
-  background-color: white;
-}
-#checkIn h1 {
-  font-size: 20px;
+  gap: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -10px;
-}
-#checkIn label {
-  font-size: 14px;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #a1a1a1;
-}
-#checkIn .lblLlegada {
-  margin-left: 36%;
-  width: 80px;
-  margin-top: 10px;
-}
-#checkIn .lblHuespedes {
-  margin-left: 50%;
-  width: 80px;
-  margin-top: -31px;
+  background-color: white;
 }
 #checkIn #diferenciasNoches {
   visibility: visible;
-  width: 0px;
-  font-size: 0px;
+  width: 0;
+  font-size: 0;
+}
+#checkIn .checkOut,
+#checkIn .checkIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+#checkIn .checkOut h3,
+#checkIn .checkIn h3 {
+  font-size: 17px;
 }
 #checkIn input {
   outline: none;
-  width: 180px;
+  width: 11rem;
   height: 32px;
   opacity: 80%;
   display: inline-block;
-  margin-top: 10px;
   border-radius: 3px;
   border: 1px solid gray;
 }
-#checkIn input[type=date] {
-  margin-left: 20px;
-}
-#checkIn input[type=submit] {
-  width: 100px;
-  height: 30px;
+#checkIn .btnSearch {
+  width: 7rem;
+  height: 2rem;
   background: linear-gradient(#126b91, #0498a0);
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  margin-top: 2rem;
+  gap: 0.3rem;
   box-shadow: 2px 2px 2px grey;
   color: white;
   opacity: 100%;
-  padding-left: 0px;
-  display: flex;
-  margin-left: 66%;
-  margin-top: -31px;
   font-weight: bold;
 }
-#checkIn input[type=submit]:hover {
+#checkIn .btnSearch img {
+  width: 21px;
+}
+#checkIn .btnSearch:hover {
   background: linear-gradient(#0f3a4d, #0a7e85);
 }
 

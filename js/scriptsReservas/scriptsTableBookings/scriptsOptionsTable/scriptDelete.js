@@ -33,23 +33,22 @@ const deleteBooking = async (idBooking) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const bookingDeleted = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (bookingDeleted) {
       data = bookingDeleted;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     if (!data) {
       errorDelete();

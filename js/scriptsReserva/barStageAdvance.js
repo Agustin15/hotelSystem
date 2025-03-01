@@ -4,16 +4,16 @@ const displayBarStagesAdvance = (lineStage) => {
   let itemsStages = [
     {
       stage: "RoomsSelected",
-      icon: "http://localhost/sistema%20Hotel/img/stageRooms.png",
+      icon: "http://localhost/sistema%20Hotel/img/stageRooms.png"
     },
     {
       stage: "PersonalData",
-      icon: "http://localhost/sistema%20Hotel/img/stagePersonalData.png",
+      icon: "http://localhost/sistema%20Hotel/img/stagePersonalData.png"
     },
     {
-      stage: "MethodPay",
-      icon: "http://localhost/sistema%20Hotel/img/stagePay.png",
-    },
+      stage: "BookingReady",
+      icon: "http://localhost/sistema%20Hotel/img/stageBookingReady.png"
+    }
   ];
 
   let displayBarStages = itemsStages.map((itemStage) => {
@@ -22,7 +22,7 @@ const displayBarStagesAdvance = (lineStage) => {
       </div>
       </div>`;
 
-    itemStage.stage == "MethodPay" ? (line = ``) : false;
+    itemStage.stage == "BookingReady" ? (line = ``) : false;
 
     return `<div id="item${itemStage.stage}" class="itemStage">
      
@@ -34,10 +34,12 @@ const displayBarStagesAdvance = (lineStage) => {
 
   containBarStages.innerHTML = displayBarStages.join("");
 
-  document
-    .querySelector(lineStage)
-    .querySelector(".progress")
-    .classList.add("progressStage");
+
+    document
+      .querySelector(lineStage)
+      .querySelector(".progress")
+      .classList.add("progressStage");
+  
 
   let stagesToComplete = definedCompleteBars();
 
@@ -46,13 +48,18 @@ const displayBarStagesAdvance = (lineStage) => {
 
 function definedCompleteBars() {
   let completeStages;
-  switch (window.location.href) {
-    case "http://localhost/sistema%20Hotel/views/reserva/pay/checkout.html":
-      completeStages = ["#itemRoomsSelected","#lineRoomsSelected","#itemPersonalData"];
+  switch (true) {
+    case window.location.href.indexOf("detalles.html") > -1:
+      completeStages = [
+        "#itemRoomsSelected",
+        "#lineRoomsSelected",
+        "#itemPersonalData",
+        "#itemBookingReady"
+      ];
 
       break;
 
-    case "http://localhost/sistema%20Hotel/views/reserva/datosCliente.php":
+      case window.location.href.indexOf("datosCliente.html") > -1:
       completeStages = ["#itemRoomsSelected"];
 
       break;
@@ -61,11 +68,10 @@ function definedCompleteBars() {
   return completeStages;
 }
 
-
-
 function completeStages(stagesToComplete) {
   stagesToComplete.forEach((element) => {
-    document.querySelector(element).style.background = "linear-gradient(#126b91, #0498a0)";
+    document.querySelector(element).style.background =
+      "linear-gradient(#126b91, #0498a0)";
   });
 }
 

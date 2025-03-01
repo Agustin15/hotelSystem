@@ -48,21 +48,20 @@ const getRowsBookingClients = async (id) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     return data;
@@ -82,7 +81,7 @@ const getClientBookingLimit = async (id) => {
     JSON.stringify({
       option: "bookingsClient",
       client: id,
-      index: indexBooking,
+      index: indexBooking
     });
 
   let data = null;
@@ -93,20 +92,19 @@ const getClientBookingLimit = async (id) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     return data;
@@ -124,7 +122,7 @@ const displayBookingClient = async (idClient) => {
       weekday: "long",
       year: "numeric",
       month: "long",
-      day: "numeric",
+      day: "numeric"
     };
 
     let startBooking = new Date(booking.fechaLlegada);
@@ -239,7 +237,6 @@ const drawOptionDetail = async (url, configOptionDetail) => {
     }
   } catch (error) {
     console.log(error);
-   
   } finally {
     loadingPage(false, modal);
     if (!optionPage) {

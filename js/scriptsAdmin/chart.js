@@ -65,15 +65,15 @@ async function getClientsByMonthActualYear(actualYear) {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
+    console.log(error);
   } finally {
     loading(false, "bookings");
     if (!data) {
@@ -163,15 +163,14 @@ async function getRevenueActualYear() {
 
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false, "revenues");
     if (data) {
@@ -269,15 +268,14 @@ async function getCategoryRoomsMostReserved() {
 
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false, "rooms");
     if (data) {

@@ -12,21 +12,20 @@ export const POSTBooking = async (booking) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
+        credentials: "same-origin"
       },
-      body: JSON.stringify(booking),
+      body: JSON.stringify(booking)
     });
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result == true) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     if (!data) {
@@ -46,7 +45,7 @@ export const getBookingByClientAndDate = async (booking) => {
   const dataBooking = {
     idClient: booking.client,
     startBooking: booking.startBooking,
-    endBooking: booking.endBooking,
+    endBooking: booking.endBooking
   };
 
   let data;
@@ -54,7 +53,7 @@ export const getBookingByClientAndDate = async (booking) => {
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingByClientAndDate",
-      dataBooking: dataBooking,
+      dataBooking: dataBooking
     });
 
   loadingForm(true);
@@ -63,21 +62,21 @@ export const getBookingByClientAndDate = async (booking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin",
-      },
+        credentials: "same-origin"
+      }
     });
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
+
     alertForm(
       "../../../img/advertenciaLogin.png",
       "Ups, error al agregar la reserva",

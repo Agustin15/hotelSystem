@@ -19,7 +19,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $this->booking->setIdClient($req['client']);
             $this->booking->setDateStart($req['startBooking']);
@@ -28,7 +28,8 @@ class bookingController
             $res =  $this->booking->addBooking();
             return $res;
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 502);
+
+            return array("error" => $th->getMessage(), "status" => 500);
         }
     }
 
@@ -38,7 +39,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $this->booking->setIdBooking($req['idBooking']);
             $this->booking->setIdClient($req['idClient']);
@@ -63,7 +64,7 @@ class bookingController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $res = $this->booking->deleteBookingById($idBooking);
             return $res;
@@ -78,7 +79,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookings = $this->booking->getAllBookings()->fetch_all(MYSQLI_ASSOC);
 
@@ -95,7 +96,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookingFind =  $this->booking->getBookingByIdClientAndDate(
                 $req['dataBooking']['idClient'],
@@ -115,7 +116,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $bookingFind =  $this->booking->getBookingByClientMailAndDate(
                 $req['dataBooking']['mail'],
@@ -135,7 +136,7 @@ class bookingController
             $year = $req['year'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $rowsBookingYear = $this->booking->getAllBookingsYear($year)->num_rows;
 
@@ -152,7 +153,7 @@ class bookingController
             $resultBookings = null;
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             if ($req['data']['indexPage'] == 0) {
                 $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
@@ -172,7 +173,7 @@ class bookingController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $res = $this->booking->getAllYearsBookings();
             return $res;
@@ -188,7 +189,7 @@ class bookingController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $res = $this->booking->getDataClientByIdBooking($idBooking);
             return $res;
@@ -205,7 +206,7 @@ class bookingController
             $idBooking = $req['idBooking'];
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $res = $this->booking->getBookingById($idBooking);
             return $res;
@@ -213,6 +214,4 @@ class bookingController
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
-
-
 }

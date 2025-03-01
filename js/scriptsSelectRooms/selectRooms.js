@@ -11,7 +11,7 @@ import {
   cleanDateBooking,
   next,
   rooms,
-  changeRooms,
+  changeRooms
 } from "./functionsCart.js";
 
 import { alerta } from "../alertas.js";
@@ -19,7 +19,7 @@ import { alerta } from "../alertas.js";
 import {
   eventsButtonsSlider,
   indexGetValue,
-  displayIndexItemRoom,
+  displayIndexItemRoom
 } from "./slider.js";
 
 export let quantityCategorysRooms;
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     dateBooking = {
       start: dateBooking.start,
-      end: dateBooking.end,
+      end: dateBooking.end
     };
 
     submitDateBooking(dateBooking);
@@ -83,15 +83,18 @@ const displayErrorGetHotelRooms = (status) => {
   }
 };
 async function submitGetCategoryHotelRooms() {
+
   try {
     loading(true);
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/controller/roomsAvailable/rooms.php?option=roomsHotel`
     );
     const result = await response.json();
+  
     if (!response.ok) {
       throw result.error;
-    } else {
+    }
+    if (result) {
       displayErrorGetHotelRooms(false);
       return result;
     }
@@ -123,7 +126,7 @@ if (formCheckIn) {
       } else {
         dateBooking = {
           start: startBooking,
-          end: endBooking,
+          end: endBooking
         };
 
         localStorage.setItem("dateBooking", JSON.stringify(dateBooking));

@@ -264,7 +264,7 @@ const updateBooking = async (bookingToUpdate) => {
 
           if (!resultUpdateRooms) return;
         }
-        
+
         let resultPayUpdated = await PUTPay({
           idBooking: bookingGlobal.idReserva,
           newAmount: amount
@@ -330,16 +330,15 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw "Ups, error al actualizar la reserva";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "Ups, error al actualizar la reserva";
     }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingForm(false);
     if (!data) {

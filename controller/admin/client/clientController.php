@@ -22,7 +22,7 @@ class clientController
 
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       $dataClientMail = $this->client->getClientByMail($req['mail'])->fetch_array(MYSQLI_ASSOC);
@@ -60,7 +60,7 @@ class clientController
 
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       $resultado = $this->client->updateClientById(
@@ -82,7 +82,7 @@ class clientController
     try {
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error("Autenticacion fallida,Token no valido");
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       $resultDelete = $this->client->deleteClientById($req['idClient']);
@@ -97,7 +97,7 @@ class clientController
     try {
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $allClients = $this->client->getAllClients()->fetch_all(MYSQLI_ASSOC);
 
@@ -113,7 +113,7 @@ class clientController
     try {
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $years = $this->client->getAllYearsVisitClients();
       return $years;
@@ -146,7 +146,7 @@ class clientController
 
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       $classClient = $this->client;
@@ -176,7 +176,7 @@ class clientController
       $index = $req['index'];
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       if ($index == 0) {
@@ -196,7 +196,7 @@ class clientController
     try {
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $clientsRows = $this->client->getAllClientsRows();
 
@@ -212,7 +212,7 @@ class clientController
       $idClient = $req['idClient'];
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $res = $this->client->getClientById($idClient);
       return $res;
@@ -228,7 +228,7 @@ class clientController
       $client = $req['client'];
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
 
       $res = $this->client->getClientExisted($client['name'], $client['lastName'], $client['mail']);
@@ -245,7 +245,7 @@ class clientController
       $client = $req['client'];
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $existClientMail = $this->client->comprobateMailInUseById($client['id'], $client['mail']);
 
@@ -271,7 +271,7 @@ class clientController
       $idClient = $req['client'];
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       $numRows = $this->client->getRowsBookingsClient($idClient);
       return $numRows;
@@ -288,7 +288,7 @@ class clientController
 
       $tokenVerify = $this->authToken->verifyToken();
       if (isset($tokenVerify["error"])) {
-        throw new Error($tokenVerify["error"]);
+        return array("error" => $tokenVerify["error"], "status" => 401);
       }
       if ($index == 0) {
 

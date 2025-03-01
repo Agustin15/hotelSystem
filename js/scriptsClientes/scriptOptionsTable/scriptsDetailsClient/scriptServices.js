@@ -32,12 +32,11 @@ const displayServicesRoom = () => {
 
   let numRoomsNoDuplicate = [];
 
-  numRooms.reduce((ac, current) => {
-    if (current != ac) {
-      ac = current;
-      numRoomsNoDuplicate.push(current);
+  numRooms.forEach((numRoom) => {
+    if (!numRoomsNoDuplicate.find((number) => number == numRoom)) {
+      numRoomsNoDuplicate.push(numRoom);
     }
-  }, 0);
+  });
 
   let items = numRoomsNoDuplicate.map((numberRoom) => {
     return `

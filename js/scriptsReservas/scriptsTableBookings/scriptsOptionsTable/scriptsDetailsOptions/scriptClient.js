@@ -37,29 +37,28 @@ const getDataClientByIdBooking = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
         JSON.stringify({
           option: "getClientByIdBooking",
-          idBooking: idBooking,
+          idBooking: idBooking
         }),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
-        },
+          credentials: "same-origin"
+        }
       }
     );
 
     const clientData = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (clientData) {
       data = clientData;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false, body);
     if (!data) {

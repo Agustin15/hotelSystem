@@ -29,7 +29,9 @@ const getAllYearsToSelect = async () => {
     );
     const years = await response.json();
     if (!response.ok) {
-      throw "No se pudieron cargar los años";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "No se pudieron cargar los años";
     }
 
     if (years) {
@@ -37,9 +39,6 @@ const getAllYearsToSelect = async () => {
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     if (!data) {
@@ -92,7 +91,9 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
     );
     const roomsBookingCategorys = await response.json();
     if (!response.ok) {
-      throw "No se pudieron cargar los habitaciones";
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw "No se pudieron cargar los habitaciones";
     }
 
     if (roomsBookingCategorys) {
@@ -100,9 +101,6 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     if (!data) {

@@ -29,15 +29,14 @@ const getNextBookingsRoom = async () => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.length > 0) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion")) {
-      invalidAuthentication();
-    }
   } finally {
     loading(false);
     if (!data) {
@@ -121,7 +120,7 @@ const redirectToCalendarBooking = () => {
       let bookingToCalendar = {
         startBooking: booking.fechaLlegada,
         endBooking: booking.fechaSalida,
-        idBooking: booking.idReserva,
+        idBooking: booking.idReserva
       };
       window.open(
         `http://localhost/sistema%20Hotel/views/admin/reservas/index.php?booking=${JSON.stringify(

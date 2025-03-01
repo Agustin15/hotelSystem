@@ -197,16 +197,15 @@ const PUTPay = async (service) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (result.response == true) {
       data = result;
     }
   } catch (error) {
     loading(false, "Cargando", "loadingDelete", footerModal);
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     if (!data) {
       noData(

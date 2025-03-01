@@ -63,4 +63,32 @@ class bookingController
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+
+    public function getDetailsBookingByClientMailAndDate($req)
+    {
+        try {
+
+            $bookingFind =  $this->booking->getBookingDetailsByClientMailAndDate(
+                $req['dataToFindBooking']['email'],
+                $req['dataToFindBooking']['startDate'],
+                $req['dataToFindBooking']['endDate']
+            );
+
+
+            $bookingDetailsFind = array_map(function ($booking) {
+
+                $booking['imagenUno'] = null;
+                $booking['imagenTres'] = null;
+                $booking['imagenDos'] = base64_encode($booking['imagenDos']);
+
+                return $booking;
+            }, $bookingFind);
+
+
+            return $bookingDetailsFind;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 }

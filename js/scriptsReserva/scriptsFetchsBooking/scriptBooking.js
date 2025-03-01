@@ -6,7 +6,6 @@ export const fetchPOSTBooking = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
   let data;
 
-  loadingBooking(true, "Reservando");
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -29,7 +28,7 @@ export const fetchPOSTBooking = async (booking) => {
       "No se pudo realizar la reserva, vuelve a intentarlo más tarde"
     );
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
   }
 };
@@ -49,7 +48,6 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
       dataBooking: dataBooking,
     });
 
-  loadingBooking(true, "Cargando");
   try {
     const response = await fetch(url);
     const result = await response.json();
@@ -67,7 +65,7 @@ export const getBookingByClientMailAndDate = async (clientBooking) => {
     );
     console.log(error);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
   }
 };
@@ -76,7 +74,7 @@ export const fetchPUTBooking = async (dataBookingToUpdate) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
   let data;
 
-  loadingBooking(true, "Actualizando reserva");
+  loadingBooking(true,"Actualizando reserva");
   try {
     const response = await fetch(url, {
       method: "PUT",
@@ -99,7 +97,7 @@ export const fetchPUTBooking = async (dataBookingToUpdate) => {
       "No se pudo actualizar la reserva, vuelve a intentarlo más tarde"
     );
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return data;
   }
 };

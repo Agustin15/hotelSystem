@@ -1,6 +1,6 @@
 import { month } from "./chart.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
-import { invalidAuthentication} from "./userData.js";
+import { invalidAuthentication } from "./userData.js";
 import { userData } from "./scriptsAdmin.js";
 
 const getCategoryRoomsData = async () => {
@@ -18,15 +18,14 @@ const getCategoryRoomsData = async () => {
     });
     const data = await response.json();
     if (!response.ok) {
-      throw data.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (data) {
       return data;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     return null;
   }
 };
@@ -46,15 +45,14 @@ const getRevenuesActualYear = async () => {
     });
     const data = await response.json();
     if (!response.ok) {
-      throw data.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else if (data) {
       return data;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
     return null;
   }
 };

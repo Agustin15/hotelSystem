@@ -14,7 +14,7 @@ export function removeAlertClientFormBooking() {
 }
 
 export const alertBooking = (title, msj) => {
-  modalOption("flex");
+
   let alert = document.querySelector(".alertBooking");
   let msjParragraph = alert.querySelector("p");
   let titleSpan = alert.querySelector("span");
@@ -29,7 +29,6 @@ export const alertBooking = (title, msj) => {
     msjParragraph.textContent = msj;
     titleSpan.textContent = "Ups, algo ha salido mal";
     btnAccept.addEventListener("click", () => {
-      modalOption("none");
       removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
     });
   } else {
@@ -84,13 +83,11 @@ export const confirmUpdateBooking = async (alert) => {
 
   return new Promise((resolve) => {
     btnCancel.addEventListener("click", () => {
-      modalOption("none");
       removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
       resolve(confirm);
     });
 
     btnAccept.addEventListener("click", () => {
-      modalOption("none");
       removeAlertBooking(alert, msjParragraph, titleSpan, btnAccept, btnCancel);
       confirm = true;
       resolve(confirm);

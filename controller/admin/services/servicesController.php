@@ -27,7 +27,7 @@ class servicesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
             switch ($option) {
@@ -95,7 +95,7 @@ class servicesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $servicesHotel = $this->service->getAllServicesHotel();
 
@@ -116,7 +116,7 @@ class servicesController
         try {
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $serviceFind = $this->service->getServiceByName($req["nameService"]);
             if ($serviceFind) {

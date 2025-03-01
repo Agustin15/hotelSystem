@@ -27,7 +27,7 @@ class roomsController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $roomsCategorys = $this->rooms->getAllCategoryRooms();
 
@@ -57,7 +57,7 @@ class roomsController
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
-                throw new Error($tokenVerify["error"]);
+                return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $roomsCategory = $this->rooms->getAllRoomsHotelWithDetails($req["category"]);
             $roomsCategory = array_map(function ($room) {

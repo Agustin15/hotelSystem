@@ -217,4 +217,22 @@ class Booking
         return $result->fetch_array(MYSQLI_ASSOC);
     }
 
+
+    public function getBookingDetailsByClientMailAndDate($email, $startDate, $endDate)
+    {
+
+        $query = $this->connection->connect()->prepare("
+        select * from reserva_habitacion 
+        INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente 
+        INNER JOIN habitacion_reservada ON reserva_habitacion.idReserva=habitacion_reservada.idReservaHabitacion INNER JOIN habitaciones ON 
+        habitaciones.numHabitacion=habitacion_reservada.numHabitacionReservada INNER JOIN tipo_habitacion ON 
+        habitaciones.tipoHabitacion=tipo_habitacion.categoria INNER JOIN pago ON pago.idReservaPago=reserva_habitacion.idReserva  
+        where clientes.correo=? and reserva_habitacion.fechaLlegada=? and reserva_habitacion.fechaSalida=?");
+        $query->bind_param("sss", $email, $startDate, $endDate);
+        $query->execute();
+
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

@@ -21,16 +21,18 @@ export function printDateBookingInCart(dateBooking) {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   };
 
   let startDate = new Date(dateBooking.start);
   let endDate = new Date(dateBooking.end);
+  startDate.setMinutes(startDate.getMinutes() + startDate.getTimezoneOffset())
+  endDate.setMinutes(endDate.getMinutes() + endDate.getTimezoneOffset())
 
   document.querySelector(".startBooking").textContent =
-    startDate.toLocaleDateString("es-ar", options);
+    startDate.toLocaleDateString("es-UY", options);
   document.querySelector(".endBooking").textContent =
-    endDate.toLocaleDateString("es-ar", options);
+    endDate.toLocaleDateString("es-UY", options);
 
   nights = calculateDifferenceNight(startDate, endDate);
 
@@ -53,12 +55,12 @@ export const createDataRoom = (button) => {
     images: {
       imageOne: dataRoom.imageOne,
       imageTwo: dataRoom.imageTwo,
-      imageThree: dataRoom.imageThree,
+      imageThree: dataRoom.imageThree
     },
     price: dataRoom.price,
     quantity: 1,
     guests: { adult: adultInput.value, children: childrenInput.value },
-    total: dataRoom.price * nights,
+    total: dataRoom.price * nights
   };
   return room;
 };
@@ -340,11 +342,11 @@ export const next = (buttonNext) => {
       date: bookingDate,
       nights: nights,
       rooms: rooms,
-      totalDeposit: totalDeposit,
+      totalDeposit: totalDeposit
     };
 
     localStorage.setItem("booking", JSON.stringify(booking));
-    location.href = "datosCliente.php";
+    location.href = "datosCliente.html";
   });
 };
 

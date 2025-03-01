@@ -55,7 +55,9 @@ const loadYears = async () => {
       const results = await response.json();
 
       if (!response.ok) {
-        throw results.error;
+        if (response.status == 401) {
+          invalidAuthentication();
+        } else throw results.error;
       } else if (results) {
         selectYearChar(results);
         document.querySelector(".noData").style.display = "none";
@@ -64,9 +66,6 @@ const loadYears = async () => {
       }
     } catch (error) {
       console.log(error);
-      if (error.indexOf("Autenticacion") > -1) {
-        invalidAuthentication();
-      }
     }
   }
 };
@@ -193,15 +192,14 @@ async function getDataClientsTOGraphic(year) {
 
     const result = await response.json();
     if (!response.ok) {
-      throw result.error;
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
     } else {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    if (error.indexOf("Autenticacion") > -1) {
-      invalidAuthentication();
-    }
   } finally {
     loadingChart(false);
     if (data) {

@@ -119,7 +119,7 @@ export const addService = async () => {
     let resultService = false;
     if (productsToAdd.length > 0) {
       let serviceAdded = await postService(productsToAdd);
-     
+
       if (serviceAdded) {
         resultService = true;
       } else {
@@ -224,15 +224,17 @@ const putPay = async (amount) => {
         }
       );
       const result = await response.json();
+      if (!response.ok) {
+        if (response.ok == 401) {
+          invalidAuthentication();
+        } else throw result.error;
+      }
       if (result) {
         resultPUTRevenue = result;
       }
     } catch (error) {
       console.log(error);
       loading(false);
-      if (error.indexOf("Autenticacion") > -1) {
-        invalidAuthentication();
-      }
     } finally {
       if (!resultPUTRevenue) {
         displayAlert(false, numRoom);
