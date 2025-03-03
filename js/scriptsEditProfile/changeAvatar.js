@@ -1,4 +1,4 @@
-import { PATCHUserImage } from "../scriptsUsers/methodsFetch.js";
+import { PATCHUserImage } from "../scriptsMaintenance/scriptsUsers/methodsFetch.js";
 import { displayForm } from "./userData.js";
 
 let user, mediaStream, modal;

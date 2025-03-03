@@ -113,7 +113,7 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     },
 
     axisY: {
-      title: "Personas",
+      title: "Clientes",
       titleFontSize: 25,
       margin: 0,
       labelFontSize: 18,
@@ -130,6 +130,11 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     data: [
       {
         type: "column",
+        indexLabelPlacement: "outside",
+        indexLabel: "{y}",
+        yValueFormatString: '#,##0',
+        indexLabelFontColor:"black",
+        indexLabelFontSize:15,
         dataPoints: dataPoints
       }
     ]

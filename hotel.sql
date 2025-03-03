@@ -1,6 +1,11 @@
 CREATE DATABASE HOTEL;
 use HOTEL;
 
+CREATE TABLE roles(
+idRol INT NOT NULL PRIMARY KEY auto_increment,
+rol VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE usuarios(
 idUsuario INT NOT NULL primary key auto_increment,
 usuario VARCHAR(50),
@@ -8,9 +13,10 @@ nombre VARCHAR(50) NOT NULL,
 apellido VARCHAR(50) NOT NULL, 
 correo VARCHAR(50) NOT NULL,
 imagen LONGBLOB NOT NULL,
-rol VARCHAR(50),
-contrasenia VARCHAR(60)
-
+rol INT NOT NULL,
+contrasenia VARCHAR(60),
+CONSTRAINT fk_userRol FOREIGN KEY(rol) REFERENCES roles(idRol)
+ON DELETE CASCADE ON Update CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -23,6 +29,7 @@ telefono VARCHAR(30) NOT NULL,
 PRIMARY KEY(idCliente)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE habitaciones(
 numHabitacion INT NOT NULL PRIMARY KEY,
 tipoHabitacion VARCHAR(50) NOT NULL
@@ -215,11 +222,15 @@ INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) 
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de frutilla",2,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/iceCreamStrawBerry.png'),50);
 INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) VALUES ("Cantina","Helado de vainilla",2,load_file('C:/xampp/htdocs/Sistema hotel/img/imgProducts/iceCreamVanila.png'),50);
 
+
+INSERT INTO roles(rol) values("Administrador");
+INSERT INTO roles(rol) values("Empleado");
+
 INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("agusMiranda","Agustin","Miranda","agus20m05@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),"Administrador","Dudu22558899");
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),1,"Dudu22558899");
 
 INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),"Empleado","andre123456");
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),2,"andre123456");
 
 
 

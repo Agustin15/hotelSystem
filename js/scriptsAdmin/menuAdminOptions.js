@@ -11,6 +11,7 @@ export const optionsMenuAdmin = () => {
     "http://localhost/sistema%20Hotel/views/admin/index.php",
     "#liInicio"
   );
+
   routesOptions(
     "http://localhost/sistema%20Hotel/views/admin/clientes/",
     "#liClientes",
@@ -32,10 +33,15 @@ export const optionsMenuAdmin = () => {
     "#liGanancias",
     "actualOptionRevenues"
   );
+
+  routesOptions(
+    "http://localhost/sistema%20Hotel/views/admin/mantenimiento/index.php",
+    "#liMantenimiento"
+  );
 };
 
 const routesOptions = (url, liOption, itemLocal) => {
-  if (liOption == "#liInicio") {
+  if (liOption == "#liInicio" || liOption == "#liMantenimiento") {
     document
       .querySelector(liOption)
       .addEventListener("click", () => (location.href = url));

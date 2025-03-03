@@ -36,6 +36,36 @@ class User
         return $result;
     }
 
+
+    public function deleteUserById($idUser)
+    {
+
+        $query = $this->connection->connect()->prepare("delete from usuarios where idUsuario=?");
+        $query->bind_param("i", $idUser);
+        $result = $query->execute();
+        return $result;
+    }
+
+
+    public function getAllUsers()
+    {
+        $query = $this->connection->connect()->prepare("select * from usuarios");
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getAllUsersLimitIndex($index)
+    {
+        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        usuarios.rol=roles.idRol LIMIT 15 OFFSET $index");
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
     public function updateUserById($username, $name, $lastname, $mail, $image, $rol, $password, $idUser)
     {
 
@@ -49,7 +79,8 @@ class User
     public function getUserByUser($user)
     {
 
-        $query = $this->connection->connect()->prepare("select * from usuarios where usuario=?");
+        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        usuarios.rol=roles.idRol where usuario=?");
         $query->bind_param("s", $user);
         $query->execute();
 
@@ -59,9 +90,12 @@ class User
     }
 
 
+
+
     public function getUserById($idUser)
     {
-        $query = $this->connection->connect()->prepare("select * from usuarios where idUsuario=?");
+        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        usuarios.rol=roles.idRol where idUsuario=?");
         $query->bind_param("i", $idUser);
         $query->execute();
 

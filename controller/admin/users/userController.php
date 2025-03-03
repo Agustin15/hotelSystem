@@ -36,7 +36,7 @@ class userController
             }
 
             $payload = [
-                "user" => $userFound["usuario"],
+                "idUser" => $userFound["idUsuario"],
                 "rol" => $userFound["rol"],
                 "exp" => time() + 3600
             ];
@@ -56,7 +56,8 @@ class userController
 
             $tokenJWT = JWT::encode($payload, $secretKey, 'HS384');
 
-            setcookie("userToken", $tokenJWT, time() + 3600, "", "", false, true);
+            setcookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
+
             return array("userLogin" => true);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
@@ -171,6 +172,25 @@ class userController
         }
     }
 
+    public function DELETE($req)
+    {
+
+        try {
+            $idUser = $req["idUser"];
+            $tokenVerified = $this->authToken->verifyToken();
+            if (isset($tokenVerified["error"])) {
+                return array("error" => $tokenVerified["error"], "status" => 401);
+            }
+
+            $userDeleted = $this->user->deleteUserById($idUser);
+
+            return $userDeleted;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
 
     public function findUserByUsernameAndDistinctId($id, $user)
     {
@@ -213,24 +233,68 @@ class userController
             }
             return $tokenVerified;
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 500);
+            return array("error" => $th->getMessage(), "status" => 404);
         }
     }
 
 
-
-    public function getDataUserByUsername($req)
+    public function getDataUserById($req)
     {
         try {
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
                 return array("error" => $tokenVerified["error"], "status" => 401);
             }
-            $dataUser = $this->user->getUserByUser($req["username"]);
+
+            $dataUser = $this->user->getUserById($req["idUser"]);
             $dataUser["imagen"] = base64_encode($dataUser["imagen"]);
             return $dataUser;
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 500);
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function getAllUsers()
+    {
+        try {
+            $tokenVerified = $this->authToken->verifyToken();
+            if (isset($tokenVerified["error"])) {
+                return array("error" => $tokenVerified["error"], "status" => 401);
+            }
+
+            $users = $this->user->getAllUsers();
+
+            $users = array_map(function ($user) {
+                $user["imagen"] = base64_encode($user["imagen"]);
+                return $user;
+            }, $users);
+
+            return $users;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getAllUsersLimitIndex($req)
+    {
+        try {
+            $tokenVerified = $this->authToken->verifyToken();
+            if (isset($tokenVerified["error"])) {
+                return array("error" => $tokenVerified["error"], "status" => 401);
+            }
+
+            $users = $this->user->getAllUsersLimitIndex($req["index"]);
+
+            $users = array_map(function ($user) {
+                $user["imagen"] = base64_encode($user["imagen"]);
+                return $user;
+            }, $users);
+
+            return $users;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
         }
     }
 }

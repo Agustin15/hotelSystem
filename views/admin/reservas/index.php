@@ -1,7 +1,8 @@
 <?php
 
-$actualYear = date("Y");
-
+if (!isset($_COOKIE["userToken"])) {
+    header("location:../../loginAdmin/index.html");
+}
 ?>
 
 <!DOCTYPE html>
@@ -261,6 +262,14 @@ $actualYear = date("Y");
 
                     </ul>
 
+                </li>
+                <li id="liMantenimiento">
+                    <div class="item">
+                        <div class="nameOption">
+                        <img src="../../../img/maintenance.png">
+                            <a>Mantenimiento</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
 

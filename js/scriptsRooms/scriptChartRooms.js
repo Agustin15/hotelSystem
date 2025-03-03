@@ -146,7 +146,7 @@ const chartRooms = (dataPoints) => {
     animationEnabled: true,
     colorSet: "greenShades",
     legend: {
-      fontSize: 15
+      fontSize: 19,
     },
     data: [
       {
@@ -155,8 +155,11 @@ const chartRooms = (dataPoints) => {
         toolTipContent: "<b>{label}</b>: {y}%",
         showInLegend: "true",
         legendText: "{label}",
-        indexLabelFontSize: 17,
-        indexLabel: "{label} - {y}%",
+        indexLabelPlacement: "inside",
+        indexLabel: "{y}",
+        yValueFormatString: '#,##0.0"%"',
+        indexLabelFontSize: 19,
+        indexLabelFontColor: "white",
         dataPoints: dataPoints
       }
     ]

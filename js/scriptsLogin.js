@@ -1,21 +1,3 @@
-let alertInvalidToken;
-
-document.addEventListener("DOMContentLoaded", function () {
-  alertInvalidToken = localStorage.getItem("alertInvalidToken");
-  if (alertInvalidToken) {
-    alertLoginAdmin(
-      "../../img/advertenciaLogin.png",
-      "Autenticacion fallida, token expirado",
-      "Advertencia"
-    );
-
-    setTimeout(() => {
-      removeAlertLoginAdmin();
-      localStorage.removeItem("alertInvalidToken");
-    }, 7000);
-  }
-});
-
 const alertLoginAdmin = (img, msj, title) => {
   let alertLogin = document.querySelector(".alertLogin");
 
@@ -71,9 +53,6 @@ function setUser(event) {
   removeAlertLoginAdmin();
   desactivateInputAlert();
   
-  if (alertInvalidToken) {
-    localStorage.removeItem("alertInvalidToken");
-  }
   const form = event.target;
 
   const formUser = new FormData(form);

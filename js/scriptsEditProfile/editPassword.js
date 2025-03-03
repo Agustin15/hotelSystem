@@ -3,7 +3,7 @@ import {
   cleanInputsMsjAlert,
   loadingSave
 } from "./formProfile.js";
-import { PATCHUserPassword } from "../scriptsUsers/methodsFetch.js";
+import { PATCHUserPassword } from "../scriptsMaintenance/scriptsUsers/methodsFetch.js";
 import { displayForm } from "./userData.js";
 
 let modal, form;

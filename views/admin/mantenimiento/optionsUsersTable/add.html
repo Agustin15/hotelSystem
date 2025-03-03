@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAdd.css">
+
+</head>
+
+<body>
+
+    <div class="containAddUser">
+
+        <div class="header">
+            <button class="btnClose">X</button>
+        </div>
+        <div class="title">
+            <h3>Agregar un nuevo usuario</h3>
+            <img src="../../../img/agregarUser.png">
+
+        </div>
+        <form>
+                <div class="rowOne">
+
+                    <div class="name">
+                        <label>Nombre</label>
+                        <input type="text" name="name" autocomplete="off" id="nombre" placeholder="Ingresa nombre">
+                    </div>
+                    <div class="lastname">
+                        <label>Apellido</label>
+                        <input type="text" name="lastname" autocomplete="off" id="apellido"
+                            placeholder="Ingresa apellido">
+                    </div>
+                </div>
+                <div class="rowTwo">
+                    <div class="username">
+                        <label>Usuario</label>
+                        <input type="text" autocomplete="off" name="username" placeholder="Ingresa nombre de usuario">
+                    </div>
+
+                    <div class="email">
+                        <label>Correo</label>
+                        <input type="text" autocomplete="off" name="email" placeholder="Ingresa correo">
+                    </div>
+                </div>
+
+                <div class="rowThree">
+                    <div class="password">
+                        <label>Contrasenia</label>
+                        <input autocomplete="off" type="password" name="username" placeholder="Ingresa contraseña">
+                    </div>
+
+                    <div class="repeatPassword">
+                        <label>Repetir contraseña</label>
+                        <input autocomplete="off" type="password" name="email" placeholder="Repita la contraseña">
+                    </div>
+                </div>
+
+                <div class="rowFour">
+                    <div class="rol">
+                        <label>Rol</label>
+                        <div class="containRols"></div>
+                    </div>
+                </div>
+
+                <div class="containAvatar">
+                    <label>Avatar</label>
+                    <div class="rowFive">
+
+                        <div class="file-select" id="src-file1">
+                            <input type="file" accept="image/*" name="avatar">
+                        </div>
+                        <div class="imageAvatar">
+                            <img src="../../../img/picture.png">
+                        </div>
+                    </div>
+                </div>
+
+
+            <button type="submit" class="btnSubmit">
+                <a>Agregar</a>
+                <img src="../../../img/addUser.png">
+            </button>
+        </form>
+
+
+    </div>
+
+</body>
+
+</html>

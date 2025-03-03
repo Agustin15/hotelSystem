@@ -28,11 +28,18 @@ $routes = [
     "PUT" => function () use ($userController, $req) {
         return $userController->PUT($req);
     },
+
+    "DELETE" => function () use ($userController, $req) {
+        return $userController->DELETE($req);
+    },
+
     "GET" => function () use ($userController, $req) {
 
         $optionGET = match ($req["option"]) {
             "getDataToken" => $userController->getDataToken(),
-            "getUserByUsername" => $userController->getDataUserByUsername($req)
+            "getUserById" => $userController->getDataUserById($req),
+            "getAllUsers" => $userController->getAllUsers(),
+            "getAllUsersLimitIndex" => $userController->getAllUsersLimitIndex($req)
         };
 
         return $optionGET;

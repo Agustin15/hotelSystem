@@ -120,14 +120,14 @@ function graphicClientsDashboard(dataPoints, chartClientsBooking, titulo) {
       text: titulo
     },
     axisY: {
-      title: "Reservas",
-      titleFontColor: "grey",
+      title: "Clientes",
+      titleFontColor: "black",
       titleFontSize: 17,
       gridColor: "white"
     },
     axisX: {
       title: "Meses",
-      titleFontColor: "grey",
+      titleFontColor: "black",
       titleFontSize: 17
     },
 
@@ -214,8 +214,8 @@ const graphicRevenues = (dataPoints, chartRevenues, title) => {
     axisX: {
       title: "Meses",
       valueFormatString: "MMM",
-      titleFontColor: "grey",
-      titleFontSize: 14,
+      titleFontColor: "black",
+      titleFontSize: 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true
@@ -225,8 +225,8 @@ const graphicRevenues = (dataPoints, chartRevenues, title) => {
       title: "Precios ($USD)",
       valueFormatString: "$##0.00",
       gridColor: "white",
-      titleFontColor: "grey",
-      titleFontSize: 16,
+      titleFontColor: "black",
+      titleFontSize: 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true,
@@ -303,8 +303,8 @@ function dataPointsToGraphicRooms(quantitysRoomsCategoryReserved) {
           (roomCategory.quantityReserved * 100) / totalRoomsReserved;
 
         const roomCategoryQuantityReserved = {
-          y: percentageCategory,
-          label: roomCategory.categoryRoom
+          label: roomCategory.categoryRoom,
+          y: percentageCategory
         };
 
         return roomCategoryQuantityReserved;
@@ -327,16 +327,21 @@ function graphicRooms(dataPointsRoomsBooking, chartRooms, title) {
     title: {
       text: title
     },
+    legend: {
+      fontSize: 15
+    },
 
     data: [
       {
         type: "pie",
         startAngle: 25,
-        toolTipContent: "<b>{label}</b>: {y}%",
         showInLegend: "true",
         legendText: "{label}",
-        indexLabelFontSize: 14,
-        indexLabel: "{label} - {y}%",
+        indexLabelPlacement: "inside",
+        indexLabel: "{y}",
+        yValueFormatString: '#,##0.0"%"',
+        indexLabelFontSize: 15,
+        indexLabelFontColor: "white",
         dataPoints: dataPointsRoomsBooking
       }
     ]

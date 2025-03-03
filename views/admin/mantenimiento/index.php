@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($_COOKIE["userToken"])) {
     header("location:../../loginAdmin/index.html");
 }
@@ -10,25 +11,17 @@ if (!isset($_COOKIE["userToken"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleMain.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
-    <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
-    <script type="module" src="../../../js/scriptsRevenues/dashboardScript.js" defer> </script>
-
-    <title>Ganancias</title>
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleMain.css">
+    <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer></script>
+    <script type="module" src="../../../js/scriptsMaintenance/dashboard.js" defer></script>
+    <title>Mantenimiento</title>
+</head>
 
 <body>
 
+<div class="modalMaintenance"></div>
 
-    <div class="modalMainRevenues">
-    </div>
-
-
-    <header>
+<header>
         <nav id="navAdmin">
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
@@ -164,12 +157,12 @@ if (!isset($_COOKIE["userToken"])) {
 
 
                     </ul>
-                </li>
 
+                </li>
                 <li id="liMantenimiento">
                     <div class="item">
                         <div class="nameOption">
-                        <img src="../../../img/maintenance.png">
+                            <img src="../../../img/maintenance.png">
                             <a>Mantenimiento</a>
                         </div>
                     </div>
@@ -193,35 +186,32 @@ if (!isset($_COOKIE["userToken"])) {
 
     </header>
 
+    <div class="bodyMaintenance">
+    <div class="menuBar">
 
-    <div class="bodyRevenues">
+        <nav>
+            <ul>
+                <li class="usersLi">
+                    <img src="../../../img/usersMaintenance.png">
+                    <a>Usuarios</a>
 
+                </li>
+                <li class="roomsLi">
+                <img src="../../../img/roomsMaintenance.png">
+                   <a>Habitaciones</a>
+                </li>
+                <li class="servicesLi">
+                <img src="../../../img/servicesMaintenance.png">    
+                <a>Servcios</a>
 
-        <div class="menuBar">
-            <div class="title">
-                <h3>Ganancias</h3>
-                <img src="../../../img/revenueTitle.png">
-            </div>
-            <nav>
-                <ul>
-                    <li class="chartLi">
-                        <img src="../../../img/areaChart.png">
-                        <a>Grafica</a>
-                    </li>
-                    <li class="billLi">
-                        <img src="../../../img/electronicBill.png">
-                        <a>Facturas</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-
-        <div class="option"></div>
+                </li>
+            </ul>
+        </nav>
 
     </div>
 
-
+    <div class="option"></div>
+    </div>
 </body>
 
 </html>

@@ -28,14 +28,14 @@ export const getDataUserByToken = async () => {
     console.log(error);
   } finally {
     if (data) {
-      data = await getUserByUsername(data);
+      data = await getUserById(data);
+
     }
     return data;
   }
 };
 
 export const invalidAuthentication = async () => {
-  localStorage.setItem("alertInvalidToken", true);
   logout();
 };
 
@@ -54,13 +54,14 @@ export const logout = async () => {
   }
 };
 
-const getUserByUsername = async (userToken) => {
+const getUserById = async (userToken) => {
+ 
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
         JSON.stringify({
-          option: "getUserByUsername",
-          username: userToken.user
+          option: "getUserById",
+          idUser: userToken.idUser
         }),
       {
         method: "GET",
@@ -72,6 +73,7 @@ const getUserByUsername = async (userToken) => {
     );
 
     const result = await response.json();
+  
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();

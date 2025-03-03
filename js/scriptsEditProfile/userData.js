@@ -1,7 +1,7 @@
 import { getDataUserByToken } from "../scriptsAdmin/userData.js";
 import { changeAvatar } from "./changeAvatar.js";
 import { submitForm } from "./formProfile.js";
-import {configEditPassword} from "./editPassword.js";
+import { configEditPassword } from "./editPassword.js";
 
 let form, avatarFormProfile;
 document.addEventListener("DOMContentLoaded", async () => {
@@ -18,24 +18,27 @@ export const displayForm = async () => {
 
 export const setFormProfile = (dataUser) => {
   form.style.display = "flex";
-  form.querySelector("#rol").readOnly = true;
   avatarFormProfile = document.querySelector(".icon").querySelector("img");
   let btnChangeAvatar = document.querySelector(".changeAvatar");
   let editPassword = document.querySelector(".editPassword");
   let inputs = [...document.querySelectorAll("input")];
 
   let keysDataUser = Object.keys(dataUser);
-
   avatarFormProfile.src = "data:image/png;base64," + dataUser.imagen;
+
+  form.querySelector("#idRol").textContent = dataUser.rol;
+  form.querySelector("#idRol").dataset.idRol = dataUser.idRol;
 
   inputs.forEach((input) => {
     let keyFound = keysDataUser.find((key) => key == input.id);
-    if (keyFound) {
-      input.value = dataUser[keyFound];
-    }
+    if (keyFound)
+      if (keyFound) {
+        input.value = dataUser[keyFound];
+      }
   });
 
   btnChangeAvatar.addEventListener("click", () => {
+
     changeAvatar(dataUser);
   });
 

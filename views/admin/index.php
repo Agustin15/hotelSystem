@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_COOKIE["userToken"])) {
+    header("location:../loginAdmin/index.html");
+}
+
 $actualYear = date("Y");
 
 ?>
@@ -159,6 +163,14 @@ $actualYear = date("Y");
 
                 </li>
 
+                <li id="liMantenimiento">
+                    <div class="item">
+                        <div class="nameOption">
+                            <img src="../../img/maintenance.png">
+                            <a>Mantenimiento</a>
+                        </div>
+                    </div>
+                </li>
 
             </ul>
 
@@ -198,7 +210,9 @@ $actualYear = date("Y");
 
             <div class="containGraphicRooms">
 
-                <h4>Categorias de habitacion mas reservadas en este año (<?php echo $actualYear ?>) </h4>
+                <div class="title">
+                    <h4>Categorias de habitacion mas reservadas <?php echo $actualYear ?></h4>
+                </div>
                 <br>
                 <div class="loadingRooms">
                     <img src="../../img/barCharSpinner.gif">
@@ -219,7 +233,9 @@ $actualYear = date("Y");
         <div class="rowTwo">
             <div class="containGraphicBookings">
 
-                <h3>Clientes de este año (<?php echo $actualYear ?>)</h3>
+                <div class="title">
+                    <h3>Clientes por meses <?php echo $actualYear ?></h3>
+                </div>
                 <div class="loadingBookings">
                     <img src="../../img/barCharSpinner.gif">
                     <span>Cargando datos</span>
@@ -239,7 +255,9 @@ $actualYear = date("Y");
 
             <div class="containGraphicRevenues">
 
-                <h3>Ganancias de este año (<?php echo $actualYear ?>)</h3>
+                <div class="title">
+                    <h3>Ganancias por meses <?php echo $actualYear ?></h3>
+                </div>
                 <div class="loadingRevenues">
                     <img src="../../img/barCharSpinner.gif">
                     <span>Cargando datos</span>

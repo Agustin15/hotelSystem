@@ -128,8 +128,8 @@ const graphicChart = (dataPoints, elementChart) => {
     axisX: {
       title: "Meses",
       valueFormatString: "MMM",
-      titleFontColor: "grey",
-      titleFontSize: 14,
+      titleFontColor: "black",
+      titleFontSize: 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true
@@ -139,8 +139,8 @@ const graphicChart = (dataPoints, elementChart) => {
       title: "Precios ($USD)",
       valueFormatString: "$##0.00",
       gridColor: "white",
-      titleFontColor: "grey",
-      titleFontSize: 16,
+      titleFontColor: "black",
+      titleFontSize: 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true,

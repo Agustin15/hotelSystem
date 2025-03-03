@@ -1,4 +1,4 @@
-import { PUTuser } from "../scriptsUsers/methodsFetch.js";
+import { PUTuser } from "../scriptsMaintenance/scriptsUsers/methodsFetch.js";
 import { displayForm } from "./userData.js";
 
 export const submitForm = async (form, avatarFormProfile, dataUser) => {
@@ -24,7 +24,7 @@ export const submitForm = async (form, avatarFormProfile, dataUser) => {
 
   if (!errorForm) {
     user.image = avatarFormProfile.src;
-    user.rol = document.querySelector("#rol").value;
+    user.rol = document.querySelector("#idRol").dataset.idRol;
     user.idUser = dataUser.idUsuario;
     user.password = dataUser.contrasenia;
 
