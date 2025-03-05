@@ -99,6 +99,20 @@ class Revenue
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    
+    public function getAllRevenuesByDate($date)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from pago INNER JOIN
+         reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
+         where reserva_habitacion.fechaSalida=?");
+        $query->bind_param("s", $date);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 
 
     public function getAllRevenuesByYearLimitIndex($year, $index)
@@ -144,10 +158,11 @@ class Revenue
     }
 
 
-    public function calculateTotalYearRevenues()
+
+    public function calculateTotalCurrentYearRevenues($year)
     {
 
-        $revenues = $this->getAllRevenuesByYear(date("Y"));
+        $revenues = $this->getAllRevenuesByYear($year);
 
         $totalRevenues = array_reduce($revenues, function ($ac, $revenue) {
 
@@ -157,7 +172,7 @@ class Revenue
         return $totalRevenues;
     }
 
-
+  
 
     public function calculateTotalMonthRevenues($month, $year)
     {

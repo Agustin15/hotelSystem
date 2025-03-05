@@ -81,7 +81,7 @@ class revenuesController
         }
     }
 
-    public function getItemDataDashboard($req)
+    public function getItemDataDashboard()
     {
 
         try {
@@ -89,11 +89,11 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            $totalRevenuesActualYear = $this->pay->calculateTotalYearRevenues();
+            $totalRevenuesCurrentYear= $this->pay->calculateTotalCurrentYearRevenues(date("Y"));
             $totalRevenuesActualMonth = $this->pay->calculateTotalMonthRevenues(date("m"), date("Y"));
 
             $dataRevenuesActual =  array(
-                "totalRevenuesActualYear" => $totalRevenuesActualYear,
+                "totalRevenuesCurrentYear" => $totalRevenuesCurrentYear,
                 "totalRevenuesActualMonth" => $totalRevenuesActualMonth
             );
 

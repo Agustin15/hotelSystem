@@ -17,6 +17,9 @@ if (isset($_GET['params'])) {
 
 $routes = [
 
+    "POST" => function () use ($userController, $req) {
+        return $userController->POST($req);
+    },
     "PATCH" => function () use ($userController, $req) {
 
         if ($req["option"] == "updateImageUser") {

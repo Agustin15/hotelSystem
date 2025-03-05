@@ -15,7 +15,7 @@ export const configDelete = async (user) => {
     let resultDelete = await userDelete(user.idUsuario);
     if (resultDelete) {
       configTableUsers();
-      closeModal();
+      closeModal(modal);
     }
   });
 

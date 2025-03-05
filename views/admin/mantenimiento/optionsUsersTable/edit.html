@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAdd.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
 
 </head>
 
@@ -16,7 +16,7 @@
 
             <h3>¡Exito!</h3>
             <img src="../../../img/tickAlertQueryForm.png">
-            <p>Usuario agregado exitosamente</p>
+            <p>Usuario actualizado exitosamente</p>
             <button class="btnCloseAlertSuccesfully">OK</button>
 
         </div>
@@ -24,26 +24,31 @@
 
             <h3>¡Error!</h3>
             <img src="../../../img/advertenciaDelete.png">
-            <p>Ups, el usuario no se pudo agregar</p>
+            <p>Ups, el usuario no se pudo actualizar</p>
             <button class="btnCloseAlertError">OK</button>
         </div>
     </div>
-    <div class="containAddUser">
+    <div class="containUpdateUser">
 
         <div class="header">
             <button class="btnClose">X</button>
         </div>
         <div class="title">
-            <h3>Agregar un nuevo usuario</h3>
-            <img src="../../../img/agregarUser.png">
+            <h3>Actualizar usuario</h3>
+            <img src="../../../img/updateUser.png">
 
         </div>
-        <form id="formAddUser">
+        <div class="noDataUser">
+            <img src="../../../img/sinDatos.png">
+            <h3>Ups no se pudo cargar el usuario</h3>
+        </div>
+
+        <form id="formUpdateUser">
             <div class="rowOne">
 
                 <div class="name">
                     <label>Nombre</label>
-                    <input type="text" name="name" autocomplete="off" placeholder="Ingresa nombre">
+                    <input type="text" id="nombre" name="name" autocomplete="off" placeholder="Ingresa nombre">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
                         <p></p>
@@ -51,7 +56,7 @@
                 </div>
                 <div class="lastname">
                     <label>Apellido</label>
-                    <input type="text" name="lastname" autocomplete="off" placeholder="Ingresa apellido">
+                    <input type="text" id="apellido" name="lastname" autocomplete="off" placeholder="Ingresa apellido">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
                         <p></p>
@@ -61,7 +66,7 @@
             <div class="rowTwo">
                 <div class="username">
                     <label>Usuario</label>
-                    <input type="text" autocomplete="off" name="username" placeholder="Ingresa nombre de usuario">
+                    <input type="text" id="usuario" autocomplete="off" name="username" placeholder="Ingresa nombre de usuario">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
                         <p></p>
@@ -70,7 +75,7 @@
 
                 <div class="email">
                     <label>Correo</label>
-                    <input type="text" autocomplete="off" name="email" placeholder="Ingresa correo">
+                    <input type="text" id="correo" autocomplete="off" name="email" placeholder="Ingresa correo">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
                         <p></p>
@@ -80,9 +85,9 @@
 
             <div class="rowThree">
                 <div class="password">
-                    <label>Contrasenia</label>
+                    <label>Contrasenia nueva</label>
                     <input id="inputPassword" autocomplete="off" type="password" name="password"
-                        placeholder="Ingresa contraseña">
+                        placeholder="Opcional">
                     <img class="viewPassword" src="../../../img/ojo.png">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
@@ -90,16 +95,6 @@
                     </div>
                 </div>
 
-                <div class="repeatPassword">
-                    <label>Repetir contraseña</label>
-                    <input id="inputPasswordRepeat" autocomplete="off" type="password" name="repeatPassword"
-                        placeholder="Repita la contraseña">
-                    <img class="viewPassword" src="../../../img/ojo.png">
-                    <div class="errorInput">
-                        <img src="../../../img/warningInput.png">
-                        <p></p>
-                    </div>
-                </div>
             </div>
 
             <div class="rowFour">
@@ -119,7 +114,7 @@
 
                     <div class="columnAvatar">
                         <div class="file-select" id="src-file1">
-                            <input class="selectAvatar" type="file" accept="image/*" name="avatar">
+                            <input id="imagen" class="selectAvatar" type="file" accept="image/*" name="imagen">
                         </div>
                         <div class="errorInput">
                             <img src="../../../img/warningInput.png">
@@ -137,8 +132,8 @@
 
 
             <button type="submit" class="btnSubmit">
-                <a>Agregar</a>
-                <img src="../../../img/addUser.png">
+                <a>Actualizar</a>
+                <img src="../../../img/updateUserButton.png">
                 <img class="loader" src="../../../img/spinnerBooking.gif">
             </button>
         </form>

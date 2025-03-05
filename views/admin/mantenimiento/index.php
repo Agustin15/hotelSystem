@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_COOKIE["userToken"])) {
+if (!isset($_COOKIE["userToken"]) || $_COOKIE["idRol"] != 1) {
     header("location:../../loginAdmin/index.html");
 }
 ?>
@@ -19,9 +19,9 @@ if (!isset($_COOKIE["userToken"])) {
 
 <body>
 
-<div class="modalMaintenance"></div>
+    <div class="modalMaintenance"></div>
 
-<header>
+    <header>
         <nav id="navAdmin">
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
@@ -187,30 +187,26 @@ if (!isset($_COOKIE["userToken"])) {
     </header>
 
     <div class="bodyMaintenance">
-    <div class="menuBar">
+        <div class="menuBar">
 
-        <nav>
-            <ul>
-                <li class="usersLi">
-                    <img src="../../../img/usersMaintenance.png">
-                    <a>Usuarios</a>
+            <nav>
+                <ul>
+                    <li class="usersLi">
+                        <img src="../../../img/usersMaintenance.png">
+                        <a>Usuarios</a>
 
-                </li>
-                <li class="roomsLi">
-                <img src="../../../img/roomsMaintenance.png">
-                   <a>Habitaciones</a>
-                </li>
-                <li class="servicesLi">
-                <img src="../../../img/servicesMaintenance.png">    
-                <a>Servcios</a>
+                    </li>
+                    <li class="servicesLi">
+                        <img src="../../../img/servicesMaintenance.png">
+                        <a>Servcios</a>
 
-                </li>
-            </ul>
-        </nav>
+                    </li>
+                </ul>
+            </nav>
 
-    </div>
+        </div>
 
-    <div class="option"></div>
+        <div class="option"></div>
     </div>
 </body>
 

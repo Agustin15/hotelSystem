@@ -15,6 +15,8 @@ correo VARCHAR(50) NOT NULL,
 imagen LONGBLOB NOT NULL,
 rol INT NOT NULL,
 contrasenia VARCHAR(60),
+creacion DATE NOT NULL,
+
 CONSTRAINT fk_userRol FOREIGN KEY(rol) REFERENCES roles(idRol)
 ON DELETE CASCADE ON Update CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -226,11 +228,11 @@ INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) 
 INSERT INTO roles(rol) values("Administrador");
 INSERT INTO roles(rol) values("Empleado");
 
-INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("agusMiranda","Agustin","Miranda","agus20m05@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),1,"Dudu22558899");
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("agusMiranda","Agustin","Miranda","agus20m05@gmail.com",
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),1,"Dudu22558899",date());
 
-INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),2,"andre123456");
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),2,"andre123456",date());
 
 
 

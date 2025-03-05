@@ -27,6 +27,7 @@ export const submitForm = async (form, avatarFormProfile, dataUser) => {
     user.rol = document.querySelector("#idRol").dataset.idRol;
     user.idUser = dataUser.idUsuario;
     user.password = dataUser.contrasenia;
+    user.option = "editProfile";
 
     let resultUpdated = await updateUser(user);
     if (resultUpdated) {

@@ -1,6 +1,8 @@
 import { getAllUsers, getAllUsersLimitIndex } from "./methodsFetch.js";
 import { configDelete } from "./optionsUsersTable/scriptDelete.js";
 import { configAdd } from "./optionsUsersTable/scriptAdd.js";
+import { configEdit } from "./optionsUsersTable/scriptEdit.js";
+import { configDetails } from "./optionsUsersTable/scriptDetails.js";
 import { loadingPage, pageNotFound } from "../dashboard.js";
 
 let controls, tableUsers;
@@ -46,10 +48,10 @@ const displayRows = async (usersLimit) => {
           <td>${user.apellido}</td>
            <td>${user.rol}</td>
            <td>
-           <div class="buttons" id='${JSON.stringify(user)}'>
+           <div class="buttons" id=${user.idUsuario}>
         <button class="btnDelete" data-option="delete"><img src="../../../img/borrar.png"></button>
-            <button class="btnEdit"><img src="../../../img/editar.png"></button>
-                <button class="btnDetails"><img src="../../../img/detalles.png"></button>
+            <button class="btnEdit" data-option="edit"><img src="../../../img/editar.png"></button>
+                <button class="btnDetails" data-option="details"><img src="../../../img/detalles.png"></button>
            </div>
            </td>
         </tr>
@@ -75,9 +77,10 @@ const displayRows = async (usersLimit) => {
 
   buttonsOptions.forEach((btn) => {
     btn.addEventListener("click", () => {
-      let user = JSON.parse(btn.parentElement.id);
+      let userId = btn.parentElement.id;
       let option = btn.dataset.option;
 
+      let user = usersLimit.find((user) => user.idUsuario == userId);
       let optionUser = optionsUsers.find(
         (optionUsers) => optionUsers.url.indexOf(option) > -1
       );
@@ -222,7 +225,9 @@ const search = () => {
 
 const optionsUsers = [
   { url: "optionsUsersTable/delete.html", function: configDelete },
-  { url: "optionsUsersTable/add.html", function: configAdd }
+  { url: "optionsUsersTable/add.html", function: configAdd },
+  { url: "optionsUsersTable/details.html", function: configDetails },
+  { url: "optionsUsersTable/edit.html", function: configEdit }
 ];
 
 const getPageOptionTable = async (optionUser, user) => {

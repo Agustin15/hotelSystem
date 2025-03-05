@@ -17,6 +17,17 @@ class User
     }
 
 
+
+    public function addUser($name, $lastname, $username, $email, $password, $rol, $avatar, $currentDate)
+    {
+
+        $imageFile = file_get_contents($avatar);
+        $query = $this->connection->connect()->prepare("insert into usuarios(usuario,nombre,apellido,correo,imagen,rol,
+        contrasenia,creacion) values(?,?,?,?,?,?,?,?)");
+        $query->bind_param("sssssiss", $username, $name, $lastname, $email, $imageFile, $rol, $password, $currentDate);
+        $result = $query->execute();
+        return $result;
+    }
     public function updateUserPasswordById($password, $idUser)
     {
 
@@ -66,10 +77,10 @@ class User
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    public function updateUserById($username, $name, $lastname, $mail, $image, $rol, $password, $idUser)
+    public function updateUserById($username, $name, $lastname, $mail, $avatar, $rol, $password, $idUser)
     {
 
-        $imageFile = file_get_contents($image);
+        $imageFile = file_get_contents($avatar);
         $query = $this->connection->connect()->prepare("update usuarios set usuario=?,nombre=?,apellido=?,correo=?, 
          imagen=?,rol=?,contrasenia=? where idUsuario=?");
         $query->bind_param("sssssssi", $username, $name, $lastname, $mail, $imageFile, $rol, $password, $idUser);
@@ -90,6 +101,18 @@ class User
     }
 
 
+
+    public function getUserByEmail($email)
+    {
+
+        $query = $this->connection->connect()->prepare("select * from usuarios where correo=?");
+        $query->bind_param("s", $email);
+        $query->execute();
+
+        $result = $query->get_result();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
 
 
     public function getUserById($idUser)

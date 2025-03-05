@@ -1,7 +1,39 @@
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 
+export const POSTuser = async (newUser) => {
+  console.log(newUser);
+  let result;
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin"
+        },
+        body: JSON.stringify(newUser)
+      }
+    );
+    result = await response.json();
+
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else {
+        throw result.error;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return result;
+  }
+};
+
 export const PUTuser = async (userToUpdate) => {
+
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
@@ -219,7 +251,6 @@ export const getRols = async () => {
       }
     );
     const result = await response.json();
-
 
     if (!response.ok) {
       if (response.status == 401) {

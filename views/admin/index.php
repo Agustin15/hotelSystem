@@ -192,49 +192,15 @@ $actualYear = date("Y");
     </header>
 
     <div id="dashboard">
-
-        <div class="welcome">
-            <div class="row">
-                <div class="containIcon">
-                    <img src="../../img/hello.png">
-                </div>
-                <h3 class="titleWelcome"></h3>
-            </div>
-            <div class="curve"></div>
-        </div>
         <div class="rowOne">
             <div class="containItemsData">
                 <ul class="itemsData"></ul>
 
             </div>
-
-            <div class="containGraphicRooms">
-
-                <div class="title">
-                    <h4>Categorias de habitacion mas reservadas <?php echo $actualYear ?></h4>
-                </div>
-                <br>
-                <div class="loadingRooms">
-                    <img src="../../img/barCharSpinner.gif">
-                    <span>Cargando datos</span>
-
-                </div>
-                <div class="noDataRooms">
-
-                    <img src="../../img/sinDatosGrafica.png">
-                    <span>No hay datos aún</span>
-
-                </div>
-                <div id="chartRooms"></div>
-            </div>
-        </div>
-
-
-        <div class="rowTwo">
             <div class="containGraphicBookings">
 
                 <div class="title">
-                    <h3>Clientes por meses <?php echo $actualYear ?></h3>
+                    <h4>Clientes por meses <?php echo $actualYear ?></h4>
                 </div>
                 <div class="loadingBookings">
                     <img src="../../img/barCharSpinner.gif">
@@ -251,6 +217,31 @@ $actualYear = date("Y");
 
                 <div id="chartBookings"></div>
 
+            </div>
+
+
+        </div>
+
+
+        <div class="rowTwo">
+
+            <div class="containGraphicRooms">
+
+                <div class="title">
+                    <h3>Categorias de habitacion mas reservadas <?php echo $actualYear ?></h3>
+                </div>
+                <div class="loadingRooms">
+                    <img src="../../img/barCharSpinner.gif">
+                    <span>Cargando datos</span>
+
+                </div>
+                <div class="noDataRooms">
+
+                    <img src="../../img/sinDatosGrafica.png">
+                    <span>No hay datos aún</span>
+
+                </div>
+                <div id="chartRooms"></div>
             </div>
 
             <div class="containGraphicRevenues">

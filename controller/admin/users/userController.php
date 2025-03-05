@@ -37,7 +37,6 @@ class userController
 
             $payload = [
                 "idUser" => $userFound["idUsuario"],
-                "rol" => $userFound["rol"],
                 "exp" => time() + 3600
             ];
 
@@ -57,6 +56,7 @@ class userController
             $tokenJWT = JWT::encode($payload, $secretKey, 'HS384');
 
             setcookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
+            setcookie("idRol", $userFound["idRol"], time() + 3600, "/", "", false, true);
 
             return array("userLogin" => true);
         } catch (Throwable $th) {
@@ -64,6 +64,49 @@ class userController
         }
     }
 
+    public function POST($req)
+    {
+
+
+        try {
+
+            $name = $req["name"];
+            $lastname = $req["lastname"];
+            $username = $req["username"];
+            $email = $req["email"];
+            $password = $req["password"];
+            $rol = $req["rol"];
+            $avatar = $req["avatar"];
+
+            $tokenVerified = $this->authToken->verifyToken();
+            if (isset($tokenVerified["error"])) {
+                return array("error" => $tokenVerified["error"], "status" => 401);
+            }
+
+            $userFound = $this->findUserByUsername($username);
+
+            if (isset($userFound["error"])) {
+                throw new Error($userFound["error"]);
+            } else if ($userFound) {
+                throw new Error("Nombre de usuario ingresado ya en uso");
+            }
+
+            $userFoundByEmail = $this->findUserByEmail($email);
+
+            if (isset($userFoundByEmail["error"])) {
+                throw new Error($userFound["error"]);
+            } else if ($userFoundByEmail) {
+                throw new Error("Correo ingresado ya en uso");
+            }
+
+            $hash = password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]);
+
+            $resultAdd =  $this->user->addUser($name, $lastname, $username, $email, $hash, $rol, $avatar, date("Y-m-d"));
+            return $resultAdd;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 500);
+        }
+    }
 
     public function PatchUserImage($req)
     {
@@ -133,6 +176,7 @@ class userController
             $rol = $req["rol"];
             $image = $req["image"];
             $password = $req["password"];
+            $option = $req["option"];
 
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
@@ -155,6 +199,10 @@ class userController
                 throw new Error("Correo ingresado ya en uso");
             }
 
+            if ($option == "updateUser" && strlen($password) < 60) {
+                $password = password_hash($password, PASSWORD_BCRYPT, ["cont" => 10]);
+            }
+           
             $resultUpdated = $this->user->updateUserById(
                 $username,
                 $name,
@@ -203,6 +251,17 @@ class userController
     }
 
 
+    public function findUserByUsername($username)
+    {
+        try {
+            $userFound = $this->user->getUserByUser($username);
+            return $userFound;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
 
     public function findUserById($idUser)
     {
@@ -218,6 +277,17 @@ class userController
     {
         try {
             $userFound = $this->user->getUserByEmailAndDistinctId($id, $email);
+            return $userFound;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+    public function findUserByEmail($email)
+    {
+        try {
+            $userFound = $this->user->getUserByEmail($email);
             return $userFound;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);

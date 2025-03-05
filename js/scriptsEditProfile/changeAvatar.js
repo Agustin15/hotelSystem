@@ -214,7 +214,6 @@ const submitForm = (newAvatar) => {
 
 const updateUserImage = async (newAvatar) => {
   let resultUpdated;
-
   const userToUpdate = {
     idUser: user.idUsuario,
     image: newAvatar.src

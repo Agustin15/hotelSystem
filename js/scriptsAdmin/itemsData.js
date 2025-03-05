@@ -61,15 +61,15 @@ const displayItemDataRevenuesActual = async () => {
   const dataRevenues = await getRevenuesActualYear();
   let liDataRevenues = document.createElement("li");
   let actualDate = new Date();
-  let actualYear = actualDate.getFullYear();
   let actualMonth = actualDate.getMonth();
+  let currentYear = actualDate.getFullYear();
   let actualMonthString = month(actualMonth + 1);
 
   let details;
   if (dataRevenues) {
     details = ` <h5>Ganancias actuales</h5>
                <span><a>${actualMonthString}:</a>US$${dataRevenues.totalRevenuesActualMonth}</span>
-                 <span><a>${actualYear}</a>: US$${dataRevenues.totalRevenuesActualMonth}</span>`;
+                 <span><a>${currentYear}</a>: US$${dataRevenues.totalRevenuesCurrentYear}</span>`;
   } else {
     details = `
       <div class="noData">
@@ -129,7 +129,7 @@ const displayItemsDataCategoryRooms = async () => {
 const displayWelcome = async () => {
   let title = document.querySelector(".titleWelcome");
   if (userData) {
-    title.textContent = `¡Bienvenido ${userData.usuario}!`;
+    title.textContent = `¡Bienvenido ${userData.nombre}!`;
   } else {
     title.textContent = `Ups, no se pudo cargar el usuario`;
   }

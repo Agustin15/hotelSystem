@@ -3,7 +3,6 @@ import { configTableUsers } from "./scriptsUsers/scriptTable.js";
 let option = document.querySelector(".option");
 let optionUsers = document.querySelector(".usersLi");
 let optionServices = document.querySelector(".servicesLi");
-let optionRooms = document.querySelector(".roomsLi");
 let actualOption = localStorage.getItem("actualOptionMaintenance");
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -24,11 +23,6 @@ export const actualOptionMaintenance = async (optionActual) => {
 
 optionUsers.addEventListener("click", async () => {
   localStorage.setItem("actualOptionMaintenance", "users.html");
-  actualOptionMaintenance(localStorage.getItem("actualOptionMaintenance"));
-});
-
-optionRooms.addEventListener("click", async () => {
-  localStorage.setItem("actualOptionMaintenance", "rooms.html");
   actualOptionMaintenance(localStorage.getItem("actualOptionMaintenance"));
 });
 
