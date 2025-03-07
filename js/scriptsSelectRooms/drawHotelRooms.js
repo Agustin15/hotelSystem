@@ -9,13 +9,13 @@ export const drawHotelRooms = (rooms) => {
             <div class="img">  
             <ul>
             <li>
-             <img src="data:image/png;base64,${room.imageTwo}">
+             <img class="imageSlider" src="data:image/png;base64,${room.imageTwo}">
             </li>
              <li>
-             <img src="data:image/png;base64,${room.imageOne}">
+             <img class="imageSlider" src="data:image/png;base64,${room.imageOne}">
             </li>
              <li>
-             <img src="data:image/png;base64,${room.imageThree}">
+             <img class="imageSlider" src="data:image/png;base64,${room.imageThree}">
             </li>
             </ul>  
               <div class="controls">

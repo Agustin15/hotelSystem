@@ -1,0 +1,300 @@
+.containEdit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35rem;
+  height: 37rem;
+  background-color: white;
+  border-radius: 3px;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-left: 8rem;
+}
+
+.containEdit .header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+}
+
+.containEdit .header button {
+  width: 2rem;
+  height: 2rem;
+  background-color: rgb(228, 0, 0);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.containEdit .header button:hover {
+  background-color: rgb(206, 8, 8);
+}
+
+.containEdit .titleEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.containEdit .titleEdit img {
+  width: 44px;
+  height: 44px;
+}
+
+.containEdit form {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.containEdit form input {
+  width: 9rem;
+  height: 2rem;
+  border: 1px solid gray;
+  outline: none;
+  font-size: 16px;
+  border-radius: 3px;
+  padding-left: 2.5rem;
+}
+
+.containEdit form input {
+  background-size: 19px;
+  background-image: url("../../img/audience.png");
+  background-repeat: no-repeat;
+  background-position-x: 0.5rem;
+  background-position-y: 0.4rem;
+}
+
+.containEdit form #categoria {
+  background-image: url("../../img/room.png");
+}
+
+.containEdit form #terraza {
+  background-image: url("../../img/terrace.png");
+}
+
+.containEdit form #camas {
+  background-image: url("../../img/bed.png");
+}
+
+.containEdit form #precio {
+  background-image: url("../../img/coin.png");
+}
+
+.containEdit form input:hover {
+  border: 2px solid rgb(50, 212, 204);
+}
+
+.containEdit form .row {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 0.8rem;
+}
+
+.containEdit form .category,
+.containEdit form .terrace,
+.containEdit form .beds,
+.containEdit form .capacity,
+.containEdit form .price,
+.containEdit form .imageUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.containEdit form .btnUpdateRoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 9rem;
+  margin-top: 3rem;
+  height: 2rem;
+  border: none;
+  box-shadow: 2px 2px 2px gray;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  color: white;
+}
+
+.containEdit form .btnUpdateRoom:hover {
+  background: linear-gradient(rgb(47, 141, 133), rgb(1, 155, 160));
+}
+
+.containEdit form .btnUpdateRoom img {
+  display: none;
+  width: 29px;
+  height: 29px;
+}
+
+.file-select {
+  position: relative;
+  display: inline-block;
+}
+
+.file-select::before {
+  background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  content: "Seleccionar";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 9rem;
+  height: 2rem;
+  border: none;
+  display: inline-block;
+}
+
+#src-file::before {
+  content: "Seleccionar";
+}
+
+.columnImagesRoom {
+  display: flex;
+  width: 32rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.containImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imageRoom {
+  width: 22rem;
+  height: 12rem;
+  box-shadow: 2px 2px 2px gray;
+  border: 1px solid rgb(190, 190, 190);
+}
+
+.imageRoom img {
+  width: 100%;
+  height: 100%;
+}
+
+.containButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorInput {
+  gap: 0.2rem;
+  margin-top: -0.5rem;
+  display: none;
+  font-size: 12px;
+  align-items: center;
+  color: red;
+  justify-content: center;
+}
+
+.errorInput img {
+  width: 25px;
+}
+
+.inputError {
+  border: 1px solid red;
+  color: red;
+}
+
+.inputError:hover {
+  border: 2px solid red;
+}
+
+.modalAlert {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+}
+.modalAlert .alertError,
+.modalAlert .alertSuccesfully {
+  width: 25rem;
+  height: 14rem;
+  background-color: white;
+  display: none;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 3px;
+  margin-left: 7rem;
+  margin-top: 12rem;
+}
+
+.modalAlert .alertError p,
+.modalAlert .alertSuccesfully p {
+  font-size: 19px;
+  width: 22rem;
+  text-align: center;
+}
+
+.modalAlert .alertError img,
+.modalAlert .alertSuccesfully img {
+  width: 55px;
+}
+
+.modalAlert .alertError button,
+.modalAlert .alertSuccesfully button {
+  width: 7rem;
+  height: 2rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  margin-top: 1rem;
+}
+
+.modalAlert .alertSuccesfully button {
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+}
+
+.modalAlert .alertSuccesfully button:hover {
+  background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
+}
+
+.modalAlert .alertError button {
+  background: red;
+}
+
+.modalAlert .alertError button:hover {
+  background: rgb(199, 22, 22);
+}

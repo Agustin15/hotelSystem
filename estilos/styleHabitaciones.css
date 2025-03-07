@@ -491,6 +491,7 @@ body {
 #containRooms .containRoom .indexImagesRoom .itemIndexActive {
   background-color: white;
 }
+
 #containRooms .containRoom .titleRoom {
   display: flex;
   flex-direction: row;

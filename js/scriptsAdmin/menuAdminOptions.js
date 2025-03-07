@@ -42,9 +42,12 @@ export const optionsMenuAdmin = () => {
 
 const routesOptions = (url, liOption, itemLocal) => {
   if (liOption == "#liInicio" || liOption == "#liMantenimiento") {
-    document
-      .querySelector(liOption)
-      .addEventListener("click", () => (location.href = url));
+    let optionMenu = document.querySelector(liOption);
+    if (optionMenu) {
+      document
+        .querySelector(liOption)
+        .addEventListener("click", () => (location.href = url));
+    }
   } else {
     let allOptionsSubMenu = document
       .querySelector(liOption)

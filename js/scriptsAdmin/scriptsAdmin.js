@@ -6,7 +6,6 @@ import {
 import {
   displayItemsDataCategoryRooms,
   displayItemDataRevenuesActual,
-  displayWelcome
 } from "./itemsData.js";
 import { getDataUserByToken, logout } from "./userData.js";
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
@@ -26,9 +25,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (userData) {
     displayOptionProfile();
 
-    if (dashboard) {
-      displayWelcome();
-    }
   }
   if (dashboard) {
     getClientsByMonthActualYear(actualYear);

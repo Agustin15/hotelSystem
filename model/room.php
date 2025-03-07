@@ -14,6 +14,73 @@ class Room
     }
 
 
+    public function addRoomBooking(
+        $idBooking,
+        $idClient,
+        $numRoom,
+        $dateStart,
+        $dateEnd,
+        $adults,
+        $childs
+    ) {
+
+
+        $query = $this->connection->connect()->prepare("insert into habitacion_reservada
+        (idReservaHabitacion,idClienteHabitacion,numHabitacionReservada,fechaLlegadaHabitacion,fechaSalidaHabitacion,adultos,ninos) values (?,?,?,?,?,?,?)");
+        $query->bind_param(
+            "iiissii",
+            $idBooking,
+            $idClient,
+            $numRoom,
+            $dateStart,
+            $dateEnd,
+            $adults,
+            $childs
+        );
+
+        $result = $query->execute();
+
+        if ($result) {
+            return $result;
+        } else {
+            return $query->error;
+        }
+    }
+
+
+
+    public function deleteRoomByIdBookingAndNumRoom($idBooking, $numRoom)
+    {
+
+        $query = $this->connection->connect()->prepare("delete from habitacion_reservada where 
+        idReservaHabitacion=? and numHabitacionReservada=?");
+        $query->bind_param("ii", $idBooking, $numRoom);
+        return $query->execute();
+    }
+
+
+    public function updateRoomData($category, $imageOne, $imageTwo, $imageThree, $beds, $capacity, $terrace, $price)
+    {
+
+        $imageRoomOne = file_get_contents($imageOne);
+        $imageRoomTwo = file_get_contents($imageTwo);
+        $imageRoomThree = file_get_contents($imageThree);
+
+        $query = $this->connection->connect()->prepare("update tipo_habitacion set imagenUno=?,imagenDos=?, 
+        imagenTres=?,camas=?,capacidad=?,terraza=?,precio=? where categoria=?");
+        $query->bind_param(
+            "sssiiiis",
+            $imageRoomOne,
+            $imageRoomTwo,
+            $imageRoomThree,
+            $beds,
+            $capacity,
+            $terrace,
+            $price,
+            $category
+        );
+        return $query->execute();
+    }
 
     public function getAllRoomsHotel()
     {
@@ -239,49 +306,7 @@ class Room
     }
 
 
-    public function addRoomBooking(
-        $idBooking,
-        $idClient,
-        $numRoom,
-        $dateStart,
-        $dateEnd,
-        $adults,
-        $childs
-    ) {
 
-
-        $query = $this->connection->connect()->prepare("insert into habitacion_reservada
-        (idReservaHabitacion,idClienteHabitacion,numHabitacionReservada,fechaLlegadaHabitacion,fechaSalidaHabitacion,adultos,ninos) values (?,?,?,?,?,?,?)");
-        $query->bind_param(
-            "iiissii",
-            $idBooking,
-            $idClient,
-            $numRoom,
-            $dateStart,
-            $dateEnd,
-            $adults,
-            $childs
-        );
-
-        $result = $query->execute();
-
-        if ($result) {
-            return $result;
-        } else {
-            return $query->error;
-        }
-    }
-
-
-
-    public function deleteRoomByIdBookingAndNumRoom($idBooking, $numRoom)
-    {
-
-        $query = $this->connection->connect()->prepare("delete from habitacion_reservada where 
-        idReservaHabitacion=? and numHabitacionReservada=?");
-        $query->bind_param("ii", $idBooking, $numRoom);
-        return $query->execute();
-    }
 
     public function getAllYearsWithRoomsBooking()
     {

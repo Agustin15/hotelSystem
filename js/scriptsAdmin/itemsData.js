@@ -126,17 +126,8 @@ const displayItemsDataCategoryRooms = async () => {
     document.querySelector(".itemsData").innerHTML += items.join("");
   }
 };
-const displayWelcome = async () => {
-  let title = document.querySelector(".titleWelcome");
-  if (userData) {
-    title.textContent = `¡Bienvenido ${userData.nombre}!`;
-  } else {
-    title.textContent = `Ups, no se pudo cargar el usuario`;
-  }
-};
 
 export {
   displayItemsDataCategoryRooms,
   displayItemDataRevenuesActual,
-  displayWelcome
 };

@@ -13,13 +13,75 @@ class roomsController
         $this->authToken = new authToken();
     }
 
-    public function POST() {}
+    public function PUT($req)
+    {
+        try {
 
-    public function PUT() {}
+            $category = $req["category"];
+            $imageOne = $req["imageOne"];
+            $imageTwo = $req["imageTwo"];
+            $imageThree = $req["imageThree"];
+            $beds = $req["beds"];
+            $capacity = $req["capacity"];
+            $terrace = $req["terrace"];
+            $price = $req["price"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $resultUpdate = $this->rooms->updateRoomData(
+                $category,
+                $imageOne,
+                $imageTwo,
+                $imageThree,
+                $beds,
+                $capacity,
+                $terrace,
+                $price
+            );
+
+            return $resultUpdate;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 500);
+        }
+    }
 
     public function DELETE() {}
 
-    public function getAllCategoryRooms($req)
+    public function getAllCategoryRoomsWithDetails()
+    {
+        try {
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+            $categoryRooms = $this->rooms->getAllCategoryRooms();
+
+            $categoryRooms = array_map(function ($roomCategory) {
+
+                $roomCategory["imagenUno"] = base64_encode(
+                    $roomCategory["imagenUno"]
+                );
+
+                $roomCategory["imagenDos"] = base64_encode(
+                    $roomCategory["imagenDos"]
+                );
+                $roomCategory["imagenTres"] = base64_encode(
+                    $roomCategory["imagenTres"]
+                );
+
+                return $roomCategory;
+            }, $categoryRooms);
+
+            return $categoryRooms;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+    public function getAllCategoryRooms()
     {
 
         try {

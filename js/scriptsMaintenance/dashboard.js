@@ -1,8 +1,10 @@
 import { configTableUsers } from "./scriptsUsers/scriptTable.js";
+import { configListRooms } from "./scriptsRooms/listRooms.js";
 
 let option = document.querySelector(".option");
 let optionUsers = document.querySelector(".usersLi");
 let optionServices = document.querySelector(".servicesLi");
+let optionRooms = document.querySelector(".roomsLi");
 let actualOption = localStorage.getItem("actualOptionMaintenance");
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -31,6 +33,11 @@ optionServices.addEventListener("click", async () => {
   actualOptionMaintenance(localStorage.getItem("actualOptionMaintenance"));
 });
 
+optionRooms.addEventListener("click", async () => {
+  localStorage.setItem("actualOptionMaintenance", "rooms.html");
+  actualOptionMaintenance(localStorage.getItem("actualOptionMaintenance"));
+});
+
 const getDocument = async (url) => {
   let page;
   loadingPage(true, option);
@@ -55,10 +62,16 @@ const drawDocument = (result) => {
   option.innerHTML = result;
 
   let containUsers = document.querySelector(".containUsers");
+  let containCategoryRooms = document.querySelector(".containCategoryRooms");
 
   if (containUsers) {
     markActualOption(optionUsers);
     configTableUsers();
+  }
+
+  if (containCategoryRooms) {
+    markActualOption(optionRooms);
+    configListRooms();
   }
 };
 
@@ -105,4 +118,5 @@ export const pageNotFound = (element) => {
       element.style.display = "none";
     });
   }
+
 };

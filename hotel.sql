@@ -229,10 +229,10 @@ INSERT INTO roles(rol) values("Administrador");
 INSERT INTO roles(rol) values("Empleado");
 
 INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("agusMiranda","Agustin","Miranda","agus20m05@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),1,"Dudu22558899",date());
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarMan.png"),1,"Dudu22558899",NOW());
 
 INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",
-load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),2,"andre123456",date());
+load_file("C:/xampp/htdocs/Sistema hotel/img/avatarWoman.png"),2,"andre123456",NOW());
 
 
 

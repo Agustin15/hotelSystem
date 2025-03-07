@@ -1,7 +1,11 @@
 <?php
 
-if (!isset($_COOKIE["userToken"]) || $_COOKIE["idRol"] != 1) {
+if (!isset($_COOKIE["userToken"])) {
     header("location:../../loginAdmin/index.html");
+} else if ($_COOKIE["idRol"] != 1) {
+
+    http_response_code(401);
+    header("location:../unauthorized.html");
 }
 ?>
 
@@ -159,14 +163,22 @@ if (!isset($_COOKIE["userToken"]) || $_COOKIE["idRol"] != 1) {
                     </ul>
 
                 </li>
-                <li id="liMantenimiento">
-                    <div class="item">
-                        <div class="nameOption">
-                            <img src="../../../img/maintenance.png">
-                            <a>Mantenimiento</a>
+                <?php
+                if ($_COOKIE["idRol"] == 1) {
+                ?>
+                    <li id="liMantenimiento">
+                        <div class="item">
+                            <div class="nameOption">
+                                <img src="../../../img/maintenance.png">
+                                <a>Mantenimiento</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+
+                <?php
+                }
+
+                ?>
             </ul>
 
             <div id="userAdmin">
@@ -196,6 +208,11 @@ if (!isset($_COOKIE["userToken"]) || $_COOKIE["idRol"] != 1) {
                         <a>Usuarios</a>
 
                     </li>
+                    <li class="roomsLi">
+                        <img src="../../../img/roomsMaintenance.png">
+                        <a>Habitaciones</a>
+
+                    </li>
                     <li class="servicesLi">
                         <img src="../../../img/servicesMaintenance.png">
                         <a>Servcios</a>
@@ -208,6 +225,7 @@ if (!isset($_COOKIE["userToken"]) || $_COOKIE["idRol"] != 1) {
 
         <div class="option"></div>
     </div>
+
 </body>
 
 </html>

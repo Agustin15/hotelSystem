@@ -88,6 +88,7 @@ const submitForm = async (newUser) => {
 
     if (resultAdd) {
       alertForm(true);
+      cleanInputs();
       configTableUsers();
     } else {
       alertForm(false);
@@ -289,5 +290,11 @@ export const convertFileToBase64 = async (file) => {
     reader.addEventListener("load", () => {
       resolve(reader.result);
     });
+  });
+};
+
+const cleanInputs = () => {
+  document.querySelectorAll("input").forEach((input) => {
+    input.value = "";
   });
 };

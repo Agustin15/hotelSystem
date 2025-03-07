@@ -1,23 +1,23 @@
-
 let indexsImgRooms = [
   { category: "Estandar", indexValue: 1 },
   { category: "Deluxe", indexValue: 1 },
-  { category: "Suite", indexValue: 1 },
+  { category: "Suite", indexValue: 1 }
 ];
 
 function controlsSlider(event, orientacion, category) {
   let arrow = event;
   let ul = arrow.parentNode.parentNode.querySelector("ul");
   let imgsRoom = ul.querySelectorAll("li");
+  let imageWidth = document.querySelector(".imageSlider").width;
   let index;
 
   index = indexGetValue(index, category);
 
   if (index < imgsRoom.length - 1 && orientacion == "next") {
-    ul.style.transform += "translateX(-40%)";
+    ul.style.transform += `translateX(${imageWidth}px)`;
     index++;
   } else if (index > 0 && orientacion == "prev") {
-    ul.style.transform += "translateX(40%)";
+    ul.style.transform += `translateX(-${imageWidth}px)`;
     index--;
   }
 

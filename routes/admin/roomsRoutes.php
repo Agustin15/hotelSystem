@@ -16,9 +16,7 @@ if (isset($_GET['params'])) {
 }
 
 $routes = [
-    "POST" => function () use ($roomsController, $req) {
-        return $roomsController->POST($req);
-    },
+
     "PUT" => function () use ($roomsController, $req) {
         return $roomsController->PUT($req);
     },
@@ -28,7 +26,8 @@ $routes = [
     "GET" => function () use ($roomsController, $req) {
 
         $optionGet = match ($req["option"]) {
-            "getAllCategoryRooms" => $roomsController->getAllCategoryRooms($req),
+            "getAllCategoryRooms" => $roomsController->getAllCategoryRooms(),
+            "getAllCategoryRoomsWithDetails" => $roomsController->getAllCategoryRoomsWithDetails(),
             "getAllRoomsByCategory" => $roomsController->getAllRoomsByCategory($req),
         };
 
