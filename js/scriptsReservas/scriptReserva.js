@@ -30,6 +30,7 @@ optionAddLi.addEventListener("click", async () => {
 
 const getDocument = async (url) => {
   let data = null;
+  window.scrollTo(0,0);
   loadingPage(true, option);
   try {
     const response = await fetch(url);

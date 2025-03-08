@@ -39,6 +39,7 @@ export const setFormProfile = (dataUser) => {
 
   btnChangeAvatar.addEventListener("click", () => {
 
+    window.scrollTo(0,0);
     changeAvatar(dataUser);
   });
 

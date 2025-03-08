@@ -353,6 +353,7 @@ const displayOptionModal = async (url, option) => {
   let modalMainBookings = document.querySelector(".modalMainBookings");
   let page;
   if (url) {
+    window.scrollTo(0, 0);
     modalOption(true, modalMainBookings);
     loadingPage(true, modalMainBookings);
     try {

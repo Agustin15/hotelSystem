@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  width: 64%;
+  width: 73%;
   background-color: white;
   border-radius: 4px;
   box-shadow: 2px 2px 2px rgb(167, 167, 167);
   height: 26.4rem;
   padding-top: 1rem;
-  margin-left: 8.3rem;
+  margin-left: 11rem;
   margin-top: 2rem;
   border-radius: 10px;
 }
@@ -23,62 +23,46 @@
   width: 96.5%;
   border-bottom: 1px solid rgb(197, 197, 197);
 }
-.containChart .header .chartTitle {
+.containChart .chartTitle {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   margin-left: 0;
 }
-.containChart .header .chartTitle img {
+.containChart .chartTitle img {
   width: 45px;
 }
-.containChart .header .chartTitle h3 {
-  color: rgb(141, 141, 141);
+.containChart .chartTitle h3 {
+  color: rgb(0, 0, 0);
   font-size: 22px;
 }
-.containChart .header .search {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid rgb(196, 196, 196);
-  box-shadow: 2px 2px 2px gray;
-  border-radius: 3px;
-  gap: 0.4rem;
-  width: 10.4rem;
-  padding-bottom: 0.5rem;
-}
-.containChart .header .search .title {
-  background-color: rgb(236, 236, 236);
-  width: 10rem;
-  font-size: 16px;
-  padding: 0.2rem;
-  border-bottom: 1px solid rgb(196, 196, 196);
-}
+
 .containChart .header .search .containSearch {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .containChart .header .search select {
-  width: 6rem;
-  height: 1.8rem;
-  border-radius: 4px;
-  border: 1px solid rgb(158, 158, 158);
+  width: 116px;
+  border-radius: 3px;
   outline: none;
-  box-shadow: 1px 1px 1px rgb(179, 179, 179);
+  height: 32px;
+  border: 1px solid rgb(180, 180, 180);
 }
 .containChart .header .search button {
   width: 2.5rem;
-  height: 1.8rem;
+  height: 2rem;
+  left: 5.5rem;
   padding: 0.3rem;
   color: white;
   background-color: rgb(7, 169, 180);
-  border-radius: 4px;
-  box-shadow: 1px 1px 1px gray;
+  border-radius: 3px;
   border: none;
   font-weight: bold;
+  position: absolute;
 }
 .containChart .header .search button img {
   width: 17px;

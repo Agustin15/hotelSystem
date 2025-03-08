@@ -35,6 +35,7 @@ optionChartLi.addEventListener("click", async () => {
 const getDocument = async (url) => {
   let page;
   loadingPage(true, option);
+  window.scrollTo(0,0);
   try {
     const response = await fetch(url);
     const result = await response.text();

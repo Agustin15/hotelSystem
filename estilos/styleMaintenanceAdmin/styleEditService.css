@@ -1,0 +1,159 @@
+.containEditService {
+  width: 31rem;
+  height: 35rem;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  margin-left: 8rem;
+}
+
+.containEditService .header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+
+.containEditService .header button {
+  width: 2rem;
+  cursor: pointer;
+  height: 2rem;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(221, 0, 0);
+  color: white;
+  border: none;
+}
+
+.containEditService .header button:hover {
+  background-color: rgb(168, 1, 1);
+}
+
+.titleEditService {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.titleEditService img {
+  width: 45px;
+}
+
+.containEditService form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.containEditService form input {
+  width: 8rem;
+  height: 1.9rem;
+  font-size: 17px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  outline: none;
+}
+.containEditService form #precio {
+  padding-left: 2rem;
+  background-image: url("../../img/coin.png");
+  background-position-x: 0.5rem;
+  background-position-y: 0.3rem;
+  background-size: 17px;
+  background-repeat: no-repeat;
+}
+
+.containEditService .containImage {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.containEditService .imageService {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.containEditService .imageService img {
+  width: 60%;
+  height: 60%;
+}
+
+.containEditService textarea {
+  resize: none;
+  width: 21rem;
+  font-size: 15px;
+  height: 6rem;
+  border-radius: 3px;
+  outline: none;
+}
+
+.containEditService form input:hover,
+.containEditService textarea:hover {
+  border: 2px solid rgb(1, 155, 160);
+}
+
+.containEditService .columnInput {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.file-select {
+  position: relative;
+  display: inline-block;
+}
+
+.file-select::before {
+  background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  content: "Seleccionar";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 9rem;
+  height: 2rem;
+  border: none;
+  display: inline-block;
+}
+
+#src-file::before {
+  content: "Seleccionar";
+}
+
+.containEditService .btnUpdate {
+  width: 9rem;
+  background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  height: 2rem;
+}
+
+.containEditService .btnUpdate:hover {
+  background: linear-gradient(rgb(57, 158, 150), rgb(1, 155, 160));
+}

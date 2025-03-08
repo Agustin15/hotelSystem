@@ -119,6 +119,7 @@ const modal = (state) => {
 export const optionsAddBooking = async (startBooking, endBooking) => {
   modalMainBookings = document.querySelector(".modalMainBookings");
   modal(true);
+  window.scrollTo(0, 0);
   let result = await getOptionsAddBooking();
   if (result) {
     modalMainBookings.innerHTML = result;

@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 0.5rem;
   font-size: 20px;
-  color: rgb(145, 145, 145);
+  color: rgb(0, 0, 0);
   margin-top: 2rem;
 }
 .containTitle img {
@@ -54,7 +54,7 @@
 }
 .containHistory ul li .footerItem {
   padding: 0.5rem;
-  color: rgb(87, 87, 87);
+  color: rgb(0, 0, 0);
   width: 14rem;
   border-radius: 3px;
   font-size: 16px;

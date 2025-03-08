@@ -1,11 +1,31 @@
 import { configTableUsers } from "./scriptsUsers/scriptTable.js";
 import { configListRooms } from "./scriptsRooms/listRooms.js";
+import { configTableServices } from "./scriptServices/services.js";
 
 let option = document.querySelector(".option");
 let optionUsers = document.querySelector(".usersLi");
 let optionServices = document.querySelector(".servicesLi");
 let optionRooms = document.querySelector(".roomsLi");
 let actualOption = localStorage.getItem("actualOptionMaintenance");
+
+const optionsUrl = [
+  {
+    url: "users.html",
+    function: configTableUsers,
+    optionMark: optionUsers
+  },
+
+  {
+    url: "rooms.html",
+    function: configListRooms,
+    optionMark: optionRooms
+  },
+  {
+    url: "services.html",
+    function: configTableServices,
+    optionMark: optionServices
+  }
+];
 
 document.addEventListener("DOMContentLoaded", async () => {
   if (actualOption) {
@@ -19,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 export const actualOptionMaintenance = async (optionActual) => {
   let optionDocument = await getDocument(optionActual);
   if (optionDocument) {
-    drawDocument(optionDocument);
+    drawDocument(optionDocument, optionActual);
   }
 };
 
@@ -40,6 +60,7 @@ optionRooms.addEventListener("click", async () => {
 
 const getDocument = async (url) => {
   let page;
+  window.scrollTo(0, 0);
   loadingPage(true, option);
   try {
     const response = await fetch(url);
@@ -58,21 +79,15 @@ const getDocument = async (url) => {
   }
 };
 
-const drawDocument = (result) => {
+const drawDocument = (result, optionActual) => {
   option.innerHTML = result;
 
-  let containUsers = document.querySelector(".containUsers");
-  let containCategoryRooms = document.querySelector(".containCategoryRooms");
+  let optionSwitched = optionsUrl.find(
+    (optionUrl) => optionUrl.url.indexOf(optionActual) > -1
+  );
 
-  if (containUsers) {
-    markActualOption(optionUsers);
-    configTableUsers();
-  }
-
-  if (containCategoryRooms) {
-    markActualOption(optionRooms);
-    configListRooms();
-  }
+  optionSwitched.function();
+  markActualOption(optionSwitched.optionMark);
 };
 
 const markActualOption = (li) => {
@@ -118,5 +133,4 @@ export const pageNotFound = (element) => {
       element.style.display = "none";
     });
   }
-
 };

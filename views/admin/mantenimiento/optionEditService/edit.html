@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">
+</head>
+
+<body>
+
+    <div class="containEditService">
+
+        <div class="header">
+            <button class="btnCloseWindow">X</button>
+        </div>
+        <div class="titleEditService">
+            <h3>Editar servicio</h3>
+            <img src="">
+        </div>
+
+        <form id="formEditService">
+
+            <div class="columnInput">
+                <label>Icono:</label>
+                <div class="containImage">
+                <div class="file-select">
+                    <input id="#src-file" type="file" accept="image/*">
+                </div>
+                <div class="imageService">
+                    <img id="iconService" src="">
+                </div>
+            </div>
+            </div>
+
+            <div class="columnInput">
+                <label>Precio:</label>
+                <input type="number" autocomplete="off" min="0" id="precio" name="price">
+            </div>
+
+            <div class="columnInput">
+                <label>Descripcion:</label>
+                <textarea maxlength="59"  autocomplete="off"  id="descripcionServicio"  name="description">
+
+                </textarea>
+            </div>
+            <button class="btnUpdate">Actualizar</button>
+        </form>
+    </div>
+</body>
+
+</html>

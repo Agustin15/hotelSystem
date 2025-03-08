@@ -46,7 +46,7 @@
   height: 27rem;
 }
 #mainCalendar h2 {
-  color: rgb(141, 141, 141);
+  color: rgb(0, 0, 0);
 }
 #mainCalendar button {
   background-color: rgb(2, 179, 155);
@@ -139,7 +139,7 @@
   border-radius: 5px;
   margin-left: 12rem;
   margin-top: 16rem;
-  color: rgb(153, 153, 153);
+  color: rgb(0, 0, 0);
 }
 .modalOptionAddBooking .alertGuests p {
   font-weight: bold;
@@ -343,7 +343,7 @@
   border-radius: 3px;
 }
 .cartRooms .titleCart h3 {
-  color: rgb(104, 104, 104);
+  color: rgb(0, 0, 0);
   font-weight: bold;
 }
 .cartRooms .titleCart img {
@@ -459,7 +459,7 @@
 }
 .cartRooms .total {
   display: none;
-  color: rgb(129, 129, 129);
+  color: rgb(0, 0, 0);
   justify-content: start;
   align-items: center;
   width: 100%;
@@ -496,7 +496,7 @@
 }
 .containForm .title h3 {
   font-size: 19px;
-  color: rgb(184, 184, 184);
+  color: rgb(0, 0, 0);
 }
 .containForm .title img {
   width: 50px;
@@ -507,11 +507,11 @@
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  color: rgb(172, 172, 172);
+  color: rgb(0, 0, 0);
 }
 .containForm .nights img {
   width: 30px;
-  opacity: 33%;
+  opacity:99%;
 }
 .containForm form {
   display: flex;
@@ -519,7 +519,7 @@
   gap: 2rem;
   align-items: center;
   font-size: 18px;
-  color: rgb(165, 165, 165);
+  color: rgb(0, 0, 0);
   padding-top: 1rem;
 }
 .containForm form .rowOne,
@@ -689,7 +689,7 @@
 .containFreeRooms .title h3 {
   font-size: 18px;
   width: 20rem;
-  color: rgb(173, 173, 173);
+  color: rgb(0, 0, 0);
   text-align: center;
 }
 .containFreeRooms .title img {
@@ -725,7 +725,7 @@
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-  color: rgb(110, 110, 110);
+  color: rgb(0, 0, 0);
   cursor: pointer;
   padding-bottom: 0.1rem;
 }
@@ -749,7 +749,7 @@
 }
 .category h3 {
   font-size: 23px;
-  color: rgb(168, 168, 168);
+  color: rgb(0, 0, 0);
 }
 .category .noDataFreeRooms {
   display: flex;

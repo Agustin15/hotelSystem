@@ -58,7 +58,7 @@
   align-items: center;
   gap: 1rem;
   font-size: 15px;
-  color: rgb(155, 155, 155);
+  color: rgb(0, 0, 0);
 }
 .containDelete .error img {
   width: 30px;

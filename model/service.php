@@ -14,10 +14,43 @@ class Service
     }
 
 
+
+    public function addServiceBooking($idService, $quantity, $idBooking, $numRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("insert into serviciosExtra_habitacion 
+          (idServicio,cantidad,idReservaHabitacionServicio,numHabitacionServicio) values (?,?,?,?) ");
+        $query->bind_param("iiii", $idService, $quantity, $idBooking, $numRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+
+    public function updateQuantityServiceBooking($quantity, $idServiceRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("update serviciosExtra_habitacion set cantidad=?
+         where idServicioHabitacion=?");
+        $query->bind_param("ii", $quantity, $idServiceRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+
+    public function deleteServiceBooking($idServiceRoom)
+    {
+
+        $query =  $this->connection->connect()->prepare("delete from serviciosExtra_habitacion where 
+        idServicioHabitacion=?");
+        $query->bind_param("i", $idServiceRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
     public function getAllServicesHotel()
     {
 
-        $query = $this->connection->connect()->prepare("select nombreServicio,descripcionServicio,imagen 
+        $query = $this->connection->connect()->prepare("select nombreServicio,descripcionServicio,imagen,precio 
         from servicio group by nombreServicio");
         $query->execute();
         $result = $query->get_result();
@@ -53,39 +86,6 @@ class Service
         return $result;
     }
 
-
-
-    public function addServiceBooking($idService, $quantity, $idBooking, $numRoom)
-    {
-
-        $query =  $this->connection->connect()->prepare("insert into serviciosExtra_habitacion 
-          (idServicio,cantidad,idReservaHabitacionServicio,numHabitacionServicio) values (?,?,?,?) ");
-        $query->bind_param("iiii", $idService, $quantity, $idBooking, $numRoom);
-        $result = $query->execute();
-        return $result;
-    }
-
-
-    public function updateQuantityServiceBooking($quantity, $idServiceRoom)
-    {
-
-        $query =  $this->connection->connect()->prepare("update serviciosExtra_habitacion set cantidad=?
-         where idServicioHabitacion=?");
-        $query->bind_param("ii", $quantity, $idServiceRoom);
-        $result = $query->execute();
-        return $result;
-    }
-
-
-    public function deleteServiceBooking($idServiceRoom)
-    {
-
-        $query =  $this->connection->connect()->prepare("delete from serviciosExtra_habitacion where 
-        idServicioHabitacion=?");
-        $query->bind_param("i", $idServiceRoom);
-        $result = $query->execute();
-        return $result;
-    }
 
     public function getServicesByIdBookingWithDetails($idBooking)
     {

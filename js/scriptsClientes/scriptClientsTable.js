@@ -241,7 +241,7 @@ const getOptionClient = async (url) => {
   let optionPage;
   modalMainClient = document.querySelector(".modalMainClient");
   modalMainClient.style.display = "flex";
-
+  window.scrollTo(0, 0);
   loadingPage(true, modalMainClient);
   try {
     const response = await fetch(url);

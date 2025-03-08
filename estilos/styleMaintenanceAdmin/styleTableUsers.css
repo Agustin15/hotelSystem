@@ -30,7 +30,7 @@
   width: 44%;
 }
 .containUsers .header .title h3 {
-  color: rgb(153, 153, 153);
+  color: rgb(0, 0, 0);
   font-size: 21px;
 }
 .containUsers .header .containInput {
@@ -44,6 +44,7 @@
   height: 2rem;
   padding-left: 1rem;
   padding-right: 2rem;
+  border-radius: 3px;
   outline: none;
   font-size: 14px;
 }
@@ -52,16 +53,16 @@
   box-shadow: none;
   position: absolute;
   left: 14rem;
-  border-radius: 2px;
+  border-radius: 3px;
   color: white;
-  width: 53px;
+  width: 51px;
   height: 34px;
   border: none;
   font-weight: bold;
   cursor: pointer;
 }
 .containUsers .header .containInput img {
-  width: 22px;
+  width: 19px;
 }
 .containUsers .header .containInput button:hover {
   background-color: rgb(3, 145, 133);
@@ -109,7 +110,7 @@
   font-size: 17px;
   width: 100%;
   padding-top: 1rem;
-  color: rgb(119, 119, 119);
+  color: rgb(0, 0, 0);
   border-top: 1px solid rgb(185, 185, 185);
 }
 .controls span:hover {

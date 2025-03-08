@@ -316,6 +316,7 @@ const search = () => {
 
 const getPageBill = async () => {
   let pageBill;
+  window.scrollTo(0, 0);
   loadingPage(true, modal);
   try {
     const response = await fetch("optionBill/bill.html");

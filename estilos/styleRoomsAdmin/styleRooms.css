@@ -25,7 +25,7 @@
   gap: 0.3rem;
   padding-bottom: 0.2rem;
   cursor: pointer;
-  color: rgb(100, 100, 100);
+  color: rgb(0, 0, 0);
 }
 .containRooms ul li img {
   border-radius: 3px;

@@ -235,6 +235,7 @@ const getPageOptionTable = async (optionUser, user) => {
   let page;
 
   modal.style.display = "flex";
+  window.scrollTo(0, 0);
   loadingPage(true, modal);
   try {
     const response = await fetch(optionUser.url);

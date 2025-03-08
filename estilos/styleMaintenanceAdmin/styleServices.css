@@ -1,0 +1,221 @@
+.containServices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.loading {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin-top: 2rem;
+  margin-left: 8rem;
+  opacity: 60%;
+}
+.loading img {
+  width: 40px;
+}
+
+.noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  gap: 0.5rem;
+  width: auto;
+  font-weight: bold;
+  margin-left: 8rem;
+  color: grey;
+}
+.noData img {
+  width: 8rem;
+  opacity: 80%;
+}
+
+.listServices {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-left: 8rem;
+  width: 55rem;
+  height: auto;
+  list-style: none;
+}
+
+.listServices li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  width: 22rem;
+  color: white;
+  height: auto;
+  gap: 1rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  border-radius: 3px;
+  border: 1px solid rgb(206, 206, 206);
+  box-shadow: 2px 2px 2px rgb(230, 230, 230);
+}
+
+.listServices li .row {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.listServices li .row .details {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap:0.2rem;
+}
+
+.listServices li .row span {
+  font-weight: bold;
+}
+
+.listServices li img {
+  width: 57px;
+  height: 57px;
+}
+
+.listServices li .footerOptions {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  width: 105%;
+  border-radius: 3px;
+  background-color: rgb(248, 248, 248);
+  padding: 0.5rem;
+}
+
+.listServices li .footerOptions button {
+  width: 7rem;
+  color: white;
+  height: 2rem;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 2px 2px 2px gray;
+  border-radius: 3px;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.listServices li .footerOptions button img {
+  width: 17px;
+  height: 17px;
+}
+
+.listServices li .footerOptions .btnDelete {
+  background-color: rgb(223, 14, 14);
+}
+
+.listServices li .footerOptions .btnDelete:hover {
+  background-color: rgb(190, 18, 18);
+}
+
+.listServices li .footerOptions .btnDetails {
+  background-color: rgb(5, 19, 219);
+}
+
+.listServices li .footerOptions .btnDetails:hover {
+  background-color: rgb(7, 19, 187);
+}
+
+.listServices li .footerOptions .btnEdit {
+  background: linear-gradient(rgb(53, 155, 146), rgb(1, 155, 160));
+}
+
+.listServices li .footerOptions .btnEdit:hover {
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+}
+
+.modalServices{
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+
+}
+
+.modalServices .loadingPage {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin-top: 17rem;
+  margin-left: 8rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 3px;
+  color: gray;
+}
+.modalServices .loadingPage img {
+  width: 40px;
+  opacity: 70%;
+}
+.modalServices .pageNotFound {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 18px;
+  align-items: center;
+  height: auto;
+  margin-left: 8rem;
+  margin-top: 14rem;
+  opacity: 100%;
+  background-color: white;
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  color: gray;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+}
+.modalServices .pageNotFound img {
+  width: 95px;
+  opacity: 75%;
+}
+.modalServices .pageNotFound .headerPageNotFound {
+  display: flex;
+  justify-content: flex-end;
+  width: 110%;
+}
+.modalServices .pageNotFound .headerPageNotFound button {
+  background-color: rgb(231, 0, 0);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 2rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.modalServices .pageNotFound .headerPageNotFound button:hover {
+  background-color: rgb(182, 4, 4);
+}

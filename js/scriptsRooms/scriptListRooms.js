@@ -178,14 +178,17 @@ const drawRooms = (rooms) => {
 
   ulRooms.innerHTML = roomsItems.join("");
 
-  let spanBooking = document.querySelector(".idBooking");
-  if (spanBooking) {
-    spanBooking.addEventListener("click", () => {
-      localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-      window.open(
-        "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
-          spanBooking.id
-      );
+  let spansBooking = document.querySelectorAll(".idBooking");
+
+  if (spansBooking) {
+    spansBooking.forEach((span) => {
+      span.addEventListener("click", () => {
+        localStorage.setItem("actualOptionBooking", "bookingsTable.html");
+        window.open(
+          "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
+            span.id
+        );
+      });
     });
   }
 
@@ -225,6 +228,7 @@ const optionMenuRoom = () => {
 const getOptionRoomPage = async (url) => {
   let data;
   modalMainRooms.style.display = "flex";
+  window.scrollTo(0, 0);
   loadingPage(true, modalMainRooms);
   try {
     const response = await fetch(url);

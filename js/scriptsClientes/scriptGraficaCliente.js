@@ -105,6 +105,7 @@ const selectYearChar = (results) => {
 };
 
 function graphicClients(dataPoints, grafica, titulo, theme) {
+  console.log(dataPoints);
   var chart = new CanvasJS.Chart(grafica, {
     colorSet: "greenShades",
     animationEnabled: true,
@@ -130,9 +131,8 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     data: [
       {
         type: "column",
-        indexLabelPlacement: "outside",
-        indexLabel: "{y}",
-        yValueFormatString: '#,##0',
+        indexLabelPlacement: "inside",
+        xValueFormatString: '#,##0',
         indexLabelFontColor:"black",
         indexLabelFontSize:15,
         dataPoints: dataPoints
@@ -174,7 +174,7 @@ async function getDataClientsTOGraphic(year) {
   }
 
   document
-    .querySelector(".header")
+    .querySelector(".titleChart")
     .querySelector(
       "h3"
     ).innerHTML = `Cantidad de clientes por mes  ${yearToConsult}`;

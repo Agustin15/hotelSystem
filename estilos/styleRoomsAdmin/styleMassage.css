@@ -87,7 +87,7 @@
   opacity: 70%;
 }
 .contentMassage .info {
-  color: rgb(161, 161, 161);
+  color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
@@ -142,7 +142,7 @@
 
 .containTotal {
   font-size: 20px;
-  color: rgb(151, 151, 151);
+  color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
