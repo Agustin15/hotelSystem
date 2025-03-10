@@ -20,9 +20,6 @@ $routes = [
     "PUT" => function () use ($roomsController, $req) {
         return $roomsController->PUT($req);
     },
-    "DELETE" => function () use ($roomsController, $req) {
-        return $roomsController->DELETE($req);
-    },
     "GET" => function () use ($roomsController, $req) {
 
         $optionGet = match ($req["option"]) {

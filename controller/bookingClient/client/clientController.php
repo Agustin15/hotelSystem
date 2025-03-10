@@ -13,47 +13,43 @@ class clientController
     $this->client = new Client();
   }
 
-  public function POST($req)
+  public function POST($name, $lastname, $email, $phone)
   {
 
     try {
 
-      $dataClientMail = $this->client->getClientByMail($req['mail'])->fetch_array(MYSQLI_ASSOC);
+      $dataClientMail = $this->client->getClientByMail($email)->fetch_array(MYSQLI_ASSOC);
 
       if ($dataClientMail) {
 
-        return array("advertencia" => "El correo ingresado ya esta en uso");
+        throw new Error("El correo ingresado ya esta en uso");
+      }
+
+      $dataClientPhone = $this->client->getClientByPhone($phone)->fetch_array(MYSQLI_ASSOC);
+      if ($dataClientPhone) {
+
+        throw new Error("El telefono ingresado ya esta en uso");
       } else {
 
-        $dataClientPhone = $this->client->getClientByMail($req['phone'])->fetch_array(MYSQLI_ASSOC);
-        if ($dataClientPhone) {
+        $this->client->setMail($email);
+        $this->client->setName($name);
+        $this->client->setLastname($lastname);
+        $this->client->setPhone($phone);
 
-          return array("advertencia" => "El telefono ingresado ya esta en uso");
-        } else {
+        $result =  $this->client->addClient();
 
-          $this->client->setMail($req['mail']);
-          $this->client->setName($req['name']);
-          $this->client->setLastname($req['lastName']);
-          $this->client->setPhone($req['phone']);
-
-          $resultado =  $this->client->addClient();
-
-          return array("respuesta" => $resultado);
-        }
+        return $result;
       }
     } catch (Throwable $th) {
       return array("error" => $th->getMessage(), "status" => 502);
     }
   }
 
-  public function getClientByMailAndName($req)
+  public function findClientByMailAndName($name, $lastname, $email)
   {
 
     try {
-      $client = $req['client'];
-
-      $res = $this->client->getClientExisted($client['name'], $client['lastName'], $client['mail']);
-
+      $res = $this->client->getClientExisted($name, $lastname, $email);
       return $res;
     } catch (Throwable $th) {
       return array("error" => $th->getMessage(), "status" => 404);

@@ -1,25 +1,9 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
 
 import {
-  fetchPOSTClient,
-  fetchGetClient
-} from "./scriptsFetchsBooking/scriptClient.js";
-import {
-  getBookingByClientMailAndDate,
   fetchPOSTBooking,
   fetchPUTBooking
 } from "./scriptsFetchsBooking/scriptBooking.js";
-
-import {
-  fetchGETAvailableRoomsCategory,
-  fetchPOSTRooms
-} from "./scriptsFetchsBooking/scriptRooms.js";
-
-import {
-  fetchPOSTPay,
-  fetchGETPay,
-  fetchPUTPay
-} from "./scriptsFetchsBooking/scriptRevenues.js";
 
 import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
 
@@ -174,7 +158,6 @@ function printBooking() {
   endBooking.setMinutes(
     endBooking.getMinutes() + endBooking.getTimezoneOffset()
   );
-  
 
   document.querySelector(
     ".startBooking"
@@ -288,211 +271,65 @@ const createBooking = async (client) => {
     booking: booking
   };
 
-  let clientExisted = await fetchGetClient(client);
+  let resultBookingAdded = await fetchPOSTBooking(clientBooking);
 
-  if (clientExisted) {
-    addBooking(clientBooking, clientExisted);
-  } else {
-    addClient(clientBooking);
-  }
-};
+  if (resultBookingAdded.error) {
+    if (resultBookingAdded.error.indexOf("Error") > -1) {
+      let msjError = "No se pudo realizar la reserva";
 
-const addClient = async (clientBooking) => {
-  let clientAdded = await fetchPOSTClient(clientBooking.client);
-
-  if (clientAdded) {
-    let clientFind = await fetchGetClient(clientBooking.client);
-    if (clientFind) {
-      addBooking(clientBooking, clientFind);
-    }
-  }
-};
-
-const addBooking = async (clientBooking, clientFind) => {
-  let bookingFind = await getBookingByClientMailAndDate(clientBooking);
-  if (bookingFind) {
-    alertBooking(
-      "Advertencia",
-      "Ya tiene una reserva en esta fecha, ¿Desea agregar las nuevas habitaciones a dicha reserva?"
-    );
-
-    let confirm = await confirmUpdateBooking(
-      document.querySelector(".alertBooking")
-    );
-
-    if (confirm) {
-      updateBooking(bookingFind, clientBooking);
-    }
-  } else {
-    const dataAddBooking = {
-      client: clientFind.idCliente,
-      startBooking: clientBooking.booking.date.start,
-      endBooking: clientBooking.booking.date.end,
-      roomsQuantity: totalRoomsInBooking(clientBooking.booking.rooms)
-    };
-
-    let bookingAdded = await fetchPOSTBooking(dataAddBooking);
-
-    if (bookingAdded) {
-      addRoomsBookings(
-        clientBooking.booking,
-        clientFind.idCliente,
-        clientBooking
-      );
-    }
-  }
-};
-
-const addRoomsBookings = async (booking, idClient, clientBooking, option) => {
-  const dataConsult = {
-    startBooking: booking.date.start,
-    endBooking: booking.date.end
-  };
-
-  let noRoomsAvailables = null;
-
-  let roomsAssign = await Promise.all(
-    booking.rooms.map(async (room) => {
-      let result = await assignRoom(dataConsult, room, rooms);
-      if (!result) {
-        noRoomsAvailables = `Ups, no quedan suficientes habitaciones ${room.category} disponibles`;
-      } else {
-        return result;
+      if (resultBookingAdded.error.indexOf("reserva existente") > -1) {
+        alertBooking(
+          "Advertencia",
+          "¿Ya tiene una reserva en estas fechas, desea agregar la nuevas habitaciones?"
+        );
+        let confirm = await confirmUpdateBooking(
+          document.querySelector(".alertBooking")
+        );
+        if (confirm) {
+          return updateBooking(clientBooking);
+        }
+      } else if (
+        resultBookingAdded.error.indexOf("habitaciones suficientes") > -1
+      ) {
+        msjError = "No quedan habitaciones suficientes";
       }
-    })
-  );
-  if (noRoomsAvailables) {
-    alertBooking("Error", noRoomsAvailables);
-  } else {
-    let getBookingAdded = await getBookingByClientMailAndDate(clientBooking);
+      alertBooking("Error", msjError);
+    }
+  }
 
-    const roomsToBooking = {
-      idBooking: getBookingAdded.idReserva,
-      client: idClient,
-      startBooking: dataConsult.startBooking,
-      endBooking: dataConsult.endBooking,
-      rooms: roomsAssign.flat()
-    };
-
-    addRoomsAssigned(roomsToBooking, option);
+  if (resultBookingAdded == true) {
+    redirect(clientBooking, "added");
   }
 };
 
-const assignRoom = async (dataConsult, room, rooms) => {
-  dataConsult.category = room.category;
+const updateBooking = async (clientBooking) => {
+  const resultUpdate = await fetchPUTBooking(clientBooking);
 
-  let roomsAvailablesCategory = await fetchGETAvailableRoomsCategory(
-    dataConsult
-  );
-  if (
-    roomsAvailablesCategory.length <
-    totalRoomsEqualCategoryInBooking(room.category, rooms)
-  ) {
-    return false;
-  } else {
-    let roomCategoryAssing = [];
-    for (let f = 0; f <= roomsAvailablesCategory.length; f++) {
-      if (roomCategoryAssing.length < room.quantity) {
-        roomCategoryAssing.push({
-          numRoom: roomsAvailablesCategory[f].numRoom,
-          adults: parseInt(room.guests.adult),
-          childs: parseInt(room.guests.children) || 0
-        });
-      } else {
-        return roomCategoryAssing;
+  if (resultUpdate.error) {
+    if (resultUpdate.error.indexOf("Error") > -1) {
+      let msjError = "No se pudo actualizar la reserva";
+      if (resultUpdate.error.indexOf("habitaciones") > -1) {
+        msjError = "No se quedan suficientes habitaciones";
       }
+      alertBooking("Error", msjError);
     }
   }
-};
-const totalRoomsEqualCategoryInBooking = (category, rooms) => {
-  let total = rooms.reduce((ac, room) => {
-    if (room.category == category) {
-      ac += room.quantity;
-    }
-    return ac;
-  }, 0);
-  return total;
-};
-
-const totalRoomsInBooking = (rooms) => {
-  let total = rooms.reduce((ac, room) => {
-    return (ac += room.quantity);
-  }, 0);
-  return total;
-};
-
-const addRoomsAssigned = async (roomsToBooking, option) => {
-  let resultAddRooms = await fetchPOSTRooms(roomsToBooking);
-  if (resultAddRooms == true && option !== "update") {
-    addPay(roomsToBooking);
-  } else if (resultAddRooms == true && option == "update") {
-    updatePay(roomsToBooking);
+  if (resultUpdate == true) {
+    redirect(clientBooking, "update");
   }
 };
 
-const addPay = async (roomsToBooking) => {
-  let resultAddPay = await fetchPOSTPay({
-    idBooking: roomsToBooking.idBooking,
-    client: roomsToBooking.client,
-    amount: booking.totalDeposit
-  });
-
-  if (resultAddPay) {
-    const dataToGetBooking = {
-      email: clientBooking.client.mail,
-      startDate: clientBooking.booking.date.start,
-      endDate: clientBooking.booking.date.end,
-      option: "added"
-    };
-
-    localStorage.clear();
-    location.href = "detalles.html?details=" + encodeURI(JSON.stringify(dataToGetBooking));
-  }
-};
-
-const updateBooking = async (bookingFind, clientBooking) => {
-  const dataBookingToUpdate = {
-    idBooking: bookingFind.idReserva,
-    idClient: bookingFind.idClienteReserva,
-    startBooking: bookingFind.fechaLlegada,
-    endBooking: bookingFind.fechaSalida,
-    quantityRooms:
-      bookingFind.cantidadHabitaciones + totalRoomsInBooking(booking.rooms)
+const redirect = (clientBooking, option) => {
+  const dataToGetBookingUpdated = {
+    email: clientBooking.client.mail,
+    startDate: clientBooking.booking.date.start,
+    endDate: clientBooking.booking.date.end,
+    option: option
   };
-
-  let resultUpdate = await fetchPUTBooking(dataBookingToUpdate);
-
-  if (resultUpdate) {
-    addRoomsBookings(
-      booking,
-      bookingFind.idClienteReserva,
-      clientBooking,
-      "update"
-    );
-  }
-};
-
-const updatePay = async (roomsToBooking) => {
-  let actualRevenue = await fetchGETPay(roomsToBooking.idBooking);
-  if (actualRevenue) {
-    let resultUpdatePay = await fetchPUTPay({
-      idBooking: roomsToBooking.idBooking,
-      newAmount: booking.totalDeposit + actualRevenue.deposito
-    });
-
-    if (resultUpdatePay) {
-      const dataToGetBookingUpdated = {
-        email: clientBooking.client.mail,
-        startDate: clientBooking.booking.date.start,
-        endDate: clientBooking.booking.date.end,
-        option: "updated"
-      };
-
-      localStorage.clear();
-      location.href =
-        "detalles.html?details=" + encodeURI(JSON.stringify(dataToGetBookingUpdated));
-    }
-  }
+  localStorage.clear();
+  location.href =
+    "detalles.html?details=" +
+    encodeURI(JSON.stringify(dataToGetBookingUpdated));
 };
 
 export function loadingBooking(loadingState, msj) {

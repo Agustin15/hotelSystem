@@ -1,7 +1,8 @@
 <?php
 
 require("../../model/revenue.php");
-require(__DIR__ . "./../authToken.php");
+require_once(__DIR__ . "./../authToken.php");
+
 class revenuesController
 {
     private $pay, $authToken;
@@ -13,16 +14,13 @@ class revenuesController
         $this->authToken = new authToken();
     }
 
-    public function POST($req)
+    public function POST($idBooking, $idClient, $amount)
     {
 
         try {
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
-            }
-            $resultPay = $this->pay->addRevenue($req['idBooking'], $req['client'], $req['amount']);
-            return array("response" => $resultPay);
+
+            $resultPay = $this->pay->addRevenue($idBooking, $idClient, $amount);
+            return  $resultPay;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
         }
@@ -89,7 +87,7 @@ class revenuesController
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            $totalRevenuesCurrentYear= $this->pay->calculateTotalCurrentYearRevenues(date("Y"));
+            $totalRevenuesCurrentYear = $this->pay->calculateTotalCurrentYearRevenues(date("Y"));
             $totalRevenuesActualMonth = $this->pay->calculateTotalMonthRevenues(date("m"), date("Y"));
 
             $dataRevenuesActual =  array(
@@ -116,6 +114,18 @@ class revenuesController
 
             $revenue =  $this->pay->getRevenueById($idBooking);
 
+            return $revenue;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+    public function findRevenueByIdBooking($idBooking)
+    {
+        try {
+
+            $revenue =  $this->pay->getRevenueById($idBooking);
             return $revenue;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);

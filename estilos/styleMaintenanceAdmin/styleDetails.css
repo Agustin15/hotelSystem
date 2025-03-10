@@ -54,6 +54,18 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  border-radius: 100%;
+  
+}
+.avatar img{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height:132px;
+  width:132px;
+  border-radius: 100%;
+  
 }
 
 .column {

@@ -12,40 +12,40 @@ class revenuesController
         $this->pay = new Revenue();
     }
 
-    public function POST($req)
+    public function POST($idBooking, $idClient, $amount)
     {
 
         try {
 
-            $resultPay = $this->pay->addRevenue($req['idBooking'], $req['client'], $req['amount']);
-            return array("response" => $resultPay);
+            $resultPay = $this->pay->addRevenue($idBooking, $idClient, $amount);
+            return $resultPay;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
-    public function PUT($req)
+    public function PUT($idBooking, $newAmount)
     {
         try {
 
-            $resultUpdatePay = $this->pay->updateRevenueById($req['idBooking'], $req['newAmount']);
-            return array("response" => $resultUpdatePay);
+            $resultUpdatePay = $this->pay->updateRevenueById($idBooking, $newAmount);
+            return $resultUpdatePay;
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
 
-    public function getRevenueByIdBooking($req)
+    public function findRevenueByIdBooking($idBooking)
     {
         try {
-            $idBooking = $req['idBooking'];
 
             $revenue =  $this->pay->getRevenueById($idBooking);
-
             return $revenue;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+   
 }

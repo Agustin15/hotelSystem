@@ -17,15 +17,6 @@ if (isset($_GET['params'])) {
 
 
 $routes = [
-    "POST" => function () use ($revenuesController, $req) {
-        return $revenuesController->POST($req);
-    },
-    "PUT" => function () use ($revenuesController, $req) {
-        return $revenuesController->PUT($req);
-    },
-    "DELETE" => function () use ($revenuesController, $req) {
-        return $revenuesController->DELETE($req);
-    },
     "GET" => function () use ($revenuesController, $req) {
 
         $optionGet = match ($req["option"]) {

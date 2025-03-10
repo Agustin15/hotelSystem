@@ -5,24 +5,19 @@ require_once(__DIR__ . "/../config/connection.php");
 
 class User
 {
-
     private $connection;
-
-
 
     public function __construct()
     {
-
-        $this->connection = new Connection();
+        $this->connection= Connection::getInstance()->getConnection();
     }
-
 
 
     public function addUser($name, $lastname, $username, $email, $password, $rol, $avatar, $currentDate)
     {
 
         $imageFile = file_get_contents($avatar);
-        $query = $this->connection->connect()->prepare("insert into usuarios(usuario,nombre,apellido,correo,imagen,rol,
+        $query = $this->connection->prepare("insert into usuarios(usuario,nombre,apellido,correo,imagen,rol,
         contrasenia,creacion) values(?,?,?,?,?,?,?,?)");
         $query->bind_param("sssssiss", $username, $name, $lastname, $email, $imageFile, $rol, $password, $currentDate);
         $result = $query->execute();
@@ -31,7 +26,7 @@ class User
     public function updateUserPasswordById($password, $idUser)
     {
 
-        $query = $this->connection->connect()->prepare("update usuarios set contrasenia=? where idUsuario=?");
+        $query = $this->connection->prepare("update usuarios set contrasenia=? where idUsuario=?");
         $query->bind_param("si", $password, $idUser);
         $result = $query->execute();
         return $result;
@@ -41,7 +36,7 @@ class User
     public function updateUserImageById($image, $idUser)
     {
         $imageFile = file_get_contents($image);
-        $query = $this->connection->connect()->prepare("update usuarios set imagen=? where idUsuario=?");
+        $query = $this->connection->prepare("update usuarios set imagen=? where idUsuario=?");
         $query->bind_param("si", $imageFile, $idUser);
         $result = $query->execute();
         return $result;
@@ -51,7 +46,7 @@ class User
     public function deleteUserById($idUser)
     {
 
-        $query = $this->connection->connect()->prepare("delete from usuarios where idUsuario=?");
+        $query = $this->connection->prepare("delete from usuarios where idUsuario=?");
         $query->bind_param("i", $idUser);
         $result = $query->execute();
         return $result;
@@ -60,7 +55,7 @@ class User
 
     public function getAllUsers()
     {
-        $query = $this->connection->connect()->prepare("select * from usuarios");
+        $query = $this->connection->prepare("select * from usuarios");
         $query->execute();
         $result = $query->get_result();
 
@@ -70,7 +65,7 @@ class User
 
     public function getAllUsersLimitIndex($index)
     {
-        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        $query = $this->connection->prepare("select * from usuarios INNER JOIN roles ON 
         usuarios.rol=roles.idRol LIMIT 15 OFFSET $index");
         $query->execute();
         $result = $query->get_result();
@@ -81,7 +76,7 @@ class User
     {
 
         $imageFile = file_get_contents($avatar);
-        $query = $this->connection->connect()->prepare("update usuarios set usuario=?,nombre=?,apellido=?,correo=?, 
+        $query = $this->connection->prepare("update usuarios set usuario=?,nombre=?,apellido=?,correo=?, 
          imagen=?,rol=?,contrasenia=? where idUsuario=?");
         $query->bind_param("sssssssi", $username, $name, $lastname, $mail, $imageFile, $rol, $password, $idUser);
         $result = $query->execute();
@@ -90,7 +85,7 @@ class User
     public function getUserByUser($user)
     {
 
-        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        $query = $this->connection->prepare("select * from usuarios INNER JOIN roles ON 
         usuarios.rol=roles.idRol where usuario=?");
         $query->bind_param("s", $user);
         $query->execute();
@@ -105,7 +100,7 @@ class User
     public function getUserByEmail($email)
     {
 
-        $query = $this->connection->connect()->prepare("select * from usuarios where correo=?");
+        $query = $this->connection->prepare("select * from usuarios where correo=?");
         $query->bind_param("s", $email);
         $query->execute();
 
@@ -117,7 +112,7 @@ class User
 
     public function getUserById($idUser)
     {
-        $query = $this->connection->connect()->prepare("select * from usuarios INNER JOIN roles ON 
+        $query = $this->connection->prepare("select * from usuarios INNER JOIN roles ON 
         usuarios.rol=roles.idRol where idUsuario=?");
         $query->bind_param("i", $idUser);
         $query->execute();
@@ -130,7 +125,7 @@ class User
     public function getUserByUsernameAndDistinctId($id, $user)
     {
 
-        $query = $this->connection->connect()->prepare("select * from usuarios where idUsuario!=? and usuario=?");
+        $query = $this->connection->prepare("select * from usuarios where idUsuario!=? and usuario=?");
         $query->bind_param("is", $id, $user);
         $query->execute();
 
@@ -142,7 +137,7 @@ class User
     public function getUserByEmailAndDistinctId($id, $email)
     {
 
-        $query = $this->connection->connect()->prepare("select * from usuarios where idUsuario!=? and correo=?");
+        $query = $this->connection->prepare("select * from usuarios where idUsuario!=? and correo=?");
         $query->bind_param("is", $id, $email);
         $query->execute();
 

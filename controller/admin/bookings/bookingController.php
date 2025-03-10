@@ -1,34 +1,101 @@
 <?php
 
+require("../../config/connection.php");
 require("../../model/booking.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "./../revenues/revenuesController.php");
+require(__DIR__ . "./../rooms/roomsBookingController.php");
+require_once(__DIR__ . "./../authToken.php");
 
 class bookingController
 {
 
-    private $booking, $authToken;
+    private $booking, $revenuesController, $roomsBookingController, $connection, $authToken;
     public function __construct()
     {
         $this->booking = new Booking();
+        $this->revenuesController = new revenuesController();
+        $this->roomsBookingController = new roomsBookingController();
         $this->authToken = new authToken();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
     public function POST($req)
     {
 
         try {
+
+            $idClient = $req["client"];
+            $startBooking = $req["startBooking"];
+            $endBooking = $req["endBooking"];
+            $rooms = $req["rooms"];
+            $quantityRooms = $req["roomsQuantity"];
+            $amount = $req["amount"];
+
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            $this->booking->setIdClient($req['client']);
-            $this->booking->setDateStart($req['startBooking']);
-            $this->booking->setDateEnd($req['endBooking']);
-            $this->booking->setQuantityRooms($req['roomsQuantity']);
-            $res =  $this->booking->addBooking();
-            return $res;
-        } catch (Throwable $th) {
 
+            $this->connection->autocommit(FALSE);
+            $this->connection->begin_transaction();
+
+            $bookingFound = $this->findBookingByClientIdAndDate($idClient, $startBooking, $endBooking);
+
+            if (isset($bookingFound["error"])) {
+                throw new Error("Error al buscar la reserva");
+            }
+
+            if ($bookingFound) {
+
+                throw new Error("Este cliente ya tiene una reserva en esta fecha,tendra que actualizarla");
+            }
+
+            $this->booking->setIdClient($idClient);
+            $this->booking->setDateStart($startBooking);
+            $this->booking->setDateEnd($endBooking);
+            $this->booking->setQuantityRooms($quantityRooms);
+            $bookingAdded =  $this->booking->addBooking();
+
+            if (!$bookingAdded) {
+
+                throw new Error("Error, no se pudo agregar la reserva");
+            }
+
+            $bookingFound = $this->findBookingByClientIdAndDate($idClient, $startBooking, $endBooking);
+            if (isset($bookingFound["error"])) {
+                throw new Error("Error al buscar la reserva");
+            }
+
+
+            $roomsAdded =  $this->roomsBookingController->POST(
+                $bookingFound["idReserva"],
+                $bookingFound["idClienteReserva"],
+                $rooms,
+                $startBooking,
+                $endBooking
+            );
+
+
+            if (!$roomsAdded) {
+                throw new Error("Error al agregar las habitaciones");
+            }
+
+            $amountBookingAdded = $this->revenuesController->POST(
+                $bookingFound["idReserva"],
+                $bookingFound["idClienteReserva"],
+                $amount
+            );
+
+            if (isset($amountBookingAdded["error"]) || !$amountBookingAdded) {
+                throw new Error("Error al agregar el deposito de la reserva");
+            }
+
+            if ($amountBookingAdded == true) {
+                $this->connection->commit();
+                return $amountBookingAdded;
+            }
+        } catch (Throwable $th) {
+            $this->connection->rollback();
             return array("error" => $th->getMessage(), "status" => 500);
         }
     }
@@ -37,19 +104,50 @@ class bookingController
     {
 
         try {
+
+            $idBooking = $req["idBooking"];
+            $idClient = $req["idClient"];
+            $quantityRooms = $req["quantityRooms"];
+            $startBooking = $req["startBooking"];
+            $endBooking = $req["endBooking"];
+            $rooms = $req["rooms"];
+
+
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            $this->booking->setIdBooking($req['idBooking']);
-            $this->booking->setIdClient($req['idClient']);
-            $this->booking->setDateStart($req['startBooking']);
-            $this->booking->setDateEnd($req['endBooking']);
-            $this->booking->setQuantityRooms($req['quantityRooms']);
 
-            $resultBookingUpdate = $this->booking->updateBookingById();
+            $this->booking->setIdBooking($idBooking);
+            $this->booking->setIdClient($idClient);
+            $this->booking->setDateStart($startBooking);
+            $this->booking->setDateEnd($endBooking);
+            $this->booking->setQuantityRooms($quantityRooms);
 
-            return $resultBookingUpdate;
+            $bookingUpdated = $this->booking->updateBookingById();
+
+            if (!$bookingUpdated) {
+                throw new Error("Error, no se pudo actualizar la reserva");
+            }
+
+            $roomsToDelete = $this->roomsBookingController->findRoomsToDeleteInCart($idBooking, $rooms);
+
+            return $roomsToDelete;
+            if (isset($roomsToDelete["error"])) {
+                throw new Error("Error, no se pudo actualizar las habitaciones");
+            }
+
+            $roomsToAdd = $this->roomsBookingController->findRoomsToAddInCart(
+                $idBooking,
+                $idClient,
+                $startBooking,
+                $endBooking,
+                $rooms
+            );
+
+            if (isset($roomsToAdd["error"])) {
+                throw new Error("Error, no se pudo actualizar las habitaciones");
+            }
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -90,18 +188,15 @@ class bookingController
     }
 
 
-    public function getBookingsByClientDate($req)
+    public function findBookingByClientIdAndDate($idClient, $startBooking, $endBooking)
     {
 
         try {
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
-            }
+
             $bookingFind =  $this->booking->getBookingByIdClientAndDate(
-                $req['dataBooking']['idClient'],
-                $req['dataBooking']['startBooking'],
-                $req['dataBooking']['endBooking']
+                $idClient,
+                $startBooking,
+                $endBooking
             );
 
             return $bookingFind;

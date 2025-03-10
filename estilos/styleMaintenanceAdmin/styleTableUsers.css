@@ -156,6 +156,8 @@
 }
 .tableUsers tbody .contentIdUser img {
   width: 43px;
+  height: 43px;
+  border-radius: 100%;
 }
 .tableUsers tbody .buttons {
   display: flex;

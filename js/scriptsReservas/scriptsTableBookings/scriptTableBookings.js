@@ -290,6 +290,7 @@ const displaySelectYear = async () => {
       }
     });
     const result = await response.json();
+  
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();

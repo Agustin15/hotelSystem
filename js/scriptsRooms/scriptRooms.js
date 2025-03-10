@@ -5,44 +5,6 @@ import {
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
-export const POSTRooms = async (booking, option) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php`;
-  let data;
-  loadingForm(true);
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        credentials: "same-origin"
-      },
-      body: JSON.stringify(booking)
-    });
-    const result = await response.json();
-
-    if (!response.ok) {
-      if (response.status == 401) {
-        invalidAuthentication();
-      } else throw result.error;
-    } else if (result.response == true) {
-      data = result.response;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loadingForm(false);
-    if (!data) {
-      alertForm(
-        "../../../img/advertenciaLogin.png",
-        `Ups, error al ${option}`,
-        "Error",
-        "alertFormError"
-      );
-    }
-    return data;
-  }
-};
-
 export const getRoomsCategoryHotel = async () => {
   let data;
   let url =

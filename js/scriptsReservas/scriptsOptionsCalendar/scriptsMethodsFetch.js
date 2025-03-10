@@ -5,7 +5,6 @@ export const POSTBooking = async (booking) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php`;
   let data;
 
-  console.log(booking);
   loadingForm(true);
   try {
     const response = await fetch(url, {
@@ -20,69 +19,13 @@ export const POSTBooking = async (booking) => {
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
-      } else throw result.error;
+      } else throw result;
     } else if (result == true) {
       data = result;
     }
   } catch (error) {
-    console.log(error);
-  } finally {
-    loadingForm(false);
-    if (!data) {
-      alertForm(
-        "../../../img/advertenciaLogin.png",
-        "Ups, error al agregar la reserva",
-        "Error",
-        "alertFormError"
-      );
-    }
-
-    return data;
-  }
-};
-
-export const getBookingByClientAndDate = async (booking) => {
-  const dataBooking = {
-    idClient: booking.client,
-    startBooking: booking.startBooking,
-    endBooking: booking.endBooking
-  };
-
-  let data;
-  let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
-    JSON.stringify({
-      option: "bookingByClientAndDate",
-      dataBooking: dataBooking
-    });
-
-  loadingForm(true);
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        credentials: "same-origin"
-      }
-    });
-    const result = await response.json();
-
-    if (!response.ok) {
-      if (response.status == 401) {
-        invalidAuthentication();
-      } else throw result.error;
-    } else if (result) {
-      data = result;
-    }
-  } catch (error) {
-    console.log(error);
-
-    alertForm(
-      "../../../img/advertenciaLogin.png",
-      "Ups, error al agregar la reserva",
-      "Error",
-      "alertFormError"
-    );
+    data = error;
+    console.log("Error:",error.error);
   } finally {
     loadingForm(false);
     return data;

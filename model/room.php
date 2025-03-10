@@ -5,13 +5,13 @@ class Room
 {
 
 
-    private $connection;
+    private $configConnection, $connection;
 
     public function __construct()
     {
-
-        $this->connection = new Connection();
+        $this->connection= Connection::getInstance()->getConnection();
     }
+
 
 
     public function addRoomBooking(
@@ -25,7 +25,7 @@ class Room
     ) {
 
 
-        $query = $this->connection->connect()->prepare("insert into habitacion_reservada
+        $query = $this->connection->prepare("insert into habitacion_reservada
         (idReservaHabitacion,idClienteHabitacion,numHabitacionReservada,fechaLlegadaHabitacion,fechaSalidaHabitacion,adultos,ninos) values (?,?,?,?,?,?,?)");
         $query->bind_param(
             "iiissii",
@@ -52,7 +52,7 @@ class Room
     public function deleteRoomByIdBookingAndNumRoom($idBooking, $numRoom)
     {
 
-        $query = $this->connection->connect()->prepare("delete from habitacion_reservada where 
+        $query = $this->connection->prepare("delete from habitacion_reservada where 
         idReservaHabitacion=? and numHabitacionReservada=?");
         $query->bind_param("ii", $idBooking, $numRoom);
         return $query->execute();
@@ -66,7 +66,7 @@ class Room
         $imageRoomTwo = file_get_contents($imageTwo);
         $imageRoomThree = file_get_contents($imageThree);
 
-        $query = $this->connection->connect()->prepare("update tipo_habitacion set imagenUno=?,imagenDos=?, 
+        $query = $this->connection->prepare("update tipo_habitacion set imagenUno=?,imagenDos=?, 
         imagenTres=?,camas=?,capacidad=?,terraza=?,precio=? where categoria=?");
         $query->bind_param(
             "sssiiiis",
@@ -86,7 +86,7 @@ class Room
     {
 
 
-        $query = $this->connection->connect()->prepare("select * from habitaciones");
+        $query = $this->connection->prepare("select * from habitaciones");
         $query->execute();
         $result = $query->get_result();
 
@@ -98,7 +98,7 @@ class Room
     {
 
 
-        $query = $this->connection->connect()->prepare("select * from habitaciones INNER JOIN tipo_habitacion ON 
+        $query = $this->connection->prepare("select * from habitaciones INNER JOIN tipo_habitacion ON 
         habitaciones.tipoHabitacion=tipo_habitacion.categoria where habitaciones.tipoHabitacion=?");
         $query->bind_param("s", $category);
         $query->execute();
@@ -113,7 +113,7 @@ class Room
     {
 
 
-        $query = $this->connection->connect()->prepare("select * from tipo_habitacion");
+        $query = $this->connection->prepare("select * from tipo_habitacion order by precio asc");
         $query->execute();
         $result = $query->get_result();
 
@@ -126,7 +126,7 @@ class Room
     {
 
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
+        $query = $this->connection->prepare("select * from habitacion_reservada where 
         (fechaLlegadaHabitacion >=? or fechaSalidaHabitacion<=?) and numHabitacionReservada=? ");
         $query->execute();
 
@@ -146,7 +146,7 @@ class Room
     ) {
 
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
+        $query = $this->connection->prepare("select * from habitacion_reservada where 
         (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? and idReservaHabitacion!=?");
         $query->execute();
 
@@ -165,7 +165,7 @@ class Room
 
 
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada");
+        $query = $this->connection->prepare("select * from habitacion_reservada");
 
         $query->execute();
 
@@ -181,7 +181,7 @@ class Room
 
 
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where YEAR(fechaLlegadaHabitacion)=?");
+        $query = $this->connection->prepare("select * from habitacion_reservada where YEAR(fechaLlegadaHabitacion)=?");
         $query->bind_param("s", $year);
         $query->execute();
 
@@ -197,7 +197,7 @@ class Room
 
 
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where
+        $query = $this->connection->prepare("select * from habitacion_reservada where
      idReservaHabitacion=?");
 
         $query->bind_param("i", $idBooking);
@@ -215,7 +215,7 @@ class Room
     {
 
 
-        $query = $this->connection->connect()->prepare("select * from habitaciones where
+        $query = $this->connection->prepare("select * from habitaciones where
      numHabitacion=?");
         $query->execute();
 
@@ -233,7 +233,7 @@ class Room
     public function getRoomsByCategory($category)
     {
 
-        $query = $this->connection->connect()->prepare("select * from habitaciones where 
+        $query = $this->connection->prepare("select * from habitaciones where 
       tipoHabitacion=?");
         $query->bind_param("s", $category);
         $query->execute();
@@ -247,7 +247,7 @@ class Room
     public function roomsBookingByNumRoom($numRoom)
     {
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
+        $query = $this->connection->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=?");
         $query->bind_param("i", $numRoom);
         $query->execute();
@@ -263,7 +263,7 @@ class Room
     public function allBookingsRoomDistinctIdBooking($numRoom, $idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
+        $query = $this->connection->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=? && idReservaHabitacion!=?");
         $query->bind_param("ii", $numRoom, $idBooking);
         $query->execute();
@@ -278,7 +278,7 @@ class Room
     public function roomsBookingAndDetails($idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada 
+        $query = $this->connection->prepare("select * from habitacion_reservada 
         INNER JOIN habitaciones ON habitacion_reservada.numHabitacionReservada=habitaciones.numHabitacion
        INNER JOIN tipo_habitacion ON habitaciones.tipoHabitacion=tipo_habitacion.categoria 
        where habitacion_reservada.idReservaHabitacion=?");
@@ -295,7 +295,7 @@ class Room
     public function getStateRoomByNumRoomAndDate($numRoom, $today)
     {
 
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada where 
+        $query = $this->connection->prepare("select * from habitacion_reservada where 
       numHabitacionReservada=? and fechaLlegadaHabitacion <=? and fechaSalidaHabitacion>?");
         $query->bind_param("iss", $numRoom, $today, $today);
         $query->execute();
@@ -310,7 +310,7 @@ class Room
 
     public function getAllYearsWithRoomsBooking()
     {
-        $query = $this->connection->connect()->prepare("select DISTINCT YEAR(fechaLlegadaHabitacion) from habitacion_reservada");
+        $query = $this->connection->prepare("select DISTINCT YEAR(fechaLlegadaHabitacion) from habitacion_reservada");
         $query->execute();
         $results = $query->get_result();
         return $results->fetch_all(MYSQLI_ASSOC);
@@ -318,7 +318,7 @@ class Room
 
     public function getAllBookingsByRoomAndYearLimit($numRoom, $year, $index)
     {
-        $query = $this->connection->connect()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        $query = $this->connection->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
          YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE() LIMIT 10 OFFSET $index");
@@ -330,7 +330,7 @@ class Room
 
     public function getFirstsBookingsByRoomAndYear($numRoom, $year)
     {
-        $query = $this->connection->connect()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        $query = $this->connection->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
          YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE() LIMIT 10");
@@ -341,7 +341,7 @@ class Room
     }
     public function getAllBookingsByRoomAndYear($numRoom, $year)
     {
-        $query = $this->connection->connect()->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        $query = $this->connection->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
          YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE()");
@@ -353,7 +353,7 @@ class Room
 
     public function getNextBookingsRoom($numRoom)
     {
-        $query = $this->connection->connect()->prepare("select * from habitacion_reservada INNER JOIN reserva_habitacion ON 
+        $query = $this->connection->prepare("select * from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva where habitacion_reservada.numHabitacionReservada=? and 
         reserva_habitacion.fechaLlegada>CURDATE() ORDER BY DATEDIFF(reserva_habitacion.fechaLlegada,CURDATE()) ASC LIMIT 4 ;");
         $query->bind_param("i", $numRoom);

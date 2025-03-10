@@ -27,7 +27,6 @@ $routes = [
     "GET" => function () use ($bookingController, $req) {
 
         $optionGet = match ($req["option"]) {
-            "bookingByClientMailAndDate" => $bookingController->getBookingByClientMailAndDate($req),
             "bookingDetailsByClientMailAndDate" => $bookingController->getDetailsBookingByClientMailAndDate($req)
         };
 

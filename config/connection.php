@@ -8,6 +8,12 @@ $dotenv->load();
 class Connection
 {
     private $connection;
+    private static $instance = null;
+
+    public function __construct()
+    {
+        $this->connect();
+    }
 
     public function connect()
     {
@@ -18,6 +24,21 @@ class Connection
         $db = $_ENV['DATABASE'];
 
         $this->connection = new mysqli($localhost, $user, $password, $db);
+    }
+
+
+    public static function getInstance()
+    {
+
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    public function getConnection()
+    {
 
         return $this->connection;
     }
@@ -26,5 +47,6 @@ class Connection
     {
 
         mysqli_close($this->connection);
+        self::$instance = null;
     }
 }

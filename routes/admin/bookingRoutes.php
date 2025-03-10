@@ -31,7 +31,6 @@ $routes = [
 
         $optionGet = match ($req["option"]) {
             "allBookings" => $bookingController->getAllBookings($req),
-            "bookingByClientAndDate" => $bookingController->getBookingsByClientDate($req),
             "bookingByClientMailAndDate" => $bookingController->getBookingByClientMailAndDate($req),
             "bookingsRowsYear" => $bookingController->getBookingsRowsYear($req),
             "bookingsYearlimit" => $bookingController->getBookingsYearLimit($req),

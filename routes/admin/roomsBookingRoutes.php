@@ -16,12 +16,7 @@ if (isset($_GET['params'])) {
 }
 
 $routes = [
-    "POST" => function () use ($roomsBookingController, $req) {
-        return $roomsBookingController->POST($req);
-    },
-    "PUT" => function () use ($roomsBookingController, $req) {
-        return $roomsBookingController->PUT($req);
-    },
+   
     "DELETE" => function () use ($roomsBookingController, $req) {
         return $roomsBookingController->DELETE($req);
     },

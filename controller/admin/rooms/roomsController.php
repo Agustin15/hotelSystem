@@ -9,7 +9,7 @@ class roomsController
     public function __construct()
     {
 
-        $this->rooms = new Room();
+        $this->rooms = new Room(null);
         $this->authToken = new authToken();
     }
 
@@ -47,8 +47,6 @@ class roomsController
             return array("error" => $th->getMessage(), "status" => 500);
         }
     }
-
-    public function DELETE() {}
 
     public function getAllCategoryRoomsWithDetails()
     {

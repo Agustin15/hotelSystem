@@ -8,13 +8,10 @@ import {
 
 import {
   POSTBooking,
-  getBookingByClientAndDate,
   alertForm,
   removeAlertForm
 } from "./scriptsMethodsFetch.js";
 
-import { POSTRooms } from "../../scriptsRooms/scriptRooms.js";
-import { POSTPay } from "../../scriptsRevenues/scriptRevenues.js";
 import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
@@ -139,42 +136,33 @@ const formAddSubmit = () => {
     if (error) {
       inputAlert(error);
     } else {
-      let bookingExisted = await getBookingByClientAndDate(booking);
-      if (bookingExisted) {
+      booking.rooms = roomsCart;
+      booking.amount = amount;
+
+      let resultBooking = await POSTBooking(booking);
+
+      if (resultBooking.error) {
+        let title = "¡Error!";
+
+        if (resultBooking.error.indexOf("actualizarla") > -1) {
+          title = "¡Advertencia!";
+        }
         alertForm(
           "../../../img/advertenciaLogin.png",
-          "Ups, este cliente ya tiene una reserva en esta fecha",
-          "Error",
+          resultBooking.error,
+          title,
           "alertFormError"
         );
-      } else {
-        let resultBooking = await POSTBooking(booking);
-        resultBookingAdd = resultBooking;
-        if (resultBooking) {
-          let bookingFind = await getBookingByClientAndDate(booking);
-          booking.rooms = roomsCart;
-          booking.idBooking = bookingFind.idReserva;
-          let resultRoomsBooking = await POSTRooms(
-            booking,
-            "agregar las habitaciones"
-          );
-
-          if (resultRoomsBooking) {
-            booking.amount = amount;
-            let resultPayBooking = await POSTPay(booking);
-            if (resultPayBooking) {
-              alertForm(
-                "../../../img/tickAdmin.png",
-                "¡Reserva agregada exitosamente!",
-                "Exito",
-                "alertFormCorrect"
-              );
-
-              cleanRoomCart();
-              setInputsForm();
-            }
-          }
-        }
+      }
+      if (resultBooking == true) {
+        alertForm(
+          "../../../img/tickAdmin.png",
+          "¡Reserva agregada exitosamente!",
+          "¡Exito!",
+          "alertFormCorrect"
+        );
+        cleanRoomCart();
+        setInputsForm();
       }
     }
   });

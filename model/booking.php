@@ -11,10 +11,8 @@ class Booking
 
     public function __construct()
     {
-
-        $this->connection = new Connection();
+        $this->connection= Connection::getInstance()->getConnection();
     }
-
 
     public function setIdBooking($idBooking)
     {
@@ -51,7 +49,7 @@ class Booking
     public function  deleteBookingById($idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("delete from reserva_habitacion where idReserva=?");
+        $query = $this->connection->prepare("delete from reserva_habitacion where idReserva=?");
         $query->bind_param("i", $idBooking);
         $result = $query->execute();
 
@@ -62,7 +60,7 @@ class Booking
     public function updateBookingById()
     {
 
-        $query = $this->connection->connect()->prepare("update reserva_habitacion set idClienteReserva=? 
+        $query = $this->connection->prepare("update reserva_habitacion set idClienteReserva=? 
         ,fechaLlegada=?,fechaSalida=?,cantidadHabitaciones=? where idReserva=?");
         $query->bind_param(
             "issii",
@@ -83,7 +81,7 @@ class Booking
     {
 
 
-        $query = $this->connection->connect()->prepare("insert into reserva_habitacion
+        $query = $this->connection->prepare("insert into reserva_habitacion
     (idClienteReserva,fechaLlegada,fechaSalida,cantidadHabitaciones) values(?,?,?,?) ");
 
         $query->bind_param(
@@ -104,7 +102,7 @@ class Booking
     public function getAllBookings()
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion");
+        $query = $this->connection->prepare("select * from reserva_habitacion");
         $query->execute();
 
         return $query->get_result();
@@ -115,7 +113,7 @@ class Booking
     public function getAllBookingsYear($year)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion where 
+        $query = $this->connection->prepare("select * from reserva_habitacion where 
         YEAR(fechaLlegada) =?");
         $query->bind_param("s", $year);
         $query->execute();
@@ -126,7 +124,7 @@ class Booking
     public function getBookingById($idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion INNER JOIN clientes ON 
+        $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes ON 
         clientes.idCliente=reserva_habitacion.idClienteReserva where idReserva=?");
         $query->bind_param("i", $idBooking);
         $query->execute();
@@ -139,7 +137,7 @@ class Booking
     public function getDataClientByIdBooking($idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("select idCliente,nombre,apellido,correo,telefono from
+        $query = $this->connection->prepare("select idCliente,nombre,apellido,correo,telefono from
          reserva_habitacion INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente 
          where idReserva=?");
         $query->bind_param("i", $idBooking);
@@ -151,7 +149,7 @@ class Booking
     public function getBookingsYearLimit($year)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion INNER JOIN clientes on
+        $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes on
         clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=?
          ORDER BY reserva_habitacion.fechaLlegada DESC LIMIT 10");
         $query->bind_param("i", $year);
@@ -165,7 +163,7 @@ class Booking
     {
 
 
-        $query = $this->connection->connect()->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion");
+        $query = $this->connection->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion");
         $query->execute();
 
         $result = $query->get_result();
@@ -175,7 +173,7 @@ class Booking
     public function getBookingsYearLimitAndIndex($year, $index)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion INNER JOIN clientes on
+        $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes on
         clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=? ORDER BY 
         reserva_habitacion.fechaLlegada LIMIT 10 OFFSET $index");
         $query->bind_param("i", $year);
@@ -189,7 +187,7 @@ class Booking
     public function getBookingByIdClientAndDate($idClient, $startDate, $endDate)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion where 
+        $query = $this->connection->prepare("select * from reserva_habitacion where 
         idClienteReserva=? and fechaLlegada=? and fechaSalida=?");
         $query->bind_param("iss", $idClient, $startDate, $endDate);
         $query->execute();
@@ -206,7 +204,7 @@ class Booking
     public function getBookingByClientMailAndDate($mail, $startDate, $endDate)
     {
 
-        $query = $this->connection->connect()->prepare("select * from reserva_habitacion 
+        $query = $this->connection->prepare("select * from reserva_habitacion 
         INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente where 
         clientes.correo=? and reserva_habitacion.fechaLlegada=? and reserva_habitacion.fechaSalida=?");
         $query->bind_param("sss", $mail, $startDate, $endDate);
@@ -221,7 +219,7 @@ class Booking
     public function getBookingDetailsByClientMailAndDate($email, $startDate, $endDate)
     {
 
-        $query = $this->connection->connect()->prepare("
+        $query = $this->connection->prepare("
         select * from reserva_habitacion 
         INNER JOIN clientes ON reserva_habitacion.idClienteReserva=clientes.idCliente 
         INNER JOIN habitacion_reservada ON reserva_habitacion.idReserva=habitacion_reservada.idReservaHabitacion INNER JOIN habitaciones ON 

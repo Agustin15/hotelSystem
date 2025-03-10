@@ -14,13 +14,13 @@ export function removeAlertClientFormBooking() {
 }
 
 export const alertBooking = (title, msj) => {
-
   let alert = document.querySelector(".alertBooking");
   let msjParragraph = alert.querySelector("p");
   let titleSpan = alert.querySelector("span");
   let btnAccept = alert.querySelector(".btnAccept");
   let btnCancel = alert.querySelector(".btnCancel");
 
+  modalOption("flex");
   alert.style.display = "flex";
 
   if (title == "Error") {
@@ -56,6 +56,7 @@ const removeAlertBooking = (
   btnAccept.textContent = "";
   btnCancel.textContent = "";
   btnCancel.style.display = "none";
+  modalOption("none");
 };
 
 const bodyConfirmAddRoomsToBookingPast = async (

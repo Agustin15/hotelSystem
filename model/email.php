@@ -19,7 +19,7 @@ class Email
     public function __construct()
     {
 
-        $this->connection = new Connection();
+        $this->connection= Connection::getInstance()->getConnection();
     }
 
     public function setName($name)
@@ -99,7 +99,7 @@ class Email
     public function addEmailBookingConfirm($idBooking, $stateConfirm, $stateUpdate)
     {
 
-        $query = $this->connection->connect()->prepare("insert into correo_reserva_confirmada(idReserva,stateConfirm,stateUpdate)
+        $query = $this->connection->prepare("insert into correo_reserva_confirmada(idReserva,stateConfirm,stateUpdate)
         values(?,?,?)");
         $query->bind_param("iii", $idBooking, $stateConfirm, $stateUpdate);
         $result = $query->execute();
@@ -109,7 +109,7 @@ class Email
     public function updateStateUpdateEmailById($idEmail, $stateUpdate)
     {
 
-        $query = $this->connection->connect()->prepare("update correo_reserva_confirmada set stateUpdate=?
+        $query = $this->connection->prepare("update correo_reserva_confirmada set stateUpdate=?
         where idCorreo=?");
         $query->bind_param("ii",$stateUpdate,$idEmail);
         $result = $query->execute();
@@ -119,7 +119,7 @@ class Email
     public function getEmailBookingConfirmByIdBooking($idBooking)
     {
 
-        $query = $this->connection->connect()->prepare("select * from correo_reserva_confirmada where 
+        $query = $this->connection->prepare("select * from correo_reserva_confirmada where 
         idReserva=?");
         $query->bind_param("i", $idBooking);
         $query->execute();

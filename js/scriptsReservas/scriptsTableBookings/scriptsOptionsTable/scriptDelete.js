@@ -10,7 +10,9 @@ export const configDelete = () => {
   let btnAccept = document.querySelector(".btnAccept");
   let btnCancel = document.querySelector(".btnCancel");
 
+
   btnAccept.addEventListener("click", async () => {
+   
     let result = await deleteBooking(idBooking);
     if (result) {
       await drawTable();
@@ -24,6 +26,7 @@ export const configDelete = () => {
 };
 
 const deleteBooking = async (idBooking) => {
+
   let data = null;
   try {
     const response = await fetch(
@@ -39,7 +42,7 @@ const deleteBooking = async (idBooking) => {
     );
 
     const bookingDeleted = await response.json();
-
+ 
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();

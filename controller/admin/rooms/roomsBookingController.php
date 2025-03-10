@@ -3,7 +3,7 @@
 require_once("../../config/connection.php");
 require("../../model/room.php");
 require("../../model/service.php");
-require(__DIR__ . "./../authToken.php");
+require_once(__DIR__ . "./../authToken.php");
 
 
 class roomsBookingController
@@ -19,50 +19,39 @@ class roomsBookingController
         $this->authToken = new authToken();
     }
 
-    public function POST($req)
+    public function POST($idBooking, $idClient, $roomsBooking, $startBooking, $endBooking)
     {
-
-        $roomsBooking = $req['rooms'];
-        $connection = new Connection();
-
-        $error = null;
-        foreach ($roomsBooking as $roomBooking) {
-            try {
-                $tokenVerify = $this->authToken->verifyToken();
-                if (isset($tokenVerify["error"])) {
-                    return array("error" => $tokenVerify["error"], "status" => 401);
-                }
-                $connection->connect()->begin_transaction();
+        $error = false;
+        try {
+            foreach ($roomsBooking as $roomBooking) {
 
                 $resultRoomAdded =  $this->rooms->addRoomBooking(
-                    $req['idBooking'],
-                    $req['client'],
+                    $idBooking,
+                    $idClient,
                     $roomBooking['numRoom'],
-                    $req['startBooking'],
-                    $req['endBooking'],
+                    $startBooking,
+                    $endBooking,
                     $roomBooking['adults'],
                     $roomBooking['childs']
                 );
 
-                if ($resultRoomAdded) {
-                    $connection->connect()->commit();
+                if (!$resultRoomAdded) {
+                    $error = true;
                 }
-            } catch (Throwable $th) {
-                $error = $th;
-                $connection->connect()->rollback();
-                return array("error" => $th->getMessage(), "status" => 502);
-            } finally {
-                $connection->closeConnection();
             }
-        }
 
-        if (!$error) {
+            if ($error == TRUE) {
 
-            return array("response" => true);
+                throw new Error("Error al agregar las habitaciones");
+            } else {
+                return true;
+            }
+        } catch (Throwable $th) {
+
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
-    public function PUT() {}
 
     public function DELETE($req)
     {
@@ -70,7 +59,6 @@ class roomsBookingController
         $roomsToDelete = $req['rooms'];
         $idBooking = $req['idBooking'];
         $errorDeleteQuery = null;
-        $connection = new Connection();
         foreach ($roomsToDelete as $roomToDelete) {
 
             try {
@@ -79,21 +67,109 @@ class roomsBookingController
                 if (isset($tokenVerify["error"])) {
                     return array("error" => $tokenVerify["error"], "status" => 401);
                 }
-                $connection->connect()->begin_transaction();
                 $this->rooms->deleteRoomByIdBookingAndNumRoom($idBooking, $roomToDelete);
-                $connection->connect()->commit();
             } catch (Throwable $th) {
                 $errorDeleteQuery = $th;
-                $connection->connect()->rollback();
+
                 return array("error" => $th->getMessage(), "status" => 404);
-            } finally {
-                $connection->closeConnection();
             }
         }
 
         if (!$errorDeleteQuery) {
             return array("response" => true);
         }
+    }
+
+    public function findRoomsToDeleteInCart($idBooking, $newRooms)
+    {
+
+        try {
+
+            $roomsOfBooking = $this->findRoomsByIdBooking($idBooking);
+
+            if (isset($roomsOfBooking["error"])) {
+                throw new Error("Error, no se pudo buscar las habitaciones de la reserva");
+            }
+
+            $roomsToDelete = array_filter($roomsOfBooking, function ($roomOfBooking) use ($newRooms, $idBooking) {
+
+                $roomNotInCart = $this->roomBookingNotInCart($newRooms, $roomOfBooking["numHabitacionReservada"]);
+                if ($roomNotInCart == true) {
+                    return array("idBooking" => $idBooking, "numRoom" => $roomOfBooking["numHabitacionReservada"]);
+                }
+            });
+
+            return $roomsToDelete;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+    public function findRoomsToAddInCart($idBooking, $idClient, $startBooking, $endBooking, $newRooms)
+    {
+        try {
+
+            $roomsOfBooking = $this->findRoomsByIdBooking($idBooking);
+
+            if (isset($roomsOfBooking["error"])) {
+                throw new Error("Error, no se pudo buscar las habitaciones de la reserva");
+            }
+
+            $roomsToAdd = array_filter($newRooms, function ($newRoom) use (
+                $idBooking,
+                $idClient,
+                $startBooking,
+                $endBooking,
+                $roomsOfBooking,
+            ) {
+
+                $roomInCart = $this->roomCartInBookingRooms($roomsOfBooking, $newRoom["numRoom"]);
+                if (!$roomInCart) {
+                    return array(
+                        "idBooking" => $idBooking,
+                        "idClient" => $idClient,
+                        "numRoom" => $newRoom["numRoom"],
+                        "startBooking" => $startBooking,
+                        "endBooking" => $endBooking,
+                        "adults" => $newRoom["adults"],
+                        "childs" => $newRoom["childs"],
+                    );
+                }
+            });
+
+            return $roomsToAdd;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+    public function roomBookingNotInCart($roomsCart, $numRoomBooking)
+    {
+        $roomNotInCart = true;
+        foreach ($roomsCart as $roomCart) {
+            $keyRoom = array_search($numRoomBooking, $roomCart);
+            if ($keyRoom) {
+                $roomNotInCart = false;
+                break;
+            }
+        }
+        return $roomNotInCart;
+    }
+
+
+    public function roomCartInBookingRooms($roomsOfBooking, $numRoomCart)
+    {
+        $roomInCart = false;
+        foreach ($roomsOfBooking as $roomOfBooking) {
+            $keyRoom = array_search($numRoomCart, $roomOfBooking);
+            if ($keyRoom) {
+                $roomInCart = true;
+                break;
+            }
+        }
+        return $roomInCart;
     }
 
     public function getDashboardGraphic($req)
@@ -195,6 +271,18 @@ class roomsBookingController
 
             $roomsDetailsBooking = $this->rooms->getAllRoomsByIdBooking($idBooking)->fetch_all(MYSQLI_ASSOC);
             return  array_values($roomsDetailsBooking);
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function findRoomsByIdBooking($idBooking)
+    {
+
+        try {
+
+            $roomsOfBooking = $this->rooms->getAllRoomsByIdBooking($idBooking)->fetch_all(MYSQLI_ASSOC);
+            return $roomsOfBooking;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

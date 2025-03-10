@@ -3,16 +3,10 @@ import {
   configRoomsCart,
   drawRoomsInCart,
   roomsCart,
-  roomsBooking,
   amount
 } from "./scriptCartRooms.js";
 import { inputAlert } from "../../../../scriptsOptionsCalendar/scriptFormAdd.js";
-import {
-  verifyStateRoomsToBooking,
-  fetchDeleteRoom,
-  POSTRooms
-} from "../../../../../scriptsRooms/scriptRooms.js";
-import { PUTPay } from "../../../../../scriptsRevenues/scriptRevenues.js";
+
 import {
   alertForm,
   loadingForm
@@ -211,107 +205,19 @@ const sendFormEdit = () => {
   });
 };
 
-const getVerifyStateRoomsToBooking = async (bookingToUpdate) => {
-  let roomsAvailables;
-
-  let numbersRoomsCart = roomsCart.map((room) => room.numRoom);
-
-  try {
-    const result = await verifyStateRoomsToBooking(
-      bookingToUpdate,
-      numbersRoomsCart,
-      bookingGlobal.idReserva
-    );
-
-    if (result) {
-      roomsAvailables = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    return roomsAvailables;
-  }
-};
-
 const updateBooking = async (bookingToUpdate) => {
-  let roomsAvailables = await getVerifyStateRoomsToBooking(bookingToUpdate);
+  bookingToUpdate.rooms = roomsCart;
+  bookingToUpdate.idBooking = bookingGlobal.idReserva;
 
-  if (roomsAvailables) {
-    if (roomsAvailables.length == roomsCart.length) {
-      let resultUpdateBooking = await fetchUpdateBooking(bookingToUpdate);
+  let resultBookingUpdated = await fetchUpdateBooking(bookingToUpdate);
 
-      if (resultUpdateBooking) {
-        let roomsToDelete = verfiyRoomsToDelete();
-
-        if (roomsToDelete.length > 0) {
-          let resultDeleteRooms = await fetchDeleteRoom({
-            idBooking: bookingGlobal.idReserva,
-            rooms: roomsToDelete
-          });
-
-          if (!resultDeleteRooms.response) return;
-        }
-
-        let roomsNewsToAdd = verfiyRoomsNewsToAdd();
-
-        if (roomsNewsToAdd.length > 0) {
-          bookingToUpdate.rooms = roomsCart;
-          bookingToUpdate.client = bookingToUpdate.idClient;
-          let resultUpdateRooms = await POSTRooms(
-            bookingToUpdate,
-            "actualizar las habitaciones"
-          );
-
-          if (!resultUpdateRooms) return;
-        }
-
-        let resultPayUpdated = await PUTPay({
-          idBooking: bookingGlobal.idReserva,
-          newAmount: amount
-        });
-
-        if (resultPayUpdated.response) {
-          alertForm(
-            "../../../img/tickAdmin.png",
-            "¡Reserva actualizada exitosamente!",
-            "Exito",
-            "alertFormCorrect"
-          );
-
-          drawTable();
-        }
-      }
-    } else {
-      roomsToBookingNotAvailables(roomsAvailables);
-    }
-  }
-};
-
-const roomsToBookingNotAvailables = (roomsAvailables) => {
-  let roomsNotAvailables = roomsCart.filter(
-    (room) =>
-      !roomsAvailables.find((roomAvailable) => roomAvailable == room.numRoom)
-  );
-
-  let numbersRoomsBusy = roomsNotAvailables.map((room) => room.numRoom);
-
-  let phraseNumsRooms = `la habitacion ${numbersRoomsBusy.join("")} ya tiene`;
-  if (numbersRoomsBusy.length > 1) {
-    phraseNumsRooms = `las habitaciones ${numbersRoomsBusy.join(
-      ","
-    )} ya tienen`;
-  }
-  alertForm(
-    "../../../img/advertenciaLogin.png",
-    `Ups, ${phraseNumsRooms} reserva en esta fecha `,
-    "Error",
-    "alertFormError"
-  );
+  console.log(resultBookingUpdated);
+  //   drawTable();
+  // }
 };
 
 const fetchUpdateBooking = async (bookingToUpdate) => {
   let data;
-  bookingToUpdate.idBooking = bookingGlobal.idReserva;
 
   loadingForm(true);
   try {
@@ -351,31 +257,4 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
     }
     return data;
   }
-};
-
-const verfiyRoomsToDelete = () => {
-  let roomsToDelete = roomsBooking.filter((roomBooking) => {
-    if (
-      !roomsCart.find((roomCart) => roomCart.numRoom == roomBooking.numRoom)
-    ) {
-      return roomBooking.numRoom;
-    }
-  });
-
-  roomsToDelete = roomsToDelete.map((room) => room.numRoom);
-  return roomsToDelete;
-};
-
-const verfiyRoomsNewsToAdd = () => {
-  let roomsNewsToAdd = roomsCart.filter((roomCart) => {
-    if (
-      !roomsBooking.find(
-        (roomBooking) => roomBooking.numRoom == roomCart.numRoom
-      )
-    ) {
-      return roomCart;
-    }
-  });
-
-  return roomsNewsToAdd;
 };

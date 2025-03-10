@@ -11,14 +11,14 @@ class Rol
     public function __construct()
     {
 
-        $this->connection = new Connection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
 
     public function getAllRols()
     {
 
-        $query = $this->connection->connect()->prepare("select * from roles");
+        $query = $this->connection->prepare("select * from roles");
         $query->execute();
         $results = $query->get_result();
         return $results->fetch_all(MYSQLI_ASSOC);

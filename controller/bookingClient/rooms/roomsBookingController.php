@@ -15,47 +15,146 @@ class roomsBookingController
         $this->rooms = new Room();
     }
 
-    public function POST($req)
+    public function POST($rooms, $idBooking, $idClient, $startBooking, $endBooking)
     {
 
-        $roomsBooking = $req['rooms'];
-        $connection = new Connection();
+        try {
 
-        $error = null;
-        foreach ($roomsBooking as $roomBooking) {
-            try {
+            $result = null;
+            $error = false;
+            $roomsToBooking = $this->roomsToAssing($rooms, $startBooking, $endBooking);
 
-                $connection->connect()->begin_transaction();
 
-                $resultRoomAdded =  $this->rooms->addRoomBooking(
-                    $req['idBooking'],
-                    $req['client'],
-                    $roomBooking['numRoom'],
-                    $req['startBooking'],
-                    $req['endBooking'],
-                    $roomBooking['adults'],
-                    $roomBooking['childs']
+            if (isset($roomsToBooking['error'])) {
+
+                throw new Error($roomsToBooking['error']);
+            }
+            foreach ($roomsToBooking as $roomToBooking) {
+
+                $roomAdded = $this->rooms->addRoomBooking(
+                    $idBooking,
+                    $idClient,
+                    $roomToBooking['numRoom'],
+                    $startBooking,
+                    $endBooking,
+                    $roomToBooking['adults'],
+                    $roomToBooking['childs']
                 );
 
-                if ($resultRoomAdded) {
-                    $connection->connect()->commit();
+                if (!$roomAdded) {
+                    $error = true;
+                    throw new Error("Error al agregar habitacion");
                 }
-            } catch (Throwable $th) {
-                $error = $th;
-                $connection->connect()->rollback();
-                return array("error" => $th->getMessage(), "status" => 502);
-            } finally {
-                $connection->closeConnection();
             }
-        }
 
-        if (!$error) {
+            if (!$error) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+            return $result;
+        } catch (Throwable $th) {
 
-            return array("response" => true);
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
+    public function roomsToAssing($rooms, $startBooking, $endBooking)
+    {
 
+
+        $roomsNotAvailables = false;
+        $roomsAssingned = [];
+
+        foreach ($rooms as $room) {
+
+            $roomsByCategory =  $this->rooms->getRoomsByCategory($room['category']);
+
+            $roomsCategoryAvailables =  array_filter($roomsByCategory, function ($roomByCategory) use ($startBooking, $endBooking) {
+
+                $bookingsOfRoom =  $this->rooms->roomsBookingByNumRoom($roomByCategory['numHabitacion']);
+
+                $bookingsOfRoomNotMatchDate =  $this->rooms->getAllRoomsAvailablesByDateAndNumRoom($startBooking, $endBooking, $roomByCategory['numHabitacion']);
+
+                if (
+                    count($bookingsOfRoom) == 0 ||
+                    count($bookingsOfRoomNotMatchDate) == count($bookingsOfRoom)
+                ) {
+                    return $roomByCategory;
+                }
+            });
+
+            $roomsCategoryAvailables = array_values($roomsCategoryAvailables);
+            if (count($roomsCategoryAvailables) < $this->totalRoomsEqualQuantity($rooms, $room['category'])) {
+                $roomsNotAvailables = true;
+                break;
+            }
+
+            $quantityRoomsAddedToArray = 0;
+
+            for ($f = 0; $f <= count($roomsCategoryAvailables); $f++) {
+
+                $roomInAssinged = $this->findNumRoomInRoomsAssigned(
+                    $roomsAssingned,
+                    $roomsCategoryAvailables[$f]["numHabitacion"]
+                );
+
+                if (!$roomInAssinged) {
+                    if ($quantityRoomsAddedToArray < $room["quantity"]) {
+                        array_push(
+                            $roomsAssingned,
+                            array("numRoom" => $roomsCategoryAvailables[$f]["numHabitacion"], "adults" =>
+                            $room["guests"]["adult"], "childs" => $room["guests"]["children"])
+                        );
+                        $quantityRoomsAddedToArray++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        if ($roomsNotAvailables == true) {
+            return array("error" => "Error,no hay habitaciones suficientes");
+        }
+        return $roomsAssingned;
+    }
+
+
+
+
+    public function findNumRoomInRoomsAssigned($roomsAssingned, $numRoom)
+    {
+
+        $found = FALSE;
+        $quantityFoundNumRoom = array_filter($roomsAssingned, function ($room) use ($numRoom) {
+
+            $key = array_search($numRoom, $room);
+            if ($key) {
+                return $room;
+            }
+        });
+
+        if (count($quantityFoundNumRoom) > 0) {
+            $found = TRUE;
+        }
+
+        return $found;
+    }
+
+    public function totalRoomsEqualQuantity($roomsBooking, $category)
+    {
+
+        $totalEqualRooms  = array_reduce($roomsBooking, function ($ac, $roomBooking) use ($category) {
+
+            if ($roomBooking['category'] == $category) {
+                $ac++;
+            }
+            return $ac;
+        }, 0);
+
+        return $totalEqualRooms;
+    }
     public function getRoomsFreeCategory($req)
     {
 
