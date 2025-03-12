@@ -3,7 +3,6 @@ import { closeModal } from "../../scriptsUsers/optionsUsersTable/scriptDelete.js
 import { displayCategoryRooms, modalRooms } from "../listRooms.js";
 import { PUTCategoryRoom } from "../methodsFetch.js";
 import { alertForm } from "../../scriptsUsers/optionsUsersTable/scriptAdd.js";
-import { cleanErrorInputs } from "../../scriptsUsers/optionsUsersTable/scriptAdd.js";
 
 let form;
 
@@ -23,6 +22,8 @@ export const configEditRoom = (categoryRoom) => {
 const submitForm = () => {
   const roomCategoryData = {};
   let quantityInputsForm = document.querySelectorAll(".inputMain").length;
+
+  cleanInputError();
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -197,9 +198,25 @@ const validationsInputs = (key, value) => {
 
 export const inputError = (key, msj) => {
   let input = [...document.getElementsByName(key)][0];
+  input.classList.add("inputError");
   let containError = input.parentElement.querySelector(".errorInput");
   containError.style.display = "flex";
   containError.querySelector("p").textContent = msj;
+};
+
+export const cleanErrorInputs = () => {
+  let errorsInputs = document.querySelectorAll(".errorInput");
+  errorsInputs.forEach((errorInput) => (errorInput.style.display = "none"));
+};
+
+export const cleanInputError = () => {
+  let inputs = document.querySelectorAll("input");
+
+  inputs.forEach((input) => {
+    input.addEventListener("click", () => {
+      input.classList.remove("inputError");
+    });
+  });
 };
 
 const eventUploadImage = () => {

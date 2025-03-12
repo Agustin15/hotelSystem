@@ -4,6 +4,7 @@ import { pageNotFound, loadingPage } from "../../scriptReserva.js";
 
 let body, idBooking;
 
+
 export const configEdit = () => {
   idBooking = document.querySelector(".containEditOption").id;
   body = document.querySelector(".body");

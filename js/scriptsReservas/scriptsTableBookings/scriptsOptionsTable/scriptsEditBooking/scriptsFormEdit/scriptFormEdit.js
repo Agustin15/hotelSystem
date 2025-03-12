@@ -208,12 +208,26 @@ const sendFormEdit = () => {
 const updateBooking = async (bookingToUpdate) => {
   bookingToUpdate.rooms = roomsCart;
   bookingToUpdate.idBooking = bookingGlobal.idReserva;
+  bookingToUpdate.amount = amount;
 
   let resultBookingUpdated = await fetchUpdateBooking(bookingToUpdate);
 
-  console.log(resultBookingUpdated);
-  //   drawTable();
-  // }
+  if (resultBookingUpdated.error) {
+    alertForm(
+      "../../../img/advertenciaLogin.png",
+      resultBookingUpdated.error,
+      "Error",
+      "alertFormError"
+    );
+  } else if (resultBookingUpdated == true) {
+    alertForm(
+      "../../../img/tickAdmin.png",
+      "¡Reserva actualizada exitosamente!",
+      "Exito",
+      "alertFormCorrect"
+    );
+    drawTable();
+  }
 };
 
 const fetchUpdateBooking = async (bookingToUpdate) => {
@@ -238,23 +252,16 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
-      } else throw "Ups, error al actualizar la reserva";
+      } else throw result;
     }
     if (result) {
       data = result;
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error", error.error);
+    data = error;
   } finally {
     loadingForm(false);
-    if (!data) {
-      alertForm(
-        "../../../img/advertenciaLogin.png",
-        "Ups, error al actualizar la reserva",
-        "Error",
-        "alertFormError"
-      );
-    }
     return data;
   }
 };

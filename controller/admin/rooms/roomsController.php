@@ -31,6 +31,7 @@ class roomsController
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
+    
             $resultUpdate = $this->rooms->updateRoomData(
                 $category,
                 $imageOne,

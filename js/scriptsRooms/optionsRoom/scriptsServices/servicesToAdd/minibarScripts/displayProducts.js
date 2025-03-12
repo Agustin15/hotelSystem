@@ -1,6 +1,6 @@
 import { contentMinibar, numRoom } from "../minibar.js";
-import { contentBar} from "../bar.js";
-import { displayCart, addService } from "./displayCart.js";
+import { contentBar } from "../bar.js";
+import {displayCart, addService} from "./displayCart.js";
 import { displayAlert } from "./displayAlert.js";
 export let cart = [];
 export let amount = 0;
@@ -41,8 +41,8 @@ export const displayContentShop = (products, option) => {
 
   displayProducts();
   let btnAddService = document.querySelector(".btnAddService");
-  btnAddService.addEventListener("click", () => {
-    addService();
+  btnAddService.addEventListener("click", async () => {
+    addService(cart);
   });
 };
 

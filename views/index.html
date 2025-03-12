@@ -185,3 +185,65 @@
 </footer>
 
 </html>
+   <div class="billDetails">
+
+   <div class="title">
+   <div class="icon">
+    <img src="../../../img/iconBill.png">
+    <h3>Hotel System</h3>
+    </div>
+    <h4>Factura</h4>
+   </div>
+
+   <div class="row">
+   <div class="infoBooking">
+     <li class="liIdBooking">
+     <span>Numero de Reserva</span>
+     <span class="blackFont">${revenueBooking.idReservaPago}</span>
+     </li>
+      <li>
+     <span>Llegada</span>
+     <span class="blackFont">${startDate}</span>
+     </li>
+      <li>
+     <span>Salida</span>
+     <span class="blackFont">${endDate}</span>
+     </li>
+     <li>
+     <span>Noches</span>
+     <span class="blackFont">${nigths}</span>
+     </li>
+   </div>
+
+   <div class="column">
+   <div class="senderDataAndClientData">
+   <li> 
+   <span>DE</span>
+   <h4 class="nameCompany">Hotel System</h4>
+   <p>David Abidal 627, 11300 Montevideo</p>
+   <span>systemFiveHotel@gmail.com</span>
+   <span>+(598) 93 647 321</span>
+   </li>
+
+   <li> 
+   <span>Para</span>
+   <h4 class="nameClient">${revenueBooking.nombre} ${revenueBooking.apellido}</h4>
+   <span>${revenueBooking.correo}</span>
+   <span>${revenueBooking.telefono}</span>
+   </li>
+   </div>
+   <table class="tableDetailsBill">
+   <thead>
+   <th>Descripcion</th>
+   <th>Precio</th>
+   <th>Cantidad</th>
+   <th>Total</th>
+   </thead>
+   <tbody></tbody>
+   </table>
+   <div class="totalAmount">
+   <span>Total:US$ ${revenueBooking.deposito}</span>
+   </div>
+   </div>
+   </div>
+   </div>

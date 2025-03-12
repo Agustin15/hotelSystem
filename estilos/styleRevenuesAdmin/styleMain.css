@@ -257,6 +257,7 @@ body #navAdmin .titleNav {
   left: 0;
   width: 100%;
   min-height: 100%;
+  padding-bottom: 5rem;
   height: auto;
   background: rgba(44, 44, 44, 0.6);
 }

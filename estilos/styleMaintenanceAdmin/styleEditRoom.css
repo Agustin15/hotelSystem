@@ -73,6 +73,10 @@
   background-position-x: 0.5rem;
   background-position-y: 0.4rem;
 }
+.containEdit form input::placeholder {
+
+font-size: 15px;  
+}
 
 .containEdit form #categoria {
   background-image: url("../../img/room.png");
@@ -223,13 +227,18 @@
 }
 
 .inputError {
-  border: 1px solid red;
   color: red;
+  border: 1px solid red;
 }
 
 .inputError:hover {
   border: 2px solid red;
 }
+
+.inputError::placeholder {
+  color: red;
+}
+
 
 .modalAlert {
   position: absolute;

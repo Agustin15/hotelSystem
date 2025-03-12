@@ -19,9 +19,6 @@ $routes = [
     "POST" => function () use ($servicesBookingController, $req) {
         return $servicesBookingController->POST($req);
     },
-    "PUT" => function () use ($servicesBookingController, $req) {
-        return $servicesBookingController->PUT($req);
-    },
     "DELETE" => function () use ($servicesBookingController, $req) {
         return $servicesBookingController->DELETE($req);
     },
@@ -31,8 +28,6 @@ $routes = [
             "getServicesBooking" => $servicesBookingController->getServicesBooking($req),
             "getHistoryServicesByCurrentBookingRoom" => $servicesBookingController->getHistoryServicesByCurrentBookingRoom($req),
             "getDetailsServicesByCurrentBookingRoom" => $servicesBookingController->getDetailsServicesByCurrentBookingRoom($req),
-            "getServiceByIdAndNumRoomAndBooking" => $servicesBookingController->getServiceByIdAndNumRoomAndBooking($req),
-            "returnStatesOfProductsServices" => $servicesBookingController->returnStatesOfProductsServices($req),
             "getServiceRoomDetailsByNumRoomAndBooking" => $servicesBookingController->getServiceRoomDetailsByNumRoomAndBooking($req)
         };
 

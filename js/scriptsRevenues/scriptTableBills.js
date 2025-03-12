@@ -5,8 +5,6 @@ import {
   getRevenuDetailsById
 } from "./scriptRevenues.js";
 
-import { loadingPage, pageNotFound } from "./dashboardScript.js";
-import { configBill } from "./scriptBill.js";
 
 let selectYear, currentYear, controls, tableBills, modal;
 
@@ -177,9 +175,9 @@ const displayTable = (revenuesLimit) => {
         <td>US$ ${revenue.deposito}</td>
         <td>
         <div class="buttons">
-        <button data-revenue-booking=${JSON.stringify(
-          revenue
-        )} class="btnViewBill" title="Ver factura">
+        <button id=${
+          revenue.idReservaPago
+        } class="btnViewBill" title="Ver factura">
         <img src="../../../img/viewBill.png">
         </button>
         </div>
@@ -193,11 +191,11 @@ const displayTable = (revenuesLimit) => {
 
   document.querySelectorAll(".btnViewBill").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      modal.style.display = "flex";
-      let page = await getPageBill();
-      let revenueBooking = JSON.parse(btn.dataset.revenueBooking);
-      if (page) {
-        drawPageBill(page, revenueBooking);
+   
+      let idRevenue = btn.id;
+
+      if (idRevenue) {
+        openBill(idRevenue);
       }
     });
   });
@@ -314,28 +312,6 @@ const search = () => {
   });
 };
 
-const getPageBill = async () => {
-  let pageBill;
-  window.scrollTo(0, 0);
-  loadingPage(true, modal);
-  try {
-    const response = await fetch("optionBill/bill.html");
-    const result = await response.text();
-    if (response.ok && result) {
-      pageBill = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loadingPage(false, modal);
-    if (!pageBill) {
-      pageNotFound(modal);
-    }
-    return pageBill;
-  }
-};
-
-const drawPageBill = (page, dataBooking) => {
-  modal.innerHTML = page;
-  configBill(dataBooking, modal);
+const openBill = (idRevenueBooking) => {
+  window.open("optionBill/bill.php?idRevenueBooking=" +idRevenueBooking);
 };

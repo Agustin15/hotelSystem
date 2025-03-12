@@ -26,15 +26,12 @@ class revenuesController
         }
     }
 
-    public function PUT($req)
+    public function PUT($idBooking, $newAmount)
     {
         try {
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
-            }
-            $resultUpdatePay = $this->pay->updateRevenueById($req['idBooking'], $req['newAmount']);
-            return array("response" => $resultUpdatePay);
+
+            $resultUpdatePay = $this->pay->updateRevenueById($idBooking, $newAmount);
+            return $resultUpdatePay;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -126,6 +123,9 @@ class revenuesController
         try {
 
             $revenue =  $this->pay->getRevenueById($idBooking);
+            if (!isset($revenue)) {
+                throw new Error("Error,no se pudo encontrar el deposito de la reserva");
+            }
             return $revenue;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);

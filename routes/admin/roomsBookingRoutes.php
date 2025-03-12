@@ -16,10 +16,6 @@ if (isset($_GET['params'])) {
 }
 
 $routes = [
-   
-    "DELETE" => function () use ($roomsBookingController, $req) {
-        return $roomsBookingController->DELETE($req);
-    },
     "GET" => function () use ($roomsBookingController, $req) {
         $optionGet = match ($req["option"]) {
 

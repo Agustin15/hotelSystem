@@ -1,91 +1,60 @@
 <?php
-require("../../model/service.php");
-require_once("../../config/connection.php");
-require(__DIR__ . "./../authToken.php");
+require_once("../../model/service.php");
+require_once(__DIR__ . "./../authToken.php");
 
 class servicesController
 {
 
-    private $service, $authToken, $connection;
+    private $service, $authToken;
     public function __construct()
     {
 
         $this->service = new Service();
-        $this->connection = new Connection();
         $this->authToken = new authToken();
     }
 
     public function POST() {}
 
+
     public function PUT($req)
     {
 
-        $option = $req["option"];
-        $serviceUpdated = null;
-        $error = false;
 
         try {
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
+            $nameService = $req["name"];
+            $priceService = $req["price"];
+            $descriptionService = $req["description"];
+            $iconService = $req["image"];
+
+            $serviceFound = $this->findServiceByName($nameService);
+
+            if (isset($serviceFound["error"])) {
+                throw new Error($serviceFound["error"]);
             }
-
-            switch ($option) {
-
-                case "updateStockProductByServiceToRoom":
-
-                    $productsToUpdateStock =  $req["products"];
-
-                    foreach ($productsToUpdateStock as $product) {
-
-                        try {
-
-                            $this->connection->connect()->begin_transaction();
-                            $serviceFinded =  $this->service->getServiceHotelByIdService($product["idService"]);
-                            if ($serviceFinded) {
-
-                                $newMaxStock = $serviceFinded["maxStock"] -  $product["quantity"];
-
-                                $resultServiceUpdated = $this->service->updateMaxStockServiceHotel(
-                                    $newMaxStock,
-                                    $product["idService"]
-                                );
-                                if ($resultServiceUpdated) {
-                                    $this->connection->connect()->commit();
-                                } else {
-                                    $error = true;
-                                    throw new Error("No se pudo actualizar el servicio");
-                                }
-                            } else {
-                                $error = true;
-                                throw new Error("No se pudo encontrar el servicio");
-                            }
-                        } catch (Throwable $th) {
-                            throw $th;
-                            $this->connection->connect()->rollback();
-                        }
-                    }
-                    if (!$error) {
-                        $serviceUpdated = true;
-                    }
-
-                    break;
-
-                case "updateStockOneService":
-
-                    $serviceUpdated = $this->service->updateMaxStockServiceHotel(
-                        $req["newMaxStock"],
-                        $req["idService"]
-                    );
-                    break;
-            }
+            $serviceUpdated = $this->service->updateServiceHotel(
+                $nameService,
+                $descriptionService,
+                $priceService,
+                $iconService,
+                null,
+                $serviceFound["idServicio"]
+            );
 
             return $serviceUpdated;
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 500);
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
+    public function PATCHmaxStock($idService, $newMaxStock)
+    {
+        try {
+            $maxStockUpdated = $this->service->updateMaxStockServiceHotel($newMaxStock, $idService);
+            return $maxStockUpdated;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
+    }
 
     public function DELETE() {}
 
@@ -110,6 +79,35 @@ class servicesController
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+    public function findServiceById($idService)
+    {
+        try {
+            $serviceFound = $this->service->getServiceHotelByIdService($idService);
+            $serviceFound["imagen"] = null;
+            if (!isset($serviceFound)) {
+                throw new Error("Error, no se pudo encontrar el servicio");
+            }
+            return $serviceFound;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+    public function findServiceByName($nameService)
+    {
+        try {
+            $serviceFound = $this->service->getServiceByName($nameService);
+            $serviceFound[0]["imagen"] = null;
+
+            if (!isset($serviceFound)) {
+                throw new Error("Error, no se pudo encontrar el servicio");
+            }
+            return $serviceFound[0];
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
     public function getServiceByName($req)
     {
 

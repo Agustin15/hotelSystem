@@ -111,12 +111,16 @@ class bookingController
             $startBooking = $req["startBooking"];
             $endBooking = $req["endBooking"];
             $rooms = $req["rooms"];
+            $amount = $req["amount"];
 
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
+
+            $this->connection->autocommit(FALSE);
+            $this->connection->begin_transaction();
 
             $this->booking->setIdBooking($idBooking);
             $this->booking->setIdClient($idClient);
@@ -132,10 +136,10 @@ class bookingController
 
             $roomsToDelete = $this->roomsBookingController->findRoomsToDeleteInCart($idBooking, $rooms);
 
-            return $roomsToDelete;
             if (isset($roomsToDelete["error"])) {
-                throw new Error("Error, no se pudo actualizar las habitaciones");
+                throw new Error("Error, no se pudieron procesar las habitaciones");
             }
+
 
             $roomsToAdd = $this->roomsBookingController->findRoomsToAddInCart(
                 $idBooking,
@@ -145,11 +149,49 @@ class bookingController
                 $rooms
             );
 
+
             if (isset($roomsToAdd["error"])) {
-                throw new Error("Error, no se pudo actualizar las habitaciones");
+                throw new Error("Error, no se pudieron procesar las habitaciones");
+            }
+
+            if (count($roomsToDelete) > 0) {
+                $roomsDeleted = $this->roomsBookingController->DELETE($idBooking, $roomsToDelete);
+
+                if (isset($roomsDeleted["error"])) {
+
+                    throw new Error("Error, no se pudieron eliminar las habitaciones");
+                }
+            }
+
+              
+            if (count($roomsToAdd) > 0) {
+                $roomsAdded = $this->roomsBookingController->POST(
+                    $idBooking,
+                    $idClient,
+                    $roomsToAdd,
+                    $startBooking,
+                    $endBooking
+                );
+
+                if (isset($roomsAdded["error"])) {
+
+                    throw new Error("Error, no se pudieron agregar las habitaciones");
+                }
+            }
+
+            $amountBookingUpdated = $this->revenuesController->PUT($idBooking, $amount);
+
+            if (!$amountBookingUpdated) {
+                throw new Error("Error, no se pudo actualizar el deposito de la reserva");
+            }
+
+            if ($amountBookingUpdated == TRUE) {
+                $this->connection->commit();
+                return $amountBookingUpdated;
             }
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
+            $this->connection->rollback();
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 

@@ -1,26 +1,56 @@
 import { formatDate } from "./scriptTableBills.js";
+import { getRevenuDetailsById } from "./scriptRevenues.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 
 let contentBill;
 
-export const configBill = async (revenueBooking, modal) => {
-  let title = document.querySelector(".title").querySelector("h3");
-  title.textContent = `Factura reserva ${revenueBooking.idReservaPago}`;
-  contentBill = document.querySelector(".contentBill");
+document.addEventListener("DOMContentLoaded", async function () {
+  let urlParams = new URLSearchParams(window.location.search);
 
-  closeWindow(modal);
+  if (!urlParams.get("idRevenueBooking")) {
+    location.href = "../index.php";
+  } else {
+    contentBill = document.querySelector(".contentBill");
+    let idRevenueBooking = urlParams.get("idRevenueBooking");
 
-  let billBookingDetails = await getBillBookingDetailsById(
-    revenueBooking.idReservaPago
-  );
-  billBookingDetails = billBookingDetails.flat();
+    let revenueBooking = await dataBillBooking(idRevenueBooking);
 
-  if (billBookingDetails) {
-    drawBill(billBookingDetails, revenueBooking);
-    generatePDF(revenueBooking.idReservaPago);
+    if (revenueBooking) {
+      let title = document.querySelector(".title").querySelector("h3");
+      title.textContent = `Factura reserva ${revenueBooking.idReservaPago}`;
+
+      let billBookingDetails = await getBillBookingDetailsById(
+        revenueBooking.idReservaPago
+      );
+      billBookingDetails = billBookingDetails.flat();
+
+      if (billBookingDetails) {
+        drawBill(billBookingDetails, revenueBooking);
+        generatePDF(revenueBooking.idReservaPago);
+      }
+    }
+  }
+});
+
+const dataBillBooking = async (idRevenueBooking) => {
+  let data;
+
+  loading(true);
+  try {
+    const result = await getRevenuDetailsById(idRevenueBooking);
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!data) {
+      noData();
+    }
+    return data;
   }
 };
-
 export const getBillBookingDetailsById = async (idBooking) => {
   let url =
     `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/billRoutes.php?params=` +
@@ -73,7 +103,7 @@ const drawBill = (billBookingDetails, revenueBooking) => {
 
    <div class="title">
    <div class="icon">
-    <img src="../../../img/iconBill.png">
+    <img src="../../../../img/iconBill.png">
     <h3>Hotel System</h3>
     </div>
     <h4>Factura</h4>
@@ -165,11 +195,11 @@ const generatePDF = (idBooking) => {
 
       let doc = new jsPDF({
         orientation: "landscape",
-        unit: "mm",
-        format: "a4",
+        unit: "px",
+        format: [canvas.width, canvas.height],
         putOnlyUsedFonts: true
       });
-      doc.addImage(imageURLCanva, "png", 15, 15);
+      doc.addImage(imageURLCanva, "png", 87, 15);
       doc.save("Factura reserva numero " + idBooking);
     });
   });
@@ -178,7 +208,7 @@ const generatePDF = (idBooking) => {
 const noData = () => {
   contentBill.innerHTML = `
   <div class="noDataBill">
- <img src="../../../img/sinDatos.png">
+ <img src="../../../../img/sinDatos.png">
   <span>Ups,no se pudo cargar la factura</span>
 </div>
 
@@ -190,20 +220,11 @@ const loading = (state) => {
     contentBill.innerHTML = `
   <div class="loadingBill">
   <span>Cargando factura</span>
-   <img src="../../../img/spinnerMain.gif">
+   <img src="../../../../img/spinnerMain.gif">
 </div>
 
 `;
   } else {
     contentBill.innerHTML = ``;
   }
-};
-
-const closeWindow = (modal) => {
-  let btnCloseWindow = document.querySelector(".btnCloseWindow");
-
-  btnCloseWindow.addEventListener("click", () => {
-    modal.innerHTML = ``;
-    modal.style.display = "none";
-  });
 };

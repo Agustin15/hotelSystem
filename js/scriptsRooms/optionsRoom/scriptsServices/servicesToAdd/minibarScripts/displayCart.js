@@ -10,15 +10,7 @@ import {
   optionServiceProduct
 } from "./displayProducts.js";
 
-import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
-import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
-import {
-  POSTService,
-  getStatesOfProductsServices,
-  PUTServiceHotel,
-  PUTService
-} from "../../../../../scriptsServices/scriptServices.js";
-import { getPayById } from "../../../../../scriptsRevenues/scriptRevenues.js";
+import { POSTService } from "../../../../../scriptsServices/scriptServices.js";
 import { idBooking, numRoom, serviceByName } from "../minibar.js";
 import { displayAlert } from "./displayAlert.js";
 
@@ -99,55 +91,6 @@ const noItems = () => {
     `;
 };
 
-const filterProductsToAddByState = (productsState, criterion) => {
-  let productsFilter = productsState.filter(
-    (productsState) => productsState.state == criterion
-  );
-
-  return productsFilter;
-};
-export const addService = async () => {
-  let productsState = await statesOfProductsServices();
-
-  if (productsState) {
-    let productsToAdd = filterProductsToAddByState(productsState, "toAdd");
-    let productsToUpdate = filterProductsToAddByState(
-      productsState,
-      "toUpdate"
-    );
-
-    let resultService = false;
-    if (productsToAdd.length > 0) {
-      let serviceAdded = await postService(productsToAdd);
-
-      if (serviceAdded) {
-        resultService = true;
-      } else {
-        return;
-      }
-    }
-    if (productsToUpdate.length > 0) {
-      let serviceUpdated = await putServiceRoom(productsToUpdate);
-      if (serviceUpdated) {
-        resultService = true;
-      } else {
-        return;
-      }
-    }
-
-    if (resultService) {
-      let resultUpdatePay = await putPay(amount);
-      if (resultUpdatePay) {
-        let resultUpdateService = await putHotelService();
-        if (resultUpdateService) {
-          cleanCart();
-          displayAlert(true, numRoom);
-        }
-      }
-    }
-  }
-};
-
 const loading = (state) => {
   let spinner = document.querySelector(".btnAddService").querySelector("img");
 
@@ -158,22 +101,12 @@ const loading = (state) => {
   }
 };
 
-const statesOfProductsServices = async () => {
-  loading(true);
-  let data;
-  try {
-    const result = await getStatesOfProductsServices(cart, idBooking, numRoom);
-    if (result) {
-      data = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading(false);
-    if (!data) {
-      displayAlert(false, numRoom);
-    }
-    return data;
+export const addService = async (cart) => {
+  const servicesAdded = await postService(cart);
+
+  if (servicesAdded == true) {
+    displayAlert(true, numRoom);
+    cleanCart();
   }
 };
 
@@ -182,115 +115,27 @@ const postService = async (productsToAdd) => {
     idBooking: idBooking,
     numRoom: numRoom,
     option: optionServiceProduct,
-    products: productsToAdd
+    products: productsToAdd,
+    amountService: amount
   };
 
   let resultPOST;
   loading(true);
   try {
     const result = await POSTService(serviceToAdd);
+    if (result.error) {
+      throw result;
+    }
     if (result) {
       resultPOST = result;
     }
   } catch (error) {
-    console.log(error);
-    loading(false);
-  } finally {
-    if (!resultPOST) {
+    if (error) {
       displayAlert(false, numRoom);
     }
+  } finally {
+    loading(false);
     return resultPOST;
-  }
-};
-
-const putPay = async (amount) => {
-  let revenueById = await getPayById(idBooking);
-
-  if (revenueById) {
-    let newAmount = revenueById.deposito + amount;
-
-    let resultPUTRevenue;
-    loading(true);
-    try {
-      const response = await fetch(
-        `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            credentials: "same-origin"
-          },
-          body: JSON.stringify({ idBooking: idBooking, newAmount: newAmount })
-        }
-      );
-      const result = await response.json();
-      if (!response.ok) {
-        if (response.ok == 401) {
-          invalidAuthentication();
-        } else throw result.error;
-      }
-      if (result) {
-        resultPUTRevenue = result;
-      }
-    } catch (error) {
-      console.log(error);
-      loading(false);
-    } finally {
-      if (!resultPUTRevenue) {
-        displayAlert(false, numRoom);
-      }
-      return resultPUTRevenue;
-    }
-  }
-};
-
-const putServiceRoom = async (productsToUpdate) => {
-  const serviceToUpdate = {
-    products: productsToUpdate,
-    option: optionServiceProduct,
-    idBooking: idBooking,
-    numRoom: numRoom
-  };
-
-  let resultPUT;
-  loading(true);
-  try {
-    const result = await PUTService(serviceToUpdate);
-    if (result) {
-      resultPUT = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading(false);
-    if (!resultPUT) {
-      displayAlert(false, numRoom);
-    }
-    return resultPUT;
-  }
-};
-
-const putHotelService = async () => {
-  const serviceToUpdate = {
-    products: cart,
-    option: "updateStockProductByServiceToRoom"
-  };
-
-  let resultPUT;
-  loading(true);
-  try {
-    const result = await PUTServiceHotel(serviceToUpdate);
-    if (result) {
-      resultPUT = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading(false);
-    if (!resultPUT) {
-      displayAlert(false, numRoom);
-    }
-    return resultPUT;
   }
 };
 

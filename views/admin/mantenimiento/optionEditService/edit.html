@@ -9,6 +9,25 @@
 
 <body>
 
+    <div class="modalAlert">
+
+        <div class="alertSuccesfully">
+
+            <h3>¡Exito!</h3>
+            <img src="../../../img/tickAlertQueryForm.png">
+            <p></p>
+            <button class="btnCloseAlertSuccesfully">OK</button>
+
+        </div>
+        <div class="alertError">
+
+            <h3>¡Error!</h3>
+            <img src="../../../img/advertenciaDelete.png">
+            <p></p>
+            <button class="btnCloseAlertError">OK</button>
+        </div>
+    </div>
+
     <div class="containEditService">
 
         <div class="header">
@@ -21,30 +40,46 @@
 
         <form id="formEditService">
 
-            <div class="columnInput">
+            <div class="columnInput" id="containInputIcon">
                 <label>Icono:</label>
                 <div class="containImage">
-                <div class="file-select">
-                    <input id="#src-file" type="file" accept="image/*">
+                    <div class="file-select">
+                        <input id="#src-file" type="file" accept="image/*">
+                    </div>
+                    <div class="imageService">
+                        <img id="iconService" src="">
+                    </div>
                 </div>
-                <div class="imageService">
-                    <img id="iconService" src="">
+                <div class="errorIcon">
+                    <img src="../../../img/warningInput.png">
+                    <p></p>
                 </div>
-            </div>
             </div>
 
             <div class="columnInput">
                 <label>Precio:</label>
-                <input type="number" autocomplete="off" min="0" id="precio" name="price">
+                <input type="text" placeholder="Ingresa precio" class="inputToFormData" autocomplete="off" id="precio"
+                    name="price">
+                <div class="errorInput">
+                    <img src="../../../img/warningInput.png">
+                    <p></p>
+                </div>
             </div>
 
-            <div class="columnInput">
+
+            <div class="columnInput" id="containDescriptionService">
                 <label>Descripcion:</label>
-                <textarea maxlength="59"  autocomplete="off"  id="descripcionServicio"  name="description">
-
-                </textarea>
+                <textarea maxlength="59" autocomplete="off" placeholder="Ingresa descripcion" id="descripcionServicio"
+                    class="inputToFormData" name="description"></textarea>
+                <div class="errorInput">
+                    <img src="../../../img/warningInput.png">
+                    <p></p>
+                </div>
             </div>
-            <button class="btnUpdate">Actualizar</button>
+            <button class="btnUpdate">
+                Actualizar
+                <img class="loader" src="../../../img/spinnerBooking.gif">
+            </button>
         </form>
     </div>
 </body>

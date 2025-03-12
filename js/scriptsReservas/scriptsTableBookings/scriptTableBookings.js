@@ -290,7 +290,7 @@ const displaySelectYear = async () => {
       }
     });
     const result = await response.json();
-  
+
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
@@ -351,6 +351,7 @@ const optionBooking = (tbody) => {
 };
 
 const displayOptionModal = async (url, option) => {
+
   let modalMainBookings = document.querySelector(".modalMainBookings");
   let page;
   if (url) {

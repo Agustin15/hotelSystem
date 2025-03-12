@@ -1,14 +1,12 @@
 import {
   getDetailsServicesByCurrentBookingRoom,
-  DELETEService,
-  PUTServiceHotel
+  DELETEService
 } from "../../../scriptsServices/scriptServices.js";
 import {
   modalConfirmDelete,
   footerModal
 } from "./modalDeleteService/modalConfirm.js";
 
-import { getPayById } from "../../../scriptsRevenues/scriptRevenues.js";
 import BACK_URL_LOCALHOST from "../../../urlLocalhost.js";
 
 let idBooking, numRoom, containDeleteService, modal;
@@ -124,13 +122,7 @@ const displayServices = (servicesRoomDetails) => {
         if (optionSwitched) {
           let resultDelete = await deleteService(serviceFound);
           if (resultDelete) {
-            let resultPay = await PUTPay(serviceFound);
-            if (resultPay) {
-              let resultPut = putServiceHotel(serviceFound);
-              if (resultPut) {
-                serviceDeleted();
-              }
-            }
+            serviceDeleted();
           }
         } else {
           modal.style.display = "none";
@@ -154,98 +146,22 @@ const deleteService = async (service) => {
   try {
     const result = await DELETEService(service.idServicioHabitacion);
 
+    if (result.error) {
+      throw result.error;
+    }
     if (result) {
       resultDeleteService = result;
     }
   } catch (error) {
     console.log(error);
-    loading(false, "Cargando", "loadingDelete", footerModal);
+    noData(
+      "Ups no se pudo eliminar el servicio",
+      "errorDelete",
+      footerModal,
+      "../../../img/advertenciaDelete.png"
+    );
   } finally {
-    if (!resultDeleteService) {
-      noData(
-        "Ups no se pudo eliminar el servicio",
-        "errorDelete",
-        footerModal,
-        "../../../img/advertenciaDelete.png"
-      );
-    }
+    loading(false, "Cargando", "loadingDelete", footerModal);
     return resultDeleteService;
-  }
-};
-
-const PUTPay = async (service) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php `;
-
-  let data;
-  loading(true, "Cargando", "loadingDelete", footerModal);
-  try {
-    let revenueBooking = await getPayById(idBooking);
-    if (!revenueBooking) {
-      throw "Ups, no se pudo encontrar el precio de la reserva";
-    }
-    let newAmount =
-      revenueBooking["deposito"] - service.cantidad * service.precio;
-
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        credentials: "same-origin"
-      },
-      body: JSON.stringify({ idBooking: idBooking, newAmount: newAmount })
-    });
-    const result = await response.json();
-
-    if (!response.ok) {
-      if (response.status == 401) {
-        invalidAuthentication();
-      } else throw result.error;
-    } else if (result.response == true) {
-      data = result;
-    }
-  } catch (error) {
-    loading(false, "Cargando", "loadingDelete", footerModal);
-    console.log(error);
-  } finally {
-    if (!data) {
-      noData(
-        "Ups no se pudo actualizar el precio de la reserva",
-        "errorDelete",
-        footerModal,
-        "../../../img/advertenciaDelete.png"
-      );
-    }
-    return data;
-  }
-};
-
-const putServiceHotel = async (service) => {
-  const serviceToUpdate = {
-    option: "updateStockOneService",
-    idService: service.idServicio,
-    newMaxStock: service.maxStock + service.cantidad
-  };
-
-  loading(true, "Cargando", "loadingDelete", footerModal);
-  let resultPut;
-  try {
-    const result = await PUTServiceHotel(serviceToUpdate);
-
-    if (result) {
-      resultPut = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading(false, "Cargando", "loadingDelete", footerModal);
-    if (!resultPut) {
-      noData(
-        "Ups no se pudo actualizar el stock del producto",
-        "errorDelete",
-        footerModal,
-        "../../../img/advertenciaDelete.png"
-      );
-    }
-    return resultPut;
   }
 };

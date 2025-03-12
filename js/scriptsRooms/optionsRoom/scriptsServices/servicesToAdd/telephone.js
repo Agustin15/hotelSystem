@@ -1,12 +1,8 @@
 import {
   getServiceByName,
-  POSTService,
-  getServiceByIdAndNumRoomAndBooking,
-  PUTService
+  POSTService
 } from "../../../../scriptsServices/scriptServices.js";
 
-import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
-import { getPayById } from "../../../../scriptsRevenues/scriptRevenues.js";
 import {
   setAlertService,
   loadingForm,
@@ -143,166 +139,54 @@ const calculateTotal = () => {
         if (alertService) {
           alertService.style.display = "none";
         }
-        serviceFind(quantityMinutes);
+        let serviceAddedToRoom = addServiceToRoom(quantityMinutes, total);
+        if (serviceAddedToRoom == true) {
+          setAlertService(
+            alertService,
+            true,
+            `Servicio agregado exitosamente a la habitacion ${numRoom}`
+          );
+          defaultValues();
+        }
       });
     }
   });
 };
 
-const serviceFind = async (quantityMinutes) => {
+const addServiceToRoom = async (quantityMinutes, amountService) => {
   const serviceToAdd = {
     idService: service.idServicio,
     option: "telephone",
-    quantity: parseInt(quantityMinutes),
     idBooking: parseInt(idBooking),
-    numRoom: parseInt(numRoom)
+    numRoom: parseInt(numRoom),
+    quantity: parseInt(quantityMinutes),
+    amountService: amountService
   };
 
-  loadingForm(true, btnAdd);
-  try {
-    const serviceFinded = await getServiceByIdAndNumRoomAndBooking(
-      serviceToAdd
-    );
-
-    if (serviceFinded == "error") {
-      throw "Error al buscar el servicio";
-    } else if (!serviceFinded) {
-      addServiceToRoom(serviceToAdd);
-    } else {
-      updateServiceRoom(serviceFinded, serviceToAdd);
-    }
-  } catch (error) {
-    console.log(error);
-    loadingForm(false, btnAdd);
-    setAlertService(
-      alertService,
-      false,
-      `Ups, no se pudo agregar el servicio a la habitacion ${numRoom}`
-    );
-  }
-};
-
-const addServiceToRoom = async (serviceToAdd) => {
   let data;
   loadingForm(true, btnAdd);
   try {
     const result = await POSTService(serviceToAdd);
+    if (result.error) {
+      throw result.error;
+    }
     if (result) {
       data = result;
     }
   } catch (error) {
     console.log(error);
-    loadingForm(false, btnAdd);
-    setAlertService(
-      alertService,
-      false,
-      `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
-    );
+    data = error;
   } finally {
-    if (data) {
-      updatePay();
-    }
-  }
-};
-
-const updateServiceRoom = async (serviceFinded, serviceToAdd) => {
-  const serviceToUpdate = {
-    idServiceRoom: serviceFinded.idServicioHabitacion,
-    option: "telephone",
-    newQuantity: serviceToAdd.quantity + serviceFinded.cantidad
-  };
-
-  let data;
-  loadingForm(true, btnAdd);
-  try {
-    const result = await PUTService(serviceToUpdate);
-    if (result) {
-      data = result;
-    }
-  } catch (error) {
-    console.log(error);
     loadingForm(false, btnAdd);
-    setAlertService(
-      alertService,
-      false,
-      `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
-    );
-  } finally {
-    if (data) {
-      updatePay();
-    }
-  }
-};
-
-const payByIdBooking = async () => {
-  let data;
-  loadingForm(true, btnAdd);
-  try {
-    data = await getPayById(idBooking);
-  } catch (error) {
-    console.log(error);
-    loadingForm(false, btnAdd);
-  } finally {
-    if (!data) {
+    if (data.error) {
       setAlertService(
         alertService,
         false,
         `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
       );
     }
+
     return data;
-  }
-};
-
-const updatePay = async () => {
-  const payBookingFinded = await payByIdBooking();
-
-  if (payBookingFinded) {
-    let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php `;
-    let data;
-    const bookingToUpdate = {
-      idBooking: idBooking,
-      newAmount: payBookingFinded.deposito + total
-    };
-
-    loadingForm(true, btnAdd);
-    try {
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "same-origin"
-        },
-        body: JSON.stringify(bookingToUpdate)
-      });
-      const result = await response.json();
-
-      if (!response.ok) {
-        if (response.status == 401) {
-          invalidAuthentication();
-        } else throw result.error;
-      } else if (result.response == true) {
-        data = result;
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      loadingForm(false, btnAdd);
-      if (!data) {
-        setAlertService(
-          alertService,
-          false,
-          `Ups no se pudo agregar el servicio a la habitacion ${numRoom}`
-        );
-      } else {
-        defaultValues();
-        setAlertService(
-          alertService,
-          true,
-          `¡Servicio agregado exitosamente a la habitacion ${numRoom}!`
-        );
-      }
-    }
   }
 };
 

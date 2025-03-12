@@ -10,7 +10,7 @@ class Service
 
     public function __construct()
     {
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
 
@@ -32,6 +32,26 @@ class Service
         $query =  $this->connection->prepare("update serviciosExtra_habitacion set cantidad=?
          where idServicioHabitacion=?");
         $query->bind_param("ii", $quantity, $idServiceRoom);
+        $result = $query->execute();
+        return $result;
+    }
+
+
+    public function updateServiceHotel($nameService, $descriptionService, $price, $icon, $maxStock, $idService)
+    {
+
+        $iconService = file_get_contents($icon);
+        $query =  $this->connection->prepare("update servicio set nombreServicio=?,descripcionServicio=?,precio=?,
+        imagen=?,maxStock=? where idServicio=?");
+        $query->bind_param("ssdsii", $nameService, $descriptionService, $price, $iconService, $maxStock, $idService);
+        $result = $query->execute();
+        return $result;
+    }
+    public function updateMaxStockServiceHotel($newMaxStock, $idService)
+    {
+
+        $query =  $this->connection->prepare("update servicio set maxStock=? where idServicio=?");
+        $query->bind_param("ii", $newMaxStock, $idService);
         $result = $query->execute();
         return $result;
     }
@@ -74,16 +94,6 @@ class Service
         $query->execute();
         $result = $query->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-
-    public function updateMaxStockServiceHotel($newMaxStock, $idService)
-    {
-
-        $query =  $this->connection->prepare("update servicio set maxStock=? where idServicio=?");
-        $query->bind_param("ii", $newMaxStock, $idService);
-        $result = $query->execute();
-        return $result;
     }
 
 
@@ -146,5 +156,15 @@ class Service
         $query->execute();
         $result = $query->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getServiceRoomByIdServiceRoom($idServiceRoom)
+    {
+        $query = $this->connection->prepare("select * from serviciosextra_habitacion INNER JOIN servicio 
+        ON serviciosextra_habitacion.idServicio=servicio.idServicio where serviciosextra_habitacion.idServicioHabitacion=?");
+        $query->bind_param("i", $idServiceRoom);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_array(MYSQLI_ASSOC);
     }
 }

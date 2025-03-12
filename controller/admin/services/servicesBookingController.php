@@ -1,17 +1,21 @@
 <?php
 require("../../model/service.php");
 require_once("../../config/connection.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "./../revenues/revenuesController.php");
+require(__DIR__ . "./../services/servicesController.php");
+require_once(__DIR__ . "./../authToken.php");
 
 class servicesBookingController
 {
 
-    private $service, $authToken, $connection;
+    private $service, $servicesController, $revenuesController, $authToken, $connection;
     public function __construct()
     {
 
         $this->service = new Service();
-        $this->connection = new Connection();
+        $this->revenuesController = new revenuesController();
+        $this->servicesController = new servicesController();
+        $this->connection = Connection::getInstance()->getConnection();
         $this->authToken = new authToken();
     }
 
@@ -19,121 +23,206 @@ class servicesBookingController
     {
 
         try {
-            $option = $req["option"];
             $idBooking = $req["idBooking"];
             $numRoom = $req["numRoom"];
-            $serviceAdded =  null;
-            $error =  false;
+            $amountService = $req["amountService"];
+            $option = $req["option"];
+
+            $serviceAddedToRoom = false;
 
             $tokenVerify = $this->authToken->verifyToken();
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
+            $this->connection->autocommit(FALSE);
+            $this->connection->begin_transaction();
+
             if ($option == "minibar" || $option == "cantina") {
                 $products = $req["products"];
-                foreach ($products as $product) {
-                    try {
-                        $this->connection->connect()->begin_transaction();
 
-                        $resultServiceAdded =  $this->service->addServiceBooking(
-                            $product["idService"],
-                            $product["quantity"],
-                            $idBooking,
-                            $numRoom
-                        );
-
-                        if ($resultServiceAdded) {
-                            $this->connection->connect()->commit();
-                        } else {
-                            throw new Error("No se pudo agregar el servicio a la habitacion");
-                        }
-                    } catch (Throwable $th) {
-                        $error = true;
-                        $this->connection->connect()->rollback();
-                        throw $th;
-                    }
-                }
-
-                if (!$error) {
-                    $serviceAdded = true;
+                $serviceAdded = $this->addServiceOfMinibarOrBar($idBooking, $numRoom, $products);
+                if (isset($serviceAdded["error"])) {
+                    throw new Error($serviceAdded["error"]);
+                } else {
+                    $serviceAddedToRoom = true;
                 }
             } else {
                 $idService = $req["idService"];
                 $quantity = $req["quantity"];
-                $serviceAdded =  $this->service->addServiceBooking($idService, $quantity, $idBooking, $numRoom);
+
+                $serviceAdded = $this->addServiceOfTelephoneOrMassage($idBooking, $idService, $numRoom, $quantity);
+                if (isset($serviceAdded["error"])) {
+                    throw new Error($serviceAdded["error"]);
+                } else {
+                    $serviceAddedToRoom = true;
+                }
             }
 
-            return $serviceAdded;
+            if ($serviceAddedToRoom == TRUE) {
+                $bookingRevenueFound  = $this->revenuesController->findRevenueByIdBooking($idBooking);
+
+                if (isset($bookingRevenueFound["error"])) {
+
+                    throw new Error($bookingRevenueFound["error"]);
+                }
+
+                $newAmount = $bookingRevenueFound["deposito"] + $amountService;
+                $amountBookingUpdated = $this->revenuesController->PUT($idBooking, $newAmount);
+
+                if (isset($amountBookingUpdated["error"]) || !$amountBookingUpdated) {
+                    throw new Error("Error, no se pudo actualizar el deposito de la reserva");
+                }
+
+                if ($amountBookingUpdated) {
+                    $this->connection->commit();
+                    return $amountBookingUpdated;
+                }
+            }
         } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 500);
+            $this->connection->rollback();
+            return array("error" => $th->getMessage(), "status" => 502);
         }
     }
 
-    public function PUT($req)
+
+    public function addServiceOfTelephoneOrMassage($idBooking, $idService, $numRoom, $quantity)
     {
 
-        try {
-            $option = $req["option"];
-            $serviceUpdated = null;
-            $error = false;
 
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
+        $serviceAddedToRoom = false;
+
+
+        try {
+
+            $serviceRoomFound = $this->findServiceByIdAndNumRoomAndBooking($idBooking, $idService, $numRoom);
+
+            if (isset($serviceRoomFound["error"])) {
+
+                throw new Error("Error,no se pudo encontrar el servicio de la habitacion");
+            }
+            if ($serviceRoomFound) {
+                $newQuantity = $quantity + $serviceRoomFound["cantidad"];
+                $serviceUpdated = $this->PATCHquantityServiceBooking($serviceRoomFound["idServicioHabitacion"], $newQuantity);
+
+                if (isset($serviceUpdated["error"])) {
+
+                    throw new Error($serviceUpdated["error"]);
+                } else {
+
+                    $serviceAddedToRoom = true;
+                }
+            } else {
+
+                $serviceAddedToRoom =  $this->service->addServiceBooking($idService, $quantity, $idBooking, $numRoom);
+
+                if (!$serviceAddedToRoom) {
+                    throw new Error("Error, no se pudo agregar el servicio a la habitacion");
+                } else {
+                    $serviceAddedToRoom = true;
+                }
             }
 
-            if ($option == "minibar" || $option == "cantina") {
-                $products = $req["products"];
-                $numRoom = $req["numRoom"];
-                $idBooking = $req["idBooking"];
+            return $serviceAddedToRoom;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage());
+        }
+    }
 
-                foreach ($products as $product) {
-                    try {
-                        $this->connection->connect()->begin_transaction();
+    public function addServiceOfMinibarOrBar($idBooking, $numRoom, $products)
+    {
 
-                        $serviceFound = $this->service->getServiceByIdAndNumRoomAndBooking(
-                            $product["idService"],
-                            $idBooking,
-                            $numRoom
-                        );
+        $errorServiceToRoom = false;
+        $serviceRoomOk = false;
+        try {
 
-                        if ($serviceFound) {
-                            $newAmount =  $product["quantity"] + $serviceFound["cantidad"];
-                            $resultServiceUpdated =  $this->service->updateQuantityServiceBooking(
-                                $newAmount,
-                                $serviceFound["idServicioHabitacion"],
-                            );
+            foreach ($products as $product) {
 
-                            if ($resultServiceUpdated) {
-                                $this->connection->connect()->commit();
-                            } else {
-                                throw new Error("No se pudo actualizar el servicio a la habitacion");
-                            }
-                        } else {
-                            throw new Error("No se pudo encontrar el servicio a actualizar");
-                        }
-                    } catch (Throwable $th) {
-                        $error = true;
-                        $this->connection->connect()->rollback();
-                        throw $th;
+                $serviceRoomFound = $this->findServiceByIdAndNumRoomAndBooking(
+                    $idBooking,
+                    $product["idService"],
+                    $numRoom
+                );
+
+                if (isset($serviceRoomFound["error"])) {
+
+                    throw new Error("Error,no se pudo encontrar el servicio de la habitacion");
+                }
+
+                if ($serviceRoomFound) {
+
+                    $newQuantity = $product["quantity"] + $serviceRoomFound["cantidad"];
+                    $serviceUpdated =  $this->PATCHquantityServiceBooking(
+                        $serviceRoomFound["idServicioHabitacion"],
+                        $newQuantity
+                    );
+
+                    if (isset($serviceUpdated["error"])) {
+                        $errorServiceToRoom = true;
+                    }
+                } else {
+
+                    $resultServiceAdded =  $this->service->addServiceBooking(
+                        $product["idService"],
+                        $product["quantity"],
+                        $idBooking,
+                        $numRoom
+                    );
+
+                    if (!$resultServiceAdded) {
+                        $errorServiceToRoom = true;
                     }
                 }
 
-                if (!$error) {
-                    $serviceUpdated = true;
+
+                if ($errorServiceToRoom == FALSE) {
+
+
+                    $serviceRoomHotelFound = $this->servicesController->findServiceById($product["idService"]);
+
+                    if (isset($serviceRoomHotelFound["error"]) || !$serviceRoomHotelFound) {
+                        $errorServiceToRoom = true;
+                    } else {
+                        $newMaxStock = $serviceRoomHotelFound["maxStock"] - $product["quantity"];
+                        $serviceRoomHotelUpdated  = $this->servicesController->PATCHmaxStock($product["idService"], $newMaxStock);
+
+                        if (isset($serviceRoomHotelUpdated["error"]) || !$serviceRoomHotelUpdated) {
+                            $errorServiceToRoom = true;
+                        }
+                    }
                 }
-            } else {
-                $idServiceRoom = $req["idServiceRoom"];
-                $quantity = $req["newQuantity"];
-                $serviceUpdated =   $this->service->updateQuantityServiceBooking(
-                    $quantity,
-                    $idServiceRoom,
-                );
             }
 
+            if ($errorServiceToRoom == TRUE) {
+                throw new Error("Error, no se pudieron agregar los productos");
+            } else {
+                $serviceRoomOk = true;
+            }
 
-            return $serviceUpdated;
+            return $serviceRoomOk;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage());
+        }
+    }
+    public function PATCHquantityServiceBooking($idServiceRoom, $newQuantity)
+    {
+
+        try {
+
+            $serviceToRoomUpdated = false;
+
+            $serviceUpdated =   $this->service->updateQuantityServiceBooking(
+                $newQuantity,
+                $idServiceRoom,
+            );
+
+            if (!$serviceUpdated) {
+                throw new Error("Error, no se pudo actualizar el servicio de la habitacion");
+            } else {
+                $serviceToRoomUpdated = true;
+            }
+
+            return $serviceToRoomUpdated;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 500);
         }
@@ -148,9 +237,70 @@ class servicesBookingController
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
-            $resultDelete = $this->service->deleteServiceBooking($req["idServiceRoom"]);
+            $this->connection->autocommit(FALSE);
+            $this->connection->begin_transaction();
 
-            return $resultDelete;
+            $idServiceRoom = $req["idServiceRoom"];
+
+            $serviceRoomFound = $this->findServiceRoomByIdServiceRoom($idServiceRoom);
+
+            if (isset($serviceRoomFound["error"])) {
+                throw new Error($serviceRoomFound["error"]);
+            }
+
+            $resultDelete = $this->service->deleteServiceBooking($idServiceRoom);
+
+            if (!$resultDelete) {
+                throw new Error("Error, no se pudo eliminar el servicio a la habitacion");
+            }
+
+            if ($serviceRoomFound["nombreServicio"] == "Minibar" || $serviceRoomFound["nombreServicio"] == "Cantina") {
+
+                $newMaxStock = $serviceRoomFound["maxStock"] + $serviceRoomFound["cantidad"];
+                $serviceHotelUpdated =  $this->servicesController->PATCHmaxStock($serviceRoomFound["idService"], $newMaxStock);
+
+                if (isset($serviceRoomFound["error"]) || !$serviceHotelUpdated) {
+                    throw new Error("Error, no se pudo actualizar el stock del servicio");
+                }
+            }
+
+            $bookingRevenueFound =  $this->revenuesController->findRevenueByIdBooking(
+                $serviceRoomFound["idReservaHabitacionServicio"]
+            );
+            if (isset($bookingRevenueFound["error"])) {
+                throw new Error($bookingRevenueFound["error"]);
+            }
+
+            $newAmount = $bookingRevenueFound["deposito"] - ($serviceRoomFound["cantidad"] * $serviceRoomFound["precio"]);
+            $amountBookingUpdated = $this->revenuesController->PUT(
+                $serviceRoomFound["idReservaHabitacionServicio"],
+                $newAmount
+            );
+
+            if (!$amountBookingUpdated) {
+                throw new Error("Error, no se pudo actualizar el deposito de la reserva");
+            } else {
+                $this->connection->commit();
+                return $amountBookingUpdated;
+            }
+        } catch (Throwable $th) {
+            $this->connection->rollback();
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function findServiceRoomByIdServiceRoom($idServiceRoom)
+    {
+
+        try {
+
+            $serviceRoomFound = $this->service->getServiceRoomByIdServiceRoom($idServiceRoom);
+            if (!isset($serviceRoomFound)) {
+                throw new Error("Error, no pudo encontrar el servicio de la habitacion");
+            }
+            $serviceRoomFound["imagen"] = null;
+
+            return $serviceRoomFound;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -220,20 +370,11 @@ class servicesBookingController
         }
     }
 
-    public function getServiceByIdAndNumRoomAndBooking($req)
+    public function findServiceByIdAndNumRoomAndBooking($idBooking, $idService, $numRoom)
     {
         try {
-
-            $idService = $req["serviceToAdd"]["idService"];
-            $idBooking = $req["serviceToAdd"]["idBooking"];
-            $numRoom = $req["serviceToAdd"]["numRoom"];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
-            }
-            $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
-            return $serviceFind;
+            $serviceFound = $this->service->getServiceByIdAndNumRoomAndBooking($idService, $idBooking, $numRoom);
+            return $serviceFound;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
@@ -265,41 +406,6 @@ class servicesBookingController
             }, $serviceDetailsRoomFound);
 
             return $serviceDetailsRoomFound;
-        } catch (Throwable $th) {
-            return array("error" => $th->getMessage(), "status" => 404);
-        }
-    }
-
-    public function returnStatesOfProductsServices($req)
-    {
-        try {
-
-            $products = $req["products"];
-            $idBooking = $req["idBooking"];
-            $numRoom = $req["numRoom"];
-
-            $tokenVerify = $this->authToken->verifyToken();
-            if (isset($tokenVerify["error"])) {
-                return array("error" => $tokenVerify["error"], "status" => 401);
-            }
-
-            $productsState = array_map(function ($product) use ($idBooking, $numRoom) {
-
-                $serviceFind = $this->service->getServiceByIdAndNumRoomAndBooking(
-                    $product["idService"],
-                    $idBooking,
-                    $numRoom
-                );
-                if ($serviceFind) {
-                    $product["state"] = "toUpdate";
-                } else {
-                    $product["state"] = "toAdd";
-                }
-
-                return $product;
-            }, $products);
-
-            return $productsState;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
