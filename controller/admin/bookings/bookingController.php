@@ -163,7 +163,7 @@ class bookingController
                 }
             }
 
-              
+
             if (count($roomsToAdd) > 0) {
                 $roomsAdded = $this->roomsBookingController->POST(
                     $idBooking,
@@ -292,11 +292,9 @@ class bookingController
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            if ($req['data']['indexPage'] == 0) {
-                $resultBookings = $this->booking->getBookingsYearLimit($req['data']['year']);
-            } else {
-                $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['indexPage']);
-            }
+
+            $resultBookings = $this->booking->getBookingsYearLimitAndIndex($req['data']['year'], $req['data']['index']);
+
 
             return $resultBookings;
         } catch (Throwable $th) {

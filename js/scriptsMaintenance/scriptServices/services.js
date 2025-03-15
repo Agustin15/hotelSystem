@@ -1,5 +1,6 @@
 import { getAllServicesHotel } from "../../scriptsServices/scriptServices.js";
 import { configEditService } from "./optionEditServices/editService.js";
+import { configEditProducts } from "./optionEditServices/editProducts.js";
 import { loadingPage, pageNotFound } from "../dashboard.js";
 
 let containServices, modalServices;
@@ -62,14 +63,18 @@ const displayServices = async (services) => {
         (service) => service.nombreServicio == nameService
       );
 
+      let url;
+      let configMethod;
       if (serviceFound) {
         if (nameService == "Telefono" || nameService == "Masajes") {
-          openEditService(
-            serviceFound,
-            "optionEditService/edit.html",
-            configEditService
-          );
+          url = "optionEditService/edit.html";
+          configMethod = configEditService;
+        } else {
+          url = "optionEditService/editProducts.html";
+          configMethod = configEditProducts;
         }
+
+        openEditService(serviceFound, url, configMethod);
       }
     });
   });

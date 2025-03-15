@@ -1,45 +1,16 @@
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
-export const inputAlert = (inputError) => {
-  let namesInputs = [...document.getElementsByName(inputError.key)];
-  let input = namesInputs[0];
-  input.classList.add("inputAlert");
-
-  let msjError = input.parentNode.querySelector(".msjError");
-  msjError.querySelector("span").textContent = inputError.msj;
-  msjError.classList.add("msjErrorShow");
-
-  removeAlertInputs();
-};
-
-const cleanInputs = () => {
-  document.querySelector(".btnClean").addEventListener("click", function () {
-    document.querySelectorAll("input").forEach((input) => {
-      input.value = "";
-    });
-  });
-};
-
-const removeAlertInputs = () => {
-  document.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("click", () => {
-      input.classList.remove("inputAlert");
-    });
-  });
-};
-
-export const removeAllMsjErrors = () => {
-  document.querySelectorAll(".msjError").forEach((msj) => {
-    msj.classList.remove("msjErrorShow");
-    msj.querySelector("span").textContent = "";
-  });
-};
+let form;
 
 const submitAddForm = () => {
-  let form = document.querySelector("form");
-
+  form = document.querySelector("form");
+  let btnClean = document.querySelector(".btnClean");
   phoneConfig();
+
+  btnClean.addEventListener("click", function () {
+    cleanInputs();
+  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -71,8 +42,37 @@ const submitAddForm = () => {
       fetchPost(client);
     }
   });
+};
 
-  cleanInputs();
+export const inputAlert = (inputError) => {
+  let namesInputs = [...document.getElementsByName(inputError.key)];
+  let input = namesInputs[0];
+  input.classList.add("inputAlert");
+
+  let msjError = input.parentNode.querySelector(".msjError");
+  msjError.querySelector("span").textContent = inputError.msj;
+  msjError.classList.add("msjErrorShow");
+
+  removeAlertInputs();
+};
+
+const cleanInputs = () => {
+  form.reset();
+};
+
+const removeAlertInputs = () => {
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("click", () => {
+      input.classList.remove("inputAlert");
+    });
+  });
+};
+
+export const removeAllMsjErrors = () => {
+  document.querySelectorAll(".msjError").forEach((msj) => {
+    msj.classList.remove("msjErrorShow");
+    msj.querySelector("span").textContent = "";
+  });
 };
 
 const fetchPost = async (client) => {
@@ -85,9 +85,9 @@ const fetchPost = async (client) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin",
+          credentials: "same-origin"
         },
-        body: JSON.stringify(client),
+        body: JSON.stringify(client)
       }
     );
 
@@ -106,10 +106,10 @@ const fetchPost = async (client) => {
         "¡Cliente agregado exitosamente! ",
         "Exito"
       );
+      cleanInputs();
     }
   } catch (error) {
     console.log(error);
-  
   } finally {
     loading(false);
     if (!data) {
@@ -160,23 +160,23 @@ export const validations = (value) => {
     {
       key: "name",
       validation: value.length > 0,
-      msj: "Complete el campo nombre",
+      msj: "Complete el campo nombre"
     },
     {
       key: "lastName",
       validation: value.length > 0,
-      msj: "Complete el campo apellido",
+      msj: "Complete el campo apellido"
     },
     {
       key: "phone",
       validation: value.length >= 8 && value.length <= 9,
-      msj: "Ingresa un telefono válido",
+      msj: "Ingresa un telefono válido"
     },
     {
       key: "mail",
       validation: value.match(validRegex),
-      msj: "Ingresa un correo válido",
-    },
+      msj: "Ingresa un correo válido"
+    }
   ];
 
   return validations;

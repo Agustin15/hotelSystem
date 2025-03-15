@@ -15,9 +15,21 @@ class Service
 
 
 
+    public function addServiceHotel($nameService, $descriptionService, $price, $image,$maxStock)
+    {
+
+        $iconProduct= file_get_contents($image);
+        $query =  $this->connection->prepare("insert into servicio (nombreServicio,descripcionServicio,precio,
+        imagen,maxStock) values (?,?,?,?,?) ");
+        $query->bind_param("ssdsi", $nameService, $descriptionService, $price, $iconProduct,$maxStock);
+        $result = $query->execute();
+        return $result;
+    }
+
     public function addServiceBooking($idService, $quantity, $idBooking, $numRoom)
     {
 
+        
         $query =  $this->connection->prepare("insert into serviciosExtra_habitacion 
           (idServicio,cantidad,idReservaHabitacionServicio,numHabitacionServicio) values (?,?,?,?) ");
         $query->bind_param("iiii", $idService, $quantity, $idBooking, $numRoom);
@@ -57,6 +69,16 @@ class Service
     }
 
 
+    public function deleteService($idService)
+    {
+
+        $query =  $this->connection->prepare("delete from servicio where 
+        idServicio=?");
+        $query->bind_param("i", $idService);
+        $result = $query->execute();
+        return $result;
+    }
+
     public function deleteServiceBooking($idServiceRoom)
     {
 
@@ -70,7 +92,7 @@ class Service
     public function getAllServicesHotel()
     {
 
-        $query = $this->connection->prepare("select nombreServicio,descripcionServicio,imagen,precio 
+        $query = $this->connection->prepare("select idServicio,nombreServicio,descripcionServicio,imagen,precio 
         from servicio group by nombreServicio");
         $query->execute();
         $result = $query->get_result();
@@ -90,6 +112,39 @@ class Service
     {
 
         $query = $this->connection->prepare("select * from servicio where nombreServicio=?");
+        $query->bind_param("s", $nameService);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+
+    public function getProductByDescriptionWithDistinctId($descriptionService, $nameService, $idService)
+    {
+
+        $query = $this->connection->prepare("select * from servicio where descripcionServicio=? and nombreServicio=? 
+        and idServicio!=?");
+        $query->bind_param("ssi", $descriptionService, $nameService, $idService);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+
+    public function getServiceByDescription($descriptionService, $nameService)
+    {
+
+        $query = $this->connection->prepare("select * from servicio where descripcionServicio=? and nombreServicio=?");
+        $query->bind_param("ss", $descriptionService, $nameService);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+    public function getServiceByNameLimitIndex($nameService, $index)
+    {
+
+        $query = $this->connection->prepare("select * from servicio where nombreServicio=? LIMIT 4 OFFSET $index");
         $query->bind_param("s", $nameService);
         $query->execute();
         $result = $query->get_result();

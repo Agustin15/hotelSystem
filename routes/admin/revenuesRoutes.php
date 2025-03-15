@@ -25,6 +25,7 @@ $routes = [
             "getRevenue" => $revenuesController->getRevenueByIdBooking($req),
             "getRevenueDetailsById" => $revenuesController->getRevenueDetailsById($req),
             "getAllYearsRevenues" => $revenuesController->getAllYearsRevenues($req),
+            "getAllRevenuesByYear" => $revenuesController->getAllRevenuesByYear($req),
             "getAllRevenuesByYearLimitIndex" => $revenuesController->getAllRevenuesByYearLimitIndex($req)
         };
 

@@ -222,7 +222,6 @@ $actualYear = date("Y");
                 </div>
 
                 <div id="chartBookings"></div>
-
             </div>
 
 
@@ -281,3 +280,5 @@ $actualYear = date("Y");
 </body>
 
 </html>
+
+

@@ -9,7 +9,7 @@ class Room
 
     public function __construct()
     {
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
 
@@ -321,7 +321,7 @@ class Room
         $query = $this->connection->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
-         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE() LIMIT 10 OFFSET $index");
+         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<=CURDATE() LIMIT 5 OFFSET $index");
         $query->bind_param("is", $numRoom, $year);
         $query->execute();
         $results = $query->get_result();
@@ -344,7 +344,7 @@ class Room
         $query = $this->connection->prepare("select idReserva,idCliente,correo,fechaLlegada,fechaSalida from habitacion_reservada INNER JOIN reserva_habitacion ON 
         habitacion_reservada.idReservaHabitacion=reserva_habitacion.idReserva INNER JOIN clientes ON clientes.idCliente=
         reserva_habitacion.idClienteReserva where habitacion_reservada.numHabitacionReservada=? and
-         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<CURDATE()");
+         YEAR(reserva_habitacion.fechaLlegada)=? and reserva_habitacion.fechaSalida<=CURDATE()");
         $query->bind_param("is", $numRoom, $year);
         $query->execute();
         $results = $query->get_result();

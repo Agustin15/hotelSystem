@@ -7,7 +7,8 @@ import { modalMainRooms } from "../scriptListRooms.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 let numRoom, containData, selectYear, limitPages, tbody, tfoot;
-let index = 0;
+let index = 1;
+let offset = 0;
 let actualYear = new Date().getFullYear();
 
 export const configRecordRoom = async () => {
@@ -87,11 +88,16 @@ const drawContainTable = (years) => {
 
  <div class="containTable">
    
- <div class="header">
+  <h4 class="titleBookingsRecord">Registros reservas ${actualYear}</h4>
+ <div class="headerTable">
+ <div class="containInput">
+   <input class="inputSearch" type="text" placeholder="Buscar...">
+   <button class="btnSearch">
+    <img src="../../../img/search.png">
+   </button>
+   </div>
+
    <div class="searchSelect">
-        <div class="title">
-        <span>Buscar por año</span>
-        </div>
         <div class="containSelect">
        <select class="selectYear"></select>
        <button class="searchByYear">
@@ -99,15 +105,7 @@ const drawContainTable = (years) => {
        </button>
        </div>
    </div>
-
-   <h4>Reservas</h4>
-
-   <div class="containInput">
-   <input class="inputSearch" type="text" placeholder="Buscar...">
-   <button class="btnSearch">
-    <img src="../../../img/search.png">
-   </button>
-   </div>
+ 
  </div>
   <table>
  <thead>
@@ -169,7 +167,7 @@ const allBookingsByRoomAndYearLimit = async () => {
   loadingTable(true);
   try {
     const result = await getAllBookingsByRoomAndYearLimit(
-      index,
+      offset,
       selectYear.value,
       numRoom
     );
@@ -188,21 +186,21 @@ const allBookingsByRoomAndYearLimit = async () => {
 
 const displayTable = async () => {
   let allBookingsRoom = await allBookingsByRoomAndYear();
+  let titleBookingsRecord = document.querySelector(".titleBookingsRecord");
+
+  titleBookingsRecord.textContent = `Registros reservas ${selectYear.value}`;
 
   if (allBookingsRoom) {
-    if (allBookingsRoom.length >= 10) {
-      limitPages = (allBookingsRoom.length / 10).toFixed(0);
-    } else {
-      limitPages = 1;
+    if (allBookingsRoom.length >= 5) {
+      limitPages = Math.ceil(allBookingsRoom.length / 5);
     }
-    let allBookingsRoomLimit = await allBookingsByRoomAndYearLimit();
-    if (allBookingsRoomLimit) {
-      drawTable(allBookingsRoomLimit);
-    }
+    drawTable();
   }
 };
 
-const drawTable = (allBookingsRoomLimit) => {
+const drawTable = async () => {
+  let allBookingsRoomLimit = await allBookingsByRoomAndYearLimit();
+
   let rowsTable = allBookingsRoomLimit.map((booking, index) => {
     return `
     <tr class=${index % 2 != 0 ? "rowGray" : "rowWhite"}>
@@ -223,11 +221,6 @@ const drawTable = (allBookingsRoomLimit) => {
 
   tbody.innerHTML = rowsTable.join("");
 
-  document.querySelector(".controls").innerHTML = `
-  <span class="prev">Anterior</span>
-  <span>${index + 1}/${limitPages}</span>
-  <span class="next">Siguiente</span>`;
-
   eventSearchByYear();
   controlsIndexPage();
   searchBooking();
@@ -244,19 +237,31 @@ const eventSearchByYear = () => {
 };
 
 const controlsIndexPage = () => {
+  let controls = document.querySelector(".controls");
+  controls.innerHTML = `
+  <span class="prev">Anterior</span>
+  <span class="pageIndex">${index}/${limitPages}</span>
+  <span class="next">Siguiente</span>`;
   let next = document.querySelector(".next");
   let prev = document.querySelector(".prev");
+  let pageIndex = document.querySelector(".pageIndex");
 
   next.addEventListener("click", () => {
-    if (index + 1 < limitPages) {
+    if (index < limitPages) {
       index++;
+      offset += 5;
+      pageIndex.textContent = `${index}/${limitPages}`;
+
       displayTable();
     }
   });
 
   prev.addEventListener("click", () => {
-    if (index + 1 > 1) {
+    if (index > 1) {
       index--;
+      offset -= 5;
+      pageIndex.textContent = `${index}/${limitPages}`;
+
       displayTable();
     }
   });

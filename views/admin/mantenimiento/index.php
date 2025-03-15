@@ -215,7 +215,7 @@ if (!isset($_COOKIE["userToken"])) {
                     </li>
                     <li class="servicesLi">
                         <img src="../../../img/servicesMaintenance.png">
-                        <a>Servcios</a>
+                        <a>Servicios</a>
 
                     </li>
                 </ul>

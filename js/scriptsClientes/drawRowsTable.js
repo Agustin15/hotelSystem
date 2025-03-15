@@ -1,13 +1,25 @@
-export const drawRowsTable = (clients,table) => {
- let dataClients = clients.map((client, index) => {
-    let classRow;
-    if (index % 2 == 0) {
-      classRow = "trGray";
-    }
+import { getDataLimitClients, optionsClient,getClientById } from "./scriptClientsTable.js";
 
+export const drawRowsTable = async (option, table,idClient) => {
+  let clients;
+
+  if (option == "clients") {
+    let clientsLimit = await getDataLimitClients();
+    clients = clientsLimit;
+  } else {
+    let clientFound = await getClientById(idClient);
+    clients = [clientFound];
+  }
+
+  if (clients) {
     table.classList.remove("tableClientsNoData");
+    let dataClients = clients.map((client, index) => {
+      let classRow;
+      if (index % 2 == 0) {
+        classRow = "trGray";
+      }
 
-    return `
+      return `
   
   <tr class=${classRow}>
    <td class="tdId">
@@ -34,7 +46,9 @@ export const drawRowsTable = (clients,table) => {
  
 
   `;
-  });
+    });
 
-  table.querySelector("tbody").innerHTML = dataClients.join("");
+    table.querySelector("tbody").innerHTML = dataClients.join("");
+    optionsClient();
+  }
 };

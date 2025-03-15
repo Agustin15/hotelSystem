@@ -39,7 +39,7 @@
   justify-items: center;
 }
 .containUsers .header .containInput input {
-  width: 11rem;
+  width: 10rem;
   border: 1px solid rgb(158, 158, 158);
   height: 2rem;
   padding-left: 1rem;
@@ -52,10 +52,10 @@
   background-color: rgb(0, 189, 173);
   box-shadow: none;
   position: absolute;
-  left: 14rem;
+  left: 13rem;
   border-radius: 3px;
   color: white;
-  width: 51px;
+  width: 48px;
   height: 34px;
   border: none;
   font-weight: bold;

@@ -44,7 +44,7 @@
 }
 
 .containEditService form {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
@@ -71,21 +71,23 @@
   background-repeat: no-repeat;
 }
 
-.containEditService .containImage {
+#containInputIcon {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
 }
+
+
 
 .containEditService .imageService {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100px;
-  width: 7rem;
-  height: 7rem;
-  border: 1px solid gray;
+  width: 8rem;
+  border-radius: 3px;
+  height: 8rem;
+  border: 1px solid rgb(155, 155, 155);
   box-shadow: 1px 1px 1px gray;
 }
 
@@ -163,7 +165,7 @@
   font-size: 16px;
   cursor: pointer;
   border: none;
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 2rem;
 }
 
@@ -204,7 +206,7 @@
   justify-content: center;
   gap: 0.4rem;
   position: absolute;
-  margin-top: 6.5rem;
+  margin-top: 11rem;
 }
 
 #containInputIcon .errorIcon img {
@@ -291,4 +293,21 @@
 
 .modalAlert .alertError button:hover {
   background: rgb(199, 22, 22);
+}
+
+.noService {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 55%;
+  font-size: 14px;
+  color: gray;
+}
+
+.noService img {
+  width: 84px;
+  height: 84px;
+  opacity: 75%;
 }

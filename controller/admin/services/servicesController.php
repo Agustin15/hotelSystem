@@ -13,7 +13,42 @@ class servicesController
         $this->authToken = new authToken();
     }
 
-    public function POST() {}
+    public function POST($req)
+    {
+
+        $nameService = $req["name"];
+        $priceService = $req["price"];
+        $descriptionService = $req["description"];
+        $iconService = $req["image"];
+        $maxStock  = $req["stock"];
+
+        try {
+
+            $serviceFound = $this->findProductByDescription($descriptionService, $nameService);
+
+            if (isset($serviceFound["error"])) {
+                throw new Error($serviceFound["error"]);
+            }
+
+            if ($serviceFound) {
+                throw new Error("Producto ya existente");
+            }
+
+            $serviceUpdated = $this->service->addServiceHotel(
+                $nameService,
+                $descriptionService,
+                $priceService,
+                $iconService,
+                $maxStock,
+            );
+
+            return $serviceUpdated;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
+    }
+
+
 
 
     public function PUT($req)
@@ -22,22 +57,33 @@ class servicesController
 
         try {
             $nameService = $req["name"];
+            $idService = $req["idService"];
             $priceService = $req["price"];
             $descriptionService = $req["description"];
             $iconService = $req["image"];
+            $maxStock  = $req["stock"];
 
-            $serviceFound = $this->findServiceByName($nameService);
 
-            if (isset($serviceFound["error"])) {
-                throw new Error($serviceFound["error"]);
+            if ($nameService == "Minibar" || $nameService == "Cantina") {
+                $serviceFound = $this->findProductByDescriptionAndDistinctId($descriptionService, $nameService, $idService);
+
+                if (isset($serviceFound["error"])) {
+                    throw new Error($serviceFound["error"]);
+                }
+
+                if ($serviceFound) {
+                    throw new Error("Producto ya existente");
+                }
             }
+
+
             $serviceUpdated = $this->service->updateServiceHotel(
                 $nameService,
                 $descriptionService,
                 $priceService,
                 $iconService,
-                null,
-                $serviceFound["idServicio"]
+                $maxStock,
+                $idService
             );
 
             return $serviceUpdated;
@@ -56,7 +102,18 @@ class servicesController
         }
     }
 
-    public function DELETE() {}
+    public function DELETE($req)
+    {
+
+        try {
+
+            $idService = $req["idService"];
+            $serviceDeleted = $this->service->deleteService($idService);
+            return $serviceDeleted;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
+    }
 
     public function getAllServicesHotel($req)
     {
@@ -97,16 +154,47 @@ class servicesController
     {
         try {
             $serviceFound = $this->service->getServiceByName($nameService);
-            $serviceFound[0]["imagen"] = null;
-
             if (!isset($serviceFound)) {
                 throw new Error("Error, no se pudo encontrar el servicio");
             }
+            $serviceFound[0]["imagen"] = null;
             return $serviceFound[0];
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }
     }
+
+    public function findProductByDescription($descriptionService, $nameService)
+    {
+        try {
+            $serviceFound = $this->service->getServiceByDescription($descriptionService, $nameService);
+
+            if ($serviceFound) {
+                $serviceFound["imagen"] = null;
+            }
+
+            return $serviceFound;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function findProductByDescriptionAndDistinctId($descriptionService, $nameService, $idService)
+    {
+        try {
+            $serviceFound = $this->service->getProductByDescriptionWithDistinctId($descriptionService, $nameService, $idService);
+
+            if ($serviceFound) {
+                $serviceFound["imagen"] = null;
+            }
+
+
+            return $serviceFound;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
 
     public function getServiceByName($req)
     {
@@ -117,6 +205,32 @@ class servicesController
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
             $serviceFind = $this->service->getServiceByName($req["nameService"]);
+            if ($serviceFind) {
+                $serviceFind = array_map(function ($service) {
+                    $service["imagen"] = base64_encode($service["imagen"]);
+                    return $service;
+                }, $serviceFind);
+                return $serviceFind;
+            } else {
+                throw new Error("Ups,no se encontro el servicio");
+            }
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+    public function getServiceByNameLimitIndex($req)
+    {
+
+        try {
+
+            $nameService = $req["nameService"];
+            $index = $req["index"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+            $serviceFind = $this->service->getServiceByNameLimitIndex($nameService, $index);
             if ($serviceFind) {
                 $serviceFind = array_map(function ($service) {
                     $service["imagen"] = base64_encode($service["imagen"]);

@@ -172,6 +172,40 @@ export const getServiceByName = async (nameService) => {
   }
 };
 
+export const getServiceByNameLimit = async (nameService, index) => {
+  let url =
+    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    JSON.stringify({
+      option: "getServiceByNameLimit",
+      nameService: nameService,
+      index: index
+    });
+
+  let data = null;
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
 export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
   let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=
   ${JSON.stringify({
@@ -319,7 +353,36 @@ export const PUTHotelService = async (serviceToUpdate) => {
     });
     const result = await response.json();
 
-    console.log(result);
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result;
+    } else if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error.error);
+    data = error;
+  } finally {
+    return data;
+  }
+};
+
+export const POSTHotelService = async (serviceToAdd) => {
+  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php`;
+
+  let data = null;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      },
+      body: JSON.stringify(serviceToAdd)
+    });
+    const result = await response.json();
 
     if (!response.ok) {
       if (response.status == 401) {

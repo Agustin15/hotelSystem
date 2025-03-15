@@ -1,15 +1,15 @@
 import {
   getAllYearsRevenues,
-  getRevenuesByYear,
+  getAllRevenuesByYear,
   getAllRevenuesByYearLimitIndex,
   getRevenuDetailsById
 } from "./scriptRevenues.js";
 
-
 let selectYear, currentYear, controls, tableBills, modal;
 
 let pages;
-let index = 0;
+let index = 1;
+let offset = 0;
 
 export const configTable = async () => {
   modal = document.querySelector(".modalMainRevenues");
@@ -32,10 +32,8 @@ export const configTable = async () => {
     }
   } else {
     controls.style.display = "none";
-    let revenueBooking = await revenueByIdBooking(urlParams.get("idBooking"));
-    if (revenueBooking) {
-      displayTable([revenueBooking]);
-    }
+
+    displayTable("revenueFound", urlParams.get("idBooking"));
   }
 };
 
@@ -99,7 +97,7 @@ const revenuesByYear = async (year) => {
   let revenues;
   loading(true);
   try {
-    let result = await getRevenuesByYear(!year ? currentYear : year);
+    let result = await getAllRevenuesByYear(!year ? currentYear : year);
     if (result) {
       revenues = result;
     }
@@ -108,11 +106,8 @@ const revenuesByYear = async (year) => {
   } finally {
     loading(false);
     if (revenues) {
-      let revenuesLimit = await allRevenuesByYearLimitIndex(year);
-      if (revenuesLimit) {
-        displayControlsIndex(revenues.length, revenuesLimit);
-        displayTable(revenuesLimit);
-      }
+      displayControlsIndex(revenues.length);
+      displayTable("revenues");
     } else {
       noData();
     }
@@ -133,28 +128,39 @@ export const formatDate = (date, character) => {
   return dateFormat;
 };
 
-const displayTable = (revenuesLimit) => {
-  let tableBills = document.querySelector(".tableBills");
+const displayTable = async (option, idBooking) => {
+  let revenues;
+  if (option == "revenues") {
+    let revenuesLimit = await allRevenuesByYearLimitIndex(selectYear.value);
+    revenues = revenuesLimit;
+  } else {
+    let revenueBooking = await revenueByIdBooking(idBooking);
 
-  let revenuesRows = revenuesLimit.map((revenue, index) => {
-    let iconStatusBooking, titleIconState;
+    revenues = [revenueBooking];
+  }
 
-    if (new Date(revenue.fechaSalida) <= new Date()) {
-      iconStatusBooking = "../../../img/bookingEndIcon.png";
-      titleIconState = "Finalizada";
-    } else if (
-      new Date(revenue.fechaLlegada) <= new Date() &&
-      new Date(revenue.fechaSalida) > new Date()
-    ) {
-      titleIconState = "En curso";
-    } else {
-      iconStatusBooking = "../../../img/bookingPendingIcon.png";
-      titleIconState = "Pendiente";
-    }
+  if (revenues) {
+    let tableBills = document.querySelector(".tableBills");
 
-    let bookingStartFormat = formatDate(new Date(revenue.fechaLlegada), "-");
-    let bookingEndFormat = formatDate(new Date(revenue.fechaSalida), "-");
-    return `
+    let revenuesRows = revenues.map((revenue, index) => {
+      let iconStatusBooking, titleIconState;
+
+      if (new Date(revenue.fechaSalida) <= new Date()) {
+        iconStatusBooking = "../../../img/bookingEndIcon.png";
+        titleIconState = "Finalizada";
+      } else if (
+        new Date(revenue.fechaLlegada) <= new Date() &&
+        new Date(revenue.fechaSalida) > new Date()
+      ) {
+        titleIconState = "En curso";
+      } else {
+        iconStatusBooking = "../../../img/bookingPendingIcon.png";
+        titleIconState = "Pendiente";
+      }
+
+      let bookingStartFormat = formatDate(new Date(revenue.fechaLlegada), "-");
+      let bookingEndFormat = formatDate(new Date(revenue.fechaSalida), "-");
+      return `
      <tr class="${index % 2 == 0 ? "trGray" : ""}"> 
       <td>
       <div class="idBooking">
@@ -184,40 +190,45 @@ const displayTable = (revenuesLimit) => {
         </td>
      </tr>
     `;
-  });
-
-  tableBills.querySelector("tbody").innerHTML = revenuesRows.join("");
-  search();
-
-  document.querySelectorAll(".btnViewBill").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-   
-      let idRevenue = btn.id;
-
-      if (idRevenue) {
-        openBill(idRevenue);
-      }
     });
-  });
+
+    tableBills.querySelector("tbody").innerHTML = revenuesRows.join("");
+    search();
+
+    document.querySelectorAll(".btnViewBill").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        let idRevenue = btn.id;
+
+        if (idRevenue) {
+          openBill(idRevenue);
+        }
+      });
+    });
+  }
 };
 
-const displayControlsIndex = (revenuesRows, revenuesLimit) => {
+const displayControlsIndex = (revenuesRows) => {
   let pageIndexElement = document.querySelector(".pageIndex");
-  revenuesRows < 10 ? (pages = 1) : (pages = (revenuesRows / 10).toFixed(0));
+  pages = Math.ceil(revenuesRows / 10);
 
-  pageIndexElement.textContent = `${index + 1}/${pages}`;
+  pageIndexElement.textContent = `${index}/${pages}`;
 
+  console.log(pages);
   controls.querySelector(".prev").addEventListener("click", () => {
-    if (index + 1 > 0) {
+    if (index > 1) {
       index--;
-      displayTable(revenuesLimit);
+      offset -= 10;
+      pageIndexElement.textContent = `${index}/${pages}`;
+      displayTable(selectYear.value);
     }
   });
 
   controls.querySelector(".next").addEventListener("click", () => {
-    if (index + 1 < pages) {
+    if (index < pages) {
       index++;
-      displayTable(revenuesLimit);
+      offset += 10;
+      pageIndexElement.textContent = `${index}/${pages}`;
+      displayTable(selectYear.value);
     }
   });
 };
@@ -227,7 +238,7 @@ const allRevenuesByYearLimitIndex = async (year) => {
 
   loading(true);
   try {
-    let result = await getAllRevenuesByYearLimitIndex(year, index);
+    let result = await getAllRevenuesByYearLimitIndex(year, offset);
     if (result) {
       revenuesLimit = result;
     }
@@ -313,5 +324,5 @@ const search = () => {
 };
 
 const openBill = (idRevenueBooking) => {
-  window.open("optionBill/bill.php?idRevenueBooking=" +idRevenueBooking);
+  window.open("optionBill/bill.php?idRevenueBooking=" + idRevenueBooking);
 };

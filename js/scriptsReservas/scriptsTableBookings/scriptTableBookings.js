@@ -6,8 +6,8 @@ import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 let pages;
-let limitByPage = 1;
-let indexPage = 0;
+let offset = 0;
+let indexPage = 1;
 let yearSelected = new Date().getFullYear();
 
 export const displayTable = async () => {
@@ -18,7 +18,11 @@ export const displayTable = async () => {
 
     if (yearsAllBookings) {
       drawYearsSelect(yearsAllBookings);
-      drawTable();
+      let quantityRows = await getQuantityBookingsActualYear();
+      if (quantityRows) {
+        drawIndex(quantityRows);
+        drawTable();
+      }
     }
   } else {
     let bookingFound = await getBookingById(urlParams.get("idBooking"));
@@ -31,15 +35,10 @@ export const displayTable = async () => {
 };
 
 export const drawTable = async () => {
-  let quantityRows = await getQuantityBookingsActualYear();
+  let bookingsYearlimit = await getBookingsYearLimit();
 
-  if (quantityRows) {
-    let bookingsYearlimit = await getBookingsYearLimit();
-
-    if (bookingsYearlimit) {
-      drawIndex();
-      drawRowsTable(bookingsYearlimit);
-    }
+  if (bookingsYearlimit) {
+    drawRowsTable(bookingsYearlimit);
   }
 };
 
@@ -145,11 +144,7 @@ const getQuantityBookingsActualYear = async () => {
       } else throw result.error;
     } else if (result) {
       data = result;
-      if (result <= 10) {
-        pages = 1;
-      } else {
-        pages = (result / limitByPage).toFixed(0);
-      }
+      pages = Math.ceil(result / 10);
     }
   } catch (error) {
     console.log(error);
@@ -218,22 +213,25 @@ const drawIndex = () => {
   let indexText = controlsIndex.querySelector(".pageIndex");
   let prevPage = controlsIndex.querySelector(".prev");
   let nextPage = controlsIndex.querySelector(".next");
-
   controlsIndex.style.display = "flex";
+  indexText.textContent = `${indexPage}/${pages}`;
+
   prevPage.addEventListener("click", () => {
-    if (indexPage + 1 > 1) {
+    if (indexPage > 1) {
       indexPage--;
+      offset -= 10;
+      indexText.textContent = `${indexPage}/${pages}`;
       drawTable();
     }
   });
   nextPage.addEventListener("click", () => {
-    if (indexPage + 1 < pages) {
+    if (indexPage < pages) {
       indexPage++;
+      offset += 10;
+      indexText.textContent = `${indexPage}/${pages}`;
       drawTable();
     }
   });
-
-  indexText.textContent = `${indexPage + 1}/${pages}`;
 };
 
 const getBookingsYearLimit = async () => {
@@ -244,7 +242,7 @@ const getBookingsYearLimit = async () => {
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
-        data: { year: yearSelected, indexPage: indexPage }
+        data: { year: yearSelected, index: offset }
       });
 
     const response = await fetch(url, {
@@ -351,7 +349,6 @@ const optionBooking = (tbody) => {
 };
 
 const displayOptionModal = async (url, option) => {
-
   let modalMainBookings = document.querySelector(".modalMainBookings");
   let page;
   if (url) {

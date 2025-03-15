@@ -6,8 +6,9 @@ import { configDetails } from "./optionsUsersTable/scriptDetails.js";
 import { loadingPage, pageNotFound } from "../dashboard.js";
 
 let controls, tableUsers;
-let index = 0,
-  pages = 0;
+let index = 1;
+let pages = 0,
+  offset = 0;
 
 export let modal;
 
@@ -20,14 +21,15 @@ export const configTableUsers = async () => {
     if (users.length < 15) {
       pages = 1;
     } else {
-      pages = (users.length / 15).toFixed(0);
+      pages = Math.ceil(users.length / 15);
     }
+    controlsIndex();
     displayTable();
   }
 };
 
 export const displayTable = async () => {
-  let usersLimit = await allUsersLimitIndex(index);
+  let usersLimit = await allUsersLimitIndex();
   if (usersLimit) {
     displayRows(usersLimit);
   }
@@ -59,7 +61,6 @@ const displayRows = async (usersLimit) => {
   });
 
   tableUsers.querySelector("tbody").innerHTML = rows.join("");
-  controlsIndex();
   search();
 
   let btnAddUser = document.querySelector(".btnAddUser");
@@ -95,17 +96,21 @@ const controlsIndex = () => {
   let next = controls.querySelector(".next");
   let pageIndex = controls.querySelector(".pageIndex");
 
-  pageIndex.innerHTML = `${index + 1}/${pages}`;
+  pageIndex.innerHTML = `${index}/${pages}`;
 
   prev.addEventListener("click", () => {
-    if (index + 1 > 1) {
+    if (index > 1) {
       index--;
+      pageIndex.innerHTML = `${index}/${pages}`;
+      offset -= 15;
       displayTable();
     }
   });
   next.addEventListener("click", () => {
-    if (index + 1 < pages) {
+    if (index < pages) {
       index++;
+      pageIndex.innerHTML = `${index}/${pages}`;
+      offset += 15;
       displayTable();
     }
   });
@@ -137,7 +142,7 @@ const allUsersLimitIndex = async () => {
 
   loading(true);
   try {
-    const result = await getAllUsersLimitIndex(index);
+    const result = await getAllUsersLimitIndex(offset);
     if (result) {
       users = result;
     }

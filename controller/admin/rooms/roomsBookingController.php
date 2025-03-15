@@ -474,11 +474,9 @@ class roomsBookingController
             if (isset($tokenVerify["error"])) {
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
-            if ($req["index"] == 0) {
-                $bookingsRoom = $this->rooms->getFirstsBookingsByRoomAndYear($req["numRoom"], $req["year"]);
-            } else {
-                $bookingsRoom = $this->rooms->getAllBookingsByRoomAndYearLimit($req["numRoom"], $req["year"], $req["index"]);
-            }
+
+            $bookingsRoom = $this->rooms->getAllBookingsByRoomAndYearLimit($req["numRoom"], $req["year"], $req["index"]);
+
             return $bookingsRoom;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);

@@ -195,6 +195,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
   numRoom
 ) => {
   let data;
+
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
@@ -221,6 +222,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
     }
     if (result) {
       data = result;
+      console.log(result);
     }
   } catch (error) {
     console.log(error);
@@ -231,6 +233,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
 
 export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
   let data;
+
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params= ` +

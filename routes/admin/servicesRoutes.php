@@ -31,6 +31,7 @@ $routes = [
 
             "getAllServicesHotel" => $servicesController->getAllServicesHotel($req),
             "getServiceByName" => $servicesController->getServiceByName($req),
+            "getServiceByNameLimit" => $servicesController->getServiceByNameLimitIndex($req),
         };
 
         return $optionGet;

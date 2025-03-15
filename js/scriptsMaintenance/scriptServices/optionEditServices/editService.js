@@ -27,16 +27,19 @@ export const configEditService = (service) => {
     .querySelector(".titleEditService")
     .querySelector("img");
 
-  titleImage.src = `data:image/png;base64,${service.imagen}`;
-
-  titleService.textContent = `Editar servicio ${service.nombreServicio.toLowerCase()}`;
-
   btnClose.addEventListener("click", () => {
     closeModal(modalServices);
   });
 
-  if (form) {
-    setForm(form);
+  if (serviceData) {
+    titleImage.src = `data:image/png;base64,${service.imagen}`;
+    titleService.textContent = `Editar servicio ${service.nombreServicio.toLowerCase()}`;
+    if (form) {
+      form.style.display = "flex";
+      setForm(form);
+    }
+  } else {
+    noService();
   }
 };
 
@@ -106,11 +109,16 @@ const submitForm = async (formData) => {
   ) {
     serviceToUpdate.name = serviceData.nombreServicio;
     serviceToUpdate.image = iconService.src;
+    serviceToUpdate.stock = null;
+    serviceToUpdate.idService = serviceData.idServicio;
 
     let serviceUpdated = await updateServiceHotel(serviceToUpdate);
 
     if (serviceUpdated) {
-      alertForm(true);
+      alertForm(
+        true,
+        `Servicio ${serviceData.nombreServicio} actualizado exitosamente`
+      );
       configTableServices();
     }
   }
@@ -173,14 +181,17 @@ const updateServiceHotel = async (serviceToUpdate) => {
       data = result;
     }
   } catch (error) {
-    alertForm(false);
+    alertForm(
+      false,
+      `Ups, no se pudo actualizar el servicio ${serviceData.nombreServicio}`
+    );
   } finally {
     loading(false);
     return data;
   }
 };
 
-const eventKeyDownInputPrice = () => {
+export const eventKeyDownInputPrice = () => {
   let priceInput = document.getElementById("precio");
 
   priceInput.addEventListener("input", (event) => {
@@ -201,16 +212,14 @@ function replaceCharacter(input) {
   }
 }
 
-export const alertForm = (state) => {
+export const alertForm = (state, msj) => {
   let modalAlert = document.querySelector(".modalAlert");
   let alertError = document.querySelector(".alertError");
   let alertSuccesfully = document.querySelector(".alertSuccesfully");
   modalAlert.style.display = "flex";
 
   if (state) {
-    alertSuccesfully.querySelector(
-      "p"
-    ).textContent = `Servicio ${serviceData.nombreServicio} actualizado exitosamente`;
+    alertSuccesfully.querySelector("p").textContent = msj;
     alertSuccesfully.style.display = "flex";
     document
       .querySelector(".btnCloseAlertSuccesfully")
@@ -218,9 +227,7 @@ export const alertForm = (state) => {
         closeAlert(modalAlert, alertSuccesfully);
       });
   } else {
-    alertError.querySelector(
-      "p"
-    ).textContent = `Ups, no se pudo actualizar el servicio ${serviceData.nombreServicio}`;
+    alertError.querySelector("p").textContent = msj;
     alertError.style.display = "flex";
     document
       .querySelector(".btnCloseAlertError")
@@ -233,4 +240,9 @@ export const alertForm = (state) => {
 const closeAlert = (modal, alert) => {
   modal.style.display = "none";
   alert.style.display = "none";
+};
+
+const noService = () => {
+  let noService = document.querySelector(".noService");
+  noService.style.display = "flex";
 };

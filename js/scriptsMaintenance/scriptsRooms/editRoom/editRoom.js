@@ -135,7 +135,7 @@ const validationImages = () => {
   containsImageRoom.forEach((contain) => {
     let imgRoom = contain.querySelector("img");
 
-    if (imgRoom.src.indexOf("data:image/png;base64") == -1) {
+    if (imgRoom.src.indexOf("base64") == -1) {
       let containError =
         imgRoom.parentElement.parentElement.querySelector(".errorInput");
 

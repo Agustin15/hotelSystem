@@ -87,21 +87,23 @@
   height: auto;
   border-radius: 3px;
   box-shadow: 2px 2px 2px gray;
-  padding: 0.2rem 1rem 0.3rem 1rem;
   margin-top: 2rem;
   border: 1px solid rgb(172, 172, 172);
 }
-.containTable .header {
+.containTable .headerTable {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  justify-content: start;
   align-items: center;
+  gap:0rem;
+  margin-top: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid grey;
   width: 100%;
-  padding: 1rem;
+
 }
-.containTable .header h4 {
+.containTable h4 {
   font-size: 19px;
+  margin-top: 1rem;
   color: rgb(0, 0, 0);
 }
 .containTable .searchSelect {
@@ -110,43 +112,31 @@
   align-items: start;
   gap: 0.5rem;
   border-radius: 3px;
-  width: 11rem;
-  height: 4rem;
-  border: 1px solid rgb(170, 170, 170);
-  box-shadow: 2px 2px 2px gray;
+  width: auto;
+  height: auto;
   background-color: white;
-}
-.containTable .searchSelect .title {
-  background-color: rgb(212, 212, 212);
-  color: black;
-  display: flex;
-  align-items: start;
-  justify-content: start;
-  margin-top: 0rem;
-  font-size: 14px;
-  padding: 0.2rem;
-  width: 10.6rem;
-  border-bottom: 1px solid gray;
 }
 .containTable .searchSelect .containSelect {
   display: flex;
   align-items: start;
   justify-content: start;
   gap: 0.2rem;
+  position: relative;
   padding-left: 1rem;
 }
 .containTable .searchSelect .containSelect select {
   width: 7rem;
-  height: 1.5rem;
+  height: 1.8rem;
   border-radius: 3px;
   outline: none;
 }
 .containTable .searchSelect .containSelect button {
   background-color: rgb(10, 168, 196);
-  box-shadow: 1px 1px 1px gray;
   border: none;
-  height: 1.4rem;
-  width: 2rem;
+  height: 1.8rem;
+  width: 2.2rem;
+  position: absolute;
+  left: 6rem;
   border-radius: 3px;
   cursor: pointer;
 }
@@ -163,30 +153,32 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-left: 1rem;
 }
 .containTable .containInput input {
-  width: 11rem;
+  width: 9rem;
   font-size: 16px;
   padding-left: 1rem;
-  padding-right: 2.4rem;
-  height: 2.1rem;
+  padding-right: 1.8rem;
+  height: 1.9rem;
   border-radius: 3px;
   border: 1px solid rgb(153, 153, 153);
   outline: none;
 }
 .containTable .containInput img {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 }
 .containTable .containInput button {
   background-color: rgb(10, 168, 196);
-  box-shadow: 1px 1px 1px gray;
   padding: 0.5rem;
+  border-radius: 3px;
   border: none;
   position: absolute;
-  height: 2.2rem;
-  right: 0rem;
+  left: 10rem;
   top: 0rem;
+  width: 2.3rem;
+  height: 2rem;
   cursor: pointer;
 }
 .containTable .containInput button:hover {
@@ -195,7 +187,7 @@
 .containTable .controls {
   padding: 1rem;
   border-top: 1px solid rgb(204, 204, 204);
-  width: 100%;
+  width: 96%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,7 +206,7 @@
 }
 
 table {
-  width: 104%;
+  width: 100%;
   height: auto;
   max-height: 12rem;
   overflow-y: scroll;

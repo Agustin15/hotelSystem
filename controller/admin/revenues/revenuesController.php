@@ -164,6 +164,25 @@ class revenuesController
         }
     }
 
+
+    public function getAllRevenuesByYear($req)
+    {
+
+        $year = $req["year"];
+
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $revenues = $this->pay->getAllRevenuesByYear($year);
+            return $revenues;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);;
+        }
+    }
+
     public function getAllRevenuesByYearLimitIndex($req)
     {
 

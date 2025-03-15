@@ -9,19 +9,17 @@
   box-shadow: 2px 2px 2px rgb(167, 167, 167);
   height: 26rem;
   padding-top: 1rem;
-  margin-left:11rem;
+  margin-left: 11rem;
   margin-top: 2rem;
   border-radius: 10px;
 }
 .containChart .header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  gap: 4rem;
-  padding-left: 2rem;
+  flex-direction: row-reverse;
   padding-bottom: 0.6rem;
-  width: 96.5%;
-  border-bottom: 1px solid rgb(197, 197, 197);
+  width: 93%;
 }
 .containChart .header .search {
   display: flex;
@@ -55,7 +53,7 @@
 }
 .containChart .header .search button {
   width: 2.5rem;
-  height:2rem;
+  height: 2rem;
   left: 5.5rem;
   padding: 0.3rem;
   color: white;
@@ -74,7 +72,7 @@
   background-color: rgb(8, 143, 153);
   cursor: pointer;
 }
-.containChart  .chartTitle {
+.containChart .chartTitle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,13 +81,13 @@
 .containChart .chartTitle img {
   width: 49px;
 }
-.containChart  .chartTitle h3 {
+.containChart .chartTitle h3 {
   color: rgb(0, 0, 0);
   font-size: 22px;
 }
 .containChart #chartRevenues {
   width: 90%;
-  min-height: 68%;
+  min-height: 78%;
   margin-top: 1rem;
 }
 .containChart .loading {

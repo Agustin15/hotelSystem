@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAddProduct.css">
+</head>
+
+<body>
+
+    <div class="modalAlert">
+
+        <div class="alertSuccesfully">
+
+            <h3>¡Exito!</h3>
+            <img src="../../../img/tickAlertQueryForm.png">
+            <p></p>
+            <button class="btnCloseAlertSuccesfully">OK</button>
+
+        </div>
+        <div class="alertError">
+
+            <h3>¡Error!</h3>
+            <img src="../../../img/advertenciaDelete.png">
+            <p></p>
+            <button class="btnCloseAlertError">OK</button>
+        </div>
+    </div>
+
+    <div class="containAdd">
+
+        <div class="header">
+            <div class="titleAdd">
+                <h3>Agregar producto</h3>
+                <img src="../../../img/addService.png">
+            </div>
+            <button class="btnCloseWindow">X</button>
+        </div>
+
+        <form>
+
+            <div class="rowOne">
+                <div class="containInput">
+                    <label>Nombre:</label>
+                    <input type="text" id="descripcionServicio" autocomplete="off" class="inputForm" name="description"
+                        placeholder="Ingresa nombre">
+                    <div class="errorInput">
+                        <img src="../../../img/warningInput.png">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="containInput">
+                    <label>Precio:</label>
+                    <input type="text" name="price" autocomplete="off" id="precio" class="inputForm"
+                        placeholder="Ingresa precio">
+                    <div class="errorInput">
+                        <img src="../../../img/warningInput.png">
+                        <p></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="containInputStock">
+                <label>Stock:</label>
+                <div class="containStock">
+                    <button type="button" class="btnMinus">-</button>
+                    <input readonly name="stock" value="0" class="inputForm" id="maxStock">
+                    <button type="button" class="btnPlus">+</button>
+                </div>
+                <div class="errorInput">
+                    <img src="../../../img/warningInput.png">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="containIconService">
+                <label>Imagen:</label>
+                <div class="imageAndInput">
+                    <div class="containImage">
+                        <img class="iconProduct" src="../../../img/uploadProduct.png">
+                    </div>
+                    <div class="fileSelect">
+                        <input type="file" name="image" id="inputFile" accept="image/*">
+                    </div>
+                </div>
+                <div class="errorInput">
+                    <img src="../../../img/warningInput.png">
+                    <p></p>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btnAddProduct">
+                Agregar
+                <img class="loader" src="../../../img/spinnerBooking.gif">
+            </button>
+        </form>
+    </div>
+
+</body>
+
+</html>

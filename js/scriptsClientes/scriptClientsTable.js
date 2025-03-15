@@ -6,10 +6,31 @@ import { loadingPage, pageNotFound } from "./scriptCliente.js";
 import BACK_URL_LOCALHOST from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
-let indexRegister = 0;
-let page = 1;
+let offset = 0;
+let index = 1;
 let limitPage;
-let modalMainClient;
+let modalMainClient, controlsElement;
+
+const displayTable = async () => {
+  let table = document.querySelector(".tableClients");
+  controlsElement = document.querySelector(".controls");
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  if (!urlParams.get("idClient")) {
+    let clientsRows = await getRowsClients();
+    if (clientsRows) {
+      limitPage = Math.ceil(clientsRows / 10);
+      controls();
+      drawRowsTable("clients", table);
+    }
+  } else {
+    drawRowsTable("client", table, urlParams.get("idClient"));
+    controlsElement.style.display = "none";
+  }
+
+  search();
+};
 
 const getRowsClients = async () => {
   let data = null;
@@ -27,12 +48,12 @@ const getRowsClients = async () => {
       }
     });
     const result = await response.json();
-
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
       } else throw result.error;
-    } else if (result.length > 0) {
+    }
+    if (result) {
       data = result;
     }
   } catch (error) {
@@ -45,7 +66,7 @@ const getRowsClients = async () => {
   }
 };
 
-const getClientById = async (idClient) => {
+export const getClientById = async (idClient) => {
   let data = null;
   try {
     let url =
@@ -77,7 +98,7 @@ const getClientById = async (idClient) => {
   }
 };
 
-const getDataLimitClients = async () => {
+export const getDataLimitClients = async () => {
   let data = null;
 
   loading(true);
@@ -85,7 +106,7 @@ const getDataLimitClients = async () => {
   try {
     let url =
       `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
-      JSON.stringify({ option: "clientsTable", index: indexRegister });
+      JSON.stringify({ option: "clientsTable", index: offset });
 
     const response = await fetch(url, {
       method: "GET",
@@ -133,52 +154,26 @@ const loading = (state) => {
   }
 };
 
-const displayTable = async () => {
-  let table = document.querySelector(".tableClients");
+const controls = () => {
+  let pagesText = document.querySelector(".pageIndex");
   let next = document.querySelector(".next");
   let prev = document.querySelector(".prev");
-  const urlParams = new URLSearchParams(window.location.search);
+  pagesText.textContent = `${index}/${limitPage}`;
 
-  if (!urlParams.get("idClient")) {
-    let pagesText = document.querySelector(".pageIndex");
-    let clientsRows = await getRowsClients();
-    let clients = await getDataLimitClients();
-
-    if (clients) {
-      if (clientsRows <= 10) {
-        limitPage = 1;
-      } else {
-        limitPage = clientsRows / 10;
-      }
-      pagesText.textContent = `${page}/${limitPage.toFixed(0)}`;
-      drawRowsTable(clients, table);
-      controls(next, prev);
-    }
-  } else {
-    prev.style.display = "none";
-    next.style.display = "none";
-    let clientFind = await getClientById(urlParams.get("idClient"));
-    let clientsFind = [clientFind];
-    drawRowsTable(clientsFind, table);
-  }
-
-  search();
-  optionsClient();
-};
-
-const controls = (next, prev) => {
   next.addEventListener("click", function () {
-    if (page < limitPage) {
-      indexRegister += 10;
-      page++;
+    if (index < limitPage) {
+      index++;
+      offset += 10;
+      pagesText.textContent = `${index}/${limitPage}`;
       displayTable();
     }
   });
 
   prev.addEventListener("click", function () {
-    if (page > 1) {
-      indexRegister -= 10;
-      page--;
+    if (index > 1) {
+      index--;
+      offset -= 10;
+      pagesText.textContent = `${index}/${limitPage}`;
       displayTable();
     }
   });
@@ -261,7 +256,7 @@ const getOptionClient = async (url) => {
   }
 };
 
-const optionsClient = () => {
+export const optionsClient = () => {
   let btnsDelete = [...document.querySelectorAll(".btnDelete")];
   let btnsEdit = [...document.querySelectorAll(".btnEdit")];
   let btnsDetails = [...document.querySelectorAll(".btnDetails")];
