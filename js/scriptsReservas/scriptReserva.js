@@ -3,6 +3,7 @@ let optionListLi = document.querySelector(".listLi");
 export let optionAddLi = document.querySelector(".addLi");
 export let actualOption = localStorage.getItem("actualOptionBooking");
 import { displayTable } from "./scriptsTableBookings/scriptTableBookings.js";
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   if (actualOption == "bookingsTable.html") {
@@ -30,7 +31,7 @@ optionAddLi.addEventListener("click", async () => {
 
 const getDocument = async (url) => {
   let data = null;
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   loadingPage(true, option);
   try {
     const response = await fetch(url);
@@ -104,7 +105,6 @@ const deleteParamsUrl = (optionPage) => {
     searchParamsUrl.get("idBooking") ||
     optionPage == "calendar"
   ) {
-    location.href =
-      "http://localhost/sistema%20Hotel/views/admin/reservas/index.php";
+    location.href = `${FRONT_URL_LOCALHOST}views/admin/reservas/index.php`;
   }
 };

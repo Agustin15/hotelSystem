@@ -1,15 +1,15 @@
 import { month } from "./chart.js";
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "./userData.js";
 import { userData } from "./scriptsAdmin.js";
 
-const getCategoryRoomsData = async () => {
-  let $url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params= ` +
+export const getCategoryRoomsData = async () => {
+  let url =
+    `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params= ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {
-    const response = await fetch($url, {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const getCategoryRoomsData = async () => {
 
 const getRevenuesActualYear = async () => {
   let $url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=  ` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=  ` +
     JSON.stringify({ option: "itemDataDashboard" });
 
   try {
@@ -127,7 +127,4 @@ const displayItemsDataCategoryRooms = async () => {
   }
 };
 
-export {
-  displayItemsDataCategoryRooms,
-  displayItemDataRevenuesActual,
-};
+export { displayItemsDataCategoryRooms, displayItemDataRevenuesActual };

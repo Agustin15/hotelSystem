@@ -1,5 +1,8 @@
 import { modalOption } from "../../scriptTableBookings.js";
-import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
+import {
+  BACK_URL_LOCALHOST,
+  FRONT_URL_LOCALHOST
+} from "../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../scriptsAdmin/userData.js";
 let body;
 let idBooking;
@@ -24,9 +27,7 @@ export const closeWindow = () => {
 
 const paramToFindClient = (url) => {
   localStorage.setItem("actualOptionClient", "clientsTable.html");
-  window.open(
-    "http://localhost/sistema%20Hotel/views/admin/clientes/index.php?" + url
-  );
+  window.open(`${FRONT_URL_LOCALHOST}views/admin/clientes/index.php?` + url);
 };
 
 const getDataClientByIdBooking = async () => {
@@ -34,7 +35,7 @@ const getDataClientByIdBooking = async () => {
   loading(true, body);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
         JSON.stringify({
           option: "getClientByIdBooking",
           idBooking: idBooking

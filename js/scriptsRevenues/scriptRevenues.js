@@ -1,9 +1,9 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 export const getPayById = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getRevenue", idBooking: idBooking });
 
   let data = null;
@@ -34,7 +34,7 @@ export const getPayById = async (idBooking) => {
 
 export const getRevenuDetailsById = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getRevenueDetailsById", idBooking: idBooking });
 
   let data = null;
@@ -65,7 +65,7 @@ export const getRevenuDetailsById = async (idBooking) => {
 
 export const getAllYearsRevenues = async () => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "getAllYearsRevenues" });
 
   let data = null;
@@ -96,7 +96,7 @@ export const getAllYearsRevenues = async () => {
 
 export const getRevenuesByYear = async (year) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({ option: "dashboardGraphic", year: year });
 
   let data = null;
@@ -127,7 +127,7 @@ export const getRevenuesByYear = async (year) => {
 
 export const getAllRevenuesByYear = async (year, index) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({
       option: "getAllRevenuesByYear",
 
@@ -162,7 +162,7 @@ export const getAllRevenuesByYear = async (year, index) => {
 
 export const getAllRevenuesByYearLimitIndex = async (year, index) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
     JSON.stringify({
       option: "getAllRevenuesByYearLimitIndex",
 

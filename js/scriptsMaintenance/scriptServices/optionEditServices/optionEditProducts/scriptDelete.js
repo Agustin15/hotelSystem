@@ -1,5 +1,5 @@
 import { closeModal } from "../../../scriptsUsers/optionsUsersTable/scriptDelete.js";
-import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../../../urlLocalhost.js";
 import { displayRows } from "../editProducts.js";
 
 export const configDeleteProduct = (nameService, product, modal) => {
@@ -32,7 +32,7 @@ const errorDelete = () => {
 
 const DELETEService = async (idService) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({ idService: idService });
   let data = null;
 

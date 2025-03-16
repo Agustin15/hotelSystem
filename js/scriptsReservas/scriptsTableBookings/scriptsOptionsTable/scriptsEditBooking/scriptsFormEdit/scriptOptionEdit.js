@@ -1,5 +1,5 @@
 import { drawFormEdit } from "./scriptFormEdit.js";
-import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
 
 let body;
@@ -22,7 +22,7 @@ const getBookingById = async (idBooking) => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
         JSON.stringify({ option: "getBookingById", idBooking: idBooking }),
       {
         method: "GET",
@@ -57,7 +57,7 @@ const getAllClients = async () => {
   loading(true);
   try {
     let url =
-      "http://localhost/sistema%20Hotel/routes/admin/clientRoutes.php?params=" +
+      `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params= ` +
       JSON.stringify({ option: "allClients" });
 
     const response = await fetch(url);

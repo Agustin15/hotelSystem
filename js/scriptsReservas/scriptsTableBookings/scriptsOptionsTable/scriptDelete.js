@@ -1,5 +1,5 @@
 import { modalOption, drawTable } from "../scriptTableBookings.js";
-import BACK_URL_LOCALHOST from "../../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../scriptsAdmin/userData.js";
 let body;
 
@@ -30,7 +30,7 @@ const deleteBooking = async (idBooking) => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params= ` +
         JSON.stringify({ idBooking: idBooking }),
       {
         method: "DELETE",

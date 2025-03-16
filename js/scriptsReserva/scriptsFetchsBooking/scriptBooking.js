@@ -1,8 +1,8 @@
 import { loadingBooking } from "../personalData.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 
 export const fetchPOSTBooking = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/bookingRoutes.php`;
 
   let data;
   loadingBooking(true, "Reservando");
@@ -32,7 +32,7 @@ export const fetchPOSTBooking = async (booking) => {
 };
 
 export const fetchPUTBooking = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/bookingRoutes.php`;
 
   let data;
 

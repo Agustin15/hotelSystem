@@ -1,41 +1,38 @@
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 export const optionsMenuAdmin = () => {
   let optionEditProfile = document.querySelector(".editProfile");
   if (optionEditProfile) {
     optionEditProfile.addEventListener("click", () => {
-      location.href =
-        "http://localhost/sistema%20Hotel/views/admin/editarPerfil";
+      location.href = `${FRONT_URL_LOCALHOST}views/admin/editarPerfil`;
     });
   }
 
-  routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/index.php",
-    "#liInicio"
-  );
+  routesOptions(`${FRONT_URL_LOCALHOST}views/admin/index.php`, "#liInicio");
 
   routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/clientes/",
+    `${FRONT_URL_LOCALHOST}views/admin/clientes/ `,
     "#liClientes",
     "actualOptionClient"
   );
   routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/reservas/",
+    `${FRONT_URL_LOCALHOST}views/admin/reservas/`,
     "#liReserva",
     "actualOptionBooking"
   );
   routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/habitaciones/",
+    `${FRONT_URL_LOCALHOST}views/admin/habitaciones/`,
     "#liHabitaciones",
     "actualOptionRooms"
   );
 
   routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/ganancias/",
+    `${FRONT_URL_LOCALHOST}views/admin/ganancias/`,
     "#liGanancias",
     "actualOptionRevenues"
   );
 
   routesOptions(
-    "http://localhost/sistema%20Hotel/views/admin/mantenimiento/index.php",
+    `${FRONT_URL_LOCALHOST}views/admin/mantenimiento/index.php`,
     "#liMantenimiento"
   );
 };

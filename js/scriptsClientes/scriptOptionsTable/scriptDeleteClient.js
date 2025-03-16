@@ -1,6 +1,6 @@
 import { displayTable } from "../scriptClientsTable.js";
 import { loading } from "../scriptAddClient.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 const configDeleteClient = async () => {
@@ -33,7 +33,7 @@ export const getDataClient = async (id) => {
   let data = null;
 
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
     JSON.stringify({ option: "dataClient", idClient: id });
 
   loading(true);
@@ -82,7 +82,7 @@ const eventsDelete = (idClient) => {
 
 const fetchDelete = async (idClient) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params= ` +
     JSON.stringify({ idClient: idClient });
   let data;
   try {

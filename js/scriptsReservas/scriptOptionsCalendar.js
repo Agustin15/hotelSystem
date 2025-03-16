@@ -5,7 +5,7 @@ import {
 import { configFreeRooms } from "./scriptsOptionsCalendar/scriptFreeRooms.js";
 import { pageNotFound, loadingPage } from "./scriptReserva.js";
 import { closePageNotFound } from "./scriptsTableBookings/scriptTableBookings.js";
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 let startBookingLocal;
@@ -17,7 +17,7 @@ const getBookings = async () => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
         JSON.stringify({ option: "allBookings" }),
       {
         method: "GET",

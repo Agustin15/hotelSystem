@@ -1,9 +1,9 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 export const getDataServices = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({ option: "getServicesBooking", idBooking: idBooking });
 
   let data = null;
@@ -36,7 +36,7 @@ export const getHistoryServicesByCurrentBookingRoom = async (
   idBooking
 ) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getHistoryServicesByCurrentBookingRoom",
       numRoom: numRoom,
@@ -74,7 +74,7 @@ export const getDetailsServicesByCurrentBookingRoom = async (
   idBooking
 ) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({
       option: "getDetailsServicesByCurrentBookingRoom",
       numRoom: numRoom,
@@ -109,7 +109,7 @@ export const getDetailsServicesByCurrentBookingRoom = async (
 
 export const getAllServicesHotel = async () => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({
       option: "getAllServicesHotel"
     });
@@ -141,7 +141,7 @@ export const getAllServicesHotel = async () => {
 
 export const getServiceByName = async (nameService) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({
       option: "getServiceByName",
       nameService: nameService
@@ -174,7 +174,7 @@ export const getServiceByName = async (nameService) => {
 
 export const getServiceByNameLimit = async (nameService, index) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php?params=` +
     JSON.stringify({
       option: "getServiceByNameLimit",
       nameService: nameService,
@@ -207,7 +207,7 @@ export const getServiceByNameLimit = async (nameService, index) => {
 };
 
 export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=
+  let url = `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=
   ${JSON.stringify({
     option: "getServiceByIdAndNumRoomAndBooking",
     serviceToAdd: serviceToAdd
@@ -242,7 +242,7 @@ export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
 export const getServiceRoomDetailsByNumRoomAndBooking = async (
   serviceToFind
 ) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=
+  let url = `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=
   ${JSON.stringify({
     option: "getServiceRoomDetailsByNumRoomAndBooking",
     serviceToFind: serviceToFind
@@ -276,7 +276,7 @@ export const getServiceRoomDetailsByNumRoomAndBooking = async (
 };
 
 export const POSTService = async (serviceToAdd) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php`;
   let data = null;
 
   try {
@@ -308,7 +308,7 @@ export const POSTService = async (serviceToAdd) => {
 
 export const DELETEService = async (idServiceRoomToDelete) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/servicesBookingRoutes.php?params=` +
     JSON.stringify({ idServiceRoom: idServiceRoomToDelete });
   let data = null;
 
@@ -338,7 +338,7 @@ export const DELETEService = async (idServiceRoomToDelete) => {
 };
 
 export const PUTHotelService = async (serviceToUpdate) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php`;
 
   let data = null;
 
@@ -369,7 +369,7 @@ export const PUTHotelService = async (serviceToUpdate) => {
 };
 
 export const POSTHotelService = async (serviceToAdd) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/servicesRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/admin/servicesRoutes.php`;
 
   let data = null;
 

@@ -1,4 +1,4 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let formQuery = document.querySelector(".formQuery");
 let loader = document.querySelector(".loader");
@@ -84,7 +84,7 @@ const sendQuery = async (dataQuery) => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/emailRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/emailRoutes.php`,
       {
         method: "POST",
         headers: {

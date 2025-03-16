@@ -1,6 +1,6 @@
 import { formatDate } from "./scriptTableBills.js";
 import { getRevenuDetailsById } from "./scriptRevenues.js";
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let contentBill;
 
@@ -53,7 +53,7 @@ const dataBillBooking = async (idRevenueBooking) => {
 };
 export const getBillBookingDetailsById = async (idBooking) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/billRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/billRoutes.php?params=` +
     JSON.stringify({
       idBooking: idBooking
     });

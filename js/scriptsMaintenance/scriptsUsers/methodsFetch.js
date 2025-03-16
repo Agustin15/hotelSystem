@@ -1,12 +1,12 @@
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 
 export const POSTuser = async (newUser) => {
-  console.log(newUser);
+  
   let result;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php`,
       {
         method: "POST",
         headers: {
@@ -36,7 +36,7 @@ export const PUTuser = async (userToUpdate) => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php`,
       {
         method: "PUT",
         headers: {
@@ -65,7 +65,7 @@ export const PATCHUserImage = async (userToUpdate) => {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php`,
       {
         method: "PATCH",
         headers: {
@@ -99,7 +99,7 @@ export const PATCHUserPassword = async (userPasswordToUpdate) => {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php`,
       {
         method: "PATCH",
         headers: {
@@ -133,7 +133,7 @@ export const getAllUsers = async () => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php?params=` +
         JSON.stringify({
           option: "getAllUsers"
         }),
@@ -169,7 +169,7 @@ export const getAllUsersLimitIndex = async (index) => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php?params=` +
         JSON.stringify({
           option: "getAllUsersLimitIndex",
           index: index
@@ -206,7 +206,7 @@ export const deleteUser = async (idUser) => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/userRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php?params=` +
         JSON.stringify({
           idUser: idUser
         }),
@@ -242,7 +242,7 @@ export const getRols = async () => {
 
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/rolRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/rolRoutes.php`,
       {
         method: "GET",
         headers: {

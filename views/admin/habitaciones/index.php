@@ -202,7 +202,7 @@ if (!isset($_COOKIE["userToken"])) {
         <div class="menuBar">
             <div class="title">
                 <h3>Habitaciones</h3>
-                <img src="../../../img/keyCardTitle.png">
+                <img src="../../../img/roomsMaintenance.png">
             </div>
             <nav>
                 <ul>

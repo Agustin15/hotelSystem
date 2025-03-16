@@ -1,6 +1,7 @@
 import { loadYears, getDataClientsTOGraphic } from "./scriptGraficaCliente.js";
 import { displayTable } from "./scriptClientsTable.js";
 import submitAddForm from "./scriptAddClient.js";
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let option = document.querySelector(".option");
 let optionChartLi = document.querySelector(".chartLi");
@@ -44,7 +45,7 @@ optionAddLi.addEventListener("click", async () => {
 
 const getDocument = async (url) => {
   let page;
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   loadingPage(true, option);
   try {
     const response = await fetch(url);
@@ -123,7 +124,6 @@ export const pageNotFound = (element) => {
 const deleteParamsUrl = () => {
   let searchParamsUrl = new URLSearchParams(window.location.search);
   if (searchParamsUrl.get("idClient")) {
-    location.href =
-      "http://localhost/sistema%20Hotel/views/admin/clientes/index.php";
+    location.href = `${FRONT_URL_LOCALHOST}views/admin/clientes/index.php`;
   }
 };

@@ -1,7 +1,7 @@
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 
 export const sendEmail = async (name, email, file, stateBooking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/emailRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/emailRoutes.php`;
   let data;
 
   const formData = new FormData();
@@ -35,7 +35,7 @@ export const sendEmail = async (name, email, file, stateBooking) => {
 };
 
 export const addEmail = async (idBooking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/emailRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/emailRoutes.php`;
   let data;
 
   try {
@@ -64,7 +64,7 @@ export const addEmail = async (idBooking) => {
 };
 
 export const patchStateUpdateEmailBookingById = async (idEmail) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/emailRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/emailRoutes.php`;
   let data;
 
   try {
@@ -92,7 +92,7 @@ export const patchStateUpdateEmailBookingById = async (idEmail) => {
 };
 
 export const getEmailBookingConfirmByIdBooking = async (idBooking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/emailRoutes.php?params=${JSON.stringify(
+  let url = `${BACK_URL_LOCALHOST}routes/bookingClient/emailRoutes.php?params=${JSON.stringify(
     { idBooking: idBooking }
   )}`;
 

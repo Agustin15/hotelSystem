@@ -1,4 +1,4 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "./userData.js";
 
 function month(numMonth) {
@@ -51,7 +51,7 @@ async function getClientsByMonthActualYear(actualYear) {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
         JSON.stringify({ option: "clientsGraphic", year: actualYear }),
       {
         method: "GET",
@@ -147,7 +147,7 @@ async function getRevenueActualYear() {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/revenuesRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/revenuesRoutes.php?params=` +
         JSON.stringify({
           option: "dashboardGraphic",
           year: currentYear
@@ -255,7 +255,7 @@ async function getCategoryRoomsMostReserved() {
   loading(true, "rooms");
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "dashboardGraphic", year: actualYear }),
       {
         method: "GET",

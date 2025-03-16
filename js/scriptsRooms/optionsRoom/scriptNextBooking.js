@@ -1,5 +1,5 @@
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST ,FRONT_URL_LOCALHOST} from "../../urlLocalhost.js";
 import { close } from "./scriptRecordRoom.js";
 
 let numRoom, bodyContainNextBookings;
@@ -22,7 +22,7 @@ const getNextBookingsRoom = async () => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=${JSON.stringify(
+      `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=${JSON.stringify(
         { option: "getNextBookingsRoom", numRoom: numRoom }
       )}`
     );
@@ -123,7 +123,7 @@ const redirectToCalendarBooking = () => {
         idBooking: booking.idReserva
       };
       window.open(
-        `http://localhost/sistema%20Hotel/views/admin/reservas/index.php?booking=${JSON.stringify(
+        `${FRONT_URL_LOCALHOST}views/admin/reservas/index.php?booking=${JSON.stringify(
           bookingToCalendar
         )}`
       );

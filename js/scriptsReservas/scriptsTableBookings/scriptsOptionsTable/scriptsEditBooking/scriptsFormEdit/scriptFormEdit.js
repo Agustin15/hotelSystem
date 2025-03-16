@@ -13,7 +13,7 @@ import {
 } from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import { drawTable } from "../../../scriptTableBookings.js";
 
-import BACK_URL_LOCALHOST from "../../../../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
 
 let bookingGlobal;
@@ -236,7 +236,7 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
   loadingForm(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php`,
       {
         method: "PUT",
         headers: {

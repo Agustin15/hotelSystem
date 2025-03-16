@@ -1,6 +1,7 @@
 import { getPayById } from "../../../../scriptsRevenues/scriptRevenues.js";
 import { modalOption } from "../../scriptTableBookings.js";
 import { noData, closeWindow, loading } from "./scriptClient.js";
+import { FRONT_URL_LOCALHOST } from "../../../../urlLocalhost.js";
 let idBooking, body;
 
 export const configBill = async () => {
@@ -21,7 +22,7 @@ export const configBill = async () => {
     if (confirm) {
       localStorage.setItem("actualOptionRevenues", "tableBills.html");
       location.href =
-        "http://localhost/sistema%20Hotel/views/admin/ganancias/index.php?idBooking=" +
+        `${FRONT_URL_LOCALHOST}views/admin/ganancias/index.php?idBooking= ` +
         idBooking;
     }
   }

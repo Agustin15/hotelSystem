@@ -1,5 +1,5 @@
 import displayBarStagesAdvance from "./barStageAdvance.js";
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 import { generatePDF } from "./optionsDetails/generatePdf.js";
 
 export let stateBooking, idBooking;
@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let dataToFindBooking = params.get("details");
 
   if (!dataToFindBooking) {
-    location.href =
-      "http://localhost/sistema%20Hotel/views/reserva/consultaHabitaciones.php";
+    location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
   }
 
   dataToFindBooking = JSON.parse(dataToFindBooking);
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 export const getBookingByClientMailAndDate = async (dataToFindBooking) => {
   let data = null;
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/bookingClient/bookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/bookingClient/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingDetailsByClientMailAndDate",
       dataToFindBooking: dataToFindBooking
@@ -97,7 +96,7 @@ const noData = () => {
 };
 const displayDetails = (detailsBooking) => {
   idBooking = detailsBooking[0].idReserva;
-  
+
   const client = {
     name: detailsBooking[0].nombre,
     lastname: detailsBooking[0].apellido,

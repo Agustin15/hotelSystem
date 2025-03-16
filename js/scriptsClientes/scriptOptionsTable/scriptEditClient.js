@@ -1,7 +1,7 @@
 import { closeModal, getDataClient } from "./scriptDeleteClient.js";
 import { drawForm } from "./scriptsEditClient/drawForm.js";
 import { displayTable } from "../scriptClientsTable.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 import {
@@ -91,7 +91,7 @@ const submitEditForm = () => {
 
 const getIfExist = async (client) => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
     JSON.stringify({ option: "ifExistClient", client: client });
 
   let data = null;
@@ -122,7 +122,7 @@ const getIfExist = async (client) => {
 };
 
 const fetchPUT = async (client) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php`;
 
   let data = null;
 

@@ -3,7 +3,7 @@ import {
   POSTService
 } from "../../../../scriptsServices/scriptServices.js";
 
-import BACK_URL_LOCALHOST from "../../../../urlLocalhost.js";
+
 
 let modalAddService, contentMassage, idBooking, numRoom, service;
 let total = 0;

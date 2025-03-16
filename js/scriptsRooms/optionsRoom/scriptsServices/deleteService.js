@@ -7,7 +7,6 @@ import {
   footerModal
 } from "./modalDeleteService/modalConfirm.js";
 
-import BACK_URL_LOCALHOST from "../../../urlLocalhost.js";
 
 let idBooking, numRoom, containDeleteService, modal;
 

@@ -3,6 +3,9 @@ import { pageNotFound, loadingPage } from "./dashboardScript.js";
 import { configRecordRoom } from "./optionsRoom/scriptRecordRoom.js";
 import { configNextBookings } from "./optionsRoom/scriptNextBooking.js";
 import { configServices } from "./optionsRoom/scriptServices.js";
+import { getCategoryRoomsData } from "../scriptsAdmin/itemsData.js";
+import { chartCategoryStateRooms } from "./scriptChartCategoryRoom.js";
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let ulRooms, menuRooms, category;
 export let modalMainRooms;
@@ -18,6 +21,8 @@ export const configListRooms = async () => {
     let rooms = await roomsByCategory();
     if (rooms) {
       drawRooms(rooms);
+      let categoryStateRooms = await stateRoomsByCategory();
+      displayChartsRooms(categoryStateRooms);
     }
   }
 };
@@ -185,7 +190,7 @@ const drawRooms = (rooms) => {
       span.addEventListener("click", () => {
         localStorage.setItem("actualOptionBooking", "bookingsTable.html");
         window.open(
-          "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
+          `${FRONT_URL_LOCALHOST}views/admin/reservas/index.php?idBooking=` +
             span.id
         );
       });
@@ -280,4 +285,49 @@ const checkShowMenu = (menuCurrent) => {
   if (menuRoomShow) {
     menuRoomShow.style.display = "none";
   }
+};
+
+const stateRoomsByCategory = async () => {
+  let data;
+
+  try {
+    const result = await getCategoryRoomsData();
+
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};
+
+const displayChartsRooms = async (data) => {
+  let containCharts = document.querySelector(".containCharts");
+
+  let charts = data.map((dataRoom) => {
+    return `
+      
+    <div class="containChart"> 
+    <div class="title">
+    <span>${dataRoom.category}<span>
+    </div>
+      <div id="chart${dataRoom.category}"></div>
+    </div>
+    `;
+  });
+
+  containCharts.innerHTML = charts.join("");
+  drawCharts(data);
+};
+
+const drawCharts = async (data) => {
+
+  data.map((dataRoom) => {
+    chartCategoryStateRooms(
+      dataRoom,
+      document.getElementById(`chart${dataRoom.category}`)
+    );
+  });
 };

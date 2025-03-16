@@ -1,18 +1,20 @@
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
+
 const displayBarStagesAdvance = (lineStage) => {
   let containBarStages = document.querySelector(".barStageAdvance");
 
   let itemsStages = [
     {
       stage: "RoomsSelected",
-      icon: "http://localhost/sistema%20Hotel/img/stageRooms.png"
+      icon: `${FRONT_URL_LOCALHOST}img/stageRooms.png`
     },
     {
       stage: "PersonalData",
-      icon: "http://localhost/sistema%20Hotel/img/stagePersonalData.png"
+      icon: `${FRONT_URL_LOCALHOST}img/stagePersonalData.png`
     },
     {
       stage: "BookingReady",
-      icon: "http://localhost/sistema%20Hotel/img/stageBookingReady.png"
+      icon: `${FRONT_URL_LOCALHOST}img/stageBookingReady.png`
     }
   ];
 
@@ -34,12 +36,10 @@ const displayBarStagesAdvance = (lineStage) => {
 
   containBarStages.innerHTML = displayBarStages.join("");
 
-
-    document
-      .querySelector(lineStage)
-      .querySelector(".progress")
-      .classList.add("progressStage");
-  
+  document
+    .querySelector(lineStage)
+    .querySelector(".progress")
+    .classList.add("progressStage");
 
   let stagesToComplete = definedCompleteBars();
 
@@ -59,7 +59,7 @@ function definedCompleteBars() {
 
       break;
 
-      case window.location.href.indexOf("datosCliente.html") > -1:
+    case window.location.href.indexOf("datosCliente.html") > -1:
       completeStages = ["#itemRoomsSelected"];
 
       break;

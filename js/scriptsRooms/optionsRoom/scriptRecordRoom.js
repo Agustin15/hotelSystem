@@ -2,7 +2,7 @@ import {
   getAllBookingsByRoomAndYear,
   getAllBookingsByRoomAndYearLimit
 } from "../scriptRooms.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { modalMainRooms } from "../scriptListRooms.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
@@ -29,7 +29,7 @@ export const configRecordRoom = async () => {
 
 const getYears = async () => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
+    `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=` +
     JSON.stringify({ option: "getAllYearsWithRoomsBooking" });
 
   let data = null;
@@ -345,7 +345,7 @@ const redirectToTableBookings = () => {
     spanIdBooking.addEventListener("click", () => {
       localStorage.setItem("actualOptionBooking", "bookingsTable.html");
       window.open(
-        "http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=" +
+        `${FRONT_URL_LOCALHOST}views/admin/reservas/index.php?idBooking=` +
           spanIdBooking.textContent
       );
     });
@@ -359,7 +359,7 @@ const redirectToTableClients = () => {
     span.addEventListener("click", () => {
       localStorage.setItem("actualOptionClient", "clientsTable.html");
       window.open(
-        "http://localhost/sistema%20Hotel/views/admin/clientes/index.php?idClient=" +
+        `${FRONT_URL_LOCALHOST}views/admin/clientes/index.php?idClient=` +
           span.id
       );
     });

@@ -1,11 +1,11 @@
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 export const getAllCategoryRoomsWithDetails = async () => {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsRoutes.php?
+      `${BACK_URL_LOCALHOST}routes/admin/roomsRoutes.php?
         params=${JSON.stringify({
           option: "getAllCategoryRoomsWithDetails"
         })}`,
@@ -40,7 +40,7 @@ export const PUTCategoryRoom = async (categoryRoomToUpdate) => {
   let data;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/roomsRoutes.php`,
       {
         method: "PUT",
         headers: {

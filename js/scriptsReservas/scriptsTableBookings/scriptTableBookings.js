@@ -2,7 +2,7 @@ import { configDelete } from "./scriptsOptionsTable/scriptDelete.js";
 import { configDetails } from "./scriptsOptionsTable/scriptDetails.js";
 import { configEdit } from "./scriptsOptionsTable/scriptEdit.js";
 import { loadingPage, pageNotFound } from "../scriptReserva.js";
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 let pages;
@@ -126,7 +126,7 @@ const getQuantityBookingsActualYear = async () => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params= ` +
       JSON.stringify({ option: "bookingsRowsYear", year: yearSelected });
 
     const response = await fetch(url, {
@@ -162,7 +162,7 @@ const getBookingById = async (idBooking) => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({ option: "getBookingById", idBooking: idBooking });
 
     const response = await fetch(url, {
@@ -239,7 +239,7 @@ const getBookingsYearLimit = async () => {
   loading(true);
   try {
     let url =
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
         data: { year: yearSelected, index: offset }
@@ -274,7 +274,7 @@ const getBookingsYearLimit = async () => {
 
 const displaySelectYear = async () => {
   let url =
-    `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php?params= ` +
+    `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params= ` +
     JSON.stringify({ option: "allYearsBooking" });
 
   let data = null;

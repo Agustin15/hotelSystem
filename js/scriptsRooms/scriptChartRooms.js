@@ -1,4 +1,4 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 let actualYear = new Date().getFullYear();
 let selectYear;
@@ -17,7 +17,7 @@ const getAllYearsToSelect = async () => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({ option: "getAllYearsWithRoomsBooking" }),
       {
         method: "GET",
@@ -76,7 +76,7 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   loading(true);
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/roomsBookingRoutes.php?params=` +
+      `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=` +
         JSON.stringify({
           option: "dashboardGraphic",
           year: year
@@ -141,7 +141,7 @@ const dataPointsRoomsToChart = (roomsBookingCategorys) => {
 const chartRooms = (dataPoints) => {
   CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
 
-  console.log(dataPoints);
+
   var chart = new CanvasJS.Chart("chartRooms", {
     animationEnabled: true,
     colorSet: "greenShades",

@@ -1,39 +1,12 @@
-const alertLoginAdmin = (img, msj, title) => {
-  let alertLogin = document.querySelector(".alertLogin");
+import { FRONT_URL_LOCALHOST, BACK_URL_LOCALHOST } from "./urlLocalhost.js";
 
-  alertLogin.querySelector("span").textContent = title;
-  alertLogin.querySelector("img").src = img;
-  alertLogin.querySelector("p").textContent = msj;
-  alertLogin.style.display = "flex";
-};
+document.addEventListener("DOMContentLoaded", () => {
+  let form = document.querySelector("form");
 
-const removeAlertLoginAdmin = () => {
-  let alertLogin = document.querySelector(".alertLogin");
-  alertLogin.style.display = "none";
-};
-
-function inputAlert(inputName, msjError) {
-  let inputsName = [...document.getElementsByName(inputName)];
-  let input = inputsName[0];
-  input.classList.add("inputAlert");
-  let containErrorInput =
-    input.parentElement.parentElement.querySelector(".errorInput");
-  containErrorInput.querySelector("p").textContent = msjError;
-  containErrorInput.style.display = "flex";
-}
-
-function desactivateInputAlert() {
-  [...document.getElementsByTagName("input")].forEach((input) => {
-    input.addEventListener("click", function () {
-      input.classList.remove("inputAlert");
-    });
+  form.addEventListener("submit", (event) => {
+    setUser(event);
   });
-
-  [...document.querySelectorAll(".errorInput")].forEach((error) => {
-    error.style.display = "none";
-    error.querySelector("p").textContent = "";
-  });
-}
+});
 
 function passwordStatus(event) {
   let password = document.querySelector("#passwordId");
@@ -52,7 +25,7 @@ function setUser(event) {
   event.preventDefault();
   removeAlertLoginAdmin();
   desactivateInputAlert();
-  
+
   const form = event.target;
 
   const formUser = new FormData(form);
@@ -91,13 +64,13 @@ async function login(userData) {
   setTimeout(async () => {
     try {
       const response = await fetch(
-        "http://localhost/sistema%20Hotel/routes/admin/loginRoutes.php",
+        `${BACK_URL_LOCALHOST}routes/admin/loginRoutes.php`,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
-          body: JSON.stringify({ userData: userData }),
+          body: JSON.stringify({ userData: userData })
         }
       );
 
@@ -105,8 +78,7 @@ async function login(userData) {
       if (!response.ok) {
         throw result.error;
       } else if (result.userLogin) {
-        location.href =
-          "http://localhost/sistema%20Hotel/views/admin/index.php";
+        location.href = `${FRONT_URL_LOCALHOST}views/admin/index.php`;
       }
     } catch (error) {
       console.log(error);
@@ -115,4 +87,41 @@ async function login(userData) {
       loading(false);
     }
   }, 200);
+}
+
+const alertLoginAdmin = (img, msj, title) => {
+  let alertLogin = document.querySelector(".alertLogin");
+
+  alertLogin.querySelector("span").textContent = title;
+  alertLogin.querySelector("img").src = img;
+  alertLogin.querySelector("p").textContent = msj;
+  alertLogin.style.display = "flex";
+};
+
+const removeAlertLoginAdmin = () => {
+  let alertLogin = document.querySelector(".alertLogin");
+  alertLogin.style.display = "none";
+};
+
+function inputAlert(inputName, msjError) {
+  let inputsName = [...document.getElementsByName(inputName)];
+  let input = inputsName[0];
+  input.classList.add("inputAlert");
+  let containErrorInput =
+    input.parentElement.parentElement.querySelector(".errorInput");
+  containErrorInput.querySelector("p").textContent = msjError;
+  containErrorInput.style.display = "flex";
+}
+
+function desactivateInputAlert() {
+  [...document.getElementsByTagName("input")].forEach((input) => {
+    input.addEventListener("click", function () {
+      input.classList.remove("inputAlert");
+    });
+  });
+
+  [...document.querySelectorAll(".errorInput")].forEach((error) => {
+    error.style.display = "none";
+    error.querySelector("p").textContent = "";
+  });
 }

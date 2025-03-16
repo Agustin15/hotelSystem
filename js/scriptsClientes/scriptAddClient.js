@@ -1,4 +1,4 @@
-import BACK_URL_LOCALHOST from "../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 let form;
@@ -80,7 +80,7 @@ const fetchPost = async (client) => {
   let data = null;
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/clientRoutes.php`,
+      `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php`,
       {
         method: "POST",
         headers: {

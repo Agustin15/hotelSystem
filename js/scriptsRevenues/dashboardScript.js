@@ -1,5 +1,6 @@
 import { configChart } from "./scriptChart.js";
 import { configTable } from "./scriptTableBills.js";
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let option = document.querySelector(".option");
 let optionChartLi = document.querySelector(".chartLi");
@@ -35,7 +36,7 @@ optionChartLi.addEventListener("click", async () => {
 
 const getDocument = async (url) => {
   let page;
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   loadingPage(true, option);
   try {
     const response = await fetch(url);
@@ -118,7 +119,6 @@ const deleteParamsUrl = () => {
   let searchParamsUrl = new URLSearchParams(window.location.search);
 
   if (searchParamsUrl.get("idBooking")) {
-    location.href =
-      "http://localhost/sistema%20Hotel/views/admin/ganancias/index.php";
+    location.href = `${FRONT_URL_LOCALHOST}views/admin/ganancias/index.php`;
   }
 };

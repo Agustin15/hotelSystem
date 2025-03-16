@@ -5,10 +5,11 @@ import {
 } from "./chart.js";
 import {
   displayItemsDataCategoryRooms,
-  displayItemDataRevenuesActual,
+  displayItemDataRevenuesActual
 } from "./itemsData.js";
 import { getDataUserByToken, logout } from "./userData.js";
 import { optionsMenuAdmin } from "./menuAdminOptions.js";
+import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
 let profileOption;
 export let userData;
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (userData) {
     displayOptionProfile();
-
   }
   if (dashboard) {
     getClientsByMonthActualYear(actualYear);
@@ -67,7 +67,7 @@ const loadingUser = (state) => {
     profileOption.innerHTML = `
       <div class="loadingUser">
       <span>Cargando usuario</span>
-      <img src="http://localhost/sistema%20Hotel/img/spinnerBooking.gif">
+      <img src=${FRONT_URL_LOCALHOST}img/spinnerBooking.gif>
       </div>
     `;
   } else {
@@ -83,15 +83,12 @@ function openSubMenu() {
       let subMenu =
         buttonOpen.parentElement.parentElement.querySelector(".subMenu");
 
-      if (
-        buttonOpen.src == "http://localhost/sistema%20Hotel/img/btnFlecha.png"
-      ) {
+      if (buttonOpen.src == `${FRONT_URL_LOCALHOST}img/btnFlecha.png`) {
         checkSubMenuOpen(subMenu);
-        buttonOpen.src =
-          "http://localhost/sistema%20Hotel/img/btnFlechaAbajo.png";
+        buttonOpen.src = `${FRONT_URL_LOCALHOST}img/btnFlechaAbajo.png`;
         subMenu.style.display = "flex";
       } else {
-        buttonOpen.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
+        buttonOpen.src = `${FRONT_URL_LOCALHOST}img/btnFlecha.png`;
         subMenu.style.display = "none";
       }
     });
@@ -125,14 +122,11 @@ const openSubMenuProfile = () => {
   });
 
   btnDisplayMenu.addEventListener("click", () => {
-    if (
-      btnDisplayMenu.src == "http://localhost/sistema%20Hotel/img/btnFlecha.png"
-    ) {
-      btnDisplayMenu.src =
-        "http://localhost/sistema%20Hotel/img/btnFlechaArriba.png";
+    if (btnDisplayMenu.src == `${FRONT_URL_LOCALHOST}img/btnFlecha.png`) {
+      btnDisplayMenu.src = `${FRONT_URL_LOCALHOST}img/btnFlechaArriba.png`;
       subMenuProfile.style.display = "flex";
     } else {
-      btnDisplayMenu.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
+      btnDisplayMenu.src = `${FRONT_URL_LOCALHOST}img/btnFlecha.png`;
       subMenuProfile.style.display = "none";
     }
   });
@@ -141,7 +135,7 @@ const openSubMenuProfile = () => {
 const displayOptionProfile = () => {
   profileOption.innerHTML = `<img class="iconProfile" src="data:image/png;base64,${userData.imagen}">
   <span>${userData.usuario}</span>
-  <img class="btnDisplayMenu" src="http://localhost/sistema%20Hotel/img/btnFlecha.png">`;
+  <img class="btnDisplayMenu" src="${FRONT_URL_LOCALHOST}img/btnFlecha.png">`;
 };
 
 const checkSubMenuOpen = (id) => {
@@ -164,5 +158,5 @@ const checkSubMenuOpen = (id) => {
 
 const retunToOriginBtnDisplaySubMenu = (subMenu, element) => {
   let iconOpenSubMenu = subMenu.parentElement.querySelector(element);
-  iconOpenSubMenu.src = "http://localhost/sistema%20Hotel/img/btnFlecha.png";
+  iconOpenSubMenu.src = `${FRONT_URL_LOCALHOST}img/btnFlecha.png`;
 };

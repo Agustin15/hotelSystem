@@ -1,8 +1,8 @@
-import BACK_URL_LOCALHOST from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 export const POSTBooking = async (booking) => {
-  let url = `${BACK_URL_LOCALHOST}/sistema%20Hotel/routes/admin/bookingRoutes.php`;
+  let url = `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php`;
   let data;
 
   loadingForm(true);
