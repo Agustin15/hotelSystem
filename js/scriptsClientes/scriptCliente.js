@@ -1,5 +1,5 @@
 import { loadYears, getDataClientsTOGraphic } from "./scriptGraficaCliente.js";
-import { displayTable } from "./scriptClientsTable.js";
+import { configClientsTable } from "./scriptClientsTable.js";
 import submitAddForm from "./scriptAddClient.js";
 import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
@@ -77,7 +77,7 @@ const drawDocument = (result) => {
     getDataClientsTOGraphic();
   } else if (clientsTable) {
     markActualOption(optionListLi);
-    displayTable();
+    configClientsTable();
   } else if (containFormAdd) {
     markActualOption(optionAddLi);
     submitAddForm();

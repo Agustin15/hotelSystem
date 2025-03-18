@@ -1,4 +1,4 @@
-import { configTableUsers } from "../scriptTable.js";
+import { displayTable, displayControlsIndex } from "../scriptTable.js";
 import { POSTuser } from "../methodsFetch.js";
 import { getRols } from "../methodsFetch.js";
 import { modal } from "../scriptTable.js";
@@ -89,7 +89,8 @@ const submitForm = async (newUser) => {
     if (resultAdd) {
       alertForm(true);
       cleanInputs();
-      configTableUsers();
+      await displayControlsIndex();
+      displayTable();
     } else {
       alertForm(false);
     }

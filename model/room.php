@@ -122,13 +122,27 @@ class Room
 
 
 
+
+    public function getCategoryRoomByCategory($category)
+    {
+
+
+        $query = $this->connection->prepare("select * from tipo_habitacion where categoria=?");
+        $query->bind_param("s", $category);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_array(MYSQLI_ASSOC);
+    }
+
+
+
     public function getAllRoomsAvailablesByDateAndNumRoom($dateStartNewBooking, $dateEndNewBooking, $numRoom)
     {
 
 
         $query = $this->connection->prepare("select * from habitacion_reservada where 
         (fechaLlegadaHabitacion >=? or fechaSalidaHabitacion<=?) and numHabitacionReservada=? ");
-        $query->execute();
 
         $query->bind_param("ssi", $dateEndNewBooking, $dateStartNewBooking, $numRoom);
 
@@ -148,7 +162,6 @@ class Room
 
         $query = $this->connection->prepare("select * from habitacion_reservada where 
         (fechaLlegadaHabitacion >? or fechaSalidaHabitacion<?) and numHabitacionReservada=? and idReservaHabitacion!=?");
-        $query->execute();
 
         $query->bind_param("ssii", $dateEndNewBooking, $dateStartNewBooking, $numRoom, $idBooking);
 

@@ -5,29 +5,31 @@ import { loadingPage, pageNotFound } from "../scriptReserva.js";
 import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
-let pages;
+let pages, indexText, prevPage, nextPage, controlsIndex;
 let offset = 0;
 let indexPage = 1;
 let yearSelected = new Date().getFullYear();
 
 export const displayTable = async () => {
   const urlParams = new URLSearchParams(window.location.search);
+  controlsIndex = document.querySelector(".controls");
+  indexText = controlsIndex.querySelector(".pageIndex");
+  prevPage = controlsIndex.querySelector(".prev");
+  nextPage = controlsIndex.querySelector(".next");
 
   if (!urlParams.get("idBooking")) {
     let yearsAllBookings = await displaySelectYear();
 
     if (yearsAllBookings) {
       drawYearsSelect(yearsAllBookings);
-      let quantityRows = await getQuantityBookingsActualYear();
-      if (quantityRows) {
-        drawIndex(quantityRows);
-        drawTable();
-      }
+      await displayControlIndex();
+      drawTable();
+      eventsDisplayControlIndex();
     }
   } else {
+    controlsIndex.style.display = "none";
     let bookingFound = await getBookingById(urlParams.get("idBooking"));
     if (bookingFound) {
-      document.querySelector(".controls").style.display = "none";
       let arrayBookingFound = [bookingFound];
       drawRowsTable(arrayBookingFound);
     }
@@ -144,7 +146,6 @@ const getQuantityBookingsActualYear = async () => {
       } else throw result.error;
     } else if (result) {
       data = result;
-      pages = Math.ceil(result / 10);
     }
   } catch (error) {
     console.log(error);
@@ -208,14 +209,19 @@ const noData = (error) => {
   `;
 };
 
-const drawIndex = () => {
-  let controlsIndex = document.querySelector(".controls");
-  let indexText = controlsIndex.querySelector(".pageIndex");
-  let prevPage = controlsIndex.querySelector(".prev");
-  let nextPage = controlsIndex.querySelector(".next");
-  controlsIndex.style.display = "flex";
-  indexText.textContent = `${indexPage}/${pages}`;
+export const displayControlIndex = async () => {
+  let quantityRows = await getQuantityBookingsActualYear();
+  if (quantityRows) {
+    pages = Math.ceil(quantityRows / 10);
+    if (indexPage > pages && pages > 0) {
+      indexPage--;
+      offset -= 10;
+    }
+    indexText.textContent = `${indexPage}/${pages}`;
+  }
+};
 
+const eventsDisplayControlIndex = () => {
   prevPage.addEventListener("click", () => {
     if (indexPage > 1) {
       indexPage--;
@@ -321,8 +327,9 @@ const drawYearsSelect = (years) => {
 
   selectYears.innerHTML = yearsOptions.join("");
 
-  btnSearch.addEventListener("click", () => {
+  btnSearch.addEventListener("click", async () => {
     yearSelected = selectYears.value;
+    await displayControlIndex();
     drawTable();
   });
 };

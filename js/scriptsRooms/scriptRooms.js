@@ -217,7 +217,6 @@ export const getAllBookingsByRoomAndYearLimit = async (
     }
     if (result) {
       data = result;
-      console.log(result);
     }
   } catch (error) {
     console.log(error);
@@ -296,3 +295,36 @@ export const getBookingByRoomReserved = async (numRoom) => {
   }
 };
 
+export const getDetailsCategoryRoom = async (category) => {
+  let data;
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}routes/admin/roomsRoutes.php?params= ` +
+        JSON.stringify({
+          option: "getDetailsCategoryRoom",
+          category: category
+        }),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin"
+        }
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    }
+    if (result) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return data;
+  }
+};

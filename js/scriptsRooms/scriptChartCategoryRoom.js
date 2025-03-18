@@ -33,12 +33,12 @@ const dataPoints = (categoryData) => {
     {
       label: "Disponibles",
       y: percentajeAvailable,
-      color: "green"
+      color: "rgb(28, 194, 28)"
     },
     {
       label: "Ocupadas",
       y: percentajeBusy,
-      color: "red"
+      color: "rgb(236, 5, 5)"
     }
   ];
 };

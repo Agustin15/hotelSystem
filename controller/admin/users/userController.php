@@ -28,17 +28,26 @@ class userController
             $userData = $req["userData"];
             $password = $userData["password"];
             $user = $userData["user"];
-            $secretKey = $_ENV["JWT_SECRET_KEY"];
+            $secretKeyAccessToken = $_ENV["JWT_SECRET_KEY"];
+            $secretKeyRefreshToken = $_ENV["JWT_SECRET_KEY_REFRESH"];
 
             $userFound = $this->user->getUserByUser($user);
             if (!$userFound) {
                 throw new Exception("Autenticacion fallida,usuario no encontrado");
             }
 
-            $payload = [
+            $payloadAccessToken = [
                 "idUser" => $userFound["idUsuario"],
                 "exp" => time() + 3600
             ];
+
+
+            $payloadRefreshToken = [
+                "idUser" => $userFound["idUsuario"],
+                "idRol" => $userFound["idRol"],
+                "exp" => time() + 86400
+            ];
+
 
             if (strlen($userFound["contrasenia"]) == 60) {
                 $valid = password_verify(
@@ -53,10 +62,12 @@ class userController
                 throw new Error("La contraseña ingresada es incorrecta");
             }
 
-            $tokenJWT = JWT::encode($payload, $secretKey, 'HS384');
+            $tokenJWT = JWT::encode($payloadAccessToken, $secretKeyAccessToken, 'HS384');
+            $refreshTokenJWT = JWT::encode($payloadRefreshToken, $secretKeyRefreshToken, 'HS384');
 
             setcookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
             setcookie("idRol", $userFound["idRol"], time() + 3600, "/", "", false, true);
+            setcookie("userRefreshToken", $refreshTokenJWT, time() + 86400, "/", "", false, true);
 
             return array("userLogin" => true);
         } catch (Throwable $th) {
@@ -202,7 +213,7 @@ class userController
             if ($option == "updateUser" && strlen($password) < 60) {
                 $password = password_hash($password, PASSWORD_BCRYPT, ["cont" => 10]);
             }
-           
+
             $resultUpdated = $this->user->updateUserById(
                 $username,
                 $name,

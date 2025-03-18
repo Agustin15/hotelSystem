@@ -1,5 +1,5 @@
 import { closeModal } from "../../../scriptsUsers/optionsUsersTable/scriptDelete.js";
-import { displayRows } from "../editProducts.js";
+import { displayControlsIndex, displayTable } from "../editProducts.js";
 import { POSTHotelService } from "../../../../scriptsServices/scriptServices.js";
 import { convertFileToBase64 } from "../../../scriptsUsers/optionsUsersTable/scriptAdd.js";
 import { eventKeyDownInputPrice } from "../editService.js";
@@ -63,7 +63,8 @@ const submitForm = async (formData) => {
     if (productAdded) {
       cleanInputs();
       alertForm(true, "Producto agregado el exitosamente");
-      displayRows();
+      await displayControlsIndex();
+      displayTable();
     }
   }
 };

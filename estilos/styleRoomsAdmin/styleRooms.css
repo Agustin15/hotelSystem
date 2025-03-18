@@ -1,43 +1,15 @@
 .containRooms {
-  width: 85%;
+  width: 82%;
   height: auto;
   border-radius: 5px;
   background-color: none;
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-left: 12rem;
+  margin-left: 13rem;
   margin-top: 0.4rem;
 }
-.containRooms ul {
-  width: auto;
-  display: none;
-  align-items: center;
-  gap: 1.5rem;
-  list-style: none;
-  margin-top: 1rem;
-  padding-left: 1.5rem;
-}
-.containRooms ul li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding-bottom: 0.2rem;
-  cursor: pointer;
-  color: rgb(0, 0, 0);
-}
-.containRooms ul li img {
-  border-radius: 3px;
-  width: 100px;
-  height: 50px;
-}
-.containRooms ul li:hover {
-  border-bottom: 3px solid rgb(0, 165, 165);
-}
-.containRooms ul .selected {
-  border-bottom: 3px solid rgb(0, 165, 165);
-}
+
 .containRooms .rooms {
   margin-top: 1rem;
   width: 100%;
@@ -92,6 +64,7 @@
   width: auto;
   gap: 0;
   height: auto;
+  top: 1rem;
   left: 9.4rem;
 }
 .containRooms .rooms .itemsRooms li .menuOptions li {
@@ -195,7 +168,8 @@
   justify-content: center;
   gap: 1rem;
   color: gray;
-  margin-top: 7rem;
+  margin-top: 12rem;
+  margin-right: 5rem;
   width: 100%;
 }
 .containRooms .loading img {
@@ -203,18 +177,19 @@
   width: 50px;
 }
 
-.noData {
+.containRooms .noData {
   font-size: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   width: 100%;
+  margin-right: 5rem;
   color: gray;
-  margin-top: 3rem;
+  margin-top: 6rem;
   font-weight: bold;
 }
-.noData img {
+.containRooms .noData img {
   opacity: 60%;
   width: 120px;
 }
@@ -281,11 +256,10 @@
 }
 
 .containCategoryRooms {
-  width: 91%;
+  width: 85%;
   display: flex;
   justify-content: start;
   align-items: center;
-  padding-left: 1.5rem;
 }
 
 .containCharts {
@@ -298,7 +272,7 @@
 
 .containChart {
   width: 17rem;
-  height: 9rem;
+  height: 9.5rem;
   background-color: white;
   border-radius: 5px;
   box-shadow: 2px 2px 2px gray;
@@ -306,22 +280,52 @@
   flex-direction: column;
   border: 1px solid rgb(214, 214, 214);
   align-items: center;
+  cursor: pointer;
 }
+.selected {
+  border-bottom: 4px solid rgb(6, 194, 163);
+}
+
 
 .containChart .title {
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   font-size: 15px;
   font-weight: bold;
+  gap: 0.5rem;
   padding-top: 0.5rem;
+}
+.containChart .title img {
+  width: 16px;
+  height: 16px;
+}
+
+.containChart .title img:hover {
+  transform: scale(1.1);
+}
+
+.containChart .viewRooms{
+  width: 97%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.containChart .viewRooms img {
+  width: 17px;
+  height: 17px;
+}
+.containChart .viewRooms img:hover {
+transform: scale(1.1);
 }
 
 .containChart #chartEstandar,
 .containChart #chartDeluxe,
 .containChart #chartSuite {
-  min-height: 75%;
+  min-height: 71%;
   width: 87%;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styleRooms.css.map */

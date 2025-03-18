@@ -191,9 +191,8 @@ const displayTable = async () => {
   titleBookingsRecord.textContent = `Registros reservas ${selectYear.value}`;
 
   if (allBookingsRoom) {
-    if (allBookingsRoom.length >= 5) {
-      limitPages = Math.ceil(allBookingsRoom.length / 5);
-    }
+    limitPages = Math.ceil(allBookingsRoom.length / 5);
+
     drawTable();
   }
 };
@@ -242,6 +241,7 @@ const controlsIndexPage = () => {
   <span class="prev">Anterior</span>
   <span class="pageIndex">${index}/${limitPages}</span>
   <span class="next">Siguiente</span>`;
+
   let next = document.querySelector(".next");
   let prev = document.querySelector(".prev");
   let pageIndex = document.querySelector(".pageIndex");

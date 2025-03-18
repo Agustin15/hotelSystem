@@ -1,68 +1,36 @@
-import { getRoomsCategoryHotel, getAllRoomsByCategory } from "./scriptRooms.js";
+import { getAllRoomsByCategory } from "./scriptRooms.js";
 import { pageNotFound, loadingPage } from "./dashboardScript.js";
 import { configRecordRoom } from "./optionsRoom/scriptRecordRoom.js";
 import { configNextBookings } from "./optionsRoom/scriptNextBooking.js";
 import { configServices } from "./optionsRoom/scriptServices.js";
+import { configDetailsCategory } from "./scriptDetailsCategory.js";
 import { getCategoryRoomsData } from "../scriptsAdmin/itemsData.js";
 import { chartCategoryStateRooms } from "./scriptChartCategoryRoom.js";
 import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
-let ulRooms, menuRooms, category;
+let ulRooms, category;
 export let modalMainRooms;
 
 export const configListRooms = async () => {
   modalMainRooms = document.querySelector(".modalMainRooms");
   ulRooms = document.querySelector(".itemsRooms");
-  menuRooms = document.querySelector(".categorysRooms");
 
-  let roomsCategorys = await roomsCategoryHotel();
-  if (roomsCategorys) {
-    drawMenuRooms(roomsCategorys);
+  let categoryStateRooms = await stateRoomsByCategory();
+  if (categoryStateRooms) {
+    await displayChartsRooms(categoryStateRooms);
+    category = document.querySelector(".containChart").id;
     let rooms = await roomsByCategory();
     if (rooms) {
       drawRooms(rooms);
-      let categoryStateRooms = await stateRoomsByCategory();
-      displayChartsRooms(categoryStateRooms);
     }
   }
 };
 
-const roomsCategoryHotel = async () => {
-  drawLoading(true);
-  let data;
-  try {
-    let roomsCategorys = await getRoomsCategoryHotel();
-
-    if (roomsCategorys) {
-      data = roomsCategorys;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    drawLoading(false);
-    if (!data) {
-      drawNoData();
-    }
-
-    return data;
-  }
-};
-
-const drawMenuRooms = (roomsCategorys) => {
-  let itemsRooms = roomsCategorys.map((room) => {
-    return `<li class="itemRoom" data-category=${room.category}>
-    <img src="data:image/png;base64,${room.imageTwo}">
-    <span>${room.category}</span>
-   </li> `;
-  });
-
-  menuRooms.innerHTML = itemsRooms.join("");
-  category = roomsCategorys[0].category;
-
-  document.querySelectorAll(".itemRoom").forEach((item) => {
+const optionsCategoryRoom = () => {
+  document.querySelectorAll(".optionViewRooms").forEach((item) => {
     item.addEventListener("click", async () => {
-      category = item.dataset.category;
-      roomOptionSelected(item);
+      category = item.parentElement.parentElement.id;
+      roomOptionSelected(item.parentElement.parentElement);
       let rooms = await roomsByCategory();
       if (rooms) {
         drawRooms(rooms);
@@ -230,7 +198,7 @@ const optionMenuRoom = () => {
   });
 };
 
-const getOptionRoomPage = async (url) => {
+const getOptionRoomPage = async (url, category) => {
   let data;
   modalMainRooms.style.display = "flex";
   window.scrollTo(0, 0);
@@ -246,14 +214,14 @@ const getOptionRoomPage = async (url) => {
   } finally {
     loadingPage(false, modalMainRooms);
     if (data) {
-      drawDocument(data, url);
+      drawDocument(data, url, category);
     } else {
       pageNotFound(modalMainRooms);
     }
   }
 };
 
-const drawDocument = (document, url) => {
+const drawDocument = (document, url, category) => {
   modalMainRooms.innerHTML = document;
 
   const functionsOptions = [
@@ -268,13 +236,22 @@ const drawDocument = (document, url) => {
     {
       page: "services.php",
       function: configServices
+    },
+    {
+      page: "details.html",
+      function: configDetailsCategory
     }
   ];
 
   let functionOption = functionsOptions.find(
     (option) => url.indexOf(option.page) > -1
   );
-  functionOption.function();
+
+  if (category) {
+    functionOption.function(category);
+  } else {
+    functionOption.function();
+  }
 };
 
 const checkShowMenu = (menuCurrent) => {
@@ -290,6 +267,7 @@ const checkShowMenu = (menuCurrent) => {
 const stateRoomsByCategory = async () => {
   let data;
 
+  drawLoading(true);
   try {
     const result = await getCategoryRoomsData();
 
@@ -299,6 +277,10 @@ const stateRoomsByCategory = async () => {
   } catch (error) {
     console.log(error);
   } finally {
+    drawLoading(false);
+    if (!data) {
+      drawNoData();
+    }
     return data;
   }
 };
@@ -309,25 +291,38 @@ const displayChartsRooms = async (data) => {
   let charts = data.map((dataRoom) => {
     return `
       
-    <div class="containChart"> 
+    <div class="containChart" id="${dataRoom.category}"> 
     <div class="title">
     <span>${dataRoom.category}<span>
+    <img class="infoCategory" src="../../../img/detalles.png">
     </div>
       <div id="chart${dataRoom.category}"></div>
+      <div class="viewRooms">
+      <img class="optionViewRooms" src="../../../img/ver.png">
+      </div>
     </div>
     `;
   });
 
   containCharts.innerHTML = charts.join("");
   drawCharts(data);
+  optionsCategoryRoom();
 };
 
 const drawCharts = async (data) => {
-
   data.map((dataRoom) => {
     chartCategoryStateRooms(
       dataRoom,
       document.getElementById(`chart${dataRoom.category}`)
     );
+  });
+
+  let infosCategory = document.querySelectorAll(".infoCategory");
+
+  infosCategory.forEach((info) => {
+    info.addEventListener("click", () => {
+      let category = info.parentNode.parentNode.parentNode.parentNode.id;
+      getOptionRoomPage("detailsCategoryRoom/details.html", category);
+    });
   });
 };

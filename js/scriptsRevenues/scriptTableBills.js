@@ -5,15 +5,16 @@ import {
   getRevenuDetailsById
 } from "./scriptRevenues.js";
 
-let selectYear, currentYear, controls, tableBills, modal;
-
+let selectYear, currentYear, controls, tableBills, next, prev, pageIndexElement;
 let pages;
 let index = 1;
 let offset = 0;
 
 export const configTable = async () => {
-  modal = document.querySelector(".modalMainRevenues");
   controls = document.querySelector(".controls");
+  pageIndexElement = controls.querySelector(".pageIndex");
+  prev = controls.querySelector(".prev");
+  next = controls.querySelector(".next");
   tableBills = document.querySelector(".tableBills");
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -22,19 +23,23 @@ export const configTable = async () => {
     let yearsRevenues = await allYearsRevenues();
     if (yearsRevenues) {
       displaySelectYears(yearsRevenues);
-      revenuesByYear(selectYear.value);
-
-      let btnSearchByYear = document.querySelector(".btnSearch");
-      btnSearchByYear.addEventListener("click", async () => {
-        controls.style.display = "flex";
-        revenuesByYear(selectYear.value);
-      });
+      await displayControlsIndex();
+      displayTable("revenues");
+      eventsControlsIndex();
+      eventSearchByYear();
     }
   } else {
     controls.style.display = "none";
-
     displayTable("revenueFound", urlParams.get("idBooking"));
   }
+};
+
+const eventSearchByYear = async () => {
+  let btnSearchByYear = document.querySelector(".btnSearch");
+  btnSearchByYear.addEventListener("click", async () => {
+    await displayControlsIndex();
+    displayTable("revenues");
+  });
 };
 
 const revenueByIdBooking = async (idBooking) => {
@@ -106,8 +111,7 @@ const revenuesByYear = async (year) => {
   } finally {
     loading(false);
     if (revenues) {
-      displayControlsIndex(revenues.length);
-      displayTable("revenues");
+      return revenues;
     } else {
       noData();
     }
@@ -207,28 +211,35 @@ const displayTable = async (option, idBooking) => {
   }
 };
 
-const displayControlsIndex = (revenuesRows) => {
-  let pageIndexElement = document.querySelector(".pageIndex");
-  pages = Math.ceil(revenuesRows / 10);
+const displayControlsIndex = async () => {
+  let revenues = await revenuesByYear(selectYear.value);
 
-  pageIndexElement.textContent = `${index}/${pages}`;
+  if (revenues) {
+    pages = Math.ceil(revenues.length / 10);
+    if (index > pages && pages > 0) {
+      index--;
+      offset -= 10;
+    }
+    pageIndexElement.textContent = `${index}/${pages}`;
+  }
+};
 
-  console.log(pages);
-  controls.querySelector(".prev").addEventListener("click", () => {
+const eventsControlsIndex = () => {
+  prev.addEventListener("click", () => {
     if (index > 1) {
       index--;
       offset -= 10;
       pageIndexElement.textContent = `${index}/${pages}`;
-      displayTable(selectYear.value);
+      displayTable("revenues");
     }
   });
 
-  controls.querySelector(".next").addEventListener("click", () => {
+  next.addEventListener("click", () => {
     if (index < pages) {
       index++;
       offset += 10;
       pageIndexElement.textContent = `${index}/${pages}`;
-      displayTable(selectYear.value);
+      displayTable("revenues");
     }
   });
 };

@@ -35,7 +35,28 @@ export const getDataUserByToken = async () => {
 };
 
 export const invalidAuthentication = async () => {
-  logout();
+  let divAlertRefreshToken = document.createElement("div");
+  divAlertRefreshToken.id = "alertRefreshToken";
+
+  divAlertRefreshToken.innerHTML = `
+   <div class="row">
+    <img src="${FRONT_URL_LOCALHOST}/img/sandClock.gif">
+     <p>Sesion expirada, regresando en 20</p>
+   </div>
+   <button class="btnUpdateToken">
+         <span>Extender sesion</span>
+             <img src="${FRONT_URL_LOCALHOST}/img/newCookie.png">
+   </button>
+  
+  
+  `;
+
+  document.body.appendChild(divAlertRefreshToken);
+  let btnUpdateToken = document.querySelector(".btnUpdateToken");
+  btnUpdateToken.addEventListener("click", async () => {
+    document.removeChild(divAlertRefreshToken);
+    let resultRefreshToken = await refreshToken();
+  });
 };
 
 export const logout = async () => {
@@ -82,5 +103,39 @@ const getUserById = async (userToken) => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+const refreshToken = async () => {
+  let data;
+
+  try {
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}routes/admin/refreshTokenRoute.php`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin"
+        }
+      }
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      if (response.status == 403) {
+        invalidAuthentication();
+      } else throw result.error;
+    }
+    if (result.refreshToken) {
+      data = result.refreshToken;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    if (!data) {
+      logout();
+    }
+    return data;
   }
 };

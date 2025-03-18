@@ -5,7 +5,7 @@ import { configEdit } from "./optionsUsersTable/scriptEdit.js";
 import { configDetails } from "./optionsUsersTable/scriptDetails.js";
 import { loadingPage, pageNotFound } from "../dashboard.js";
 
-let controls, tableUsers;
+let controls, tableUsers, prev, next, pageIndex;
 let index = 1;
 let pages = 0,
   offset = 0;
@@ -15,17 +15,13 @@ export let modal;
 export const configTableUsers = async () => {
   tableUsers = document.querySelector(".tableUsers");
   controls = document.querySelector(".controls");
-  let users = await allUsers();
+  prev = controls.querySelector(".prev");
+  next = controls.querySelector(".next");
+  pageIndex = controls.querySelector(".pageIndex");
 
-  if (users) {
-    if (users.length < 15) {
-      pages = 1;
-    } else {
-      pages = Math.ceil(users.length / 15);
-    }
-    controlsIndex();
-    displayTable();
-  }
+  await displayControlsIndex();
+  displayTable();
+  eventsControlsIndex();
 };
 
 export const displayTable = async () => {
@@ -91,13 +87,19 @@ const displayRows = async (usersLimit) => {
   });
 };
 
-const controlsIndex = () => {
-  let prev = controls.querySelector(".prev");
-  let next = controls.querySelector(".next");
-  let pageIndex = controls.querySelector(".pageIndex");
+export const displayControlsIndex = async () => {
+  let users = await allUsers();
+  if (users) {
+    pages = Math.ceil(users.length / 15);
+    if (index > pages && pages > 0) {
+      index--;
+      offset -= 15;
+    }
+    pageIndex.innerHTML = `${index}/${pages}`;
+  }
+};
 
-  pageIndex.innerHTML = `${index}/${pages}`;
-
+const eventsControlsIndex = async () => {
   prev.addEventListener("click", () => {
     if (index > 1) {
       index--;

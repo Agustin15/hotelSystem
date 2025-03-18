@@ -9,26 +9,32 @@ import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 let offset = 0;
 let index = 1;
 let limitPage;
-let modalMainClient, controlsElement;
+let modalMainClient, controlsElement, pagesText, next, prev;
+export let table;
 
-const displayTable = async () => {
-  let table = document.querySelector(".tableClients");
+export const configClientsTable = async () => {
+  table = document.querySelector(".tableClients");
   controlsElement = document.querySelector(".controls");
+  pagesText = controlsElement.querySelector(".pageIndex");
+  next = controlsElement.querySelector(".next");
+  prev = controlsElement.querySelector(".prev");
 
   const urlParams = new URLSearchParams(window.location.search);
 
   if (!urlParams.get("idClient")) {
-    let clientsRows = await getRowsClients();
-    if (clientsRows) {
-      limitPage = Math.ceil(clientsRows / 10);
-      controls();
-      drawRowsTable("clients", table);
-    }
+    await displayControlsIndex();
+    displayTable();
+    eventsControlsIndex();
   } else {
-    drawRowsTable("client", table, urlParams.get("idClient"));
+    let clientFound = await getClientById(urlParams.get("idClient"));
     controlsElement.style.display = "none";
+    drawRowsTable([clientFound]);
   }
+};
 
+export const displayTable = async () => {
+  let clientsLimit = await getDataLimitClients();
+  drawRowsTable(clientsLimit);
   search();
 };
 
@@ -154,12 +160,19 @@ const loading = (state) => {
   }
 };
 
-const controls = () => {
-  let pagesText = document.querySelector(".pageIndex");
-  let next = document.querySelector(".next");
-  let prev = document.querySelector(".prev");
-  pagesText.textContent = `${index}/${limitPage}`;
+export const displayControlsIndex = async () => {
+  let clientsRows = await getRowsClients();
+  if (clientsRows) {
+    limitPage = Math.ceil(clientsRows / 10);
+    if (index > limitPage && limitPage > 0) {
+      index--;
+      offset -= 10;
+    }
+    pagesText.textContent = `${index}/${limitPage}`;
+  }
+};
 
+const eventsControlsIndex = () => {
   next.addEventListener("click", function () {
     if (index < limitPage) {
       index++;
@@ -308,5 +321,3 @@ export const closePageNotFound = (modal) => {
     modal.style.display = "none";
   });
 };
-
-export { displayTable };

@@ -26,6 +26,7 @@ $routes = [
             "getAllCategoryRooms" => $roomsController->getAllCategoryRooms(),
             "getAllCategoryRoomsWithDetails" => $roomsController->getAllCategoryRoomsWithDetails(),
             "getAllRoomsByCategory" => $roomsController->getAllRoomsByCategory($req),
+            "getDetailsCategoryRoom" => $roomsController->getDetailsCategoryRoom($req),
         };
 
         return $optionGet;

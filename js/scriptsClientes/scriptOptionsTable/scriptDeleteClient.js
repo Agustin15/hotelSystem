@@ -1,4 +1,4 @@
-import { displayTable } from "../scriptClientsTable.js";
+import { displayTable, displayControlsIndex } from "../scriptClientsTable.js";
 import { loading } from "../scriptAddClient.js";
 import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
@@ -73,6 +73,7 @@ const eventsDelete = (idClient) => {
     const result = await fetchDelete(idClient);
     if (result) {
       closeModal();
+      await displayControlsIndex();
       displayTable();
     } else {
       errorDelete();

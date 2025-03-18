@@ -2,6 +2,11 @@ import { FRONT_URL_LOCALHOST, BACK_URL_LOCALHOST } from "./urlLocalhost.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   let form = document.querySelector("form");
+  let iconChangePassword = document.querySelector(".iconPassword");
+
+  iconChangePassword.addEventListener("click", (event) => {
+    passwordStatus(event);
+  });
 
   form.addEventListener("submit", (event) => {
     setUser(event);

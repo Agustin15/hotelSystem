@@ -8,22 +8,22 @@ import { configEditProduct } from "./optionEditProducts/scriptEdit.js";
 import { loadingPage, pageNotFound } from "../../dashboard.js";
 import { configAddProduct } from "./optionEditProducts/scriptAdd.js";
 
-let serviceData, tbody, controls;
-let index = 1;
+let serviceData, tbody, controls, pageIndex, limitPages;
+export let index = 1;
 let offset = 0;
 
-export const configEditProducts = (service) => {
+export const configEditProducts = async (service) => {
   serviceData = service;
 
   let modalServices = document.querySelector(".modalServices");
   let btnCloseWindow = document.querySelector(".btnCloseWindow");
   let title = document.querySelector(".titleEditProducts").querySelector("h3");
   controls = document.querySelector(".controls");
-
+  pageIndex = document.querySelector(".pageIndex");
+  tbody = document.querySelector("tbody");
   let iconTitle = document
     .querySelector(".titleEditProducts")
     .querySelector("img");
-  tbody = document.querySelector("tbody");
 
   title.textContent = `Editar productos ${serviceData.nombreServicio.toLowerCase()}`;
   iconTitle.src =
@@ -35,6 +35,8 @@ export const configEditProducts = (service) => {
     closeModal(modalServices);
   });
 
+  await displayControlsIndex();
+  eventsControlsIndex();
   displayTable();
 };
 
@@ -83,7 +85,7 @@ const optionsUrlProduct = [
   }
 ];
 
-const displayTable = async () => {
+export const displayTable = async () => {
   let btnAddProduct = document.querySelector(".btnAddProduct");
 
   btnAddProduct.addEventListener("click", () => {
@@ -94,15 +96,6 @@ const displayTable = async () => {
     drawPageOption(optionFound.urlPage, null, optionFound.function);
   });
 
-  let products = await getProducts();
-  if (products) {
-    displayControlsIndex(products);
-    let productsLimit = await getProductsLimit();
-    drawRowsTable(productsLimit);
-  }
-};
-
-export const displayRows = async () => {
   let productsLimit = await getProductsLimit();
   drawRowsTable(productsLimit);
 };
@@ -263,29 +256,33 @@ const drawPageOption = async (url, product, configFunction) => {
   }
 };
 
-const displayControlsIndex = (products) => {
-  let limitPages = Math.ceil(products.length / 4);
-  
-  controls.querySelector(".pageIndex").textContent = `${index}/${limitPages}`;
+export const displayControlsIndex = async () => {
+  let products = await getProducts();
+  if (products) {
+    limitPages = Math.ceil(products.length / 4);
+    if (index > limitPages && limitPages > 0) {
+      index--;
+      offset -= 4;
+    }
+    pageIndex.textContent = `${index}/${limitPages}`;
+  }
+};
 
+const eventsControlsIndex = () => {
   controls.querySelector(".prev").addEventListener("click", () => {
     if (index > 1) {
       index--;
       offset -= 4;
-      controls.querySelector(
-        ".pageIndex"
-      ).textContent = `${index}/${limitPages}`;
-      displayRows();
+      pageIndex.textContent = `${index}/${limitPages}`;
+      displayTable();
     }
   });
   controls.querySelector(".next").addEventListener("click", () => {
     if (index < limitPages) {
       index++;
       offset += 4;
-      controls.querySelector(
-        ".pageIndex"
-      ).textContent = `${index}/${limitPages}`;
-      displayRows();
+      pageIndex.textContent = `${index}/${limitPages}`;
+      displayTable();
     }
   });
 };

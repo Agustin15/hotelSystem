@@ -1,0 +1,210 @@
+.containDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 41rem;
+  height: 18rem;
+  background-color: white;
+  border-radius: 3px;
+  margin-left: 11rem;
+  margin-top: 11rem;
+}
+
+.containDetails .header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+}
+
+.containDetails .header .titleCategory {
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  font-size: 18px;
+  justify-content: center;
+  width: 99%;
+  margin-top: 1rem;
+}
+
+.containDetails .header button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.containDetails .noData {
+  width: 100%;
+  height: 25%;
+  font-size: 18px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.containDetails .noData img {
+  width: 80px;
+  opacity: 70%;
+}
+.containDetails .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 12rem;
+  gap: 0.5rem;
+  font-size: 18px;
+  color: gray;
+}
+.containDetails .loading img {
+  width: 30px;
+  opacity: 70%;
+}
+
+.containRoom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.containRoom .row {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  gap: 1.5rem;
+}
+
+.containRoom .row .images {
+  overflow: hidden;
+  display: flex;
+  width: 22rem;
+  align-items: start;
+  justify-content: center;
+}
+
+.containRoom .row .images ul {
+  width: 99rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.containRoom .row .images li {
+  list-style: none;
+}
+
+.containRoom  .row .images img {
+  width: 22rem;
+  height: 12rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17rem;
+  margin-top: 5rem;
+  position: absolute;
+}
+
+.containRoom .row .images .controls img {
+  width: 28px;
+  height: 28px;
+  opacity: 97%;
+  cursor: pointer;
+}
+
+.containRoom  .row .images .controls img:hover {
+  opacity: 100%;
+  transform: scale(1.1);
+}
+
+.containRoom  .row .images .indexImagesRoom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 11rem;
+  position: absolute;
+}
+.containRoom .row .images .indexImagesRoom li {
+  width: 80px;
+  height: 3px;
+  background-color: rgb(201, 201, 201);
+}
+.containRoom  .row .images .indexImagesRoom .itemIndexActive {
+  background-color: white;
+}
+
+.containRoom  .dataRoom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.containRoom  .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.containRoom  .title img {
+  width: 34px;
+  height: 34px;
+}
+
+.containRoom  .rowData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.containRoom  .dataRoom span {
+  font-weight: bold;
+}
+
+.containRoom  .dataRoom .data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.containRoom  .titleData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.containRoom  .titleData img {
+  width: 18px;
+  height: 18px;
+}
+
+.containRoom  .columnOne {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.containRoom  .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

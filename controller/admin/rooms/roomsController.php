@@ -31,7 +31,7 @@ class roomsController
                 return array("error" => $tokenVerify["error"], "status" => 401);
             }
 
-    
+
             $resultUpdate = $this->rooms->updateRoomData(
                 $category,
                 $imageOne,
@@ -134,6 +134,32 @@ class roomsController
                 );
             }, $roomsCategory);
             return $roomsCategory;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function getDetailsCategoryRoom($req)
+    {
+
+        try {
+
+            $category = $req["category"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $roomCategoryDetails = $this->rooms->getCategoryRoomByCategory($category);
+
+            $roomCategoryDetails["imagenUno"] = base64_encode($roomCategoryDetails["imagenUno"]);
+            $roomCategoryDetails["imagenDos"] = base64_encode($roomCategoryDetails["imagenDos"]);
+            $roomCategoryDetails["imagenTres"] = base64_encode($roomCategoryDetails["imagenTres"]);
+
+            return $roomCategoryDetails;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

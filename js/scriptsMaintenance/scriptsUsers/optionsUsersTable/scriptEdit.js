@@ -1,5 +1,5 @@
 import { closeModal } from "./scriptDelete.js";
-import { modal, configTableUsers } from "../scriptTable.js";
+import { modal, displayTable} from "../scriptTable.js";
 import { PUTuser } from "../methodsFetch.js";
 
 import {
@@ -105,7 +105,7 @@ const submitForm = async (userToUpdated) => {
 
     if (resultUpdate) {
       alertForm(true);
-      configTableUsers();
+      displayTable();
     } else {
       alertForm(false);
     }

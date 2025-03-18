@@ -1,5 +1,5 @@
 import { deleteUser } from "../methodsFetch.js";
-import { configTableUsers, modal } from "../scriptTable.js";
+import { displayTable, displayControlsIndex, modal } from "../scriptTable.js";
 
 let containDelete;
 
@@ -14,8 +14,9 @@ export const configDelete = async (user) => {
   btnAccept.addEventListener("click", async () => {
     let resultDelete = await userDelete(user.idUsuario);
     if (resultDelete) {
-      configTableUsers();
       closeModal(modal);
+      await displayControlsIndex();
+      displayTable();
     }
   });
 
@@ -46,7 +47,6 @@ const errorDelete = () => {
    <img src="../../../img/advertenciaDelete.png">
   <span>Ups, no se pudo eliminar el usuario</span>
   `;
-
 };
 
 export const closeModal = (modal) => {

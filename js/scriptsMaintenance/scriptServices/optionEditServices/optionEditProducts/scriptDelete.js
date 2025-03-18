@@ -1,8 +1,8 @@
 import { closeModal } from "../../../scriptsUsers/optionsUsersTable/scriptDelete.js";
 import { BACK_URL_LOCALHOST } from "../../../../urlLocalhost.js";
-import { displayRows } from "../editProducts.js";
+import { displayTable, displayControlsIndex } from "../editProducts.js";
 
-export const configDeleteProduct = (nameService, product, modal) => {
+export const configDeleteProduct = async (nameService, product, modal) => {
   let containDelete = document.querySelector(".containDelete");
   let titleDelete = document.querySelector(".titleDelete");
   titleDelete.textContent = `¿Desea eliminar el producto ${product.descripcionServicio}?`;
@@ -14,7 +14,8 @@ export const configDeleteProduct = (nameService, product, modal) => {
     let resultDelete = await DELETEService(product.idServicio);
     if (resultDelete) {
       closeModal(modal);
-      displayRows();
+      await displayControlsIndex();
+      displayTable();
     }
   });
 
