@@ -308,9 +308,10 @@ class userController
     public function getDataToken()
     {
         try {
+
             $tokenVerified = $this->authToken->verifyToken();
             if (isset($tokenVerified["error"])) {
-                return array("error" => $tokenVerified["error"], "status" => 401);
+                throw new Error($tokenVerified["error"]);
             }
             return $tokenVerified;
         } catch (Throwable $th) {

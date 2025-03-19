@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_COOKIE["userToken"])) {
+if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     header("location:../loginAdmin/index.html");
 }
 

@@ -23,6 +23,7 @@ class authToken
                 throw new Error("Autenticacion fallida,Token no valido");
             }
             $decoded =  JWT::decode($_COOKIE["userToken"], new Key($key, 'HS384'));
+
             if ($decoded) {
                 return array("resultVerify" => $decoded);
             }
@@ -53,18 +54,19 @@ class authToken
             }
 
             $decoded =  JWT::decode($_COOKIE["userRefreshToken"], new Key($keyRefresh, 'HS384'));
+            $decoded_array = (array) $decoded;
 
             if ($decoded) {
                 $payloadAccessToken = array(
-                    "idUser" => $decoded["idUser"],
+                    "idUser" => $decoded_array["idUser"],
                     "exp" => time() + 3600
                 );
 
                 $tokenJWT = JWT::encode($payloadAccessToken, $key, 'HS384');
 
-                setcookie("userToken", $tokenJWT, time() + 3600, "/", "/", false, true);
-                setcookie("idRol", $decoded["idRol"], time() + 3600, "/", "/", false, true);
-                return array("refreshToken" => true);
+                setcookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
+                setcookie("idRol", $decoded_array["idRol"], time() + 3600, "/", "", false, true);
+                return array("refreshToken" => $tokenJWT);
             }
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 403);

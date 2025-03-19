@@ -64,6 +64,11 @@ body {
   justify-content: space-between;
 }
 
+.liBookingMarginTop {
+  margin-top:7.5rem;
+}
+
+
 #navAdmin .menu li:hover {
   cursor: pointer;
   background-color: rgb(5, 141, 146);

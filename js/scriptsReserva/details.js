@@ -10,13 +10,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let params = new URLSearchParams(window.location.search);
 
-  let dataToFindBooking = params.get("details");
-
-  if (!dataToFindBooking) {
+  if (!params.get("details")) {
     location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
   }
-
+  
+  let dataToFindBooking = params.get("details");
   dataToFindBooking = JSON.parse(dataToFindBooking);
+
+  let dataToFindBookingOk =
+    Object.values(dataToFindBooking).length ==
+    Object.keys(dataToFindBooking).length;
+
+  if (!dataToFindBooking || dataToFindBookingOk) {
+    location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
+  }
 
   dataToFindBooking.option == "added"
     ? (stateBooking = "Confirmacion")
@@ -129,64 +136,62 @@ const displayDetails = (detailsBooking) => {
   endBooking = endBooking.toLocaleDateString("es-UY", options);
 
   details.innerHTML = `
+  <div class="row">
   
-    <div class="header">
+  <div class="column">
+  <div class="icon">
+   <img src="../../img/revision.png">
+   <span>Hotel system</span>
+  </div>
+  <ul>
+   <li>
+   <span>Numero de reserva</span>
+   <a>${idBooking}</a>
+   </li>
+     <li>
+   <span>Check in</span>
+   <a>${startBooking}</a>
+   </li>
+     <li>
+   <span>Check out</span>
+   <a>${endBooking}</a>
+   </li>
+    <li>
+   <span>Noches</span>
+   <a>${nights}</a>
+   </li>
+  </ul>
+  </div>
 
-                <div class="containIdBooking">
-                    <span>${stateBooking} reserva</span>
-                    <div class="id">
-                        <img src="../../img/id.png">
-                        <span>Numero:<a>${
-                          detailsBooking[0].idReserva
-                        }</a></span>
-                        </div>
-                </div>
-                <div class="logo">
-                    <img src="../../img/revision2.png">
-                    <h3>System Hotel</h3>
+  <div class="columnTwo">
+  <div class="msjSuccesfully">
+  <h3>¡Confirmacion de reserva exitosa!</h3>
+  </div>
+    <div class="client">
+    <h3>Cliente:</h3>
+    <div>
+      <span>Nombre: <a>${client.name}</a></span>
+      </div>
+      <div>
+         <span>Apellido: <a>${client.lastname}</a></span>
+         </div>   
+           <div>
+      <span>Telefono: <a>${client.phone}</a></span>
+      </div>
+      <div>
+         <span>Correo: <a>${client.email}</a></span>
+         </div>
 
-                </div>
+    </div>
 
-            </div>
+    <div class="rowData">
+    </div>
 
-            <div class="msjSuccesfully">
-                <img src="../../img/tickAdmin.png">
-                <span>¡${stateBooking} de reserva exitosa!</span>
-            </div>
-
-            <div class="containDate">
-
-            <div class="date">
-            <img src="../../img/dateConfirm.png">
-               <span><a>Check in: </a>${startBooking}</span>
-                 <span><a>Check out: </a>${endBooking}</span>
-                 </div>
-                    
-                 <span>${nights}${nights > 1 ? " noches" : " noche"}</span>
-            </div>
-
-            <div class="rowData">
-
-            <div class="client">
-            
-            <h3>Cliente</h3>
-            <div class="dataClient">
-            <span>Nombre:<a>${client.name}</a></span>
-            <span>Apellido:<a>${client.lastname}</a></span>
-            <span>Telefono:<a>${client.phone}</a></span>
-            <span>Correo:<a>${client.email}</a></span>
-            </div>
-            </div>
-        
-            </div>
-
-            <div class="containAmount">
-            <div class="column">
-              <h3>Total</h3>
-            <span>US$ ${detailsBooking[0].deposito}</span>
-            </div>
-            </div>
-        </div>
+    <div class="containAmount">
+    <span>Total:$${detailsBooking[0].deposito}</span>
+    </div>
+  </div>
+  </div>
   `;
 
   let rooms = detailsBooking.map((detail) => {
@@ -251,7 +256,7 @@ const drawRooms = (roomsToDisplay) => {
         
             <div class="row">
          <img src="data:image/png;base64,${room.image}">
-         <div class="column">
+         <div class="columnRoomData">
           <span>Cantidad: ${room.quantity}</span>
           <span>${room.adults} ${room.adults > 1 ? "Adultos" : "Adulto"} </span>
           ${

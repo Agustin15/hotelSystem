@@ -77,17 +77,24 @@ const loadingUser = (state) => {
 
 function openSubMenu() {
   let buttonsOpenSubMenu = document.querySelectorAll(".btnDisplaySubMenu");
-
+  let liBooking = document.getElementById("liReserva");
+  
   buttonsOpenSubMenu.forEach(function (buttonOpen) {
     buttonOpen.addEventListener("click", () => {
       let subMenu =
         buttonOpen.parentElement.parentElement.querySelector(".subMenu");
 
       if (buttonOpen.src == `${FRONT_URL_LOCALHOST}img/btnFlecha.png`) {
+        if (buttonOpen.parentElement.parentElement.id == "liClientes") {
+          liBooking.classList.add("liBookingMarginTop");
+        } else {
+          liBooking.classList.remove("liBookingMarginTop");
+        }
         checkSubMenuOpen(subMenu);
         buttonOpen.src = `${FRONT_URL_LOCALHOST}img/btnFlechaAbajo.png`;
         subMenu.style.display = "flex";
       } else {
+        liBooking.classList.remove("liBookingMarginTop");
         buttonOpen.src = `${FRONT_URL_LOCALHOST}img/btnFlecha.png`;
         subMenu.style.display = "none";
       }

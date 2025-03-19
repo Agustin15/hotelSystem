@@ -19,7 +19,7 @@ export const generatePDF = (option, email, name) => {
       putOnlyUsedFonts: true
     });
 
-    doc.addImage(srcCanvasElement, "png", 77, 15);
+    doc.addImage(srcCanvasElement, "png", 94, 15);
 
     if (option == "download") {
       doc.save("Detalles reserva.pdf");

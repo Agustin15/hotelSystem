@@ -1,3 +1,5 @@
+
+
 import {
   getAllYearsRevenues,
   getAllRevenuesByYear,
@@ -11,6 +13,7 @@ let index = 1;
 let offset = 0;
 
 export const configTable = async () => {
+
   controls = document.querySelector(".controls");
   pageIndexElement = controls.querySelector(".pageIndex");
   prev = controls.querySelector(".prev");

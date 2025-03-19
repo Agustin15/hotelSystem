@@ -340,7 +340,7 @@ function graphicRooms(dataPointsRoomsBooking, chartRooms, title) {
         indexLabelPlacement: "inside",
         indexLabel: "{y}",
         yValueFormatString: '#,##0.0"%"',
-        indexLabelFontSize: 15,
+        indexLabelFontSize: 18,
         indexLabelFontColor: "white",
         dataPoints: dataPointsRoomsBooking
       }

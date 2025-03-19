@@ -1,6 +1,7 @@
 import { formatDate } from "./scriptTableBills.js";
 import { getRevenuDetailsById } from "./scriptRevenues.js";
 import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
+import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 
 let contentBill;
 
@@ -101,16 +102,12 @@ const drawBill = (billBookingDetails, revenueBooking) => {
   contentBill.innerHTML = `
    <div class="billDetails">
 
-   <div class="title">
-   <div class="icon">
-    <img src="../../../../img/iconBill.png">
-    <h3>Hotel System</h3>
-    </div>
-    <h4>Factura</h4>
-   </div>
-
    <div class="row">
    <div class="infoBooking">
+    <div class="icon">
+    <img src="../../../../img/revision.png">
+    <h3>Hotel System</h3>
+    </div>
      <li class="liIdBooking">
      <span>Numero de Reserva</span>
      <span class="blackFont">${revenueBooking.idReservaPago}</span>
