@@ -92,8 +92,7 @@ class Service
     public function getAllServicesHotel()
     {
 
-        $query = $this->connection->prepare("select idServicio,nombreServicio,descripcionServicio,imagen,precio 
-        from servicio group by nombreServicio");
+        $query = $this->connection->prepare("select idServicio,nombreServicio,descripcionServicio,imagen,precio from servicio group by nombreServicio");
         $query->execute();
         $result = $query->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);

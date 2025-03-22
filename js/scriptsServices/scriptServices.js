@@ -289,7 +289,7 @@ export const POSTService = async (serviceToAdd) => {
       body: JSON.stringify(serviceToAdd)
     });
     const result = await response.json();
-    console.log(result);
+
 
     if (!response.ok) {
       if (response.status == 401) {

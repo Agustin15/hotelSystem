@@ -11,7 +11,7 @@ class Client
 
     public function __construct()
     {
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
 
@@ -151,6 +151,21 @@ class Client
     }
 
 
+
+    public function getClientsOfWeekday($startWeek, $endWeek, $numberWeekday)
+    {
+
+        $query  = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes 
+        ON clientes.idCliente=reserva_habitacion.idClienteReserva where reserva_habitacion.fechaLlegada>=? && 
+        reserva_habitacion.fechaSalida<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
+        $query->bind_param("ssi", $startWeek, $endWeek, $numberWeekday);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
     public function getRowsBookingsClient($id)
     {
 
@@ -193,6 +208,17 @@ class Client
 
         $query = $this->connection->prepare("select DISTINCT YEAR(fechaLlegada) from reserva_habitacion INNER JOIN clientes 
         ON clientes.idCliente=reserva_habitacion.idClienteReserva");
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getClientsByEmail($email)
+    {
+
+        $query = $this->connection->prepare("select * from clientes where clientes.correo=?");
+        $query->bind_param("s", $email);
         $query->execute();
         $result = $query->get_result();
 

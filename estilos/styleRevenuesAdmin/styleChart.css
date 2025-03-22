@@ -45,7 +45,7 @@
   position: relative;
 }
 .containChart .header .search select {
-  width: 116px;
+  width: 9rem;
   border-radius: 3px;
   outline: none;
   height: 32px;
@@ -54,7 +54,7 @@
 .containChart .header .search button {
   width: 2.5rem;
   height: 2rem;
-  left: 5.5rem;
+  left: 7rem;
   padding: 0.3rem;
   color: white;
   background-color: rgb(7, 169, 180);
@@ -90,6 +90,11 @@
   min-height: 78%;
   margin-top: 1rem;
 }
+
+.hideChartRevenues {
+  display: none;
+}
+
 .containChart .loading {
   display: none;
   flex-direction: column;

@@ -52,7 +52,7 @@ async function getClientsByMonthActualYear(actualYear) {
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
-        JSON.stringify({ option: "clientsGraphic", year: actualYear }),
+        JSON.stringify({ option: "clientsMonthsGraphic", year: actualYear }),
       {
         method: "GET",
         headers: {
@@ -267,6 +267,7 @@ async function getCategoryRoomsMostReserved() {
     );
 
     const result = await response.json();
+  
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();

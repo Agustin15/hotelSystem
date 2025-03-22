@@ -139,5 +139,8 @@
   opacity: 80%;
   margin-top: 0.5rem;
 }
+.hideRoomsChart {
+  display: none;
+}
 
 /*# sourceMappingURL=styleChart.css.map */

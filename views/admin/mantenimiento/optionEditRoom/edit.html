@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditRoom.css">
+    <link rel="preload" href="../../../estilos/styleMaintenanceAdmin/styleEditRoom.css" as="style"
+        onload="this.rel='stylesheet'">
 </head>
 
 <body>
-    <div class="modalAlert">
+    <div class=" modalAlert">
 
         <div class="alertSuccesfully">
 
@@ -44,7 +45,8 @@
                 <div class="row">
                     <div class="category">
                         <label>Categoria:</label>
-                        <input type="text" id="categoria" placeholder="Ingresa categoria"  class="inputMain" readonly name="category">
+                        <input type="text" id="categoria" placeholder="Ingresa categoria" class="inputMain" readonly
+                            name="category">
                         <div class="errorInput">
                             <img src="../../../img/warningInput.png">
                             <p></p>
@@ -53,7 +55,8 @@
 
                     <div class="terrace">
                         <label>Terraza:</label>
-                        <input max="1" min="0" type="number" placeholder="Ingresa terraza"  class="inputMain" id="terraza" name="terrace">
+                        <input max="1" min="0" type="number" placeholder="Ingresa terraza" class="inputMain"
+                            id="terraza" name="terrace">
                         <div class="errorInput">
                             <img src="../../../img/warningInput.png">
                             <p></p>
@@ -64,7 +67,8 @@
                 <div class="row">
                     <div class="beds">
                         <label>Camas:</label>
-                        <input max="5" min="0" type="number" placeholder="Ingresa camas"  class="inputMain" id="camas" name="beds">
+                        <input max="5" min="0" type="number" placeholder="Ingresa camas" class="inputMain" id="camas"
+                            name="beds">
                         <div class="errorInput">
                             <img src="../../../img/warningInput.png">
                             <p></p>
@@ -73,7 +77,8 @@
 
                     <div class="capacity">
                         <label>Capacidad:</label>
-                        <input max="6" min="0" type="number" placeholder="Ingresa capacidad"  class="inputMain" id="capacidad" name="capacity">
+                        <input max="6" min="0" type="number" placeholder="Ingresa capacidad" class="inputMain"
+                            id="capacidad" name="capacity">
                         <div class="errorInput">
                             <img src="../../../img/warningInput.png">
                             <p></p>

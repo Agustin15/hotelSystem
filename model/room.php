@@ -228,12 +228,8 @@ class Room
     {
 
 
-        $query = $this->connection->prepare("select * from habitaciones where
-     numHabitacion=?");
-        $query->execute();
-
+        $query = $this->connection->prepare("select * from habitaciones where numHabitacion=?");
         $query->bind_param("i", $numRoom);
-
         $query->execute();
 
         $result = $query->get_result();

@@ -270,6 +270,7 @@
   display: none;
   justify-content: flex-end;
   width: 110%;
+  color: #1497a8;
 }
 
 .containFormAndCart {
@@ -511,7 +512,7 @@
 }
 .containForm .nights img {
   width: 30px;
-  opacity:99%;
+  opacity: 99%;
 }
 .containForm form {
   display: flex;

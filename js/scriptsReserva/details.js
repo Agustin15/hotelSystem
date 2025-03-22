@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Object.values(dataToFindBooking).length ==
     Object.keys(dataToFindBooking).length;
 
-  if (!dataToFindBooking || dataToFindBookingOk) {
+  if (!dataToFindBooking || !dataToFindBookingOk) {
     location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
   }
 

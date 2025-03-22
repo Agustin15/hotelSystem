@@ -1,9 +1,9 @@
 <?php
 require_once("../../config/connection.php");
 require("../../model/booking.php");
-require(__DIR__ . "./../client/clientController.php");
-require(__DIR__ . "./../rooms/roomsBookingController.php");
-require(__DIR__ . "./../revenues/revenuesController.php");
+require(__DIR__ . "../../client/clientController.php");
+require(__DIR__ . "../../rooms/roomsBookingController.php");
+require(__DIR__ . "../../revenues/revenuesController.php");
 
 class bookingController
 {

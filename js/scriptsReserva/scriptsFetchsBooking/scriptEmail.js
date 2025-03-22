@@ -18,8 +18,8 @@ export const sendEmail = async (name, email, file, stateBooking) => {
       body: formData
     });
 
-    const result = await response.json();
-
+    const result = await response.text();
+    console.log(result);
     if (!response.ok) {
       throw result.error;
     }

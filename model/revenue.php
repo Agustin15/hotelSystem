@@ -9,7 +9,7 @@ class Revenue
 
     public function __construct()
     {
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
 
@@ -86,12 +86,58 @@ class Revenue
 
 
 
+    public function getRevenuesByWeekday($startWeek, $endWeek, $numberWeekday)
+    {
+
+        $query = $this->connection->prepare("select * from pago INNER JOIN reserva_habitacion 
+        ON pago.idReservaPago=reserva_habitacion.idReserva where reserva_habitacion.fechaLlegada>=?
+        && reserva_habitacion.fechaSalida<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
+        $query->bind_param("ssi", $startWeek, $endWeek, $numberWeekday);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getRevenuesOfThisWeek($startWeek, $endWeek)
+    {
+
+        $query = $this->connection->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,
+        clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
+        reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
+        ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
+        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaSalida<=?");
+        $query->bind_param("ss", $startWeek, $endWeek);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    
+
+    public function getRevenuesOfThisWeekLimit($startWeek, $endWeek,$index)
+    {
+
+        $query = $this->connection->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,
+        clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
+        reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
+        ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
+        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaSalida<=?
+        LIMIT 10 OFFSET $index");
+        $query->bind_param("ss", $startWeek, $endWeek);
+        $query->execute();
+        $result = $query->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getAllRevenuesByYear($year)
     {
 
         $query = $this->connection->prepare("select * from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
-         where YEAR(reserva_habitacion.fechaSalida)=?");
+         where YEAR(reserva_habitacion.fechaLlegada)=?");
         $query->bind_param("i", $year);
         $query->execute();
         $result = $query->get_result();
@@ -105,7 +151,7 @@ class Revenue
 
         $query = $this->connection->prepare("select * from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
-         where reserva_habitacion.fechaSalida=?");
+         where reserva_habitacion.fechaLlegada=?");
         $query->bind_param("s", $date);
         $query->execute();
         $result = $query->get_result();
@@ -122,7 +168,7 @@ class Revenue
         clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
         reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
         ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
-        pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaSalida)=? LIMIT 10 OFFSET $index");
+        pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10 OFFSET $index");
         $query->bind_param("i", $year);
         $query->execute();
         $result = $query->get_result();
@@ -134,7 +180,7 @@ class Revenue
     public function getAllYearsRevenues()
     {
 
-        $query = $this->connection->prepare("select DISTINCT YEAR(reserva_habitacion.fechaSalida) from pago INNER JOIN
+        $query = $this->connection->prepare("select DISTINCT YEAR(reserva_habitacion.fechaLlegada) from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva;");
         $query->execute();
         $result = $query->get_result();
@@ -149,7 +195,7 @@ class Revenue
 
         $query = $this->connection->prepare("select * from pago INNER JOIN
          reserva_habitacion ON pago.idReservaPago= reserva_habitacion.idReserva 
-         where MONTH(reserva_habitacion.fechaSalida)=? and YEAR(reserva_habitacion.fechaSalida)=? ");
+         where MONTH(reserva_habitacion.fechaLlegada)=? and YEAR(reserva_habitacion.fechaLlegada)=? ");
         $query->bind_param("ii", $month, $year);
         $query->execute();
         $result = $query->get_result();

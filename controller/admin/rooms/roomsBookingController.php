@@ -3,7 +3,7 @@
 require_once("../../config/connection.php");
 require("../../model/room.php");
 require("../../model/service.php");
-require_once(__DIR__ . "./../authToken.php");
+require_once(__DIR__ . "../../authToken.php");
 
 
 class roomsBookingController
@@ -71,7 +71,7 @@ class roomsBookingController
                 }
             }
 
-            if ($errorDelete == false) {
+            if ($errorDelete == true) {
 
                 throw new Error("Error, no se pudo eliminar la habitacion reservada");
             } else {
@@ -202,7 +202,6 @@ class roomsBookingController
                 use ($categoryRoom) {
 
                     $dataRoomReserved = $this->rooms->getCategoryByNumRoom($roomReserved['numHabitacionReservada'])->fetch_array(MYSQLI_ASSOC);
-
                     return $dataRoomReserved['tipoHabitacion'] == $categoryRoom['categoria'];
                 });
 

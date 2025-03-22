@@ -18,7 +18,7 @@ $actualYear = date("Y");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
-    <script src="../../js/alertas.js" defer></script>
+   
 
     <title>Admin</title>
 

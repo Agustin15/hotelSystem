@@ -1,6 +1,7 @@
+
 <?php
 require("../../model/client.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../authToken.php");
 
 class clientController
 {
@@ -123,7 +124,7 @@ class clientController
   }
 
 
-  public function getClientsGraphic($req)
+  public function getClientsMonthsGraphic($req)
   {
 
     try {
@@ -169,6 +170,43 @@ class clientController
     }
   }
 
+
+  public function getClientsOfThisWeek()
+  {
+
+    try {
+
+      $startWeek = date("Y-m-d", strtotime("this week"));
+      $endWeek = date("Y-m-d", strtotime("next sunday"));
+
+      $numbersWeekday = [
+        array("number" => 0, "weekday" => "Lunes"),
+        array("number" => 1, "weekday" => "Martes"),
+        array("number" => 2, "weekday" => "Miercoles"),
+        array("number" => 3, "weekday" => "Jueves"),
+        array("number" => 4, "weekday" => "Viernes"),
+        array("number" => 5, "weekday" => "Sabado"),
+        array("number" => 6, "weekday" => "Domingo")
+      ];
+
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        return array("error" => $tokenVerify["error"], "status" => 401);
+      }
+
+      $quantityClientsOfThisWeek = array_map(function ($numberWeekday) use ($startWeek, $endWeek) {
+
+        $clientsOfWeekday =  $this->client->getClientsOfWeekday($startWeek, $endWeek, $numberWeekday["number"]);
+        return array("weekday" => $numberWeekday["weekday"], "clients" => count($clientsOfWeekday));
+      }, $numbersWeekday);
+
+      return $quantityClientsOfThisWeek;
+    } catch (Throwable $th) {
+      return array("error" => $th->getMessage(), "status" => 404);
+    }
+  }
+
+
   public function getClientsTable($req)
   {
     try {
@@ -201,6 +239,23 @@ class clientController
       $clientsRows = $this->client->getAllClientsRows();
 
       return $clientsRows;
+    } catch (Throwable $th) {
+      return array("error" => $th->getMessage(), "status" => 404);
+    }
+  }
+
+
+  public function getClientsByEmail($req)
+  {
+    try {
+      $email = $req["email"];
+      $tokenVerify = $this->authToken->verifyToken();
+      if (isset($tokenVerify["error"])) {
+        return array("error" => $tokenVerify["error"], "status" => 401);
+      }
+      $clientsByLastname = $this->client->getClientsByEmail($email);
+
+      return $clientsByLastname;
     } catch (Throwable $th) {
       return array("error" => $th->getMessage(), "status" => 404);
     }

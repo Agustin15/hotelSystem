@@ -2,7 +2,6 @@
 
 require("../../controller/bookingClient/bookings/bookingController.php");
 
-
 $bookingController = new bookingController();
 
 $method = $_SERVER['REQUEST_METHOD'];

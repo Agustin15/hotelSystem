@@ -1,7 +1,7 @@
 <?php
 
 require("../../model/rol.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../authToken.php");
 
 class rolController
 {

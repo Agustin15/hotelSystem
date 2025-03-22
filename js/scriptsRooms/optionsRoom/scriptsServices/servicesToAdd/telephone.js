@@ -139,14 +139,15 @@ const calculateTotal = () => {
         if (alertService) {
           alertService.style.display = "none";
         }
-        let serviceAddedToRoom = addServiceToRoom(quantityMinutes, total);
+        let serviceAddedToRoom = await addServiceToRoom(quantityMinutes, total);
         if (serviceAddedToRoom == true) {
+          defaultValues();
           setAlertService(
             alertService,
             true,
             `Servicio agregado exitosamente a la habitacion ${numRoom}`
           );
-          defaultValues();
+  
         }
       });
     }

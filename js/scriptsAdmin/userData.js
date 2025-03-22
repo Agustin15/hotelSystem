@@ -36,46 +36,7 @@ export const getDataUserByToken = async () => {
 };
 
 export const invalidAuthentication = async () => {
-  let timeout = 20;
-
-  if (!document.querySelector("#alertRefreshToken")) {
-    let divAlertRefreshToken = document.createElement("div");
-    divAlertRefreshToken.id = "alertRefreshToken";
-
-    divAlertRefreshToken.innerHTML = `
-   <div class="row">
-    <img src="${FRONT_URL_LOCALHOST}/img/sandClock.gif">
-     <p>Sesion expirada, regresando en <span class="secondsText">${timeout}</span></p>
-   </div>
-   <button class="btnUpdateToken">
-         <span>Extender sesion</span>
-             <img src="${FRONT_URL_LOCALHOST}/img/newCookie.png">
-   </button>
-  
-  `;
-
-    document.body.appendChild(divAlertRefreshToken);
-    let secondsText = document.querySelector(".secondsText");
-    let btnUpdateToken = document.querySelector(".btnUpdateToken");
-    countBackSeconds(secondsText, timeout);
-
-    btnUpdateToken.addEventListener("click", async () => {
-      document.body.removeChild(divAlertRefreshToken);
-      refreshToken();
-    });
-  }
-};
-
-const countBackSeconds = (secondsText, timeout) => {
-  setInterval(function () {
-    if (timeout > 0) {
-      timeout--;
-      secondsText.textContent = timeout;
-    }
-    if (timeout == 0) {
-      // logout();
-    }
-  }, 1200);
+  logout();
 };
 
 export const logout = async () => {

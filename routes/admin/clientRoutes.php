@@ -32,9 +32,11 @@ $routes = [
 
             "allClients" => $clientController->getAllClients($req),
             "AllYearsVisitClients" => $clientController->getAllYearsVisitClients($req),
-            "clientsGraphic" => $clientController->getClientsGraphic($req),
+            "clientsMonthsGraphic" => $clientController->getClientsMonthsGraphic($req),
+            "getClientsOfThisWeek" => $clientController->getClientsOfThisWeek(),
             "clientsTable" => $clientController->getClientsTable($req),
             "clientsRows" => $clientController->getClientsRows($req),
+            "clientsByEmail" => $clientController->getClientsByEmail($req),
             "dataClient" => $clientController->getDataClient($req),
             "getClientByMailAndName" => $clientController->getClientByMailAndName($req),
             "ifExistClient" => $clientController->getIfExistClient($req),

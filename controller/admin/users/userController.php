@@ -1,7 +1,7 @@
 <?php
 require("../../model/user.php");
 require("../../vendor/autoload.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../authToken.php");
 
 use Firebase\JWT\JWT;
 

@@ -2,9 +2,9 @@
 
 require("../../config/connection.php");
 require("../../model/booking.php");
-require(__DIR__ . "./../revenues/revenuesController.php");
-require(__DIR__ . "./../rooms/roomsBookingController.php");
-require_once(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../revenues/revenuesController.php");
+require(__DIR__ . "../../rooms/roomsBookingController.php");
+require_once(__DIR__ . "../../authToken.php");
 
 class bookingController
 {
@@ -262,6 +262,52 @@ class bookingController
             );
 
             return $bookingFind;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function getBookingsOfLastWeek()
+    {
+        try {
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+            $weekdayStart = date("Y-m-d", strtotime("this week"));
+            $weekdayEnd = date("Y-m-d", strtotime("next sunday"));
+
+            $allBookingOfLastWeek = $this->booking->getAllBookingsOfLastWeek($weekdayStart, $weekdayEnd);
+
+            return $allBookingOfLastWeek;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getBookingsOfLastWeekLimitIndex($req)
+    {
+        try {
+
+            $index = $req["index"];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $weekdayStart = date("Y-m-d", strtotime("this week"));
+            $weekdayEnd = date("Y-m-d", strtotime("next sunday"));
+
+            $allBookingOfLastWeekLimit = $this->booking->getAllBookingsOfLastWeekLimitIndex(
+                $weekdayStart,
+                $weekdayEnd,
+                $index
+            );
+
+            return $allBookingOfLastWeekLimit;
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

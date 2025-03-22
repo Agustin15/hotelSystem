@@ -1,10 +1,12 @@
 import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
 let actualYear = new Date().getFullYear();
-let selectYear;
+let selectYear, chartOfRooms;
 
 export const configChartRooms = async () => {
   selectYear = document.querySelector(".selectYear");
+  chartOfRooms = document.getElementById("chartRooms");
+
   const years = await getAllYearsToSelect();
   if (years) {
     drawYearsToSelect(years);
@@ -109,7 +111,6 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
       noData(false);
       dataPointsRoomsToChart(data);
     }
-    return data;
   }
 };
 
@@ -117,8 +118,10 @@ const noData = (state) => {
   let noData = document.querySelector(".noData");
 
   if (state) {
+    chartOfRooms.classList.add("hideRoomsChart");
     noData.style.display = "flex";
   } else {
+    chartOfRooms.classList.remove("hideRoomsChart");
     noData.style.display = "none";
   }
 };
@@ -141,12 +144,11 @@ const dataPointsRoomsToChart = (roomsBookingCategorys) => {
 const chartRooms = (dataPoints) => {
   CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
 
-
   var chart = new CanvasJS.Chart("chartRooms", {
     animationEnabled: true,
     colorSet: "greenShades",
     legend: {
-      fontSize: 19,
+      fontSize: 19
     },
     data: [
       {
@@ -169,8 +171,10 @@ const chartRooms = (dataPoints) => {
 
 const loading = (state) => {
   if (state) {
+    chartOfRooms.classList.add("hideRoomsChart");
     document.querySelector(".loading").style.display = "flex";
   } else {
+    chartOfRooms.classList.remove("hideRoomsChart");
     document.querySelector(".loading").style.display = "none";
   }
 };

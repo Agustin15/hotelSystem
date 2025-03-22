@@ -1,19 +1,18 @@
-
-
 import {
   getAllYearsRevenues,
   getAllRevenuesByYear,
   getAllRevenuesByYearLimitIndex,
+  getRevenuesOfThisWeek,
+  getRevenuesOfThisWeekLimit,
   getRevenuDetailsById
 } from "./scriptRevenues.js";
 
-let selectYear, currentYear, controls, tableBills, next, prev, pageIndexElement;
+let selectYear, controls, tableBills, next, prev, pageIndexElement;
 let pages;
 let index = 1;
 let offset = 0;
 
 export const configTable = async () => {
-
   controls = document.querySelector(".controls");
   pageIndexElement = controls.querySelector(".pageIndex");
   prev = controls.querySelector(".prev");
@@ -27,21 +26,24 @@ export const configTable = async () => {
     if (yearsRevenues) {
       displaySelectYears(yearsRevenues);
       await displayControlsIndex();
-      displayTable("revenues");
+      displayTable();
       eventsControlsIndex();
       eventSearchByYear();
     }
   } else {
     controls.style.display = "none";
-    displayTable("revenueFound", urlParams.get("idBooking"));
+    let revenueBooking = await revenueByIdBooking(urlParams.get("idBooking"));
+    drawRows([revenueBooking]);
   }
 };
 
 const eventSearchByYear = async () => {
   let btnSearchByYear = document.querySelector(".btnSearch");
   btnSearchByYear.addEventListener("click", async () => {
+    index = 1;
+    offset = 0;
     await displayControlsIndex();
-    displayTable("revenues");
+    displayTable();
   });
 };
 
@@ -89,36 +91,13 @@ const allYearsRevenues = async () => {
 
 const displaySelectYears = (yearsRevenues) => {
   selectYear = document.querySelector(".selectYear");
-  currentYear = new Date().getFullYear();
   let optionsYears = yearsRevenues.map((year) => {
     return ` 
-      <option ${
-        currentYear == Object.values(year) ? "selected" : ""
-      } value=${Object.values(year)}>${Object.values(year)}</option>
+      <option value=${Object.values(year)}>${Object.values(year)}</option>
     `;
   });
 
-  selectYear.innerHTML = optionsYears.join("");
-};
-
-const revenuesByYear = async (year) => {
-  let revenues;
-  loading(true);
-  try {
-    let result = await getAllRevenuesByYear(!year ? currentYear : year);
-    if (result) {
-      revenues = result;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loading(false);
-    if (revenues) {
-      return revenues;
-    } else {
-      noData();
-    }
-  }
+  selectYear.innerHTML += optionsYears.join("");
 };
 
 export const formatDate = (date, character) => {
@@ -135,96 +114,104 @@ export const formatDate = (date, character) => {
   return dateFormat;
 };
 
-const displayTable = async (option, idBooking) => {
+const displayTable = async () => {
   let revenues;
-  if (option == "revenues") {
-    let revenuesLimit = await allRevenuesByYearLimitIndex(selectYear.value);
-    revenues = revenuesLimit;
+  if (selectYear.value == "thisWeek") {
+    revenues = await revenuesThisWeekLimit();
   } else {
-    let revenueBooking = await revenueByIdBooking(idBooking);
-
-    revenues = [revenueBooking];
+    revenues = await allRevenuesByYearLimitIndex(selectYear.value);
   }
 
   if (revenues) {
-    let tableBills = document.querySelector(".tableBills");
-
-    let revenuesRows = revenues.map((revenue, index) => {
-      let iconStatusBooking, titleIconState;
-
-      if (new Date(revenue.fechaSalida) <= new Date()) {
-        iconStatusBooking = "../../../img/bookingEndIcon.png";
-        titleIconState = "Finalizada";
-      } else if (
-        new Date(revenue.fechaLlegada) <= new Date() &&
-        new Date(revenue.fechaSalida) > new Date()
-      ) {
-        titleIconState = "En curso";
-      } else {
-        iconStatusBooking = "../../../img/bookingPendingIcon.png";
-        titleIconState = "Pendiente";
-      }
-
-      let bookingStartFormat = formatDate(new Date(revenue.fechaLlegada), "-");
-      let bookingEndFormat = formatDate(new Date(revenue.fechaSalida), "-");
-      return `
-     <tr class="${index % 2 == 0 ? "trGray" : ""}"> 
-      <td>
-      <div class="idBooking">
-      ${revenue.idReservaPago}
-      <img src="../../../img/reservas.png">
-        ${
-          iconStatusBooking
-            ? `<img title=${titleIconState} class="iconStatus" src=${iconStatusBooking}></img>`
-            : `<div title="En curso" class="bar">
-                       <div class="contentBar"></div>
-                     </div>`
-        }  
-      </div>
-      </td>
-       <td>${revenue.correo}</td>
-       <td>${bookingStartFormat}</td>
-         <td>${bookingEndFormat}</td>
-        <td>US$ ${revenue.deposito}</td>
-        <td>
-        <div class="buttons">
-        <button id=${
-          revenue.idReservaPago
-        } class="btnViewBill" title="Ver factura">
-        <img src="../../../img/viewBill.png">
-        </button>
-        </div>
-        </td>
-     </tr>
-    `;
-    });
-
-    tableBills.querySelector("tbody").innerHTML = revenuesRows.join("");
-    search();
-
-    document.querySelectorAll(".btnViewBill").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        let idRevenue = btn.id;
-
-        if (idRevenue) {
-          openBill(idRevenue);
-        }
-      });
-    });
+    drawRows(revenues);
   }
 };
 
 const displayControlsIndex = async () => {
-  let revenues = await revenuesByYear(selectYear.value);
+  let revenues;
+  if (selectYear.value == "thisWeek") {
+    revenues = await revenuesThisWeek();
+  } else {
+    revenues = await revenuesByYear(selectYear.value);
+  }
 
   if (revenues) {
+    controls.style.display = "flex";
     pages = Math.ceil(revenues.length / 10);
     if (index > pages && pages > 0) {
       index--;
       offset -= 10;
     }
     pageIndexElement.textContent = `${index}/${pages}`;
+  } else {
+    controls.style.display = "none";
   }
+};
+
+const drawRows = (revenues) => {
+  let tableBills = document.querySelector(".tableBills");
+
+  let revenuesRows = revenues.map((revenue, index) => {
+    let iconStatusBooking, titleIconState;
+
+    if (new Date(revenue.fechaSalida) <= new Date()) {
+      iconStatusBooking = "../../../img/bookingEndIcon.png";
+      titleIconState = "Finalizada";
+    } else if (
+      new Date(revenue.fechaLlegada) <= new Date() &&
+      new Date(revenue.fechaSalida) > new Date()
+    ) {
+      titleIconState = "En curso";
+    } else {
+      iconStatusBooking = "../../../img/bookingPendingIcon.png";
+      titleIconState = "Pendiente";
+    }
+
+    let bookingStartFormat = formatDate(new Date(revenue.fechaLlegada), "-");
+    let bookingEndFormat = formatDate(new Date(revenue.fechaSalida), "-");
+    return `
+   <tr class="${index % 2 == 0 ? "trGray" : ""}"> 
+    <td>
+    <div class="idBooking">
+    ${revenue.idReservaPago}
+    <img src="../../../img/reservas.png">
+      ${
+        iconStatusBooking
+          ? `<img title=${titleIconState} class="iconStatus" src=${iconStatusBooking}></img>`
+          : `<div title="En curso" class="bar">
+                     <div class="contentBar"></div>
+                   </div>`
+      }  
+    </div>
+    </td>
+     <td>${revenue.correo}</td>
+     <td>${bookingStartFormat}</td>
+       <td>${bookingEndFormat}</td>
+      <td>US$ ${revenue.deposito}</td>
+      <td>
+      <div class="buttons">
+      <button id=${
+        revenue.idReservaPago
+      } class="btnViewBill" title="Ver factura">
+      <img src="../../../img/viewBill.png">
+      </button>
+      </div>
+      </td>
+   </tr>
+  `;
+  });
+
+  tableBills.querySelector("tbody").innerHTML = revenuesRows.join("");
+  search();
+
+  document.querySelectorAll(".btnViewBill").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let idRevenue = btn.id;
+      if (idRevenue) {
+        openBill(idRevenue);
+      }
+    });
+  });
 };
 
 const eventsControlsIndex = () => {
@@ -267,6 +254,66 @@ const allRevenuesByYearLimitIndex = async (year) => {
   }
 };
 
+const revenuesThisWeekLimit = async () => {
+  let revenuesLimit;
+
+  loading(true);
+  try {
+    let result = await getRevenuesOfThisWeekLimit(offset);
+    if (result) {
+      revenuesLimit = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!revenuesLimit) {
+      noData();
+    }
+    return revenuesLimit;
+  }
+};
+
+const revenuesByYear = async () => {
+  let revenues;
+  loading(true);
+  try {
+    let result = await getAllRevenuesByYear(selectYear.value);
+    if (result) {
+      revenues = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (revenues) {
+      return revenues;
+    } else {
+      noData();
+    }
+  }
+};
+
+const revenuesThisWeek = async () => {
+  let revenues;
+  loading(true);
+  try {
+    let result = await getRevenuesOfThisWeek();
+    if (result) {
+      revenues = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (revenues) {
+      return revenues;
+    } else {
+      noData();
+    }
+  }
+};
+
 const loading = (state) => {
   tableBills.querySelector("tbody").innerHTML = ``;
   let tfoot = document.querySelector("tfoot");
@@ -287,7 +334,6 @@ const loading = (state) => {
 const noData = () => {
   tableBills.querySelector("tbody").innerHTML = ``;
   let tfoot = document.querySelector("tfoot");
-  controls.style.display = "none";
 
   tfoot.innerHTML = `
   <td cellspan="6" colspan="6">

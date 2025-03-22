@@ -3,7 +3,7 @@
 require("../../model/bill.php");
 require("../../model/service.php");
 require("../../model/room.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../authToken.php");
 
 
 

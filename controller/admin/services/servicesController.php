@@ -1,6 +1,6 @@
 <?php
 require_once("../../model/service.php");
-require_once(__DIR__ . "./../authToken.php");
+require_once(__DIR__ . "../../authToken.php");
 
 class servicesController
 {

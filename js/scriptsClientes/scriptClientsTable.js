@@ -25,6 +25,7 @@ export const configClientsTable = async () => {
     await displayControlsIndex();
     displayTable();
     eventsControlsIndex();
+    searchClientByLastname();
   } else {
     let clientFound = await getClientById(urlParams.get("idClient"));
     controlsElement.style.display = "none";
@@ -35,7 +36,6 @@ export const configClientsTable = async () => {
 export const displayTable = async () => {
   let clientsLimit = await getDataLimitClients();
   drawRowsTable(clientsLimit);
-  search();
 };
 
 const getRowsClients = async () => {
@@ -141,6 +141,44 @@ export const getDataLimitClients = async () => {
   }
 };
 
+export const getClientsByLastname = async (email) => {
+  let data = null;
+
+  loading(true);
+
+  try {
+    let url =
+      `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params= ` +
+      JSON.stringify({ option: "clientsByEmail", email: email });
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    } else if (result.length > 0) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+
+    if (!data) {
+      noData();
+    }
+    return data;
+  }
+};
+
 const loading = (state) => {
   let tbody = document.querySelector("tbody");
   tbody.innerHTML = ``;
@@ -163,12 +201,15 @@ const loading = (state) => {
 export const displayControlsIndex = async () => {
   let clientsRows = await getRowsClients();
   if (clientsRows) {
+    controlsElement.style.display = "flex";
     limitPage = Math.ceil(clientsRows / 10);
     if (index > limitPage && limitPage > 0) {
       index--;
       offset -= 10;
     }
     pagesText.textContent = `${index}/${limitPage}`;
+  } else {
+    controlsElement.style.display = "none";
   }
 };
 
@@ -192,42 +233,15 @@ const eventsControlsIndex = () => {
   });
 };
 
-const search = () => {
+const searchClientByLastname = () => {
   let btnInputSearch = document.querySelector(".btnSearchInput");
   let inputSearch = document.querySelector(".inputSearch");
-  let tfoot = document.querySelector("tfoot");
 
-  let rows = document.querySelector("tbody").querySelectorAll("tr");
-  btnInputSearch.addEventListener("click", () => {
-    let value = inputSearch.value.trim();
-
-    rows.forEach((row) => {
-      if (row.innerText.indexOf(value) == -1) {
-        row.style.display = "none";
-      } else {
-        row.style.display = "table-row";
-      }
-    });
-
-    let totalRowsHide = [...rows].reduce((ac, row) => {
-      row.style.display == "none" ? ac++ : ac;
-      return ac;
-    }, 0);
-
-    if (rows.length == totalRowsHide) {
-      document.querySelector(".controls").style.display = "none";
-      tfoot.innerHTML = `
-   <td rowspan="6" colspan="6">
-  <div class="noResults">
-      <img src="../../../img/noFind.png">
-      <span>Sin Resultados</span>
-  </div>
-  </td>
-  
-  `;
-    } else {
-      tfoot.innerHTML = ``;
-      document.querySelector(".controls").style.display = "flex";
+  btnInputSearch.addEventListener("click", async () => {
+    let clients = await getClientsByLastname(inputSearch.value.trim());
+    controlsElement.style.display = "none";
+    if (clients) {
+      drawRowsTable(clients);
     }
   });
 };

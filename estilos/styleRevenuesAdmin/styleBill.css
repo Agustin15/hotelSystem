@@ -73,10 +73,14 @@ body {
   width: auto;
   margin-top: 2rem;
   padding-left: 12rem;
-  border: 1px solid gray;
   border-radius: 3px;
   position: relative;
 }
+
+.border {
+  border: 1px solid gray;
+}
+
 .containBill .billDetails {
   display: flex;
   flex-direction: column;
@@ -213,70 +217,16 @@ body {
 }
 
 .loadingBill {
+  margin: auto;
   display: flex;
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  width: auto;
-  height: 33rem;
+  height:78vh;
   font-size: 21px;
   color: grey;
 }
 .loadingBill img {
   width: 57px;
   opacity: 60%;
-}
-
-#alertRefreshToken {
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.9);
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-}
-
-#alertRefreshToken .row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 17rem;
-  font-size: 19px;
-  font-weight: bold;
-  color: black;
-}
-
-#alertRefreshToken .row img {
-  width: 45px;
-  height: 45px;
-}
-
-#alertRefreshToken button {
-  width: 11rem;
-  height: 2.5rem;
-  border-radius: 33px;
-  background-color: rgb(248, 163, 5);
-  border: none;
-  display: flex;
-  color: white;
-  font-weight: bold;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#alertRefreshToken button:hover {
-  background-color: rgb(216, 146, 15);
-}
-
-#alertRefreshToken button img {
-  width: 25px;
-  height: 25px;
 }

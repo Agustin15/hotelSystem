@@ -19,6 +19,8 @@ export const configListRooms = async () => {
   if (categoryStateRooms) {
     await displayChartsRooms(categoryStateRooms);
     category = document.querySelector(".containChart").id;
+    roomOptionSelected(document.querySelector(".containChart"));
+
     let rooms = await roomsByCategory();
     if (rooms) {
       drawRooms(rooms);

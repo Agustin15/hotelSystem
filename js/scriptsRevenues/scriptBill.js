@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       billBookingDetails = billBookingDetails.flat();
 
       if (billBookingDetails) {
+        contentBill.classList.add("border");
         drawBill(billBookingDetails, revenueBooking);
         generatePDF(revenueBooking.idReservaPago);
       }

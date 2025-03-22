@@ -211,7 +211,7 @@ const updateBooking = async (bookingToUpdate) => {
   bookingToUpdate.amount = amount;
 
   let resultBookingUpdated = await fetchUpdateBooking(bookingToUpdate);
-
+ 
   if (resultBookingUpdated.error) {
     alertForm(
       "../../../img/advertenciaLogin.png",

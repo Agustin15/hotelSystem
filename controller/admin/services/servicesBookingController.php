@@ -1,9 +1,9 @@
 <?php
 require("../../model/service.php");
 require_once("../../config/connection.php");
-require(__DIR__ . "./../revenues/revenuesController.php");
-require(__DIR__ . "./../services/servicesController.php");
-require_once(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../revenues/revenuesController.php");
+require(__DIR__ . "../../services/servicesController.php");
+require_once(__DIR__ . "../../authToken.php");
 
 class servicesBookingController
 {

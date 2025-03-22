@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
+    <link rel="preload" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css" as="style"
+        onload="this.rel='stylesheet'">
 
 </head>
 
@@ -66,7 +67,8 @@
             <div class="rowTwo">
                 <div class="username">
                     <label>Usuario</label>
-                    <input type="text" id="usuario" autocomplete="off" name="username" placeholder="Ingresa nombre de usuario">
+                    <input type="text" id="usuario" autocomplete="off" name="username"
+                        placeholder="Ingresa nombre de usuario">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">
                         <p></p>
@@ -86,8 +88,7 @@
             <div class="rowThree">
                 <div class="password">
                     <label>Contrasenia nueva</label>
-                    <input id="inputPassword" autocomplete="off" type="password" name="password"
-                        placeholder="Opcional">
+                    <input id="inputPassword" autocomplete="off" type="password" name="password" placeholder="Opcional">
                     <img class="viewPassword" src="../../../img/ojo.png">
                     <div class="errorInput">
                         <img src="../../../img/warningInput.png">

@@ -69,14 +69,14 @@ const submitEditForm = () => {
       if (exist) {
         alertForm("../../../img/advertenciaLogin.png", exist.warning, "Error");
       } else {
-        let resultPUT = fetchPUT(clientUpdated);
+        let resultPUT = await fetchPUT(clientUpdated);
         if (resultPUT) {
           alertForm(
             "../../../img/tickAdmin.png",
             "¡Cliente actualizado exitosamente!",
             "Exito"
           );
-          displayTable();
+          await displayTable();
         } else {
           alertForm(
             "../../../img/advertenciaLogin.png",

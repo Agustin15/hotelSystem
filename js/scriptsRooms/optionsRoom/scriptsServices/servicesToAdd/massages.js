@@ -154,7 +154,7 @@ const calculateTotal = () => {
         if (alertService) {
           alertService.style.display = "none";
         }
-        let serviceAddedToRoom = addServiceToRoom(quantitySessions, total);
+        let serviceAddedToRoom = await addServiceToRoom(quantitySessions, total);
         if (serviceAddedToRoom==true) {
           setAlertService(
             alertService,

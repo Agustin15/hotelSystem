@@ -1,6 +1,6 @@
 <?php
 require("../../model/room.php");
-require(__DIR__ . "./../authToken.php");
+require(__DIR__ . "../../authToken.php");
 
 class roomsController
 {

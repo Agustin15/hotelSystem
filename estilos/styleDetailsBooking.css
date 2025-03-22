@@ -204,7 +204,7 @@ header li img {
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 79%;
+  width: 82%;
   margin-top: 3rem;
   border-radius: 5px;
   height: auto;
@@ -234,7 +234,7 @@ header li img {
 
 .details  .msjSuccesfully {
   display: flex;
-  width: 95%;
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
@@ -276,7 +276,7 @@ header li img {
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding-left: 17rem;
+  padding-left: 18rem;
   padding-top: 0.5rem;
 }
 .details .client {

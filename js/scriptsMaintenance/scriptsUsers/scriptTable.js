@@ -90,12 +90,15 @@ const displayRows = async (usersLimit) => {
 export const displayControlsIndex = async () => {
   let users = await allUsers();
   if (users) {
+    controls.style.display = "flex";
     pages = Math.ceil(users.length / 15);
     if (index > pages && pages > 0) {
       index--;
       offset -= 15;
     }
     pageIndex.innerHTML = `${index}/${pages}`;
+  } else {
+    controls.style.display = "none";
   }
 };
 

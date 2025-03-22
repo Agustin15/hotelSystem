@@ -1,4 +1,4 @@
-import { loadYears, getDataClientsTOGraphic } from "./scriptGraficaCliente.js";
+import { configChart } from "./scriptGraficaCliente.js";
 import { configClientsTable } from "./scriptClientsTable.js";
 import submitAddForm from "./scriptAddClient.js";
 import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
@@ -73,8 +73,7 @@ const drawDocument = (result) => {
 
   if (containChart) {
     markActualOption(optionChartLi);
-    loadYears();
-    getDataClientsTOGraphic();
+    configChart();
   } else if (clientsTable) {
     markActualOption(optionListLi);
     configClientsTable();

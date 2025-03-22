@@ -1,7 +1,7 @@
 <?php
 
 require("../../model/revenue.php");
-require_once(__DIR__ . "./../authToken.php");
+require_once(__DIR__ . "../../authToken.php");
 
 class revenuesController
 {
@@ -203,5 +203,86 @@ class revenuesController
     }
 
 
-    public function DELETE() {}
+
+    public function getRevenuesOfThisWeek()
+    {
+
+        try {
+
+            $startWeek = date("Y-m-d", strtotime("this week"));
+            $endWeek = date("Y-m-d", strtotime("next sunday"));
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $revenuesOfThisWeek =  $this->pay->getRevenuesOfThisWeek($startWeek, $endWeek);
+            return $revenuesOfThisWeek;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getRevenuesOfThisWeekLimit($req)
+    {
+
+        try {
+
+            $index = $req["index"];
+
+            $startWeek = date("Y-m-d", strtotime("this week"));
+            $endWeek = date("Y-m-d", strtotime("next sunday"));
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $revenuesOfThisWeekLimit =  $this->pay->getRevenuesOfThisWeekLimit($startWeek, $endWeek, $index);
+            return $revenuesOfThisWeekLimit;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+    public function getRevenuesOfThisWeekToChart()
+    {
+
+        try {
+
+            $startWeek = date("Y-m-d", strtotime("this week"));
+            $endWeek = date("Y-m-d", strtotime("next sunday"));
+
+            $numbersWeekday = [
+                array("number" => 0, "weekday" => "Lunes"),
+                array("number" => 1, "weekday" => "Martes"),
+                array("number" => 2, "weekday" => "Miercoles"),
+                array("number" => 3, "weekday" => "Jueves"),
+                array("number" => 4, "weekday" => "Viernes"),
+                array("number" => 5, "weekday" => "Sabado"),
+                array("number" => 6, "weekday" => "Domingo")
+            ];
+
+            $tokenVerify = $this->authToken->verifyToken();
+            if (isset($tokenVerify["error"])) {
+                return array("error" => $tokenVerify["error"], "status" => 401);
+            }
+
+            $revenuesOfThisWeek = array_map(function ($numberWeekday) use ($startWeek, $endWeek) {
+
+                $revenuesOfWeekday =  $this->pay->getRevenuesByWeekday($startWeek, $endWeek, $numberWeekday["number"]);
+
+                $amountRevenues =  array_reduce($revenuesOfWeekday, function ($ac, $revenue) {
+                    return $ac += $revenue["deposito"];
+                }, 0);
+
+                return array("weekday" => $numberWeekday["weekday"], "revenues" => $amountRevenues);
+            }, $numbersWeekday);
+
+            return $revenuesOfThisWeek;
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
 }

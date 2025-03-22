@@ -6,7 +6,7 @@ import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { modalMainRooms } from "../scriptListRooms.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
-let numRoom, containData, selectYear, limitPages, tbody, tfoot;
+let numRoom, containData, selectYear, limitPages, tbody, tfoot, controlsIndex;
 let index = 1;
 let offset = 0;
 let actualYear = new Date().getFullYear();
@@ -14,6 +14,7 @@ let actualYear = new Date().getFullYear();
 export const configRecordRoom = async () => {
   numRoom = document.querySelector(".mainContain").id;
   containData = document.querySelector(".containData");
+  controlsIndex = document.querySelector(".controls");
 
   close();
   let years = await getYears();
@@ -191,9 +192,11 @@ const displayTable = async () => {
   titleBookingsRecord.textContent = `Registros reservas ${selectYear.value}`;
 
   if (allBookingsRoom) {
+    controlsIndex.style = "flex";
     limitPages = Math.ceil(allBookingsRoom.length / 5);
-
     drawTable();
+  } else {
+    controlsIndex.style = "none";
   }
 };
 
@@ -231,20 +234,21 @@ const eventSearchByYear = () => {
   document
     .querySelector(".searchByYear")
     .addEventListener("click", async () => {
+      index = 1;
+      offset = 0;
       displayTable();
     });
 };
 
 const controlsIndexPage = () => {
-  let controls = document.querySelector(".controls");
-  controls.innerHTML = `
+  controlsIndex.innerHTML = `
   <span class="prev">Anterior</span>
   <span class="pageIndex">${index}/${limitPages}</span>
   <span class="next">Siguiente</span>`;
 
-  let next = document.querySelector(".next");
-  let prev = document.querySelector(".prev");
-  let pageIndex = document.querySelector(".pageIndex");
+  let next = controlsIndex.querySelector(".next");
+  let prev = controlsIndex.querySelector(".prev");
+  let pageIndex = controlsIndex.querySelector(".pageIndex");
 
   next.addEventListener("click", () => {
     if (index < limitPages) {

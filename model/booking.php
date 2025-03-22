@@ -11,7 +11,7 @@ class Booking
 
     public function __construct()
     {
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
     public function setIdBooking($idBooking)
@@ -109,6 +109,30 @@ class Booking
     }
 
 
+
+    public function getAllBookingsOfLastWeek($weekdayStart, $weekdayEnd)
+    {
+
+        $query = $this->connection->prepare("select * from reserva_habitacion where 
+        fechaLlegada>=? && fechaSalida<=?");
+        $query->bind_param("ss", $weekdayStart, $weekdayEnd);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function getAllBookingsOfLastWeekLimitIndex($weekdayStart, $weekdayEnd, $index)
+    {
+
+        $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes ON 
+        clientes.idCliente=reserva_habitacion.idClienteReserva where reserva_habitacion.fechaLlegada>=? && 
+        reserva_habitacion.fechaSalida<=? LIMIT 10 OFFSET $index");
+        $query->bind_param("ss", $weekdayStart, $weekdayEnd);
+        $query->execute();
+        $result = $query->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function getAllBookingsYear($year)
     {

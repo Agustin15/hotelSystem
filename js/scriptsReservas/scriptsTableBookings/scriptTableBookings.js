@@ -5,10 +5,9 @@ import { loadingPage, pageNotFound } from "../scriptReserva.js";
 import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
-let pages, indexText, prevPage, nextPage, controlsIndex;
+let pages, indexText, prevPage, nextPage, controlsIndex, selectYears;
 let offset = 0;
 let indexPage = 1;
-let yearSelected = new Date().getFullYear();
 
 export const displayTable = async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -16,6 +15,7 @@ export const displayTable = async () => {
   indexText = controlsIndex.querySelector(".pageIndex");
   prevPage = controlsIndex.querySelector(".prev");
   nextPage = controlsIndex.querySelector(".next");
+  selectYears = document.querySelector(".selectYears");
 
   if (!urlParams.get("idBooking")) {
     let yearsAllBookings = await displaySelectYear();
@@ -37,10 +37,15 @@ export const displayTable = async () => {
 };
 
 export const drawTable = async () => {
-  let bookingsYearlimit = await getBookingsYearLimit();
+  let bookings;
+  if (selectYears.value == "lastWeek") {
+    bookings = await getBookingsOfLastWeekLimit();
+  } else {
+    bookings = await getBookingsYearLimit();
+  }
 
-  if (bookingsYearlimit) {
-    drawRowsTable(bookingsYearlimit);
+  if (bookings) {
+    drawRowsTable(bookings);
   }
 };
 
@@ -129,7 +134,7 @@ const getQuantityBookingsActualYear = async () => {
   try {
     let url =
       `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params= ` +
-      JSON.stringify({ option: "bookingsRowsYear", year: yearSelected });
+      JSON.stringify({ option: "bookingsRowsYear", year: selectYears.value });
 
     const response = await fetch(url, {
       method: "GET",
@@ -155,6 +160,44 @@ const getQuantityBookingsActualYear = async () => {
       noData("No se encontraron reservas en este año");
     }
     return data;
+  }
+};
+
+const getQuantityBookingsLastWeek = async () => {
+  let data = null;
+  loading(true);
+  try {
+    let url =
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params= ` +
+      JSON.stringify({
+        option: "getBookingsOfLastWeek"
+      });
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    } else if (result.length > 0) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!data) {
+      noData("Sin reservas en esta semana");
+    } else {
+      return data.length;
+    }
   }
 };
 
@@ -210,14 +253,23 @@ const noData = (error) => {
 };
 
 export const displayControlIndex = async () => {
-  let quantityRows = await getQuantityBookingsActualYear();
+  let quantityRows;
+  if (selectYears.value == "lastWeek") {
+    quantityRows = await getQuantityBookingsLastWeek();
+  } else {
+    quantityRows = await getQuantityBookingsActualYear();
+  }
+
   if (quantityRows) {
+    controlsIndex.style.display = "flex";
     pages = Math.ceil(quantityRows / 10);
     if (indexPage > pages && pages > 0) {
       indexPage--;
       offset -= 10;
     }
     indexText.textContent = `${indexPage}/${pages}`;
+  } else {
+    controlsIndex.style.display = "none";
   }
 };
 
@@ -248,7 +300,7 @@ const getBookingsYearLimit = async () => {
       `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
       JSON.stringify({
         option: "bookingsYearlimit",
-        data: { year: yearSelected, index: offset }
+        data: { year: selectYears.value, index: offset }
       });
 
     const response = await fetch(url, {
@@ -273,6 +325,43 @@ const getBookingsYearLimit = async () => {
     loading(false);
     if (!data) {
       noData("No se encontraron reservas en este año");
+    }
+    return data;
+  }
+};
+
+const getBookingsOfLastWeekLimit = async () => {
+  let data = null;
+  loading(true);
+  try {
+    let url =
+      `${BACK_URL_LOCALHOST}routes/admin/bookingRoutes.php?params=` +
+      JSON.stringify({
+        option: "getBookingsOfLastWeekLimit",
+        index: offset
+      });
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "same-origin"
+      }
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    } else if (result.length > 0) {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading(false);
+    if (!data) {
+      noData("Sin reservas esta semana");
     }
     return data;
   }
@@ -314,21 +403,20 @@ const displaySelectYear = async () => {
 };
 
 const drawYearsSelect = (years) => {
-  let selectYears = document.querySelector(".selectYears");
   let btnSearch = document.querySelector(".btnSearch");
 
   let yearsOptions = years.map((year) => {
     return `
-  <option selected=${year == new Date().getFullYear() ? true : false}value=${
-      year["YEAR(fechaLlegada)"]
-    }>${year["YEAR(fechaLlegada)"]}</option>
+  <option value=${year["YEAR(fechaLlegada)"]}>${year["YEAR(fechaLlegada)"]}</option>
   `;
   });
 
-  selectYears.innerHTML = yearsOptions.join("");
+  selectYears.innerHTML += yearsOptions.join("");
 
   btnSearch.addEventListener("click", async () => {
-    yearSelected = selectYears.value;
+    indexPage = 1;
+    offset = 0;
+
     await displayControlIndex();
     drawTable();
   });

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleTableBills.css">
+    <link rel="preload" href="../../../estilos/styleRevenuesAdmin/styleTableBills.css" as="style"
+        onload="this.rel='stylesheet'">
 
 </head>
 
@@ -17,22 +18,24 @@
         </div>
 
         <div class="header">
-                <div class="containSelect">
+            <div class="containSelect">
 
-                    <div class="search">
-                        <select class="selectYear"></select>
-                        <button class="btnSearch"> <img src="../../../img/search.png"></button>
-                    </div>
+                <div class="search">
+                    <select class="selectYear">
+                        <option selected value="thisWeek">Esta semana</option>
+                    </select>
+                    <button class="btnSearch"> <img src="../../../img/search.png"></button>
                 </div>
-                <div class="containSearch">
-                    <div class="containInput">
-                        <input class="inputSearch" type="text" placeholder="Buscar...">
-                        <button class="btnSearchInput">
-                            <img src="../../../img/search.png">
-                        </button>
-                    </div>
+            </div>
+            <div class="containSearch">
+                <div class="containInput">
+                    <input class="inputSearch" type="text" placeholder="Buscar...">
+                    <button class="btnSearchInput">
+                        <img src="../../../img/search.png">
+                    </button>
                 </div>
-            
+            </div>
+
         </div>
 
         <div class="scroll">

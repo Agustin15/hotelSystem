@@ -1,14 +1,100 @@
 import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "../scriptsAdmin/userData.js";
-let today = new Date();
-let actualYear = today.getFullYear();
+
+const greenShadesWeek = [
+  "#055b5e",
+  "#04b8c2",
+  "#04c289",
+  "#0ca073",
+  "#16f1c2",
+  "#15cca4",
+  "#1497a8"
+];
+const greenShadesMonths = [
+  "#055b5e",
+  "#04b8c2",
+  "#04c289",
+  "#0ca073",
+  "#16f1c2",
+  "#4bebd0",
+  "#15cca4",
+  "#1497a8",
+  "#2771b6",
+  "#2771b6",
+  "#1d5c97",
+  "#1d3397"
+];
+
+CanvasJS.addColorSet("greenShadesWeek", greenShadesWeek);
+
+CanvasJS.addColorSet("greenShadesMonths", greenShadesMonths);
+
+let selectYear, chartClients;
+
+export const configChart = async () => {
+  chartClients = document.getElementById("chartClients");
+  selectYear = document.querySelector(".selectYear");
+  let years = await loadYears();
+  selectYearChar(years);
+  getDataClientsTOGraphic(selectYear.value);
+};
+
+const loadYears = async () => {
+  {
+    try {
+      let url =
+        `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
+        JSON.stringify({ option: "AllYearsVisitClients" });
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "same-origin"
+        }
+      });
+      const results = await response.json();
+
+      if (!response.ok) {
+        if (response.status == 401) {
+          invalidAuthentication();
+        } else throw results.error;
+      } else if (results) {
+        noData(false);
+        return results;
+      } else {
+        noData(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+const selectYearChar = (results) => {
+  let options = results.map((result) => {
+    return `
+          <option value=${Object.values(result)}>${Object.values(
+      result
+    )}</option>
+        `;
+  });
+
+  selectYear.innerHTML += options.join("");
+
+  document.querySelector(".btnSearch").addEventListener("click", () => {
+    getDataClientsTOGraphic(selectYear.value);
+  });
+};
 
 const loadingChart = (state) => {
   const spinnerChar = document.querySelector(".loading");
 
   if (state) {
+    chartClients.classList.add("hideClientsChart");
     spinnerChar.style.display = "flex";
   } else {
+    chartClients.classList.remove("hideClientsChart");
     spinnerChar.style.display = "none";
   }
 };
@@ -36,81 +122,12 @@ function getMes(numMes) {
   return mesElegido;
 }
 
-CanvasJS.addColorSet("greenShades", ["#055b5e", "#04b8c2", "#04c289"]);
-
-const loadYears = async () => {
-  {
-    try {
-      let url =
-        `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
-        JSON.stringify({ option: "AllYearsVisitClients" });
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "same-origin"
-        }
-      });
-      const results = await response.json();
-
-      if (!response.ok) {
-        if (response.status == 401) {
-          invalidAuthentication();
-        } else throw results.error;
-      } else if (results) {
-        selectYearChar(results);
-        document.querySelector(".noData").style.display = "none";
-      } else {
-        document.querySelector(".noData").style.display = "flex";
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-};
-
-const selectYearChar = (results) => {
-  let selectYear = document.querySelector(".selectYear");
-  let yearSelected;
-
-  let options = results.map((result) => {
-    let selected = false;
-    if (Object.values(result) == actualYear) {
-      selected = true;
-    }
-
-    return `
-          <option selected=$${selected} value=${Object.values(
-      result
-    )}>${Object.values(result)}</option>
-        `;
-  });
-
-  selectYear.innerHTML += options.join("");
-
-  selectYear.querySelectorAll("option").forEach((option) => {
-    if (option.value == actualYear) {
-      option.selected;
-    }
-  });
-
-  selectYear.addEventListener("change", () => {
-    yearSelected = selectYear.value;
-  });
-
-  document.querySelector(".btnSearch").addEventListener("click", () => {
-    getDataClientsTOGraphic(yearSelected);
-  });
-};
-
-function graphicClients(dataPoints, grafica, titulo, theme) {
-  console.log(dataPoints);
+function graphicClients(dataPoints, grafica, titleAxisX, greenShades) {
   var chart = new CanvasJS.Chart(grafica, {
-    colorSet: "greenShades",
+    colorSet: greenShades,
     animationEnabled: true,
     title: {
-      text: titulo
+      text: ""
     },
 
     axisY: {
@@ -122,7 +139,7 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
     },
 
     axisX: {
-      title: "Meses",
+      title: titleAxisX,
       titleFontSize: 25,
       margin: 0,
       labelFontSize: 18
@@ -132,9 +149,9 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
       {
         type: "column",
         indexLabelPlacement: "inside",
-        xValueFormatString: '#,##0',
-        indexLabelFontColor:"black",
-        indexLabelFontSize:15,
+        xValueFormatString: "#,##0",
+        indexLabelFontColor: "black",
+        indexLabelFontSize: 15,
         dataPoints: dataPoints
       }
     ]
@@ -142,7 +159,7 @@ function graphicClients(dataPoints, grafica, titulo, theme) {
   chart.render();
 }
 
-function dataPointsToGraphicClients(monthsClients) {
+function dataPointsToGraphicMonthsClients(monthsClients) {
   let dataPoints = monthsClients.map((monthClients) => {
     let monthString = getMes(monthClients.month);
 
@@ -159,32 +176,54 @@ function dataPointsToGraphicClients(monthsClients) {
   }, 0);
 
   if (totalMonthsClients > 0) {
-    graphicClients(dataPoints, "chartClients", "");
+    graphicClients(dataPoints, "chartClients", "Meses","greenShadesMonths");
   }
 }
 
-async function getDataClientsTOGraphic(year) {
-  let yearToConsult;
-  let data = null;
+function dataPointsToGraphicWeekdayClients(weekdayClients) {
+  let dataPoints = weekdayClients.map((weekdayClient) => {
+    const dataPoint = {
+      label: weekdayClient.weekday,
+      y: weekdayClient.clients
+    };
 
-  if (typeof year == "undefined") {
-    yearToConsult = actualYear;
-  } else {
-    yearToConsult = year;
+    return dataPoint;
+  });
+
+  let totalWeekdayClients = dataPoints.reduce((ac, dataPoint) => {
+    return (ac += dataPoint.y);
+  }, 0);
+
+  if (totalWeekdayClients > 0) {
+    graphicClients(
+      dataPoints,
+      "chartClients",
+      "Dias de la semana",
+      "greenShadesWeek"
+    );
   }
+}
 
-  document
-    .querySelector(".titleChart")
-    .querySelector(
-      "h3"
-    ).innerHTML = `Cantidad de clientes por mes  ${yearToConsult}`;
+async function getDataClientsTOGraphic(optionSelected) {
+  let titleChart = document.querySelector(".titleChart").querySelector("h3");
 
+  if (optionSelected == "thisWeek") {
+    titleChart.innerHTML = `Cantidad de clientes esta semana`;
+    dataClientsWeekday();
+  } else {
+    titleChart.innerHTML = `Cantidad de clientes por meses ${optionSelected}`;
+    dataClientsMonths(selectYear.value);
+  }
+}
+
+const dataClientsMonths = async (year) => {
+  let data;
   try {
     loadingChart(true);
     const response = await fetch(
       `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
         JSON.stringify(
-          { option: "clientsGraphic", year: yearToConsult },
+          { option: "clientsMonthsGraphic", year: year },
           {
             method: "GET",
             headers: {
@@ -208,12 +247,63 @@ async function getDataClientsTOGraphic(year) {
   } finally {
     loadingChart(false);
     if (data) {
-      dataPointsToGraphicClients(data);
-      document.querySelector(".noData").style.display = "none";
+      dataPointsToGraphicMonthsClients(data);
+      noData(false);
     } else {
-      document.querySelector(".noData").style.display = "flex";
+      noData(true);
     }
   }
-}
+};
 
-export { getDataClientsTOGraphic, loadYears };
+const noData = (state) => {
+  let noData = document.querySelector(".noData");
+
+  if (state) {
+    chartClients.classList.add("hideClientsChart");
+    noData.style.display = "flex";
+  } else {
+    chartClients.classList.remove("hideClientsChart");
+    noData.style.display = "none";
+  }
+};
+
+const dataClientsWeekday = async () => {
+  let data;
+  try {
+    loadingChart(true);
+    const response = await fetch(
+      `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params=` +
+        JSON.stringify(
+          {
+            option: "getClientsOfThisWeek"
+          },
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              credentials: "same-origin"
+            }
+          }
+        )
+    );
+
+    const result = await response.json();
+    if (!response.ok) {
+      if (response.status == 401) {
+        invalidAuthentication();
+      } else throw result.error;
+    } else {
+      data = result;
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loadingChart(false);
+    if (data) {
+      dataPointsToGraphicWeekdayClients(data);
+      noData(false);
+    } else {
+      noData(true);
+    }
+  }
+};

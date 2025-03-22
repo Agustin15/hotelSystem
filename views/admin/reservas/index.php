@@ -12,6 +12,7 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleMain.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
     <script type="module" src="../../../js/scriptsReservas/scriptReserva.js" defer> </script>
@@ -30,6 +31,9 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
             optionsAddBooking
         } from "../../../js/scriptsReservas/scriptOptionsCalendar.js";
 
+        import {
+            FRONT_URL_LOCALHOST
+        } from "../../../js/urlLocalhost.js";
 
         if (actualOption == "addBooking.html") {
             localStorage.setItem("actualOptionBooking", "addBooking.html");
@@ -101,7 +105,7 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
                     let idBooking = info.event.extendedProps.idBooking;
 
                     localStorage.setItem("actualOptionBooking", "bookingsTable.html");
-                    location.href = `http://localhost/sistema%20Hotel/views/admin/reservas/index.php?idBooking=${idBooking}`;
+                    location.href = `${FRONT_URL_LOCALHOST}views/admin/reservas/index.php?idBooking=${idBooking}`;
                 }
 
             });
