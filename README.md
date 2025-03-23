@@ -29,7 +29,7 @@
   <em><strong>Proyect dependences:</strong></em>
 
    #### Install
-          compose install 
+          composer install 
    
    #### Dependences used 
    - php-jwt
