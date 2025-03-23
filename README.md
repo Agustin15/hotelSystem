@@ -38,8 +38,27 @@
 
   ## HomePage
   ![HomePage](https://i.postimg.cc/fRn1kwNy/home.png)
-
   
+  ## RoomsPage
+  ![RoomsPage](https://i.postimg.cc/jqXSTF0G/select-Rooms1.png)
+  
+  ## billBookingClientPage
+  ![BillBookingClientPage](https://i.postimg.cc/L5cJPq9n/bill-Booking.png)
+
+  ## Dashboard admin
+  ![DashboardAdmin](https://i.postimg.cc/NGJLTzJR/dashboard.png)
+
+  ## Lists bookings
+  ![ListBookings](https://i.postimg.cc/x1zrftFv/table-Bookings.png)
+
+  ## Calendar bookings
+  ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
+
+  ## Calendar bookings
+  ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
+
+  ## Rooms hotel data
+  ![RoomsHotel](https://i.postimg.cc/XY4VPMvZ/rooms-Hotel.png)
 
   
    
