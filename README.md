@@ -45,14 +45,17 @@
   ## Dashboard admin
   ![DashboardAdmin](https://i.postimg.cc/NGJLTzJR/dashboard.png)
 
-  ## Lists bookings
-  ![ListBookings](https://i.postimg.cc/x1zrftFv/table-Bookings.png)
+  ## CRUD bookings
+  ![CRUDbookings](https://i.postimg.cc/260P5Jd5/table-Bookings.png)
 
   ## Calendar bookings
   ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
 
+  # Add Booking 
+  ![AddBookings](https://i.postimg.cc/xTZNm1jv/add-Booking.png)
+   
   ## Rooms hotel data
   ![RoomsHotel](https://i.postimg.cc/XY4VPMvZ/rooms-Hotel.png)
 
-  
+    
    
