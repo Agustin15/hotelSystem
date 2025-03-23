@@ -34,6 +34,7 @@
    #### Dependences used 
    - php-jwt
    - phpdotenv
+   - sodium_compat
 
  #### Library used
   - [Boostrap](https://getbootstrap.com/)
