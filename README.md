@@ -26,10 +26,11 @@
           mysql -h <hostname> -u <user> hotel<hotel.sql
     
   <em><strong>Proyect dependences:</strong></em>
-  
-        #### Install
+
+   #### Install
           compose install 
-       #### Dependences used 
+   
+   #### Dependences used 
    - php-jwt
    - phpdotenv
   
