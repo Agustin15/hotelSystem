@@ -54,9 +54,6 @@
   ## Calendar bookings
   ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
 
-  ## Calendar bookings
-  ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
-
   ## Rooms hotel data
   ![RoomsHotel](https://i.postimg.cc/XY4VPMvZ/rooms-Hotel.png)
 
