@@ -21,7 +21,7 @@
           mysql -u <user> -p
   - In mysql client,create hotel database
     
-          Create database hotel
+          CREATE DATABASE HOTEL
   - Exit of mysql client and execute the script file hotel
     
           mysql -h <hostname> -u <user> hotel<hotel.sql
