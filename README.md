@@ -13,6 +13,7 @@
 
  ### Install dependences  
  - cd hotelSystem
+   
    <em><strong>Execute database Hotel script MySQL:</strong></em>
   - Start MySQL Server
   - launch mysql client
