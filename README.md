@@ -43,7 +43,7 @@
   - [Canvasjs](https://canvasjs.com/)
   - [FullCalendar](https://fullcalendar.io/)
 
- #### Environment variables
+ #### .env configuration
 
      DB_HOST=""
      DB_USER=""
