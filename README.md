@@ -41,9 +41,6 @@
   
   ## RoomsPage
   ![RoomsPage](https://i.postimg.cc/jqXSTF0G/select-Rooms1.png)
-  
-  ## billBookingClientPage
-  ![BillBookingClientPage](https://i.postimg.cc/L5cJPq9n/bill-Booking.png)
 
   ## Dashboard admin
   ![DashboardAdmin](https://i.postimg.cc/NGJLTzJR/dashboard.png)
