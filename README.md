@@ -26,6 +26,7 @@
           mysql -h <hostname> -u <user> hotel<hotel.sql
     
   <em><strong>Proyect dependences:</strong></em>
+  
         #### Install
           compose install 
        #### Dependences used 
@@ -34,7 +35,8 @@
   
  >## Init ▶
   Start httpd server
-  URL:http://localhost/hotelSystem/views/
+         
+         http://localhost/hotelSystem/views/
 
   ## HomePage
   ![HomePage](https://i.postimg.cc/fRn1kwNy/home.png)
