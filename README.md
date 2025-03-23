@@ -8,6 +8,7 @@
     
  ### Clone repository
  - Browse to branch folder of your Apache server
+   
        git clone https://github.com/Agustin15/hotelSystem.git
 
  ### Execute database Hotel script MySQL
