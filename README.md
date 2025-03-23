@@ -61,10 +61,10 @@
   ## HomePage
   ![HomePage](https://i.postimg.cc/fRn1kwNy/home.png)
   
-  ## RoomsPage
+  ## Rooms Page
   ![RoomsPage](https://i.postimg.cc/jqXSTF0G/select-Rooms1.png)
 
-  ## Dashboard admin
+  ## Dashboard Admin
   ![DashboardAdmin](https://i.postimg.cc/NGJLTzJR/dashboard.png)
 
   ## CRUD bookings
@@ -73,7 +73,7 @@
   ## Calendar bookings
   ![CalendarBookings](https://i.postimg.cc/nLmQ1bSX/calendar.png)
 
-  # Add Booking 
+  ## Add Booking 
   ![AddBookings](https://i.postimg.cc/xTZNm1jv/add-Booking.png)
    
   ## Rooms hotel data
