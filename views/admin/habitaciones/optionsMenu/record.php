@@ -10,8 +10,7 @@ if (isset($_GET["numRoom"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" as="style" onload="this.rel='stylesheet'"
-        href="../../../estilos/styleRoomsAdmin/styleRecord.css">
+  
 
 </head>
 

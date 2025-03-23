@@ -36,7 +36,7 @@ const getAllYearsToSelect = async () => {
       } else throw "No se pudieron cargar los años";
     }
 
-    if (years) {
+    if (years.length > 0) {
       data = years;
     }
   } catch (error) {
@@ -44,7 +44,7 @@ const getAllYearsToSelect = async () => {
   } finally {
     loading(false);
     if (!data) {
-      noData(true);
+      noData(true, "No se encontraron datos");
     } else {
       noData(false);
     }
@@ -106,7 +106,7 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   } finally {
     loading(false);
     if (!data) {
-      noData(true);
+      noData(true, "No se encontraron datos");
     } else {
       noData(false);
       dataPointsRoomsToChart(data);
@@ -114,12 +114,14 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
   }
 };
 
-const noData = (state) => {
+const noData = (state, msj) => {
   let noData = document.querySelector(".noData");
+  let span = noData.querySelector("span");
 
   if (state) {
     chartOfRooms.classList.add("hideRoomsChart");
     noData.style.display = "flex";
+    span.textContent = msj;
   } else {
     chartOfRooms.classList.remove("hideRoomsChart");
     noData.style.display = "none";
@@ -127,6 +129,7 @@ const noData = (state) => {
 };
 
 const dataPointsRoomsToChart = (roomsBookingCategorys) => {
+
   let totalRoomsBooking = roomsBookingCategorys.reduce((ac, room) => {
     return (ac += room.quantityReserved);
   }, 0);

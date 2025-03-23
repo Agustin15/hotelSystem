@@ -204,19 +204,18 @@ header li img {
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 82%;
   margin-top: 3rem;
+  position: relative;
+  min-width: 45rem;
   border-radius: 5px;
   height: auto;
   border: 1px solid rgb(185, 185, 185);
-  position: relative;
 }
 
 .details .row {
   display: flex;
   justify-content: center;
   align-items: start;
-  position: relative;
 }
 
 .details .row .column {
@@ -225,14 +224,14 @@ header li img {
   align-items: center;
   gap: 1rem;
   background: linear-gradient(#126b91, #0498a0);
-  height: 92.6%;
-  position: absolute;
   padding: 1rem;
-  left: 0;
   color: white;
+  height: 93%;
+  left: 0;
+  position: absolute;
 }
 
-.details  .msjSuccesfully {
+.details .msjSuccesfully {
   display: flex;
   width: 100%;
   align-items: center;
@@ -256,7 +255,6 @@ header li img {
 .details .row .column ul a {
   font-weight: bold;
 }
-
 .details .row .column ul {
   list-style: none;
   display: flex;
@@ -276,15 +274,16 @@ header li img {
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding-left: 18rem;
-  padding-top: 0.5rem;
+  min-width: 36rem;
+  margin-left: 17rem;
+  padding:0.5rem 2rem 0 1rem ;
 }
 .details .client {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.6rem;
-  margin-top: 0.8rem;
+  margin-top: 2rem;
 }
 
 .details .client a {
@@ -367,11 +366,11 @@ header li img {
 .containAmount {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  margin-top: 1rem;
+  align-items: end;
   padding-bottom: 1rem;
   font-weight: bold;
+  margin-top: 1rem;
+  width: 100%;
   font-size: 21px;
 }
 

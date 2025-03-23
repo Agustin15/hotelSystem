@@ -15,6 +15,7 @@ import { drawTable } from "../../../scriptTableBookings.js";
 
 import { BACK_URL_LOCALHOST } from "../../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
+import { cleanRoomsCart } from "./scriptCartRooms.js";
 
 let bookingGlobal;
 let allClients;
@@ -45,7 +46,7 @@ export const drawFormEdit = (body, booking, clients) => {
             <div class="containForm">
             <div class="title">
 
-            <h3>Editar Reserva <?php echo $idBooking ?> </h3>
+            <h3>Editar Reserva ${booking.idReserva} </h3>
             <img src="../../../img/updateBooking.png">
                </div>
         
@@ -211,7 +212,7 @@ const updateBooking = async (bookingToUpdate) => {
   bookingToUpdate.amount = amount;
 
   let resultBookingUpdated = await fetchUpdateBooking(bookingToUpdate);
- 
+
   if (resultBookingUpdated.error) {
     alertForm(
       "../../../img/advertenciaLogin.png",
@@ -264,4 +265,10 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
     loadingForm(false);
     return data;
   }
+};
+
+export const cleanVariablesBooking = () => {
+  startBookingSetting = null;
+  endBookingSetting = null;
+  cleanRoomsCart();
 };

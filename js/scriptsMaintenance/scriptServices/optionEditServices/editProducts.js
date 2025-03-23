@@ -9,7 +9,7 @@ import { loadingPage, pageNotFound } from "../../dashboard.js";
 import { configAddProduct } from "./optionEditProducts/scriptAdd.js";
 
 let serviceData, tbody, controls, pageIndex, limitPages;
-export let index = 1;
+let index = 1;
 let offset = 0;
 
 export const configEditProducts = async (service) => {
@@ -32,6 +32,8 @@ export const configEditProducts = async (service) => {
       : "../../../img/bar-counter.png";
 
   btnCloseWindow.addEventListener("click", () => {
+    index = 1;
+    offset = 0;
     closeModal(modalServices);
   });
 

@@ -186,3 +186,7 @@ const deleteRoom = () => {
     });
   });
 };
+
+export const cleanRoomsCart = () => {
+  roomsCart = [];
+};

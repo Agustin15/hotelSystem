@@ -99,7 +99,7 @@ class Client
     public function getAllClientsLimit()
     {
 
-        $query = $this->connection->prepare("select * from clientes LIMIT 10");
+        $query = $this->connection->prepare("select * from clientes LIMIT 5");
         $query->execute();
 
         $result = $query->get_result();
@@ -112,7 +112,7 @@ class Client
     public function getAllClientsLimitAndIndex($index)
     {
 
-        $query = $this->connection->prepare("select * from clientes LIMIT 10 OFFSET $index");
+        $query = $this->connection->prepare("select * from clientes LIMIT 5 OFFSET $index");
         $query->execute();
 
         $result = $query->get_result();
@@ -157,7 +157,7 @@ class Client
 
         $query  = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes 
         ON clientes.idCliente=reserva_habitacion.idClienteReserva where reserva_habitacion.fechaLlegada>=? && 
-        reserva_habitacion.fechaSalida<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
+        reserva_habitacion.fechaLlegada<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
         $query->bind_param("ssi", $startWeek, $endWeek, $numberWeekday);
         $query->execute();
         $result = $query->get_result();

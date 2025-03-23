@@ -91,7 +91,7 @@ class Revenue
 
         $query = $this->connection->prepare("select * from pago INNER JOIN reserva_habitacion 
         ON pago.idReservaPago=reserva_habitacion.idReserva where reserva_habitacion.fechaLlegada>=?
-        && reserva_habitacion.fechaSalida<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
+        && reserva_habitacion.fechaLlegada<=? && WEEKDAY(reserva_habitacion.fechaLlegada)=?");
         $query->bind_param("ssi", $startWeek, $endWeek, $numberWeekday);
         $query->execute();
         $result = $query->get_result();
@@ -107,24 +107,24 @@ class Revenue
         clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
         reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
         ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
-        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaSalida<=?");
+        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaLlegada<=?");
         $query->bind_param("ss", $startWeek, $endWeek);
         $query->execute();
         $result = $query->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
 
-    public function getRevenuesOfThisWeekLimit($startWeek, $endWeek,$index)
+
+    public function getRevenuesOfThisWeekLimit($startWeek, $endWeek, $index)
     {
 
         $query = $this->connection->prepare("select pago.idReservaPago,pago.idClientePago,pago.deposito,
         clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
         reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
         ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
-        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaSalida<=?
-        LIMIT 10 OFFSET $index");
+        pago.idClientePago=clientes.idCliente where reserva_habitacion.fechaLlegada>=? && reserva_habitacion.fechaLlegada<=?
+        LIMIT 5 OFFSET $index");
         $query->bind_param("ss", $startWeek, $endWeek);
         $query->execute();
         $result = $query->get_result();
@@ -168,7 +168,7 @@ class Revenue
         clientes.nombre,clientes.apellido,clientes.telefono,clientes.correo,reserva_habitacion.fechaLlegada,
         reserva_habitacion.fechaSalida from pago INNER JOIN reserva_habitacion 
         ON pago.idReservaPago=reserva_habitacion.idReserva INNER JOIN clientes ON 
-        pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 10 OFFSET $index");
+        pago.idClientePago=clientes.idCliente where YEAR(reserva_habitacion.fechaLlegada)=? LIMIT 5 OFFSET $index");
         $query->bind_param("i", $year);
         $query->execute();
         $result = $query->get_result();

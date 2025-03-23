@@ -20,6 +20,7 @@ export const displayTable = async () => {
   if (!urlParams.get("idBooking")) {
     let yearsAllBookings = await displaySelectYear();
 
+
     if (yearsAllBookings) {
       drawYearsSelect(yearsAllBookings);
       await displayControlIndex();
@@ -89,7 +90,6 @@ const drawRowsTable = (bookingsYearlimit) => {
 
  <div class="idBooking">
        ${booking.idReserva}
-              <img src="../../../img/reservas.png">
                  ${
                    iconStatusBooking
                      ? `<img title=${titleIconState} class="iconStatus" src=${iconStatusBooking}></img>`
@@ -262,10 +262,10 @@ export const displayControlIndex = async () => {
 
   if (quantityRows) {
     controlsIndex.style.display = "flex";
-    pages = Math.ceil(quantityRows / 10);
+    pages = Math.ceil(quantityRows / 5);
     if (indexPage > pages && pages > 0) {
       indexPage--;
-      offset -= 10;
+      offset -= 5;
     }
     indexText.textContent = `${indexPage}/${pages}`;
   } else {
@@ -277,7 +277,7 @@ const eventsDisplayControlIndex = () => {
   prevPage.addEventListener("click", () => {
     if (indexPage > 1) {
       indexPage--;
-      offset -= 10;
+      offset -= 5;
       indexText.textContent = `${indexPage}/${pages}`;
       drawTable();
     }
@@ -285,7 +285,7 @@ const eventsDisplayControlIndex = () => {
   nextPage.addEventListener("click", () => {
     if (indexPage < pages) {
       indexPage++;
-      offset += 10;
+      offset += 5;
       indexText.textContent = `${indexPage}/${pages}`;
       drawTable();
     }
@@ -396,7 +396,8 @@ const displaySelectYear = async () => {
   } finally {
     loading(false);
     if (!data) {
-      noData("No se encontraron reservas en este año");
+      noData("No se encontraron reservas");
+      controlsIndex.style.display ="none";
     }
     return data;
   }

@@ -7,6 +7,7 @@ import { alertGuests } from "./scriptFreeRooms.js";
 export const configCartRooms = () => {
   cartRooms = document.querySelector(".cartRooms");
   divTotal = document.querySelector(".total");
+
   if (roomsCart.length > 0) {
     drawRoomsCart();
   } else {
@@ -118,5 +119,4 @@ const btnsDeleteRoomCart = () => {
 
 export const cleanRoomCart = () => {
   roomsCart = [];
-  configCartRooms();
 };

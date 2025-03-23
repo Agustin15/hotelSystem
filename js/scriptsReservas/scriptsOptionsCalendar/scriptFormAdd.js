@@ -155,14 +155,15 @@ const formAddSubmit = () => {
         );
       }
       if (resultBooking == true) {
+        cleanRoomCart();
+        setInputsForm();
+        configCartRooms();
         alertForm(
           "../../../img/tickAdmin.png",
           "¡Reserva agregada exitosamente!",
           "¡Exito!",
           "alertFormCorrect"
         );
-        cleanRoomCart();
-        setInputsForm();
       }
     }
   });

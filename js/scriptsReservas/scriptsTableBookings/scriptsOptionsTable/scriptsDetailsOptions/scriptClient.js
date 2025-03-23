@@ -97,7 +97,7 @@ export const loading = (state, body) => {
 
 const drawDataClient = (client) => {
   body.innerHTML = `
-  <div data-client=${JSON.stringify(client)} class="dataClient">
+  <div data-client='${JSON.stringify(client)}' class="dataClient">
 
    <li>
     <img src="../../../img/idClientIcon.png">
@@ -121,9 +121,8 @@ const drawDataClient = (client) => {
   `;
 
   document.querySelector(".idClient").addEventListener("click", () => {
-    let client = JSON.parse(
-      document.querySelector(".dataClient").dataset.client
-    );
+    let dataClient = document.querySelector(".dataClient").dataset.client;
+    let client = JSON.parse(dataClient);
 
     paramToFindClient(`idClient=${client.idCliente}`);
   });

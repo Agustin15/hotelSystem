@@ -91,7 +91,7 @@
   font-weight: bold;
 }
 
-.containCalculate {
+.containTelephone .containCalculate {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,17 +99,17 @@
   gap: 1rem;
   position: relative;
 }
-.containCalculate .inputCalculate {
+.containTelephone .containCalculate .inputCalculate {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.1rem;
 }
-.containCalculate .inputCalculate span {
+.containTelephone .containCalculate .inputCalculate span {
   color: rgb(235, 0, 0);
   font-size: 15px;
 }
-.containCalculate input {
+.containTelephone .containCalculate input {
   font-size: 17px;
   width: 16rem;
   height: 2.5rem;
@@ -118,7 +118,7 @@
   outline: none;
   padding-left: 2.7rem;
 }
-.containCalculate button {
+.containTelephone .containCalculate button {
   height: 2.6rem;
   width: 2.5rem;
   display: flex;
@@ -133,20 +133,20 @@
   color: white;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
-.containCalculate button img {
+.containTelephone .containCalculate button img {
   width: 22px;
 }
-.containCalculate button:hover {
+.containTelephone .containCalculate button:hover {
   background: linear-gradient(rgb(57, 141, 134), rgb(1, 155, 160));
 }
 
-.containTotal {
+.containTelephone .containTotal {
   font-size: 20px;
   color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
-.addServiceBtn {
+.containTelephone .addServiceBtn {
   font-size: 14px;
   height: 2.5rem;
   gap: 0.5rem;
@@ -162,17 +162,17 @@
   color: white;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
-.addServiceBtn img {
+.containTelephone .addServiceBtn img {
   width: 30px;
   display: none;
 }
 
-.addServiceBtnActive {
+.containTelephone .addServiceBtnActive {
   opacity: 100%;
   cursor: pointer;
 }
 
-.alertService {
+.containTelephone .alertService {
   display: none;
   justify-content: start;
   align-items: center;
@@ -188,26 +188,26 @@
   margin-top: -1rem;
 }
 
-.alertService span {
+.containTelephone .alertService span {
   font-weight: bold;
 }
 
-.alertService .body {
+.containTelephone .alertService .body {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
 }
 
-.alertService img {
+.containTelephone .alertService img {
   width: 25px;
 }
 
-.alertServiceCorrect {
+.containTelephone .alertServiceCorrect {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.alertServiceError {
+.containTelephone .alertServiceError {
   background: linear-gradient(#c71515, #880a0a);
 }
 
-/*# sourceMappingURL=styleTelephone.css.map */
+

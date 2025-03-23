@@ -43,7 +43,7 @@
   width: 50px;
 }
 
-.containData {
+.mainContain .containData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +51,7 @@
   height: 80%;
 }
 
-.noData {
+.mainContain .noData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,12 +60,12 @@
   height: 100%;
   color: rgb(204, 204, 204);
 }
-.noData img {
+.mainContain .noData img {
   width: 40px;
   opacity: 80%;
 }
 
-.loading {
+.mainContain .loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,12 +74,12 @@
   height: 100%;
   color: rgb(170, 170, 170);
 }
-.loading img {
+.mainContain .loading img {
   width: 40px;
   opacity: 50%;
 }
 
-.containTable {
+.mainContain .containTable {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,7 +90,7 @@
   margin-top: 2rem;
   border: 1px solid rgb(172, 172, 172);
 }
-.containTable .headerTable {
+.mainContain .containTable .headerTable {
   display: flex;
   flex-direction: row-reverse;
   justify-content: start;
@@ -101,12 +101,12 @@
   width: 100%;
 
 }
-.containTable h4 {
+.mainContain .containTable h4 {
   font-size: 19px;
   margin-top: 1rem;
   color: rgb(0, 0, 0);
 }
-.containTable .searchSelect {
+.mainContain .containTable .searchSelect {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -116,7 +116,7 @@
   height: auto;
   background-color: white;
 }
-.containTable .searchSelect .containSelect {
+.mainContain .containTable .searchSelect .containSelect {
   display: flex;
   align-items: start;
   justify-content: start;
@@ -124,13 +124,13 @@
   position: relative;
   padding-left: 1rem;
 }
-.containTable .searchSelect .containSelect select {
+.mainContain .containTable .searchSelect .containSelect select {
   width: 7rem;
   height: 1.8rem;
   border-radius: 3px;
   outline: none;
 }
-.containTable .searchSelect .containSelect button {
+.mainContain .containTable .searchSelect .containSelect button {
   background-color: rgb(10, 168, 196);
   border: none;
   height: 1.8rem;
@@ -140,22 +140,22 @@
   border-radius: 3px;
   cursor: pointer;
 }
-.containTable .searchSelect .containSelect button img {
+.mainContain  .containTable .searchSelect .containSelect button img {
   width: 15px;
   height: 15px;
   border-radius: 3px;
 }
-.containTable .searchSelect .containSelect button:hover {
+.mainContain .containTable .searchSelect .containSelect button:hover {
   background-color: rgb(15, 151, 175);
 }
-.containTable .containInput {
+.mainContain .containTable .containInput {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-left: 1rem;
 }
-.containTable .containInput input {
+.mainContain .containTable .containInput input {
   width: 9rem;
   font-size: 16px;
   padding-left: 1rem;
@@ -165,11 +165,11 @@
   border: 1px solid rgb(153, 153, 153);
   outline: none;
 }
-.containTable .containInput img {
+.mainContain .containTable .containInput img {
   width: 15px;
   height: 15px;
 }
-.containTable .containInput button {
+.mainContain .containTable .containInput button {
   background-color: rgb(10, 168, 196);
   padding: 0.5rem;
   border-radius: 3px;
@@ -181,10 +181,10 @@
   height: 2rem;
   cursor: pointer;
 }
-.containTable .containInput button:hover {
+.mainContain .containTable .containInput button:hover {
   background-color: rgb(15, 151, 175);
 }
-.containTable .controls {
+.mainContain .containTable .controls {
   padding: 1rem;
   border-top: 1px solid rgb(204, 204, 204);
   width: 96%;
@@ -196,54 +196,54 @@
   color: rgb(0, 0, 0);
   margin-top: 1rem;
 }
-.containTable .prev:hover {
+.mainContain .containTable .prev:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.containTable .next:hover {
+.mainContain .containTable .next:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-table {
+.mainContain table {
   width: 100%;
   height: auto;
   max-height: 12rem;
   overflow-y: scroll;
 }
-table thead {
+.mainContain table thead {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
   font-size: 17px;
 }
-table thead th {
+.mainContain table thead th {
   padding: 0.5rem;
 }
-table tbody {
+.mainContain table tbody {
   font-size: 17px;
 }
-table tbody td {
+.mainContain table tbody td {
   padding: 0.5rem;
   text-align: center;
 }
-table .iconIdBooking {
+.mainContain table .iconIdBooking {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
-table .iconIdBooking img {
+.mainContain table .iconIdBooking img {
   width: 25px;
 }
-table .iconIdBooking:hover {
+.mainContain table .iconIdBooking:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-table .client:hover {
+.mainContain table .client:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-table tfoot .containNoFound {
+.mainContain table tfoot .containNoFound {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -251,16 +251,16 @@ table tfoot .containNoFound {
   font-size: 16px;
   color: rgb(180, 180, 180);
 }
-table tfoot .containNoFound img {
+.mainContain table tfoot .containNoFound img {
   width: 70px;
   opacity: 100%;
 }
 
-.rowGray {
+.mainContain .rowGray {
   background-color: rgb(212, 212, 212);
 }
 
-.rowWhite {
+.mainContain .rowWhite {
   background-color: rgb(255, 255, 255);
 }
 

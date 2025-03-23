@@ -176,7 +176,9 @@ function dataPointsToGraphicMonthsClients(monthsClients) {
   }, 0);
 
   if (totalMonthsClients > 0) {
-    graphicClients(dataPoints, "chartClients", "Meses","greenShadesMonths");
+    graphicClients(dataPoints, "chartClients", "Meses", "greenShadesMonths");
+  } else {
+    noData(true, "Sin clientes este año");
   }
 }
 
@@ -201,6 +203,8 @@ function dataPointsToGraphicWeekdayClients(weekdayClients) {
       "Dias de la semana",
       "greenShadesWeek"
     );
+  } else {
+    noData(true, "Sin clientes esta semana");
   }
 }
 
@@ -255,12 +259,14 @@ const dataClientsMonths = async (year) => {
   }
 };
 
-const noData = (state) => {
+const noData = (state, msj) => {
   let noData = document.querySelector(".noData");
+  let span = noData.querySelector("span");
 
   if (state) {
     chartClients.classList.add("hideClientsChart");
     noData.style.display = "flex";
+    span.textContent = msj;
   } else {
     chartClients.classList.remove("hideClientsChart");
     noData.style.display = "none";
@@ -301,9 +307,8 @@ const dataClientsWeekday = async () => {
     loadingChart(false);
     if (data) {
       dataPointsToGraphicWeekdayClients(data);
-      noData(false);
     } else {
-      noData(true);
+      noData(true, "No se encontraron datos");
     }
   }
 };

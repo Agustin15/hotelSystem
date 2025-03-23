@@ -166,7 +166,7 @@
   background-color: #920606;
 }
 
-.headerWindow {
+.containOptions .headerWindow {
   display: flex;
   align-items: start;
   justify-content: space-between;
@@ -177,7 +177,7 @@
   padding-bottom: 0.5rem;
   box-shadow: 2px 2px 2px gray;
 }
-.headerWindow button {
+.containOptions .headerWindow button {
   background-color: rgb(233, 3, 3);
   color: white;
   font-weight: bold;
@@ -185,11 +185,11 @@
   width: 2rem;
   border: none;
 }
-.headerWindow button:hover {
+.containOptions .headerWindow button:hover {
   background-color: rgb(212, 4, 4);
   cursor: pointer;
 }
-.headerWindow ul {
+.containOptions .headerWindow ul {
   display: flex;
   gap: 0.4rem;
   justify-content: center;
@@ -198,7 +198,7 @@
   height: 100%;
   color: white;
 }
-.headerWindow ul li {
+.containOptions .headerWindow ul li {
   font-size: 15px;
   list-style: none;
   cursor: pointer;
@@ -208,10 +208,10 @@
   align-items: center;
   gap: 0.2rem;
 }
-.headerWindow ul li img {
+.containOptions .headerWindow ul li img {
   width: 20px;
 }
-.headerWindow ul li:hover {
+.containOptions .headerWindow ul li:hover {
   background: linear-gradient(rgb(57, 170, 161), rgb(4, 127, 131));
 }
 

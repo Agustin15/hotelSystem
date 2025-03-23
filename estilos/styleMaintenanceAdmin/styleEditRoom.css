@@ -74,8 +74,7 @@
   background-position-y: 0.4rem;
 }
 .containEdit form input::placeholder {
-
-font-size: 15px;  
+  font-size: 15px;
 }
 
 .containEdit form #categoria {
@@ -145,12 +144,12 @@ font-size: 15px;
   height: 29px;
 }
 
-.file-select {
+.containEdit .file-select {
   position: relative;
   display: inline-block;
 }
 
-.file-select::before {
+.containEdit .file-select::before {
   background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
   color: white;
   display: flex;
@@ -165,7 +164,7 @@ font-size: 15px;
   bottom: 0;
 }
 
-.file-select input[type="file"] {
+.containEdit .file-select input[type="file"] {
   opacity: 0;
   width: 9rem;
   height: 2rem;
@@ -173,11 +172,11 @@ font-size: 15px;
   display: inline-block;
 }
 
-#src-file::before {
+.containEdit #src-file::before {
   content: "Seleccionar";
 }
 
-.columnImagesRoom {
+.containEdit .columnImagesRoom {
   display: flex;
   width: 32rem;
   flex-direction: column;
@@ -186,33 +185,33 @@ font-size: 15px;
   margin-top: 2rem;
 }
 
-.containImage {
+.containEdit .containImage {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
-.imageRoom {
+.containEdit .imageRoom {
   width: 22rem;
   height: 12rem;
   box-shadow: 2px 2px 2px gray;
   border: 1px solid rgb(190, 190, 190);
 }
 
-.imageRoom img {
+.containEdit .imageRoom img {
   width: 100%;
   height: 100%;
 }
 
-.containButton {
+.containEdit .containButton {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.errorInput {
+.containEdit .errorInput {
   gap: 0.2rem;
   margin-top: -0.5rem;
   display: none;
@@ -222,23 +221,22 @@ font-size: 15px;
   justify-content: center;
 }
 
-.errorInput img {
+.containEdit .errorInput img {
   width: 25px;
 }
 
-.inputError {
+.containEdit .inputError {
   color: red;
   border: 1px solid red;
 }
 
-.inputError:hover {
+.containEdit .inputError:hover {
   border: 2px solid red;
 }
 
-.inputError::placeholder {
+.containEdit .inputError::placeholder {
   color: red;
 }
-
 
 .modalAlert {
   position: absolute;

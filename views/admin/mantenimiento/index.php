@@ -2,7 +2,9 @@
 
 if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     header("location:../../loginAdmin/index.html");
-} else if ($_COOKIE["idRol"] != 1) {
+}
+
+if ($_COOKIE["idRol"] != 1) {
 
     http_response_code(401);
     header("location:../unauthorized.html");
@@ -16,7 +18,20 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleMain.css">
-    <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer></script>
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleTableUsers.css"">
+    <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDelete.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAdd.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleRooms.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleServices.css"">
+    <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProducts.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProduct.css">
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDeleteProduct.css" >
+
+
+    <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer>
+    </script>
     <script type="module" src="../../../js/scriptsMaintenance/dashboard.js" defer></script>
     <title>Mantenimiento</title>
 </head>

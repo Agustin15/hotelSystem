@@ -50,7 +50,7 @@ export const alertForm = (icon, msj, title, classToAdd) => {
   alert.style.display = "flex";
   alert.classList.add(classToAdd);
 
-  if (title == "Exito") {
+  if (title == "¡Exito!") {
     setTimeout(() => {
       removeAlertForm();
     }, 2000);

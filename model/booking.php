@@ -114,7 +114,7 @@ class Booking
     {
 
         $query = $this->connection->prepare("select * from reserva_habitacion where 
-        fechaLlegada>=? && fechaSalida<=?");
+        fechaLlegada>=? && fechaLlegada<=?");
         $query->bind_param("ss", $weekdayStart, $weekdayEnd);
         $query->execute();
         $result = $query->get_result();
@@ -127,7 +127,7 @@ class Booking
 
         $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes ON 
         clientes.idCliente=reserva_habitacion.idClienteReserva where reserva_habitacion.fechaLlegada>=? && 
-        reserva_habitacion.fechaSalida<=? LIMIT 10 OFFSET $index");
+        reserva_habitacion.fechaLlegada<=? LIMIT 5 OFFSET $index");
         $query->bind_param("ss", $weekdayStart, $weekdayEnd);
         $query->execute();
         $result = $query->get_result();
@@ -175,7 +175,7 @@ class Booking
 
         $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes on
         clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=?
-         ORDER BY reserva_habitacion.fechaLlegada DESC LIMIT 10");
+         ORDER BY reserva_habitacion.fechaLlegada DESC LIMIT 5");
         $query->bind_param("i", $year);
         $query->execute();
 
@@ -199,7 +199,7 @@ class Booking
 
         $query = $this->connection->prepare("select * from reserva_habitacion INNER JOIN clientes on
         clientes.idCliente=reserva_habitacion.idClienteReserva where YEAR(fechaLlegada)=? ORDER BY 
-        reserva_habitacion.fechaLlegada LIMIT 10 OFFSET $index");
+        reserva_habitacion.fechaLlegada LIMIT 5 OFFSET $index");
         $query->bind_param("i", $year);
         $query->execute();
 

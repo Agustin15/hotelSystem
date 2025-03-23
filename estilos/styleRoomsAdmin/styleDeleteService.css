@@ -139,7 +139,7 @@
   opacity: 70%;
 }
 
-.ulItems {
+.containDeleteService .ulItems {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -152,7 +152,7 @@
   overflow-y: scroll;
   padding-bottom: 2rem;
 }
-.ulItems .item {
+.containDeleteService .ulItems .item {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -167,7 +167,7 @@
   font-size: 17px;
   padding: 0.5rem;
 }
-.ulItems .item .name {
+.containDeleteService .ulItems .item .name {
   text-overflow: ellipsis;
   width: 14rem;
   font-size: 15px;
@@ -175,19 +175,19 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.ulItems .item .row {
+.containDeleteService .ulItems .item .row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-.ulItems .item .icon {
+.containDeleteService .ulItems .item .icon {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
 }
-.ulItems .item .icon button {
+.containDeleteService .ulItems .item .icon button {
   width: 3.3rem;
   height: 1.4rem;
   font-size: 11px;
@@ -202,15 +202,15 @@
   align-items: center;
   justify-content: center;
 }
-.ulItems .item .icon button img {
+.containDeleteService .ulItems .item .icon button img {
   width: 17px;
   height: 17px;
 }
-.ulItems .item .icon button:hover {
+.containDeleteService .ulItems .item .icon button:hover {
   background-color: rgb(228, 0, 0);
 }
-.ulItems .item .columnOne,
-.ulItems .item .columnTwo {
+.containDeleteService .ulItems .item .columnOne,
+.containDeleteService .ulItems .item .columnTwo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -221,21 +221,21 @@
   padding: 1rem;
   background: rgb(2, 112, 116);
 }
-.ulItems .item .columnOne {
+.containDeleteService .ulItems .item .columnOne {
   height: 4.3rem;
 }
-.ulItems .item .columnOne img {
+.containDeleteService .ulItems .item .columnOne img {
   width: 50px;
   height: 50px;
 }
-.ulItems .item .columnTwo {
+.containDeleteService .ulItems .item .columnTwo {
   font-size: 14px;
   width: 7rem;
   justify-content: center;
   gap: 0.5rem;
   padding-top: 0.5rem;
 }
-.ulItems .item .columnTwo a {
+.containDeleteService .ulItems .item .columnTwo a {
   font-weight: bold;
 }
 

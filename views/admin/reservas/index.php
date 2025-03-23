@@ -12,6 +12,10 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleTableBookings.css">
+    <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleEditBooking.css">
+    <link  rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleAddBooking.css" >
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>

@@ -79,7 +79,7 @@
   margin-left: 9rem;
   padding-bottom: 2rem;
 }
-.categoryRooms {
+.containCategoryRooms .categoryRooms {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
   gap: 1rem;
 }
 
-.categoryRooms .containRoom {
+.containCategoryRooms .categoryRooms .containRoom {
   width: 41rem;
   border-radius: 3px;
   height: 15rem;
@@ -101,14 +101,14 @@
   gap: 0.1rem;
 }
 
-.categoryRooms .row {
+.containCategoryRooms .categoryRooms .row {
   display: flex;
   align-items: start;
   justify-content: start;
   gap: 1.5rem;
 }
 
-.categoryRooms .row .images {
+.containCategoryRooms .categoryRooms .row .images {
   overflow: hidden;
   display: flex;
   width: 22rem;
@@ -116,23 +116,26 @@
   justify-content: center;
 }
 
-.categoryRooms .row .images ul {
+.containCategoryRooms .categoryRooms .row .images ul {
   width: 99rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-.categoryRooms .row .images li {
+
+.containCategoryRooms .categoryRooms .row .images li {
   list-style: none;
 }
 
-.categoryRooms .row .images img {
+
+.containCategoryRooms .categoryRooms .row .images img {
   width: 22rem;
   height: 12rem;
 }
 
-.controls {
+
+.containCategoryRooms .controls {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,19 +144,22 @@
   position: absolute;
 }
 
-.categoryRooms .row .images .controls img {
+
+.containCategoryRooms .categoryRooms .row .images .controls img {
   width: 28px;
   height: 28px;
   opacity: 97%;
   cursor: pointer;
 }
 
-.categoryRooms .row .images .controls img:hover {
+
+.containCategoryRooms .categoryRooms .row .images .controls img:hover {
   opacity: 100%;
   transform: scale(1.1);
 }
 
-.categoryRooms .row .images .indexImagesRoom {
+
+.containCategoryRooms .categoryRooms .row .images .indexImagesRoom {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,12 +167,14 @@
   margin-top: 11rem;
   position: absolute;
 }
-.categoryRooms .row .images .indexImagesRoom li {
+
+.containCategoryRooms .categoryRooms .row .images .indexImagesRoom li {
   width: 80px;
   height: 3px;
   background-color: rgb(201, 201, 201);
 }
-.categoryRooms .row .images .indexImagesRoom .itemIndexActive {
+
+.containCategoryRooms .categoryRooms .row .images .indexImagesRoom .itemIndexActive {
   background-color: white;
 }
 

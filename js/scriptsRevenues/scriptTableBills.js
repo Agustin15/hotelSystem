@@ -135,12 +135,12 @@ const displayControlsIndex = async () => {
     revenues = await revenuesByYear(selectYear.value);
   }
 
-  if (revenues) {
+  if (revenues.length) {
     controls.style.display = "flex";
-    pages = Math.ceil(revenues.length / 10);
+    pages = Math.ceil(revenues.length / 5);
     if (index > pages && pages > 0) {
       index--;
-      offset -= 10;
+      offset -= 5;
     }
     pageIndexElement.textContent = `${index}/${pages}`;
   } else {
@@ -218,7 +218,7 @@ const eventsControlsIndex = () => {
   prev.addEventListener("click", () => {
     if (index > 1) {
       index--;
-      offset -= 10;
+      offset -= 5;
       pageIndexElement.textContent = `${index}/${pages}`;
       displayTable("revenues");
     }
@@ -227,7 +227,7 @@ const eventsControlsIndex = () => {
   next.addEventListener("click", () => {
     if (index < pages) {
       index++;
-      offset += 10;
+      offset += 5;
       pageIndexElement.textContent = `${index}/${pages}`;
       displayTable("revenues");
     }
@@ -248,7 +248,7 @@ const allRevenuesByYearLimitIndex = async (year) => {
   } finally {
     loading(false);
     if (!revenuesLimit) {
-      noData();
+      noData("Sin reservas esta año");
     }
     return revenuesLimit;
   }
@@ -268,7 +268,7 @@ const revenuesThisWeekLimit = async () => {
   } finally {
     loading(false);
     if (!revenuesLimit) {
-      noData();
+      noData("Sin reservas esta semana");
     }
     return revenuesLimit;
   }
@@ -289,7 +289,7 @@ const revenuesByYear = async () => {
     if (revenues) {
       return revenues;
     } else {
-      noData();
+      noData("Sin reservas esta año");
     }
   }
 };
@@ -309,7 +309,7 @@ const revenuesThisWeek = async () => {
     if (revenues) {
       return revenues;
     } else {
-      noData();
+      noData("Sin reservas esta semana");
     }
   }
 };
@@ -331,7 +331,7 @@ const loading = (state) => {
   }
 };
 
-const noData = () => {
+const noData = (msj) => {
   tableBills.querySelector("tbody").innerHTML = ``;
   let tfoot = document.querySelector("tfoot");
 
@@ -339,7 +339,7 @@ const noData = () => {
   <td cellspan="6" colspan="6">
   <div class="noData">
  <img src="../../../img/sinDatos.png">
-   <span>No se encontraron datos</span>
+   <span>${msj}</span>
 </div>
 </td>
 `;

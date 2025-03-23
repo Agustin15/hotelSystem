@@ -12,6 +12,18 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleChart.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleRooms.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleRecord.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleNextBookings.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleServices.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleHistoryServices.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleAddService.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleTelephone.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMassage.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMinibar.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleDeleteService.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>

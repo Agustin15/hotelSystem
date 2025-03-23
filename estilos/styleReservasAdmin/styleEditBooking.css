@@ -143,32 +143,32 @@
   width: 50px;
 }
 
-.containFormAndCart {
+.containEditOption .containFormAndCart {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 2rem;
 }
 
-.title {
+.containEditOption .containFormAndCart .title {
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgb(0, 0, 0);
   gap: 1rem;
 }
-.title img {
+.containEditOption .containFormAndCart .title img {
   width: 53px;
 }
 
-.row {
+.containEditOption .row {
   display: flex;
   align-items: start;
   justify-content: center;
   gap: 4rem;
 }
 
-.cartRooms {
+.containEditOption .cartRooms {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,7 +183,7 @@
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   color: white;
 }
-.cartRooms .titleCart {
+.containEditOption .cartRooms .titleCart {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,15 +196,15 @@
   box-shadow: 1px 1px 1px rgb(114, 114, 114);
   border-radius: 3px;
 }
-.cartRooms .titleCart h3 {
+.containEditOption .cartRooms .titleCart h3 {
   color: rgb(0, 0, 0);
   font-weight: bold;
 }
-.cartRooms .titleCart img {
+.containEditOption .cartRooms .titleCart img {
   width: 28px;
   margin-top: -0.3rem;
 }
-.cartRooms ul {
+.containEditOption .cartRooms ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -215,21 +215,21 @@
   overflow-x: hidden;
   margin-top: 1rem;
 }
-.cartRooms .noRoomsCart {
+.containEditOption .cartRooms .noRoomsCart {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   opacity: 80%;
 }
-.cartRooms .noRoomsCart img {
+.containEditOption .cartRooms .noRoomsCart img {
   width: 53px;
 }
-.cartRooms .noRoomsCart span {
+.containEditOption .cartRooms .noRoomsCart span {
   color: white;
   font-size: 17px;
 }
-.cartRooms li {
+.containEditOption .cartRooms li {
   padding: 0.5rem;
   padding-top: 0.3rem;
   display: flex;
@@ -242,7 +242,7 @@
   width: 88%;
   box-shadow: 2px 2px 2px rgb(68, 68, 68);
 }
-.cartRooms li .row {
+.containEditOption .cartRooms li .row {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -250,74 +250,74 @@
   padding-top: 0.3rem;
   color: rgb(0, 0, 0);
 }
-.cartRooms li .icon {
+.containEditOption .cartRooms li .icon {
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.cartRooms li .icon img {
+.containEditOption .cartRooms li .icon img {
   width: 90px;
   height: 50px;
 }
-.cartRooms li .icon,
-.cartRooms li .info {
+.containEditOption .cartRooms li .icon,
+.containEditOption .cartRooms li .info {
   background: #e6e6e6;
   border-radius: 5px;
 }
-.cartRooms li .info {
+.containEditOption .cartRooms li .info {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.5rem;
   background-color: white;
 }
-.cartRooms li .info h5 {
+.containEditOption .cartRooms li .info h5 {
   font-size: 17px;
 }
-.cartRooms li .info .guests {
+.containEditOption .cartRooms li .info .guests {
   display: flex;
   flex-direction: column;
   align-items: start;
   font-size: 16px;
 }
-.cartRooms li .info .guests .containAdults,
-.cartRooms li .info .guests .containChilds {
+.containEditOption .cartRooms li .info .guests .containAdults,
+.containEditOption .cartRooms li .info .guests .containChilds {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
-.cartRooms li .price,
-.cartRooms li .header {
+.containEditOption .cartRooms li .price,
+.containEditOption .cartRooms li .header {
   display: flex;
   width: 100%;
   color: rgb(0, 0, 0);
 }
-.cartRooms li .price {
+.containEditOption .cartRooms li .price {
   padding-top: 0.2rem;
   font-size: 14px;
   font-weight: bold;
   justify-content: space-between;
 }
-.cartRooms li .header {
+.containEditOption .cartRooms li .header {
   font-weight: bold;
   font-size: 15px;
   padding-left: 0.2rem;
   justify-content: space-between;
 }
-.cartRooms li .header .statusAddedNew {
+.containEditOption .cartRooms li .header .statusAddedNew {
   color: rgb(2, 196, 2);
 }
-.cartRooms li .header .statusAddedPreviously {
+.containEditOption .cartRooms li .header .statusAddedPreviously {
   color: rgb(219, 11, 11);
 }
-.cartRooms li .header img {
+.containEditOption .cartRooms li .header img {
   width: 15px;
   height: 15px;
   cursor: pointer;
 }
-.cartRooms .total {
+.containEditOption .cartRooms .total {
   display: none;
   color: black;
   justify-content: start;
@@ -333,11 +333,11 @@
   background-color: white;
   border-radius: 4px;
 }
-.cartRooms .total img {
+.containEditOption .cartRooms .total img {
   width: 25px;
 }
 
-.containForm {
+.containEditOption .containForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -350,20 +350,20 @@
   margin-top: -1rem;
   margin-left: 2rem;
 }
-.containForm .title {
+.containEditOption .containForm .title {
   display: flex;
   gap: 1rem;
   justify-content: center;
   align-items: center;
 }
-.containForm .title h3 {
+.containEditOption .containForm .title h3 {
   font-size: 19px;
   color: rgb(0, 0, 0);
 }
-.containForm .title img {
+.containEditOption .containForm .title img {
   width: 50px;
 }
-.containForm .nights {
+.containEditOption .containForm .nights {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -371,11 +371,11 @@
   font-size: 13px;
   color: rgb(0, 0, 0);
 }
-.containForm .nights img {
+.containEditOption .containForm .nights img {
   width: 30px;
-  opacity:99%;
+  opacity: 99%;
 }
-.containForm form {
+.containEditOption .containForm form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -384,26 +384,26 @@
   color: rgb(0, 0, 0);
   padding-top: 1rem;
 }
-.containForm form .rowOne,
-.containForm form .rowTwo {
+.containEditOption .containForm form .rowOne,
+.containEditOption .containForm form .rowTwo {
   display: flex;
   gap: 1.5rem;
   justify-content: center;
   align-items: start;
 }
-.containForm form label {
+.containEditOption .containForm form label {
   font-size: 16px;
 }
-.containForm form .dateStart,
-.containForm form .dateEnd,
-.containForm form .client,
-.containForm form .quantityRooms {
+.containEditOption .containForm form .dateStart,
+.containEditOption .containForm form .dateEnd,
+.containEditOption .containForm form .client,
+.containEditOption .containForm form .quantityRooms {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1rem;
 }
-.containForm form select {
+.containEditOption .containForm form select {
   width: 16rem;
   height: 3.2rem;
   border: 1px solid rgb(199, 199, 199);
@@ -412,7 +412,7 @@
   font-size: 15px;
   outline: none;
 }
-.containForm form input {
+.containEditOption .containForm form input {
   padding-left: 3rem;
   font-size: 15px;
   border: 1px solid rgb(199, 199, 199);
@@ -421,35 +421,35 @@
   height: 3rem;
   outline: none;
 }
-.containForm form select,
-.containForm form input {
+.containEditOption .containForm form select,
+.containEditOption .containForm form input {
   background-repeat: no-repeat;
   background-size: 25px;
   background-position-x: 0.8rem;
   background-position-y: 0.7rem;
 }
-.containForm form .inputAlert {
+.containEditOption .containForm form .inputAlert {
   border: 1px solid rgb(214, 0, 0);
 }
-.containForm form .inputAlert:hover {
+.containEditOption .containForm form .inputAlert:hover {
   border: 2px solid rgb(214, 0, 0);
 }
-.containForm form .inputAlert::placeholder {
+.containEditOption .containForm form .inputAlert::placeholder {
   color: red;
 }
-.containForm form #startInput {
+.containEditOption .containForm form #startInput {
   background-image: url("../../img/enterDate.png");
 }
-.containForm form #endInput {
+.containEditOption .containForm form #endInput {
   background-image: url("../../img/exitDate.png");
 }
-.containForm form #clientsSelect {
+.containEditOption .containForm form #clientsSelect {
   background-image: url("../../img/usuario.png");
 }
-.containForm form #roomsQuantityInput {
+.containEditOption .containForm form #roomsQuantityInput {
   background-image: url("../../img/roomInfoIconInput.png");
 }
-.containForm form button {
+.containEditOption .containForm form button {
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -465,14 +465,14 @@
   height: 2.5rem;
   cursor: pointer;
 }
-.containForm form button img {
+.containEditOption .containForm form button img {
   width: 25px;
   display: none;
 }
-.containForm form button:hover {
+.containEditOption .containForm form button:hover {
   background-color: rgb(5, 134, 134);
 }
-.containForm form .msjError {
+.containEditOption .containForm form .msjError {
   display: none;
   justify-content: center;
   align-items: center;
@@ -486,10 +486,10 @@
   margin-top: -0.5rem;
   position: relative;
 }
-.containForm form .msjError img {
+.containEditOption .containForm form .msjError img {
   width: 16px;
 }
-.containForm form .msjError .arrow {
+.containEditOption .containForm form .msjError .arrow {
   width: 0;
   height: 0;
   border-top: 10px solid rgb(255, 77, 77);
@@ -499,20 +499,20 @@
   top: -0.2rem;
   left: 0.2rem;
 }
-.containForm form .msjErrorShow {
+.containEditOption .containForm form .msjErrorShow {
   display: flex;
 }
-.containForm .rowOne .btnCalculate {
+.containEditOption .containForm .rowOne .btnCalculate {
   height: 2.1rem;
   width: 5rem;
   margin-top: 2.6rem;
 }
-.containForm .containButton {
+.containEditOption .containForm .containButton {
   display: flex;
   justify-content: center;
   width: 89%;
 }
-.containForm .alertForm {
+.containEditOption .containForm .alertForm {
   display: none;
   justify-content: start;
   align-items: center;
@@ -527,27 +527,27 @@
   box-shadow: 2px 2px 2px gray;
   font-size: 17px;
 }
-.containForm .alertForm span {
+.containEditOption .containEditOption .containForm .alertForm span {
   font-weight: bold;
 }
-.containForm .alertForm .body {
+.containEditOption .containEditOption .containForm .alertForm .body {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
 }
-.containForm .alertForm img {
+.containEditOption .containForm .alertForm img {
   width: 30px;
 }
-.containForm .alertFormCorrect {
+.containEditOption .containForm .alertFormCorrect {
   background: linear-gradient(#2e888b, #065357);
   display: flex;
 }
-.containForm .alertFormError {
+.containEditOption .containForm .alertFormError {
   background: linear-gradient(#dd0e0e, #a00404);
   display: flex;
 }
 
-.noDataRoomsCart {
+.containEditOption .noDataRoomsCart {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -558,11 +558,11 @@
   font-weight: bold;
   color: white;
 }
-.noDataRoomsCart img {
+.containEditOption .noDataRoomsCart img {
   width: 61px;
 }
 
-.loadingRoomsCart {
+.containEditOption .loadingRoomsCart {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -571,11 +571,11 @@
   font-weight: bold;
   font-size: 18px;
 }
-.loadingRoomsCart img {
+.containEditOption .loadingRoomsCart img {
   width: 34px;
 }
 
-.containFreeRooms {
+.containEditOption .containFreeRooms {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -585,22 +585,22 @@
   width: 90%;
   height: 31rem;
 }
-.containFreeRooms .title {
+.containEditOption .containFreeRooms .title {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 }
-.containFreeRooms .title h3 {
+.containEditOption .containFreeRooms .title h3 {
   font-size: 18px;
   width: 20rem;
   color: rgb(0, 0, 0);
   text-align: center;
 }
-.containFreeRooms .title img {
+.containEditOption .containFreeRooms .title img {
   width: 50px;
 }
-.containFreeRooms .rooms {
+.containEditOption .containFreeRooms .rooms {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -612,7 +612,7 @@
   padding-top: 0;
   border: 1px solid rgb(214, 214, 214);
 }
-.containFreeRooms .rooms .menuRooms {
+.containEditOption .containFreeRooms .rooms .menuRooms {
   display: flex;
   width: 101%;
   height: 3rem;
@@ -624,7 +624,7 @@
   align-items: start;
   border-bottom: 1px solid rgb(209, 209, 209);
 }
-.containFreeRooms .rooms .menuRooms li {
+.containEditOption .containFreeRooms .rooms .menuRooms li {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -634,16 +634,16 @@
   cursor: pointer;
   padding-bottom: 0.1rem;
 }
-.containFreeRooms .rooms .menuRooms li img {
+.containEditOption .containFreeRooms .rooms .menuRooms li img {
   width: 80px;
   height: 40px;
   border-radius: 4px;
 }
-.containFreeRooms .rooms .menuRooms li:hover {
+.containEditOption .containFreeRooms .rooms .menuRooms li:hover {
   border-bottom: 2px solid rgb(0, 179, 179);
 }
 
-.category {
+.containEditOption .category {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -653,11 +653,11 @@
   gap: 1rem;
   padding-top: 1rem;
 }
-.category h3 {
+.containEditOption .category h3 {
   font-size: 24px;
   color: rgb(0, 0, 0);
 }
-.category .noDataFreeRooms {
+.containEditOption .category .noDataFreeRooms {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -665,13 +665,13 @@
   opacity: 70%;
   font-size: 18px;
 }
-.category .noDataFreeRooms h3 {
+.containEditOption .category .noDataFreeRooms h3 {
   color: rgb(0, 0, 0);
 }
-.category .noDataFreeRooms img {
+.containEditOption .category .noDataFreeRooms img {
   width: 100px;
 }
-.category .loadingRooms {
+.containEditOption .category .loadingRooms {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -680,10 +680,10 @@
   margin-top: 0rem;
   opacity: 61%;
 }
-.category .loadingRooms img {
+.containEditOption .category .loadingRooms img {
   width: 50px;
 }
-.category ul {
+.containEditOption .category ul {
   width: 112%;
   display: flex;
   justify-content: center;
@@ -694,7 +694,7 @@
   margin-top: 0.1rem;
   overflow-y: scroll;
 }
-.category ul li {
+.containEditOption .category ul li {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -705,10 +705,10 @@
   color: white;
   box-shadow: 2px 2px 2px rgb(114, 114, 114);
 }
-.category ul li .containAdd {
+.containEditOption .category ul li .containAdd {
   margin-top: 0.5rem;
 }
-.category ul li .containAdd button {
+.containEditOption .category ul li .containAdd button {
   padding: 0.3rem;
   background: white;
   border: none;
@@ -724,59 +724,59 @@
   font-size: 13px;
   box-shadow: 2px 2px 2px rgb(7, 7, 7);
 }
-.category ul li .containAdd button img {
+.containEditOption .category ul li .containAdd button img {
   width: 16px;
   height: 16px;
 }
-.category ul li .containAdd button:hover {
+.containEditOption .category ul li .containAdd button:hover {
   background-color: gainsboro;
 }
-.category ul li .row {
+.containEditOption .category ul li .row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 }
-.category ul li .icon {
+.containEditOption .category ul li .icon {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.category ul li .icon img {
+.containEditOption .category ul li .icon img {
   width: 130px;
   height: 80px;
 }
-.category ul li .icon,
+.containEditOption .category ul li .icon,
 .category ul li .info {
   background: #1f888b;
   border-radius: 5px;
 }
-.category ul li .info {
+.containEditOption .category ul li .info {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
-.category ul li .info h5 {
+.containEditOption .category ul li .info h5 {
   font-size: 17px;
 }
-.category ul li .info .guests {
+.containEditOption .category ul li .info .guests {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   font-size: 16px;
 }
-.category ul li .info .guests .containAdults,
-.category ul li .info .guests .containChilds {
+.containEditOption .category ul li .info .guests .containAdults,
+.containEditOption .category ul li .info .guests .containChilds {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
 }
-.category ul li .info .guests input {
+.containEditOption .category ul li .info .guests input {
   width: 50px;
   height: 30px;
   border: none;
@@ -784,7 +784,7 @@
   outline: none;
 }
 
-.alertGuests {
+.containEditOption .alertGuests {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -797,15 +797,15 @@
   margin-top: 16rem;
   color: rgb(0, 0, 0);
 }
-.alertGuests p {
+.containEditOption .alertGuests p {
   font-weight: bold;
   font-size: 18px;
   text-align: center;
 }
-.alertGuests img {
+.containEditOption .alertGuests img {
   width: 72px;
 }
-.alertGuests button {
+.containEditOption .alertGuests button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -818,8 +818,7 @@
   margin-top: 1rem;
   cursor: pointer;
 }
-.alertGuests button:hover {
+.containEditOption .alertGuests button:hover {
   background-color: #920606;
 }
 
-/*# sourceMappingURL=styleEditBooking.css.map */

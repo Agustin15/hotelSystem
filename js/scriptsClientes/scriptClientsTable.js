@@ -202,10 +202,10 @@ export const displayControlsIndex = async () => {
   let clientsRows = await getRowsClients();
   if (clientsRows) {
     controlsElement.style.display = "flex";
-    limitPage = Math.ceil(clientsRows / 10);
+    limitPage = Math.ceil(clientsRows / 5);
     if (index > limitPage && limitPage > 0) {
       index--;
-      offset -= 10;
+      offset -= 5;
     }
     pagesText.textContent = `${index}/${limitPage}`;
   } else {
@@ -217,7 +217,7 @@ const eventsControlsIndex = () => {
   next.addEventListener("click", function () {
     if (index < limitPage) {
       index++;
-      offset += 10;
+      offset += 5;
       pagesText.textContent = `${index}/${limitPage}`;
       displayTable();
     }
@@ -226,7 +226,7 @@ const eventsControlsIndex = () => {
   prev.addEventListener("click", function () {
     if (index > 1) {
       index--;
-      offset -= 10;
+      offset -= 5;
       pagesText.textContent = `${index}/${limitPage}`;
       displayTable();
     }

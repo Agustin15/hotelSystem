@@ -49,7 +49,7 @@
   height: 45px;
 }
 
-.containTable {
+.containEditProducts .containTable {
   display: flex;
   margin-top: 0.2rem;
   width: 99%;
@@ -60,7 +60,7 @@
   border-radius: 3px;
 }
 
-.containTable .rowHeaderTable {
+.containEditProducts .containTable .rowHeaderTable {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -68,7 +68,7 @@
   width: 100%;
 }
 
-.containTable .rowHeaderTable .btnAddProduct {
+.containEditProducts .containTable .rowHeaderTable .btnAddProduct {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,16 +85,16 @@
   margin-top: 1.5rem;
 }
 
-.containTable .rowHeaderTable .btnAddProduct:hover {
+.containEditProducts .containTable .rowHeaderTable .btnAddProduct:hover {
   background: linear-gradient(rgb(63, 175, 166), rgb(1, 155, 160));
 }
 
-.containTable .rowHeaderTable .btnAddProduct img {
-  width:18px;
+.containEditProducts .containTable .rowHeaderTable .btnAddProduct img {
+  width: 18px;
   height: 18px;
 }
 
-.containTable .containSearchProduct {
+.containEditProducts .containTable .containSearchProduct {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -103,7 +103,7 @@
   margin-top: 1.5rem;
 }
 
-.containTable .containSearchProduct input {
+.containEditProducts .containTable .containSearchProduct input {
   width: 10.5rem;
   height: 2rem;
   padding-left: 1rem;
@@ -114,7 +114,7 @@
   font-size: 14px;
 }
 
-.containTable .containSearchProduct button {
+.containEditProducts .containTable .containSearchProduct button {
   display: flex;
   position: absolute;
   border-radius: 3px;
@@ -128,16 +128,22 @@
   left: 13rem;
 }
 
-.containTable .containSearchProduct button:hover {
+.containEditProducts .containTable .containSearchProduct button:hover {
   background: linear-gradient(rgb(44, 121, 114), rgb(1, 155, 160));
 }
 
-.containTable .containSearchProduct button img {
+.containEditProducts .containTable .containSearchProduct button img {
   width: 19px;
   height: 19px;
 }
 
-.tableProducts {
+.scroll {
+  height: 26rem;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.containEditProducts .tableProducts {
   width: 100%;
   background-color: rgb(255, 255, 255);
   margin-top: 1.5rem;
@@ -165,8 +171,8 @@
   align-items: center;
 }
 .containEditProducts table tbody .iconProduct img {
-  width: 42px;
-  height: 42px;
+  width: 66px;
+  height: 66px;
 }
 
 .containEditProducts table .trGray {
@@ -224,7 +230,7 @@
   height: auto;
 }
 
-.controls {
+.containEditProducts .controls {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -235,12 +241,12 @@
   color: rgb(0, 0, 0);
   border-top: 1px solid rgb(185, 185, 185);
 }
-.controls span:hover {
+.containEditProducts .controls span:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.loadingProducts {
+.containEditProducts .loadingProducts {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,14 +256,14 @@
   color: gray;
 }
 
-.loadingProducts img {
+.containEditProducts .loadingProducts img {
   width: 45px;
   height: 45px;
   opacity: 56%;
 }
 
-.noDataProducts,
-.noResultsProductFound {
+.containEditProducts .noDataProducts,
+.containEditProducts .noResultsProductFound {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -268,8 +274,8 @@
   color: gray;
 }
 
-.noDataProducts img,
-.noResultsProductFound img {
+.containEditProducts .noDataProducts img,
+.containEditProducts .noResultsProductFound img {
   width: 86px;
   height: 86px;
   opacity: 76%;

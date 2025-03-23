@@ -57,7 +57,7 @@ const getDocument = async (url) => {
 const drawDocument = (result) => {
   option.innerHTML = result;
 
-  let containChart = document.querySelector(".containChart");
+  let containChart = document.querySelector(".containChartMain");
   let containRooms = document.querySelector(".containRooms");
 
   if (containChart) {

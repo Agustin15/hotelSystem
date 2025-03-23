@@ -6,7 +6,7 @@
   height: 80vh;
 }
 
-.loading {
+.containServices .loading {
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -16,11 +16,11 @@
   margin-left: 8rem;
   opacity: 60%;
 }
-.loading img {
+.containServices .loading img {
   width: 40px;
 }
 
-.noData {
+.containServices .noData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,12 +32,12 @@
   margin-left: 8rem;
   color: grey;
 }
-.noData img {
+.containServices .noData img {
   width: 8rem;
   opacity: 80%;
 }
 
-.listServices {
+.containServices .listServices {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -50,7 +50,7 @@
   list-style: none;
 }
 
-.listServices li {
+.containServices .listServices li {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +67,7 @@
   box-shadow: 2px 2px 2px rgb(230, 230, 230);
 }
 
-.listServices li .row {
+.containServices .listServices li .row {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -75,23 +75,23 @@
   gap: 1rem;
 }
 
-.listServices li .row .details {
+.containServices .listServices li .row .details {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap:0.2rem;
+  gap: 0.2rem;
 }
 
-.listServices li .row span {
+.containServices .listServices li .row span {
   font-weight: bold;
 }
 
-.listServices li img {
+.containServices .listServices li img {
   width: 57px;
   height: 57px;
 }
 
-.listServices li .footerOptions {
+.containServices .listServices li .footerOptions {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -102,7 +102,7 @@
   padding: 0.5rem;
 }
 
-.listServices li .footerOptions button {
+.containServices .listServices li .footerOptions button {
   width: 7rem;
   color: white;
   height: 2rem;
@@ -117,36 +117,36 @@
   gap: 0.5rem;
 }
 
-.listServices li .footerOptions button img {
+.containServices .listServices li .footerOptions button img {
   width: 17px;
   height: 17px;
 }
 
-.listServices li .footerOptions .btnDelete {
+.containServices .listServices li .footerOptions .btnDelete {
   background-color: rgb(223, 14, 14);
 }
 
-.listServices li .footerOptions .btnDelete:hover {
+.containServices .listServices li .footerOptions .btnDelete:hover {
   background-color: rgb(190, 18, 18);
 }
 
-.listServices li .footerOptions .btnDetails {
+.containServices .listServices li .footerOptions .btnDetails {
   background-color: rgb(5, 19, 219);
 }
 
-.listServices li .footerOptions .btnDetails:hover {
+.containServices .listServices li .footerOptions .btnDetails:hover {
   background-color: rgb(7, 19, 187);
 }
 
-.listServices li .footerOptions .btnEdit {
+.containServices .listServices li .footerOptions .btnEdit {
   background: linear-gradient(rgb(53, 155, 146), rgb(1, 155, 160));
 }
 
-.listServices li .footerOptions .btnEdit:hover {
+.containServices .listServices li .footerOptions .btnEdit:hover {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.modalServices{
+.modalServices {
   position: absolute;
   z-index: 2;
   display: none;
@@ -159,7 +159,6 @@
   width: 100%;
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
-
 }
 
 .modalServices .loadingPage {

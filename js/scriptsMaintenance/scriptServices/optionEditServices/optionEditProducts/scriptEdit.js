@@ -1,5 +1,5 @@
 import { closeModal } from "../../../scriptsUsers/optionsUsersTable/scriptDelete.js";
-import { displayTable, displayControlsIndex } from "../editProducts.js";
+import { displayTable} from "../editProducts.js";
 import { PUTHotelService } from "../../../../scriptsServices/scriptServices.js";
 import { convertFileToBase64 } from "../../../scriptsUsers/optionsUsersTable/scriptAdd.js";
 import { eventKeyDownInputPrice } from "../editService.js";

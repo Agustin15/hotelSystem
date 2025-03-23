@@ -22,7 +22,7 @@ class authToken
 
                 throw new Error("Autenticacion fallida,Token no valido");
             }
-            if (!isset($_COOKIE["userToken"]) && isset(($_COOKIE["userRefreshToken"]))) {
+            if (!isset($_COOKIE["userToken"]) && isset($_COOKIE["userRefreshToken"])) {
                   
                 $resultRefreshToken  = $this->refreshToken($key);
             

@@ -34,7 +34,7 @@ const allYearsRevenues = async () => {
   } finally {
     loading(false);
     if (!years) {
-      noData(true);
+      noData(true,"No se encontraron datos");
     } else {
       noData(false);
     }
@@ -54,12 +54,14 @@ const loading = (state) => {
   }
 };
 
-const noData = (state) => {
+const noData = (state, msj) => {
   let noData = document.querySelector(".noData");
+  let span = noData.querySelector("span");
 
   if (state) {
     noData.style.display = "flex";
     chartRevenues.classList.add("hideChartRevenues");
+    span.textContent = msj;
   } else {
     noData.style.display = "none";
     chartRevenues.classList.remove("hideChartRevenues");
@@ -100,7 +102,7 @@ const revenuesByYear = async (year) => {
   } finally {
     loading(false);
     if (!revenues) {
-      noData(true);
+      noData(true,"No se encontraron datos");
     } else {
       noData(false);
       dataPointsRevenuesMonthsChart(revenues);
@@ -121,7 +123,7 @@ const revenuesOfThisWeek = async () => {
   } finally {
     loading(false);
     if (!revenues) {
-      noData(true);
+      noData(true,"No se encontraron datos");
     } else {
       noData(false);
       dataPointsRevenuesWeekChart(revenues);
@@ -149,7 +151,7 @@ function dataPointsRevenuesMonthsChart(yearRevenues) {
 
     graphicChart(dataPointsRevenues, "chartRevenues", "Meses", "MMM");
   } else {
-    noData(true);
+    noData(true, "Sin ganancias esta año");
   }
 }
 
@@ -173,7 +175,7 @@ function dataPointsRevenuesWeekChart(revenuesWeek) {
 
     graphicChart(dataPointsRevenues, "chartRevenues", "Dias de la semana", "");
   } else {
-    noData(true);
+    noData(true, "Sin ganancias esta semana");
   }
 }
 

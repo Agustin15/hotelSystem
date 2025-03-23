@@ -110,7 +110,7 @@
   background: rgba(44, 44, 44, 0.6);
 }
 
-.containDetails {
+.modalMainHistory .containDetails {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,7 +122,7 @@
   height: 26rem;
   border-radius: 4px;
 }
-.containDetails .headerWindow {
+.modalMainHistory .containDetails .headerWindow {
   display: flex;
   color: rgb(255, 255, 255);
   width: 25rem;
@@ -132,13 +132,13 @@
   justify-content: space-between;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
-.containDetails .headerWindow h3 {
+.modalMainHistory .containDetails .headerWindow h3 {
   font-weight: bold;
   font-size: 18px;
   margin-top: 1rem;
   margin-left: 7rem;
 }
-.containDetails .headerWindow button {
+.modalMainHistory .containDetails .headerWindow button {
   height: 1.7rem;
   width: 1.7rem;
   font-weight: bold;
@@ -146,12 +146,12 @@
   color: white;
   background-color: rgb(240, 19, 19);
 }
-.containDetails .headerWindow button:hover {
+.modalMainHistory .containDetails .headerWindow button:hover {
   cursor: pointer;
   background-color: rgb(216, 15, 15);
 }
 
-.contentDetails {
+.modalMainHistory .contentDetails {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +159,7 @@
   height: 100%;
   background-color: white;
 }
-.contentDetails .noData {
+.modalMainHistory .contentDetails .noData {
   width: 100%;
   height: 65%;
   font-size: 16px;
@@ -170,11 +170,11 @@
   justify-content: center;
   gap: 0.5rem;
 }
-.contentDetails .noData img {
+.modalMainHistory .contentDetails .noData img {
   width: 80px;
   opacity: 70%;
 }
-.contentDetails .loading {
+.modalMainHistory .contentDetails .loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,12 +184,12 @@
   font-size: 14px;
   color: gray;
 }
-.contentDetails .loading img {
+.modalMainHistory .contentDetails .loading img {
   width: 40px;
   opacity: 70%;
 }
 
-.ulItems {
+.modalMainHistory .ulItems {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,7 +201,7 @@
   width: 100%;
   padding-bottom: 1rem;
 }
-.ulItems .item {
+.modalMainHistory .ulItems .item {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -216,7 +216,7 @@
   font-size: 17px;
   padding: 0.5rem;
 }
-.ulItems .item .name {
+.modalMainHistory .ulItems .item .name {
   text-overflow: ellipsis;
   width: 14rem;
   font-size: 15px;
@@ -224,14 +224,14 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.ulItems .item .row {
+.modalMainHistory .ulItems .item .row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
-.ulItems .item .columnOne,
-.ulItems .item .columnTwo {
+.modalMainHistory .ulItems .item .columnOne,
+.modalMainHistory .ulItems .item .columnTwo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -242,20 +242,20 @@
   padding: 1rem;
   background: rgb(2, 112, 116);
 }
-.ulItems .item .columnOne {
+.modalMainHistory .ulItems .item .columnOne {
   height: 3.5rem;
 }
-.ulItems .item .columnOne img {
+.modalMainHistory .ulItems .item .columnOne img {
   width: 50px;
   height: 50px;
 }
-.ulItems .item .columnTwo {
+.modalMainHistory .ulItems .item .columnTwo {
   font-size: 14px;
   width: 7rem;
   gap: 0.5rem;
   padding-top: 0.5rem;
 }
-.ulItems .item .columnTwo a {
+.modalMainHistory .ulItems .item .columnTwo a {
   font-weight: bold;
 }
 

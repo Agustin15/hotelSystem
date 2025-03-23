@@ -14,7 +14,6 @@ let actualYear = new Date().getFullYear();
 export const configRecordRoom = async () => {
   numRoom = document.querySelector(".mainContain").id;
   containData = document.querySelector(".containData");
-  controlsIndex = document.querySelector(".controls");
 
   close();
   let years = await getYears();
@@ -126,6 +125,7 @@ const drawContainTable = (years) => {
 
 `;
 
+  controlsIndex = document.querySelector(".controls");
   tfoot = document.querySelector(".containTable").querySelector("tfoot");
   tbody = document.querySelector(".containTable").querySelector("tbody");
   drawOptionsYear(years);
@@ -191,7 +191,7 @@ const displayTable = async () => {
 
   titleBookingsRecord.textContent = `Registros reservas ${selectYear.value}`;
 
-  if (allBookingsRoom) {
+  if (allBookingsRoom && allBookingsRoom.length > 0) {
     controlsIndex.style = "flex";
     limitPages = Math.ceil(allBookingsRoom.length / 5);
     drawTable();

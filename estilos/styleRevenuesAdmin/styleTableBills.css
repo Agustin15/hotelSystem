@@ -22,6 +22,7 @@
   align-items: center;
   width: 99%;
   gap:0;
+  margin-top: 1rem;
 }
 
 .containTable .header .titleTable h3 {
@@ -41,6 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 2rem;
 }
 .containTable .header .containInput input {
   padding-left: 1rem;
@@ -61,7 +63,7 @@
   background-color: rgb(0, 189, 173);
   box-shadow: none;
   position: absolute;
-  left: 22rem;
+  left: 25rem;
   border-radius: 2px;
   color: white;
   width: 44px;
@@ -83,10 +85,11 @@
   border-radius: 3px;
   gap: 0.4rem;
   width: 10.4rem;
+  margin-left: 1rem;
 }
 
 .containTable .header .containSelect select {
-  width: 9rem;
+  width: 10rem;
   border-radius: 3px;
   outline: none;
   height: 31px;
@@ -104,7 +107,7 @@
   position: absolute;
   border-radius: 3px;
   width: 42px;
-  left: 7.5rem;
+  left: 10rem;
   height: 1.9rem;
   border: none;
   font-weight: bold;

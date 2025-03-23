@@ -71,7 +71,7 @@
   background-repeat: no-repeat;
 }
 
-#containInputIcon {
+.containEditService #containInputIcon {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,12 +120,12 @@
   gap: 0.5rem;
 }
 
-.file-select {
+.containEditService .file-select {
   position: relative;
   display: inline-block;
 }
 
-.file-select::before {
+.containEditService .file-select::before {
   background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
   color: white;
   display: flex;
@@ -140,7 +140,7 @@
   bottom: 0;
 }
 
-.file-select input[type="file"] {
+.containEditService .file-select input[type="file"] {
   opacity: 0;
   width: 9rem;
   height: 2rem;
@@ -148,7 +148,7 @@
   display: inline-block;
 }
 
-#src-file::before {
+.containEditService #src-file::before {
   content: "Seleccionar";
 }
 
@@ -178,7 +178,7 @@
   background: linear-gradient(rgb(57, 158, 150), rgb(1, 155, 160));
 }
 
-.errorInput {
+.containEditService .errorInput {
   color: red;
   font-size: 15px;
   display: none;
@@ -189,16 +189,16 @@
   margin-top: 3.7rem;
 }
 
-.errorInput img {
+.containEditService .errorInput img {
   width: 22px;
   height: 22px;
 }
 
-#containDescriptionService .errorInput {
+.containEditService #containDescriptionService .errorInput {
   margin-top: 7.5rem;
 }
 
-#containInputIcon .errorIcon {
+.containEditService #containInputIcon .errorIcon {
   color: red;
   font-size: 15px;
   display: none;
@@ -209,21 +209,21 @@
   margin-top: 11rem;
 }
 
-#containInputIcon .errorIcon img {
+.containEditService #containInputIcon .errorIcon img {
   width: 22px;
   height: 22px;
 }
 
-.inputError {
+.containEditService .inputError {
   color: red;
   border: 1px solid red;
 }
 
-.inputError:hover {
+.containEditService .inputError:hover {
   border: 2px solid red;
 }
 
-.inputError::placeholder {
+.containEditService .inputError::placeholder {
   color: red;
 }
 
@@ -295,7 +295,7 @@
   background: rgb(199, 22, 22);
 }
 
-.noService {
+.containEditService .noService {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -306,7 +306,7 @@
   color: gray;
 }
 
-.noService img {
+.containEditService .noService img {
   width: 84px;
   height: 84px;
   opacity: 75%;
