@@ -1,3 +1,4 @@
 # HotelSystem 🏨
 
- >Installation
+ >## Installation ⚙
+   <em><strong>Requirements:</strong></em>
