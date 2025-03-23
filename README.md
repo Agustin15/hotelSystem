@@ -11,7 +11,9 @@
    
        git clone https://github.com/Agustin15/hotelSystem.git
 
- ### Execute database Hotel script MySQL
+ ### Install dependences  
+ - cd hotelSystem
+   <em><strong>Execute database Hotel script MySQL:</strong></em>
   - Start MySQL Server
   - launch mysql client
     
@@ -22,6 +24,22 @@
   - Exit of mysql client and execute the script file hotel
     
           mysql -h <hostname> -u <user> hotel<hotel.sql
+    
+  <em><strong>Proyect dependences:</strong></em>
+        #### Install
+          compose install 
+       #### Dependences used 
+   - php-jwt
+   - phpdotenv
+  
+ >## Init ▶
+  Start httpd server
+  URL:http://localhost/hotelSystem/views/
 
-               
-        
+  ## HomePage
+  ![HomePage](https://i.postimg.cc/fRn1kwNy/home.png)
+
+  
+
+  
+   
