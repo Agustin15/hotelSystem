@@ -43,7 +43,16 @@
   - [Canvasjs](https://canvasjs.com/)
   - [FullCalendar](https://fullcalendar.io/)
 
+ #### Environment variables
+
+     DB_HOST=""
+     DB_USER=""
+     DATABASE=""
+     DB_PASSWORD=""
+     JWT_SECRET_KEY=
+     JWT_SECRET_KEY_REFRESH=
  
+     
  >## Init ▶
   Start httpd server
          
