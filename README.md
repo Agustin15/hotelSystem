@@ -37,10 +37,11 @@
 
  #### Library used
   - [Boostrap](https://getbootstrap.com/)
-  - [FullCalendar](https://fullcalendar.io/)
   - [jsPDF](https://artskydj.github.io/jsPDF/docs/jsPDF.html)
-  - [Canvasjs](https://canvasjs.com/)
   - [html2canvas](https://html2canvas.hertzen.com/)
+  - [Canvasjs](https://canvasjs.com/)
+  - [FullCalendar](https://fullcalendar.io/)
+
  
  >## Init ▶
   Start httpd server
