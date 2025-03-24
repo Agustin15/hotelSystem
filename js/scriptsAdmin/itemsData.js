@@ -1,7 +1,7 @@
 import { month } from "./chart.js";
 import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 import { invalidAuthentication } from "./userData.js";
-import { userData } from "./scriptsAdmin.js";
+
 
 export const getCategoryRoomsData = async () => {
   let url =

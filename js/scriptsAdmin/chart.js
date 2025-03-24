@@ -105,7 +105,6 @@ function dataPointsToChartClientsDashboard(monthsClients) {
 
     if (totalMonthsClients > 0) {
       graphicClientsDashboard(dataPointsMonthsClients, "chartBookings", "");
-      $("#navAdmin").css("marginTop", "-22px");
     }
   } else {
     document.querySelector(".noDataBookings").style.display = "flex";

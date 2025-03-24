@@ -86,7 +86,7 @@ const drawTable = (nextBookingsRoom) => {
  `;
   });
 
-  tableNextBookings.querySelector("tbody").innerHTML = rows;
+  tableNextBookings.querySelector("tbody").innerHTML = rows.join("");
 
   redirectToCalendarBooking();
 };

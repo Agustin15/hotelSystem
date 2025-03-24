@@ -15,7 +15,7 @@ body {
 #navAdmin {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
-  height: 103.2vh;
+  height: 100vh;
   position: fixed;
   display: flex;
   flex-direction: column;

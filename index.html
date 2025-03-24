@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilos/style.css">
-    <script src="../js/queryClient/submitForm.js" type="module" defer></script>
+    <link rel="stylesheet" href="estilos/style.css">
+    <script src="js/queryClient/submitForm.js" type="module" defer></script>
 
     <title>Hotel-Inicio</title>
 </head>
@@ -15,10 +15,8 @@
 
     <header>
 
-
-
         <div id="logo">
-            <img src="../img/revision.png" width="50px">
+            <img src="img/revision.png" width="50px">
             <h1>Sistema Hotel</h1>
         </div>
 
@@ -26,18 +24,17 @@
         <ul>
 
             <li>Inicio</li>
-            <li><a href="habitaciones.html">Habitaciones</a></li>
+            <li><a href="views/habitaciones.html">Habitaciones</a></li>
             <li><a href="index.html #sobreNosotros">Sobre nosotros</a></li>
             <li><a href="index.html #contacto">Contacto</a></li>
-
 
         </ul>
 
 
         <ul class="redes">
-            <li><img src="../img/instagram.png"></li>
-            <li><img src="../img/facebook.png"></li>
-            <li><img src="../img/whatsapp.png"></li>
+            <li><img src="img/instagram.png"></li>
+            <li><img src="img/facebook.png"></li>
+            <li><img src="img/whatsapp.png"></li>
 
         </ul>
     </header>
@@ -48,22 +45,22 @@
         <ul>
 
             <li>
-                <img src="../img/img1.jpg">
+                <img src="img/img1.jpg">
 
             </li>
 
             <li>
-                <img src="../img/img2.jpg">
+                <img src="img/img2.jpg">
 
             </li>
 
             <li>
-                <img src="../img/img3.jpg">
+                <img src="img/img3.jpg">
 
             </li>
 
             <li>
-                <img src="../img/img4.jpg">
+                <img src="img/img4.jpg">
 
             </li>
 
@@ -71,7 +68,7 @@
     </div>
 
     <div id="reservar">
-        <a href="reserva/consultaHabitaciones.php"><button>Reservar</button></a>
+        <a href="views/reserva/consultaHabitaciones.php"><button>Reservar</button></a>
     </div>
 
     <div id="sobreNosotros">
@@ -100,14 +97,14 @@
 
 
 
-        <img class="imgSobreNosotros1" src="../img/sobreNosotros1.jpeg">
+        <img class="imgSobreNosotros1" src="img/sobreNosotros1.jpeg">
 
 
 
         <br>
 
 
-        <img class="imgSobreNosotros2" src="../img/sobreNosostros2.jpg">
+        <img class="imgSobreNosotros2" src="img/sobreNosostros2.jpg">
 
 
 
@@ -123,17 +120,17 @@
 
     <div id="contacto" class="containContact">
         <div class="background">
-            <img src="../img/footerBack.jpg">
+            <img src="img/footerBack.jpg">
         </div>
         <div class="contactForm">
 
             <div class="infoContact">
                 <div class="phone">
-                    <img src="../img/llamada.png">
+                    <img src="img/llamada.png">
                     <span>+(598) 93 647 321</span>
                 </div>
                 <div class="mail">
-                    <img src="../img/correo.png">
+                    <img src="img/correo.png">
                     <span>systemFiveHotel@gmail.com</span>
                 </div>
             </div>
@@ -146,7 +143,7 @@
                         <input id="name" class="nameInput" autocomplete="off" name="name"
                             placeholder="Ingrese su nombre">
                         <div class="inputError">
-                            <img src="../img/warningInput.png">
+                            <img src="img/warningInput.png">
                             <label></label>
                         </div>
                     </div>
@@ -155,15 +152,15 @@
                         <input id="mail" autocomplete="off" name="mail" class="mailInput"
                             placeholder="Ingrese su correo">
                         <div class="inputError">
-                            <img src="../img/warningInput.png">
+                            <img src="img/warningInput.png">
                             <label></label>
                         </div>
                     </div>
                     <div class="query">
                         <label>Consulta</label>
-                        <textarea  name="query"></textarea>
+                        <textarea name="query"></textarea>
                         <div class="inputError" id="inputErrorQuery">
-                            <img src="../img/warningInput.png">
+                            <img src="img/warningInput.png">
                             <label></label>
                         </div>
                     </div>
@@ -171,7 +168,7 @@
 
                 <button type="submit">
                     Enviar
-                    <img class="loader" src="../img/spinnerBooking.gif">
+                    <img class="loader" src="img/spinnerBooking.gif">
                 </button>
                 <div class="alertFormQuery">
                     <img src="">
@@ -185,65 +182,3 @@
 </footer>
 
 </html>
-   <div class="billDetails">
-
-   <div class="title">
-   <div class="icon">
-    <img src="../../../img/iconBill.png">
-    <h3>Hotel System</h3>
-    </div>
-    <h4>Factura</h4>
-   </div>
-
-   <div class="row">
-   <div class="infoBooking">
-     <li class="liIdBooking">
-     <span>Numero de Reserva</span>
-     <span class="blackFont">${revenueBooking.idReservaPago}</span>
-     </li>
-      <li>
-     <span>Llegada</span>
-     <span class="blackFont">${startDate}</span>
-     </li>
-      <li>
-     <span>Salida</span>
-     <span class="blackFont">${endDate}</span>
-     </li>
-     <li>
-     <span>Noches</span>
-     <span class="blackFont">${nigths}</span>
-     </li>
-   </div>
-
-   <div class="column">
-   <div class="senderDataAndClientData">
-   <li> 
-   <span>DE</span>
-   <h4 class="nameCompany">Hotel System</h4>
-   <p>David Abidal 627, 11300 Montevideo</p>
-   <span>systemFiveHotel@gmail.com</span>
-   <span>+(598) 93 647 321</span>
-   </li>
-
-   <li> 
-   <span>Para</span>
-   <h4 class="nameClient">${revenueBooking.nombre} ${revenueBooking.apellido}</h4>
-   <span>${revenueBooking.correo}</span>
-   <span>${revenueBooking.telefono}</span>
-   </li>
-   </div>
-   <table class="tableDetailsBill">
-   <thead>
-   <th>Descripcion</th>
-   <th>Precio</th>
-   <th>Cantidad</th>
-   <th>Total</th>
-   </thead>
-   <tbody></tbody>
-   </table>
-   <div class="totalAmount">
-   <span>Total:US$ ${revenueBooking.deposito}</span>
-   </div>
-   </div>
-   </div>
-   </div>

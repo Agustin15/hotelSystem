@@ -18,14 +18,14 @@
   position: relative;
 }
 .containNotAuthorized h1 {
-  color: rgb(19, 156, 197);
+  color: rgb(223, 34, 34);
   font-weight: bold;
   font-size: 148px;
 }
 .containNotAuthorized h3 {
   font-size: 25px;
   font-weight: bold;
-  color: rgb(19, 156, 197);
+  color: rgb(182, 23, 23);
   margin-top: -3.5rem;
 }
 

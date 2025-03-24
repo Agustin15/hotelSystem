@@ -238,3 +238,11 @@ INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creac
 
 
 
+
+
+
+
+
+
+
+
