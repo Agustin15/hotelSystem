@@ -1,15 +1,34 @@
 @media only screen and (max-width: 600px) {
   header {
     background: linear-gradient(#126b91, #0498a0);
-    color: rgb(255, 255, 255);
-    text-align: center;
     width: 100%;
-    height: 5rem;
-    font-family: Arial;
+    height: 6rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  #logo {
+    display: flex;
     align-items: center;
+    justify-content: start;
+    gap: 0.1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-left: 2%;
+  }
+
+  #logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  #logo h1 {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    color: rgb(255, 255, 255);
   }
 
   header a {
@@ -17,13 +36,21 @@
     color: rgb(255, 255, 255);
   }
 
-  header ul {
+  header ul,
+  .options {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: auto;
     color: rgb(255, 255, 255);
     font-size: 14px;
     font-family: Arial;
     margin-top: 0.5rem;
+  }
+
+  .options {
+    margin-top: 0;
   }
 
   header li {
@@ -43,75 +70,19 @@
     cursor: pointer;
   }
 
-  header li img {
-    width: 16px;
-  }
-
-  .redes {
-    margin-top: 0.7rem;
-    margin-right: 4rem;
-  }
-
-  .redes li:hover {
-    transform: scale(1);
-    border-bottom: none;
-  }
-
-  .redes img {
-    opacity: 100%;
-    transition: 0.5s;
-  }
-
-  .redes img:hover {
-    opacity: 60%;
-    transition: 0.5s;
-  }
-
-  #logo {
-    display: flex;
-    margin-left: 2%;
-    margin-top: -0.3rem;
-  }
-
-  #logo img {
-    width: 45px;
-    height: 45px;
-  }
-
-  #logo h1 {
-    font-size: 13px;
-    font-weight: bold;
-    font-family: "Courier New", Courier, monospace;
-    margin-top: 20px;
-    margin-left: 15px;
-    color: rgb(255, 255, 255);
-  }
-
-  .options {
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    font-family: Arial;
-    margin-right: 18rem;
-    margin-top: 1.4rem;
-  }
-
+  .redes,
   .networks {
-    margin-top: 1.4rem;
-    margin-right: 4rem;
-  }
-  .networks li:hover {
-    transform: scale(1);
-    border-bottom: none;
-  }
-  .networks img {
-    opacity: 100%;
-    transition: 0.5s;
-  }
-  .networks img:hover {
-    opacity: 60%;
-    transition: 0.5s;
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin-top: -4%;
   }
 
+  .redes img,
+  .networks img {
+    width: 18px;
+  }
   .optionsRoom {
     color: rgb(255, 255, 255);
     font-size: 16px;
@@ -152,7 +123,7 @@
   }
   #slider img {
     width: 100%;
-    height: 240px;
+    height: 270px;
   }
   #slider li {
     width: 100%;
@@ -224,8 +195,9 @@
   }
   #sobreNosotros h2 {
     font-family: verdana;
-    font-size: 24px;
-    font-weight: 300;
+    font-size: 21px;
+    text-align: start;
+    font-weight: bold;
     color: rgb(255, 255, 255);
   }
 
@@ -452,7 +424,6 @@
     gap: 0.3rem;
     font-weight: bold;
     display: flex;
-
   }
   .contactForm .alertFormQuery img {
     width: 40px;
@@ -475,22 +446,26 @@
   #fondo {
     background-image: url("../img/fondo2.jpg");
     width: 100%;
-    height: 2200px;
+    height: 333vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     text-align: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
   .subFondo {
-    width: 70%;
-    height: 2000px;
+    width: 95%;
+    height: 315vh;
     margin: auto;
-    margin-top: -3%;
+    margin-top: 8%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     background: rgba(0, 0, 0, 0.6);
     position: absolute;
   }
@@ -502,69 +477,89 @@
     color: white;
   }
 
-  .detallesStandar {
-    width: 360px;
-    padding-top: 10px;
-    height: 388px;
+  .containRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .detallesHabitacion,
+  .detallesHabitacionDeluxe,
+  .detallesHabitacionSuite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+    gap: 1.5rem;
+    padding: 1rem;
+    width: 19rem;
+    height: auto;
     color: rgb(255, 255, 255);
-    margin-left: 53%;
-    margin-top: -17%;
+    margin-top: -2rem;
     background: linear-gradient(#126b91, #0498a0);
-    border-radius: 3px;
-    position: absolute;
+    border-radius: 5px;
+    position: relative;
+    top:0;
+    left: 0;
+    z-index: 2;
+  }
+  .detallesHabitacionDeluxe,
+  .detallesHabitacionSuite {
+    margin-top: -2rem;
   }
 
   .masDetallesSobreHab {
-    margin-top: -10%;
-    width: 400px;
-    text-align: center;
-    margin-left: -10px;
-  }
-
-  .masDetallesSobreHab h4 {
-    margin-right: 50%;
-    font-size: 13px;
-    padding-top: 30px;
-  }
-
-  .masDetallesSobreHab a {
     display: flex;
-    margin-top: -28px;
-    color: white;
-    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .vista {
-    margin-left: 39%;
+  .masDetallesSobreHab .columnOne,
+  .masDetallesSobreHab .columnTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    list-style: none;
+  }
+  .masDetallesSobreHab li {
+    font-size: 15px;
   }
 
-  .superficie {
-    margin-left: 39%;
+  .masDetallesSobreHab li .detail {
+    font-weight: bold;
   }
 
-  .capacidad {
-    margin-left: 39%;
-  }
-
-  #sliderStandar {
-    width: 465px;
-    height: 380px;
+  #sliderStandar,
+  #sliderDeluxe,
+  #sliderSuite {
+    width: 18rem;
+    height: 13rem;
     overflow: hidden;
     margin-top: 4%;
-    margin-left: 5%;
+    margin-right: 0;
   }
-  #sliderStandar ul {
+  #sliderStandar ul,
+  #sliderDeluxe ul,
+  #sliderSuite ul {
     display: flex;
     padding: 0;
     animation: cambioStandar 16s infinite alternate ease-in-out;
     width: 400%;
   }
-  #sliderStandar img {
-    width: 450px;
-    height: 300px;
+
+  #sliderStandar img,
+  #sliderDeluxe img,
+  #sliderSuite img {
+    width: 100%;
+    height:9rem;
     border: 4px solid white;
+    border-radius: 12px;
   }
-  #sliderStandar li {
+  #sliderStandar li,
+  #sliderDeluxe li,
+  #sliderSuite li {
     list-style: none;
     width: 100%;
   }
@@ -575,136 +570,38 @@
     font-size: 20px;
   }
 
-  #verMas {
-    margin-left: 27%;
-    margin-top: -27%;
-    visibility: hidden;
-    border-radius: 200px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-  }
-  #verMas img {
-    width: 40px;
-    height: 40px;
-    border: none;
-    color: black;
-    font-weight: bold;
-    opacity: 99%;
-  }
-  #verMas img:hover {
-    filter: brightness(0.5);
-  }
-
-  #sliderDeluxe {
-    width: 465px;
-    height: 380px;
-    overflow: hidden;
-    margin-top: 2%;
-    margin-left: 5%;
-  }
-  #sliderDeluxe ul {
-    display: flex;
-    padding: 0;
-    animation: cambioStandar 16s infinite alternate ease-in-out;
-    width: 400%;
-  }
-  #sliderDeluxe img {
-    width: 450px;
-    height: 300px;
-    border: 4px solid white;
-  }
-  #sliderDeluxe li {
-    list-style: none;
-    width: 100%;
-  }
-
-  .detallesDeluxe {
-    width: 360px;
-    padding-top: 10px;
-    height: 388px;
-    color: rgb(255, 255, 255);
-    margin-left: 54%;
-    margin-top: -17%;
-    background: linear-gradient(#126b91, #0498a0);
-    border-radius: 3px;
-    position: absolute;
-  }
-
-  #verMasDeluxe {
-    margin-left: 27%;
-    margin-top: -27%;
-    visibility: hidden;
-    border-radius: 200px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-  }
-  #verMasDeluxe img {
-    width: 40px;
-    height: 40px;
-    border: none;
-    color: black;
-    font-weight: bold;
-    opacity: 99%;
-  }
-  #verMasDeluxe img:hover {
-    filter: brightness(0.5);
-  }
-
-  #sliderSuite {
-    width: 465px;
-    height: 380px;
-    overflow: hidden;
-    margin-top: 2%;
-    margin-left: 5%;
-  }
-  #sliderSuite ul {
-    display: flex;
-    padding: 0;
-    animation: cambioStandar 16s infinite alternate ease-in-out;
-    width: 400%;
-  }
-  #sliderSuite img {
-    width: 450px;
-    height: 300px;
-    border: 4px solid white;
-  }
-  #sliderSuite li {
-    list-style: none;
-    width: 100%;
-  }
-
-  .detallesSuite {
-    width: 360px;
-    padding-top: 10px;
-    height: 388px;
-    color: rgb(255, 255, 255);
-    margin-left: 54%;
-    margin-top: -17%;
-    background: linear-gradient(#126b91, #0498a0);
-    border-radius: 3px;
-    position: absolute;
-  }
-
+  #verMas,
+  #verMasDeluxe,
   #verMasSuite {
-    margin-left: 27%;
-    margin-top: -27%;
+    top: 7.4rem;
+    left:8rem;
+    position: absolute;
     visibility: hidden;
-    border-radius: 200px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-  }
-  #verMasSuite img {
+    border-radius: 100%;
     width: 40px;
     height: 40px;
+    z-index: 3;
+    text-align: center;
+  }
+
+  #verMas img,
+  #verMasDeluxe img,
+  #verMasSuite img {
+    width: 30px;
+    height: 30px;
     border: none;
     color: black;
     font-weight: bold;
     opacity: 99%;
   }
+
+  #verMas img:hover,
+  #verMasDeluxe img:hover,
   #verMasSuite img:hover {
     filter: brightness(0.5);
+  }
+  #verMasDeluxe,
+  #verMasSuite {
+    top:12rem;
   }
 }

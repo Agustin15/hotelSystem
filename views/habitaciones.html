@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/style.css">
+    <link rel="stylesheet" href="../estilos/styleResponsive.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script defer src="../js/scriptsCategoryRoomsPage/script.js"></script>
 
 
 
@@ -51,230 +53,261 @@
     <div id="fondo">
 
 
-
         <div class="subFondo">
 
-            <h2>STANDAR</h2>
-            <br>
+            <div class="containRoom">
+                <h2>ESTANDAR</h2>
+
+                <div id="verMas">
+                    <a href="infoStandar.html"><img src="../img/masInfo.png"></a>
+
+                </div>
+                <div id="sliderStandar">
+                    <div id="carouselExampleIndicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../img/bannerHab1.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab2.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab3.jpg" class="d-block w-100">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="detallesHabitacion">
 
 
+                    <div>
+                        <p>Habitaciones renovadas, ubicadas en pisos inferiores, igualmente con terraza</p>
+                        <p>
+                            base doble y/o comunicadas. Equipadas con aire acondicionado, </p>
+                        <p> cocina, frigobar, microondas, jarra eléctrica, vajilla básica, y TV</p>
 
+                    </div>
+                    <div class="masDetallesSobreHab">
+                        <ul class="columnOne">
+                            <li>
+                                <span class="detail">VISTA:</span>
+                            </li>
 
-            <div id="sliderStandar">
+                            <li>
+                                <span class="detail">SUPERFICIE:</span>
+                            </li>
 
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
+                            <li>
+                                <span class="detail">CAPACIDAD:</span>
+                            </li>
+                        </ul>
+
+                        <ul class="columnTwo">
+                            <span>Frente/ Contrafrente</span>
+                            <span>36 m2 / hab.</span>
+                            <span>Hasta 4 personas</span>
+                        </ul>
+
                     </div>
 
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../img/bannerHab1.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab2.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab3.jpg" class="d-block w-100">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="prev">
 
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+
                 </div>
             </div>
 
+            <div class="containRoom">
+                <h3>DELUXE</h3>
+
+                <div id="verMasDeluxe">
+                    <a href="infoDeluxe.html"><img src="../img/masInfo.png"></a>
+
+                </div>
+                <div id="sliderDeluxe">
+
+                    <div id="carouselExampleIndicators2" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../img/bannerHab2Deluxe.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab1Deluxe.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab3Deluxe.jpg" class="d-block w-100">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2"
+                            data-bs-slide="prev">
+
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
 
 
-            <div id="verMas">
-                <a href="infoStandar.html"><img src="../img/masInfo.png"></a>
+                <div class="detallesHabitacionDeluxe">
+
+                    <div>
+                        <p>Habitaciones renovadas, ubicadas en pisos superiores, con terraza</p>
+                        <p>base doble y/o comunicadas. Equipadas con aire acondicionado, </p>
+                        <p> kitchenette, frigobar, microondas, sommier, vajilla básica,</p>
+                        <p>caja fuerte, secador de pelo y TV</p>
+
+                    </div>
+
+
+                    <div class="masDetallesSobreHab">
+                        <ul class="columnOne">
+                            <li>
+                                <span class="detail">VISTA:</span>
+                            </li>
+
+                            <li>
+                                <span class="detail">SUPERFICIE:</span>
+                            </li>
+
+                            <li>
+                                <span class="detail">CAPACIDAD:</span>
+                            </li>
+                        </ul>
+
+                        <ul class="columnTwo">
+                            <span>Frente/ Contrafrente</span>
+                            <span>45m2 / hab</span>
+                            <span>Hasta 5 personas</span>
+                        </ul>
+
+                    </div>
+
+                </div>
 
             </div>
-            <br>
 
-            <div class="detallesStandar">
+            <div class="containRoom">
+                <h3>SUITE</h3>
 
+                <div id="sliderSuite">
 
-                <p>Habitaciones renovadas, ubicadas en pisos inferiores, igualmente con terraza</p>
-                <p>
-                    base doble y/o comunicadas. Equipadas con aire acondicionado, </p>
-                <p> cocina, frigobar, microondas, jarra eléctrica, vajilla básica, y TV</p>
+                    <div id="carouselExampleIndicators3" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
 
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../img/bannerHab2Suite.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab1Suite.jpg" class="d-block w-100">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../img/bannerHab3Suite.jpg" class="d-block w-100">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3"
+                            data-bs-slide="prev">
+
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div id="verMasSuite">
+                    <a href="infoSuite.html"><img src="../img/masInfo.png"></a>
+
+                </div>
                 <br>
-                <div class="masDetallesSobreHab">
-                    <h4>VISTA:</h4> <a class="vista">Frente/ Contrafrente</a>
 
-                    <h4>SUPERFICIE:</h4> <a class="superficie">36 m2 / hab.</a>
+                <div class="detallesHabitacionSuite">
 
-                    <h4>CAPACIDAD:</h4> <a class="capacidad">Hasta 4 personas</a>
-                    <br>
+                    <div>
+                        <p>Opción “Superior” tiene 60 m2, con cocina americana y gran terraza.</p>
+                        <p>
+                            Opción “Ejecutiva” es de 65 m2, 4 dormitorios,</p>
+                        <p> sala de estar,cocina americana,baño con hidromasaje y gran terraza.</p>
 
-                </div>
-
-
-
-            </div>
-
-
-
-            <br><br>
-
-            <h3>DELUXE</h3>
-            <br>
-
-
-            <div id="sliderDeluxe">
-
-                <div id="carouselExampleIndicators2" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
                     </div>
 
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../img/bannerHab2Deluxe.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab1Deluxe.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab3Deluxe.jpg" class="d-block w-100">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2"
-                        data-bs-slide="prev">
+                    <div class="masDetallesSobreHab">
+                        <ul class="columnOne">
+                            <li>
+                                <span class="detail">VISTA:</span>
+                            </li>
 
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                            <li>
+                                <span class="detail">SUPERFICIE:</span>
+                            </li>
 
-            </div>
+                            <li>
+                                <span class="detail">CAPACIDAD:</span>
+                            </li>
+                        </ul>
 
-            <div id="verMasDeluxe">
-                <a href="infoDeluxe.html"><img src="../img/masInfo.png"></a>
+                        <ul class="columnTwo">
+                            <span>Frente/ Contrafrente</span>
 
-            </div>
-            <br>
+                            <span>65m2 / hab.</span>
 
-            <div class="detallesDeluxe">
+                            <span>Hasta 6 personas</span>
 
-                <p>Habitaciones renovadas, ubicadas en pisos superiores, con terraza</p>
-                <p>
-                    base doble y/o comunicadas. Equipadas con aire acondicionado, </p>
-                <p> kitchenette, frigobar, microondas, sommier, vajilla básica,</p>
-                <p>caja fuerte, secador de pelo y TV</p>
+                        </ul>
 
-
-                <br>
-                <div class="masDetallesSobreHab">
-                    <h4>VISTA:</h4> <a class="vista">Frente/ Contrafrente</a>
-
-                    <h4>SUPERFICIE:</h4> <a class="superficie">45m2 / hab.</a>
-
-                    <h4>CAPACIDAD:</h4> <a class="capacidad">Hasta 5 personas</a>
-                    <br>
-
-                </div>
-
-            </div>
-
-
-            <br><br>
-
-            <h3>SUITE</h3>
-            <br>
-
-
-            <div id="sliderSuite">
-
-                <div id="carouselExampleIndicators3" class="carousel slide">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
                     </div>
 
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../img/bannerHab2Suite.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab1Suite.jpg" class="d-block w-100">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../img/bannerHab3Suite.jpg" class="d-block w-100">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3"
-                        data-bs-slide="prev">
-
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
 
-            </div>
 
-            <div id="verMasSuite">
-                <a href="infoSuite.html"><img src="../img/masInfo.png"></a>
 
             </div>
-            <br>
-
-            <div class="detallesSuite">
-
-                <p>Opción “Superior” tiene 60 m2, con cocina americana y gran terraza.</p>
-                <p>
-                    Opción “Ejecutiva” es de 65 m2, 4 dormitorios,</p>
-                <p> sala de estar,cocina americana,baño con hidromasaje y gran terraza.</p>
-
-                <br>
-                <div class="masDetallesSobreHab">
-                    <h4>VISTA:</h4> <a class="vista">Frente/ Contrafrente</a>
-
-                    <h4>SUPERFICIE:</h4> <a class="superficie">65m2 / hab.</a>
-
-                    <h4>CAPACIDAD:</h4> <a class="capacidad">Hasta 6 personas</a>
-                    <br>
-
-                </div>
-
-            </div>
-
-
-
 
 
 
@@ -296,105 +329,3 @@
 </body>
 
 </html>
-
-<script>
-
-
-
-    //sliderStandar
-    imagenesStandar = document.getElementById("sliderStandar").querySelectorAll("img");
-
-    imagenesStandar.forEach(function (imagen) {
-
-
-        imagen.addEventListener("mouseenter", function () {
-            document.getElementById("verMas").style.visibility = "visible";
-        });
-
-
-        imagen.addEventListener("mouseleave", function () {
-            document.getElementById("verMas").style.visibility = "hidden";
-        });
-
-
-    });
-
-
-    document.getElementById("verMas").addEventListener("mouseenter", function () {
-        document.getElementById("verMas").style.visibility = "visible";
-
-    });
-
-
-
-    //sliderDeluxe
-
-    imagenesDeluxe = document.getElementById("sliderDeluxe").querySelectorAll("img");
-
-    imagenesDeluxe.forEach(function (imagen) {
-
-
-        imagen.addEventListener("mouseenter", function () {
-            document.getElementById("verMasDeluxe").style.visibility = "visible";
-        });
-
-
-        imagen.addEventListener("mouseleave", function () {
-            document.getElementById("verMasDeluxe").style.visibility = "hidden";
-        });
-
-
-    });
-
-
-
-    document.getElementById("verMasDeluxe").addEventListener("mouseenter", function () {
-        document.getElementById("verMasDeluxe").style.visibility = "visible";
-
-    });
-
-
-
-    //sliderSuite
-
-    imagenesSuite = document.getElementById("sliderSuite").querySelectorAll("img");
-
-    imagenesSuite.forEach(function (imagen) {
-
-
-        imagen.addEventListener("mouseenter", function () {
-            document.getElementById("verMasSuite").style.visibility = "visible";
-        });
-
-
-        imagen.addEventListener("mouseleave", function () {
-            document.getElementById("verMasSuite").style.visibility = "hidden";
-        });
-
-
-    });
-
-
-
-    document.getElementById("verMasSuite").addEventListener("mouseenter", function () {
-        document.getElementById("verMasSuite").style.visibility = "visible";
-
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>

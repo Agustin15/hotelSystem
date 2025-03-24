@@ -269,6 +269,9 @@ header li img {
   height: 100%;
 }
 
+.openContact {
+  display: none;
+}
 .contactForm {
   position: absolute;
   z-index: 3;
@@ -448,7 +451,7 @@ header li img {
 #fondo {
   background-image: url("../img/fondo2.jpg");
   width: 100%;
-  height: 2200px;
+  height: 333vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -464,6 +467,10 @@ header li img {
   margin: auto;
   margin-top: -3%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rem;
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
 }
@@ -475,69 +482,88 @@ header li img {
   color: white;
 }
 
-.detallesStandar {
-  width: 360px;
-  padding-top: 10px;
-  height: 388px;
+.containRoom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.detallesHabitacion,
+.detallesHabitacionDeluxe,
+.detallesHabitacionSuite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: start;
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 22rem;
+  height: auto;
   color: rgb(255, 255, 255);
-  margin-left: 53%;
-  margin-top: -17%;
+  left: 57%;
+  top: 17rem;
   background: linear-gradient(#126b91, #0498a0);
   border-radius: 3px;
   position: absolute;
+  z-index: 2;
+}
+.detallesHabitacionDeluxe,
+.detallesHabitacionSuite {
+  top: 25rem;
 }
 
 .masDetallesSobreHab {
-  margin-top: -10%;
-  width: 400px;
-  text-align: center;
-  margin-left: -10px;
-}
-
-.masDetallesSobreHab h4 {
-  margin-right: 50%;
-  font-size: 13px;
-  padding-top: 30px;
-}
-
-.masDetallesSobreHab a {
   display: flex;
-  margin-top: -28px;
-  color: white;
-  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.vista {
-  margin-left: 39%;
+.masDetallesSobreHab .columnOne,
+.masDetallesSobreHab .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  list-style: none;
+}
+.masDetallesSobreHab li {
+  font-size: 15px;
 }
 
-.superficie {
-  margin-left: 39%;
+.masDetallesSobreHab li .detail {
+  font-weight: bold;
 }
 
-.capacidad {
-  margin-left: 39%;
-}
-
-#sliderStandar {
-  width: 465px;
-  height: 380px;
+#sliderStandar,
+#sliderDeluxe,
+#sliderSuite {
+  width: 34rem;
+  height: 19rem;
   overflow: hidden;
   margin-top: 4%;
-  margin-left: 5%;
+  margin-right: 33%;
 }
-#sliderStandar ul {
+#sliderStandar ul,
+#sliderDeluxe ul,
+#sliderSuite ul {
   display: flex;
   padding: 0;
   animation: cambioStandar 16s infinite alternate ease-in-out;
   width: 400%;
 }
-#sliderStandar img {
-  width: 450px;
-  height: 300px;
+
+#sliderStandar img,
+#sliderDeluxe img,
+#sliderSuite img {
+  width: 100%;
+  height: 19rem;
   border: 4px solid white;
+  border-radius: 12px;
 }
-#sliderStandar li {
+#sliderStandar li,
+#sliderDeluxe li,
+#sliderSuite li {
   list-style: none;
   width: 100%;
 }
@@ -548,127 +574,22 @@ header li img {
   font-size: 20px;
 }
 
-#verMas {
-  margin-left: 27%;
-  margin-top: -27%;
-  visibility: hidden;
-  border-radius: 200px;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-}
-#verMas img {
-  width: 40px;
-  height: 40px;
-  border: none;
-  color: black;
-  font-weight: bold;
-  opacity: 99%;
-}
-#verMas img:hover {
-  filter: brightness(0.5);
-}
-
-#sliderDeluxe {
-  width: 465px;
-  height: 380px;
-  overflow: hidden;
-  margin-top: 2%;
-  margin-left: 5%;
-}
-#sliderDeluxe ul {
-  display: flex;
-  padding: 0;
-  animation: cambioStandar 16s infinite alternate ease-in-out;
-  width: 400%;
-}
-#sliderDeluxe img {
-  width: 450px;
-  height: 300px;
-  border: 4px solid white;
-}
-#sliderDeluxe li {
-  list-style: none;
-  width: 100%;
-}
-
-.detallesDeluxe {
-  width: 360px;
-  padding-top: 10px;
-  height: 388px;
-  color: rgb(255, 255, 255);
-  margin-left: 54%;
-  margin-top: -17%;
-  background: linear-gradient(#126b91, #0498a0);
-  border-radius: 3px;
-  position: absolute;
-}
-
-#verMasDeluxe {
-  margin-left: 27%;
-  margin-top: -27%;
-  visibility: hidden;
-  border-radius: 200px;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-}
-#verMasDeluxe img {
-  width: 40px;
-  height: 40px;
-  border: none;
-  color: black;
-  font-weight: bold;
-  opacity: 99%;
-}
-#verMasDeluxe img:hover {
-  filter: brightness(0.5);
-}
-
-#sliderSuite {
-  width: 465px;
-  height: 380px;
-  overflow: hidden;
-  margin-top: 2%;
-  margin-left: 5%;
-}
-#sliderSuite ul {
-  display: flex;
-  padding: 0;
-  animation: cambioStandar 16s infinite alternate ease-in-out;
-  width: 400%;
-}
-#sliderSuite img {
-  width: 450px;
-  height: 300px;
-  border: 4px solid white;
-}
-#sliderSuite li {
-  list-style: none;
-  width: 100%;
-}
-
-.detallesSuite {
-  width: 360px;
-  padding-top: 10px;
-  height: 388px;
-  color: rgb(255, 255, 255);
-  margin-left: 54%;
-  margin-top: -17%;
-  background: linear-gradient(#126b91, #0498a0);
-  border-radius: 3px;
-  position: absolute;
-}
-
+#verMas,
+#verMasDeluxe,
 #verMasSuite {
-  margin-left: 27%;
-  margin-top: -27%;
+  top: 13rem;
+  margin-right: 11rem;
+  position: absolute;
   visibility: hidden;
-  border-radius: 200px;
+  border-radius: 100%;
   width: 60px;
   height: 60px;
+  z-index: 3;
   text-align: center;
 }
+
+#verMas img,
+#verMasDeluxe img,
 #verMasSuite img {
   width: 40px;
   height: 40px;
@@ -677,12 +598,15 @@ header li img {
   font-weight: bold;
   opacity: 99%;
 }
+
+#verMas img:hover,
+#verMasDeluxe img:hover,
 #verMasSuite img:hover {
   filter: brightness(0.5);
 }
-
-.openContact {
-  display: none;
+#verMasDeluxe,
+#verMasSuite {
+  top: 22rem;
 }
 
 /*# sourceMappingURL=style.css.map */
