@@ -18,20 +18,20 @@ class authToken
                 throw new Error("JWT_SECRET_KEY no definida");
             }
             $key = $_ENV["JWT_SECRET_KEY"];
-            if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
+            if (empty($_COOKIE["userToken"]) && empty($_COOKIE["userRefreshToken"])) {
 
                 throw new Error("Autenticacion fallida,Token no valido");
             }
-            if (!isset($_COOKIE["userToken"]) && isset($_COOKIE["userRefreshToken"])) {
-                  
+            if (empty($_COOKIE["userToken"]) && isset($_COOKIE["userRefreshToken"])) {
+
                 $resultRefreshToken  = $this->refreshToken($key);
-            
+
                 if (isset($resultRefreshToken["error"])) {
 
                     throw new Error($resultRefreshToken["error"]);
                 }
             }
-        
+
 
             $decoded =  JWT::decode($_COOKIE["userToken"], new Key($key, 'HS384'));
 
@@ -58,7 +58,7 @@ class authToken
 
             $keyRefresh = $_ENV["JWT_SECRET_KEY_REFRESH"];
 
-            if (!isset($_COOKIE["userRefreshToken"])) {
+            if (empty($_COOKIE["userRefreshToken"])) {
 
                 throw new Error("Autenticacion fallida,Token de actualizacion no valido");
             }

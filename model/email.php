@@ -1,6 +1,10 @@
 <?php
 
-require_once(__DIR__ . "/../config/connection.php");
+require_once(__DIR__ . "../../config/connection.php");
+require_once(__DIR__ . "../../vendor/autoload.php");
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 require "libreria/PHPMailer/src/PHPMailer.php";
 require "libreria/PHPMailer/src/SMTP.php";
@@ -19,7 +23,7 @@ class Email
     public function __construct()
     {
 
-        $this->connection= Connection::getInstance()->getConnection();
+        $this->connection = Connection::getInstance()->getConnection();
     }
 
     public function setName($name)
@@ -70,29 +74,32 @@ class Email
             $mail->Port = 587;
 
 
-            $mail->setFrom("systemfivehotel@gmail.com", "System Hotel");
+            $mail->setFrom($_ENV["EMAIL_ADDRESS"], "Hotel System");
             $mail->addAddress($this->destinary, $this->name);
-            $mail->isHTML(true);
+            $mail->isHTML(TRUE);
 
             $mail->CharSet = 'UTF-8';
             $mail->Subject = $this->subject;
             $mail->Body = $this->body;
-            $mail->addAttachment(
-                $this->fileToAttachment,
-                "Detalles reserva",
-                "base64",
-                "application/pdf"
-            );
+            if (isset($this->fileToAttachment)) {
+                $mail->addAttachment(
+                    $this->fileToAttachment,
+                    "Detalles reserva",
+                    "base64",
+                    "application/pdf"
+                );
+            }
 
 
-            $mail->Username = "systemfivehotel@gmail.com";
-            $mail->Password = "g r d j b z w q e o y e v d f s";
+
+            $mail->Username = $_ENV["EMAIL_ADDRESS"];
+            $mail->Password =  $_ENV["EMAIL_PASSWORD"];
 
             $response = $mail->send();
             return $response;
         } catch (Exception $e) {
 
-            $e->getMessage();
+            return array("error"=>$e->getMessage());
         }
     }
 
@@ -111,7 +118,7 @@ class Email
 
         $query = $this->connection->prepare("update correo_reserva_confirmada set stateUpdate=?
         where idCorreo=?");
-        $query->bind_param("ii",$stateUpdate,$idEmail);
+        $query->bind_param("ii", $stateUpdate, $idEmail);
         $result = $query->execute();
         return $result;
     }

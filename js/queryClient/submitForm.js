@@ -3,6 +3,16 @@ import { BACK_URL_LOCALHOST } from "../urlLocalhost.js";
 let formQuery = document.querySelector(".formQuery");
 let loader = document.querySelector(".loader");
 let alertFormQuery = document.querySelector(".alertFormQuery");
+let openContactUs = document.querySelector(".openContact");
+let infoContact = document.querySelector(".infoContact");
+
+openContactUs.addEventListener("click", () => {
+  if (infoContact.style.display == "none") {
+    infoContact.style.display = "flex";
+  } else {
+    infoContact.style.display = "none";
+  }
+});
 
 formQuery.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -36,18 +46,18 @@ const validationsInputs = (key, value) => {
     {
       key: "name",
       validation: value.length > 0,
-      msj: "Ingrese un nombre valido",
+      msj: "Ingrese un nombre valido"
     },
     {
       key: "mail",
       validation: value.length > 0 && value.match(regexMail),
-      msj: "Ingrese un correo valido",
+      msj: "Ingrese un correo valido"
     },
     {
       key: "query",
       validation: value.length > 0,
-      msj: "Complete la consulta",
-    },
+      msj: "Complete la consulta"
+    }
   ];
 
   let validationFind = validations.find((validation) => validation.key == key);
@@ -77,7 +87,7 @@ const sendQuery = async (dataQuery) => {
     name: dataQuery.name,
     destinary: "systemFiveHotel@gmail.com",
     subject: `Consulta cliente ${dataQuery.name}(${dataQuery.mail})`,
-    body: dataQuery.query,
+    body: dataQuery.query
   };
 
   let resultEmail;
@@ -88,12 +98,13 @@ const sendQuery = async (dataQuery) => {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(emailData),
+        body: JSON.stringify(emailData)
       }
     );
     const result = await response.json();
+    console.log(result);
     if (!response.ok) {
       throw result.error;
     }
@@ -105,7 +116,7 @@ const sendQuery = async (dataQuery) => {
     console.log(error);
   } finally {
     loading(false);
-    if (!resultEmail) {
+    if (resultEmail==true) {
       alertForm("error");
     } else {
       cleanInputs();
@@ -125,13 +136,13 @@ const loading = (state) => {
 const alertForm = (result) => {
   if (result == "error") {
     setComponentsAlert(
-      "../img/warningInput.png",
+      "img/warningInput.png",
       "Ups, no se pudo enviar la consulta",
       "alertFormQueryError"
     );
   } else {
     setComponentsAlert(
-      "../img/tickAlertQueryForm.png",
+      "img/tickAlertQueryForm.png",
       "¡Consulta enviada exitosamente!",
       "alertFormQueryCorrect"
     );

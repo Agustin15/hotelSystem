@@ -81,6 +81,11 @@ header li img {
   margin-top: -0.3rem;
 }
 
+#logo img {
+  width: 49px;
+  height: 49px;
+}
+
 #logo h1 {
   font-size: 18px;
   font-weight: bold;
@@ -164,16 +169,20 @@ header li img {
 }
 
 @keyframes cambio {
-  0%, 23% {
+  0%,
+  23% {
     transform: translate3d(0, 0, 0);
   }
-  25%, 48% {
+  25%,
+  48% {
     transform: translate3d(-25%, 0, 0);
   }
-  50%, 73% {
+  50%,
+  73% {
     transform: translate3d(-50%, 0, 0);
   }
-  75%, 98% {
+  75%,
+  98% {
     transform: translate3d(-75%, 0, 0);
   }
   100% {
@@ -670,6 +679,10 @@ header li img {
 }
 #verMasSuite img:hover {
   filter: brightness(0.5);
+}
+
+.openContact {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
