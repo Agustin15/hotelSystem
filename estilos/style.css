@@ -602,7 +602,7 @@ header li img {
 #verMas img:hover,
 #verMasDeluxe img:hover,
 #verMasSuite img:hover {
-  filter: brightness(0.5);
+  filter: contrast(67%);
 }
 #verMasDeluxe,
 #verMasSuite {

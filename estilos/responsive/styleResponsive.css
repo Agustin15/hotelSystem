@@ -50,7 +50,7 @@
   }
 
   .options {
-    margin-top: 0;
+    margin-top: 0.5rem;
   }
 
   header li {
@@ -349,13 +349,13 @@
     border: 2px solid #126b91;
   }
   .contactForm .nameInput {
-    background-image: url("../img/nameAndLastnameClient.png");
+    background-image: url("../../img/nameAndLastnameClient.png");
   }
   .contactForm .phoneInput {
-    background-image: url("../img/phoneClient.png");
+    background-image: url("../../img/phoneClient.png");
   }
   .contactForm .mailInput {
-    background-image: url("../img/mailClient.png");
+    background-image: url("../../img/mailClient.png");
   }
   .contactForm textarea {
     width: 16rem;
@@ -444,9 +444,9 @@
   }
 
   #fondo {
-    background-image: url("../img/fondo2.jpg");
+    background-image: url("../../img/fondo2.jpg");
     width: 100%;
-    height: 333vh;
+    height: 135rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -458,16 +458,16 @@
 
   .subFondo {
     width: 95%;
-    height: 315vh;
+    height: auto;
     margin: auto;
     margin-top: 8%;
+    padding-bottom: 2rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
     background: rgba(0, 0, 0, 0.6);
-    position: absolute;
   }
 
   .subFondo h2 {
@@ -500,7 +500,7 @@
     background: linear-gradient(#126b91, #0498a0);
     border-radius: 5px;
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
     z-index: 2;
   }
@@ -553,7 +553,7 @@
   #sliderDeluxe img,
   #sliderSuite img {
     width: 100%;
-    height:9rem;
+    height: 9rem;
     border: 4px solid white;
     border-radius: 12px;
   }
@@ -574,7 +574,7 @@
   #verMasDeluxe,
   #verMasSuite {
     top: 7.4rem;
-    left:8rem;
+    left: 8rem;
     position: absolute;
     visibility: hidden;
     border-radius: 100%;
@@ -598,10 +598,10 @@
   #verMas img:hover,
   #verMasDeluxe img:hover,
   #verMasSuite img:hover {
-    filter: brightness(0.5);
+    filter: contrast(67%);
   }
   #verMasDeluxe,
   #verMasSuite {
-    top:12rem;
+    top: 12rem;
   }
 }
