@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../../estilos/styleHabitaciones.css">
+    <link rel="stylesheet" href="../../estilos/responsive/styleResponsiveHabitaciones.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script defer type="module" src="../../js/scriptsSelectRooms/selectRooms.js"></script>
@@ -32,7 +34,7 @@
 
             <li><a href="../../views/index.html">Inicio</a></li>
             <li><a href="../../views/habitaciones.html">Habitaciones</a></li>
-            <li><a href="../../views/index.html #sobreNosotros">Sobre nosotros</a></li>
+            <li><a href="../../views/index.html #sobreNosotros">Nosotros</a></li>
             <li><a href="../../views/index.html #contacto">Contacto</a></li>
 
 
@@ -48,16 +50,18 @@
     </header>
 
 
-    <div class="avisoCompleteDatos">
+    <div class="containAvisoCompleteDatos">
+        <div class="avisoCompleteDatos">
 
-        <div class="contain">
-            <div class="header">
-                <img src="../../img/advertenciaLogin.png">
-                <span>Advertencia</span>
-            </div>
-            <p>Ingresa una fecha válida</p>
-            <div class="progressBar">
-                <div class="bar">
+            <div class="contain">
+                <div class="header">
+                    <img src="../../img/advertenciaLogin.png">
+                    <span>Advertencia</span>
+                </div>
+                <p>Ingresa una fecha válida</p>
+                <div class="progressBar">
+                    <div class="bar">
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,6 +70,7 @@
     <form id="checkIn">
 
 
+        <div class="containDateInputs">
             <div class="checkIn">
                 <h3>Check In</h3>
                 <input id="llegada" min="<?php echo date("Y-m-d") ?>" type="date" name="llegada">
@@ -75,7 +80,8 @@
                 <h3>Check Out</h3>
                 <input id="salida" min="<?php echo date("Y-m-d") ?>" type="date" name="salida">
             </div>
-    
+        </div>
+
         <button class="btnSearch" type="submit">
             Buscar
             <img src="../../img/search.png">
@@ -134,6 +140,12 @@
 
         <div id="containRooms"></div>
 
+        <div class="containItemCart">
+            <div class="itemCart">
+                <img src="../../img/closeCart.png">
+            </div>
+        </div>
+        
         <div class="containCart">
             <div id="cart">
 

@@ -137,6 +137,14 @@ body {
   width: 0;
   font-size: 0;
 }
+
+.containDateInputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
 #checkIn .checkOut,
 #checkIn .checkIn {
   display: flex;
@@ -421,7 +429,7 @@ body {
   width: 44rem;
   height: 21rem;
   box-shadow: 2px 2px 2px grey;
-  border-radius: 3px;
+  border-radius: 5px;
   position: relative;
 }
 #containRooms .containRoom .containTitleAndRoom {
@@ -571,7 +579,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
 }
-#containRooms .containRoom .containSelectGuests input[type=number] {
+#containRooms .containRoom .containSelectGuests input[type="number"] {
   width: 50px;
   height: 45px;
   border-radius: 3px;
@@ -631,6 +639,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: start;
+}
+
+.containItemCart {
+  display: none;
 }
 
 .containCart #cart {

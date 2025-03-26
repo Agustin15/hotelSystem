@@ -1,14 +1,17 @@
 export function alerta(msj) {
-  const avisoCompleteDatos = document.querySelector(".avisoCompleteDatos");
-  const progresBar = avisoCompleteDatos.querySelector(".bar");
-  const labelMsj = avisoCompleteDatos.querySelector("p");
-  labelMsj.textContent = msj;
+  const containAvisoCompleteDatos = document.querySelector(
+    ".containAvisoCompleteDatos"
+  );
 
+  const progresBar = containAvisoCompleteDatos.querySelector(".bar");
+  const labelMsj = containAvisoCompleteDatos.querySelector("p");
+  labelMsj.textContent = msj;
   window.scroll(0, 0);
 
-  avisoCompleteDatos.style.display="flex";
-  avisoCompleteDatos.classList.remove("desactivarCompleteDatos");
-  avisoCompleteDatos.classList.add("activarCompleteDatos");
+  containAvisoCompleteDatos.querySelector(".avisoCompleteDatos").style.display =
+    "flex";
+  containAvisoCompleteDatos.classList.remove("desactivarCompleteDatos");
+  containAvisoCompleteDatos.classList.add("activarCompleteDatos");
   progresBar.classList.add("barActive");
 
   setTimeout(() => {
@@ -17,11 +20,13 @@ export function alerta(msj) {
 }
 
 export const borrarAlerta = () => {
-  const avisoCompleteDatos = document.querySelector(".avisoCompleteDatos");
-  const progresBar = avisoCompleteDatos.querySelector(".bar");
+  const containAvisoCompleteDatos = document.querySelector(
+    ".containAvisoCompleteDatos"
+  );
+  const progresBar = containAvisoCompleteDatos.querySelector(".bar");
 
-  avisoCompleteDatos.classList.remove("activarCompleteDatos");
-  avisoCompleteDatos.classList.add("desactivarCompleteDatos");
+  containAvisoCompleteDatos.classList.remove("activarCompleteDatos");
+  containAvisoCompleteDatos.classList.add("desactivarCompleteDatos");
   progresBar.classList.remove("barActive");
 };
 
@@ -44,7 +49,7 @@ export const removeAlertGuests = (alert) => {
   alert.querySelector(".bar").classList.remove("barActive");
 };
 
-export const alertModal = (modal,option) => {
+export const alertModal = (modal, option) => {
   if (option == "show") {
     modal.style.display = "flex";
   } else {
@@ -55,6 +60,6 @@ export const alertModal = (modal,option) => {
 
 function buttonModalAlert(modal) {
   modal.querySelector("button").addEventListener("click", function () {
-    alertModal(modal,"hide");
+    alertModal(modal, "hide");
   });
 }

@@ -31,6 +31,8 @@ let salida = document.getElementById("salida");
 export let modal = document.getElementById("modal");
 let buttonNext = document.getElementById("buttonNext");
 let alertEmptyDate = document.querySelector(".avisoCompleteDatos");
+let itemOpenCart = document.querySelector(".itemCart");
+let cartElement = document.getElementById("cart");
 
 export let guestsAlert = document.getElementById("alertGuests");
 
@@ -65,7 +67,27 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     printRoomsCart();
   }
+
+  itemOpenCart.addEventListener("click", () => {
+    configOpenCart();
+  });
 });
+
+const configOpenCart = () => {
+  if (cartElement.style.display == "flex") {
+    itemOpenCart.querySelector("img").src = "../../img/openCart.png";
+    cartElement.classList.remove("openCart");
+    cartElement.classList.add("closeCart");
+    setTimeout(function () {
+      cartElement.style.display = "none";
+    }, 500);
+  } else {
+    cartElement.style.display = "flex";
+    cartElement.classList.remove("closeCart");
+    cartElement.classList.add("openCart");
+    itemOpenCart.querySelector("img").src = "../../img/closeCart.png";
+  }
+};
 
 const loading = (status) => {
   if (status) {
@@ -83,7 +105,6 @@ const displayErrorGetHotelRooms = (status) => {
   }
 };
 async function submitGetCategoryHotelRooms() {
-
   try {
     loading(true);
     const response = await fetch(
