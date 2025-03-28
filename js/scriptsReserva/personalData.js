@@ -15,6 +15,7 @@ let clientBooking = {};
 let indexRoom = 0;
 let btnNext = document.querySelector(".btnNext");
 let btnPrev = document.querySelector(".btnPrev");
+let iconNights = document.querySelector(".iconNigths");
 let roomsBooking = document.querySelector(".bookingRooms");
 let containClientAndBooking = document.querySelector(
   ".containClientAndBooking"
@@ -105,39 +106,35 @@ function printBookingRooms() {
     }
 
     return `
-    
-    
-                            <div class="header">
+  <div class="header">
+ <img src="data:image/png;base64,${room.images.imageTwo}">
+ <div class="data">
+  <span>Habitacion ${room.category}</span>
 
-                                <img src="data:image/png;base64,${room.images.imageTwo}">
-                                <div class="data">
-                                <span>Habitacion ${room.category}</span>
+ <div class="details">
+ <ul>
+   ${liAdult}
+  ${liChildren}
+ <li>$USD ${room.price}</li>
+<li>${quantityRoomsType}</li>
+<li class="total">U$S ${room.total}</li>
+ </ul>
+  </div>
+  </div>
 
-                                <div class="details">
-                                <ul>
-                                    ${liAdult}
-                                    ${liChildren}
-                                    <li>$USD ${room.price}</li>
-                                    <li>${quantityRoomsType}</li>
-                                    <li class="total">U$S ${room.total}</li>
-                         
-                                </div>
-                            
-                                </div>
-
-                            </div>
+                      
     `;
   });
 
   roomsBooking.querySelector("li").innerHTML = roomsToPrint[indexRoom];
 
   if (rooms.length > 1) {
-    document
-      .querySelector(".controls")
-      .querySelectorAll("img")
-      .forEach(function (control) {
-        control.style.visibility = "visible";
-      });
+    btnNext.style.visibility = "visible";
+    btnPrev.style.visibility = "visible";
+    if (window.innerWidth <= 600) {
+      btnPrev.src = "../../img/up.png";
+      btnNext.src = "../../img/up.png";
+    } 
   }
 }
 
@@ -165,6 +162,10 @@ function printBooking() {
   document.querySelector(
     ".endBooking"
   ).textContent = `${endBooking.toLocaleDateString("es-UY", optionsFormat)}`;
+
+  window.innerWidth <= 600
+    ? (iconNights.src = "../../img/night.png")
+    : "../../img/moonBooking.png";
 
   if (booking.nights > 1) {
     document.querySelector(".nights").textContent = `${booking.nights} Noches`;

@@ -1,4 +1,10 @@
-import { quantityCategorysRooms, guestsAlert, modal } from "./selectRooms.js";
+import {
+  quantityCategorysRooms,
+  guestsAlert,
+  modal,
+  itemOpenCart,
+  setNotificationRoom
+} from "./selectRooms.js";
 import { alertGuests, alertModal } from "../alertas.js";
 
 let nights;
@@ -13,6 +19,10 @@ export const changeRooms = (roomsChanged) => {
 };
 
 export function printDateBookingInCart(dateBooking) {
+  if (window.innerWidth <= 600) {
+    itemOpenCart.style.display="flex";
+  }
+
   cart.style.display = "flex";
 
   bookingDate = dateBooking;
@@ -26,8 +36,8 @@ export function printDateBookingInCart(dateBooking) {
 
   let startDate = new Date(dateBooking.start);
   let endDate = new Date(dateBooking.end);
-  startDate.setMinutes(startDate.getMinutes() + startDate.getTimezoneOffset())
-  endDate.setMinutes(endDate.getMinutes() + endDate.getTimezoneOffset())
+  startDate.setMinutes(startDate.getMinutes() + startDate.getTimezoneOffset());
+  endDate.setMinutes(endDate.getMinutes() + endDate.getTimezoneOffset());
 
   document.querySelector(".startBooking").textContent =
     startDate.toLocaleDateString("es-UY", options);
@@ -181,6 +191,10 @@ export const printRoomsCart = () => {
 
     totalPriceBooking();
     printDeposit(divDeposit);
+  }
+
+  if (itemOpenCart.style.display == "flex") {
+    setNotificationRoom();
   }
 };
 

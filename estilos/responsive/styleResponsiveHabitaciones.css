@@ -4,8 +4,9 @@
     width: 100%;
     height: 6rem;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
     position: relative;
   }
 
@@ -14,7 +15,7 @@
     align-items: center;
     justify-content: start;
     gap: 0.1rem;
-    width: 100%;
+    width: 98%;
     margin-top: 0.5rem;
     margin-left: 2%;
   }
@@ -39,17 +40,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    width: auto;
+    gap: 1.5rem;
+    margin-right: 0;
+    padding: 0;
+    width: 100%;
     color: rgb(255, 255, 255);
     font-size: 14px;
     font-family: Arial;
     margin-top: 0.5rem;
   }
 
-  .options {
-    margin-top: 0.5rem;
-  }
+
 
   header li {
     display: flex;
@@ -66,8 +67,8 @@
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    width: 95%;
-    margin-top: -4%;
+    width: 94%;
+    margin-top: 1.7rem;
   }
   .networks img {
     width: 18px;
@@ -150,8 +151,8 @@
   .avisoCompleteDatos {
     position: absolute;
     left: -90%;
-    width: 300px;
-    height: 55px;
+    width: 257px;
+    height: 51px;
     color: white;
     border-radius: 3px;
     background: linear-gradient(#0f3a4d, #0498a0);
@@ -168,7 +169,7 @@
     display: flex;
     flex-direction: row;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 12px;
     padding-left: 0.3rem;
     padding-top: 0.2rem;
     justify-content: start;
@@ -180,7 +181,7 @@
   .avisoCompleteDatos p {
     color: #ffffff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: -1rem;
     text-align: center;
   }
@@ -190,8 +191,8 @@
   }
   #alertGuests img,
   .avisoCompleteDatos img {
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
     margin-top: 0.7rem;
   }
   #alertGuests .progressBar,
@@ -238,12 +239,12 @@
       left: -90%;
     }
     to {
-      left: 5.5%;
+      left: 12%;
     }
   }
   @keyframes alertHide {
     from {
-      left: 5.3%;
+      left: 12%;
     }
     to {
       left: -90%;
@@ -371,7 +372,7 @@
   }
   .errorHotelRooms span {
     font-weight: 200;
-    width: 600px;
+    width: 300px;
   }
 
   #containRoomsAndCart {
@@ -624,11 +625,11 @@
 
   .containCart {
     display: flex;
-    position: absolute;
+    position: fixed;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    margin-top: -2rem;
+    margin-top: -10.3rem;
   }
 
   .containItemCart {
@@ -636,30 +637,48 @@
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    position: absolute;
-    z-index: 3;
+    position: fixed;
+    z-index: 4;
   }
 
   .itemCart {
-    margin-top: -2rem;
+    margin-top: -15rem;
     background: linear-gradient(#126b91, #0498a0);
     border-radius: 100%;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: none;
+    position: relative;
     justify-content: center;
     align-items: center;
   }
 
+  .itemCart .containNotificationRoom {
+    color: #088f96;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.1rem;
+    width: 1.1rem;
+    border-radius: 100%;
+    top: 0.5rem;
+    left: 2rem;
+    position: absolute;
+  }
+
   .itemCart img {
     width: 25px;
+    margin-top: 0.8rem;
     height: 25px;
   }
 
   .containCart #cart {
     width: 310px;
     height: auto;
-    max-height: 800px;
+    max-height: 600px;
     background: white;
     margin-top: 2rem;
     margin-right: 0.5rem;
@@ -706,7 +725,6 @@
       transform: translateX(0);
     }
   }
-
   .containCart #cart #title h6 {
     color: rgb(5, 68, 104);
     font-size: 15px;

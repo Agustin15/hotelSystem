@@ -32,10 +32,10 @@
 
         <ul class="options">
 
-            <li><a href="../../views/index.html">Inicio</a></li>
+            <li><a href="../../index.html">Inicio</a></li>
             <li><a href="../../views/habitaciones.html">Habitaciones</a></li>
-            <li><a href="../../views/index.html #sobreNosotros">Nosotros</a></li>
-            <li><a href="../../views/index.html #contacto">Contacto</a></li>
+            <li><a href="../../index.html #sobreNosotros">Sobre nosotros</a></li>
+            <li><a href="../../index.html #contacto">Contacto</a></li>
 
 
         </ul>
@@ -108,7 +108,7 @@
 
     <div class="loading">
 
-        <span></span>
+        <span>Cargando habitaciones</span>
         <img src="../../img/spinnerMain.gif">
     </div>
 
@@ -142,10 +142,13 @@
 
         <div class="containItemCart">
             <div class="itemCart">
+                <div class="containNotificationRoom">
+                    <span class="notificationRoom"></span>
+                </div>
                 <img src="../../img/closeCart.png">
             </div>
         </div>
-        
+
         <div class="containCart">
             <div id="cart">
 

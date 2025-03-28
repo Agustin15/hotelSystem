@@ -10,6 +10,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script defer src="../js/scriptsCategoryRoomPage/script.js"></script>
     <title>Habitacion Suite</title>
 
 </head>
@@ -30,7 +31,7 @@
 
             <li><a href="../index.html">Inicio</a></li>
             <li><a href="habitaciones.html">Habitaciones</a></li>
-            <li><a href="../index.html #sobreNosotros">Nosotros</a></li>
+            <li><a href="../index.html #sobreNosotros">Sobre nosotros</a></li>
             <li><a href="../index.html #contacto">Contacto</a></li>
 
 
@@ -121,24 +122,24 @@
 
             <li>
 
-                <a href="infoStandar.html"><img id="verMasEstandar" src="../img/masInfo.png"></a>
+                <a href="infoStandar.html"><img class="viewMore" id="verMasEstandar" src="../img/masInfo.png"></a>
                 <label>Habitacion Estandar</label>
-                <img id="habitacionEstandar" src="../img/bannerHab1.jpg">
+                <img id="habitacionEstandar" class="roomIcon" src="../img/bannerHab1.jpg">
 
             </li>
 
             <li>
-                <a href="infoDeluxe.html"> <img id="verMasDeluxe" src="../img/masInfo.png"></a>
+                <a href="infoDeluxe.html"> <img class="viewMore" id="verMasDeluxe" src="../img/masInfo.png"></a>
                 <label>Habitacion Deluxe</label>
-                <img id="habitacionDeluxe" src="../img/bannerHab2Deluxe.jpg">
+                <img id="habitacionDeluxe" class="roomIcon" src="../img/bannerHab2Deluxe.jpg">
 
             </li>
 
 
             <li>
-                <a href="infoSuite.html"><img id="verMasSuite" src="../img/masInfo.png"></a>
+                <a href="infoSuite.html"><img class="viewMore" id="verMasSuite" src="../img/masInfo.png"></a>
                 <label>Habitacion Suite</label>
-                <img id="habitacionSuite" src="../img/bannerHab1Suite.jpg">
+                <img id="habitacionSuite" class="roomIcon" src="../img/bannerHab1Suite.jpg">
 
             </li>
         </ul>
@@ -155,97 +156,3 @@
 </body>
 
 </html>
-
-
-<script>
-
-
-    var habitacionEstandar = document.getElementById("habitacionEstandar");
-    var verMasEstandar = document.getElementById("verMasEstandar");
-
-    var habitacionDeluxe = document.getElementById("habitacionDeluxe");
-    var verMasDeluxe = document.getElementById("verMasDeluxe");
-
-    var habitacionSuite = document.getElementById("habitacionSuite");
-    var verMasSuite = document.getElementById("verMasSuite");
-
-
-
-    habitacionEstandar.addEventListener("mouseenter", function () {
-
-
-        verMasEstandar.style.visibility = "visible";
-
-
-    });
-
-
-    habitacionEstandar.addEventListener("mouseleave", function () {
-
-
-
-        verMasEstandar.addEventListener("mouseenter", function () {
-
-
-            verMasEstandar.style.visibility = "visible";
-
-        });
-
-
-        verMasEstandar.style.visibility = "hidden";
-
-    });
-
-
-
-
-
-    habitacionDeluxe.addEventListener("mouseenter", function () {
-
-        verMasDeluxe.style.visibility = "visible";
-
-
-    });
-
-
-    habitacionDeluxe.addEventListener("mouseleave", function () {
-
-
-        verMasDeluxe.addEventListener("mouseenter", function () {
-
-
-            verMasDeluxe.style.visibility = "visible";
-
-        });
-
-        verMasDeluxe.style.visibility = "hidden";
-
-    });
-
-
-
-
-
-    habitacionSuite.addEventListener("mouseenter", function () {
-
-        verMasSuite.style.visibility = "visible";
-
-    });
-
-
-    habitacionSuite.addEventListener("mouseleave", function () {
-
-
-        verMasSuite.addEventListener("mouseenter", function () {
-
-            verMasSuite.style.visibility = "visible";
-
-        });
-
-
-        verMasSuite.style.visibility = "hidden";
-    });
-
-
-
-</script>

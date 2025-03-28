@@ -1,0 +1,626 @@
+@media only screen and (max-width: 600px) {
+  header {
+    background: linear-gradient(#126b91, #0498a0);
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    position: relative;
+  }
+
+  #logo {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 0.1rem;
+    width: 97%;
+    margin-top: 0.5rem;
+    margin-left: 2%;
+  }
+
+  #logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  #logo h1 {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Courier New", Courier, monospace;
+    color: rgb(255, 255, 255);
+  }
+
+  header a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+
+  header ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-family: Arial;
+    margin-top: 0.7rem;
+  }
+
+  header li {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+    text-align: center;
+    transform: scale(1);
+    transition: 0.5s;
+  }
+
+  header li:hover {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.822);
+    transform: scale(1.1);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  .redes {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin-top: 1.7rem;
+  }
+
+  .redes img {
+    width: 18px;
+  }
+
+  #contain {
+    margin: auto;
+    margin-top: 1rem;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .barStageAdvance {
+    display: flex;
+    margin: auto;
+    margin-top: 0rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .barStageAdvance .itemStage {
+    padding: 1rem;
+    border-radius: 100px;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #cecece;
+  }
+  .barStageAdvance .itemStage img {
+    width: 21px;
+  }
+  .barStageAdvance .line {
+    width: 7rem;
+    height: 0.2rem;
+    border-radius: 2px;
+    background-color: #cecece;
+  }
+
+  .progressStage {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(#2c7594, #0498a0);
+    animation-name: progressStage;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes progressStage {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  .dateBooking {
+    width: 97%;
+    color: rgb(0, 0, 0);
+    padding: 0.5rem;
+    background: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .dateBooking .arrival,
+  .dateBooking .exit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .dateBooking .arrival h4,
+  .dateBooking .exit h4 {
+    font-weight: normal;
+  }
+
+  .dateBooking .containNights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .dateBooking .containNights img {
+    width: 21px;
+  }
+
+  .containClientAndBooking {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 93%;
+    margin-top: -2rem;
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  .containClientAndBooking .header {
+    width: 100%;
+  }
+  .containClientAndBooking .header .title {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  .containClientAndBooking .header .title h1 {
+    font-size: 25px;
+    opacity: 90%;
+  }
+  .containClientAndBooking .header .title img {
+    width: 80px;
+  }
+
+  .bodyClientAndBooking {
+    display: flex;
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .client {
+    height: auto;
+    width: auto;
+    padding: 1rem;
+    color: rgb(0, 0, 0);
+    margin-top: 0;
+  }
+  .client h4 {
+    font-size: 20px;
+  }
+  .client .iconTitle img {
+    width: 47px;
+  }
+  .client form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0.4rem;
+  }
+  .client form input {
+    width: 230px;
+    height: 43px;
+    border: 1px solid rgb(23, 161, 150);
+    box-shadow: 2px 2px 2px rgb(0, 141, 129);
+    border-radius: 3px;
+    padding-left: 2.6rem;
+    outline: none;
+    font-size: 15px;
+  }
+  .client form input::placeholder {
+    font-size: 15px;
+  }
+  .client form input:hover {
+    border: 2px solid rgb(4, 128, 117);
+    box-shadow: 1px 1px 1px rgb(182, 182, 182);
+  }
+  .client form .nameAndLast,
+  .client form .phoneAndMail {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .client form .name,
+  .client form .lastName,
+  .client form .mail,
+  .client form .phone {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: start;
+    align-items: start;
+    position: relative;
+  }
+  .client form .name input,
+  .client form .lastName input,
+  .client form .mail input,
+  .client form .phone input {
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: left center;
+    background-position-x: 0.6rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .client form .name input {
+    background-image: url("../../img/usuario.png");
+  }
+  .client form .lastName input {
+    background-image: url("../../img/lastNameForm.png");
+  }
+  .client form .mail input {
+    background-image: url("../../img/mailForm.png");
+  }
+  .client form .phone input {
+    background-image: url("../../img/phoneForm.png");
+  }
+
+  .containButtonsForm {
+    display: flex;
+    gap: 2rem;
+    margin-top: -1rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .containButtonsForm button {
+    width: 135px;
+    height: 34px;
+    background-color: #349db8;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 14px;
+    box-shadow: 2px 2px 2px gray;
+  }
+  .containButtonsForm button:hover {
+    background-color: #2f8ca3;
+    cursor: pointer;
+  }
+
+  .bookingData {
+    color: white;
+    padding: 0.8rem;
+    height: 15rem;
+    width: 100%;
+    border: 1px solid rgb(182, 182, 182);
+    display: flex;
+    margin-top: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .bookingData .title {
+    display: none;
+  }
+  .bookingData .bookingRooms {
+    height: 225px;
+    width: auto;
+    border-radius: 0;
+    display: flex;
+    gap: 2rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    box-shadow: none;
+  }
+  .bookingData .bookingRooms li {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bookingData .bookingRooms li span {
+    font-weight: bold;
+  }
+  .bookingData .bookingRooms li img {
+    width: 90%;
+    border-radius: 5px;
+    height: 130px;
+  }
+  .bookingData .bookingRooms li .header {
+    display: flex;
+    width: auto;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: auto;
+    font-size: 17px;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+  .bookingData .bookingRooms li .data {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .bookingData .bookingRooms li .data span {
+    margin-top: 1rem;
+  }
+  .bookingData .bookingRooms li .data .details ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.7rem;
+    padding-top: 0.5rem;
+  }
+  .bookingData .bookingRooms li .data .details ul .total {
+    font-weight: bold;
+  }
+  .bookingData .containTotalBooking {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 30rem;
+    padding-top: 0.5rem;
+  }
+  .bookingData .controls {
+    width: auto;
+    padding: 0.3rem;
+    font-size: 17px;
+    display: flex;
+    box-shadow: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    color: black;
+  }
+  .bookingData .controls img {
+    width: 25px;
+    visibility: hidden;
+  }
+  .bookingData .controls .btnPrev {
+    transform: rotate(-90deg);
+  }
+  .bookingData .controls .btnNext {
+    transform: rotate(90deg);
+  }
+
+  .bookingData .controls img:hover {
+    transform: scale();
+    cursor: pointer;
+  }
+
+  .inputAlert {
+    border: 2px solid rgb(235, 62, 62);
+    box-shadow: 1px 1px 1px rgb(202, 117, 117);
+  }
+
+  .inputAlert::placeholder {
+    color: red;
+  }
+
+  .inputAlert:hover {
+    border: 2px solid rgb(235, 35, 35);
+    box-shadow: 1px 1px 1px rgb(235, 48, 48);
+  }
+
+  .alertErrorInput {
+    position: absolute;
+    top: 4.7rem;
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: start;
+    color: red;
+    font-size: 14px;
+    gap: 0.4rem;
+  }
+  .alertErrorInput img {
+    width: 26px;
+  }
+
+  .alertErrorInputShow {
+    display: flex;
+  }
+
+  .modalBooking {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 170%;
+    display: none;
+    justify-content: center;
+    align-items: start;
+  }
+  .modalBooking .loading {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    height: 15rem;
+    width: 22rem;
+    border-radius: 3px;
+    gap: 0.2rem;
+    margin-top: 17rem;
+    background-color: white;
+  }
+  .modalBooking .loading .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+  .modalBooking .loading .title img {
+    width: 50px;
+    height: 50px;
+  }
+  .modalBooking .loading .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .modalBooking .loading .clientDevice .hotel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modalBooking .loading span {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .modalBooking .loading img {
+    width: 55px;
+    height: 55px;
+  }
+  .modalBooking .loading .containBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 2rem;
+  }
+  .modalBooking .loading .containBar .bar {
+    width: 9rem;
+    border-radius: 20px;
+    border: 1px solid rgb(158, 158, 158);
+    height: 0.5rem;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: start;
+    position: relative;
+  }
+  .modalBooking .loading .containBar .contentBar {
+    border-radius: 20px;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(#1eb9b9, #0498a0);
+    opacity: 90%;
+    animation-name: bar;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes bar {
+    from {
+      margin-left: 0;
+    }
+    to {
+      margin-left: 13rem;
+    }
+  }
+  .modalBooking .alertBooking {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 17rem;
+    gap: 1rem;
+    z-index: 3;
+    padding-top: 1rem;
+    background-color: rgb(255, 255, 255);
+    width: 310px;
+    height: auto;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 1rem;
+    color: rgb(0, 0, 0);
+  }
+  .modalBooking .alertBooking .title {
+    font-size: 18px;
+    margin-top: -0.4rem;
+  }
+  .modalBooking .alertBooking p {
+    padding: 0.4rem;
+    font-size: 17px;
+  }
+  .modalBooking img {
+    width: 55px;
+  }
+  .modalBooking .buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalBooking .buttons button {
+    width: 100px;
+    height: 27px;
+    background-color: #c00a0a;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 15px;
+    box-shadow: 2px 2px 2px gray;
+  }
+  .modalBooking .buttons button:hover {
+    background-color: #8f1212;
+    cursor: pointer;
+  }
+
+  #alertClient {
+    display: none;
+    margin: auto;
+    justify-content: start;
+    align-items: center;
+    max-width: 15rem;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 13px;
+    background: linear-gradient(#d31010, #860606);
+  }
+  #alertClient span {
+    font-weight: bold;
+    width: 0px;
+  }
+  #alertClient .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    width: auto;
+  }
+  #alertClient img {
+    width: 21px;
+  }
+}

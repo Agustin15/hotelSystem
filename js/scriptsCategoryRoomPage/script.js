@@ -3,12 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   roomsOption.querySelectorAll("li").forEach((li) => {
     let img = li.querySelector(".roomIcon");
+
     img.addEventListener("mouseenter", () => {
-      li.querySelector(".viewMore").style.display = "flex";
+      li.querySelector(".viewMore").style.visibility = "visible";
     });
 
-    img.addEventListener("mouseleave", () => {
-      li.querySelector(".viewMore").style.display = "none";
+    li.addEventListener("mouseleave", () => {
+      li.querySelector(".viewMore").style.visibility = "hidden";
     });
   });
 });

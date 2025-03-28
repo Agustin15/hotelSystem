@@ -31,8 +31,10 @@ let salida = document.getElementById("salida");
 export let modal = document.getElementById("modal");
 let buttonNext = document.getElementById("buttonNext");
 let alertEmptyDate = document.querySelector(".avisoCompleteDatos");
-let itemOpenCart = document.querySelector(".itemCart");
+export let itemOpenCart = document.querySelector(".itemCart");
+let notificationRoom = itemOpenCart.querySelector(".notificationRoom");
 let cartElement = document.getElementById("cart");
+
 
 export let guestsAlert = document.getElementById("alertGuests");
 
@@ -72,6 +74,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     configOpenCart();
   });
 });
+
+export const setNotificationRoom = () => {
+  let quantityRooms = rooms.reduce((ac, room) => {
+    ac += room.quantity;
+    return ac;
+  }, 0);
+
+  notificationRoom.textContent = quantityRooms;
+};
 
 const configOpenCart = () => {
   if (cartElement.style.display == "flex") {
