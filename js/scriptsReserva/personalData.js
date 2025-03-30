@@ -2,7 +2,7 @@ import displayBarStagesAdvance from "./barStageAdvance.js";
 
 import {
   fetchPOSTBooking,
-  fetchPUTBooking
+  fetchPUTBooking,
 } from "./scriptsFetchsBooking/scriptBooking.js";
 
 import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
@@ -70,7 +70,7 @@ const removeMsjAlertInputs = () => [
     .querySelectorAll(".alertErrorInput")
     .forEach((alertMsj) => {
       alertMsj.textContent = "";
-    })
+    }),
 ];
 
 function displayIndexRoom() {
@@ -134,7 +134,7 @@ function printBookingRooms() {
     if (window.innerWidth <= 600) {
       btnPrev.src = "../../img/up.png";
       btnNext.src = "../../img/up.png";
-    } 
+    }
   }
 }
 
@@ -143,7 +143,7 @@ function printBooking() {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric"
+    day: "numeric",
   };
 
   let startBooking = new Date(booking.date.start);
@@ -200,23 +200,23 @@ const validationsInputs = (value) => {
     {
       key: "name",
       validation: value.length > 0,
-      msj: "Ingrese un nombre"
+      msj: "Ingrese un nombre",
     },
     {
       key: "lastName",
       validation: value.length > 0,
-      msj: "Ingrese un apellido"
+      msj: "Ingrese un apellido",
     },
     {
       key: "mail",
       validation: value.match(validRegex),
-      msj: "Ingrese un correo válido"
+      msj: "Ingrese un correo válido",
     },
     {
       key: "phone",
       validation: value.length == 8 || value.length == 9,
-      msj: "Ingrese un telefono válido"
-    }
+      msj: "Ingrese un telefono válido",
+    },
   ];
   return validations;
 };
@@ -269,7 +269,7 @@ function clientData() {
 const createBooking = async (client) => {
   clientBooking = {
     client: client,
-    booking: booking
+    booking: booking,
   };
 
   let resultBookingAdded = await fetchPOSTBooking(clientBooking);
@@ -325,7 +325,7 @@ const redirect = (clientBooking, option) => {
     email: clientBooking.client.mail,
     startDate: clientBooking.booking.date.start,
     endDate: clientBooking.booking.date.end,
-    option: option
+    option: option,
   };
   localStorage.clear();
   location.href =
@@ -334,6 +334,8 @@ const redirect = (clientBooking, option) => {
 };
 
 export function loadingBooking(loadingState, msj) {
+  window.scroll(0, 0);
+
   if (msj) {
     loadingSpinner.querySelector(".spanLoading").textContent = msj;
   }

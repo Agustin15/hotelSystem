@@ -83,7 +83,7 @@ body {
   align-items: center;
   gap: 1rem;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(145, 145, 145);
+  color: rgb(0, 0, 0);
   margin-top: 2rem;
   font-size: 23px;
 }
@@ -104,7 +104,7 @@ body {
 }
 
 #loginAdmin label {
-  color: rgb(138, 138, 138);
+  color: rgb(0, 0, 0);
 }
 
 #loginAdmin .user,
@@ -126,9 +126,6 @@ body {
   font-size: 16px;
 }
 
-#loginAdmin form input::placeholder {
-  opacity: 90%;
-}
 
 #loginAdmin form #userId {
   width: 18.8rem;
@@ -136,7 +133,7 @@ body {
 
 #loginAdmin form #userId,
 #loginAdmin form #passwordId {
-  background-image: url("../img/usuario.png");
+  background-image: url("../img/persona.png");
   background-repeat: no-repeat;
   background-position-x: 0.6rem;
   background-position-y: 0.7rem;

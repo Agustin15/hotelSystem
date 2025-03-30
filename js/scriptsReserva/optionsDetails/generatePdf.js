@@ -2,7 +2,7 @@ import {
   sendEmail,
   addEmail,
   getEmailBookingConfirmByIdBooking,
-  patchStateUpdateEmailBookingById
+  patchStateUpdateEmailBookingById,
 } from "../scriptsFetchsBooking/scriptEmail.js";
 import { stateBooking, idBooking } from "../details.js";
 
@@ -10,13 +10,18 @@ export const generatePDF = (option, email, name) => {
   let details = document.querySelector(".details");
 
   html2canvas(details).then(function (canvas) {
-    let srcCanvasElement = canvas.toDataURL();
+    let format =
+      window.innerWidth <= 600
+        ? [parseInt(canvas.style.width), parseInt(canvas.style.height)]
+        : [canvas.width, canvas.height];
 
+    console.log(canvas);
+    let srcCanvasElement = canvas.toDataURL();
     let doc = new jsPDF({
       orientation: "landscape",
       unit: "px",
-      format: [canvas.width, canvas.height],
-      putOnlyUsedFonts: true
+      format: format,
+      putOnlyUsedFonts: true,
     });
 
     doc.addImage(srcCanvasElement, "png", 94, 15);
@@ -32,7 +37,7 @@ export const generatePDF = (option, email, name) => {
 
 const generateFileToSend = async (name, email, pdfBlob) => {
   const file = new File([pdfBlob], "Detalles reserva", {
-    type: pdfBlob.type
+    type: pdfBlob.type,
   });
 
   let emailFound = await getEmailBookingConfirmByIdBooking(idBooking);

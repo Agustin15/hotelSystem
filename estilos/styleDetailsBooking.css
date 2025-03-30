@@ -207,6 +207,7 @@ header li img {
   margin-top: 3rem;
   position: relative;
   min-width: 45rem;
+  max-width:67rem;
   border-radius: 5px;
   height: auto;
   border: 1px solid rgb(185, 185, 185);
@@ -226,7 +227,7 @@ header li img {
   background: linear-gradient(#126b91, #0498a0);
   padding: 1rem;
   color: white;
-  height: 93%;
+  height: 95%;
   left: 0;
   position: absolute;
 }
@@ -275,8 +276,8 @@ header li img {
   flex-direction: column;
   align-items: start;
   min-width: 36rem;
-  margin-left: 17rem;
-  padding:0.5rem 2rem 0 1rem ;
+  margin-left: 15rem;
+  padding: 0.5rem 2rem 0 1rem;
 }
 .details .client {
   display: flex;

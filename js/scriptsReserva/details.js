@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!params.get("details")) {
     location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
   }
-  
+
   let dataToFindBooking = params.get("details");
   dataToFindBooking = JSON.parse(dataToFindBooking);
 
@@ -63,7 +63,7 @@ export const getBookingByClientMailAndDate = async (dataToFindBooking) => {
     `${BACK_URL_LOCALHOST}routes/bookingClient/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingDetailsByClientMailAndDate",
-      dataToFindBooking: dataToFindBooking
+      dataToFindBooking: dataToFindBooking,
     });
 
   loading(true);
@@ -108,7 +108,7 @@ const displayDetails = (detailsBooking) => {
     name: detailsBooking[0].nombre,
     lastname: detailsBooking[0].apellido,
     email: detailsBooking[0].correo,
-    phone: detailsBooking[0].telefono
+    phone: detailsBooking[0].telefono,
   };
   let details = document.querySelector(".details");
 
@@ -122,7 +122,7 @@ const displayDetails = (detailsBooking) => {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric"
+    day: "numeric",
   };
 
   startBooking.setMinutes(
@@ -200,7 +200,7 @@ const displayDetails = (detailsBooking) => {
       adultos: detail.adultos,
       ninos: detail.ninos,
       imagenDos: detail.imagenDos,
-      precio: detail.precio
+      precio: detail.precio,
     };
   });
 
@@ -237,7 +237,7 @@ const displayRooms = (rooms, nights) => {
         adults: room.adultos,
         childs: room.ninos,
         quantity: quantityRoomsEqualConditions,
-        total: room.precio * quantityRoomsEqualConditions * nights
+        total: room.precio * quantityRoomsEqualConditions * nights,
       });
     }
   });
@@ -257,7 +257,10 @@ const drawRooms = (roomsToDisplay) => {
             <div class="row">
          <img src="data:image/png;base64,${room.image}">
          <div class="columnRoomData">
-          <span>Cantidad: ${room.quantity}</span>
+  
+         <span>${room.quantity} ${
+      room.quantity > 1 ? "Habitaciones" : "Habitacion"
+    }  </span>
           <span>${room.adults} ${room.adults > 1 ? "Adultos" : "Adulto"} </span>
           ${
             room.childs > 0
@@ -266,7 +269,11 @@ const drawRooms = (roomsToDisplay) => {
                 }</span>`
               : ""
           }  
-         <span>US$ ${room.total}</span>
+           
+        <span>${
+          window.innerWidth <= 600 ? room.total + " US$" : " US$" + room.total
+        }</span>
+       
          </div>
         </div>
 

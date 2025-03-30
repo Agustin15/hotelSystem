@@ -143,6 +143,7 @@
   .dateBooking {
     width: 97%;
     color: rgb(0, 0, 0);
+    border-top: 1px solid gray;
     padding: 0.5rem;
     background: none;
     font-weight: bold;
@@ -317,6 +318,7 @@
   .bookingData {
     color: white;
     padding: 0.8rem;
+    padding-top: 1.5rem;
     height: 15rem;
     width: 100%;
     border: 1px solid rgb(182, 182, 182);
