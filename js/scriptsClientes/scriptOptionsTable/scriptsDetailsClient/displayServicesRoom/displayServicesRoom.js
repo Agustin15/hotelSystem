@@ -4,8 +4,12 @@ export const displayServicesDetailsRoom = (numberRoom, servicesRoom) => {
   modal.innerHTML = `
   <div class="containServicesRoom">
       <div class="headerServicesRoom">
+                  <div class="titleServicesRoom">
                 <h3>Servicios habitacion ${numberRoom}</h3>
+                 </div>
+                <div class="closeServicesRoom">
                 <button class="btnCloseServicesRoom">X</button>
+                </div>
         </div>
         <div class="bodyServicesRoom"></div>
   </div>

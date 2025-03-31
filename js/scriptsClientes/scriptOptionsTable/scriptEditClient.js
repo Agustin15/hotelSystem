@@ -28,6 +28,7 @@ export const configEditClient = async () => {
   });
 
   if (dataClient) {
+    form.style.display = "flex";
     drawForm(dataClient);
     submitEditForm(form);
   } else {

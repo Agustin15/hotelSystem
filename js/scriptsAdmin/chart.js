@@ -121,13 +121,13 @@ function graphicClientsDashboard(dataPoints, chartClientsBooking, titulo) {
     axisY: {
       title: "Clientes",
       titleFontColor: "black",
-      titleFontSize: 17,
+      titleFontSize: window.innerWidth <= 600 ? 14 : 17,
       gridColor: "white"
     },
     axisX: {
       title: "Meses",
       titleFontColor: "black",
-      titleFontSize: 17
+      titleFontSize: window.innerWidth <= 600 ? 14 : 17
     },
 
     data: [
@@ -214,7 +214,7 @@ const graphicRevenues = (dataPoints, chartRevenues, title) => {
       title: "Meses",
       valueFormatString: "MMM",
       titleFontColor: "black",
-      titleFontSize: 17,
+      titleFontSize: window.innerWidth <= 600 ? 14 : 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true
@@ -225,7 +225,7 @@ const graphicRevenues = (dataPoints, chartRevenues, title) => {
       valueFormatString: "$##0.00",
       gridColor: "white",
       titleFontColor: "black",
-      titleFontSize: 17,
+      titleFontSize: window.innerWidth <= 600 ? 14 : 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true,
@@ -266,7 +266,7 @@ async function getCategoryRoomsMostReserved() {
     );
 
     const result = await response.json();
-  
+
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
@@ -328,7 +328,7 @@ function graphicRooms(dataPointsRoomsBooking, chartRooms, title) {
       text: title
     },
     legend: {
-      fontSize: 15
+      titleFontSize: window.innerWidth <= 600 ? 14 : 15
     },
 
     data: [

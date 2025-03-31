@@ -30,13 +30,12 @@ class clientController
 
       if ($dataClientMail) {
 
-        return array("advertencia" => "El correo ingresado ya esta en uso");
+        throw new Error("El correo ingresado ya esta en uso");
       } else {
 
         $dataClientPhone = $this->client->getClientByPhone($req['phone'])->fetch_array(MYSQLI_ASSOC);
         if ($dataClientPhone) {
-
-          return array("advertencia" => "El telefono ingresado ya esta en uso");
+          throw new Error("El telefono ingresado ya esta en uso");
         } else {
 
           $this->client->setMail($req['mail']);

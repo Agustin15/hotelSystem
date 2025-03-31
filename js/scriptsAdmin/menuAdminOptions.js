@@ -1,5 +1,18 @@
 import { FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 export const optionsMenuAdmin = () => {
+  let openMenu = document.querySelector(".openMenu").querySelector("img");
+  let closeMenu = document.querySelector(".closeMenu").querySelector("img");
+  let navAdmin = document.getElementById("navAdmin");
+
+  openMenu.addEventListener("click", () => {
+    navAdmin.classList.remove("navAdminHide");
+    navAdmin.classList.add("navAdminShow");
+  });
+
+  closeMenu.addEventListener("click", () => {
+    navAdmin.classList.add("navAdminHide");
+  });
+
   let optionEditProfile = document.querySelector(".editProfile");
   if (optionEditProfile) {
     optionEditProfile.addEventListener("click", () => {

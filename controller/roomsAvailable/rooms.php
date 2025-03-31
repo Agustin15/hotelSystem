@@ -59,7 +59,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $roomsHotel = $room->getAllRoomsHotel();
 
 
-            $roomsAvailablesByDate= array_filter($roomsHotel, function ($roomAvailable) use ($room, $dateBooking) {
+            $roomsAvailablesByDate = array_filter($roomsHotel, function ($roomAvailable) use ($room, $dateBooking) {
 
                $start = new DateTime($dateBooking['start']);
                $end = new DateTime($dateBooking['end']);
@@ -78,7 +78,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                }
             });
 
-            $categoryQuantity= array_map(function ($detailsCategoyRoom) use ($room, $roomsAvailablesByDate) {
+            $categoryQuantity = array_map(function ($detailsCategoyRoom) use ($room, $roomsAvailablesByDate) {
 
                return quantityCategoryRoom(array_values($roomsAvailablesByDate), $room, $detailsCategoyRoom['categoria']);
             }, $room->getAllCategoryRooms());

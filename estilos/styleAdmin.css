@@ -12,6 +12,13 @@ body {
   height: 100vh;
 }
 
+
+#navAdmin .closeMenu {
+
+  display: none;
+
+}
+
 #navAdmin {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
@@ -34,11 +41,12 @@ body {
 }
 
 #navAdmin .titleNav span {
-  margin-top: 0.8rem;
+  margin-top: 0rem;
 }
 
 #navAdmin .titleNav img {
   width: 40px;
+  margin-top: -1rem;
 }
 
 #navAdmin .menu {
@@ -65,9 +73,8 @@ body {
 }
 
 .liBookingMarginTop {
-  margin-top:7.5rem;
+  margin-top: 7.5rem;
 }
-
 
 #navAdmin .menu li:hover {
   cursor: pointer;
@@ -250,6 +257,9 @@ body {
   margin-top: 1.5rem;
 }
 
+.headerDashboard {
+  display: none;
+}
 .rowOne {
   display: flex;
   align-items: start;

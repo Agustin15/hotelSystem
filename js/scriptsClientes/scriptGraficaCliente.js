@@ -132,17 +132,17 @@ function graphicClients(dataPoints, grafica, titleAxisX, greenShades) {
 
     axisY: {
       title: "Clientes",
-      titleFontSize: 25,
+      titleFontSize: window.innerWidth <= 600 ? 17 : 25,
       margin: 0,
-      labelFontSize: 18,
+      labelFontSize: window.innerWidth <= 600 ? 15 : 18,
       gridColor: "white"
     },
 
     axisX: {
       title: titleAxisX,
-      titleFontSize: 25,
+      titleFontSize: window.innerWidth <= 600 ? 17 : 25,
       margin: 0,
-      labelFontSize: 18
+      labelFontSize: window.innerWidth <= 600 ? 12 : 18
     },
 
     data: [

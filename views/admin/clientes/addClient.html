@@ -1,96 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-
-<body>
-
-
+  <body>
     <div class="containFormAdd">
-        <form>
+      <form>
+        <div class="title">
+          <h3>Agregar cliente</h3>
+          <img src="../../../img/agregarCliente.png" />
+        </div>
 
-            <div class="title">
-
-                <h3>Agregar cliente</h3>
-                <img src="../../../img/agregarCliente.png">
+        <div class="row1">
+          <div class="name">
+            <label for="inputName">Nombre</label>
+            <input
+              autocomplete="off"
+              type="text"
+              id="inputName"
+              name="name"
+              placeholder="Ingrese nombre"
+            />
+            <div class="msjError">
+              <img src="../../../img/warningInput.png" />
+              <span></span>
             </div>
+          </div>
 
-            <div class="row1">
-                <div class="name">
-
-                    <label for="inputName">Nombre</label>
-                    <input autocomplete="off" type="text" id="inputName" name="name" placeholder="Ingrese nombre">
-                    <div class="msjError">
-                        <div class="arrow"></div>
-                        <img src="../../../img/advertenciaLogin.png">
-                        <span></span>
-                    </div>
-                </div>
-
-                <div class="lastName">
-
-                    <label for="inputLastName">Apellido</label>
-                    <input autocomplete="off" type="text" id="inputLastName" name="lastName"
-                        placeholder="Ingrese apellido">
-                    <div class="msjError">
-                        <div class="arrow"></div>
-                        <img src="../../../img/advertenciaLogin.png">
-                        <span></span>
-                    </div>
-                </div>
+          <div class="lastName">
+            <label for="inputLastName">Apellido</label>
+            <input
+              autocomplete="off"
+              type="text"
+              id="inputLastName"
+              name="lastName"
+              placeholder="Ingrese apellido"
+            />
+            <div class="msjError">
+              <img src="../../../img/warningInput.png" />
+              <span></span>
             </div>
+          </div>
+        </div>
 
-
-            <div class="row2">
-                <div class="phone">
-
-                    <label for="inputPhone">Telefono</label>
-                    <input autocomplete="off" type="text" id="inputPhone" name="phone" placeholder="Ingrese telefono">
-                    <div class="msjError">
-                        <div class="arrow"></div>
-                        <img src="../../../img/advertenciaLogin.png">
-                        <span></span>
-                    </div>
-                </div>
-
-                <div class="mail">
-
-                    <label for="inputMail">Correo</label>
-                    <input autocomplete="off" type="text" id="inputMail" name="mail" placeholder="Ingrese correo">
-
-                    <div class="msjError">
-                        <div class="arrow"></div>
-                        <img src="../../../img/advertenciaLogin.png">
-                        <span></span>
-                    </div>
-                </div>
+        <div class="row2">
+          <div class="phone">
+            <label for="inputPhone">Telefono</label>
+            <input
+              autocomplete="off"
+              type="text"
+              id="inputPhone"
+              name="phone"
+              placeholder="Ingrese telefono"
+            />
+            <div class="msjError">
+              <img src="../../../img/warningInput.png" />
+              <span></span>
             </div>
+          </div>
 
-            <div class="buttons">
-
-                <button class="btnAdd" type="submit">Agregar
-                    <img class="loading" src="../../../img/spinnerBooking.gif"> </button>
-                <button type="reset" class="btnClean">Limpiar</button>
-
+          <div class="mail">
+            <label for="inputMail">Correo</label>
+            <input
+              autocomplete="off"
+              type="text"
+              id="inputMail"
+              name="mail"
+              placeholder="Ingrese correo"
+            />
+            <div class="msjError">
+              <img src="../../../img/warningInput.png" />
+              <span></span>
             </div>
+          </div>
+        </div>
 
-            <div class="alertForm">
+        <div class="buttons">
+          <button class="btnAdd" type="submit">
+            Agregar
+            <img class="loading" src="../../../img/spinnerBooking.gif" />
+          </button>
+          <button type="reset" class="btnClean">Limpiar</button>
+        </div>
 
-                <img>
-                <div class="body">
-                    <span></span>
+        <div class="alertForm">
+          <img />
+          <div class="body">
+            <span></span>
 
-                    <p></p>
-                </div>
-
-            </div>
-        </form>
+            <p></p>
+          </div>
+        </div>
+      </form>
     </div>
-
-</body>
-
+  </body>
 </html>

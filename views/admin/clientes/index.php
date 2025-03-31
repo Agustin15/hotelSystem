@@ -11,13 +11,11 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleClientes.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleResponsiveClientes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
     <script type="module" src="../../../js/scriptsClientes/scriptCliente.js" defer> </script>
-
-
-
 
     <title>Clientes</title>
 
@@ -29,6 +27,9 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <header>
         <nav id="navAdmin">
+            <div class="closeMenu">
+                <img src="../../../img/menuOpen.png">
+            </div>
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -202,27 +203,31 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
 
         <div class="menuBar">
-            <div class="title">
-                <h3>Clientes</h3>
-                <img src="../../../img/clientsBanner.png">
+            <div class="openMenu">
+                <img src="../../../img/menuHabitacion.png">
             </div>
-            <nav>
-                <ul>
-                    <li class="chartLi">
-                        <img src="../../../img/grafica.png">
-                        <a>Grafica</a>
-                    </li>
-                    <li class="listLi">
-                        <img src="../../../img/listaClientes.png">
-                        <a>Lista</a>
-                    </li>
-                    <li class="addLi">
-                        <img src="../../../img/agregarCliente.png">
-                        <a>Agregar</a>
-                    </li>
-                </ul>
-            </nav>
-
+            <div class="columnMenuBar">
+                <div class="title">
+                    <h3>Clientes</h3>
+                    <img src="../../../img/clientsBanner.png">
+                </div>
+                <nav>
+                    <ul>
+                        <li class="chartLi">
+                            <img src="../../../img/grafica.png">
+                            <a>Grafica</a>
+                        </li>
+                        <li class="listLi">
+                            <img src="../../../img/listaClientes.png">
+                            <a>Lista</a>
+                        </li>
+                        <li class="addLi">
+                            <img src="../../../img/agregarCliente.png">
+                            <a>Agregar</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
 
         <div class="option"></div>

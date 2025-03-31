@@ -11,8 +11,7 @@ export const drawForm = (data) => {
           <input type="text" id="inputName" data-ref="nombre"
               autocomplete="off" value=${data.nombre} name="name" placeholder="Ingrese nombre">
           <div class="msjError">
-              <div class="arrow"></div>
-              <img src="../../../img/advertenciaLogin.png">
+              <img src="../../../img/warningInput.png">
               <span></span>
           </div>
       </div>
@@ -23,8 +22,7 @@ export const drawForm = (data) => {
           <input type="text" id="inputLastName" autocomplete="off" data-ref="apellido" 
           name="lastName" placeholder="Ingrese apellido" value=${data.apellido} >
           <div class="msjError">
-              <div class="arrow"></div>
-              <img src="../../../img/advertenciaLogin.png">
+              <img src="../../../img/warningInput.png">
               <span></span>
           </div>
       </div>
@@ -38,8 +36,7 @@ export const drawForm = (data) => {
           <input type="text" id="inputPhone" autocomplete="off" onpaste="return false"
               data-ref="telefono" name="phone" value=${data.telefono}  placeholder="Ingrese telefono">
           <div class="msjError">
-              <div class="arrow"></div>
-              <img src="../../../img/advertenciaLogin.png">
+              <img src="../../../img/warningInput.png">
               <span></span>
           </div>
       </div>
@@ -50,9 +47,8 @@ export const drawForm = (data) => {
           <input type="text" autocomplete="off" value=${data.correo}  id="inputMail" name="mail"
               data-ref="correo" placeholder="Ingrese correo">
 
-          <div class="msjError">
-              <div class="arrow"></div>
-              <img src="../../../img/advertenciaLogin.png">
+          <div class="msjError"
+              <img src="../../../img/warningInput.png">
               <span></span>
           </div>
       </div>
@@ -80,19 +76,15 @@ export const drawForm = (data) => {
 
   let btnClean = document.querySelector(".btnClean");
   btnClean.addEventListener("click", (event) => {
-
     event.preventDefault();
     cleanInputs(form);
   });
 };
 
 const cleanInputs = (form) => {
-
-  let inputs=form.querySelectorAll("input");
-  inputs.forEach(input => {
-    
-    input.value="";
+  let inputs = form.querySelectorAll("input");
+  inputs.forEach((input) => {
+    input.value = "";
   });
   console.log(inputs);
-
 };

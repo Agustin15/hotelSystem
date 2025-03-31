@@ -97,9 +97,9 @@ const fetchPost = async (client) => {
       if (response.status == 401) {
         invalidAuthentication();
       } else throw result.error;
-    } else if (result.advertencia) {
-      throw result.advertencia;
-    } else if (result.respuesta) {
+    }
+
+    if (result.respuesta) {
       data = result.respuesta;
       alertForm(
         "../../../img/tickAdmin.png",
@@ -109,16 +109,15 @@ const fetchPost = async (client) => {
       cleanInputs();
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error,", error);
+    let msjError = "Ups, no se pudo agregar el cliente";
+    if (error.indexOf("en uso") > -1) {
+      msjError = error;
+    }
+
+    alertForm("../../../img/advertenciaLogin.png", msjError, "Error");
   } finally {
     loading(false);
-    if (!data) {
-      alertForm(
-        "../../../img/advertenciaLogin.png",
-        "Ups, no se pudo agregar el cliente",
-        "Error"
-      );
-    }
   }
 };
 
@@ -138,7 +137,7 @@ export const alertForm = (img, msj, title) => {
     }, 3500);
   } else {
     alertForm.classList.add("alertFormError");
-    console.log(alertForm);
+  
   }
 };
 

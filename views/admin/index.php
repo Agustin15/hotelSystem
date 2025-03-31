@@ -15,10 +15,12 @@ $actualYear = date("Y");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../estilos/styleAdmin.css">
+    <link rel="stylesheet" href="../../estilos/responsive/styleResponsiveAdmin.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script type="module" src="../../js/scriptsAdmin/scriptsAdmin.js" defer> </script>
-   
+
 
     <title>Admin</title>
 
@@ -26,6 +28,10 @@ $actualYear = date("Y");
 
     <header>
         <nav id="navAdmin">
+            <div class="closeMenu">
+                <img src="../../img/menuOpen.png">
+            </div>
+
             <div class="titleNav">
                 <img class="iconoMenu" src="../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -198,6 +204,15 @@ $actualYear = date("Y");
     </header>
 
     <div id="dashboard">
+        <div class="headerDashboard">
+            <div class="openMenu">
+                <img src="../../img/menuHabitacion.png">
+            </div>
+            <div class="titleDashboard">
+                <h3>Inicio</h3>
+                <img src="../../img/iconDashboard.png">
+            </div>
+        </div>
         <div class="rowOne">
             <div class="containItemsData">
                 <ul class="itemsData"></ul>
@@ -280,5 +295,3 @@ $actualYear = date("Y");
 </body>
 
 </html>
-
-

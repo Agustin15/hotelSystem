@@ -240,10 +240,12 @@ const drawOptionDetail = async (url, configOptionDetail) => {
   } finally {
     loadingPage(false, modal);
     if (!optionPage) {
+      window.scroll(0, 0);
       pageNotFound(modal);
       closePageNotFound(modal);
     } else {
       modal.innerHTML = optionPage;
+      window.scroll(0, 0);
       configOptionDetail();
     }
   }

@@ -1,0 +1,1962 @@
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: rgb(255, 253, 253);
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: start;
+    gap: 0;
+    height: 100vh;
+  }
+
+  #navAdmin {
+    transform: translateX(-100%);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    width: 11rem;
+    height: 76vh;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navAdminShow {
+    animation-name: showMenu;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes showMenu {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  .navAdminHide {
+    animation-name: hideMenu;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes hideMenu {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  #navAdmin .closeMenu {
+    width: 97%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  #navAdmin .closeMenu img {
+    width: 31px;
+    cursor: pointer;
+  }
+
+  #navAdmin .titleNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0;
+    gap: 0.5rem;
+    color: white;
+    font-weight: bold;
+  }
+
+  #navAdmin .titleNav span {
+    margin-top: 0.3rem;
+  }
+
+  #navAdmin .titleNav img {
+    width: 45px;
+    margin-top: -3rem;
+  }
+
+  #navAdmin .menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -0.5rem;
+    height: 70%;
+    color: white;
+    list-style: none;
+  }
+
+  #navAdmin .menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 11rem;
+    height: auto;
+    min-height: 2.2rem;
+    padding-top: 0.6rem;
+    justify-content: space-between;
+  }
+
+  #navAdmin .menu li:hover {
+    cursor: pointer;
+    background-color: rgb(5, 141, 146);
+  }
+
+  #navAdmin .menu li .item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    position: relative;
+    margin-left: 3rem;
+  }
+  .liBookingMarginTop {
+    margin-top: 2rem;
+  }
+
+  #navAdmin .loadingUser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    gap: 0.5rem;
+  }
+
+  #navAdmin .loadingUser img {
+    width: 30px;
+    margin-top: 0.2rem;
+  }
+
+  .bodyClient {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .menuBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 0;
+    align-items: start;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    padding-top: 0.5rem;
+    box-shadow: 2px 2px 2px rgb(172, 172, 172);
+  }
+
+  .menuBar .openMenu {
+    width: 1%;
+    display: flex;
+    z-index: 2;
+  }
+
+  .menuBar .openMenu img {
+    width: 23px;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+
+  .menuBar .columnMenuBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .menuBar .title {
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 95%;
+    margin-left: 0;
+  }
+  .menuBar .title img {
+    width: 35px;
+  }
+
+  .menuBar ul {
+    display: flex;
+    margin-left: 0;
+    gap: 1rem;
+    list-style: none;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    width: 100%;
+  }
+  .menuBar ul li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 0.4rem;
+    cursor: pointer;
+  }
+  .menuBar ul li img {
+    width: 27px;
+  }
+
+  .option {
+    width: 100%;
+    height: 76%;
+    margin-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
+  }
+  .option .containChart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    width: 94%;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgb(167, 167, 167);
+    height: 27rem;
+    padding-top: 1rem;
+    margin-left: 0rem;
+    margin-top: 2rem;
+    border-radius: 10px;
+  }
+  .option .containChart .header {
+    display: flex;
+    justify-content: start;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.5rem;
+    width: 93%;
+    padding-bottom: 1rem;
+  }
+  .option .containChart .titleChart {
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .option .containChart .titleChart img {
+    width: 35px;
+    opacity: 100%;
+  }
+
+  .containChart .header .search .containSearch {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .containChart .header .search select {
+    width: 9rem;
+    border-radius: 3px;
+    outline: none;
+    height: 32px;
+    border: 1px solid rgb(180, 180, 180);
+  }
+  .containChart .header .search button {
+    width: 2.5rem;
+    height: 2rem;
+    left: 7rem;
+    padding: 0.3rem;
+    color: white;
+    background-color: rgb(7, 169, 180);
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+    position: absolute;
+  }
+  .option .containChart .header .search button img {
+    width: 17px;
+    opacity: 100%;
+  }
+  .option .containChart .header .search button:hover {
+    background-color: rgb(8, 143, 153);
+    cursor: pointer;
+  }
+  .option .containChart #chartClients {
+    width: 90%;
+    min-height: 75%;
+  }
+  .option .containChart .loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 17px;
+    opacity: 100%;
+    margin-top: 5rem;
+    color: rgb(83, 83, 83);
+  }
+  .option .containChart .loading img {
+    width: 86px;
+    opacity: 60%;
+  }
+  .option .containChart .noData {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    color: rgb(141, 141, 141);
+    align-items: center;
+    font-weight: bold;
+    font-size: 19px;
+    margin-top: 5rem;
+  }
+  .option .containChart .noData img {
+    width: 80px;
+    opacity: 76%;
+  }
+
+  .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    opacity: 60%;
+    margin-left: 0;
+    color: rgb(116, 115, 115);
+    margin-top: 12rem;
+  }
+  .loadingPage img {
+    width: 40px;
+  }
+
+  .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 70%;
+    font-size: 16px;
+    align-items: center;
+    height: 100%;
+    margin-left: 0;
+    margin-top: 8rem;
+    color: gray;
+  }
+  .pageNotFound img {
+    width: 90px;
+  }
+  .pageNotFound .header {
+    display: none;
+    width: 97%;
+    justify-content: flex-end;
+  }
+  .pageNotFound .header span {
+    opacity: 80%;
+    margin-top: 0.5rem;
+  }
+
+  .containTable {
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    margin-left: 0;
+    border-radius: 6px;
+    font-size: 18px;
+    box-shadow: 2px 2px 2px gray;
+    background-color: white;
+    gap: 0rem;
+    width: 94%;
+    border: 1px solid rgb(173, 173, 173);
+  }
+  .containTable .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 99%;
+    gap: 1rem;
+  }
+  .containTable .header .containSearch {
+    flex-grow: 1;
+    margin-top: 1rem;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .containTable .header .containSearch input {
+    padding-right: 2rem;
+    padding-left: 1rem;
+    border: 1px solid rgb(173, 173, 173);
+    width: 11rem;
+    height: 2.2rem;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgb(230, 230, 230);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position-x: 0.5rem;
+    background-position-y: 0.5rem;
+    outline: none;
+  }
+  .containTable .header .containSearch button {
+    background-color: rgb(0, 189, 173);
+    box-shadow: none;
+    position: absolute;
+    margin-left: 12rem;
+    border-radius: 2px;
+    color: white;
+    width: 49px;
+    height: 2.3rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .containTable .header .containSearch img {
+    width: 19px;
+  }
+  .containTable .header .containSearch button:hover {
+    background-color: rgb(3, 145, 133);
+  }
+
+  .titleTable {
+    flex-grow: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .titleTable h3 {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+  }
+
+  .titleNoData {
+    width: auto;
+    padding-left: 0;
+    justify-content: center;
+  }
+
+  .scroll {
+    min-width: 100%;
+    max-width: 100%;
+    height: 22rem;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+
+  .controls {
+    display: flex;
+    padding-top: 1rem;
+    gap: 1.5rem;
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+    width: 100%;
+    border-top: 1px solid rgb(212, 212, 212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .controls span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .tableClients {
+    font-size: 15px;
+    width: 12rem;
+    height: auto;
+    padding-top: 1rem;
+  }
+  .tableClients thead th {
+    padding: 1rem;
+  }
+  .tableClients thead tr {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+  }
+  .tableClients tbody td {
+    padding: 0.4rem;
+    width: auto;
+    text-align: center;
+  }
+  .tableClients tbody td .idClient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    gap: 0.4rem;
+  }
+  .tableClients tbody td .idClient img {
+    width: 24px;
+  }
+  .tableClients tbody td .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    color: white;
+    width: 100%;
+    padding-left: 0;
+  }
+  .tableClients tbody td .buttons img {
+    width: 21px;
+  }
+  .tableClients tbody td .buttons button {
+    box-shadow: 1px 1px 1px gray;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+    cursor: pointer;
+  }
+
+  .tableClients tbody .tdOptions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    padding-left: 0;
+  }
+  .tableClients tbody .tdId {
+    width: 5rem;
+  }
+  .tableClients .trGray {
+    background-color: rgb(235, 235, 235);
+  }
+  .tableClients .loading {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    opacity: 60%;
+    height: 75%;
+  }
+  .tableClients .loading img {
+    width: 40px;
+  }
+
+  .noDataClients,
+  .noResults {
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+    gap: 1rem;
+    color: rgb(148, 148, 148);
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 5rem;
+    padding-bottom: 2rem;
+  }
+  .noDataClients img,
+  .noResults img {
+    width: 70px;
+    opacity: 70%;
+  }
+
+  .containFormAdd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    gap: 1rem;
+    padding-bottom: 2rem;
+  }
+  .containFormAdd form {
+    width: 91%;
+    height: 34rem;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+    border: 1px solid rgb(189, 189, 189);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 4px;
+  }
+
+  .containFormAdd form .title img {
+    width: 36px;
+  }
+  .containFormAdd form .title h3 {
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+  }
+  .containFormAdd form label {
+    background-color: white;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: -0.8rem;
+    left: 0.8rem;
+  }
+  .containFormAdd form input {
+    width: 16rem;
+    height: 1.2rem;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    border: 1px solid rgb(173, 173, 173);
+    border-radius: 3px;
+    padding-left: 2.5rem;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position-x: 0.5rem;
+    background-position-y: 1rem;
+    outline: none;
+  }
+
+  .containFormAdd form #inputName {
+    background-image: url("../../img/usuario.png");
+  }
+  .containFormAdd form #inputLastName {
+    background-image: url("../../img/lastNameForm.png");
+  }
+  .containFormAdd form #inputMail {
+    background-image: url("../../img/mailForm.png");
+  }
+  .containFormAdd form #inputPhone {
+    background-image: url("../../img/phoneForm.png");
+  }
+  .containFormAdd form .row1,
+  .containFormAdd form .row2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 3rem;
+  }
+  .containFormAdd form .name,
+  .containFormAdd form .lastName,
+  .containFormAdd form .phone,
+  .containFormAdd form .mail {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+  }
+  .containFormAdd form .buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .containFormAdd form .buttons .btnAdd {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .containFormAdd form .buttons .btnAdd img {
+    display: none;
+    width: 28px;
+  }
+  .containFormAdd form .buttons button {
+    width: 8rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(1, 156, 167);
+  }
+
+  .containFormAdd form .msjError {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    position: absolute;
+    margin-left: 0;
+    margin-top: 2.7rem;
+    gap: 0.5rem;
+    border-radius: 3px;
+    background: none;
+    color: rgb(190, 5, 5);
+    font-size: 14px;
+  }
+  .containFormAdd form .msjError img {
+    width: 25px;
+  }
+
+  .containFormAdd form .alertForm {
+    display: none;
+    justify-content: start;
+    align-items: center;
+    width: 17.5rem;
+    margin-top: -1rem;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 15px;
+  }
+
+  .containFormAdd form .alertForm img {
+    width: 24px;
+  }
+
+  .modalMainClient {
+    position: absolute;
+    z-index: 3;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    background: rgba(44, 44, 44, 0.6);
+  }
+  .modalMainClient .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    opacity: 100%;
+    color: rgb(119, 119, 119);
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  .modalMainClient .loadingPage img {
+    width: 40px;
+    opacity: 60%;
+  }
+  .modalMainClient .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 15px;
+    align-items: center;
+    height: auto;
+    margin-top: 2rem;
+    opacity: 100%;
+    background-color: white;
+    padding: 0.5rem;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .modalMainClient .pageNotFound img {
+    width: 65px;
+    opacity: 75%;
+  }
+  .modalMainClient .pageNotFound .header {
+    display: flex;
+    justify-content: flex-end;
+    width: 106%;
+  }
+  .modalMainClient .pageNotFound .header button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modalMainClient .pageNotFound .header button:hover {
+    background-color: rgb(182, 4, 4);
+  }
+  .modalMainClient .containDelete {
+    gap: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 16rem;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    text-align: center;
+  }
+  .modalMainClient .containDelete .loading {
+    display: flex;
+    align-items: center;
+    opacity: 60%;
+    font-size: 15px;
+    gap: 1rem;
+  }
+  .modalMainClient .containDelete .loading img {
+    width: 35px;
+  }
+  .modalMainClient .containDelete img {
+    width: 40px;
+  }
+  .modalMainClient .containDelete .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.7rem;
+  }
+  .modalMainClient .containDelete button {
+    padding: 0.4rem;
+    width: 6rem;
+    background-color: rgb(221, 1, 1);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+  }
+  .modalMainClient .containDelete button:hover {
+    background-color: rgb(189, 3, 3);
+    cursor: pointer;
+  }
+  .modalMainClient .containDelete .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .modalMainClient .containDelete .error {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+  }
+  .modalMainClient .containDelete .error img {
+    width: 26px;
+  }
+  .modalMainClient .containDelete .noData {
+    font-size: 16px;
+    color: rgb(126, 126, 126);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: -1rem;
+  }
+  .modalMainClient .containDelete .noData .content {
+    opacity: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modalMainClient .containDelete .noData img {
+    width: 60px;
+  }
+  .modalMainClient .containDelete .noData button {
+    opacity: 100%;
+  }
+  .modalMainClient .containFormEdit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    margin-top: 0;
+    width: 94%;
+    height: 84%;
+    gap: 1rem;
+    background-color: white;
+    border-radius: 3px;
+  }
+  .modalMainClient .containFormEdit .loading {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 50%;
+    font-size: 17px;
+    gap: 1rem;
+  }
+  .modalMainClient .containFormEdit .loading img {
+    width: 40px;
+  }
+  .modalMainClient .containFormEdit .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: -1rem;
+  }
+  .modalMainClient .containFormEdit .title img {
+    width: 50px;
+  }
+  .modalMainClient .containFormEdit .title h3 {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+  }
+  .modalMainClient .containFormEdit form {
+    width: 78%;
+    height: 27rem;
+    padding: 1rem;
+    border-radius: 3px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+  }
+  .modalMainClient .containFormEdit form .loadingForm {
+    display: none;
+    align-items: center;
+    opacity: 50%;
+    font-size: 17px;
+    gap: 1rem;
+  }
+  .modalMainClient .containFormEdit form .loadingForm img {
+    width: 20px;
+  }
+  .modalMainClient .containFormEdit form .contentForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+  .modalMainClient .containFormEdit form label {
+    background-color: white;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: -0.8rem;
+    left: 0.8rem;
+  }
+  .modalMainClient .containFormEdit form input {
+    width: 16rem;
+    height: 1.2rem;
+    padding: 0.5rem;
+    padding-top: 1rem;
+    border: 1px solid rgb(173, 173, 173);
+    border-radius: 3px;
+    padding-left: 2.5rem;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position-x: 0.5rem;
+    background-position-y: 1rem;
+    outline: none;
+  }
+  .modalMainClient .containFormEdit form input:hover {
+    border: 2px solid rgb(0, 156, 156);
+  }
+  .modalMainClient .containFormEdit form .inputAlert {
+    border: 1px solid rgb(216, 3, 3);
+  }
+  .modalMainClient .containFormEdit form .inputAlert::placeholder {
+    color: red;
+  }
+  .modalMainClient .containFormEdit form .inputAlert:hover {
+    border: 2px solid rgb(216, 3, 3);
+  }
+  .modalMainClient .containFormEdit form #inputName {
+    background-image: url("../../img/usuario.png");
+  }
+  .modalMainClient .containFormEdit form #inputLastName {
+    background-image: url("../../img/lastNameForm.png");
+  }
+  .modalMainClient .containFormEdit form #inputMail {
+    background-image: url("../../img/mailForm.png");
+  }
+  .modalMainClient .containFormEdit form #inputPhone {
+    background-image: url("../../img/phoneForm.png");
+  }
+  .modalMainClient .containFormEdit form .row1,
+  .modalMainClient .containFormEdit form .row2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 3rem;
+  }
+  .modalMainClient .containFormEdit form .name,
+  .modalMainClient .containFormEdit form .lastName,
+  .modalMainClient .containFormEdit form .phone,
+  .modalMainClient .containFormEdit form .mail {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+  }
+  .modalMainClient .containFormEdit form .buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .modalMainClient .containFormEdit form .buttons .btnAdd {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .modalMainClient .containFormEdit form .buttons .btnAdd img {
+    display: none;
+    width: 28px;
+  }
+  .modalMainClient .containFormEdit form .buttons button {
+    width: 7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(29, 140, 204);
+  }
+  .modalMainClient .containFormEdit form .buttons button:hover {
+    background-color: rgb(22, 125, 185);
+    cursor: pointer;
+  }
+  .modalMainClient .containFormEdit .msjError {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    gap: 0.5rem;
+    border-radius: 3px;
+    background-color: none;
+    color: rgb(185, 14, 14);
+    font-size: 14px;
+    margin-top: 2.8rem;
+    margin-left: 0;
+    position: absolute;
+  }
+  .modalMainClient .containFormEdit .msjError img {
+    width: 21px;
+  }
+
+  .modalMainClient .containFormEdit .msjErrorShow {
+    display: flex;
+  }
+  .modalMainClient .containFormEdit .alertForm {
+    display: none;
+    justify-content: start;
+    align-items: center;
+    width: 18rem;
+    gap: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin-top: -1rem;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 15px;
+  }
+  .modalMainClient .containFormEdit .alertForm span {
+    font-weight: bold;
+  }
+  .modalMainClient .containFormEdit .alertForm .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .modalMainClient .containFormEdit .alertForm img {
+    width: 30px;
+  }
+  .modalMainClient .containFormEdit .alertFormCorrect {
+    background: linear-gradient(#3879a5, #2858b1);
+  }
+  .modalMainClient .containFormEdit .alertFormError {
+    background: linear-gradient(#dd0e0e, #a00404);
+  }
+  .modalMainClient .containFormEdit .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    gap: 1rem;
+    height: 100%;
+    color: rgb(126, 126, 126);
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .modalMainClient .containFormEdit .noData img {
+    opacity: 70%;
+    width: 60px;
+  }
+  .modalMainClient .containFormEdit .close {
+    display: flex;
+    height: auto;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .modalMainClient .containFormEdit .close button {
+    background-color: rgb(29, 140, 204);
+    padding: 0.5rem;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .modalMainClient .containFormEdit .close button:hover {
+    background-color: rgb(20, 112, 165);
+  }
+  .modalMainClient .containDetailsClientBooking {
+    width: 97%;
+    height: auto;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-left: 0;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+  .modalMainClient .containDetailsClientBooking .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(146, 146, 146);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .modalMainClient .containDetailsClientBooking .header .title {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0;
+  }
+  .modalMainClient .containDetailsClientBooking .header .title img {
+    width: 45px;
+  }
+  .modalMainClient .containDetailsClientBooking .header .closeDetails {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: flex-end;
+  }
+  .modalMainClient .containDetailsClientBooking .header .closeDetails button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    border: none;
+    background-color: rgb(233, 3, 3);
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .modalMainClient .containDetailsClientBooking .header .closeDetails button:hover {
+    background-color: rgb(199, 2, 2);
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 75%;
+    width: 100%;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .loading {
+    display: none;
+    align-items: center;
+    opacity: 50%;
+    font-size: 20px;
+    gap: 1rem;
+    margin-top: 8rem;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .loading img {
+    width: 56px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    width: 100%;
+    border-bottom: 1px solid rgb(211, 211, 211);
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient img {
+    width: 45px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .noBookings {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 60%;
+    font-size: 19px;
+    color: rgb(133, 133, 133);
+    margin-top: 5rem;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .noBookings img {
+    width: 90px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .indexBookings {
+    display: flex;
+    gap: 1rem;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    margin-top: 1.5rem;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .indexBookings span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 96%;
+    justify-content: start;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .date {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    gap: 3rem;
+    align-items: center;
+    justify-content: start;
+    padding-top: 0;
+    text-align: center;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .date img {
+    width: 31px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .date .start,
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .date .end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .headerItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    width: 17rem;
+    color: white;
+    padding: 0.5rem;
+    padding-top: 0.1rem;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .headerItem img {
+    width: 40px;
+    height: 40px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .headerItem p {
+    padding: 0.5rem;
+    width: 14rem;
+    font-size: 15px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .footer {
+    background-color: white;
+    height: 2rem;
+    box-shadow: 2px 2px 2px gray;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1rem;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  .modalMainClient .containDetailsClientBooking .bookingsClient .bookings .footer img {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  .modalOptionsBookingClient {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 44, 44, 0.6);
+  }
+  .modalOptionsBookingClient .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    opacity: 100%;
+    color: rgb(187, 187, 187);
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 17rem;
+  }
+  .modalOptionsBookingClient .loadingPage img {
+    width: 30px;
+    opacity: 60%;
+  }
+  .modalOptionsBookingClient .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 15px;
+    align-items: center;
+    height: auto;
+    margin-left: 0;
+    margin-top: 17rem;
+    opacity: 100%;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .modalOptionsBookingClient .pageNotFound img {
+    width: 65px;
+    opacity: 75%;
+  }
+  .modalOptionsBookingClient .pageNotFound .header {
+    display: flex;
+    justify-content: flex-end;
+    width: 112%;
+  }
+  .modalOptionsBookingClient .pageNotFound .header button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modalOptionsBookingClient .pageNotFound .header button:hover {
+    background-color: rgb(182, 4, 4);
+  }
+  .modalOptionsBookingClient .containGuestDetails {
+    width: 91%;
+    height: 67%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-left: 0;
+    margin-right: 0.7rem;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    box-shadow: 2px 2px 2px gray;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    padding-top: 0;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 99%;
+    border-radius: 3px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header img {
+    width: 35px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1rem;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header .close {
+    width: 106%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header .close button {
+    border: none;
+    background-color: rgb(216, 5, 5);
+    color: #f5f5f5;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .modalOptionsBookingClient .containGuestDetails .header .close button:hover {
+    background-color: rgb(206, 0, 0);
+  }
+  .modalOptionsBookingClient .containGuestDetails .body {
+    height: 84%;
+    width: 104%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .loading {
+    display: none;
+    justify-content: center;
+    height: 85%;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    opacity: 60%;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .loading img {
+    width: 50px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85%;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(126, 126, 126);
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .noData img {
+    width: 80px;
+    opacity: 70%;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .totalGuests {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .totalGuests img {
+    width: 30px;
+    opacity: 70%;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .totalGuests .adults,
+  .modalOptionsBookingClient .containGuestDetails .body .totalGuests .childs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 1rem;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li {
+    padding: 0.5rem;
+    width: 68%;
+    background: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .roomNumb {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .content {
+    display: flex;
+    align-items: center;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .content .icon {
+    height: 65%;
+    display: flex;
+    align-items: center;
+    opacity: 100%;
+    padding: 0.8rem;
+    background-color: #037b80;
+    border-radius: 5px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .content .icon img {
+    width: 35px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li img {
+    width: 25px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .guests {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: #037b80;
+    border-radius: 5px;
+    margin-left: 1rem;
+    font-size: 15px;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .guests .adults,
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .guests .childs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .guests .adults .value,
+  .modalOptionsBookingClient .containGuestDetails .body .roomsGuests li .guests .childs .value {
+    display: flex;
+    align-items: center;
+  }
+  .modalOptionsBookingClient .containRoomsDetails,
+  .modalOptionsBookingClient .containServicesDetails {
+    width: 95%;
+    height: 75%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-left: 0;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header,
+  .modalOptionsBookingClient .containServicesDetails .header {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header img,
+  .modalOptionsBookingClient .containServicesDetails .header img {
+    width: 40px;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header .title,
+  .modalOptionsBookingClient .containServicesDetails .header .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1rem;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header .close,
+  .modalOptionsBookingClient .containServicesDetails .header .close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header .close button,
+  .modalOptionsBookingClient .containServicesDetails .header .close button {
+    border: none;
+    background-color: rgb(233, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .header .close button:hover,
+  .modalOptionsBookingClient .containServicesDetails .header .close button:hover {
+    background-color: rgb(196, 2, 2);
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body,
+  .modalOptionsBookingClient .containServicesDetails .body {
+    height: 76%;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .loading,
+  .modalOptionsBookingClient .containServicesDetails .body .loading {
+    display: none;
+    align-items: center;
+    font-size: 19px;
+    justify-content: center;
+    height: 92%;
+    gap: 1rem;
+    opacity: 60%;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .loading img,
+  .modalOptionsBookingClient .containServicesDetails .body .loading img {
+    width: 50px;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .noData,
+  .modalOptionsBookingClient .containServicesDetails .body .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 82%;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(126, 126, 126);
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .noData img,
+  .modalOptionsBookingClient .containServicesDetails .body .noData img {
+    width: 80px;
+    opacity: 70%;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .rooms,
+  .modalOptionsBookingClient .containRoomsDetails .body .services,
+  .modalOptionsBookingClient .containServicesDetails .body .rooms,
+  .modalOptionsBookingClient .containServicesDetails .body .services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+    height: 87%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .rooms li,
+  .modalOptionsBookingClient .containRoomsDetails .body .services li,
+  .modalOptionsBookingClient .containServicesDetails .body .rooms li,
+  .modalOptionsBookingClient .containServicesDetails .body .services li {
+    padding: 0.5rem;
+    width: 90%;
+    background: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    color: white;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .rooms li .icon,
+  .modalOptionsBookingClient .containRoomsDetails .body .services li .icon,
+  .modalOptionsBookingClient .containServicesDetails .body .rooms li .icon,
+  .modalOptionsBookingClient .containServicesDetails .body .services li .icon {
+    padding: 0.5rem;
+    background: rgb(20, 135, 139);
+    border-radius: 3px;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .rooms li .icon img,
+  .modalOptionsBookingClient .containRoomsDetails .body .services li .icon img,
+  .modalOptionsBookingClient .containServicesDetails .body .rooms li .icon img,
+  .modalOptionsBookingClient .containServicesDetails .body .services li .icon img {
+    width: 120px;
+    height: 60px;
+  }
+  .modalOptionsBookingClient .containRoomsDetails .body .rooms li .info,
+  .modalOptionsBookingClient .containRoomsDetails .body .services li .info,
+  .modalOptionsBookingClient .containServicesDetails .body .rooms li .info,
+  .modalOptionsBookingClient .containServicesDetails .body .services li .info {
+    padding: 0.5rem;
+    width: 15rem;
+    font-weight: bold;
+    height: 3.7rem;
+    background: rgb(20, 135, 139);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 15px;
+  }
+  .modalOptionsBookingClient .containServicesDetails {
+    width: 95%;
+    height: 75%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-left: 0;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    width: 100%;
+    height: 87%;
+    gap: 0.5rem;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12.3rem;
+    gap: 0;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    padding: 0.4rem;
+    gap: 0.5rem;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 2px 2px 2px gray;
+    border-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li .headerItem .row img {
+    width: 35px;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li .footerItem {
+    height: 1rem;
+    padding: 0.4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    box-shadow: 2px 2px 2px gray;
+    justify-content: start;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .modalOptionsBookingClient .containServicesDetails .roomServices li .footerItem img {
+    width: 20px;
+    cursor: pointer;
+  }
+
+  .modalServicesRoom {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modalServicesRoom .containServicesRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 87%;
+    margin-left: 0;
+    width: 96%;
+    margin-top: 2rem;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .modalServicesRoom .containServicesRoom .titleServicesRoom {
+    width: 112%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom h3 {
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+
+  .modalServicesRoom .containServicesRoom .closeServicesRoom {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom button {
+    border: none;
+    background-color: rgb(233, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom button:hover {
+    background-color: rgb(196, 2, 2);
+  }
+  .modalServicesRoom .bodyServicesRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    height: 75%;
+    width: 100%;
+    gap: 1rem;
+  }
+  .modalServicesRoom ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  .modalServicesRoom ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.2rem;
+    border-radius: 5px;
+    color: white;
+    width: 15rem;
+    height: 7rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    border: 1px solid rgb(1, 155, 160);
+    box-shadow: 2px 2px 2px gray;
+    font-size: 17px;
+    padding: 0.5rem;
+  }
+  .modalServicesRoom ul li .name {
+    text-overflow: ellipsis;
+    width: 14rem;
+    font-size: 15px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .modalServicesRoom ul li .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .modalServicesRoom ul li .columnOne,
+  .modalServicesRoom ul li .columnTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 3px;
+    width: 3rem;
+    height: 4rem;
+    padding: 1rem;
+    background: rgb(2, 112, 116);
+  }
+  .modalServicesRoom ul li .columnOne {
+    height: 3.5rem;
+  }
+  .modalServicesRoom ul li .columnOne img {
+    width: 70px;
+    height: 70px;
+  }
+  .modalServicesRoom ul li .columnTwo {
+    font-size: 14px;
+    width: 7rem;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .modalServicesRoom ul li .columnTwo a {
+    font-weight: bold;
+  }
+}
