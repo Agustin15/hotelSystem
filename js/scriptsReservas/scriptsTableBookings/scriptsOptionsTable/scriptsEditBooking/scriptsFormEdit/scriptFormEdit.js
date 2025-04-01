@@ -13,7 +13,10 @@ import {
 } from "../../../../scriptsOptionsCalendar/scriptsMethodsFetch.js";
 import { drawTable } from "../../../scriptTableBookings.js";
 
-import { BACK_URL_LOCALHOST } from "../../../../../urlLocalhost.js";
+import {
+  BACK_URL_LOCALHOST,
+  FRONT_URL_LOCALHOST
+} from "../../../../../urlLocalhost.js";
 import { invalidAuthentication } from "../../../../../scriptsAdmin/userData.js";
 import { cleanRoomsCart } from "./scriptCartRooms.js";
 
@@ -45,9 +48,11 @@ export const drawFormEdit = (body, booking, clients) => {
         <div class="row">
             <div class="containForm">
             <div class="title">
-
             <h3>Editar Reserva ${booking.idReserva} </h3>
             <img src="../../../img/updateBooking.png">
+            <div class="containOpenCart">
+            <img class="openCart" src="../../../img/menuHabitacion.png">
+            </div>
                </div>
         
                 <div class="nights">
@@ -57,6 +62,7 @@ export const drawFormEdit = (body, booking, clients) => {
                 </div>
 
                 <form id="formEdit">
+             
                     <div class="rowOne">
                         <div class="dateStart">
                             <label>Fecha de llegada</label>
@@ -91,6 +97,7 @@ export const drawFormEdit = (body, booking, clients) => {
 
                     </div>
 
+                   
                     <div class="containButton">
                     <button type="submit">
                         Editar reserva
@@ -105,9 +112,7 @@ export const drawFormEdit = (body, booking, clients) => {
 
                             <p></p>
                         </div>
-
                     </div>
-
                 </form>
 
             </div>
@@ -137,6 +142,7 @@ export const drawFormEdit = (body, booking, clients) => {
   drawSelectClients(formEdit, selectClients);
   configRoomsCart(bookingGlobal.idReserva, nights);
   calculateDate();
+  closeAndOpenCart();
   sendFormEdit();
 };
 
@@ -151,6 +157,26 @@ function calculateDifferenceNight(llegada, salida) {
 const drawSelectClients = (form, selectClients) => {
   displayClients(form, allClients);
   selectClients.value = bookingGlobal.idClienteReserva;
+};
+
+const closeAndOpenCart = () => {
+  let openCart = document.querySelector(".openCart");
+  let cart = document.querySelector(".cartRooms");
+
+  openCart.addEventListener("click", () => {
+    if (openCart.src == `${FRONT_URL_LOCALHOST}img/menuHabitacion.png`) {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/menuOpenCart.png`;
+      cart.classList.remove("cartRoomsHide");
+      cart.classList.add("cartRoomsShow");
+      cart.style.display = "flex";
+    } else {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/menuHabitacion.png`;
+      cart.classList.add("cartRoomsHide");
+      setTimeout(function () {
+        cart.style.display = "none";
+      }, 200);
+    }
+  });
 };
 
 const calculateDate = () => {

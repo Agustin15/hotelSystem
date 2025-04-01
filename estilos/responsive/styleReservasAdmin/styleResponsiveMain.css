@@ -304,6 +304,7 @@
     justify-content: center;
     flex-direction: row;
     align-items: start;
+    position: fixed;
     gap: 1rem;
     width: 100%;
     background-color: white;

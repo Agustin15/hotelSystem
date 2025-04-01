@@ -17,7 +17,9 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <link rel="stylesheet" href="../../../estilos/responsive/styleReservasAdmin/styleResponsiveTableBookings.css">
 
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleEditBooking.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleReservasAdmin/styleResponsiveEditBooking.css">
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleAddBooking.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleReservasAdmin/styleResponsiveAddBooking.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -348,3 +350,6 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 </body>
 
 </html>
+
+
+

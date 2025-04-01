@@ -1,11 +1,13 @@
+@media only screen and (max-width: 600px) {
+
 .containCalendar {
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 12rem;
   width: auto;
-  margin-left: 13.8rem;
+  margin-left: 0;
   background-color: white;
   padding: 1rem;
   box-shadow: 2px 2px 2px gray;
@@ -880,5 +882,4 @@
   border-radius: 3px;
   outline: none;
 }
-
-/*# sourceMappingURL=styleAddBooking.css.map */
+}

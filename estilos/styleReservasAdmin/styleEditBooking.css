@@ -350,6 +350,7 @@
   margin-top: -1rem;
   margin-left: 2rem;
 }
+
 .containEditOption .containForm .title {
   display: flex;
   gap: 1rem;
@@ -383,6 +384,9 @@
   font-size: 18px;
   color: rgb(0, 0, 0);
   padding-top: 1rem;
+}
+.containEditOption .containForm .title .containOpenCart {
+  display: none;
 }
 .containEditOption .containForm form .rowOne,
 .containEditOption .containForm form .rowTwo {
@@ -784,7 +788,7 @@
   outline: none;
 }
 
-.containEditOption .alertGuests {
+.modalOptionEditBooking .alertGuests {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -797,15 +801,15 @@
   margin-top: 16rem;
   color: rgb(0, 0, 0);
 }
-.containEditOption .alertGuests p {
+.modalOptionEditBooking .alertGuests p {
   font-weight: bold;
   font-size: 18px;
   text-align: center;
 }
-.containEditOption .alertGuests img {
+.modalOptionEditBooking .alertGuests img {
   width: 72px;
 }
-.containEditOption .alertGuests button {
+.modalOptionEditBooking .alertGuests button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -818,7 +822,6 @@
   margin-top: 1rem;
   cursor: pointer;
 }
-.containEditOption .alertGuests button:hover {
+.modalOptionEditBooking .alertGuests button:hover {
   background-color: #920606;
 }
-

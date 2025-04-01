@@ -1,0 +1,892 @@
+@media only screen and (max-width: 600px) {
+  .modalOptionEditBooking {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 44, 44, 0.6);
+    color: #4bebd0;
+  }
+
+  .body {
+    width: 95%;
+    height: 97%;
+  }
+  .containEditOption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 91%;
+    height: auto;
+    padding-bottom: 2rem;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .containEditOption .headerWindow {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    box-shadow: 2px 2px 2px gray;
+  }
+  .containEditOption .headerWindow button {
+    background-color: rgb(233, 3, 3);
+    color: white;
+    font-weight: bold;
+    height: 2rem;
+    width: 2rem;
+    border: none;
+  }
+  .containEditOption .headerWindow button:hover {
+    background-color: rgb(212, 4, 4);
+    cursor: pointer;
+  }
+  .containEditOption .headerWindow .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 2.4rem;
+    margin-top: 0.9rem;
+    gap: 0.2rem;
+    color: rgb(255, 255, 255);
+  }
+  .containEditOption .headerWindow .menu li {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  .containEditOption .headerWindow .menu li img {
+    width: 20px;
+  }
+  .containEditOption .headerWindow .menu li:hover {
+    background: linear-gradient(rgb(57, 170, 161), rgb(4, 127, 131));
+  }
+  .containEditOption .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-left: 0rem;
+    margin-top: 12rem;
+    color: gray;
+  }
+  .containEditOption .loadingPage img {
+    width: 50px;
+  }
+  .containEditOption .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 70%;
+    font-size: 20px;
+    align-items: center;
+    height: 100%;
+    margin-left: 0rem;
+    margin-top: 9rem;
+    color: gray;
+  }
+  .containEditOption .pageNotFound img {
+    width: 120px;
+    opacity: 60%;
+  }
+  .containEditOption .pageNotFound .header {
+    display: none;
+    width: 97%;
+    justify-content: flex-end;
+  }
+  .containEditOption .pageNotFound .header span {
+    opacity: 80%;
+    margin-top: 0.5rem;
+  }
+  .containEditOption .noDataFormEdit {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 60%;
+    font-size: 21px;
+    text-align: center;
+    margin-top: 7rem;
+    color: rgb(151, 151, 151);
+  }
+  .containEditOption .noDataFormEdit img {
+    width: 113px;
+  }
+  .containEditOption .noDataFormEdit h3 {
+    width: 21rem;
+  }
+  .containEditOption .loadingEdit {
+    display: none;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    opacity: 60%;
+    margin-top: 7rem;
+  }
+  .containEditOption .loadingEdit img {
+    width: 50px;
+  }
+
+  .containEditOption .containFormAndCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0.5rem;
+    width: 99%;
+    height: 98%;
+  }
+
+  .containEditOption .containFormAndCart .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+    gap: 1rem;
+  }
+  .containEditOption .containFormAndCart .title img {
+    width: 43px;
+  }
+
+  .containEditOption .row {
+    display: flex;
+    align-items: start;
+    width: 99%;
+    height: 99%;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .containEditOption .cartRooms {
+    position: absolute;
+    z-index: 2;
+    margin-top: 2rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    height: 30rem;
+    transform: translateX(1rem);
+    width: 16rem;
+    border-radius: 4px;
+    padding: 0 1rem 0 1rem;
+    border: 1px solid rgb(202, 202, 202);
+    box-shadow: 2px 2px 2px gray;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+  }
+
+  .cartRoomsShow {
+    animation-name: showCart;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes showCart {
+    from {
+      transform: translateX(2rem);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .cartRoomsHide {
+    animation-name: hideCart;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes hideCart {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(2rem);
+    }
+  }
+
+  .containEditOption .cartRooms .titleCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background-color: white;
+    width: 107%;
+    height: 2rem;
+    border: 1px solid rgb(189, 189, 189);
+    padding: 0.5rem;
+    box-shadow: 1px 1px 1px rgb(114, 114, 114);
+    border-radius: 3px;
+  }
+  .containEditOption .cartRooms .titleCart h3 {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+  }
+  .containEditOption .cartRooms .titleCart img {
+    width: 28px;
+    margin-top: -0.3rem;
+  }
+  .containEditOption .cartRooms ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 111%;
+    height: 21rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 1rem;
+  }
+  .containEditOption .cartRooms .noRoomsCart {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 80%;
+  }
+  .containEditOption .cartRooms .noRoomsCart img {
+    width: 53px;
+  }
+  .containEditOption .cartRooms .noRoomsCart span {
+    color: white;
+    font-size: 17px;
+  }
+  .containEditOption .cartRooms li {
+    padding: 0.5rem;
+    padding-top: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background: #ffffff;
+    list-style: none;
+    border-radius: 5px;
+    color: white;
+    width: 88%;
+    box-shadow: 2px 2px 2px rgb(68, 68, 68);
+  }
+  .containEditOption .cartRooms li .row {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    padding-top: 0.3rem;
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .cartRooms li .icon {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .containEditOption .cartRooms li .icon img {
+    width: 90px;
+    height: 50px;
+  }
+  .containEditOption .cartRooms li .icon,
+  .containEditOption .cartRooms li .info {
+    background: #e6e6e6;
+    border-radius: 5px;
+  }
+  .containEditOption .cartRooms li .info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+    background-color: white;
+  }
+  .containEditOption .cartRooms li .info h5 {
+    font-size: 17px;
+  }
+  .containEditOption .cartRooms li .info .guests {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: 16px;
+  }
+  .containEditOption .cartRooms li .info .guests .containAdults,
+  .containEditOption .cartRooms li .info .guests .containChilds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .containEditOption .cartRooms li .price,
+  .containEditOption .cartRooms li .header {
+    display: flex;
+    width: 100%;
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .cartRooms li .price {
+    padding-top: 0.2rem;
+    font-size: 14px;
+    font-weight: bold;
+    justify-content: space-between;
+  }
+  .containEditOption .cartRooms li .header {
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 0.2rem;
+    justify-content: space-between;
+  }
+  .containEditOption .cartRooms li .header .statusAddedNew {
+    color: rgb(2, 196, 2);
+  }
+  .containEditOption .cartRooms li .header .statusAddedPreviously {
+    color: rgb(219, 11, 11);
+  }
+  .containEditOption .cartRooms li .header img {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+  .containEditOption .cartRooms .total {
+    display: none;
+    color: black;
+    justify-content: start;
+    align-items: center;
+    width: 101%;
+    height: 1rem;
+    margin-top: 2rem;
+    gap: 0.6rem;
+    border: 1px solid gray;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 4px;
+  }
+  .containEditOption .cartRooms .total img {
+    width: 25px;
+  }
+
+  .containEditOption .containForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 99%;
+    border-radius: 5px;
+    padding: 0;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .containEditOption .containForm .title {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .containEditOption .containForm .title h3 {
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .containForm .title img {
+    width: 34px;
+  }
+  .containEditOption .containForm .title .containOpenCart {
+    width: 87%;
+    display: flex;
+    position: absolute;
+    margin-left: 0;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .containEditOption .containForm .title .openCart {
+    width: 17px;
+  }
+
+  .containEditOption .containForm .nights {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .containForm .nights img {
+    width: 20px;
+    opacity: 99%;
+  }
+  .containEditOption .containForm form {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    width: 99%;
+    height: 99%;
+    gap: 1rem;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    padding-top: 0;
+  }
+
+  .containEditOption .containForm form .rowOne,
+  .containEditOption .containForm form .rowTwo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: start;
+    align-items: center;
+  }
+  .containEditOption .containForm form label {
+    font-size: 14px;
+  }
+  .containEditOption .containForm form .dateStart,
+  .containEditOption .containForm form .dateEnd,
+  .containEditOption .containForm form .client,
+  .containEditOption .containForm form .quantityRooms {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+  .containEditOption .containForm form select {
+    width: 15rem;
+    height: 2.2rem;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 3px;
+    padding-left: 2.5rem;
+    font-size: 14px;
+    outline: none;
+  }
+  .containEditOption .containForm form input {
+    padding-left: 2rem;
+    font-size: 14px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 3px;
+    width: 13rem;
+    height: 2.2rem;
+    outline: none;
+  }
+  .containEditOption .containForm form select,
+  .containEditOption .containForm form input {
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position-x: 0.4rem;
+    background-position-y: 0.6rem;
+  }
+  .containEditOption .containForm form .inputAlert {
+    border: 1px solid rgb(214, 0, 0);
+  }
+  .containEditOption .containForm form .inputAlert:hover {
+    border: 2px solid rgb(214, 0, 0);
+  }
+  .containEditOption .containForm form .inputAlert::placeholder {
+    color: red;
+  }
+  .containEditOption .containForm form #startInput {
+    background-image: url("../../../img/enterDate.png");
+  }
+  .containEditOption .containForm form #endInput {
+    background-image: url("../../../img/exitDate.png");
+  }
+  .containEditOption .containForm form #clientsSelect {
+    background-image: url("../../../img/usuario.png");
+  }
+  .containEditOption .containForm form #roomsQuantityInput {
+    background-image: url("../../../img/roomInfoIconInput.png");
+  }
+  .containEditOption .containForm form button {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 9rem;
+    border: none;
+    background-color: rgb(0, 155, 155);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    outline: none;
+    border-radius: 3px;
+    height: 2rem;
+    cursor: pointer;
+  }
+  .containEditOption .containForm form button img {
+    width: 25px;
+    display: none;
+  }
+  .containEditOption .containForm form button:hover {
+    background-color: rgb(5, 134, 134);
+  }
+  .containEditOption .containForm form .msjError {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    gap: 0.5rem;
+    width: 15rem;
+    border-radius: 3px;
+    background-color: rgb(255, 77, 77);
+    color: white;
+    font-size: 14px;
+    margin-top: -0.5rem;
+    position: relative;
+  }
+  .containEditOption .containForm form .msjError img {
+    width: 16px;
+  }
+  .containEditOption .containForm form .msjError .arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid rgb(255, 77, 77);
+    border-right: 10px solid transparent;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -0.2rem;
+    left: 0.2rem;
+  }
+  .containEditOption .containForm form .msjErrorShow {
+    display: flex;
+  }
+  .containEditOption .containForm .rowOne .btnCalculate {
+    height: 2.1rem;
+    width: 5rem;
+    margin-top: 0;
+  }
+  .containEditOption .containForm .containButton {
+    display: flex;
+    justify-content: center;
+    width: 89%;
+  }
+  .containEditOption .containForm .alertForm {
+    display: none;
+    justify-content: start;
+    align-items: center;
+    width: 16rem;
+    height: 2.5rem;
+    gap: 0.7rem;
+    margin-left: 0;
+    padding: 0.5rem;
+    margin-top: 0;
+    border-radius: 3px;
+    color: white;
+    border: 1px solid gray;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 15px;
+  }
+  .containEditOption .containEditOption .containForm .alertForm span {
+    font-weight: bold;
+  }
+  .containEditOption .containEditOption .containForm .alertForm .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .containEditOption .containForm .alertForm img {
+    width: 27px;
+  }
+  .containEditOption .containForm .alertFormCorrect {
+    background: linear-gradient(#2e888b, #065357);
+    display: flex;
+  }
+  .containEditOption .containForm .alertFormError {
+    background: linear-gradient(#dd0e0e, #a00404);
+    display: flex;
+  }
+
+  .containEditOption .noDataRoomsCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 15px;
+    opacity: 80%;
+    margin-top: 5rem;
+    font-weight: bold;
+    color: white;
+  }
+  .containEditOption .noDataRoomsCart img {
+    width: 61px;
+  }
+
+  .containEditOption .loadingRoomsCart {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 85%;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .containEditOption .loadingRoomsCart img {
+    width: 34px;
+  }
+
+  .containEditOption .containFreeRooms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 0;
+    padding: 1rem;
+    width: 90%;
+    height: 90%;
+  }
+  .containEditOption .containFreeRooms .title {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .containEditOption .containFreeRooms .title h3 {
+    font-size: 15px;
+    width: 84%;
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+  .containEditOption .containFreeRooms .title img {
+    width: 35px;
+  }
+  .containEditOption .containFreeRooms .rooms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 91%;
+    box-shadow: 2px 2px 2px gray;
+    border-radius: 4px;
+    padding: 1rem;
+    padding-top: 0;
+    border: 1px solid rgb(214, 214, 214);
+  }
+  .containEditOption .containFreeRooms .rooms .menuRooms {
+    display: flex;
+    width: 101%;
+    height: 3rem;
+    padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    justify-content: flex-start;
+    align-items: start;
+    border-bottom: 1px solid rgb(209, 209, 209);
+  }
+  .containEditOption .containFreeRooms .rooms .menuRooms li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    padding-bottom: 0.1rem;
+  }
+  .containEditOption .containFreeRooms .rooms .menuRooms li img {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .containEditOption .containFreeRooms .rooms .menuRooms li:hover {
+    border-bottom: 2px solid rgb(0, 179, 179);
+  }
+
+  .containEditOption .category {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 18rem;
+    width: 90%;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  .containEditOption .category h3 {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .category .noDataFreeRooms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    opacity: 70%;
+    font-size: 18px;
+  }
+  .containEditOption .category .noDataFreeRooms h3 {
+    color: rgb(0, 0, 0);
+  }
+  .containEditOption .category .noDataFreeRooms img {
+    width: 85px;
+  }
+  .containEditOption .category .loadingRooms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 16px;
+    width: 99%;
+    height: 99%;
+    margin-top: 0rem;
+    opacity: 61%;
+  }
+  .containEditOption .category .loadingRooms img {
+    width: 40px;
+  }
+  .containEditOption .category ul {
+    width: 112%;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    height: 100%;
+    margin-top: 0.1rem;
+    overflow-y: scroll;
+  }
+  .containEditOption .category ul li {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    list-style: none;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 2px 2px 2px rgb(114, 114, 114);
+  }
+  .containEditOption .category ul li .containAdd {
+    margin-top: 0.5rem;
+  }
+  .containEditOption .category ul li .containAdd button {
+    padding: 0.3rem;
+    background: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    width: 6rem;
+    font-size: 13px;
+    box-shadow: 2px 2px 2px rgb(7, 7, 7);
+  }
+  .containEditOption .category ul li .containAdd button img {
+    width: 16px;
+    height: 16px;
+  }
+  .containEditOption .category ul li .containAdd button:hover {
+    background-color: gainsboro;
+  }
+  .containEditOption .category ul li .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .containEditOption .category ul li .icon {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .containEditOption .category ul li .icon img {
+    width: 120px;
+    height: 50px;
+  }
+  .containEditOption .category ul li .icon,
+  .category ul li .info {
+    background: #1f888b;
+    border-radius: 5px;
+  }
+  .containEditOption .category ul li .info {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .containEditOption .category ul li .info h5 {
+    font-size: 14px;
+  }
+  .containEditOption .category ul li .info .guests {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 14px;
+  }
+  .containEditOption .category ul li .info .guests .containAdults,
+  .containEditOption .category ul li .info .guests .containChilds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .containEditOption .category ul li .info .guests input {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .modalOptionEditBooking .alertGuests {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 1rem;
+    align-items: center;
+    width: 76%;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-left: 0;
+    margin-top: 16rem;
+    color: rgb(0, 0, 0);
+  }
+  .modalOptionEditBooking .alertGuests p {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+  }
+  .modalOptionEditBooking .alertGuests img {
+    width: 55px;
+  }
+  .modalOptionEditBooking .alertGuests button {
+    width: 6rem;
+    height: 2rem;
+    color: white;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px black;
+    border: none;
+    border-radius: 3px;
+    background-color: #c40303;
+    font-size: 15px;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  .modalOptionEditBooking .alertGuests button:hover {
+    background-color: #920606;
+  }
+}
