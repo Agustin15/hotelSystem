@@ -26,7 +26,7 @@ $idBooking = $_GET['idBooking'];
                 <button class="btnAccept">Aceptar</button>
                 <button class="btnCancel">Cancelar</button>
             </div>
-            <div class="error"></div>
+            <div class="error"> </div>
         </div>
 
     </div>

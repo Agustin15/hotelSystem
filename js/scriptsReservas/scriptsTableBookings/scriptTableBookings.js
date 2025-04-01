@@ -20,7 +20,6 @@ export const displayTable = async () => {
   if (!urlParams.get("idBooking")) {
     let yearsAllBookings = await displaySelectYear();
 
-
     if (yearsAllBookings) {
       drawYearsSelect(yearsAllBookings);
       await displayControlIndex();
@@ -242,7 +241,9 @@ const noData = (error) => {
   tbody.innerHTML = ``;
 
   tfoot.innerHTML = `
-   <td rowspan="6" colspan="6">
+    <td rowspan="${window.innerWidth <= 600 ? 1 : 6}" colspan=${
+    window.innerWidth <= 600 ? 1 : 6
+  }" colspan>
   <div class="noDataBookings">
       <img src="../../../img/sinDatos.png">
       <span>${error}</span>
@@ -397,7 +398,7 @@ const displaySelectYear = async () => {
     loading(false);
     if (!data) {
       noData("No se encontraron reservas");
-      controlsIndex.style.display ="none";
+      controlsIndex.style.display = "none";
     }
     return data;
   }
@@ -525,7 +526,11 @@ const search = () => {
     if (rows.length == totalRowsHide) {
       document.querySelector(".controls").style.display = "none";
       tfoot.innerHTML = `
-   <td rowspan="6" colspan="6">
+
+    <td rowspan="${window.innerWidth <= 600 ? 2 : 6}" colspan=${
+        window.innerWidth <= 600 ? 2 : 6
+      }" colspan>
+
   <div class="noResults">
       <img src="../../../img/noFind.png">
       <span>Sin Resultados</span>
@@ -547,7 +552,9 @@ const loading = (state) => {
   if (state) {
     document.querySelector("tfoot").innerHTML = ` 
     
-       <td rowspan="6" colspan="6">
+         <td rowspan="${window.innerWidth <= 600 ? 2 : 6}" colspan=${
+      window.innerWidth <= 600 ? 2 : 6
+    }" colspan>
     <div class="loading">
       <span>Cargando datos</span>
       <img src="../../../img/spinnerMain.gif">

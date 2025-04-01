@@ -12,9 +12,12 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleReservasAdmin/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleTableBookings.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleReservasAdmin/styleResponsiveTableBookings.css">
+
     <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleEditBooking.css">
-    <link  rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleAddBooking.css" >
+    <link rel="stylesheet" href="../../../estilos/styleReservasAdmin/styleAddBooking.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -135,6 +138,11 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <header>
         <nav id="navAdmin">
+
+            <div class="closeMenu">
+                <img src="../../../img/menuOpen.png">
+            </div>
+
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -306,25 +314,29 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
 
     <div class="bodyBookings">
-
-
         <div class="menuBar">
-            <div class="title">
-                <h3>Reservas</h3>
-                <img src="../../../img/reservaId.png">
+            <div class="openMenu">
+                <img src="../../../img/menuHabitacion.png">
             </div>
-            <nav>
-                <ul>
-                    <li class="listLi">
-                        <img src="../../../img/reservas.png">
-                        <a>Lista</a>
-                    </li>
-                    <li class="addLi">
-                        <img src="../../../img/agregarReserva.png">
-                        <a>Agregar</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="columnMenuBar">
+                <div class="title">
+                    <h3>Reservas</h3>
+                    <img src="../../../img/reservaId.png">
+                </div>
+
+                <nav>
+                    <ul>
+                        <li class="listLi">
+                            <img src="../../../img/reservas.png">
+                            <a>Lista</a>
+                        </li>
+                        <li class="addLi">
+                            <img src="../../../img/agregarReserva.png">
+                            <a>Agregar</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
         </div>
 

@@ -1,0 +1,1432 @@
+@media only screen and (max-width: 600px) {
+  .containTable {
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    margin-top: 2rem;
+    margin-left: 0;
+    color: black;
+    border-radius: 6px;
+    font-size: 18px;
+    box-shadow: 2px 2px 2px gray;
+    background-color: white;
+    gap: 0.2rem;
+    width: 96%;
+  }
+  .containTable .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 99%;
+    margin-top: 1rem;
+  }
+
+  .containTable .containRowSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .containTable .titleTable {
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .containTable .titleTable h3 {
+    color: rgb(0, 0, 0);
+    font-size: 19px;
+  }
+
+  .containTable .header .containSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .containTable .header .containInput {
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    position: relative;
+    justify-content: center;
+  }
+  .containTable .header .containInput input {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    border: 1px solid rgb(173, 173, 173);
+    width: 12rem;
+    height: 2.1rem;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgb(230, 230, 230);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position-x: 0.5rem;
+    background-position-y: 0.5rem;
+    outline: none;
+  }
+  .containTable .header .containInput button {
+    background-color: rgb(0, 189, 173);
+    color: white;
+    position: absolute;
+    border-radius: 3px;
+    width: 42px;
+    left: 14rem;
+    height: 2.2rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .containTable .header .containInput img {
+    width: 19px;
+  }
+  .containTable .header .containInput button:hover {
+    background-color: rgb(3, 145, 133);
+  }
+  .containTable .header .containSelect {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    border-radius: 3px;
+    width: 10.4rem;
+  }
+
+  .containTable .header .containSelect select {
+    width: 13rem;
+    height: 2.2rem;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .containTable .header .containSelect .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .containTable .header .containSelect button {
+    background-color: rgb(0, 189, 173);
+    color: white;
+    position: absolute;
+    border-radius: 3px;
+    width: 42px;
+    left: 9rem;
+    height: 2.2rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .containTable .header .containSelect button img {
+    width: 17px;
+  }
+  .containTable .header .containSelect button:hover {
+    background-color: rgb(3, 145, 133);
+  }
+
+  .scroll {
+    height: auto;
+    min-width: 100%;
+    max-width: 100%;
+    width: auto;
+    height: 22rem;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+
+  .controls {
+    display: flex;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+    width: 100%;
+    border-top: 1px solid rgb(212, 212, 212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .controls span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .tableBookings {
+    min-width: 60rem;
+    width: 64rem;
+    padding-top: 1rem;
+  }
+  .tableBookings thead {
+    width: auto;
+  }
+  .tableBookings thead th {
+    padding: 1rem;
+    font-size: 15px;
+  }
+  .tableBookings thead .thQuantityRooms {
+    font-size: 14px;
+  }
+  .tableBookings thead tr {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+  }
+  .tableBookings tbody td {
+    padding: 0.5rem;
+    width: auto;
+    font-size: 16px;
+    text-align: center;
+  }
+  .tableBookings tbody td .idBooking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    gap: 0.4rem;
+    margin-left: 0.5rem;
+  }
+  .tableBookings tbody td .idBooking .bar {
+    width: 2rem;
+    height: 0.2rem;
+    border: 1px solid gray;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    justify-content: start;
+  }
+  .tableBookings tbody td .idBooking .bar .contentBar {
+    width: 40%;
+    background-color: #00e257;
+    height: 100%;
+    border-radius: 20px;
+    animation-name: inCurse;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes inCurse {
+    from {
+      margin-left: 0;
+    }
+    to {
+      margin-left: 2rem;
+    }
+  }
+  .tableBookings tbody td .idBooking .iconStatus {
+    width: 16px;
+  }
+  .tableBookings tbody td .idBooking img {
+    width: 18px;
+    cursor: pointer;
+  }
+  .tableBookings tbody td .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    color: white;
+    width: 15rem;
+    padding-left: 1rem;
+  }
+  .tableBookings tbody td .buttons img {
+    width: 18px;
+  }
+  .tableBookings tbody td .buttons button {
+    box-shadow: 1px 1px 1px gray;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+    cursor: pointer;
+  }
+  .tableBookings tbody td .buttons .btnDelete {
+    background-color: rgb(230, 3, 3);
+  }
+  .tableBookings tbody td .buttons .btnDelete:hover {
+    background-color: rgb(196, 0, 0);
+  }
+  .tableBookings tbody td .buttons .btnEdit {
+    background-color: rgb(6, 127, 207);
+  }
+  .tableBookings tbody td .buttons .btnEdit:hover {
+    background-color: rgb(1, 98, 163);
+  }
+  .tableBookings tbody td .buttons .btnDetails {
+    background-color: rgb(0, 124, 108);
+  }
+  .tableBookings tbody td .buttons .btnDetails:hover {
+    background-color: rgb(2, 107, 93);
+  }
+  .tableBookings tbody .btnDisabled img {
+    filter: grayscale(33);
+    opacity: 71%;
+  }
+  .tableBookings tbody .tdOptions {
+    width: 15rem;
+    display: flex;
+    justify-content: start;
+  }
+  .tableBookings tbody .tdStartDate,
+  .tableBookings tbody .tdEndDate {
+    width: 8rem;
+  }
+  .tableBookings tbody .tdId {
+    width: 5rem;
+  }
+  .tableBookings .trGray {
+    background-color: rgb(235, 235, 235);
+  }
+  .tableBookings .loading {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    opacity: 60%;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .tableBookings .loading img {
+    width: 40px;
+  }
+
+  .noDataBookings,
+  .noResults {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: auto;
+    font-weight: bold;
+    font-size: 18px;
+    color: grey;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .noDataBookings img,
+  .noResults img {
+    width: 80px;
+    opacity: 80%;
+  }
+
+  .modalMainBookings .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    opacity: 100%;
+    color: rgb(163, 163, 163);
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .modalMainBookings .loadingPage img {
+    width: 35px;
+    opacity: 60%;
+  }
+
+  .modalMainBookings .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 15px;
+    align-items: center;
+    height: auto;
+    margin-left: 0;
+    margin-top: 0;
+    opacity: 100%;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .modalMainBookings .pageNotFound img {
+    width: 65px;
+    opacity: 75%;
+  }
+  .modalMainBookings .pageNotFound .header {
+    display: flex;
+    justify-content: flex-end;
+    width: 111%;
+  }
+  .modalMainBookings .pageNotFound .header button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modalMainBookings .pageNotFound .header button:hover {
+    background-color: rgb(182, 4, 4);
+  }
+
+  .containDelete {
+    gap: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 81%;
+    margin-left: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    text-align: center;
+  }
+  .containDelete .loading {
+    display: none;
+    align-items: center;
+    opacity: 50%;
+    font-size: 5px;
+    gap: 1rem;
+  }
+  .containDelete .loading img {
+    width: 35px;
+  }
+  .containDelete img {
+    width: 42px;
+  }
+  .containDelete .buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.7rem;
+  }
+  .containDelete button {
+    padding: 0.4rem;
+    width: 5rem;
+    background-color: rgb(221, 1, 1);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+  }
+  .containDelete button:hover {
+    background-color: rgb(189, 3, 3);
+    cursor: pointer;
+  }
+  .containDelete .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .containDelete .error {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+  }
+  .containDelete .error img {
+    width: 30px;
+  }
+
+  .modalOptionsBookingDetails {
+    position: absolute;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 44, 44, 0.6);
+  }
+
+  .containDetailsBooking {
+    position: relative;
+    width: 94%;
+    height: 85%;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-left: 0;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+  .containDetailsBooking .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(146, 146, 146);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .containDetailsBooking .header .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -0.5rem;
+    gap: 1rem;
+  }
+  .containDetailsBooking .header .title img {
+    width: 45px;
+  }
+  .containDetailsBooking .header .closeDetails {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: flex-end;
+  }
+  .containDetailsBooking .header .closeDetails button {
+    border: none;
+    background-color: rgb(223, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 2rem;
+    height: 2rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .containDetailsBooking .header .closeDetails button:hover {
+    background-color: rgb(199, 3, 3);
+  }
+  .containDetailsBooking .bookingDetailsItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    height: 86%;
+    overflow-y: scroll;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .containDetailsBooking .bookingDetailsItem .headerItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    width: 15rem;
+    color: white;
+    padding: 0.5rem;
+    padding-top: 0.1rem;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: 2px 2px 2px gray;
+  }
+  .containDetailsBooking .bookingDetailsItem .headerItem img {
+    width: 31px;
+    height: 31px;
+  }
+  .containDetailsBooking .bookingDetailsItem .headerItem p {
+    padding: 0.5rem;
+    width: 10rem;
+    font-size: 15px;
+  }
+  .containDetailsBooking .bookingDetailsItem .footer {
+    background-color: white;
+    height: 2rem;
+    box-shadow: 2px 2px 2px gray;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1rem;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+  .containDetailsBooking .bookingDetailsItem .footer img {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  .containClientDetails {
+    width: 87%;
+    height: 12rem;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 1.5rem;
+  }
+  .containClientDetails .header {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    padding-top: 0;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 105%;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .containClientDetails .header img {
+    width: 30px;
+  }
+  .containClientDetails .header .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1rem;
+  }
+  .containClientDetails .header .close {
+    width: 104%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .containClientDetails .header .close button {
+    border: none;
+    background-color: rgb(223, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .containClientDetails .header .close button:hover {
+    background-color: rgb(199, 3, 3);
+  }
+  .containClientDetails .body {
+    height: 76%;
+    width: 110%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .containClientDetails .body .dataClient {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    padding-top: 1rem;
+    gap: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+  }
+  .containClientDetails .body .dataClient li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .containClientDetails .body .dataClient li h4 {
+    color: black;
+  }
+  .containClientDetails .body .dataClient li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  .containClientDetails .body .dataClient li a:hover {
+    text-decoration: underline;
+  }
+  .containClientDetails .body .dataClient li img {
+    width: 25px;
+  }
+  .containClientDetails .body .loadingDetails {
+    display: flex;
+    height: 92%;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    color: gray;
+  }
+  .containClientDetails .body .loadingDetails img {
+    width: 45px;
+    opacity: 60%;
+  }
+  .containClientDetails .body .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    height: 94%;
+    font-weight: bold;
+    color: gray;
+  }
+  .containClientDetails .body .noData img {
+    width: 80px;
+    opacity: 60%;
+  }
+
+  .containGuestDetails {
+    width: 93%;
+    height: 55%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+  .containGuestDetails .header {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    padding-top: 0;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 99%;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .containGuestDetails .header img {
+    width: 40px;
+  }
+  .containGuestDetails .header .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1rem;
+  }
+  .containGuestDetails .header .close {
+    width: 104%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .containGuestDetails .header .close button {
+    border: none;
+    background-color: rgb(223, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .containGuestDetails .header .close button:hover {
+    background-color: rgb(199, 3, 3);
+  }
+  .containGuestDetails .loadingDetails {
+    display: flex;
+    height: 92%;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    color: gray;
+  }
+  .containGuestDetails .loadingDetails img {
+    width: 45px;
+    opacity: 60%;
+  }
+  .containGuestDetails .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    height: 85%;
+    font-weight: bold;
+    color: gray;
+  }
+  .containGuestDetails .noData img {
+    width: 80px;
+    opacity: 60%;
+  }
+  .containGuestDetails .body {
+    height: 100%;
+    width: 104%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .containGuestDetails .body .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+  }
+  .containGuestDetails .body .noData img {
+    width: 80px;
+    opacity: 70%;
+  }
+  .containGuestDetails .body .totalGuests {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    font-size: 17px;
+    color: rgb(0, 0, 0);
+    opacity: 90%;
+  }
+  .containGuestDetails .body .totalGuests img {
+    width: 30px;
+    opacity: 70%;
+  }
+  .containGuestDetails .body .totalGuests .adults,
+  .containGuestDetails .body .totalGuests .childs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .roomsGuests {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    max-height: 20rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 1rem;
+  }
+  .roomsGuests li {
+    padding: 0.5rem;
+    width: 75%;
+    background: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .roomsGuests li .roomNumb {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+  }
+  .roomsGuests li .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .roomsGuests li .content .icon {
+    height: 61%;
+    display: flex;
+    align-items: center;
+    opacity: 100%;
+    padding: 1rem;
+    background-color: #027f83;
+    border-radius: 5px;
+  }
+  .roomsGuests li .content .icon img {
+    width: 30px;
+  }
+  .roomsGuests li img {
+    width: 30px;
+  }
+  .roomsGuests li .guests {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #027f83;
+    border-radius: 5px;
+    margin-left: 0;
+  }
+  .roomsGuests li .guests .adults,
+  .roomsGuests li .guests .childs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .roomsGuests li .guests .adults .value,
+  .roomsGuests li .guests .childs .value {
+    display: flex;
+    align-items: center;
+  }
+
+  .containRoomsDetails,
+  .containServicesDetails {
+    width: 95%;
+    height: 75%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .containRoomsDetails .noData,
+  .containServicesDetails .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 68%;
+    text-align: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(124, 124, 124);
+  }
+  .containRoomsDetails .noData img,
+  .containServicesDetails .noData img {
+    width: 80px;
+    opacity: 80%;
+  }
+  .containRoomsDetails .header,
+  .containServicesDetails .header {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .containRoomsDetails .header img,
+  .containServicesDetails .header img {
+    width: 40px;
+  }
+  .containRoomsDetails .header .title,
+  .containServicesDetails .header .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: -1rem;
+  }
+  .containRoomsDetails .header .close,
+  .containServicesDetails .header .close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .containRoomsDetails .header .close button,
+  .containServicesDetails .header .close button {
+    border: none;
+    background-color: rgb(223, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .containRoomsDetails .header .close button:hover,
+  .containServicesDetails .header .close button:hover {
+    background-color: rgb(199, 3, 3);
+  }
+  .containRoomsDetails .body,
+  .containServicesDetails .body {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .containRoomsDetails .body .loadingDetails,
+  .containServicesDetails .body .loadingDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    font-size: 20px;
+    gap: 1rem;
+    color: rgb(156, 156, 156);
+  }
+  .containRoomsDetails .body .loadingDetails img,
+  .containServicesDetails .body .loadingDetails img {
+    width: 50px;
+    opacity: 60%;
+  }
+  .containRoomsDetails .body .rooms,
+  .containRoomsDetails .body .services,
+  .containServicesDetails .body .rooms,
+  .containServicesDetails .body .services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .containRoomsDetails .body .rooms li,
+  .containRoomsDetails .body .services li,
+  .containServicesDetails .body .rooms li,
+  .containServicesDetails .body .services li {
+    padding: 0.5rem;
+    width: 92%;
+    background: white;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    color: white;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .containRoomsDetails .body .rooms li .icon,
+  .containRoomsDetails .body .services li .icon,
+  .containServicesDetails .body .rooms li .icon,
+  .containServicesDetails .body .services li .icon {
+    padding: 0.5rem;
+    background-color: #027f83;
+    border-radius: 3px;
+  }
+  .containRoomsDetails .body .rooms li .icon img,
+  .containRoomsDetails .body .services li .icon img,
+  .containServicesDetails .body .rooms li .icon img,
+  .containServicesDetails .body .services li .icon img {
+    width: 120px;
+    height: 60px;
+  }
+  .containRoomsDetails .body .rooms li .info,
+  .containRoomsDetails .body .services li .info,
+  .containServicesDetails .body .rooms li .info,
+  .containServicesDetails .body .services li .info {
+    padding: 0.5rem;
+    width: 15rem;
+    font-weight: bold;
+    font-size: 15px;
+    height: 3.7rem;
+    background-color: #027f83;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .containServicesDetails {
+    width: 90%;
+    height: 76%;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .containServicesDetails .roomServices {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .containServicesDetails .loading {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    height: 90%;
+    color: gray;
+  }
+  .containServicesDetails .loading img {
+    width: 50px;
+    opacity: 60%;
+  }
+  .containServicesDetails .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(116, 116, 116);
+    margin-top: 1rem;
+  }
+  .containServicesDetails .noData img {
+    width: 80px;
+    opacity: 70%;
+  }
+  .containServicesDetails .roomServices li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12.3rem;
+    gap: 0;
+  }
+  .containServicesDetails .roomServices li .headerItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    padding: 0.4rem;
+    gap: 0.5rem;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    box-shadow: 2px 2px 2px gray;
+    border-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+  .containServicesDetails .roomServices li .headerItem .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  .containServicesDetails .roomServices li .headerItem .row img {
+    width: 35px;
+  }
+  .containServicesDetails .roomServices li .footerItem {
+    height: 1rem;
+    padding: 0.4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    box-shadow: 2px 2px 2px gray;
+    justify-content: start;
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .containServicesDetails .roomServices li .footerItem img {
+    width: 20px;
+    cursor: pointer;
+  }
+
+  .modalServicesRoom {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .modalServicesRoom .containServicesRoom {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1;
+    margin-left: 0;
+    height: 74%;
+    width: 91%;
+    align-items: center;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    padding-bottom: 0.5rem;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .modalServicesRoom .titleServicesRoom {
+    width: 100%;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modalServicesRoom .closeServicesRoom {
+    width: 11%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom h3 {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom button {
+    border: none;
+    background-color: rgb(233, 3, 3);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .modalServicesRoom .containServicesRoom .headerServicesRoom button:hover {
+    background-color: rgb(196, 2, 2);
+  }
+
+  .modalServicesRoom .bodyServicesRoom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: white;
+    width: 100%;
+    gap: 1rem;
+  }
+  .modalServicesRoom ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  .modalServicesRoom ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.2rem;
+    border-radius: 5px;
+    color: white;
+    width: 15rem;
+    height: 7rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    box-shadow: 2px 2px 2px gray;
+    font-size: 17px;
+    padding: 0.5rem;
+  }
+  .modalServicesRoom ul li .name {
+    text-overflow: ellipsis;
+    width: 14rem;
+    font-size: 15px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .modalServicesRoom ul li .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .modalServicesRoom ul li .columnOne,
+  .modalServicesRoom ul li .columnTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 3px;
+    width: 3rem;
+    height: 4rem;
+    padding: 1rem;
+    background: rgb(2, 112, 116);
+  }
+  .modalServicesRoom ul li .columnOne {
+    height: 3.5rem;
+  }
+  .modalServicesRoom ul li .columnOne img {
+    width: 70px;
+    height: 70px;
+  }
+  .modalServicesRoom ul li .columnTwo {
+    font-size: 14px;
+    width: 7rem;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .modalServicesRoom ul li .columnTwo a {
+    font-weight: bold;
+  }
+
+  .alertRedirect {
+    width: 89%;
+    background-color: white;
+    height: 13rem;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-left: 0;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .alertRedirect .close {
+    width: 100%;
+    display: none;
+    justify-content: flex-end;
+  }
+  .alertRedirect .close button {
+    border: none;
+    background-color: rgb(0, 126, 158);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 19px;
+    cursor: pointer;
+  }
+  .alertRedirect .close button:hover {
+    background-color: rgb(0, 112, 139);
+  }
+  .alertRedirect .body {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+  .alertRedirect .body .title {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+  }
+  .alertRedirect .body .title img {
+    width: 50px;
+  }
+  .alertRedirect .body .content {
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  .alertRedirect .body .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .alertRedirect .body .buttons button {
+    background-color: #06a093;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px gray;
+    width: 5rem;
+    height: 2rem;
+    border: none;
+    cursor: pointer;
+  }
+  .alertRedirect .body .buttons button:hover {
+    background-color: #059da5;
+  }
+  .alertRedirect .noData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: rgb(116, 116, 116);
+    margin-top: 2rem;
+  }
+  .alertRedirect .noData img {
+    width: 80px;
+    opacity: 70%;
+  }
+  .alertRedirect .loadingDetails {
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    gap: 1rem;
+    margin-top: 2rem;
+    opacity: 60%;
+  }
+  .alertRedirect .loadingDetails img {
+    width: 50px;
+  }
+}

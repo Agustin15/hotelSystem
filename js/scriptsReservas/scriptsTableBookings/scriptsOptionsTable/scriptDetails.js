@@ -90,6 +90,7 @@ const drawItemData = async (itemUrlFind, idBooking) => {
   if (pageData) {
     modalOption(true, modalOptionsBookingDetails);
     modalOptionsBookingDetails.innerHTML = pageData;
+    
 
     itemUrlFind.method();
   }

@@ -13,6 +13,13 @@
   align-items: center;
   justify-content: space-between;
 }
+#navAdmin .closeMenu {
+  display: none;
+}
+
+.menuBar .openMenu {
+  display: none;
+}
 
 #navAdmin .titleNav {
   display: flex;

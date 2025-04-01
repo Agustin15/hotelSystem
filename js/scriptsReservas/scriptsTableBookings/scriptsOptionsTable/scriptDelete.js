@@ -26,6 +26,7 @@ export const configDelete = () => {
   btnCancel.addEventListener("click", () => {
     modalOption(false, document.querySelector(".modalMainBookings"));
   });
+  
 };
 
 const deleteBooking = async (idBooking) => {
