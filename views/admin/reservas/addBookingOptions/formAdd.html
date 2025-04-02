@@ -1,116 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-
-<body>
-
+  <body>
     <div class="containFormAndCart">
+      <div class="loading">
+        <span>Cargando datos</span>
+        <img src="../../../img/spinnerMain.gif" />
+      </div>
 
-        <div class="loading">
+      <div class="row">
+        <div class="containForm">
+          <div class="title">
+            <h3>Agregar reserva</h3>
+            <img src="../../../img/addBooking.png" />
+            <div class="containOpenCart">
+              <img class="openCart" src="../../../img/menuHabitacion.png" />
+            </div>
+          </div>
 
-            <span>Cargando datos</span>
-            <img src="../../../img/spinnerMain.gif">
-        </div>
+          <div class="nights">
+            <h3></h3>
+            <img src="../../../img/night.png" />
+          </div>
 
-        <div class="row">
-            <div class="containForm">
+          <form>
+            <div class="rowOne">
+              <div class="dateStart">
+                <label>Fecha de llegada</label>
+                <input
+                  name="startBooking"
+                  type="date"
+                  readonly
+                  id="startInput"
+                />
+              </div>
 
-                <div class="title">
-                    <h3>Agregar reserva</h3>
-                    <img src="../../../img/addBooking.png">
-                </div>
-
-                <div class="nights">
-
-                    <h3></h3>
-                    <img src="../../../img/night.png">
-                </div>
-
-                <form>
-                    <div  class="rowOne">
-                        <div class="dateStart">
-                            <label>Fecha de llegada</label>
-                            <input name="startBooking" type="date" readonly id="startInput">
-                        </div>
-
-                        <div class="dateEnd">
-                            <label>Fecha de Salida</label>
-                            <input name="endBooking" type="date" readonly id="endInput">
-                        </div>
-
-                    </div>
-
-                    <div class="rowTwo">
-                        <div class="client">
-                            <label>Cliente</label>
-                            <select name="client" id="clientsSelect"></select>
-                        </div>
-
-
-                        <div class="quantityRooms">
-
-                            <label>Cantidad de habitaciones</label>
-                            <input id="roomsQuantityInput" name="roomsQuantity" type="number" readonly
-                                placeholder="Habitaciones seleccionadas">
-                            <div class="msjError">
-                                <div class="arrow"></div>
-                                <img src="../../../img/advertenciaLogin.png">
-                                <span></span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="containButton">
-                    <button type="submit">
-                        Agregar reserva
-                        <img class="loadingForm" src="../../../img/spinnerBooking.gif">
-                    </button>
-                </div>
-
-
-                    <div class="alertForm">
-                        <img>
-                        <div class="body">
-                            <span></span>
-
-                            <p></p>
-                        </div>
-
-                    </div>
-
-                </form>
-
+              <div class="dateEnd">
+                <label>Fecha de Salida</label>
+                <input name="endBooking" type="date" readonly id="endInput" />
+              </div>
             </div>
 
-            <div class="cartRooms">
+            <div class="rowTwo">
+              <div class="client">
+                <label>Cliente</label>
+                <select name="client" id="clientsSelect"></select>
+              </div>
 
-                <div class="titleCart">
-                    <h3>Habitaciones</h3>
-                    <img src="../../../img/roomCart.png">
+              <div class="quantityRooms">
+                <label>Cantidad de habitaciones</label>
+                <input
+                  id="roomsQuantityInput"
+                  name="roomsQuantity"
+                  type="number"
+                  readonly
+                  placeholder="Habitaciones seleccionadas"
+                />
+                <div class="msjError">
+                  <div class="arrow"></div>
+                  <img src="../../../img/advertenciaLogin.png" />
+                  <span></span>
                 </div>
-
-                <ul></ul>
-
-                <div class="total">
-                    <img src="../../../img/amountService.png">
-                    <span>Total</span>
-
-                </div>
+              </div>
             </div>
 
-        </div>
-        <div class="noDataFormAdd">
+            <div class="containButton">
+              <button type="submit">
+                Agregar reserva
+                <img
+                  class="loadingForm"
+                  src="../../../img/spinnerBooking.gif"
+                />
+              </button>
+            </div>
 
-            <img src="../../../img/sinDatos.png">
-            <h3>Ups, no se pudieron cargar los clientes para la reserva</h3>
+            <div class="alertForm">
+              <img />
+              <div class="body">
+                <span></span>
+
+                <p></p>
+              </div>
+            </div>
+          </form>
         </div>
+
+        <div class="cartRooms">
+          <div class="titleCart">
+            <h3>Habitaciones</h3>
+            <img src="../../../img/roomCart.png" />
+          </div>
+
+          <ul></ul>
+
+          <div class="total">
+            <img src="../../../img/amountService.png" />
+            <span>Total</span>
+          </div>
+        </div>
+      </div>
+      <div class="noDataFormAdd">
+        <img src="../../../img/sinDatos.png" />
+        <h3>Ups, no se pudieron cargar los clientes para la reserva</h3>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

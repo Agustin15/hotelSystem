@@ -12,7 +12,7 @@ import {
   removeAlertForm
 } from "./scriptsMethodsFetch.js";
 
-import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 
 export let nights;
@@ -43,13 +43,40 @@ export const configFormAddBooking = async (startBooking, endBooking) => {
 
 const draw = (containForm, cartRooms) => {
   containForm.style.display = "flex";
-  cartRooms.style.display = "flex";
+  if (window.innerWidth <= 600) {
+    cartRooms.style.display = "none";
+  } else {
+    cartRooms.style.display = "flex";
+  }
+
   displayNights();
   displayClients(form, clients);
   setInputsForm();
   formAddSubmit();
   configCartRooms();
+  closeAndOpenCart();
 };
+
+const closeAndOpenCart = () => {
+  let openCart = document.querySelector(".openCart");
+  let cart = document.querySelector(".cartRooms");
+
+  openCart.addEventListener("click", () => {
+    if (openCart.src == `${FRONT_URL_LOCALHOST}img/menuHabitacion.png`) {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/menuOpenCart.png`;
+      cart.classList.remove("cartRoomsHide");
+      cart.classList.add("cartRoomsShow");
+      cart.style.display = "flex";
+    } else {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/menuHabitacion.png`;
+      cart.classList.add("cartRoomsHide");
+      setTimeout(function () {
+        cart.style.display = "none";
+      }, 200);
+    }
+  });
+};
+
 const setInputsForm = async () => {
   startInput = form.querySelector("#startInput");
   endInput = form.querySelector("#endInput");
