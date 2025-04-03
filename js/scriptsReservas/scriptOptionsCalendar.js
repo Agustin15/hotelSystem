@@ -96,7 +96,7 @@ const getOptionsAddBooking = async () => {
   } catch (error) {
     console.log(error);
   } finally {
-    loadingPage(true, modalMainBookings);
+    loadingPage(false, modalMainBookings);
 
     if (!page) {
       pageNotFound(modalMainBookings);

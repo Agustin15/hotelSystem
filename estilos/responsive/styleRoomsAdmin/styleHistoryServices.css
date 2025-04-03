@@ -1,0 +1,262 @@
+.containTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  margin-top: 2rem;
+}
+.containTitle img {
+  width: 41px;
+}
+
+.containHistory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 96%;
+}
+.containHistory ul {
+  padding-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 69%;
+  height: 70%;
+  gap: 2rem;
+}
+.containHistory ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background: linear-gradient(rgb(57, 170, 161), rgb(12, 122, 126));
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px gray;
+  width: 15rem;
+  height: auto;
+  list-style: none;
+}
+.containHistory ul li .headerItem {
+  font-size: 18px;
+  display: flex;
+  font-weight: bold;
+  padding: 1rem;
+  align-items: center;
+  justify-content: start;
+  gap: 1rem;
+  color: white;
+}
+.containHistory ul li img {
+  width: 44px;
+}
+.containHistory ul li .footerItem {
+  padding: 0.5rem;
+  color: rgb(0, 0, 0);
+  width: 14rem;
+  border-radius: 3px;
+  font-size: 16px;
+  background-color: white;
+  border: 1px solid rgb(167, 167, 167);
+}
+.containHistory ul li .footerItem span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.containHistory .noData {
+  width: 100%;
+  height: 65%;
+  font-size: 19px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.containHistory .noData img {
+  width: 90px;
+  opacity: 70%;
+}
+.containHistory .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: gray;
+}
+.containHistory .loading img {
+  width: 50px;
+  opacity: 70%;
+}
+
+.modalMainHistory {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+}
+
+.modalMainHistory .containDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
+  margin-top: 9rem;
+  margin-left: 12rem;
+  background-color: white;
+  height: auto;
+  height: 26rem;
+  border-radius: 4px;
+}
+.modalMainHistory .containDetails .headerWindow {
+  display: flex;
+  color: rgb(255, 255, 255);
+  width: 25rem;
+  height: 3rem;
+  padding-bottom: 0.5rem;
+  align-items: start;
+  justify-content: space-between;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+}
+.modalMainHistory .containDetails .headerWindow h3 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 1rem;
+  margin-left: 7rem;
+}
+.modalMainHistory .containDetails .headerWindow button {
+  height: 1.7rem;
+  width: 1.7rem;
+  font-weight: bold;
+  border: none;
+  color: white;
+  background-color: rgb(240, 19, 19);
+}
+.modalMainHistory .containDetails .headerWindow button:hover {
+  cursor: pointer;
+  background-color: rgb(216, 15, 15);
+}
+
+.modalMainHistory .contentDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.modalMainHistory .contentDetails .noData {
+  width: 100%;
+  height: 65%;
+  font-size: 16px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.modalMainHistory .contentDetails .noData img {
+  width: 80px;
+  opacity: 70%;
+}
+.modalMainHistory .contentDetails .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: gray;
+}
+.modalMainHistory .contentDetails .loading img {
+  width: 40px;
+  opacity: 70%;
+}
+
+.modalMainHistory .ulItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 97%;
+  margin-top: 1rem;
+  overflow-y: scroll;
+  width: 100%;
+  padding-bottom: 1rem;
+}
+.modalMainHistory .ulItems .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.2rem;
+  border-radius: 5px;
+  color: white;
+  width: 15rem;
+  height: 7rem;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  border: 1px solid rgb(1, 155, 160);
+  box-shadow: 2px 2px 2px gray;
+  font-size: 17px;
+  padding: 0.5rem;
+}
+.modalMainHistory .ulItems .item .name {
+  text-overflow: ellipsis;
+  width: 14rem;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.modalMainHistory .ulItems .item .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.modalMainHistory .ulItems .item .columnOne,
+.modalMainHistory .ulItems .item .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 3px;
+  width: 3rem;
+  height: 4rem;
+  padding: 1rem;
+  background: rgb(2, 112, 116);
+}
+.modalMainHistory .ulItems .item .columnOne {
+  height: 3.5rem;
+}
+.modalMainHistory .ulItems .item .columnOne img {
+  width: 50px;
+  height: 50px;
+}
+.modalMainHistory .ulItems .item .columnTwo {
+  font-size: 14px;
+  width: 7rem;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+.modalMainHistory .ulItems .item .columnTwo a {
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=styleHistoryServices.css.map */

@@ -24,6 +24,10 @@
   font-weight: bold;
 }
 
+#navAdmin .closeMenu {
+  display: none;
+}
+
 #navAdmin .titleNav span {
   margin-top: 0.8rem;
 }
@@ -266,6 +270,10 @@ body #navAdmin .titleNav {
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 }
+
+.menuBar .openMenu {
+  display: none;
+}
 .menuBar .title {
   font-size: 20px;
   color: rgb(0, 0, 0);
@@ -389,4 +397,3 @@ body #navAdmin .titleNav {
 .pageNotFound .headerPageNotFound button:hover {
   background-color: rgb(182, 4, 4);
 }
-

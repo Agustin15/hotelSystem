@@ -129,7 +129,6 @@ const noData = (state, msj) => {
 };
 
 const dataPointsRoomsToChart = (roomsBookingCategorys) => {
-
   let totalRoomsBooking = roomsBookingCategorys.reduce((ac, room) => {
     return (ac += room.quantityReserved);
   }, 0);
@@ -151,7 +150,7 @@ const chartRooms = (dataPoints) => {
     animationEnabled: true,
     colorSet: "greenShades",
     legend: {
-      fontSize: 19
+      fontSize: window.innerWidth <= 600 ? 17 : 19
     },
     data: [
       {
@@ -163,7 +162,7 @@ const chartRooms = (dataPoints) => {
         indexLabelPlacement: "inside",
         indexLabel: "{y}",
         yValueFormatString: '#,##0.0"%"',
-        indexLabelFontSize: 19,
+        indexLabelFontSize: window.innerWidth <= 600 ? 18 : 19,
         indexLabelFontColor: "white",
         dataPoints: dataPoints
       }

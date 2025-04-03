@@ -35,7 +35,7 @@ optionChartLi.addEventListener("click", async () => {
 const getDocument = async (url) => {
   let page;
   loadingPage(true, option);
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
   try {
     const response = await fetch(url);
     const result = await response.text();
@@ -45,8 +45,7 @@ const getDocument = async (url) => {
   } catch (error) {
     console.log(error);
   } finally {
-    
-    loadingPage(true, option);
+    loadingPage(false, option);
     if (!page) {
       pageNotFound(option);
     }

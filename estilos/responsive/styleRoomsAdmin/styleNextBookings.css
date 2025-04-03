@@ -1,0 +1,200 @@
+.containNextBookings {
+  background-color: white;
+  border-radius: 3px;
+  width: 40rem;
+  height: 27rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 10rem;
+  margin-top: 5rem;
+  position: relative;
+}
+.containNextBookings .headerWindow {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  color: white;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+  box-shadow: 2px 2px 2px gray;
+}
+.containNextBookings .headerWindow button {
+  background-color: rgb(233, 3, 3);
+  color: white;
+  font-weight: bold;
+  height: 2rem;
+  width: 2rem;
+  border: none;
+}
+.containNextBookings .headerWindow button:hover {
+  background-color: rgb(212, 4, 4);
+  cursor: pointer;
+}
+.containNextBookings .headerWindow .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 17px;
+  margin-top: 1rem;
+  width: 100%;
+}
+.containNextBookings .headerWindow .title img {
+  width: 50px;
+}
+.containNextBookings .bodyContainNextBookings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+  margin-top: 2rem;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings {
+  width: 90%;
+  height: auto;
+  max-height: 12rem;
+  overflow-y: scroll;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings thead {
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  color: white;
+  font-size: 17px;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings thead th {
+  padding: 0.5rem;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody {
+  font-size: 17px;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody td {
+  padding: 0.5rem;
+  text-align: center;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody td .containViewCalendar {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody td .containViewCalendar button {
+  cursor: pointer;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 2rem;
+  border-radius: 3px;
+  background: linear-gradient(rgb(0, 148, 153), rgb(7, 179, 185));
+  color: white;
+  font-weight: bold;
+  border: none;
+  box-shadow: 2px 2px 2px gray;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody td .containViewCalendar button img {
+  width: 20px;
+}
+.containNextBookings .bodyContainNextBookings .tableNextBookings tbody td .containViewCalendar button:hover {
+  background: linear-gradient(rgb(0, 148, 153), rgb(11, 143, 148));
+}
+.containNextBookings .trGray {
+  background-color: rgb(238, 238, 238);
+}
+.containNextBookings .trWhite {
+  background-color: rgb(255, 255, 255);
+}
+.containNextBookings .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 20px;
+  color: gray;
+  height: 100%;
+}
+.containNextBookings .loading img {
+  width: 40px;
+  opacity: 50%;
+}
+.containNextBookings .noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  height: 100%;
+  width: 20rem;
+  font-size: 18px;
+  color: gray;
+}
+.containNextBookings .noData img {
+  width: 80px;
+  opacity: 70%;
+}
+
+.loadingPage {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  opacity: 100%;
+  color: rgb(187, 187, 187);
+  background: none;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-left: 7rem;
+  margin-top: 14rem;
+}
+.loadingPage img {
+  width: 50px;
+  opacity: 60%;
+}
+
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 20px;
+  align-items: center;
+  height: auto;
+  margin-left: 7rem;
+  margin-top: 9rem;
+  opacity: 100%;
+  background: none;
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  color: gray;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+}
+.pageNotFound img {
+  width: 120px;
+  opacity: 75%;
+}
+.pageNotFound .headerPageNotFound {
+  display: none;
+  justify-content: flex-end;
+  width: 110%;
+}
+.pageNotFound .headerPageNotFound button {
+  background-color: rgb(231, 0, 0);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.pageNotFound .headerPageNotFound button:hover {
+  background-color: rgb(182, 4, 4);
+}
+
+/*# sourceMappingURL=styleNextBookings.css.map */

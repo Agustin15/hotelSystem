@@ -12,8 +12,11 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRoomsAdmin/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleChart.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRoomsAdmin/styleResponsiveChart.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleRooms.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRoomsAdmin/styleResponsiveRooms.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleRecord.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleNextBookings.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleServices.css">
@@ -23,6 +26,8 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMassage.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleMinibar.css">
     <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleDeleteService.css">
+    <link rel="stylesheet" href="../../../estilos/styleRoomsAdmin/styleDetailsCategoryRoom.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRoomsAdmin/styleResponsiveDetailsCategoryRoom.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
@@ -39,6 +44,11 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <header>
         <nav id="navAdmin">
+
+            <div class="closeMenu">
+                <img src="../../../img/menuOpen.png">
+            </div>
+
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -210,25 +220,30 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <div class="bodyRooms">
 
-
         <div class="menuBar">
-            <div class="title">
-                <h3>Habitaciones</h3>
-                <img src="../../../img/roomsMaintenance.png">
+            <div class="openMenu">
+                <img src="../../../img/menuHabitacion.png">
             </div>
-            <nav>
-                <ul>
-                    <li class="chartLi">
-                        <img src="../../../img/pieChart.png">
-                        <a>Grafica</a>
-                    </li>
-                    <li class="listLi">
-                        <img src="../../../img/key-card.png">
-                        <a>Lista</a>
-                    </li>
 
-                </ul>
-            </nav>
+            <div class="columnMenuBar">
+                <div class="title">
+                    <h3>Habitaciones</h3>
+                    <img src="../../../img/roomsMaintenance.png">
+                </div>
+                <nav>
+                    <ul>
+                        <li class="chartLi">
+                            <img src="../../../img/pieChart.png">
+                            <a>Grafica</a>
+                        </li>
+                        <li class="listLi">
+                            <img src="../../../img/key-card.png">
+                            <a>Lista</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
 
         </div>
 

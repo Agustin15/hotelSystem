@@ -288,24 +288,21 @@
     margin-top: 1.8rem;
   }
 
-  .bodyBookings {
+  .bodyRooms {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: auto;
-    margin-top: -0.1rem;
+    align-items: start;
     width: 100%;
-    height: 100vh;
+    height: 99%;
     font-family: Arial, Helvetica, sans-serif;
   }
 
   .menuBar {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: start;
     position: fixed;
     z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
     gap: 1rem;
     width: 100%;
     background-color: white;
@@ -321,19 +318,6 @@
     width: 100%;
   }
 
-  .menuBar .title {
-    font-size: 17px;
-    color: rgb(0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-left: 0;
-  }
-  .menuBar .title img {
-    width: 35px;
-  }
-
   .menuBar .openMenu {
     display: flex;
     width: 1%;
@@ -345,10 +329,23 @@
     margin-left: 1rem;
     cursor: pointer;
   }
+
+  .menuBar .title {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 0;
+  }
+  .menuBar .title img {
+    width: 25px;
+  }
   .menuBar ul {
     display: flex;
-    margin-left: 0;
     gap: 3rem;
+    margin-left: 0;
     list-style: none;
     font-size: 16px;
     color: rgb(0, 0, 0);
@@ -364,7 +361,7 @@
     cursor: pointer;
   }
   .menuBar ul li img {
-    width: 25px;
+    width: 24px;
   }
   .menuBar ul li:hover {
     border-bottom: 2px solid rgb(1, 187, 147);
@@ -376,47 +373,111 @@
 
   .option {
     width: 100%;
+    height: 96%;
+    margin-top: 7.5rem;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .modalMainBookings {
+  .modalMainRooms {
     position: absolute;
     z-index: 3;
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     margin: auto;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 250%;
     background: rgba(44, 44, 44, 0.6);
   }
 
-  .loadingPage {
+  .modalMainRooms .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    opacity: 100%;
+    color: rgb(187, 187, 187);
+    background: white;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-left: 0;
+    margin-top: 12rem;
+  }
+  .modalMainRooms .loadingPage img {
+    width: 50px;
+    opacity: 60%;
+  }
+
+  .modalMainRooms .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 16px;
+    align-items: center;
+    height: auto;
+    text-align: center;
+    width: 76%;
+    margin-left: 0rem;
+    margin-top: 8rem;
+    opacity: 100%;
+    padding: 1rem;
+    background-color: white;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .modalMainRooms .pageNotFound img {
+    width: 60px;
+    opacity: 75%;
+  }
+  .modalMainRooms .pageNotFound .headerPageNotFound {
+    display: flex;
+    justify-content: flex-end;
+    width: 112%;
+  }
+  .modalMainRooms .pageNotFound .headerPageNotFound button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modalMainRooms .pageNotFound .headerPageNotFound button:hover {
+    background-color: rgb(182, 4, 4);
+  }
+
+  .bodyRooms .loadingPage {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
     font-size: 21px;
     opacity: 100%;
-    color: rgb(131, 131, 131);
-    background-color: none;
+    color: rgb(158, 158, 158);
+    background: none;
     border-radius: 5px;
     padding: 1rem;
     margin-left: 0;
-    margin-top: 14rem;
+    margin-top: 9rem;
   }
-  .loadingPage img {
-    width: 40px;
+  .bodyRooms .loadingPage img {
+    width: 50px;
     opacity: 60%;
   }
 
-  .pageNotFound {
+  .bodyRooms .pageNotFound {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -424,7 +485,7 @@
     align-items: center;
     height: auto;
     margin-left: 0;
-    margin-top: 12rem;
+    margin-top: 0;
     opacity: 100%;
     background: none;
     padding: 1rem;
@@ -434,13 +495,26 @@
     border-radius: 5px;
     border-top-right-radius: 0;
   }
-  .pageNotFound img {
-    width: 75px;
+  .bodyRooms .pageNotFound img {
+    width: 60px;
     opacity: 75%;
   }
-  .pageNotFound .header {
+  .pageNotFound .headerPageNotFound {
     display: none;
     justify-content: flex-end;
     width: 110%;
+  }
+  .pageNotFound .headerPageNotFound button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .pageNotFound .headerPageNotFound button:hover {
+    background-color: rgb(182, 4, 4);
   }
 }

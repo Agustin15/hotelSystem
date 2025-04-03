@@ -1,0 +1,179 @@
+.modalAddService {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin: auto;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 44, 44, 0.6);
+}
+.modalAddService .pageNotFound {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 18px;
+  align-items: center;
+  height: auto;
+  margin-left: 10rem;
+  margin-top: 16rem;
+  opacity: 100%;
+  background-color: white;
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 1.5rem;
+  color: gray;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+}
+.modalAddService .pageNotFound img {
+  width: 95px;
+  opacity: 75%;
+}
+.modalAddService .pageNotFound .headerPageNotFound {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 110%;
+}
+.modalAddService .pageNotFound .headerPageNotFound button {
+  background-color: rgb(231, 0, 0);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.modalAddService .pageNotFound .headerPageNotFound button:hover {
+  background-color: rgb(182, 4, 4);
+}
+.modalAddService .loadingPage {
+  display: flex;
+  gap: 0.5rem;
+  width: 15rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  opacity: 100%;
+  color: rgb(187, 187, 187);
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-left: 7rem;
+  margin-top: 18rem;
+}
+.modalAddService .loadingPage img {
+  width: 40px;
+  opacity: 60%;
+}
+
+.containTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  margin-top: 2rem;
+}
+.containTitle img {
+  width: 41px;
+}
+
+.containAddService {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.containAddService .noData {
+  width: 100%;
+  height: 65%;
+  font-size: 19px;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.containAddService .noData img {
+  width: 90px;
+  opacity: 70%;
+}
+.containAddService .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  gap: 0.5rem;
+  font-size: 21px;
+  color: gray;
+}
+.containAddService .loading img {
+  width: 50px;
+  opacity: 70%;
+}
+.containAddService ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 35rem;
+  margin-top: 2rem;
+  gap: 2rem;
+  height: auto;
+}
+.containAddService ul li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.containAddService ul li .headerService {
+  font-size: 15px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 12rem;
+  height: 6rem;
+  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 2px 2px 2px gray;
+}
+.containAddService ul li .headerService img {
+  width: 35px;
+}
+.containAddService ul li .footerService {
+  display: flex;
+  width: 13rem;
+  height: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgb(161, 161, 161);
+  padding: 0.5rem;
+  box-shadow: 1px 1px 1px gray;
+  color: rgb(0, 0, 0);
+  background-color: #fdfdfd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.containAddService ul li .footerService img {
+  width: 20px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=styleAddService.css.map */
