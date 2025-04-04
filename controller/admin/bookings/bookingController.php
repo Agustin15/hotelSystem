@@ -154,6 +154,19 @@ class bookingController
                 throw new Error("Error, no se pudieron procesar las habitaciones");
             }
 
+            $roomsToUpdate = $this->roomsBookingController->findRoomsToUpdateInCart(
+                $idBooking,
+                $idClient,
+                $startBooking,
+                $endBooking,
+                $rooms
+            );
+
+            if (isset($roomsToAdd["error"])) {
+                throw new Error("Error, no se pudieron procesar las habitaciones");
+            }
+
+
             if (count($roomsToDelete) > 0) {
                 $roomsDeleted = $this->roomsBookingController->DELETE($idBooking, $roomsToDelete);
 
@@ -162,7 +175,6 @@ class bookingController
                     throw new Error("Error, no se pudieron eliminar las habitaciones");
                 }
             }
-
 
             if (count($roomsToAdd) > 0) {
                 $roomsAdded = $this->roomsBookingController->POST(
@@ -178,6 +190,21 @@ class bookingController
                     throw new Error("Error, no se pudieron agregar las habitaciones");
                 }
             }
+
+            if (count($roomsToUpdate) > 0) {
+                $roomsUpdated = $this->roomsBookingController->PUT(
+                    $roomsToUpdate,
+                    $idBooking,
+                    $idClient,
+                    $startBooking,
+                    $endBooking
+                );
+                if (isset($roomsUpdated["error"])) {
+
+                    throw new Error($roomsUpdated["error"]);
+                }
+            }
+
 
             $amountBookingUpdated = $this->revenuesController->PUT($idBooking, $amount);
 

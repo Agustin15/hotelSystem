@@ -54,16 +54,16 @@ const drawDocument = (page) => {
 const optionServicePage = [
   {
     page: "history.html",
-    function: configHistory,
+    function: configHistory
   },
   {
     page: "addService.html",
-    function: configAddService,
+    function: configAddService
   },
   {
     page: "deleteService.html",
-    function: configDeleteService,
-  },
+    function: configDeleteService
+  }
 ];
 
 const bookingByRoomReserved = async () => {
@@ -108,7 +108,9 @@ const loading = (state) => {
 };
 
 const optionMenu = () => {
-  let options = document.querySelector(".headerWindowContainServices").querySelectorAll("li");
+  let options = document
+    .querySelector(".headerWindowContainServices")
+    .querySelectorAll("li");
 
   options.forEach((option) => {
     option.addEventListener("click", async () => {

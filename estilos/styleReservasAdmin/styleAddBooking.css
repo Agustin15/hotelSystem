@@ -476,6 +476,10 @@
   width: 25px;
 }
 
+.containForm .containOpenCart {
+  display: none;
+}
+
 .containForm {
   display: flex;
   flex-direction: column;

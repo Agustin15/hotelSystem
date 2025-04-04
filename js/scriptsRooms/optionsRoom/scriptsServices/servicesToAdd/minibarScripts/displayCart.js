@@ -18,6 +18,10 @@ let ulCart;
 
 export const displayCart = () => {
   ulCart = document.querySelector(".items");
+  let notificationQuantityCart = document.querySelector(
+    ".notificationQuantity"
+  );
+  notificationQuantityCart.textContent = cart.length;
   if (cart.length == 0) {
     calculateTotalAmount();
     noItems();
@@ -106,7 +110,7 @@ export const addService = async (cart) => {
 
   if (servicesAdded == true) {
     displayAlert(true, numRoom);
-    cleanCart();
+    cleanCart("addService");
   }
 };
 

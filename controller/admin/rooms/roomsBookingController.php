@@ -52,7 +52,36 @@ class roomsBookingController
         }
     }
 
+    public function PUT($roomsToUpdate, $idBooking, $idClient, $startDate, $endDate)
+    {
 
+        try {
+
+            $error = false;
+            foreach ($roomsToUpdate as $room) {
+
+                $resultUpdated = $this->rooms->updateRoomBooking(
+                    $idBooking,
+                    $idClient,
+                    $room['numRoom'],
+                    $startDate,
+                    $endDate,
+                    $room['adults'],
+                    $room['childs']
+                );
+
+                if (!$resultUpdated) {
+                    $error = true;
+                }
+            }
+
+            if ($error) {
+                throw new Error("Error, no se pudieron actualizar las habitaciones");
+            }
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 502);
+        }
+    }
     public function DELETE($idBooking, $roomsToDelete)
     {
 
@@ -103,6 +132,47 @@ class roomsBookingController
             });
 
             return  array_values($roomsToDelete);
+        } catch (Throwable $th) {
+            return array("error" => $th->getMessage(), "status" => 404);
+        }
+    }
+
+
+
+    public function findRoomsToUpdateInCart($idBooking, $idClient, $startBooking, $endBooking, $roomsCart)
+    {
+
+        try {
+
+            $roomsOfBooking = $this->findRoomsByIdBooking($idBooking);
+
+            if (isset($roomsOfBooking["error"])) {
+                throw new Error("Error, no se pudo buscar las habitaciones de la reserva");
+            }
+
+            $roomsToUpdate = array_filter($roomsCart, function ($roomCart) use (
+                $roomsOfBooking,
+                $idBooking,
+                $idClient,
+                $startBooking,
+                $endBooking,
+            ) {
+
+                $roomInBooking = $this->roomCartInBookingRooms($roomsOfBooking, $roomCart["numRoom"]);
+                if ($roomInBooking == true) {
+                    return array(
+                        "idBooking" => $idBooking,
+                        "idClient" => $idClient,
+                        "numRoom" => $roomCart["numRoom"],
+                        "startBooking" => $startBooking,
+                        "endBooking" => $endBooking,
+                        "adults" => $roomCart["adults"],
+                        "childs" => $roomCart["childs"],
+                    );
+                }
+            });
+
+            return  array_values($roomsToUpdate);
         } catch (Throwable $th) {
             return array("error" => $th->getMessage(), "status" => 404);
         }

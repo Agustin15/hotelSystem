@@ -55,13 +55,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   font-size: 17px;
   gap: 0.5rem;
-  height: 100%;
-  color: rgb(204, 204, 204);
+  width: 32%;
+  height: 85%;
+  color: rgb(161, 161, 161);
 }
 .mainContain .noData img {
-  width: 40px;
+  width: 80px;
   opacity: 80%;
 }
 
@@ -95,11 +98,10 @@
   flex-direction: row-reverse;
   justify-content: start;
   align-items: center;
-  gap:0rem;
+  gap: 0rem;
   margin-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
-
 }
 .mainContain .containTable h4 {
   font-size: 19px;
@@ -140,7 +142,7 @@
   border-radius: 3px;
   cursor: pointer;
 }
-.mainContain  .containTable .searchSelect .containSelect button img {
+.mainContain .containTable .searchSelect .containSelect button img {
   width: 15px;
   height: 15px;
   border-radius: 3px;
@@ -205,11 +207,14 @@
   cursor: pointer;
 }
 
+.mainContain .scrollTableRecord {
+  width: 100%;
+  height: 13rem;
+  overflow-y: scroll;
+}
+
 .mainContain table {
   width: 100%;
-  height: auto;
-  max-height: 12rem;
-  overflow-y: scroll;
 }
 .mainContain table thead {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
@@ -246,14 +251,31 @@
 .mainContain table tfoot .containNoFound {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  height: 9rem;
   font-size: 16px;
   color: rgb(180, 180, 180);
 }
 .mainContain table tfoot .containNoFound img {
   width: 70px;
   opacity: 100%;
+}
+
+.mainContain table tfoot .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  gap: 0.5rem;
+  width: 100%;
+  height: 11rem;
+  color: rgb(170, 170, 170);
+}
+.mainContain table tfoot .loading img {
+  width: 40px;
+  opacity: 50%;
 }
 
 .mainContain .rowGray {
@@ -263,5 +285,3 @@
 .mainContain .rowWhite {
   background-color: rgb(255, 255, 255);
 }
-
-/*# sourceMappingURL=styleRecord.css.map */

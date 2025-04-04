@@ -71,21 +71,21 @@
   opacity: 70%;
 }
 
-.containRoom {
+.containDetails .containRoom {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
 }
 
-.containRoom .row {
+.containDetails .containRoom .row {
   display: flex;
   align-items: start;
   justify-content: start;
   gap: 1.5rem;
 }
 
-.containRoom .row .images {
+.containDetails .containRoom .row .images {
   overflow: hidden;
   display: flex;
   width: 22rem;
@@ -93,14 +93,14 @@
   justify-content: center;
 }
 
-.containRoom .row .images ul {
+.containDetails .containRoom .row .images ul {
   width: 99rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-.containRoom .row .images li {
+.containDetails .containRoom .row .images li {
   list-style: none;
 }
 
@@ -109,7 +109,7 @@
   height: 12rem;
 }
 
-.controls {
+.containDetails .controls {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,19 +118,19 @@
   position: absolute;
 }
 
-.containRoom .row .images .controls img {
+.containDetails .containRoom .row .images .controls img {
   width: 28px;
   height: 28px;
   opacity: 97%;
   cursor: pointer;
 }
 
-.containRoom  .row .images .controls img:hover {
+.containDetails .containRoom  .row .images .controls img:hover {
   opacity: 100%;
   transform: scale(1.1);
 }
 
-.containRoom  .row .images .indexImagesRoom {
+.containDetails .containRoom  .row .images .indexImagesRoom {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,71 +138,71 @@
   margin-top: 11rem;
   position: absolute;
 }
-.containRoom .row .images .indexImagesRoom li {
+.containDetails .containRoom .row .images .indexImagesRoom li {
   width: 80px;
   height: 3px;
   background-color: rgb(201, 201, 201);
 }
-.containRoom  .row .images .indexImagesRoom .itemIndexActive {
+.containDetails .containRoom  .row .images .indexImagesRoom .itemIndexActive {
   background-color: white;
 }
 
-.containRoom  .dataRoom {
+.containDetails .containRoom  .dataRoom {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
 }
 
-.containRoom  .title {
+.containDetails .containRoom  .title {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 }
 
-.containRoom  .title img {
+.containDetails .containRoom  .title img {
   width: 34px;
   height: 34px;
 }
 
-.containRoom  .rowData {
+.containDetails .containRoom  .rowData {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
 }
-.containRoom  .dataRoom span {
+.containDetails .containRoom  .dataRoom span {
   font-weight: bold;
 }
 
-.containRoom  .dataRoom .data {
+.containDetails .containRoom  .dataRoom .data {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
 }
 
-.containRoom  .titleData {
+.containDetails .containRoom  .titleData {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
 
-.containRoom  .titleData img {
+.containDetails .containRoom  .titleData img {
   width: 18px;
   height: 18px;
 }
 
-.containRoom  .columnOne {
+.containDetails .containRoom  .columnOne {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
-.containRoom  .columnTwo {
+.containDetails .containRoom  .columnTwo {
   display: flex;
   flex-direction: column;
   align-items: center;

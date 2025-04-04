@@ -53,7 +53,7 @@ const getYears = async () => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false, containData);
+    loading(true, containData);
     if (!data) {
       noData("No se encontraron reservas en esta habitacion");
     }
@@ -107,6 +107,7 @@ const drawContainTable = (years) => {
    </div>
  
  </div>
+ <div class="scrollTableRecord">
   <table>
  <thead>
  <tr>
@@ -119,7 +120,7 @@ const drawContainTable = (years) => {
  <tbody></tbody>
 <tfoot></tfoot>
 </table>
-
+</div>
 <div class="controls"></div>
  </div>
 
@@ -298,10 +299,12 @@ const searchBooking = () => {
 const noFound = (state) => {
   if (state) {
     tfoot.innerHTML = `
-  <td rowspan="4" colspan="4">
+    <td rowspan="${window.innerWidth <= 600 ? 2 : 4}" colspan=${
+      window.innerWidth <= 600 ? 2 : 4
+    }">
   <div class="containNoFound">
 <img src="../../../img/noFind.png">
-<h3>Sin resultados</h3>
+<h3>No se encontraron resultados</h3>
 </div>
   
   </td>
@@ -314,7 +317,9 @@ const noFound = (state) => {
 const noDataTable = () => {
   tbody.innerHTML = ``;
   tfoot.innerHTML = `
-  <td rowspan="4" colspan="4">
+   <td rowspan="${window.innerWidth <= 600 ? 2 : 4}" colspan=${
+    window.innerWidth <= 600 ? 2 : 4
+  }">
   <div class="containNoFound">
 <img src="../../../img/sinDatos.png">
 <h3>Ups,no se encontraron reservas</h3>
@@ -328,7 +333,9 @@ const loadingTable = (state) => {
 
   if (state) {
     tfoot.innerHTML = `
-  <td rowspan="4" colspan="4">
+     <td rowspan="${window.innerWidth <= 600 ? 2 : 4}" colspan=${
+      window.innerWidth <= 600 ? 2 : 4
+    }">
   <div class="loading">
         <span>Cargando datos</span>
          <img src="../../../img/spinnerMain.gif">

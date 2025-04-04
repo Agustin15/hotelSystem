@@ -11,8 +11,10 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRevenuesAdmin/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleTableBills.css">
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleChart.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRevenuesAdmin/styleResponsiveChart.css">
 
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"> </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -30,6 +32,9 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <header>
         <nav id="navAdmin">
+            <div class="closeMenu">
+                <img src="../../../img/menuOpen.png">
+            </div>
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -201,24 +206,28 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
     <div class="bodyRevenues">
 
-
         <div class="menuBar">
-            <div class="title">
-                <h3>Ganancias</h3>
-                <img src="../../../img/revenueTitle.png">
+            <div class="openMenu">
+                <img src="../../../img/menuHabitacion.png">
             </div>
-            <nav>
-                <ul>
-                    <li class="chartLi">
-                        <img src="../../../img/areaChart.png">
-                        <a>Grafica</a>
-                    </li>
-                    <li class="billLi">
-                        <img src="../../../img/electronicBill.png">
-                        <a>Facturas</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="columnMenuBar">
+                <div class="title">
+                    <h3>Ganancias</h3>
+                    <img src="../../../img/revenueTitle.png">
+                </div>
+                <nav>
+                    <ul>
+                        <li class="chartLi">
+                            <img src="../../../img/areaChart.png">
+                            <a>Grafica</a>
+                        </li>
+                        <li class="billLi">
+                            <img src="../../../img/electronicBill.png">
+                            <a>Facturas</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
         </div>
 

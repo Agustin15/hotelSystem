@@ -83,8 +83,8 @@
   color: rgb(0, 0, 0);
   margin-top: 2rem;
 }
-.containTitle img {
-  width: 41px;
+.containTitle .iconAddService {
+  width: 31px;
 }
 
 .containAddService {

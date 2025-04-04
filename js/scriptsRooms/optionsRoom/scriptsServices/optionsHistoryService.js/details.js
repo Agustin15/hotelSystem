@@ -15,10 +15,11 @@ const drawWindow = async (nameService) => {
    
     <div class="containDetails">
       <div class="headerWindow">
+      <div class="titleDetailService">
       <h3>Detalles ${nameService} </h3>
+      </div>
       <button class="btnCloseDetails">X</button>
       </div>
-
       <div class="contentDetails"></div>
 
     </div>

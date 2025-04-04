@@ -1266,12 +1266,12 @@
     display: none;
     align-items: center;
     opacity: 50%;
-    font-size: 20px;
+    font-size: 17px;
     gap: 1rem;
     margin-top: 8rem;
   }
   .modalMainClient .containDetailsClientBooking .bookingsClient .loading img {
-    width: 56px;
+    width: 40px;
   }
   .modalMainClient .containDetailsClientBooking .bookingsClient .title {
     display: flex;
@@ -1289,15 +1289,16 @@
   .modalMainClient .containDetailsClientBooking .bookingsClient .noBookings {
     display: none;
     flex-direction: column;
+    text-align: center;
     gap: 1rem;
     align-items: center;
     opacity: 60%;
-    font-size: 19px;
+    font-size: 17px;
     color: rgb(133, 133, 133);
     margin-top: 5rem;
   }
   .modalMainClient .containDetailsClientBooking .bookingsClient .noBookings img {
-    width: 90px;
+    width: 60px;
   }
   .modalMainClient .containDetailsClientBooking .bookingsClient .indexBookings {
     display: flex;

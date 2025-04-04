@@ -1,12 +1,24 @@
 import { configChartRooms } from "./scriptChartRooms.js";
 import { configListRooms } from "./scriptListRooms.js";
+import { linkRels } from "./scriptLinksRel.js";
+import { linkRelsResponsive } from "./scriptLinksRelResponsive.js";
 
 let option = document.querySelector(".option");
 let optionChartLi = document.querySelector(".chartLi");
 let optionListLi = document.querySelector(".listLi");
 let actualOption = localStorage.getItem("actualOptionRooms");
+let head = document.getElementsByTagName("head")[0];
 
 document.addEventListener("DOMContentLoaded", async () => {
+  if (head) {
+    linkRels.map((link) => {
+      head.innerHTML += link;
+    });
+    linkRelsResponsive.map((link) => {
+      head.innerHTML += link;
+    });
+  }
+
   if (actualOption) {
     actualOptionClient(localStorage.getItem("actualOptionRooms"));
   } else {

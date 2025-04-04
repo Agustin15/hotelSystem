@@ -132,6 +132,13 @@
   justify-content: space-between;
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
+.modalMainHistory .containDetails .headerWindow .titleDetailService {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2rem;
+}
 .modalMainHistory .containDetails .headerWindow h3 {
   font-weight: bold;
   font-size: 18px;

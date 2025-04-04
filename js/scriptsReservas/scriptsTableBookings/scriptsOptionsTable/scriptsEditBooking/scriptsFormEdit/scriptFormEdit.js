@@ -276,6 +276,7 @@ const fetchUpdateBooking = async (bookingToUpdate) => {
 
     const result = await response.json();
 
+    console.log(result);
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();

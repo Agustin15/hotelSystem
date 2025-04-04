@@ -1,6 +1,9 @@
 import { getServiceByName } from "../../../../scriptsServices/scriptServices.js";
-import { closeWindow } from "./massages.js";
-import { displayContentShop } from "./minibarScripts/displayProducts.js";
+import {
+  displayContentShop,
+  cleanCart
+} from "./minibarScripts/displayProducts.js";
+
 let modalAddService, productsMinibar;
 export let contentMinibar, idBooking, numRoom;
 
@@ -14,13 +17,21 @@ export const configMinibarService = async (
 
   modalAddService = document.querySelector(".modalAddService");
   contentMinibar = document.querySelector(".contentMinibar");
-  closeWindow(modalAddService, ".btnCloseMinibar");
+  closeWindow(modalAddService);
 
   productsMinibar = await serviceByName(nameService, contentMinibar);
 
   if (productsMinibar) {
     displayContentShop(productsMinibar, "minibar");
   }
+};
+
+const closeWindow = (modal) => {
+  document.querySelector(".btnCloseMinibar").addEventListener("click", () => {
+    modal.innerHTML = ``;
+    modal.style.display = "none";
+    cleanCart("toCloseWindow");
+  });
 };
 
 export const serviceByName = async (nameService, contentMinibar) => {

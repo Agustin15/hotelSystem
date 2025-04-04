@@ -1,5 +1,5 @@
 import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
-import { BACK_URL_LOCALHOST ,FRONT_URL_LOCALHOST} from "../../urlLocalhost.js";
+import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../../urlLocalhost.js";
 import { close } from "./scriptRecordRoom.js";
 
 let numRoom, bodyContainNextBookings;
@@ -49,6 +49,7 @@ const getNextBookingsRoom = async () => {
 const displayBookings = (nextBookingsRoom) => {
   bodyContainNextBookings.innerHTML = `
      
+     <div class="scrollNextBookings">
        <table class="tableNextBookings">
        <thead>
        <tr>
@@ -60,6 +61,7 @@ const displayBookings = (nextBookingsRoom) => {
        </thead>
       <tbody></tbody>       
        </table>
+           </div>
     `;
 
   drawTable(nextBookingsRoom);

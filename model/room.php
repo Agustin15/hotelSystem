@@ -48,6 +48,38 @@ class Room
     }
 
 
+    public function updateRoomBooking(
+        $idBooking,
+        $idClient,
+        $numRoom,
+        $dateStart,
+        $dateEnd,
+        $adults,
+        $childs
+    ) {
+
+
+        $query = $this->connection->prepare("update habitacion_reservada set idClienteHabitacion=?,numHabitacionReservada=?,fechaLlegadaHabitacion=?,
+        fechaSalidaHabitacion=?,adultos=?,ninos=? where idReservaHabitacion=? ");
+        $query->bind_param(
+            "iissiii",
+            $idClient,
+            $numRoom,
+            $dateStart,
+            $dateEnd,
+            $adults,
+            $childs,
+            $idBooking,
+        );
+
+        $result = $query->execute();
+
+        if ($result) {
+            return $result;
+        } else {
+            return $query->error;
+        }
+    }
 
     public function deleteRoomByIdBookingAndNumRoom($idBooking, $numRoom)
     {

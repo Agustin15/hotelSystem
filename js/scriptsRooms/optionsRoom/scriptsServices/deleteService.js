@@ -7,7 +7,6 @@ import {
   footerModal
 } from "./modalDeleteService/modalConfirm.js";
 
-
 let idBooking, numRoom, containDeleteService, modal;
 
 export const configDeleteService = async (numRoomService, idBookingService) => {

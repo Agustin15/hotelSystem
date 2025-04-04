@@ -230,7 +230,7 @@
   .containOptions {
     width: 95%;
     height: auto;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     margin-left: 0;
@@ -343,6 +343,7 @@
   .cartRooms {
     position: absolute;
     transform: translateX(2rem);
+    margin-top: 2rem;
     display: none;
     flex-direction: column;
     align-items: center;

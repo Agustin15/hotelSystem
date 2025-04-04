@@ -34,7 +34,7 @@ const allYearsRevenues = async () => {
   } finally {
     loading(false);
     if (!years) {
-      noData(true,"No se encontraron datos");
+      noData(true, "No se encontraron datos");
     } else {
       noData(false);
     }
@@ -102,7 +102,7 @@ const revenuesByYear = async (year) => {
   } finally {
     loading(false);
     if (!revenues) {
-      noData(true,"No se encontraron datos");
+      noData(true, "No se encontraron datos");
     } else {
       noData(false);
       dataPointsRevenuesMonthsChart(revenues);
@@ -123,7 +123,7 @@ const revenuesOfThisWeek = async () => {
   } finally {
     loading(false);
     if (!revenues) {
-      noData(true,"No se encontraron datos");
+      noData(true, "No se encontraron datos");
     } else {
       noData(false);
       dataPointsRevenuesWeekChart(revenues);
@@ -194,7 +194,7 @@ const graphicChart = (
       title: titleAxisX,
       valueFormatString: valueFormatString,
       titleFontColor: "black",
-      titleFontSize: 17,
+      titleFontSize: window.innerWidth <= 600 ? 15 : 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true
@@ -205,7 +205,7 @@ const graphicChart = (
       valueFormatString: "$##0.00",
       gridColor: "white",
       titleFontColor: "black",
-      titleFontSize: 17,
+      titleFontSize: window.innerWidth <= 600 ? 15 : 17,
       crosshair: {
         enabled: true,
         snapToDataPoint: true,

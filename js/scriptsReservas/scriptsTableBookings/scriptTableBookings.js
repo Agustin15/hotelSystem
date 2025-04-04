@@ -554,7 +554,7 @@ const loading = (state) => {
     
          <td rowspan="${window.innerWidth <= 600 ? 2 : 6}" colspan=${
       window.innerWidth <= 600 ? 2 : 6
-    }" colspan>
+    }">
     <div class="loading">
       <span>Cargando datos</span>
       <img src="../../../img/spinnerMain.gif">

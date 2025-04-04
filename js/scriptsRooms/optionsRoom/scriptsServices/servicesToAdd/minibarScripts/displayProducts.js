@@ -1,7 +1,8 @@
 import { contentMinibar, numRoom } from "../minibar.js";
 import { contentBar } from "../bar.js";
-import {displayCart, addService} from "./displayCart.js";
+import { displayCart, addService } from "./displayCart.js";
 import { displayAlert } from "./displayAlert.js";
+import { FRONT_URL_LOCALHOST } from "../../../../../urlLocalhost.js";
 export let cart = [];
 export let amount = 0;
 export let productsShop, content, optionServiceProduct;
@@ -17,6 +18,15 @@ export const displayContentShop = (products, option) => {
 
   productsShop = products;
   content.innerHTML = `
+
+  <div class="containOpenCartProducts">
+  
+    <div class="containNotificationQuantity">
+     <span class="notificationQuantity">${cart.length}</span>
+    </div>
+    <img class="openCartProducts" src="../../../img/cartShopService2.png">
+  </div>
+
   <ul class="products">
   </ul>
   <div class="containCart">
@@ -34,15 +44,35 @@ export const displayContentShop = (products, option) => {
    Agregar servicio
    <img src="../../../img/spinnerBooking.gif">
    </button>
-
    </div>
 
   `;
 
+  closeAndOpenCart();
   displayProducts();
   let btnAddService = document.querySelector(".btnAddService");
   btnAddService.addEventListener("click", async () => {
     addService(cart);
+  });
+};
+
+const closeAndOpenCart = () => {
+  let openCart = document.querySelector(".openCartProducts");
+  let cart = document.querySelector(".containCart");
+
+  openCart.addEventListener("click", () => {
+    if (openCart.src == `${FRONT_URL_LOCALHOST}img/cartShopService2.png`) {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/cartShopService.png`;
+      cart.classList.remove("cartHide");
+      cart.classList.add("cartShow");
+      cart.style.display = "flex";
+    } else {
+      openCart.src = `${FRONT_URL_LOCALHOST}img/cartShopService2.png`;
+      cart.classList.add("cartHide");
+      setTimeout(function () {
+        cart.style.display = "none";
+      }, 200);
+    }
   });
 };
 
@@ -232,7 +262,9 @@ export const calculateTotalAmount = () => {
   }
 };
 
-export const cleanCart = () => {
+export const cleanCart = (option) => {
   cart = [];
-  displayCart();
+  if (option != "toCloseWindow") {
+    displayCart();
+  }
 };
