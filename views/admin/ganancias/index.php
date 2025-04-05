@@ -13,6 +13,7 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleMain.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleRevenuesAdmin/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleTableBills.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleRevenuesAdmin/styleResponsiveTableBills.css">
     <link rel="stylesheet" href="../../../estilos/styleRevenuesAdmin/styleChart.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleRevenuesAdmin/styleResponsiveChart.css">
 

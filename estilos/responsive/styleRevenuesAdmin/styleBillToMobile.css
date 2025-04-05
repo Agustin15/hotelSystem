@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+
+.containBill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px;
+    height: auto;
+    padding-bottom: 2rem;
+    width: 100%;
+}
+.containBill .header {
+    display: flex;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 3.5rem;
+    align-items: start;
+    justify-content: start;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+}
+.containBill .header .download {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5rem;
+    height: 2.8rem;
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 0;
+    margin-top: 0.7rem;
+}
+.containBill .header .download img {
+    width: 22px;
+    margin-right: 0.2rem;
+    height: 22px;
+}
+.containBill .header .download:hover {
+    background: linear-gradient(rgb(57, 170, 161), rgb(4, 118, 122));
+}
+.containBill .header .btnPrint:hover {
+    background-color: gainsboro;
+}
+.containBill .header .title {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+}
+.containBill .header .title img {
+    width: 35px;
+}
+.containBill .contentBill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: auto;
+    margin-top: 2rem;
+    padding-left: 12rem;
+    border-radius: 3px;
+    position: relative;
+}
+
+.border {
+    border: 1px solid gray;
+}
+
+.containBill .billDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.containBill .billDetails .row {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 1rem;
+    height: auto;
+    width: 100%;
+}
+.containBill .billDetails .row .infoBooking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(rgb(57, 170, 161), rgb(4, 118, 122));
+    color: white;
+    height: 100%;
+    left: 0;
+    position: absolute;
+}
+
+.containBill .billDetails .row .infoBooking .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    padding-top: 0.5rem;
+}
+
+.containBill .billDetails .row .infoBooking .icon img {
+    width: 63px;
+    height: 63px;
+}
+
+.containBill .billDetails .row .infoBooking li {
+    list-style: none;
+    display: flex;
+    padding-top: 0.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.1rem;
+    width: 11rem;
+    height: 4rem;
+}
+.containBill .billDetails .row .infoBooking li .blackFont {
+    font-weight: bold;
+}
+
+.containBill .billDetails .column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.3rem;
+    margin-top: 1rem;
+}
+.containBill .billDetails .senderDataAndClientData {
+    display: flex;
+    align-items: start;
+    gap: 0rem;
+    justify-content: center;
+}
+.containBill .billDetails .senderDataAndClientData li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: start;
+    list-style: none;
+    width: 15rem;
+}
+.containBill .billDetails .senderDataAndClientData li p {
+    width: 12rem;
+}
+.containBill .billDetails .senderDataAndClientData li span,
+.containBill .billDetails .senderDataAndClientData li p {
+    font-size: 15px;
+}
+.containBill .billDetails .senderDataAndClientData li .nameCompany {
+    font-weight: bold;
+}
+
+.tableDetailsBill {
+    width: 46rem;
+    height: auto;
+    border-top: 2px solid black;
+}
+.tableDetailsBill thead th {
+    border-bottom: 2px solid black;
+    padding: 0.5rem;
+}
+.tableDetailsBill thead tr {
+    background: none;
+}
+
+.tableDetailsBill tbody td {
+    text-align: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid black;
+}
+.tableDetailsBill tbody .description {
+    width: 17rem;
+    text-align: start;
+}
+
+.totalAmount {
+    width: 96%;
+    border-top: 2px solid black;
+    padding: 0.5rem;
+    font-size: 21px;
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .noDataBill {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 33rem;
+        font-weight: bold;
+        font-size: 19px;
+        color: grey;
+    }
+    .noDataBill img {
+        width: 87px;
+        opacity: 70%;
+    }
+
+    .loadingBill {
+        margin: auto;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        height: 78vh;
+        font-size: 21px;
+        color: grey;
+    }
+    .loadingBill img {
+        width: 57px;
+        opacity: 60%;
+    }
+}

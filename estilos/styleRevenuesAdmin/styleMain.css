@@ -14,6 +14,10 @@
   justify-content: space-between;
 }
 
+#navAdmin .closeMenu {
+  display: none;
+}
+
 #navAdmin .titleNav {
   display: flex;
   align-items: center;
@@ -56,9 +60,8 @@
 }
 
 .liBookingMarginTop {
-  margin-top:7.5rem;
+  margin-top: 7.5rem;
 }
-
 
 #navAdmin .menu li:hover {
   cursor: pointer;
@@ -354,6 +357,11 @@ body #navAdmin .titleNav {
 .menuBar .title img {
   width: 50px;
 }
+
+.menuBar .openMenu {
+  display: none;
+}
+
 .menuBar ul {
   display: flex;
   gap: 3rem;
@@ -451,4 +459,3 @@ body #navAdmin .titleNav {
 .pageNotFound .headerPageNotFound button:hover {
   background-color: rgb(182, 4, 4);
 }
-

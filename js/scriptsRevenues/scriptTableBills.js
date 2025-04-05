@@ -62,7 +62,7 @@ const revenueByIdBooking = async (idBooking) => {
     loading(false);
 
     if (!revenueBooking) {
-      noData();
+      noData("No se encontro la factura de la reserva");
     }
     return revenueBooking;
   }
@@ -83,7 +83,7 @@ const allYearsRevenues = async () => {
     loading(false);
 
     if (!years) {
-      noData();
+      noData("No se encontraron ganancias");
     }
     return years;
   }
@@ -248,7 +248,7 @@ const allRevenuesByYearLimitIndex = async (year) => {
   } finally {
     loading(false);
     if (!revenuesLimit) {
-      noData("Sin reservas esta año");
+      noData("Sin ganancias este año");
     }
     return revenuesLimit;
   }
@@ -268,7 +268,7 @@ const revenuesThisWeekLimit = async () => {
   } finally {
     loading(false);
     if (!revenuesLimit) {
-      noData("Sin reservas esta semana");
+      noData("Sin ganancias esta semana");
     }
     return revenuesLimit;
   }
@@ -289,7 +289,7 @@ const revenuesByYear = async () => {
     if (revenues) {
       return revenues;
     } else {
-      noData("Sin reservas esta año");
+      noData("Sin ganancias este año");
     }
   }
 };
@@ -309,7 +309,7 @@ const revenuesThisWeek = async () => {
     if (revenues) {
       return revenues;
     } else {
-      noData("Sin reservas esta semana");
+      noData("Sin ganancias esta semana");
     }
   }
 };
@@ -319,7 +319,9 @@ const loading = (state) => {
   let tfoot = document.querySelector("tfoot");
   if (state) {
     tfoot.innerHTML = `
-      <td cellspan="6" colspan="6">
+     <td rowspan="${window.innerWidth <= 600 ? 2 : 6}" colspan=${
+      window.innerWidth <= 600 ? 2 : 6
+    }">
     <div class="loading">
         <span>Cargando datos</span>
        <img src="../../../img/spinnerMain.gif">
@@ -336,7 +338,10 @@ const noData = (msj) => {
   let tfoot = document.querySelector("tfoot");
 
   tfoot.innerHTML = `
-  <td cellspan="6" colspan="6">
+  
+         <td rowspan="${window.innerWidth <= 600 ? 2 : 6}" colspan=${
+    window.innerWidth <= 600 ? 2 : 6
+  }">
   <div class="noData">
  <img src="../../../img/sinDatos.png">
    <span>${msj}</span>
