@@ -234,3 +234,11 @@ INSERT INTO roles(rol) values("Administrador");
 INSERT INTO roles(rol) values("Empleado");
 
 -- INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("username","name","lastname","email",load_file("routeImage"),idRol,"password",NOW());
+
+
+
+
+
+
+
+
