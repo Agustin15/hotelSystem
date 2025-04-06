@@ -93,7 +93,7 @@
 }
 
 .containUsers .scroll {
-  max-height: 22rem;
+  height: 19rem;
   min-width: 60rem;
   max-width: 65rem;
   width: auto;

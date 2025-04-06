@@ -123,7 +123,7 @@ export const validationsInputs = (key, value, valuePassword) => {
     {
       name: "password",
       validation: value.length > 8,
-      msj: "La contraseña debe tener mas de 8 caracteres"
+      msj: "Ingrese al menos 9 caracteres"
     },
     {
       name: "repeatPassword",
@@ -237,6 +237,7 @@ export const loading = (state) => {
 };
 
 export const alertForm = (state) => {
+  window.scroll(0,0);
   let modalAlert = document.querySelector(".modalAlert");
   let alertError = document.querySelector(".alertError");
   let alertSuccesfully = document.querySelector(".alertSuccesfully");

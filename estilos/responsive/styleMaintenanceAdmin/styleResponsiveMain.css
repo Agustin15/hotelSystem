@@ -1,35 +1,77 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
+@media only screen and (max-width: 600px) {
 #navAdmin {
+  transform: translateX(-100%);
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   width: 11rem;
-  height: 103.2vh;
+  height: 100%;
   position: fixed;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-#navAdmin .titleNav {
+.navAdminShow {
+  animation-name: showMenu;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showMenu {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.navAdminHide {
+  animation-name: hideMenu;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hideMenu {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#navAdmin .closeMenu {
+  width: 97%;
+  height: auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 3rem;
-  gap: 0.5rem;
+  justify-content: end;
+}
+#navAdmin .closeMenu img {
+  width: 31px;
+  cursor: pointer;
+}
+
+#navAdmin .titleNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin-top: 1rem;
+  gap: 0rem;
   color: white;
   font-weight: bold;
 }
 
 #navAdmin .titleNav span {
-  margin-top: 0.8rem;
+  margin-top: 0.3rem;
 }
 
 #navAdmin .titleNav img {
-  width: 40px;
+  width: 45px;
+  margin-top: -3rem;
 }
 
 #navAdmin .menu {
@@ -56,7 +98,7 @@
 }
 
 .liBookingMarginTop {
-  margin-top:7.5rem;
+  margin-top: 7.5rem;
 }
 
 #navAdmin .menu li:hover {
@@ -172,14 +214,12 @@
 #userAdmin .profile {
   gap: 0.5rem;
 }
-
 #userAdmin .profile span {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   width: 7rem;
 }
-
 #userAdmin li .btnDisplayMenu {
   width: 14px;
   visibility: hidden;
@@ -199,7 +239,6 @@
   height: 30px;
   border-radius: 100%;
 }
-
 #userAdmin .subMenuProfile {
   display: none;
   flex-direction: column;
@@ -233,22 +272,6 @@
   background-color: rgb(36, 36, 36);
 }
 
-body {
-  background-color: rgb(243, 243, 243);
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  align-items: start;
-  gap: 2rem;
-  height: 100vh;
-  gap: 0;
-}
-body #navAdmin {
-  height: 100vh;
-}
-body #navAdmin .titleNav {
-  margin-top: 1.8rem;
-}
-
 .bodyMaintenance {
   display: flex;
   flex-direction: column;
@@ -262,10 +285,12 @@ body #navAdmin .titleNav {
 
 .menuBar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  position: fixed;
   gap: 1rem;
-  height: 5.1rem;
+  height: 3.8rem;
   color: rgb(0, 0, 0);
   font-weight: bold;
   width: 100%;
@@ -273,17 +298,31 @@ body #navAdmin .titleNav {
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 }
+
+.menuBar .openMenu {
+  width: 1%;
+  position: absolute;
+  display: flex;
+}
+
+.menuBar .openMenu img {
+  width: 21px;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
 .menuBar nav,
 .menuBar ul {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .menuBar ul {
   list-style: none;
-  gap: 3rem;
-  margin-left: 6rem;
-  margin-top: 0.3rem;
+  gap: 1rem;
+  margin-left: 0.5rem;
+  margin-top: 0;
+  width: 100%;
 }
 .menuBar li {
   display: flex;
@@ -294,7 +333,7 @@ body #navAdmin .titleNav {
   cursor: pointer;
 }
 .menuBar li img {
-  width: 45px;
+  width: 28px;
 }
 .menuBar li:hover {
   border-bottom: 3px solid rgb(1, 187, 147);
@@ -302,6 +341,16 @@ body #navAdmin .titleNav {
 
 .optionMarkActual {
   border-bottom: 3px solid rgb(1, 187, 147);
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6rem;
+  width: 99%;
+  height: 76%;
 }
 
 .loadingPage {
@@ -315,8 +364,8 @@ body #navAdmin .titleNav {
   background: none;
   border-radius: 5px;
   padding: 1rem;
-  margin-left: 7rem;
-  margin-top: 13rem;
+  margin-left: 0;
+  margin-top: 0;
 }
 .loadingPage img {
   width: 50px;
@@ -326,23 +375,24 @@ body #navAdmin .titleNav {
 .pageNotFound {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
-  font-size: 20px;
+  margin-left: 0rem;
+  margin-top: 0;
+  width: 98%;
+  font-size: 17px;
   align-items: center;
-  height: auto;
-  margin-left: 7rem;
-  margin-top: 11rem;
   opacity: 100%;
   background: none;
-  padding: 1rem;
+  padding: 0;
   padding-top: 0;
-  padding-bottom: 1.5rem;
+  padding-bottom: 0;
   color: gray;
   border-radius: 5px;
   border-top-right-radius: 0;
 }
 .pageNotFound img {
-  width: 120px;
+  width: 70px;
   opacity: 75%;
 }
 .pageNotFound .headerPageNotFound {
@@ -375,7 +425,7 @@ body #navAdmin .titleNav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 133%;
+  height: 163%;
   background: rgba(44, 44, 44, 0.6);
 }
 
@@ -384,38 +434,40 @@ body #navAdmin .titleNav {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 17rem;
-  margin-left: 6rem;
+  margin-left: 0;
   background-color: white;
   padding: 1rem;
   border-radius: 3px;
   color: gray;
 }
 .modalMaintenance .loadingPage img {
-  width: 40px;
+  width: 34px;
   opacity: 70%;
 }
 .modalMaintenance .pageNotFound {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: 18px;
+  font-size: 15px;
+  text-align: center;
   align-items: center;
   height: auto;
-  margin-left: 6rem;
+  width: 85%;
+  margin-left: 0;
   margin-top: 14rem;
   opacity: 100%;
   background-color: white;
   padding: 1rem;
   padding-top: 0;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2rem;
   color: gray;
   border-radius: 5px;
   border-top-right-radius: 0;
 }
 .modalMaintenance .pageNotFound img {
-  width: 95px;
+  width: 55px;
   opacity: 75%;
 }
 .modalMaintenance .pageNotFound .headerPageNotFound {
@@ -435,4 +487,6 @@ body #navAdmin .titleNav {
 }
 .modalMaintenance .pageNotFound .headerPageNotFound button:hover {
   background-color: rgb(182, 4, 4);
+}
+
 }

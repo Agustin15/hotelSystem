@@ -21,9 +21,20 @@ if ($_COOKIE["idRol"] != 1) {
     <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveMain.css">
 
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleTableUsers.css"">
-    <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
+    <link rel=" stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveTableUsers.css">
+
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveEdit.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDelete.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveDelete.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAdd.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveAdd.css">
+    
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDetails.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveDetails.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleRooms.css">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleServices.css"">
     <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">

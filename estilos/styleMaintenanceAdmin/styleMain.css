@@ -14,6 +14,10 @@
   justify-content: space-between;
 }
 
+#navAdmin .closeMenu {
+  display: none;
+
+}
 #navAdmin .titleNav {
   display: flex;
   align-items: center;
@@ -56,7 +60,7 @@
 }
 
 .liBookingMarginTop {
-  margin-top:7.5rem;
+  margin-top: 7.5rem;
 }
 
 #navAdmin .menu li:hover {
@@ -273,6 +277,11 @@ body #navAdmin .titleNav {
   padding-top: 0.5rem;
   box-shadow: 2px 2px 2px rgb(172, 172, 172);
 }
+
+.menuBar .openMenu {
+  display: none;
+}
+
 .menuBar nav,
 .menuBar ul {
   display: flex;
@@ -303,6 +312,17 @@ body #navAdmin .titleNav {
 .optionMarkActual {
   border-bottom: 3px solid rgb(1, 187, 147);
 }
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0rem;
+  width:76%;
+  margin-left: 0rem;
+}
+
 
 .loadingPage {
   display: flex;

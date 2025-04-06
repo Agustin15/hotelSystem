@@ -311,7 +311,7 @@
   top: 4.2rem;
 }
 
-.modalAlert {
+.modalMaintenance .modalAlert {
   position: absolute;
   z-index: 2;
   display: none;
@@ -325,8 +325,8 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalAlert .alertError,
-.modalAlert .alertSuccesfully {
+.modalMaintenance .modalAlert .alertError,
+.modalMaintenance .modalAlert .alertSuccesfully {
   width: 25rem;
   height: 14rem;
   background-color: white;
@@ -340,18 +340,18 @@
   margin-top: 16rem;
 }
 
-.modalAlert .alertError p,
-.modalAlert .alertSuccesfully p {
+.modalMaintenance .modalAlert .alertError p,
+.modalMaintenance .modalAlert .alertSuccesfully p {
   font-size: 19px;
 }
 
-.modalAlert .alertError img,
-.modalAlert .alertSuccesfully img {
+.modalMaintenance .modalAlert .alertError img,
+.modalMaintenance .modalAlert .alertSuccesfully img {
   width: 55px;
 }
 
-.modalAlert .alertError button,
-.modalAlert .alertSuccesfully button {
+.modalMaintenance .modalAlert .alertError button,
+.modalMaintenance .modalAlert .alertSuccesfully button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -361,18 +361,18 @@
   margin-top: 1rem;
 }
 
-.modalAlert .alertSuccesfully button {
+.modalMaintenance .modalAlert .alertSuccesfully button {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.modalAlert .alertSuccesfully button:hover {
+.modalMaintenance .modalAlert .alertSuccesfully button:hover {
   background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
 }
 
-.modalAlert .alertError button {
+.modalMaintenance .modalAlert .alertError button {
   background: red;
 }
 
-.modalAlert .alertError button:hover {
+.modalMaintenance .modalAlert .alertError button:hover {
   background: rgb(199, 22, 22);
 }

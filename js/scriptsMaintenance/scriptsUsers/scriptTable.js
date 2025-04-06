@@ -155,7 +155,6 @@ const allUsersLimitIndex = async () => {
     console.log(error);
   } finally {
     loading(false);
-
     if (!users) {
       noData();
     }
@@ -168,7 +167,9 @@ const loading = (state) => {
   let tfoot = document.querySelector("tfoot");
   if (state) {
     tfoot.innerHTML = `
-        <td cellspan="6" colspan="6">
+         <td rowspan="${window.innerWidth <= 600 ? 1 : 6}" colspan=${
+      window.innerWidth <= 600 ? 1 : 6
+    }">
       <div class="loading">
           <span>Cargando datos</span>
          <img src="../../../img/spinnerMain.gif">
@@ -186,7 +187,9 @@ const noData = () => {
   controls.style.display = "none";
 
   tfoot.innerHTML = `
-    <td cellspan="6" colspan="6">
+      <td rowspan="${window.innerWidth <= 600 ? 1 : 6}" colspan=${
+    window.innerWidth <= 600 ? 1 : 6
+  }">
     <div class="noData">
    <img src="../../../img/sinDatos.png">
      <span>No se encontraron datos</span>

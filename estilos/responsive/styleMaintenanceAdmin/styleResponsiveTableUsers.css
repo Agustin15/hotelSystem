@@ -1,3 +1,5 @@
+@media only screen and (max-width: 600px) {
+
 .containUsers {
   background-color: white;
   position: relative;
@@ -6,40 +8,40 @@
   align-items: center;
   padding-bottom: 1.5rem;
   padding-top: 1rem;
-  margin-top: 2rem;
-  margin-left: 11rem;
+  margin-top: 5rem;
+  margin-left: 0;
   color: black;
   border-radius: 6px;
+  border: 1px solid rgb(211, 207, 207);
   font-size: 18px;
   box-shadow: 2px 2px 2px gray;
   background-color: white;
   gap: 1rem;
-  width: auto;
+  width: 97%;
 }
 .containUsers .header {
   display: flex;
-  justify-content: start;
+  flex-direction: column;
   align-items: center;
+  justify-content: start;
   width: 95%;
-  gap: 3rem;
+  gap: 1rem;
 }
-.containUsers .header .title {
+.containUsers .title {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44%;
-}
-.containUsers .header .title h3 {
-  color: rgb(0, 0, 0);
-  font-size: 21px;
+  width: 99%;
+  font-size: 16px;
 }
 .containUsers .header .containInput {
   display: flex;
   align-items: center;
   justify-items: center;
+  position:relative;
 }
 .containUsers .header .containInput input {
-  width: 10rem;
+  width: 12rem;
   border: 1px solid rgb(158, 158, 158);
   height: 2rem;
   padding-left: 1rem;
@@ -55,7 +57,7 @@
   left: 13rem;
   border-radius: 3px;
   color: white;
-  width: 48px;
+  width: 41px;
   height: 34px;
   border: none;
   font-weight: bold;
@@ -93,12 +95,11 @@
 }
 
 .containUsers .scroll {
-  max-height: 22rem;
-  min-width: 60rem;
-  max-width: 65rem;
-  width: auto;
+  height: 22rem;
+  max-width: 99%;
+  min-width: 99%;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: scroll;
 }
 
 .containUsers .controls {
@@ -118,13 +119,12 @@
 }
 
 .tableUsers {
-  min-width: 60rem;
-  width: 64rem;
+  width: auto;
   padding-top: 1rem;
 }
 .tableUsers thead {
   width: auto;
-  font-size: 15px;
+  font-size: 14px;
 }
 .tableUsers thead th {
   padding: 1rem;
@@ -134,7 +134,7 @@
   color: white;
 }
 .tableUsers tbody {
-  font-size: 17px;
+  font-size: 15px;
 }
 .tableUsers tbody td {
   padding: 0.5rem;
@@ -154,8 +154,8 @@
   gap: 0.4rem;
 }
 .tableUsers tbody .contentIdUser img {
-  width: 43px;
-  height: 43px;
+  width: 37px;
+  height: 37px;
   border-radius: 100%;
 }
 .tableUsers tbody .buttons {
@@ -166,7 +166,7 @@
   color: white;
 }
 .tableUsers tbody .buttons img {
-  width: 25px;
+  width: 21px;
 }
 .tableUsers tbody .buttons button {
   box-shadow: 1px 1px 1px gray;
@@ -176,7 +176,7 @@
   border-radius: 4px;
   display: flex;
   justify-content: center;
-  width: 3.8rem;
+  width: 3rem;
   cursor: pointer;
 }
 .tableUsers tbody .buttons .btnDelete {
@@ -204,7 +204,10 @@
   justify-content: center;
   align-items: center;
   font-size: 22px;
-  margin-top: 2rem;
+  width: 99%;
+  height: 99%;
+  margin-left: 1rem;
+  margin-top: 5rem;
   padding-bottom: 2rem;
   opacity: 60%;
 }
@@ -218,14 +221,17 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  width: auto;
+  width: 100%;
+  height: 99%;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: grey;
-  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-top: 3rem;
 }
 .containUsers .noData img,
 .containUsers .noResults img {
-  width: 80px;
+  width: 70px;
   opacity: 80%;
+}
 }

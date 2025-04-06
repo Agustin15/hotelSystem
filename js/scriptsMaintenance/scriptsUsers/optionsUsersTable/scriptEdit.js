@@ -1,5 +1,5 @@
 import { closeModal } from "./scriptDelete.js";
-import { modal, displayTable} from "../scriptTable.js";
+import { modal, displayTable } from "../scriptTable.js";
 import { PUTuser } from "../methodsFetch.js";
 
 import {
@@ -25,6 +25,7 @@ export const configEdit = async (user) => {
   btnClose.addEventListener("click", () => {
     closeModal(modal);
   });
+
 
   if (!user) {
     noData();
@@ -167,7 +168,7 @@ const setRolOption = (idRolUser) => {
 };
 
 const noData = () => {
-  let noData = document.querySelector("noData");
+  let noData = document.querySelector(".noDataUser");
 
   form.style.display = "none";
   noData.style.display = "flex";
@@ -199,7 +200,7 @@ export const validationsInputs = (key, value) => {
     {
       name: "password",
       validation: value.length > 0 ? value.length > 8 : true,
-      msj: "La contraseña debe tener mas de 8 caracteres"
+      msj: "Ingrese al menos 9 caracteres"
     },
     {
       name: "imagen",
