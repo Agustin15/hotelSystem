@@ -11,8 +11,13 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleEditProfile/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleEditProfile/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleEditProfile/styleChangeAvatar.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleEditProfile/styleResponsiveChangeAvatar.css">
     <link rel="stylesheet" href="../../../estilos/styleEditProfile/styleEditPassword.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleEditProfile/styleResponsiveEditPassword.css">
+
+
     <script type="module" src="../../../js/scriptsEditProfile/userData.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
         integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
@@ -127,10 +132,7 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
         </form>
     </div>
-
-    </div>
-
+    <br><br>
 </body>
 
 </html>
-

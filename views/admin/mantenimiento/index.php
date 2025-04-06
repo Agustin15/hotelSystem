@@ -18,6 +18,8 @@ if ($_COOKIE["idRol"] != 1) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleMain.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveMain.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleTableUsers.css"">
     <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEdit.css">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDelete.css">
@@ -27,7 +29,7 @@ if ($_COOKIE["idRol"] != 1) {
     <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProducts.css">
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProduct.css">
-    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDeleteProduct.css" >
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDeleteProduct.css">
 
 
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer>
@@ -42,6 +44,10 @@ if ($_COOKIE["idRol"] != 1) {
 
     <header>
         <nav id="navAdmin">
+            <div class="closeMenu">
+                <img src="../../../img/menuOpen.png">
+            </div>
+
             <div class="titleNav">
                 <img class="iconoMenu" src="../../../img/revision.png">
                 <span>Sistema hotel</span>
@@ -215,7 +221,9 @@ if ($_COOKIE["idRol"] != 1) {
 
     <div class="bodyMaintenance">
         <div class="menuBar">
-
+            <div class="openMenu">
+                <img src="../../../img/menuHabitacion.png">
+            </div>
             <nav>
                 <ul>
                     <li class="usersLi">
