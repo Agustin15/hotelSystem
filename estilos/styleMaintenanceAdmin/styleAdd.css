@@ -3,7 +3,7 @@
   border-radius: 3px;
   height: 48rem;
   background-color: white;
-  margin-left: 8rem;
+  margin-left: 0;
   margin-top: 1rem;
 }
 
@@ -153,7 +153,6 @@
   color: red;
 }
 
-
 .containAddUser .containRols {
   display: flex;
   align-items: center;
@@ -162,7 +161,6 @@
   gap: 1rem;
 }
 
-
 .containAddUser .containAvatar {
   display: flex;
   flex-direction: column;
@@ -170,7 +168,6 @@
   gap: 0.2rem;
   margin-top: 1rem;
 }
-
 
 .containAddUser .containImageAvatar {
   width: 9rem;
@@ -197,13 +194,11 @@
   height: 45px;
 }
 
-
 .containAddUser .imageAvatar .iconAvatar {
   width: 100%;
   height: 100%;
   position: absolute;
 }
-
 
 .containAddUser .columnAvatar {
   display: flex;
@@ -212,12 +207,10 @@
   gap: 0.2rem;
 }
 
-
 .containAddUser .file-select {
   position: relative;
   display: inline-block;
 }
-
 
 .containAddUser .file-select::before {
   background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
@@ -234,7 +227,6 @@
   bottom: 0;
 }
 
-
 .containAddUser .file-select input[type="file"] {
   opacity: 0;
   width: 200px;
@@ -242,11 +234,9 @@
   display: inline-block;
 }
 
-
 .containAddUser #src-file1::before {
   content: "Seleccionar Imagen";
 }
-
 
 .containAddUser .btnSubmit {
   display: flex;
@@ -268,17 +258,14 @@
   width: 22px;
 }
 
-
 .containAddUser .btnSubmit:hover {
   background: linear-gradient(rgb(46, 136, 128), rgb(1, 155, 160));
 }
-
 
 .containAddUser .btnSubmit .loader {
   display: none;
   width: 26px;
 }
-
 
 .containAddUser .errorInput {
   color: red;
@@ -296,13 +283,11 @@
   width: 22px;
 }
 
-
 .containAddUser .rol .errorInput {
   position: relative;
   left: 0;
   top: 0;
 }
-
 
 .containAddUser .containAvatar .errorInput {
   position: relative;
@@ -310,12 +295,11 @@
   top: 0;
 }
 
-
 .containAddUser .password .errorInput {
   top: 4.2rem;
 }
 
-.modalAlert {
+.modalMaintenance .modalAlert {
   position: absolute;
   z-index: 2;
   display: none;
@@ -329,8 +313,9 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalAlert .alertError,
-.modalAlert .alertSuccesfully {
+
+.modalMaintenance .modalAlert .alertError,
+.modalMaintenance .modalAlert .alertSuccesfully {
   width: 25rem;
   height: 14rem;
   background-color: white;
@@ -340,22 +325,22 @@
   align-items: center;
   gap: 1rem;
   border-radius: 3px;
-  margin-left: 6.5rem;
+  margin-left:0;
   margin-top: 16rem;
 }
 
-.modalAlert .alertError p,
-.modalAlert .alertSuccesfully p {
+.modalMaintenance .modalAlert .alertError p,
+.modalMaintenance .modalAlert .alertSuccesfully p {
   font-size: 19px;
 }
 
-.modalAlert .alertError img,
-.modalAlert .alertSuccesfully img {
+.modalMaintenance .modalAlert .alertError img,
+.modalMaintenance .modalAlert .alertSuccesfully img {
   width: 55px;
 }
 
-.modalAlert .alertError button,
-.modalAlert .alertSuccesfully button {
+.modalMaintenance .modalAlert .alertError button,
+.modalMaintenance .modalAlert .alertSuccesfully button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -365,18 +350,18 @@
   margin-top: 1rem;
 }
 
-.modalAlert .alertSuccesfully button {
+.modalMaintenance .modalAlert .alertSuccesfully button {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.modalAlert .alertSuccesfully button:hover {
+.modalMaintenance .modalAlert .alertSuccesfully button:hover {
   background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
 }
 
-.modalAlert .alertError button {
+.modalMaintenance .modalAlert .alertError button {
   background: red;
 }
 
-.modalAlert .alertError button:hover {
+.modalMaintenance .modalAlert .alertError button:hover {
   background: rgb(199, 22, 22);
 }

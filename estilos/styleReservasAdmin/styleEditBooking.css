@@ -23,7 +23,7 @@
   border-radius: 4px;
   background-color: white;
   margin-top: 1rem;
-  margin-left: 11rem;
+  margin-left: 0;
 }
 .containEditOption .headerWindow {
   display: flex;
@@ -797,7 +797,7 @@
   width: 20rem;
   padding: 1rem;
   border-radius: 5px;
-  margin-left: 12rem;
+  margin-left: 0;
   margin-top: 16rem;
   color: rgb(0, 0, 0);
 }

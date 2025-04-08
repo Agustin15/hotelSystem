@@ -1,492 +1,493 @@
 @media only screen and (max-width: 600px) {
-#navAdmin {
-  transform: translateX(-100%);
-  background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
-  width: 11rem;
-  height: 100%;
-  position: fixed;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navAdminShow {
-  animation-name: showMenu;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes showMenu {
-  from {
+  #navAdmin {
     transform: translateX(-100%);
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+    width: 11rem;
+    height: 100%;
+    position: fixed;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   }
-  to {
-    transform: translateX(0%);
+
+  .navAdminShow {
+    animation-name: showMenu;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
   }
-}
 
-.navAdminHide {
-  animation-name: hideMenu;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes hideMenu {
-  from {
-    transform: translateX(0%);
+  @keyframes showMenu {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
   }
-  to {
-    transform: translateX(-100%);
+
+  .navAdminHide {
+    animation-name: hideMenu;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
   }
-}
 
-#navAdmin .closeMenu {
-  width: 97%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-#navAdmin .closeMenu img {
-  width: 31px;
-  cursor: pointer;
-}
+  @keyframes hideMenu {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
 
-#navAdmin .titleNav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  margin-top: 1rem;
-  gap: 0rem;
-  color: white;
-  font-weight: bold;
-}
+  #navAdmin .closeMenu {
+    width: 97%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  #navAdmin .closeMenu img {
+    width: 31px;
+    cursor: pointer;
+  }
 
-#navAdmin .titleNav span {
-  margin-top: 0.3rem;
-}
+  #navAdmin .titleNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin-top: 1rem;
+    gap: 0rem;
+    color: white;
+    font-weight: bold;
+  }
 
-#navAdmin .titleNav img {
-  width: 45px;
-  margin-top: -3rem;
-}
+  #navAdmin .titleNav span {
+    margin-top: 0.3rem;
+  }
 
-#navAdmin .menu {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0rem;
-  height: 70%;
-  color: white;
-  list-style: none;
-}
+  #navAdmin .titleNav img {
+    width: 45px;
+    margin-top: -3rem;
+  }
 
-#navAdmin .menu li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 11rem;
-  height: auto;
-  min-height: 2.2rem;
-  padding-top: 0.6rem;
-  justify-content: space-between;
-}
+  #navAdmin .menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0rem;
+    height: 70%;
+    color: white;
+    list-style: none;
+  }
 
-.liBookingMarginTop {
-  margin-top: 7.5rem;
-}
+  #navAdmin .menu li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 11rem;
+    height: auto;
+    min-height: 2.2rem;
+    padding-top: 0.6rem;
+    justify-content: space-between;
+  }
 
-#navAdmin .menu li:hover {
-  cursor: pointer;
-  background-color: rgb(5, 141, 146);
-}
+  .liBookingMarginTop {
+    margin-top: 7.5rem;
+  }
 
-#navAdmin .menu li .item {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  position: relative;
-  margin-left: 3rem;
-}
+  #navAdmin .menu li:hover {
+    cursor: pointer;
+    background-color: rgb(5, 141, 146);
+  }
 
-#navAdmin .menu li .nameOption {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding-right: 1rem;
-}
+  #navAdmin .menu li .item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    position: relative;
+    margin-left: 3rem;
+  }
 
-.nameOptionHome a {
-  margin-top: 0.3rem;
-}
+  #navAdmin .menu li .nameOption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding-right: 1rem;
+  }
 
-#navAdmin .menu li .btnDisplaySubMenu {
-  width: 14px;
-  left: 8.4rem;
-  position: absolute;
-  display: none;
-  cursor: pointer;
-}
+  .nameOptionHome a {
+    margin-top: 0.3rem;
+  }
 
-#navAdmin .menu li .btnDisplaySubMenu:hover {
-  transform: scale(1.1);
-}
+  #navAdmin .menu li .btnDisplaySubMenu {
+    width: 14px;
+    left: 8.4rem;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+  }
 
-#navAdmin .menu li img {
-  width: 25px;
-}
+  #navAdmin .menu li .btnDisplaySubMenu:hover {
+    transform: scale(1.1);
+  }
 
-#navAdmin .loadingUser {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  gap: 0.5rem;
-}
+  #navAdmin .menu li img {
+    width: 25px;
+  }
 
-#navAdmin .loadingUser img {
-  width: 30px;
-  margin-top: 0.2rem;
-}
+  #navAdmin .loadingUser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    gap: 0.5rem;
+  }
 
-#navAdmin .subMenu {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 0rem;
-  margin-top: 0.5rem;
-}
+  #navAdmin .loadingUser img {
+    width: 30px;
+    margin-top: 0.2rem;
+  }
 
-#navAdmin .subMenu li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  border-bottom: 1px solid rgb(165, 165, 165);
-  width: 11rem;
-  background-color: rgb(49, 49, 49);
-  font-size: 15px;
-  gap: 0.5rem;
-}
+  #navAdmin .subMenu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0rem;
+    margin-top: 0.5rem;
+  }
 
-#navAdmin .subMenu li img {
-  width: 20px;
-  margin-left: 3rem;
-}
+  #navAdmin .subMenu li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-bottom: 1px solid rgb(165, 165, 165);
+    width: 11rem;
+    background-color: rgb(49, 49, 49);
+    font-size: 15px;
+    gap: 0.5rem;
+  }
 
-#navAdmin .subMenu li:hover {
-  background-color: rgb(37, 37, 37);
-}
+  #navAdmin .subMenu li img {
+    width: 20px;
+    margin-left: 3rem;
+  }
 
-#navAdmin .subMenu li:hover {
-  background-color: rgb(37, 37, 37);
-}
+  #navAdmin .subMenu li:hover {
+    background-color: rgb(37, 37, 37);
+  }
 
-#userAdmin {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: rgb(7, 145, 150);
-  width: 100%;
-  height: 3rem;
-  color: white;
-  list-style: none;
-}
+  #navAdmin .subMenu li:hover {
+    background-color: rgb(37, 37, 37);
+  }
 
-#userAdmin li {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  margin-top: 0.5rem;
-  gap: 1rem;
-  color: white;
-  font-size: 17px;
-}
+  #userAdmin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(7, 145, 150);
+    width: 100%;
+    height: 3rem;
+    color: white;
+    list-style: none;
+  }
 
-#userAdmin .profile {
-  gap: 0.5rem;
-}
-#userAdmin .profile span {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 7rem;
-}
-#userAdmin li .btnDisplayMenu {
-  width: 14px;
-  visibility: hidden;
-  cursor: pointer;
-}
+  #userAdmin li {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 0.5rem;
+    gap: 1rem;
+    color: white;
+    font-size: 17px;
+  }
 
-#userAdmin li .btnDisplayMenu:hover {
-  transform: scale(1.1);
-}
+  #userAdmin .profile {
+    gap: 0.5rem;
+  }
+  #userAdmin .profile span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 7rem;
+  }
+  #userAdmin li .btnDisplayMenu {
+    width: 14px;
+    visibility: hidden;
+    cursor: pointer;
+  }
 
-#userAdmin li img {
-  width: 30px;
-}
+  #userAdmin li .btnDisplayMenu:hover {
+    transform: scale(1.1);
+  }
 
-#userAdmin li .iconProfile {
-  width: 30px;
-  height: 30px;
-  border-radius: 100%;
-}
-#userAdmin .subMenuProfile {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  margin-top: -5rem;
-}
+  #userAdmin li img {
+    width: 30px;
+  }
 
-#userAdmin .subMenuProfile li {
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-  width: 11rem;
-  height: auto;
-  border-bottom: 1px solid gray;
-  gap: 0.4rem;
-  font-size: 15px;
-  cursor: pointer;
-  justify-content: start;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
-  background-color: rgb(49, 49, 49);
-}
+  #userAdmin li .iconProfile {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  }
+  #userAdmin .subMenuProfile {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    margin-top: -5rem;
+  }
 
-#userAdmin .subMenuProfile li img {
-  width: 20px;
-  margin-left: 3rem;
-}
+  #userAdmin .subMenuProfile li {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    width: 11rem;
+    height: auto;
+    border-bottom: 1px solid gray;
+    gap: 0.4rem;
+    font-size: 15px;
+    cursor: pointer;
+    justify-content: start;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    background-color: rgb(49, 49, 49);
+  }
 
-#userAdmin .subMenuProfile li:hover {
-  background-color: rgb(36, 36, 36);
-}
+  #userAdmin .subMenuProfile li img {
+    width: 20px;
+    margin-left: 3rem;
+  }
 
-.bodyMaintenance {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  margin-top: -0.1rem;
-  width: 100%;
-  height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  #userAdmin .subMenuProfile li:hover {
+    background-color: rgb(36, 36, 36);
+  }
 
-.menuBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: start;
-  position: fixed;
-  gap: 1rem;
-  height: 3.8rem;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  width: 100%;
-  background-color: white;
-  padding-top: 0.5rem;
-  box-shadow: 2px 2px 2px rgb(172, 172, 172);
-}
+  .bodyMaintenance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: -0.1rem;
+    margin-left: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
-.menuBar .openMenu {
-  width: 1%;
-  position: absolute;
-  display: flex;
-}
+  .menuBar {
+    display: flex;
+    z-index: 3;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    position: fixed;
+    gap: 1rem;
+    height: 3.8rem;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    width: 100%;
+    background-color: white;
+    padding-top: 0.5rem;
+    box-shadow: 2px 2px 2px rgb(172, 172, 172);
+  }
 
-.menuBar .openMenu img {
-  width: 21px;
-  margin-left: 0.5rem;
-  cursor: pointer;
-}
-.menuBar nav,
-.menuBar ul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.menuBar ul {
-  list-style: none;
-  gap: 1rem;
-  margin-left: 0.5rem;
-  margin-top: 0;
-  width: 100%;
-}
-.menuBar li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.2rem;
-  cursor: pointer;
-}
-.menuBar li img {
-  width: 28px;
-}
-.menuBar li:hover {
-  border-bottom: 3px solid rgb(1, 187, 147);
-}
+  .menuBar .openMenu {
+    width: 1%;
+    position: absolute;
+    display: flex;
+  }
 
-.optionMarkActual {
-  border-bottom: 3px solid rgb(1, 187, 147);
-}
+  .menuBar .openMenu img {
+    width: 21px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  .menuBar nav,
+  .menuBar ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .menuBar ul {
+    list-style: none;
+    gap: 1rem;
+    margin-left: 0.5rem;
+    margin-top: 0;
+    width: 100%;
+  }
+  .menuBar li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem;
+    cursor: pointer;
+  }
+  .menuBar li img {
+    width: 28px;
+  }
+  .menuBar li:hover {
+    border-bottom: 3px solid rgb(1, 187, 147);
+  }
 
-.option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 6rem;
-  width: 99%;
-  height: 76%;
-}
+  .optionMarkActual {
+    border-bottom: 3px solid rgb(1, 187, 147);
+  }
 
-.loadingPage {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  font-size: 21px;
-  opacity: 100%;
-  color: rgb(158, 158, 158);
-  background: none;
-  border-radius: 5px;
-  padding: 1rem;
-  margin-left: 0;
-  margin-top: 0;
-}
-.loadingPage img {
-  width: 50px;
-  opacity: 60%;
-}
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    width: 99%;
+    height: 76%;
+  }
 
-.pageNotFound {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  margin-left: 0rem;
-  margin-top: 0;
-  width: 98%;
-  font-size: 17px;
-  align-items: center;
-  opacity: 100%;
-  background: none;
-  padding: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  color: gray;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-}
-.pageNotFound img {
-  width: 70px;
-  opacity: 75%;
-}
-.pageNotFound .headerPageNotFound {
-  display: none;
-  justify-content: flex-end;
-  width: 110%;
-}
-.pageNotFound .headerPageNotFound button {
-  background-color: rgb(231, 0, 0);
-  padding: 0.2rem;
-  width: 2rem;
-  height: 1.5rem;
-  font-weight: bold;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.pageNotFound .headerPageNotFound button:hover {
-  background-color: rgb(182, 4, 4);
-}
+  .loadingPage {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    opacity: 100%;
+    color: rgb(158, 158, 158);
+    background: none;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .loadingPage img {
+    width: 50px;
+    opacity: 60%;
+  }
 
-.modalMaintenance {
-  position: absolute;
-  z-index: 2;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  margin: auto;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 163%;
-  background: rgba(44, 44, 44, 0.6);
-}
+  .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-left: 0rem;
+    margin-top: 0;
+    width: 98%;
+    font-size: 17px;
+    align-items: center;
+    opacity: 100%;
+    background: none;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .pageNotFound img {
+    width: 70px;
+    opacity: 75%;
+  }
+  .pageNotFound .headerPageNotFound {
+    display: none;
+    justify-content: flex-end;
+    width: 110%;
+  }
+  .pageNotFound .headerPageNotFound button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 1.5rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .pageNotFound .headerPageNotFound button:hover {
+    background-color: rgb(182, 4, 4);
+  }
 
-.modalMaintenance .loadingPage {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  margin-top: 17rem;
-  margin-left: 0;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 3px;
-  color: gray;
-}
-.modalMaintenance .loadingPage img {
-  width: 34px;
-  opacity: 70%;
-}
-.modalMaintenance .pageNotFound {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  font-size: 15px;
-  text-align: center;
-  align-items: center;
-  height: auto;
-  width: 85%;
-  margin-left: 0;
-  margin-top: 14rem;
-  opacity: 100%;
-  background-color: white;
-  padding: 1rem;
-  padding-top: 0;
-  padding-bottom: 2rem;
-  color: gray;
-  border-radius: 5px;
-  border-top-right-radius: 0;
-}
-.modalMaintenance .pageNotFound img {
-  width: 55px;
-  opacity: 75%;
-}
-.modalMaintenance .pageNotFound .headerPageNotFound {
-  display: flex;
-  justify-content: flex-end;
-  width: 110%;
-}
-.modalMaintenance .pageNotFound .headerPageNotFound button {
-  background-color: rgb(231, 0, 0);
-  padding: 0.2rem;
-  width: 2rem;
-  height: 2rem;
-  font-weight: bold;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.modalMaintenance .pageNotFound .headerPageNotFound button:hover {
-  background-color: rgb(182, 4, 4);
-}
+  .modalMaintenance {
+    position: absolute;
+    z-index: 5;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 163%;
+    background: rgba(44, 44, 44, 0.6);
+  }
 
+  .modalMaintenance .loadingPage {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-top: 17rem;
+    margin-left: 0;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 3px;
+    color: gray;
+  }
+  .modalMaintenance .loadingPage img {
+    width: 34px;
+    opacity: 70%;
+  }
+  .modalMaintenance .pageNotFound {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    height: auto;
+    width: 85%;
+    margin-left: 0;
+    margin-top: 14rem;
+    opacity: 100%;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 2rem;
+    color: gray;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+  }
+  .modalMaintenance .pageNotFound img {
+    width: 55px;
+    opacity: 75%;
+  }
+  .modalMaintenance .pageNotFound .headerPageNotFound {
+    display: flex;
+    justify-content: flex-end;
+    width: 110%;
+  }
+  .modalMaintenance .pageNotFound .headerPageNotFound button {
+    background-color: rgb(231, 0, 0);
+    padding: 0.2rem;
+    width: 2rem;
+    height: 2rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modalMaintenance .pageNotFound .headerPageNotFound button:hover {
+    background-color: rgb(182, 4, 4);
+  }
 }

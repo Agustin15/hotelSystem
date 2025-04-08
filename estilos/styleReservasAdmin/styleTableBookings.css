@@ -7,7 +7,7 @@
   padding-bottom: 1.5rem;
   padding-top: 1rem;
   margin-top: 2rem;
-  margin-left: 11rem;
+  margin-left: 0;
   color: black;
   border-radius: 6px;
   font-size: 18px;
@@ -328,7 +328,7 @@
   background-color: white;
   border-radius: 5px;
   padding: 1rem;
-  margin-left: 7rem;
+  margin-left: 0;
   margin-top: 14rem;
 }
 .modalMainBookings .loadingPage img {
@@ -343,7 +343,7 @@
   font-size: 18px;
   align-items: center;
   height: auto;
-  margin-left: 7rem;
+  margin-left: 0;
   margin-top: 14rem;
   opacity: 100%;
   background-color: white;
@@ -385,7 +385,7 @@
   font-size: 18px;
   font-weight: bold;
   width: 20rem;
-  margin-left: 9rem;
+  margin-left: 0;
   margin-top: 14rem;
   display: flex;
   flex-direction: column;
@@ -466,7 +466,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  margin-left: 10rem;
+  margin-left: 0;
   margin-top: 4rem;
   padding-bottom: 1rem;
   align-items: center;
@@ -576,7 +576,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 11rem;
-  margin-left: 7rem;
+  margin-left: 0;
 }
 .containClientDetails .header {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
@@ -704,7 +704,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 8rem;
-  margin-left: 7rem;
+  margin-left: 0;
 }
 .containGuestDetails .header {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
@@ -906,7 +906,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 8rem;
-  margin-left: 9rem;
+  margin-left: 0;
 }
 .containRoomsDetails .noData,
 .containServicesDetails .noData {
@@ -1071,7 +1071,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 8rem;
-  margin-left: 8rem;
+  margin-left: 0;
 }
 .containServicesDetails .roomServices {
   display: flex;
@@ -1179,7 +1179,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 8rem;
-  margin-left: 8rem;
+  margin-left: 0;
   height: 29rem;
   width: 30rem;
   align-items: center;
@@ -1303,7 +1303,7 @@
   height: 15rem;
   border-radius: 4px;
   margin-top: 14rem;
-  margin-left: 8rem;
+  margin-left: 0;
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;

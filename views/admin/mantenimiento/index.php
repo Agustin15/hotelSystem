@@ -31,16 +31,34 @@ if ($_COOKIE["idRol"] != 1) {
 
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAdd.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveAdd.css">
-    
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDetails.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveDetails.css">
 
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleRooms.css">
-    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleServices.css"">
-    <link rel=" stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveRooms.css">
+
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditRoom.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveEditRoom.css">
+
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleServices.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveServices.css">
+
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditService.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveEditService.css">
+
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProducts.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveEditProducts.css">
+
+    <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleAddProduct.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveAddProduct.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleEditProduct.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveEditProduct.css">
+
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleDeleteProduct.css">
+    <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveDeleteProduct.css">
 
 
     <script type="module" src="../../../js/scriptsAdmin/scriptsAdmin.js" defer>

@@ -1,14 +1,15 @@
 .containEditService {
   width: 31rem;
-  height: 38rem;
+  height: 92%;
+  padding-bottom: 2rem;
   background-color: white;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
-  margin-left: 8rem;
+  margin-top: 0.5rem;
+  margin-left: 0;
 }
 
 .containEditService .header {
@@ -47,6 +48,7 @@
   display: none;
   flex-direction: column;
   align-items: center;
+  margin-top: 0;
   gap: 2rem;
 }
 
@@ -77,8 +79,6 @@
   align-items: center;
   gap: 0.5rem;
 }
-
-
 
 .containEditService .imageService {
   display: flex;
@@ -118,6 +118,7 @@
   flex-direction: column;
   align-items: start;
   gap: 0.5rem;
+  position: relative;
 }
 
 .containEditService .file-select {
@@ -227,7 +228,7 @@
   color: red;
 }
 
-.modalAlert {
+.modalServices .modalAlert {
   position: absolute;
   z-index: 2;
   display: none;
@@ -241,8 +242,8 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalAlert .alertError,
-.modalAlert .alertSuccesfully {
+.modalServices .modalAlert .alertError,
+.modalServices .modalAlert .alertSuccesfully {
   width: 25rem;
   height: 14rem;
   background-color: white;
@@ -252,24 +253,24 @@
   align-items: center;
   gap: 1rem;
   border-radius: 3px;
-  margin-left: 8rem;
+  margin-left: 0;
   margin-top: 12rem;
 }
 
-.modalAlert .alertError p,
-.modalAlert .alertSuccesfully p {
+.modalServices .modalAlert .alertError p,
+.modalServices .modalAlert .alertSuccesfully p {
   font-size: 19px;
   width: 22rem;
   text-align: center;
 }
 
-.modalAlert .alertError img,
-.modalAlert .alertSuccesfully img {
+.modalServices .modalAlert .alertError img,
+.modalServices .modalAlert .alertSuccesfully img {
   width: 55px;
 }
 
-.modalAlert .alertError button,
-.modalAlert .alertSuccesfully button {
+.modalServices .modalAlert .alertError button,
+.modalServices .modalAlert .alertSuccesfully button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -279,19 +280,19 @@
   margin-top: 1rem;
 }
 
-.modalAlert .alertSuccesfully button {
+.modalServices .modalAlert .alertSuccesfully button {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.modalAlert .alertSuccesfully button:hover {
+.modalServices .modalAlert .alertSuccesfully button:hover {
   background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
 }
 
-.modalAlert .alertError button {
+.modalServices .modalAlert .alertError button {
   background: red;
 }
 
-.modalAlert .alertError button:hover {
+.modalServices .modalAlert .alertError button:hover {
   background: rgb(199, 22, 22);
 }
 

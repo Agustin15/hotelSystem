@@ -4,11 +4,11 @@
   align-items: center;
   width: 35rem;
   height: 37rem;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 3px;
   gap: 1rem;
   margin-top: 2rem;
-  margin-left: 8rem;
+  margin-left: 0;
 }
 
 .containEdit .header {
@@ -115,6 +115,7 @@
   flex-direction: column;
   align-items: start;
   gap: 0.5rem;
+  position: relative;
 }
 
 .containEdit form .btnUpdateRoom {
@@ -185,11 +186,16 @@
   margin-top: 2rem;
 }
 
-.containEdit .containImage {
+.modalRooms .containEdit .containImage {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  box-shadow:none;
 }
 
 .containEdit .imageRoom {
@@ -238,7 +244,7 @@
   color: red;
 }
 
-.modalAlert {
+.modalRooms .modalAlert {
   position: absolute;
   z-index: 2;
   display: none;
@@ -252,8 +258,8 @@
   height: 100%;
   background: rgba(44, 44, 44, 0.6);
 }
-.modalAlert .alertError,
-.modalAlert .alertSuccesfully {
+.modalRooms .modalAlert .alertError,
+.modalRooms .modalAlert .alertSuccesfully {
   width: 25rem;
   height: 14rem;
   background-color: white;
@@ -263,24 +269,24 @@
   align-items: center;
   gap: 1rem;
   border-radius: 3px;
-  margin-left: 7rem;
+  margin-left: 0;
   margin-top: 12rem;
 }
 
-.modalAlert .alertError p,
-.modalAlert .alertSuccesfully p {
+.modalRooms .modalAlert .alertError p,
+.modalRooms .modalAlert .alertSuccesfully p {
   font-size: 19px;
   width: 22rem;
   text-align: center;
 }
 
-.modalAlert .alertError img,
-.modalAlert .alertSuccesfully img {
+.modalRooms .modalAlert .alertError img,
+.modalRooms .modalAlert .alertSuccesfully img {
   width: 55px;
 }
 
-.modalAlert .alertError button,
-.modalAlert .alertSuccesfully button {
+.modalRooms .modalAlert .alertError button,
+.modalRooms .modalAlert .alertSuccesfully button {
   width: 7rem;
   height: 2rem;
   color: white;
@@ -290,18 +296,18 @@
   margin-top: 1rem;
 }
 
-.modalAlert .alertSuccesfully button {
+.modalRooms .modalAlert .alertSuccesfully button {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
 }
 
-.modalAlert .alertSuccesfully button:hover {
+.modalRooms .modalAlert .alertSuccesfully button:hover {
   background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
 }
 
-.modalAlert .alertError button {
+.modalRooms .modalAlert .alertError button {
   background: red;
 }
 
-.modalAlert .alertError button:hover {
+.modalRooms .modalAlert .alertError button:hover {
   background: rgb(199, 22, 22);
 }

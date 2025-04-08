@@ -5,7 +5,7 @@
   background-color: white;
   border-radius: 3px;
   margin-top: 2.6rem;
-  margin-left: 9rem;
+  margin-left: 0;
   width: 32rem;
   height: 36rem;
 }
@@ -316,7 +316,7 @@ form .containImage img {
   align-items: center;
   gap: 1rem;
   border-radius: 3px;
-  margin-left: 8rem;
+  margin-left: 0;
   margin-top: 12rem;
 }
 

@@ -45,7 +45,10 @@ export const configEditProducts = async (service) => {
 const noProducts = () => {
   let tfoot = document.querySelector("tfoot");
   tbody.innerHTML = ``;
-  tfoot.innerHTML = ` <td colspan="5" rowspan="5">
+  tfoot.innerHTML = `   
+  <td rowspan="${window.innerWidth <= 600 ? 4 : 5}" colspan=${
+    window.innerWidth <= 600 ? 4 : 5
+  }">
   <div class="noDataProducts">
       <img src="../../../img/sinDatos.png">
       <span>No hay productos</span>
@@ -59,7 +62,10 @@ const loading = (state) => {
 
   tbody.innerHTML = ``;
   if (state) {
-    tfoot.innerHTML = ` <td colspan="5" rowspan="5">
+    tfoot.innerHTML = `  
+    <td rowspan="${window.innerWidth <= 600 ? 4 : 5}" colspan=${
+      window.innerWidth <= 600 ? 4 : 5
+    }">
   <div class="loadingProducts">
         <span>Cargando productos</span>
        <img src="../../../img/spinnerMain.gif">
@@ -220,7 +226,9 @@ const search = () => {
 
     if (rows.length == totalRowsHide) {
       tfoot.innerHTML = `
-   <td rowspan="5" colspan="5">
+    <td rowspan="${window.innerWidth <= 600 ? 4 : 5}" colspan=${
+        window.innerWidth <= 600 ? 4 : 5
+      }">
   <div class="noResultsProductFound">
       <img src="../../../img/noFind.png">
       <span>Sin Resultados</span>

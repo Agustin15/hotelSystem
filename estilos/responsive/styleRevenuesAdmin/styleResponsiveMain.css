@@ -289,6 +289,7 @@
     flex-direction: column;
     align-items: start;
     width: 100%;
+    margin-left: 0;
     height: 97%;
     font-family: Arial, Helvetica, sans-serif;
   }
@@ -340,7 +341,8 @@
   }
   .menuBar ul {
     display: flex;
-    gap: 3rem;
+    width: 99%;
+    gap: 2rem;
     margin-left: 0;
     list-style: none;
     font-size: 18px;

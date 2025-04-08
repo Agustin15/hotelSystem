@@ -1,0 +1,363 @@
+@media only screen and (max-width: 600px) {
+  .containAdd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px;
+    margin-top: 0;
+    margin-left: 0;
+    width: 91%;
+    height: 95%;
+  }
+
+  .containAdd .header {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    justify-content: center;
+  }
+
+  .containAdd .header button {
+    width: 2rem;
+    height: 2rem;
+    background-color: red;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .containAdd .header button:hover {
+    background-color: rgb(211, 3, 3);
+  }
+
+  .containAdd .titleAdd {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  .containAdd .titleAdd img {
+    width: 28px;
+    height: 28px;
+  }
+
+  form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+  }
+
+  form .containInput {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+    position: relative;
+  }
+
+  form .containInputStock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 12rem;
+    height: 3.5rem;
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+    border-radius: 3px;
+  }
+
+  form .errorInput {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    position: absolute;
+    margin-top: 4rem;
+    left: 0;
+    font-size: 15px;
+    color: red;
+  }
+
+  form .errorInput img {
+    width: 21px;
+    height: 21px;
+  }
+
+  form .containInputStock .errorInput {
+    margin-top: 3.6rem;
+    margin-left: 1rem;
+  }
+
+  form .containIconService .errorInput {
+    margin-top: 13.5rem;
+    margin-left: 1.5rem;
+  }
+
+  form input {
+    width: 12rem;
+    height: 2rem;
+    border-radius: 3px;
+    border: 1px solid gray;
+    outline: none;
+    font-size: 16px;
+    padding-left: 1rem;
+  }
+
+  form .inputError {
+    border: 1px solid red;
+    color: red;
+  }
+
+  form .inputError::placeholder {
+    color: red;
+  }
+  form .inputError:hover {
+    border: 2px solid red;
+  }
+
+  form #descripcionServicio,
+  form #precio {
+    width: 11rem;
+    background-size: 19px;
+    background-position-x: 0.4rem;
+    background-position-y: 0.4rem;
+    background-repeat: no-repeat;
+    padding-left: 2rem;
+  }
+
+  form #descripcionServicio {
+    background-image: url("../../../img/inputNameProduct.png");
+  }
+
+  form #precio {
+    background-image: url("../../../img/coin.png");
+  }
+
+  form input:hover {
+    border: 2px solid rgb(4, 182, 167);
+  }
+
+  form .rowOne,
+  form .rowTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    justify-content: start;
+  }
+
+  form .containStock {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 0rem;
+    font-weight: bold;
+  }
+
+  form .containStock input {
+    width: auto;
+    border: none;
+    width: 2rem;
+    background: none;
+    height: 1.5rem;
+  }
+
+  form .containStock button {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    font-size: 21px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form .containStock .btnMinus {
+    background-color: rgb(211, 13, 13);
+  }
+
+  form .containStock .btnPlus {
+    background-color: rgb(26, 184, 26);
+  }
+
+  form .containStock .btnMinus:hover {
+    background-color: rgb(199, 14, 14);
+  }
+
+  form .containStock .btnPlus:hover {
+    background-color: rgb(22, 160, 22);
+  }
+
+  .fileSelect {
+    position: relative;
+    display: inline-block;
+  }
+
+  .fileSelect::before {
+    background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: "Seleccionar";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .fileSelect input[type="file"] {
+    opacity: 0;
+    width: 6rem;
+    height: 2rem;
+    border: none;
+    display: inline-block;
+  }
+
+  form .containIconService {
+    display: flex;
+    width: 14rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    position: relative;
+  }
+
+  form .imageAndInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  form .containImage {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 3px;
+    border: 1px solid rgb(211, 211, 211);
+    box-shadow: 2px 2px 2px gray;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form .containImage img {
+    width: 117px;
+    height: 117px;
+  }
+
+  .btnAddProduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 12rem;
+    height: 2rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    border-radius: 3px;
+    background: linear-gradient(rgb(63, 189, 178), rgb(1, 155, 160));
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .btnAddProduct img {
+    width: 24px;
+    display: none;
+    height: 24px;
+  }
+  .btnAddProduct:hover {
+    background: linear-gradient(rgb(46, 122, 116), rgb(1, 155, 160));
+  }
+
+  .modalProducts .modalAlert {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 44, 44, 0.6);
+  }
+  .modalProducts .modalAlert .alertError,
+  .modalProducts .modalAlert .alertSuccesfully {
+    width: 82%;
+    height: 14rem;
+    background-color: white;
+    display: none;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 3px;
+    margin-left: 0rem;
+    margin-top: 0;
+  }
+
+  .modalProducts .modalAlert .alertError p,
+  .modalProducts .modalAlert .alertSuccesfully p {
+    font-size: 19px;
+    width: 22rem;
+    text-align: center;
+  }
+
+  .modalProducts .modalAlert .alertError img,
+  .modalProducts .modalAlert .alertSuccesfully img {
+    width: 55px;
+  }
+
+  .modalProducts .modalAlert .alertError button,
+  .modalProducts .modalAlert .alertSuccesfully button {
+    width: 7rem;
+    height: 2rem;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    margin-top: 1rem;
+  }
+
+  .modalProducts .modalAlert .alertSuccesfully button {
+    background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
+  }
+
+  .modalProducts .modalAlert .alertSuccesfully button:hover {
+    background: linear-gradient(rgb(38, 114, 108), rgb(1, 155, 160));
+  }
+
+  .modalProducts .modalAlert .alertError button {
+    background: red;
+  }
+
+  .modalProducts .modalAlert .alertError button:hover {
+    background: rgb(199, 22, 22);
+  }
+}

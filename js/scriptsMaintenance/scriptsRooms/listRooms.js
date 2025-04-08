@@ -122,7 +122,7 @@ const allCategoryRoomsWithDetails = async () => {
   } catch (error) {
     console.log(error);
   } finally {
-    loading(false);
+    loading(true);
     if (!rooms) {
       noData();
     }
@@ -179,10 +179,10 @@ const openEditRoom = async (roomFound) => {
   } catch (error) {
     console.log(error);
   } finally {
-    loadingPage(false, modalRooms);
+    loadingPage(true, modalRooms);
     if (page) {
       modalRooms.innerHTML = page;
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       configEditRoom(roomFound);
     } else {
       pageNotFound(modalRooms);

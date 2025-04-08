@@ -24,7 +24,7 @@
   padding: 1rem;
   margin-top: 12rem;
   border-radius: 5px;
-  margin-left: 8rem;
+  margin-left: 0;
   color: rgb(0, 0, 0);
 }
 .modalMainMinibar .alert .title,
@@ -81,7 +81,7 @@
   background-color: white;
   border-radius: 3px;
   margin-top: 3rem;
-  margin-left: 9rem;
+  margin-left: 0;
   display: flex;
   align-items: center;
   flex-direction: column;

@@ -5,7 +5,6 @@
   align-items: center;
   margin-top: 1.5rem;
   width: auto;
-  margin-left: 13.8rem;
   background-color: white;
   padding: 1rem;
   box-shadow: 2px 2px 2px gray;
@@ -81,7 +80,7 @@
   background-color: white;
   border-radius: 5px;
   padding: 1rem;
-  margin-left: 7rem;
+  margin-left: 0;
   margin-top: 14rem;
 }
 .modalOptionAddBooking .loadingPage img {
@@ -95,7 +94,7 @@
   font-size: 18px;
   align-items: center;
   height: auto;
-  margin-left: 7rem;
+  margin-left: 0;
   margin-top: 14rem;
   opacity: 100%;
   background-color: white;
@@ -137,7 +136,7 @@
   width: 20rem;
   padding: 1rem;
   border-radius: 5px;
-  margin-left: 12rem;
+  margin-left: 0;
   margin-top: 16rem;
   color: rgb(0, 0, 0);
 }
@@ -220,7 +219,7 @@
   height: 37.5rem;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  margin-left: 11rem;
+  margin-left: 0;
   margin-top: 1rem;
 }
 .containOptions .optionAddBooking {

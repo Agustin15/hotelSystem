@@ -20,7 +20,7 @@
   align-items: center;
   font-size: 22px;
   margin-top: 17rem;
-  margin-left: 6rem;
+  margin-left: 0;
   background-color: white;
   padding: 1rem;
   border-radius: 3px;
@@ -37,7 +37,7 @@
   font-size: 18px;
   align-items: center;
   height: auto;
-  margin-left: 6rem;
+  margin-left: 0;
   margin-top: 14rem;
   opacity: 100%;
   background-color: white;
@@ -76,7 +76,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 2rem;
-  margin-left: 9rem;
+  margin-left: 0;
   padding-bottom: 2rem;
 }
 .containCategoryRooms .categoryRooms {
@@ -128,12 +128,10 @@
   list-style: none;
 }
 
-
 .containCategoryRooms .categoryRooms .row .images img {
   width: 22rem;
   height: 12rem;
 }
-
 
 .containCategoryRooms .controls {
   display: flex;
@@ -144,7 +142,6 @@
   position: absolute;
 }
 
-
 .containCategoryRooms .categoryRooms .row .images .controls img {
   width: 28px;
   height: 28px;
@@ -152,12 +149,10 @@
   cursor: pointer;
 }
 
-
 .containCategoryRooms .categoryRooms .row .images .controls img:hover {
   opacity: 100%;
   transform: scale(1.1);
 }
-
 
 .containCategoryRooms .categoryRooms .row .images .indexImagesRoom {
   display: flex;
@@ -280,7 +275,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 7rem;
+  margin-left: 0;
   gap: 0.4rem;
   font-size: 22px;
   color: gray;
@@ -298,7 +293,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-left: 7rem;
+  margin-left: 0;
   font-size: 22px;
   color: gray;
 }
@@ -307,5 +302,3 @@
   width: 116px;
   opacity: 75%;
 }
-
-
