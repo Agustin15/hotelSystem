@@ -56,7 +56,13 @@ export const getBookingByClientMailAndDate = async (dataToFindBooking) => {
 
   loading(true);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      }
+    });
     const result = await response.json();
 
     if (!response.ok) {

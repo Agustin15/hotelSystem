@@ -13,6 +13,9 @@
   align-items: center;
   justify-content: space-between;
 }
+#navAdmin #liMaintenance {
+  display: none;
+}
 #navAdmin .closeMenu {
   display: none;
 }
@@ -262,7 +265,7 @@ body #navAdmin .titleNav {
   margin: auto;
   margin-left: 11rem;
   margin-top: -0.1rem;
-  width: 90%;
+  width: 100%;
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }

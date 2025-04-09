@@ -39,7 +39,7 @@ const getYears = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();

@@ -116,6 +116,10 @@ body {
   width: 25px;
 }
 
+#navAdmin #liMaintenance {
+  display: none;
+}
+
 #navAdmin .loadingUser {
   display: flex;
   align-items: center;
@@ -250,7 +254,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
-  width: 90%;
+  width: 100%;
   padding-bottom: 1rem;
   margin-left: 11rem;
   margin-top: 1.5rem;

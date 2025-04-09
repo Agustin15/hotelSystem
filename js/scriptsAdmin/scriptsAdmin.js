@@ -78,7 +78,7 @@ const loadingUser = (state) => {
 function openSubMenu() {
   let buttonsOpenSubMenu = document.querySelectorAll(".btnDisplaySubMenu");
   let liBooking = document.getElementById("liReserva");
-  
+
   buttonsOpenSubMenu.forEach(function (buttonOpen) {
     buttonOpen.addEventListener("click", () => {
       let subMenu =
@@ -143,6 +143,14 @@ const displayOptionProfile = () => {
   profileOption.innerHTML = `<img class="iconProfile" src="data:image/png;base64,${userData.imagen}">
   <span>${userData.usuario}</span>
   <img class="btnDisplayMenu" src="${FRONT_URL_LOCALHOST}img/btnFlecha.png">`;
+
+  let optionMaintenance = document.getElementById("liMantenimiento");
+
+  if (userData.idRol == 1) {
+    optionMaintenance.style.display = "flex";
+  } else {
+    optionMaintenance.style.display = "none";
+  }
 };
 
 const checkSubMenuOpen = (id) => {

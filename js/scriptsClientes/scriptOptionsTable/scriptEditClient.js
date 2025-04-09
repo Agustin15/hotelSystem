@@ -103,7 +103,7 @@ const getIfExist = async (client) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -133,7 +133,7 @@ const fetchPUT = async (client) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       },
       body: JSON.stringify(client)
     });

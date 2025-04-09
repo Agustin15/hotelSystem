@@ -13,7 +13,7 @@ export const getAllCategoryRoomsWithDetails = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -45,7 +45,7 @@ export const PUTCategoryRoom = async (categoryRoomToUpdate) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         },
         body: JSON.stringify(categoryRoomToUpdate)
       }

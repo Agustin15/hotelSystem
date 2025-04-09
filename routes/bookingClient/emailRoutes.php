@@ -1,4 +1,11 @@
 <?php
+
+require(__DIR__ . "../../../vendor/autoload.php");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../../../");
+$dotenv->load();
+
+header("Access-Control-Allow-Origin:" . $_ENV["BACK_URL_LOCALHOST"]);
+
 require("../../controller/bookingClient/email/emailController.php");
 
 $emailController = new emailController();
@@ -25,6 +32,7 @@ if (isset($_GET["params"])) {
     $req = json_decode(file_get_contents("php://input"), true);
 }
 
+
 $routes = [
     "POST" => function () use ($req, $emailController) {
         $optionPost =  match ($req["optionPOST"]) {
@@ -45,9 +53,9 @@ $routes = [
     }
 ];
 
-
 if (array_key_exists($method, $routes)) {
     $response = $routes[$method]();
+
 
     if (isset($response["error"])) {
         http_response_code($response["status"]);

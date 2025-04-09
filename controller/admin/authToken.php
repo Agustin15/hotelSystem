@@ -14,9 +14,12 @@ class authToken
     {
         try {
 
+            $tokenAccess = $_COOKIE["userToken"];
+
             if (empty($_ENV["JWT_SECRET_KEY"])) {
                 throw new Error("JWT_SECRET_KEY no definida");
             }
+
             $key = $_ENV["JWT_SECRET_KEY"];
             if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
@@ -25,6 +28,7 @@ class authToken
             if (!isset($_COOKIE["userToken"]) && isset($_COOKIE["userRefreshToken"])) {
 
                 $resultRefreshToken  = $this->refreshToken($key);
+                $tokenAccess = $resultRefreshToken["newAccessToken"];
 
                 if (isset($resultRefreshToken["error"])) {
 
@@ -33,7 +37,7 @@ class authToken
             }
 
 
-            $decoded =  JWT::decode($_COOKIE["userToken"], new Key($key, 'HS384'));
+            $decoded =  JWT::decode($tokenAccess, new Key($key, 'HS384'));
 
             if ($decoded) {
                 return array("resultVerify" => $decoded);
@@ -74,9 +78,9 @@ class authToken
 
                 $tokenJWT = JWT::encode($payloadAccessToken, $jwtSecretKey, 'HS384');
 
-                setcookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
-                setcookie("idRol", $decoded_array["idRol"], time() + 3600, "/", "", false, true);
-                return array("refreshToken" => $tokenJWT);
+                setCookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
+                setCookie("idRol", $decoded_array["idRol"], time() + 3600, "/", "", false, true);
+                return array("newAccessToken" => $tokenJWT);
             }
         } catch (Throwable $th) {
             return array("error" => $th->getMessage());

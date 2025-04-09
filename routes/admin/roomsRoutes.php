@@ -1,4 +1,9 @@
 <?php
+require(__DIR__ . "../../../vendor/autoload.php");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../../../");
+$dotenv->load();
+
+header("Access-Control-Allow-Origin:" . $_ENV["BACK_URL_LOCALHOST"]);
 
 require("../../controller/admin/rooms/roomsController.php");
 

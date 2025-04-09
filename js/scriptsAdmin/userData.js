@@ -11,13 +11,13 @@ export const getDataUserByToken = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
 
     const tokenUserData = await response.json();
-
+  
     if (!response.ok) {
       if (response.status == 401) {
         invalidAuthentication();
@@ -36,13 +36,19 @@ export const getDataUserByToken = async () => {
 };
 
 export const invalidAuthentication = async () => {
-  logout();
+  // logout();
 };
 
 export const logout = async () => {
   try {
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}routes/admin/logoutRoutes.php`
+      `${BACK_URL_LOCALHOST}routes/admin/logoutRoutes.php`,
+      {
+        method: "GET",
+        headers: {
+          credentials: "include"
+        }
+      }
     );
     const result = await response.json();
 
@@ -66,7 +72,7 @@ const getUserById = async (userToken) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -83,39 +89,5 @@ const getUserById = async (userToken) => {
     }
   } catch (error) {
     console.log(error);
-  }
-};
-
-const refreshToken = async () => {
-  let data;
-
-  try {
-    const response = await fetch(
-      `${BACK_URL_LOCALHOST}routes/admin/refreshTokenRoute.php`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "same-origin"
-        }
-      }
-    );
-
-    const result = await response.json();
-
-    console.log(result);
-    if (!response.ok) {
-      throw result.error;
-    }
-    if (result.refreshToken) {
-      data = result.refreshToken;
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    if (!data) {
-      // logout();
-    }
-    return data;
   }
 };

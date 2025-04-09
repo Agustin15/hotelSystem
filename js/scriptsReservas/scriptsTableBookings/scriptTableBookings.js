@@ -139,7 +139,7 @@ const getQuantityBookingsActualYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -176,7 +176,7 @@ const getQuantityBookingsLastWeek = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -212,7 +212,7 @@ const getBookingById = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -308,7 +308,7 @@ const getBookingsYearLimit = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -346,7 +346,7 @@ const getBookingsOfLastWeekLimit = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -380,7 +380,7 @@ const displaySelectYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();

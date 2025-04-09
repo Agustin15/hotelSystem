@@ -73,7 +73,8 @@ async function login(userData) {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            credentials: "include"
           },
           body: JSON.stringify({ userData: userData })
         }

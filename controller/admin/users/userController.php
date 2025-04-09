@@ -41,7 +41,6 @@ class userController
                 "exp" => time() + 3600
             ];
 
-
             $payloadRefreshToken = [
                 "idUser" => $userFound["idUsuario"],
                 "idRol" => $userFound["idRol"],

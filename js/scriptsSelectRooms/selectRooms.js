@@ -35,7 +35,6 @@ export let itemOpenCart = document.querySelector(".itemCart");
 let notificationRoom = itemOpenCart.querySelector(".notificationRoom");
 let cartElement = document.getElementById("cart");
 
-
 export let guestsAlert = document.getElementById("alertGuests");
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -119,7 +118,14 @@ async function submitGetCategoryHotelRooms() {
   try {
     loading(true);
     const response = await fetch(
-      `${BACK_URL_LOCALHOST}controller/roomsAvailable/rooms.php?option=roomsHotel`
+      `${BACK_URL_LOCALHOST}controller/roomsAvailable/rooms.php?option=roomsHotel`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include"
+        }
+      }
     );
     const result = await response.json();
 
@@ -177,7 +183,14 @@ async function submitDateBooking(dateBooking) {
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}controller/roomsAvailable/rooms.php?option=roomsAvailable&dateBooking=` +
-        JSON.stringify(dateBooking)
+        JSON.stringify(dateBooking),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include"
+        }
+      }
     );
 
     const result = await response.json();

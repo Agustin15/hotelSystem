@@ -98,12 +98,14 @@ const sendQuery = async (dataQuery) => {
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          credentials: "include"
         },
         body: JSON.stringify(emailData)
       }
     );
-    const result = await response.json();
+    const result = await response.text();
+
     console.log(result);
     if (!response.ok) {
       throw result.error;
@@ -116,7 +118,7 @@ const sendQuery = async (dataQuery) => {
     console.log(error);
   } finally {
     loading(false);
-    if (resultEmail==true) {
+    if (resultEmail == true) {
       alertForm("error");
     } else {
       cleanInputs();

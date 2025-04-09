@@ -169,20 +169,15 @@ $actualYear = date("Y");
 
                 </li>
 
-                <?php
-                if ($_COOKIE["idRol"] == 1) {
-                ?>
-                    <li id="liMantenimiento">
-                        <div class="item">
-                            <div class="nameOption">
-                                <img src="../../img/maintenance.png">
-                                <a>Mantenimiento</a>
-                            </div>
+                <li id="liMantenimiento" >
+                    <div class="item">
+                        <div class="nameOption">
+                            <img src="../../img/maintenance.png">
+                            <a>Mantenimiento</a>
                         </div>
-                    </li>
-                <?php
-                }
-                ?>
+                    </div>
+                </li>
+
 
             </ul>
 

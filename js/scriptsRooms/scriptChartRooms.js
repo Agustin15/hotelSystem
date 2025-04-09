@@ -25,7 +25,7 @@ const getAllYearsToSelect = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -87,7 +87,7 @@ const getDataCategoryRoomsBookingByYear = async (year) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );

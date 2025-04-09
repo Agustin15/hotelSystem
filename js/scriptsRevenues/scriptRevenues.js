@@ -12,7 +12,7 @@ export const getPayById = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -43,7 +43,7 @@ export const getRevenuDetailsById = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -74,7 +74,7 @@ export const getAllYearsRevenues = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -105,7 +105,7 @@ export const getRevenuesByYear = async (year) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -140,7 +140,7 @@ export const getAllRevenuesByYear = async (year, index) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -176,7 +176,7 @@ export const getAllRevenuesByYearLimitIndex = async (year, index) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -207,7 +207,7 @@ export const getRevenuesOfThisWeek = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -238,7 +238,7 @@ export const getRevenuesOfThisWeekLimit = async (index) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -271,7 +271,7 @@ export const getRevenuesThisWeekToChart = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();

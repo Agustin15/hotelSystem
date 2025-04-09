@@ -13,7 +13,7 @@ export const getDataServices = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -50,7 +50,7 @@ export const getHistoryServicesByCurrentBookingRoom = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -88,7 +88,7 @@ export const getDetailsServicesByCurrentBookingRoom = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -121,7 +121,7 @@ export const getAllServicesHotel = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -154,7 +154,7 @@ export const getServiceByName = async (nameService) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -188,7 +188,7 @@ export const getServiceByNameLimit = async (nameService, index) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -219,7 +219,7 @@ export const getServiceByIdAndNumRoomAndBooking = async (serviceToAdd) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -255,7 +255,7 @@ export const getServiceRoomDetailsByNumRoomAndBooking = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -284,12 +284,11 @@ export const POSTService = async (serviceToAdd) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       },
       body: JSON.stringify(serviceToAdd)
     });
     const result = await response.json();
-
 
     if (!response.ok) {
       if (response.status == 401) {
@@ -317,7 +316,7 @@ export const DELETEService = async (idServiceRoomToDelete) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -347,7 +346,7 @@ export const PUTHotelService = async (serviceToUpdate) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       },
       body: JSON.stringify(serviceToUpdate)
     });
@@ -378,7 +377,7 @@ export const POSTHotelService = async (serviceToAdd) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       },
       body: JSON.stringify(serviceToAdd)
     });

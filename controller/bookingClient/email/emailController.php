@@ -98,6 +98,7 @@ class emailController
 
     public function getEmailBookingConfirmByIdBooking($req)
     {
+
         try {
             $idBooking = $req["idBooking"];
             $emailState = $this->email->getEmailBookingConfirmByIdBooking($idBooking);

@@ -8,6 +8,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -190,8 +192,11 @@ header li img {
   }
 }
 #reservar {
-  margin-left: 43%;
-  margin-top: -24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1.5rem;
 }
 #reservar button {
   width: 144px;
@@ -211,8 +216,11 @@ header li img {
 }
 
 #sobreNosotros {
-  margin-top: -2%;
-  margin-left: 0%;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap:0.5rem;
+  margin-top: -1.8rem;
   width: 98%;
   height: 28rem;
   padding-left: 1.7rem;
@@ -221,6 +229,33 @@ header li img {
   color: rgb(255, 255, 255);
   background: linear-gradient(#126b91, #0498a0);
 }
+
+#sobreNosotros .columnOne,
+#sobreNosotros .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  width: 50%;
+  margin-top: 1.5rem;
+}
+
+#sobreNosotros .columnTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 50%;
+  margin-top: 4rem;
+}
+
+
+#sobreNosotros .title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 99%;
+}
+
 #sobreNosotros p {
   font-size: 16px;
 }
@@ -230,23 +265,26 @@ header li img {
   font-weight: 300;
   color: rgb(255, 255, 255);
 }
+.containImages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
 
 .imgSobreNosotros1 {
-  position: absolute;
   width: 450px;
   height: 253px;
-  margin-left: 55%;
-  margin-top: -20%;
   border: 4px solid rgb(255, 255, 255);
 }
 
 .imgSobreNosotros2 {
-  position: absolute;
   width: 280px;
   height: 213px;
-  margin-left: 43%;
-  margin-top: -10%;
   border: 4px solid rgb(255, 255, 255);
+  position: absolute;
+  margin-left: 19rem;
+  margin-top: 9rem;
 }
 
 .containContact {
@@ -458,14 +496,14 @@ header li img {
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 
 .subFondo {
   width: 70%;
   height: 2000px;
   margin: auto;
-  margin-top: -3%;
+  margin-top: 3%;
   text-align: center;
   display: flex;
   flex-direction: column;

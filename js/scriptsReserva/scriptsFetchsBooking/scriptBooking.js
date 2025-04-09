@@ -10,7 +10,8 @@ export const fetchPOSTBooking = async (booking) => {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        credentials: "include"
       },
       body: JSON.stringify(booking)
     });
@@ -41,7 +42,8 @@ export const fetchPUTBooking = async (booking) => {
     const response = await fetch(url, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        credentials: "include"
       },
       body: JSON.stringify(booking)
     });

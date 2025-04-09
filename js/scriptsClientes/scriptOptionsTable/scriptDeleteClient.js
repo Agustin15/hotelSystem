@@ -42,7 +42,7 @@ export const getDataClient = async (id) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -91,7 +91,7 @@ const fetchDelete = async (idClient) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
 

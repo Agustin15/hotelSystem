@@ -32,8 +32,10 @@ header ul {
   color: rgb(255, 255, 255);
   font-size: 16px;
   font-family: Arial;
-  margin-right: 18rem;
   margin-top: 0.5rem;
+  display: flex;
+  width: auto;
+  align-items: center;
 }
 
 header li {
@@ -124,7 +126,9 @@ body {
 #checkIn {
   width: 100%;
   height: 9.5rem;
-  box-shadow: 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
   margin: auto;
   gap: 2rem;
   display: flex;

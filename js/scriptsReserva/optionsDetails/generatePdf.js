@@ -52,6 +52,7 @@ const generateFileToSend = async (name, email, pdfBlob) => {
     (emailFound.stateUpdate == 0 && stateBooking == "Actualizacion")
   ) {
     let emailSent = await sendEmail(name, email, file, stateBooking);
+    
     if (emailSent) {
       if (stateBooking == "Confirmacion") {
         addEmail(idBooking);

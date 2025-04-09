@@ -63,12 +63,18 @@ export const getBookingByClientMailAndDate = async (dataToFindBooking) => {
     `${BACK_URL_LOCALHOST}routes/bookingClient/bookingRoutes.php?params=` +
     JSON.stringify({
       option: "bookingDetailsByClientMailAndDate",
-      dataToFindBooking: dataToFindBooking,
+      dataToFindBooking: dataToFindBooking
     });
 
   loading(true);
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      }
+    });
     const result = await response.json();
 
     if (!response.ok) {
@@ -108,7 +114,7 @@ const displayDetails = (detailsBooking) => {
     name: detailsBooking[0].nombre,
     lastname: detailsBooking[0].apellido,
     email: detailsBooking[0].correo,
-    phone: detailsBooking[0].telefono,
+    phone: detailsBooking[0].telefono
   };
   let details = document.querySelector(".details");
 
@@ -122,7 +128,7 @@ const displayDetails = (detailsBooking) => {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   };
 
   startBooking.setMinutes(
@@ -200,7 +206,7 @@ const displayDetails = (detailsBooking) => {
       adultos: detail.adultos,
       ninos: detail.ninos,
       imagenDos: detail.imagenDos,
-      precio: detail.precio,
+      precio: detail.precio
     };
   });
 
@@ -237,7 +243,7 @@ const displayRooms = (rooms, nights) => {
         adults: room.adultos,
         childs: room.ninos,
         quantity: quantityRoomsEqualConditions,
-        total: room.precio * quantityRoomsEqualConditions * nights,
+        total: room.precio * quantityRoomsEqualConditions * nights
       });
     }
   });

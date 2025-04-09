@@ -14,6 +14,10 @@
   justify-content: space-between;
 }
 
+#navAdmin #liMaintenance {
+  display: none;
+}
+
 #navAdmin .closeMenu {
   display: none;
 }
@@ -257,6 +261,7 @@ body #navAdmin .titleNav {
   flex-direction: column;
   align-items: center;
   margin: auto;
+  width: 100%;
   margin-left: 11rem;
   margin-top: -0.1rem;
   width: 90%;

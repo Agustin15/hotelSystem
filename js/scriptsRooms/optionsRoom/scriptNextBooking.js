@@ -24,7 +24,14 @@ const getNextBookingsRoom = async () => {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}routes/admin/roomsBookingRoutes.php?params=${JSON.stringify(
         { option: "getNextBookingsRoom", numRoom: numRoom }
-      )}`
+      )}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include"
+        }
+      }
     );
     const result = await response.json();
 

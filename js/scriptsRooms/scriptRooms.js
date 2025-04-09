@@ -12,7 +12,7 @@ export const getRoomsCategoryHotel = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -40,7 +40,7 @@ export const getAllRoomsByCategory = async (category) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -72,7 +72,7 @@ export const getDataBookingRoomsWithCategory = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -105,7 +105,7 @@ export const getBookingRoomsDetails = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -137,7 +137,7 @@ export const getDataBookingRoomsGuests = async (idBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -166,7 +166,7 @@ export const getRoomsFreeCategory = async (dataBooking) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const result = await response.json();
@@ -204,7 +204,7 @@ export const getAllBookingsByRoomAndYearLimit = async (
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -240,7 +240,7 @@ export const getAllBookingsByRoomAndYear = async (year, numRoom) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -274,7 +274,7 @@ export const getBookingByRoomReserved = async (numRoom) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -308,7 +308,7 @@ export const getDetailsCategoryRoom = async (category) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );

@@ -57,7 +57,7 @@ async function getClientsByMonthActualYear(actualYear) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -155,7 +155,7 @@ async function getRevenueActualYear() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -260,7 +260,7 @@ async function getCategoryRoomsMostReserved() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );

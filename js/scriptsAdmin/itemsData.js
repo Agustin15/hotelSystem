@@ -13,7 +13,7 @@ export const getCategoryRoomsData = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const data = await response.json();
@@ -40,7 +40,7 @@ const getRevenuesActualYear = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        credentials: "same-origin"
+        credentials: "include"
       }
     });
     const data = await response.json();

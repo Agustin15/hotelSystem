@@ -1,5 +1,11 @@
 <?php
 
+require("../../vendor/autoload.php");
+$dotenv = Dotenv\Dotenv::createImmutable("../../");
+$dotenv->load();
+
+header("Access-Control-Allow-Origin:" . $_ENV["BACK_URL_LOCALHOST"]);
+
 require("../../controller/bookingClient/rooms/roomsBookingController.php");
 
 $roomsBookingController = new roomsBookingController();

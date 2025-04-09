@@ -50,7 +50,7 @@ const loadYears = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       });
       const results = await response.json();
@@ -232,7 +232,7 @@ const dataClientsMonths = async (year) => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              credentials: "same-origin"
+              credentials: "include"
             }
           }
         )
@@ -287,7 +287,7 @@ const dataClientsWeekday = async () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              credentials: "same-origin"
+              credentials: "include"
             }
           }
         )

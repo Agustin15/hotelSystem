@@ -15,10 +15,14 @@ export const sendEmail = async (name, email, file, stateBooking) => {
   try {
     const response = await fetch(url, {
       method: "POST",
+      headers: {
+        credentials: "include"
+      },
+
       body: formData
     });
 
-    const result = await response.text();
+    const result = await response.json();
     console.log(result);
     if (!response.ok) {
       throw result.error;
@@ -41,6 +45,10 @@ export const addEmail = async (idBooking) => {
   try {
     const response = await fetch(url, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      },
       body: JSON.stringify({
         idBooking: idBooking,
         optionPOST: "addEmail"
@@ -70,6 +78,10 @@ export const patchStateUpdateEmailBookingById = async (idEmail) => {
   try {
     const response = await fetch(url, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      },
       body: JSON.stringify({
         idEmailBooking: idEmail
       })
@@ -100,7 +112,11 @@ export const getEmailBookingConfirmByIdBooking = async (idBooking) => {
 
   try {
     const response = await fetch(url, {
-      method: "GET"
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      }
     });
 
     const result = await response.json();

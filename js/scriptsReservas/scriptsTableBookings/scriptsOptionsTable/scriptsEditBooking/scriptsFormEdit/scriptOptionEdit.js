@@ -28,7 +28,7 @@ const getBookingById = async (idBooking) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -60,7 +60,13 @@ const getAllClients = async () => {
       `${BACK_URL_LOCALHOST}routes/admin/clientRoutes.php?params= ` +
       JSON.stringify({ option: "allClients" });
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include"
+      }
+    });
     const result = await response.json();
     if (!response.ok) {
       if (response.status == 401) {

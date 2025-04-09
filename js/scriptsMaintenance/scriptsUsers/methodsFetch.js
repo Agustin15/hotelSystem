@@ -2,7 +2,6 @@ import { invalidAuthentication } from "../../scriptsAdmin/userData.js";
 import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 
 export const POSTuser = async (newUser) => {
-  
   let result;
   try {
     const response = await fetch(
@@ -11,7 +10,7 @@ export const POSTuser = async (newUser) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         },
         body: JSON.stringify(newUser)
       }
@@ -33,7 +32,6 @@ export const POSTuser = async (newUser) => {
 };
 
 export const PUTuser = async (userToUpdate) => {
-
   try {
     const response = await fetch(
       `${BACK_URL_LOCALHOST}routes/admin/userRoutes.php`,
@@ -41,7 +39,7 @@ export const PUTuser = async (userToUpdate) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         },
         body: JSON.stringify(userToUpdate)
       }
@@ -70,7 +68,7 @@ export const PATCHUserImage = async (userToUpdate) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         },
         body: JSON.stringify({
           option: "updateImageUser",
@@ -104,7 +102,7 @@ export const PATCHUserPassword = async (userPasswordToUpdate) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         },
         body: JSON.stringify({
           option: "updatePasswordUser",
@@ -141,7 +139,7 @@ export const getAllUsers = async () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -178,7 +176,7 @@ export const getAllUsersLimitIndex = async (index) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -214,7 +212,7 @@ export const deleteUser = async (idUser) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
@@ -246,7 +244,7 @@ export const getRols = async () => {
       {
         method: "GET",
         headers: {
-          credentials: "same-origin"
+          credentials: "include"
         }
       }
     );
