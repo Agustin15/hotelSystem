@@ -45,6 +45,7 @@
 
  #### .env configuration
 
+     BACK_URL_LOCALHOST=
      DB_HOST=""
      DB_USER=""
      DATABASE=""
