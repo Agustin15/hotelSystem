@@ -534,10 +534,10 @@
     margin: auto;
     gap: 1rem;
     color: rgb(112, 112, 112);
-    font-size: 18px;
+    font-size: 16px;
   }
   .loading img {
-    width: 50px;
+    width: 40px;
     opacity: 70%;
   }
 
@@ -549,10 +549,10 @@
     height: 76vh;
     gap: 1rem;
     color: rgb(143, 143, 143);
-    font-size: 18px;
+    font-size: 13px;
   }
   .noData img {
-    width: 90px;
+    width: 60px;
     opacity: 80%;
   }
 

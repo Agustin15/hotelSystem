@@ -22,13 +22,13 @@ class clientController
 
       if ($dataClientMail) {
 
-        throw new Error("El correo ingresado ya esta en uso");
+        throw new Error("Error cliente,el correo ingresado ya esta en uso");
       }
 
       $dataClientPhone = $this->client->getClientByPhone($phone)->fetch_array(MYSQLI_ASSOC);
       if ($dataClientPhone) {
 
-        throw new Error("El telefono ingresado ya esta en uso");
+        throw new Error("Error cliente,el telefono ingresado ya esta en uso");
       } else {
 
         $this->client->setMail($email);
@@ -38,6 +38,9 @@ class clientController
 
         $result =  $this->client->addClient();
 
+        if (!$result) {
+          throw new Error("Error, no se pudo agregar el cliente");
+        }
         return $result;
       }
     } catch (Throwable $th) {

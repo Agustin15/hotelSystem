@@ -59,8 +59,8 @@ class bookingController
 
                 $clientAdded = $this->clientController->POST($nameClient, $lastnameClient, $emailClient, $phoneClient);
 
-                if (!$clientAdded || isset($clientAdded['error'])) {
-                    throw new Error("Error al agregar al cliente");
+                if (isset($clientAdded['error'])) {
+                    throw new Error($clientAdded['error']);
                 }
             }
 
@@ -165,7 +165,7 @@ class bookingController
                 $startBooking,
                 $endBooking
             );
-    
+
 
             if (isset($roomsAdded['error'])) {
 

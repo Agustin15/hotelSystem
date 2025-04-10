@@ -74,7 +74,6 @@ class emailController
         $body .= "</td>";
         $body .= "</table>";
 
-
         $body .= "</div>";
 
         $body .= "</body>";

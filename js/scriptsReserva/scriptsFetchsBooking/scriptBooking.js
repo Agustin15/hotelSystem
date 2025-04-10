@@ -23,7 +23,7 @@ export const fetchPOSTBooking = async (booking) => {
       data = result;
     }
   } catch (error) {
-    console.log("Error", error.error);
+    console.log(error.error);
     data = error;
   } finally {
     await new Promise((resolve) => setTimeout(resolve, 4000));

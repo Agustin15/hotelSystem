@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="../../estilos/responsive/styleGenerateBillToMobile.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+      integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="module"
+      src="../../js/scriptsReserva/billGeneratedMobile.js"
+      defer
+    ></script>
+
+    <title>Descargando detalles</title>
+  </head>
+
+  <body>
+    <div class="loading">
+      <span>Cargando detalles de la reserva</span>
+      <img src="../../img/spinnerMain.gif" />
+    </div>
+
+    <div class="noData">
+      <img src="../../img/noData.png" />
+      <h3>Ups, no se pudieron cargar los datos</h3>
+    </div>
+
+    <div class="containDetails">
+        <div class="details"></div>
+    </div>
+  </body>
+</html>

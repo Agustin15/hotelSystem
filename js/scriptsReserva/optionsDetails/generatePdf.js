@@ -6,20 +6,21 @@ import {
 } from "../scriptsFetchsBooking/scriptEmail.js";
 import { stateBooking, idBooking } from "../details.js";
 
+let widthImage, heightImage, format, orientation;
+
 export const generatePDF = (option, email, name) => {
   let details = document.querySelector(".details");
-  let orientation = "landscape";
-
-  if (window.innerWidth < 1080) {
-    orientation = "portrait";
-  }
 
   html2canvas(details).then(function (canvas) {
-    let format = [canvas.width - 220, canvas.height - 130];
+    format = [canvas.width - 224, canvas.height - 114];
+    orientation = "landscape";
 
-    if (window.innerWidth < 1080) {
-      format = [canvas.width - 300, canvas.height - 1075];
+    if (window.innerWidth <= 600) {
+      formats([canvas.width / 3.7, canvas.height / 4], 245, 954, "portrait");
+    } else if (window.innerWidth >= 601 && window.innerWidth < 1080) {
+      formats([canvas.width / 4.4, canvas.height / 5], 445, 454, "portrait");
     }
+
     let srcCanvasElement = canvas.toDataURL();
     let doc = new jsPDF({
       orientation: orientation,
@@ -28,7 +29,7 @@ export const generatePDF = (option, email, name) => {
       putOnlyUsedFonts: true
     });
 
-    doc.addImage(srcCanvasElement, "png", 14, 14);
+    doc.addImage(srcCanvasElement, "png", 14, 14, widthImage, heightImage);
 
     if (option == "download") {
       doc.save("Detalles reserva.pdf");
@@ -39,6 +40,17 @@ export const generatePDF = (option, email, name) => {
   });
 };
 
+const formats = (
+  formatParam,
+  widthImageParam,
+  heightImageParam,
+  orientationParam
+) => {
+  format = formatParam;
+  widthImage = widthImageParam;
+  heightImage = heightImageParam;
+  orientation = orientationParam;
+};
 const generateFileToSend = async (name, email, pdfBlob) => {
   const file = new File([pdfBlob], "Detalles reserva", {
     type: pdfBlob.type
@@ -52,7 +64,7 @@ const generateFileToSend = async (name, email, pdfBlob) => {
     (emailFound.stateUpdate == 0 && stateBooking == "Actualizacion")
   ) {
     let emailSent = await sendEmail(name, email, file, stateBooking);
-    
+
     if (emailSent) {
       if (stateBooking == "Confirmacion") {
         addEmail(idBooking);

@@ -2,7 +2,7 @@ import displayBarStagesAdvance from "./barStageAdvance.js";
 
 import {
   fetchPOSTBooking,
-  fetchPUTBooking,
+  fetchPUTBooking
 } from "./scriptsFetchsBooking/scriptBooking.js";
 
 import { alertBooking, confirmUpdateBooking } from "./alertsBooking.js";
@@ -70,7 +70,7 @@ const removeMsjAlertInputs = () => [
     .querySelectorAll(".alertErrorInput")
     .forEach((alertMsj) => {
       alertMsj.textContent = "";
-    }),
+    })
 ];
 
 function displayIndexRoom() {
@@ -143,7 +143,7 @@ function printBooking() {
     weekday: "long",
     year: "numeric",
     month: "long",
-    day: "numeric",
+    day: "numeric"
   };
 
   let startBooking = new Date(booking.date.start);
@@ -165,7 +165,7 @@ function printBooking() {
 
   window.innerWidth <= 600
     ? (iconNights.src = "../../img/night.png")
-    : iconNights.src ="../../img/moonBooking.png";
+    : (iconNights.src = "../../img/moonBooking.png");
 
   if (booking.nights > 1) {
     document.querySelector(".nights").textContent = `${booking.nights} Noches`;
@@ -200,23 +200,23 @@ const validationsInputs = (value) => {
     {
       key: "name",
       validation: value.length > 0,
-      msj: "Ingrese un nombre",
+      msj: "Ingrese un nombre"
     },
     {
       key: "lastName",
       validation: value.length > 0,
-      msj: "Ingrese un apellido",
+      msj: "Ingrese un apellido"
     },
     {
       key: "mail",
       validation: value.match(validRegex),
-      msj: "Ingrese un correo válido",
+      msj: "Ingrese un correo válido"
     },
     {
       key: "phone",
       validation: value.length == 8 || value.length == 9,
-      msj: "Ingrese un telefono válido",
-    },
+      msj: "Ingrese un telefono válido"
+    }
   ];
   return validations;
 };
@@ -269,33 +269,27 @@ function clientData() {
 const createBooking = async (client) => {
   clientBooking = {
     client: client,
-    booking: booking,
+    booking: booking
   };
 
   let resultBookingAdded = await fetchPOSTBooking(clientBooking);
 
   if (resultBookingAdded.error) {
-    if (resultBookingAdded.error.indexOf("Error") > -1) {
-      let msjError = "No se pudo realizar la reserva";
-
-      if (resultBookingAdded.error.indexOf("reserva existente") > -1) {
-        alertBooking(
-          "Advertencia",
-          "¿Ya tiene una reserva en estas fechas, desea agregar la nuevas habitaciones?"
-        );
-        let confirm = await confirmUpdateBooking(
-          document.querySelector(".alertBooking")
-        );
-        if (confirm) {
-          return updateBooking(clientBooking);
-        }
-      } else if (
-        resultBookingAdded.error.indexOf("habitaciones suficientes") > -1
-      ) {
-        msjError = "No quedan habitaciones suficientes";
+    let msjError = resultBookingAdded.error;
+    if (resultBookingAdded.error.indexOf("reserva existente") > -1) {
+      alertBooking(
+        "Advertencia",
+        "¿Ya tiene una reserva en estas fechas, desea agregar la nuevas habitaciones?"
+      );
+      let confirm = await confirmUpdateBooking(
+        document.querySelector(".alertBooking")
+      );
+      if (confirm) {
+        return updateBooking(clientBooking);
       }
-      alertBooking("Error", msjError);
     }
+
+    alertBooking("Error", msjError);
   }
 
   if (resultBookingAdded == true) {
@@ -307,13 +301,7 @@ const updateBooking = async (clientBooking) => {
   const resultUpdate = await fetchPUTBooking(clientBooking);
 
   if (resultUpdate.error) {
-    if (resultUpdate.error.indexOf("Error") > -1) {
-      let msjError = "No se pudo actualizar la reserva";
-      if (resultUpdate.error.indexOf("habitaciones") > -1) {
-        msjError = "No se quedan suficientes habitaciones";
-      }
-      alertBooking("Error", msjError);
-    }
+    alertBooking("Error", resultUpdate.error);
   }
   if (resultUpdate == true) {
     redirect(clientBooking, "update");
@@ -325,7 +313,7 @@ const redirect = (clientBooking, option) => {
     email: clientBooking.client.mail,
     startDate: clientBooking.booking.date.start,
     endDate: clientBooking.booking.date.end,
-    option: option,
+    option: option
   };
   localStorage.clear();
   location.href =
