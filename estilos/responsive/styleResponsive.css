@@ -648,16 +648,21 @@
     color: rgb(255, 255, 255);
   }
 
-  header ul {
+  header ul,
+  .options {
     color: rgb(255, 255, 255);
     font-size: 14px;
     font-family: Arial;
     margin-left: 0;
     margin-right: 0;
+    padding-left: 0;
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
     width: auto;
+  }
+  .options {
+    margin-top: 1.3rem;
   }
 
   header li {
@@ -703,7 +708,7 @@
     width: auto;
     display: flex;
     gap: 0.5rem;
-    align-items: center;
+    align-items: end;
     justify-content: center;
   }
 
@@ -721,18 +726,8 @@
     margin-top: 0.5rem;
   }
 
-  .options {
-    color: rgb(255, 255, 255);
-    font-size: 14px;
-    font-family: Arial;
-    margin-top: 1.4rem;
-    display: flex;
-    align-items: center;
-    width: auto;
-  }
-
   .networks {
-    margin-top: 1.4rem;
+    margin-top: 1rem;
     margin-right: 0;
   }
   .networks li:hover {
@@ -744,32 +739,6 @@
     transition: 0.5s;
   }
   .networks img:hover {
-    opacity: 60%;
-    transition: 0.5s;
-  }
-
-  .optionsRoom {
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    font-family: Arial;
-    margin-right: 18rem;
-    margin-top: 1.4rem;
-  }
-
-  .networksRoom {
-    margin-top: 1.4rem;
-    margin-right: 4rem;
-  }
-  .networksRoom li:hover {
-    transform: scale(1);
-    border-bottom: none;
-    cursor: pointer;
-  }
-  .networksRoom img {
-    opacity: 100%;
-    transition: 0.5s;
-  }
-  .networksRoom img:hover {
     opacity: 60%;
     transition: 0.5s;
   }
@@ -1263,8 +1232,8 @@
   #verMas,
   #verMasDeluxe,
   #verMasSuite {
-    top: 7.4rem;
-    left: 8rem;
+    top: 10rem;
+    left: 11rem;
     position: absolute;
     visibility: hidden;
     border-radius: 100%;
@@ -1292,6 +1261,6 @@
   }
   #verMasDeluxe,
   #verMasSuite {
-    top: 12rem;
+    top: 16rem;
   }
 }

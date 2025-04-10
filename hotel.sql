@@ -233,6 +233,8 @@ INSERT INTO servicio(nombreServicio,descripcionServicio,precio,imagen,maxStock) 
 INSERT INTO roles(rol) values("Administrador");
 INSERT INTO roles(rol) values("Empleado");
 
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("agusMiranda","Agustin","Miranda","agus@gmail.com",load_file("C:/Apache24/htdocs/hotelSystem/img/avatarMan.png"),1,"Dudu22558899",NOW());
+INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("andreaPoggio","Andrea","Poggio","andrea@gmail.com",load_file("C:/Apache24/htdocs/hotelSystem/img/avatarWoman.png"),2,"andre123456",NOW());
 
 -- INSERT INTO usuarios(usuario,nombre,apellido,correo,imagen,rol,contrasenia,creacion) values("username","name","lastname","email",load_file("routeImage"),idRol,"password",NOW());
 

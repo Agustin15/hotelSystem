@@ -165,7 +165,7 @@ function printBooking() {
 
   window.innerWidth <= 600
     ? (iconNights.src = "../../img/night.png")
-    : "../../img/moonBooking.png";
+    : iconNights.src ="../../img/moonBooking.png";
 
   if (booking.nights > 1) {
     document.querySelector(".nights").textContent = `${booking.nights} Noches`;
