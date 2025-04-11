@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 class Email
 {
 
-    private $name, $destinary, $subject, $body, $fileToAttachment, $connection;
+    private $name, $destinary, $subject, $body, $connection;
 
     public function __construct()
     {
@@ -52,12 +52,6 @@ class Email
     }
 
 
-    public function setAttachment($file)
-    {
-
-        $this->fileToAttachment = $file;
-    }
-
 
     public function sendMail()
     {
@@ -81,16 +75,6 @@ class Email
             $mail->CharSet = 'UTF-8';
             $mail->Subject = $this->subject;
             $mail->Body = $this->body;
-            if (isset($this->fileToAttachment)) {
-                $mail->addAttachment(
-                    $this->fileToAttachment,
-                    "Detalles reserva",
-                    "base64",
-                    "application/pdf"
-                );
-            }
-
-
 
             $mail->Username = $_ENV["EMAIL_ADDRESS"];
             $mail->Password =  $_ENV["EMAIL_PASSWORD"];
@@ -99,7 +83,7 @@ class Email
             return $response;
         } catch (Exception $e) {
 
-            return array("error"=>$e->getMessage());
+            return array("error" => $e->getMessage());
         }
     }
 

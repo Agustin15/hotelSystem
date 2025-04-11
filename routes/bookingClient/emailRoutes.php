@@ -17,16 +17,6 @@ $req;
 if (isset($_GET["params"])) {
 
     $req = json_decode($_GET["params"], true);
-} else if (isset($_POST["optionPOST"])) {
-
-    $req = array(
-        "name" => $_POST["name"],
-        "destinary" => $_POST["destinary"],
-        "subject" => $_POST["subject"],
-        "stateBooking" => $_POST["stateBooking"],
-        "file" => $_FILES["file"],
-        "optionPOST" => $_POST["optionPOST"]
-    );
 } else {
 
     $req = json_decode(file_get_contents("php://input"), true);

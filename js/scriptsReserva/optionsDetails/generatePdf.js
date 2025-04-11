@@ -4,11 +4,31 @@ import {
   getEmailBookingConfirmByIdBooking,
   patchStateUpdateEmailBookingById
 } from "../scriptsFetchsBooking/scriptEmail.js";
-import { stateBooking, idBooking } from "../details.js";
+import {
+  stateBooking,
+  idBooking,
+  detailsBooking,
+  startBooking,
+  endBooking,
+  roomsToDisplay
+} from "../details.js";
 
 let widthImage, heightImage, format, orientation;
 
-export const generatePDF = (option, email, name) => {
+export const generatePDF = async (option, email, name) => {
+  let booking = {
+    idBooking: idBooking,
+    date: { startBooking: startBooking, endBooking: endBooking },
+    client: {
+      name: name,
+      lastname: detailsBooking[0].apellido,
+      email: email,
+      phone: detailsBooking[0].telefono
+    },
+    rooms: roomsToDisplay,
+    amount: detailsBooking[0].deposito
+  };
+
   let details = document.querySelector(".details");
 
   html2canvas(details).then(function (canvas) {
@@ -34,8 +54,7 @@ export const generatePDF = (option, email, name) => {
     if (option == "download") {
       doc.save("Detalles reserva.pdf");
     } else {
-      let pdf = doc.output("blob");
-      generateFileToSend(name, email, pdf);
+      send(name, email, booking);
     }
   });
 };
@@ -51,23 +70,20 @@ const formats = (
   heightImage = heightImageParam;
   orientation = orientationParam;
 };
-const generateFileToSend = async (name, email, pdfBlob) => {
-  const file = new File([pdfBlob], "Detalles reserva", {
-    type: pdfBlob.type
-  });
-
+const send = async (name, email, booking) => {
   let emailFound = await getEmailBookingConfirmByIdBooking(idBooking);
 
+  emailFound = null;
   if (
     !emailFound ||
     emailFound.stateConfirm == 0 ||
     (emailFound.stateUpdate == 0 && stateBooking == "Actualizacion")
   ) {
-    let emailSent = await sendEmail(name, email, file, stateBooking);
+    let emailSent = await sendEmail(name, email, booking, stateBooking);
 
     if (emailSent) {
       if (stateBooking == "Confirmacion") {
-        addEmail(idBooking);
+        // addEmail(idBooking);
       } else if (stateBooking == "Actualizacion") {
         patchStateUpdateEmailBookingById(emailFound.idCorreo);
       }

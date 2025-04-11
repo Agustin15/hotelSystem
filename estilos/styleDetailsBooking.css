@@ -207,7 +207,7 @@ header li img {
   margin-top: 3rem;
   position: relative;
   min-width: 45rem;
-  max-width:67rem;
+  max-width: 67rem;
   border-radius: 5px;
   height: auto;
   border: 1px solid rgb(185, 185, 185);
@@ -399,4 +399,17 @@ button img {
 button:hover {
   background-color: rgb(10, 155, 118);
   cursor: pointer;
+}
+.loadingDownload {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 16px;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.loadingDownload img {
+  width: 45px;
+  opacity: 99%;
 }

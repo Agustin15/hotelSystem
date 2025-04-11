@@ -1,29 +1,28 @@
 import { BACK_URL_LOCALHOST } from "../../urlLocalhost.js";
 
-export const sendEmail = async (name, email, file, stateBooking) => {
+export const sendEmail = async (name, email, booking, stateBooking) => {
   let url = `${BACK_URL_LOCALHOST}routes/bookingClient/emailRoutes.php`;
   let data;
-
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("destinary", email);
-  formData.append("stateBooking", stateBooking);
-  formData.append("subject", "Reserva en Hotel Five confirmada");
-  formData.append("file", file);
-  formData.append("optionPOST", "sendEmail");
 
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        credentials: "include"
+        "Content-Type": "application/json"
       },
-
-      body: formData
+      body: JSON.stringify({
+        name: name,
+        destinary: email,
+        booking: booking,
+        optionPOST: "sendEmail",
+        subject: "Reserva en Hotel Five confirmada",
+        stateBooking: stateBooking
+      })
     });
 
     const result = await response.json();
-    console.log(result);
+    
+
     if (!response.ok) {
       throw result.error;
     }

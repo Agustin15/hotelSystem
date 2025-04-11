@@ -3,6 +3,10 @@ import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 import { generatePDF } from "./optionsDetails/generatePdf.js";
 
 export let stateBooking, idBooking;
+export let detailsBooking,
+  startBooking,
+  endBooking,
+  roomsToDisplay = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   displayBarStagesAdvance("#linePersonalData");
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ? (stateBooking = "Confirmacion")
     : (stateBooking = "Actualizacion");
 
-  let detailsBooking = await getBookingByClientMailAndDate(dataToFindBooking);
+  detailsBooking = await getBookingByClientMailAndDate(dataToFindBooking);
 
   if (detailsBooking) {
     let barStageAdvance = document.querySelector(".barStageAdvance");
@@ -51,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
 
     btnDownloadPdf.style.display = "flex";
-    btnDownloadPdf.addEventListener("click", () => {
+    btnDownloadPdf.addEventListener("click", async () => {
       generatePDF("download");
     });
   }
@@ -118,8 +122,8 @@ const displayDetails = (detailsBooking) => {
   };
   let details = document.querySelector(".details");
 
-  let startBooking = new Date(detailsBooking[0].fechaLlegada);
-  let endBooking = new Date(detailsBooking[0].fechaSalida);
+  startBooking = new Date(detailsBooking[0].fechaLlegada);
+  endBooking = new Date(detailsBooking[0].fechaSalida);
 
   let nights =
     (endBooking.getTime() - startBooking.getTime()) / (1000 * 60 * 60 * 24);
@@ -214,7 +218,7 @@ const displayDetails = (detailsBooking) => {
 };
 
 const displayRooms = (rooms, nights) => {
-  let roomsToDisplay = [];
+  roomsToDisplay = [];
 
   rooms.map((room) => {
     let roomInToDisplay = roomsToDisplay.find((roomFind) => {
