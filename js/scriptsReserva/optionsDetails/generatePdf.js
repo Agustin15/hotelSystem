@@ -73,7 +73,6 @@ const formats = (
 const send = async (name, email, booking) => {
   let emailFound = await getEmailBookingConfirmByIdBooking(idBooking);
 
-  emailFound = null;
   if (
     !emailFound ||
     emailFound.stateConfirm == 0 ||
@@ -83,7 +82,7 @@ const send = async (name, email, booking) => {
 
     if (emailSent) {
       if (stateBooking == "Confirmacion") {
-        // addEmail(idBooking);
+        addEmail(idBooking);
       } else if (stateBooking == "Actualizacion") {
         patchStateUpdateEmailBookingById(emailFound.idCorreo);
       }

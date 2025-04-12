@@ -573,6 +573,7 @@
     display: flex;
     justify-content: center;
     align-items: start;
+    width: 100%;
   }
 
   .details .row .column {
@@ -590,7 +591,7 @@
 
   .details .msjSuccesfully {
     display: flex;
-    width: 74%;
+    width:99%;
     font-size: 15px;
     align-items: center;
     justify-content: center;
@@ -634,8 +635,9 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    min-width: 36rem;
-    margin-left: 15rem;
+    min-width:27.5rem;
+    width: 27.5rem;
+    margin-left: 14rem;
     padding: 0.5rem 2rem 0 1rem;
     
   }
@@ -680,6 +682,7 @@
     flex-wrap: wrap;
     justify-content: start;
     gap: 0.5rem;
+    width: 25rem;
     margin-top: 0.5rem;
   }
 

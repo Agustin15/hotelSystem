@@ -14,25 +14,27 @@ class authToken
     {
         try {
 
-            $tokenAccess = $_COOKIE["userToken"];
 
+            $tokenAccess = null;
             if (empty($_ENV["JWT_SECRET_KEY"])) {
                 throw new Error("JWT_SECRET_KEY no definida");
             }
 
             $key = $_ENV["JWT_SECRET_KEY"];
-            if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 
-                throw new Error("Autenticacion fallida,Token no valido");
-            }
-            if (!isset($_COOKIE["userToken"]) && isset($_COOKIE["userRefreshToken"])) {
+            if (isset($_COOKIE["userToken"])) {
+                $tokenAccess = $_COOKIE["userToken"];
+            } else {
+                if (!isset($_COOKIE["userRefreshToken"])) {
+                    throw new Error("Autenticacion fallida,Token no valido");
+                } else {
+                    $resultRefreshToken  = $this->refreshToken($key);
+                    $tokenAccess = $resultRefreshToken["newAccessToken"];
 
-                $resultRefreshToken  = $this->refreshToken($key);
-                $tokenAccess = $resultRefreshToken["newAccessToken"];
+                    if (isset($resultRefreshToken["error"])) {
 
-                if (isset($resultRefreshToken["error"])) {
-
-                    throw new Error($resultRefreshToken["error"]);
+                        throw new Error($resultRefreshToken["error"]);
+                    }
                 }
             }
 
@@ -73,13 +75,13 @@ class authToken
             if ($decoded) {
                 $payloadAccessToken = array(
                     "idUser" => $decoded_array["idUser"],
-                    "exp" => time() + 3600
+                    "exp" => time() + 60
                 );
 
                 $tokenJWT = JWT::encode($payloadAccessToken, $jwtSecretKey, 'HS384');
 
-                setCookie("userToken", $tokenJWT, time() + 3600, "/", "", false, true);
-                setCookie("idRol", $decoded_array["idRol"], time() + 3600, "/", "", false, true);
+                setCookie("userToken", $tokenJWT, time() + 60, "/", "", false, true);
+                setCookie("idRol", $decoded_array["idRol"], time() + 60, "/", "", false, true);
                 return array("newAccessToken" => $tokenJWT);
             }
         } catch (Throwable $th) {
