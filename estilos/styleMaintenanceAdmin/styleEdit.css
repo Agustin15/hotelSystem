@@ -204,8 +204,9 @@
   align-items: center;
 }
 .containUpdateUser .imageAvatar img {
-  width: 45px;
-  height: 45px;
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
 }
 
 .containUpdateUser .imageAvatar .iconAvatar {
@@ -336,7 +337,7 @@
   align-items: center;
   gap: 1rem;
   border-radius: 3px;
-  margin-left:0;
+  margin-left: 0;
   margin-top: 16rem;
 }
 

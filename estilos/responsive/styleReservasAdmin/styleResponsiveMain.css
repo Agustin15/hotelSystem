@@ -96,9 +96,8 @@
     padding-top: 0.6rem;
     justify-content: space-between;
   }
-
   .liBookingMarginTop {
-    margin-top: 7.5rem;
+    margin-top: 0;
   }
 
   #navAdmin .menu li:hover {

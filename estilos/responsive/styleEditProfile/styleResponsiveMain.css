@@ -1,3 +1,5 @@
+@media only screen and (max-width: 600px) {
+
 * {
   margin: 0;
   padding: 0;
@@ -305,4 +307,5 @@ h4 {
 .alertSaveCorrect {
   background: linear-gradient(rgb(57, 170, 161), rgb(1, 155, 160));
   display: flex;
+}
 }

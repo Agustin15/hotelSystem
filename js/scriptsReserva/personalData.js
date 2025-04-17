@@ -196,6 +196,8 @@ function removeInputAlert(input) {
 
 const validationsInputs = (value) => {
   let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+  let validPhone = /\d/;
+
   const validations = [
     {
       key: "name",
@@ -214,7 +216,8 @@ const validationsInputs = (value) => {
     },
     {
       key: "phone",
-      validation: value.length == 8 || value.length == 9,
+      validation:
+        (value.length == 8 || value.length == 9) && value.match(validPhone),
       msj: "Ingrese un telefono válido"
     }
   ];

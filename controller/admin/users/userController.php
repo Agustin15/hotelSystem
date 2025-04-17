@@ -64,10 +64,9 @@ class userController
             $tokenJWT = JWT::encode($payloadAccessToken, $secretKeyAccessToken, 'HS384');
             $refreshTokenJWT = JWT::encode($payloadRefreshToken, $secretKeyRefreshToken, 'HS384');
 
-            setcookie("userToken", $tokenJWT, time() + 60, "/", "", true, true);
-            setcookie("userRefreshToken", $refreshTokenJWT, time() + 86400, "/", "", true, true);
-            setcookie("idRol", $userFound["idRol"], time() + 60, "/", "", true, true);
-
+            setCookie("userToken", $tokenJWT, time() +  3600, "/", "", true, true);
+            setCookie("userRefreshToken", $refreshTokenJWT, time() + 86400, "/", "", true, true);
+            setCookie("idRol", $userFound["idRol"], time() +  3600, "/", "", true, true);
 
             return array("userLogin" => true);
         } catch (Throwable $th) {

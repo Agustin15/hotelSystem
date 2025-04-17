@@ -75,13 +75,13 @@ class authToken
             if ($decoded) {
                 $payloadAccessToken = array(
                     "idUser" => $decoded_array["idUser"],
-                    "exp" => time() + 60
+                    "exp" => time() + 3600
                 );
 
                 $tokenJWT = JWT::encode($payloadAccessToken, $jwtSecretKey, 'HS384');
 
-                setCookie("userToken", $tokenJWT, time() + 60, "/", "", false, true);
-                setCookie("idRol", $decoded_array["idRol"], time() + 60, "/", "", false, true);
+                setCookie("userToken", $tokenJWT, time() + 3600, "/", "", true, true);
+                setCookie("idRol", $decoded_array["idRol"], time() + 3600, "/", "", true, true);
                 return array("newAccessToken" => $tokenJWT);
             }
         } catch (Throwable $th) {

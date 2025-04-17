@@ -13,6 +13,8 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../../img/revision2.png">
+
     <link rel="stylesheet" href="../../../../estilos/responsive/styleRevenuesAdmin/styleBillToMobile.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"

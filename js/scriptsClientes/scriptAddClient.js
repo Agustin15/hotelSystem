@@ -137,7 +137,6 @@ export const alertForm = (img, msj, title) => {
     }, 3500);
   } else {
     alertForm.classList.add("alertFormError");
-  
   }
 };
 
@@ -154,6 +153,7 @@ export const removeAlertForm = () => {
 
 export const validations = (value) => {
   let validRegex = /^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/;
+  let validPhone = /\d/;
 
   let validations = [
     {
@@ -168,7 +168,8 @@ export const validations = (value) => {
     },
     {
       key: "phone",
-      validation: value.length >= 8 && value.length <= 9,
+      validation:
+        value.length >= 8 && value.length <= 9 && value.match(validPhone),
       msj: "Ingresa un telefono válido"
     },
     {

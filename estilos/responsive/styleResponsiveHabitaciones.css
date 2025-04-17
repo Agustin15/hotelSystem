@@ -800,11 +800,11 @@
     font-weight: bold;
     border-top: 1px solid rgb(194, 194, 194);
     color: rgb(0, 0, 0);
-    font-size: 13px;
+    font-size: 12px;
   }
   .containCart #roomsBooking li .imgRoom {
     width: 150px;
-    height: 112px;
+    height: 110px;
     padding-top: 0.5rem;
     padding-left: 0.1rem;
   }
@@ -815,7 +815,7 @@
   .containCart #roomsBooking li .dataRoom {
     display: flex;
     color: white;
-    height: 104px;
+    height: 102px;
     width: 230px;
     background: linear-gradient(#126b91, #0498a0);
     padding-top: 0.2rem;
@@ -828,13 +828,14 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+
   }
   .containCart #roomsBooking li .dataRoom .header span {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
   .containCart #roomsBooking li .dataRoom .header img {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     opacity: 100%;
     filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
     margin-right: 0.3rem;
@@ -859,7 +860,7 @@
     margin-top: 0.1rem;
   }
   .containCart #roomsBooking li .changeQuantity span {
-    font-size: 16px;
+    font-size: 14px;
   }
   .containCart #roomsBooking li .changeQuantity img {
     width: 17px;
@@ -870,7 +871,7 @@
     transform: scale(1.1);
   }
   .containCart #roomsBooking li .total {
-    margin-left: 7.2rem;
+    margin-left: 5.2rem;
     padding: 0.1rem;
   }
   .containCart #containDeposit {
@@ -1708,7 +1709,7 @@
     font-weight: bold;
     border-top: 1px solid rgb(194, 194, 194);
     color: rgb(0, 0, 0);
-    font-size: 13px;
+    font-size: 12px;
   }
   .containCart #roomsBooking li .imgRoom {
     width: 150px;
@@ -1738,11 +1739,11 @@
     width: 100%;
   }
   .containCart #roomsBooking li .dataRoom .header span {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
   .containCart #roomsBooking li .dataRoom .header img {
-    width: 17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     opacity: 100%;
     filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
     margin-right: 0.3rem;
@@ -1767,7 +1768,7 @@
     margin-top: 0.1rem;
   }
   .containCart #roomsBooking li .changeQuantity span {
-    font-size: 16px;
+    font-size: 13px;
   }
   .containCart #roomsBooking li .changeQuantity img {
     width: 17px;
@@ -1778,7 +1779,7 @@
     transform: scale(1.1);
   }
   .containCart #roomsBooking li .total {
-    margin-left: 7.2rem;
+    margin-left: 5.2rem;
     padding: 0.1rem;
   }
   .containCart #containDeposit {

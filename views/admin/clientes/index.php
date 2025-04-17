@@ -10,6 +10,8 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../img/revision2.png">
+
     <link rel="stylesheet" href="../../../estilos/styleClientes.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleResponsiveClientes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

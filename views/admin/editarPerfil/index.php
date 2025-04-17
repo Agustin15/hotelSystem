@@ -10,6 +10,8 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../img/revision2.png">
+    
     <link rel="stylesheet" href="../../../estilos/styleEditProfile/styleMain.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleEditProfile/styleResponsiveMain.css">
     <link rel="stylesheet" href="../../../estilos/styleEditProfile/styleChangeAvatar.css">

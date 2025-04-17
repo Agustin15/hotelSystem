@@ -32,24 +32,34 @@ export const generatePDF = async (option, email, name) => {
   let details = document.querySelector(".details");
 
   html2canvas(details).then(function (canvas) {
-    format = [canvas.width - 224, canvas.height - 114];
     orientation = "landscape";
 
-    if (window.innerWidth <= 600) {
-      formats([canvas.width / 3.7, canvas.height / 4], 245, 954, "portrait");
-    } else if (window.innerWidth >= 601 && window.innerWidth < 1080) {
-      formats([canvas.width / 4.4, canvas.height / 5], 445, 454, "portrait");
+    if (
+      window.innerWidth <= 600 ||
+      (window.innerWidth >= 601 && window.innerWidth < 1080)
+    ) {
+      orientation = "portrait";
     }
 
     let srcCanvasElement = canvas.toDataURL();
     let doc = new jsPDF({
       orientation: orientation,
       unit: "px",
-      format: format,
+      format: [
+        details.getBoundingClientRect().width,
+        details.getBoundingClientRect().height
+      ],
       putOnlyUsedFonts: true
     });
 
-    doc.addImage(srcCanvasElement, "png", 14, 14, widthImage, heightImage);
+    doc.addImage(
+      srcCanvasElement,
+      "png",
+      14,
+      5,
+      details.clientWidth / 1.5,
+      details.clientHeight / 1.5
+    );
 
     if (option == "download") {
       doc.save("Detalles reserva.pdf");
@@ -59,13 +69,7 @@ export const generatePDF = async (option, email, name) => {
   });
 };
 
-const formats = (
-  formatParam,
-  widthImageParam,
-  heightImageParam,
-  orientationParam
-) => {
-  format = formatParam;
+const formats = (widthImageParam, heightImageParam, orientationParam) => {
   widthImage = widthImageParam;
   heightImage = heightImageParam;
   orientation = orientationParam;

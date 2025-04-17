@@ -4,11 +4,12 @@ if (!isset($_COOKIE["userToken"]) && !isset($_COOKIE["userRefreshToken"])) {
     header("location:../../loginAdmin/index.html");
 }
 
-if ($_COOKIE["idRol"] != 1) {
-
+if (isset($_COOKIE["idRol"]) && $_COOKIE["idRol"] != 1) {
     http_response_code(401);
     header("location:../unauthorized.html");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,8 @@ if ($_COOKIE["idRol"] != 1) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../../img/revision2.png">
+    
     <link rel="stylesheet" href="../../../estilos/styleMaintenanceAdmin/styleMain.css">
     <link rel="stylesheet" href="../../../estilos/responsive/styleMaintenanceAdmin/styleResponsiveMain.css">
 
