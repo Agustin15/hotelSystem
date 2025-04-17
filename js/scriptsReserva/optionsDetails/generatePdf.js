@@ -11,7 +11,7 @@ import {
   startBooking,
   endBooking,
   roomsToDisplay
-} from "../details.js";
+} from "../displayBill.js";
 
 let widthImage, heightImage, format, orientation;
 
@@ -69,11 +69,7 @@ export const generatePDF = async (option, email, name) => {
   });
 };
 
-const formats = (widthImageParam, heightImageParam, orientationParam) => {
-  widthImage = widthImageParam;
-  heightImage = heightImageParam;
-  orientation = orientationParam;
-};
+
 const send = async (name, email, booking) => {
   let emailFound = await getEmailBookingConfirmByIdBooking(idBooking);
 
