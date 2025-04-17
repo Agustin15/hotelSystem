@@ -1,20 +1,19 @@
 import { BACK_URL_LOCALHOST, FRONT_URL_LOCALHOST } from "../urlLocalhost.js";
 
-export let stateBooking, idBooking;
+export let stateBooking, idBooking, dataToFindBooking;
 export let detailsBooking,
   startBooking,
   endBooking,
   roomsToDisplay = [];
 
-export const displayBill = async () => {
-
+export const displayBill = async (option) => {
   let params = new URLSearchParams(window.location.search);
 
   if (!params.get("details")) {
     location.href = `${FRONT_URL_LOCALHOST}views/reserva/consultaHabitaciones.php`;
   }
 
-  let dataToFindBooking = params.get("details");
+  dataToFindBooking = params.get("details");
   dataToFindBooking = JSON.parse(dataToFindBooking);
 
   let dataToFindBookingOk =
@@ -32,10 +31,13 @@ export const displayBill = async () => {
   detailsBooking = await getBookingByClientMailAndDate(dataToFindBooking);
 
   if (detailsBooking) {
-    let barStageAdvance = document.querySelector(".barStageAdvance");
     let containDetails = document.querySelector(".containDetails");
 
-    barStageAdvance.style.display = "flex";
+    if (option == "normal") {
+      let barStageAdvance = document.querySelector(".barStageAdvance");
+      barStageAdvance.style.display = "flex";
+    }
+
     containDetails.style.display = "flex";
 
     if (!detailsBooking.length) {

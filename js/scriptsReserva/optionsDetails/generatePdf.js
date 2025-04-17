@@ -13,8 +13,6 @@ import {
   roomsToDisplay
 } from "../displayBill.js";
 
-let widthImage, heightImage, format, orientation;
-
 export const generatePDF = async (option, email, name) => {
   let booking = {
     idBooking: idBooking,
@@ -32,43 +30,26 @@ export const generatePDF = async (option, email, name) => {
   let details = document.querySelector(".details");
 
   html2canvas(details).then(function (canvas) {
-    orientation = "landscape";
-
-    if (
-      window.innerWidth <= 600 ||
-      (window.innerWidth >= 601 && window.innerWidth < 1080)
-    ) {
-      orientation = "portrait";
-    }
-
     let srcCanvasElement = canvas.toDataURL();
     let doc = new jsPDF({
-      orientation: orientation,
+      orientation: "landscape",
       unit: "px",
-      format: [
-        details.getBoundingClientRect().width,
-        details.getBoundingClientRect().height
-      ],
+      format: [canvas.width / 1.3, canvas.height / 1.3],
       putOnlyUsedFonts: true
     });
 
-    doc.addImage(
-      srcCanvasElement,
-      "png",
-      14,
-      5,
-      details.clientWidth / 1.5,
-      details.clientHeight / 1.5
-    );
+    doc.addImage(srcCanvasElement, "png", 8, 5);
 
     if (option == "download") {
       doc.save("Detalles reserva.pdf");
+      if (window.innerWidth < 1080) {
+        window.close();
+      }
     } else {
       send(name, email, booking);
     }
   });
 };
-
 
 const send = async (name, email, booking) => {
   let emailFound = await getEmailBookingConfirmByIdBooking(idBooking);
