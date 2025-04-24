@@ -815,7 +815,6 @@ body {
 }
 .containCart #roomsBooking li .changeQuantity img {
   width: 17px;
-  filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
   cursor: pointer;
 }
 .containCart #roomsBooking li .changeQuantity img:hover {
