@@ -52,8 +52,12 @@
      DB_PASSWORD=""
      JWT_SECRET_KEY=
      JWT_SECRET_KEY_REFRESH=
+
+ #### Configuration environment variables urlLocalhost.js
  
-     
+  Browse to js folder and on   urlLocalhost.js file, change localhost 
+by your url server 
+
  >## Init ▶
   Start httpd server
          
