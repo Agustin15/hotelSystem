@@ -8,10 +8,7 @@ import displayBarStagesAdvance from "./barStageAdvance.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   displayBarStagesAdvance("#linePersonalData");
-  let barStageAdvance = document.querySelector(".barStageAdvance");
-  barStageAdvance.style.display = "flex";
-
-  await displayBill();
+  await displayBill("normal");
   let btnDownloadPdf = document.querySelector(".btnDownloadPdf");
   btnDownloadPdf.style.display = "flex";
   generatePDF("sendEmail", detailsBooking[0].correo, detailsBooking[0].nombre);

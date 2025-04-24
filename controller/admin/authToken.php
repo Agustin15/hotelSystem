@@ -13,8 +13,6 @@ class authToken
     public function verifyToken()
     {
         try {
-
-
             $tokenAccess = null;
             if (empty($_ENV["JWT_SECRET_KEY"])) {
                 throw new Error("JWT_SECRET_KEY no definida");

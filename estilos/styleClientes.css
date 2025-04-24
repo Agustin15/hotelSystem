@@ -845,6 +845,7 @@ body #navAdmin .titleNav {
   justify-content: start;
   align-items: center;
   width: auto;
+  margin-top: -1rem;
   gap: 0.7rem;
   padding: 0.5rem;
   border-radius: 3px;
