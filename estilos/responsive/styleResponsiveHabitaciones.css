@@ -416,7 +416,7 @@
   }
   #containRooms .containRoom .img {
     width: 300px;
-    height: 130px;
+    height: 160px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -435,13 +435,13 @@
   }
   #containRooms .containRoom .img li {
     width: 360px;
-    height: 130px;
+    height: 160px;
     list-style: none;
   }
   #containRooms .containRoom .img li img {
     width: 360px;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 9px;
   }
   #containRooms .moveCarrouselNext {
     transform: translateX(-40%);
@@ -451,7 +451,7 @@
     margin: auto;
     display: flex;
     position: absolute;
-    top: 3rem;
+    top: 4.3rem;
     left: 0rem;
     gap: 16rem;
   }
@@ -466,11 +466,11 @@
     display: flex;
     gap: 2rem;
     position: absolute;
-    top: 7rem;
-    left: 4rem;
+    top: 9.3rem;
+    left:3.7rem;
   }
   #containRooms .containRoom .indexImagesRoom li {
-    width: 34px;
+    width: 38px;
     height: 3px;
     background-color: rgb(201, 201, 201);
   }
@@ -864,7 +864,6 @@
   }
   .containCart #roomsBooking li .changeQuantity img {
     width: 17px;
-    filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
     cursor: pointer;
   }
   .containCart #roomsBooking li .changeQuantity img:hover {
@@ -1441,7 +1440,7 @@
     gap: 13rem;
   }
   #containRooms .controls img {
-    width: 17px;
+    width: 20px;
     opacity: 80%;
   }
   #containRooms .controls img:hover {
@@ -1451,11 +1450,11 @@
     display: flex;
     gap: 2rem;
     position: absolute;
-    top: 7.3rem;
-    left: 2.5rem;
+    top: 7.5rem;
+    left:2.3rem;
   }
   #containRooms .containRoom .indexImagesRoom li {
-    width: 34px;
+    width: 38px;
     height: 3px;
     background-color: rgb(201, 201, 201);
   }
@@ -1772,8 +1771,8 @@
   }
   .containCart #roomsBooking li .changeQuantity img {
     width: 17px;
-    filter: drop-shadow(1px 1px 1px rgb(0, 0, 0));
     cursor: pointer;
+    filter: none;
   }
   .containCart #roomsBooking li .changeQuantity img:hover {
     transform: scale(1.1);
