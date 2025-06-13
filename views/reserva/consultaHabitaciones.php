@@ -34,8 +34,8 @@
 
             <li><a href="../../index.html">Inicio</a></li>
             <li><a href="../../views/habitaciones.html">Habitaciones</a></li>
-            <li><a href="../../index.html #sobreNosotros">Sobre nosotros</a></li>
-            <li><a href="../../index.html #contacto">Contacto</a></li>
+            <li><a href="../../index.html#sobreNosotros">Sobre nosotros</a></li>
+            <li><a href="../../index.html#contacto">Contacto</a></li>
 
 
         </ul>
